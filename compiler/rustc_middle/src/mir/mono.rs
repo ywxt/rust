@@ -1,4 +1,5 @@
 use std::borrow::Cow;
+use std::cmp::Ordering;
 use std::fmt;
 use std::hash::Hash;
 
@@ -6,7 +7,7 @@ use rustc_ast::expand::autodiff_attrs::AutoDiffItem;
 use rustc_attr_data_structures::InlineAttr;
 use rustc_data_structures::base_n::{BaseNString, CASE_INSENSITIVE, ToBaseN};
 use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::fx::FxIndexMap;
+use rustc_data_structures::fx::{FxHashMap, FxIndexMap};
 use rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
 use rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash128;
@@ -526,23 +527,61 @@ impl<'tcx> CodegenUnit<'tcx> {
     ) -> Vec<(MonoItem<'tcx>, MonoItemData)> {
         // The codegen tests rely on items being process in the same order as
         // they appear in the file, so for local items, we sort by span and def_path first
-        #[derive(PartialEq, Eq, PartialOrd, Ord)]
-        struct ItemSortKey<'tcx>(Option<Span>, Option<String>, SymbolName<'tcx>);
+        struct ItemSortKey<'tcx>(Option<Span>, SymbolName<'tcx>);
 
-        fn item_sort_key<'tcx>(tcx: TyCtxt<'tcx>, item: MonoItem<'tcx>) -> ItemSortKey<'tcx> {
-            ItemSortKey(
-                // For codegen tests purposes, we don't care about non-local items' order,
-                // so we just sort non-local items by symbol names.
-                item.local_span(tcx),
-                item.def_id()
-                    .as_local()
-                    .map(|_| tcx.def_path(item.def_id()).to_string_no_crate_verbose()),
-                item.symbol_name(tcx),
-            )
+        struct LocalItemSortKey(String);
+
+        // Avoids def_path querying for items that have different spans
+        fn item_sort<'tcx>(
+            tcx: TyCtxt<'tcx>,
+            cached_keys_map: &'_ mut FxHashMap<MonoItem<'tcx>, ItemSortKey<'tcx>>,
+            cached_local_keys_map: &'_ mut FxHashMap<MonoItem<'tcx>, LocalItemSortKey>,
+            item1: MonoItem<'tcx>,
+            item2: MonoItem<'tcx>,
+        ) -> Ordering {
+            cached_keys_map
+                .entry(item1)
+                .or_insert_with(|| ItemSortKey(item1.local_span(tcx), item1.symbol_name(tcx)));
+            cached_keys_map
+                .entry(item2)
+                .or_insert_with(|| ItemSortKey(item2.local_span(tcx), item2.symbol_name(tcx)));
+            let ItemSortKey(span1, name1) = &cached_keys_map[&item1];
+            let ItemSortKey(span2, name2) = &cached_keys_map[&item2];
+
+            match (span1, span2) {
+                (None, None) => name1.cmp(name2),
+                (None, Some(_)) => Ordering::Less,
+                (Some(_), None) => Ordering::Greater,
+                (Some(span1), Some(span2)) => {
+                    let ord = span1.cmp(span2);
+                    if ord != Ordering::Equal {
+                        return ord;
+                    }
+
+                    cached_local_keys_map.entry(item1).or_insert_with(|| {
+                        tcx.def_path(item1.def_id()).to_string_no_crate_verbose()
+                    });
+                    cached_local_keys_map.entry(item2).or_insert_with(|| {
+                        tcx.def_path(item2.def_id()).to_string_no_crate_verbose()
+                    });
+                    let LocalItemSortKey(def_path1) = &cached_local_keys_map[&item1];
+                    let LocalItemSortKey(def_path2) = &cached_local_keys_map[&item2];
+                    match def_path1.cmp(def_path2) {
+                        Ordering::Equal => name1.cmp(name2),
+                        other => other,
+                    }
+                }
+            }
         }
 
         let mut items: Vec<_> = self.items().iter().map(|(&i, &data)| (i, data)).collect();
-        items.sort_by_cached_key(|&(i, _)| item_sort_key(tcx, i));
+        let mut cached_keys_map =
+            FxHashMap::with_capacity_and_hasher(items.len(), Default::default());
+        let mut cached_local_keys_map =
+            FxHashMap::with_capacity_and_hasher(items.len(), Default::default());
+        items.sort_by(|&(item1, _), &(item2, _)| {
+            item_sort(tcx, &mut cached_keys_map, &mut cached_local_keys_map, item1, item2)
+        });
         items
     }
 
