@@ -559,10 +559,10 @@ impl<'tcx> CodegenUnit<'tcx> {
                     }
 
                     cached_local_keys_map.entry(item1).or_insert_with(|| {
-                        tcx.def_path(item1.def_id()).to_string_no_crate_verbose()
+                        LocalItemSortKey(tcx.def_path(item1.def_id()).to_string_no_crate_verbose())
                     });
                     cached_local_keys_map.entry(item2).or_insert_with(|| {
-                        tcx.def_path(item2.def_id()).to_string_no_crate_verbose()
+                        LocalItemSortKey(tcx.def_path(item2.def_id()).to_string_no_crate_verbose())
                     });
                     let LocalItemSortKey(def_path1) = &cached_local_keys_map[&item1];
                     let LocalItemSortKey(def_path2) = &cached_local_keys_map[&item2];
