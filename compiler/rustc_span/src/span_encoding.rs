@@ -442,6 +442,12 @@ impl Span {
             Interned(span) => interned_parent(span.index),
         }
     }
+
+    pub fn as_u64(self) -> u64 {
+        (self.lo_or_index as u64) << 32
+            | (self.len_with_tag_or_marker as u64) << 16
+            | (self.ctxt_or_parent_or_marker as u64)
+    }
 }
 
 #[derive(Default)]
