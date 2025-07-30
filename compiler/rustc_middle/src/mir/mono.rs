@@ -7,7 +7,7 @@ use rustc_ast::expand::autodiff_attrs::AutoDiffItem;
 use rustc_attr_data_structures::InlineAttr;
 use rustc_data_structures::base_n::{BaseNString, CASE_INSENSITIVE, ToBaseN};
 use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap};
+use rustc_data_structures::fx::FxIndexMap;
 use rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
 use rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash128;
@@ -527,77 +527,45 @@ impl<'tcx> CodegenUnit<'tcx> {
     ) -> Vec<(MonoItem<'tcx>, MonoItemData)> {
         // The codegen tests rely on items being process in the same order as
         // they appear in the file, so for local items, we sort by span and def_path first
-        struct ItemSortKey<'tcx>(Option<Span>, Option<String>, Option<SymbolName<'tcx>>);
+        // struct ItemSortKey<'tcx>(Option<Span>, SymbolName<'tcx>);
 
         // Avoids def_path querying for items that have different spans
         fn item_sort<'tcx>(
             tcx: TyCtxt<'tcx>,
-            cached_keys_map: &'_ mut FxHashMap<MonoItem<'tcx>, ItemSortKey<'tcx>>,
             item1: MonoItem<'tcx>,
             item2: MonoItem<'tcx>,
         ) -> Ordering {
-            let is_local1 = item1.def_id().is_local();
-            let is_local2 = item2.def_id().is_local();
+            let span1 = item1.local_span(tcx);
+            let span2 = item2.local_span(tcx);
 
-            match (is_local1, is_local2) {
-                (false, false) => {
-                    cached_keys_map
-                        .entry(item1)
-                        .or_insert_with(|| ItemSortKey(None, None, Some(item1.symbol_name(tcx))));
-                    cached_keys_map
-                        .entry(item2)
-                        .or_insert_with(|| ItemSortKey(None, None, Some(item2.symbol_name(tcx))));
-                    let ItemSortKey(_, _, name1) = &cached_keys_map[&item1];
-                    let ItemSortKey(_, _, name2) = &cached_keys_map[&item2];
-                    name1.cmp(name2)
+            match (span1, span2) {
+                (None, None) => {
+                    let name1 = item1.symbol_name(tcx);
+                    let name2 = item2.symbol_name(tcx);
+                    name1.cmp(&name2)
                 }
-                (false, true) => Ordering::Less,
-                (true, false) => Ordering::Greater,
-                (true, true) => {
-                    cached_keys_map
-                        .entry(item1)
-                        .or_insert_with(|| ItemSortKey(item1.local_span(tcx), None, None));
-                    cached_keys_map
-                        .entry(item2)
-                        .or_insert_with(|| ItemSortKey(item2.local_span(tcx), None, None));
-                    let ItemSortKey(span1, _, _) = &cached_keys_map[&item1];
-                    let ItemSortKey(span2, _, _) = &cached_keys_map[&item2];
-                    let ord = span1.cmp(span2);
-                    if ord != Ordering::Equal {
-                        return ord;
+                (None, Some(_)) => Ordering::Less,
+                (Some(_), None) => Ordering::Greater,
+                (Some(span1), Some(span2)) => {
+                    let order = span1.cmp(&span2);
+                    if order != Ordering::Equal {
+                        return order;
                     }
-
-                    cached_keys_map.entry(item1).and_modify(
-                        |ItemSortKey(_, def_path, symbol_name)| {
-                            def_path.get_or_insert_with(|| {
-                                tcx.def_path(item1.def_id()).to_string_no_crate_verbose()
-                            });
-                            symbol_name.get_or_insert_with(|| item1.symbol_name(tcx));
-                        },
-                    );
-                    cached_keys_map.entry(item2).and_modify(
-                        |ItemSortKey(_, def_path, symbol_name)| {
-                            def_path.get_or_insert_with(|| {
-                                tcx.def_path(item2.def_id()).to_string_no_crate_verbose()
-                            });
-                            symbol_name.get_or_insert_with(|| item2.symbol_name(tcx));
-                        },
-                    );
-                    let ItemSortKey(_, def_path1, name1) = &cached_keys_map[&item1];
-                    let ItemSortKey(_, def_path2, name2) = &cached_keys_map[&item2];
-                    match def_path1.cmp(def_path2) {
-                        Ordering::Equal => name1.cmp(name2),
-                        other => other,
+                    let def_path1 = tcx.def_path(item1.def_id()).to_string_no_crate_verbose();
+                    let def_path2 = tcx.def_path(item2.def_id()).to_string_no_crate_verbose();
+                    let order = def_path1.cmp(&def_path2);
+                    if order != Ordering::Equal {
+                        return order;
                     }
+                    let name1 = item1.symbol_name(tcx);
+                    let name2 = item2.symbol_name(tcx);
+                    name1.cmp(&name2)
                 }
             }
         }
 
         let mut items: Vec<_> = self.items().iter().map(|(&i, &data)| (i, data)).collect();
-        let mut cached_keys_map =
-            FxHashMap::with_capacity_and_hasher(items.len(), Default::default());
-        items
-            .sort_by(|&(item1, _), &(item2, _)| item_sort(tcx, &mut cached_keys_map, item1, item2));
+        items.sort_by(|&(item1, _), &(item2, _)| item_sort(tcx, item1, item2));
         items
     }
 
