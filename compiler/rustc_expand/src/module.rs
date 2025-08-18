@@ -14,7 +14,7 @@ use crate::errors::{
     ModuleCircular, ModuleFileNotFound, ModuleInBlock, ModuleInBlockName, ModuleMultipleCandidates,
 };
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub enum DirOwnership {
     Owned {
         // None if `mod.rs`, `Some("foo")` if we're in `foo.rs`.

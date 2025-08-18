@@ -1190,7 +1190,7 @@ impl ModuleData {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct ExpansionData {
     pub id: LocalExpnId,
     pub depth: usize,

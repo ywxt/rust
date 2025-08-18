@@ -383,12 +383,14 @@ impl AstFragmentKind {
     }
 }
 
+#[derive(Debug)]
 pub struct Invocation {
     pub kind: InvocationKind,
     pub fragment_kind: AstFragmentKind,
     pub expansion_data: ExpansionData,
 }
 
+#[derive(Debug)]
 pub enum InvocationKind {
     Bang {
         mac: Box<ast::MacCall>,
@@ -674,7 +676,7 @@ impl<'a, 'b> MacroExpander<'a, 'b> {
                 }
             }
         }
-
+        // invocations.iter().for_each(|x|println!("Collected invocation: ({:?}, {:?})", x.0, x.1.as_ref().map(|e|e.span)));
         (fragment, invocations)
     }
 
@@ -715,6 +717,7 @@ impl<'a, 'b> MacroExpander<'a, 'b> {
         invoc: Invocation,
         ext: &SyntaxExtensionKind,
     ) -> ExpandResult<AstFragment, Invocation> {
+        // println!("Expanding {:?} at {:?}", invoc.kind, invoc.span());
         let recursion_limit = match self.cx.reduced_recursion_limit {
             Some((limit, _)) => limit,
             None => self.cx.ecfg.recursion_limit,

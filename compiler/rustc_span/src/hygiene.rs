@@ -565,9 +565,31 @@ impl HygieneData {
         self.alloc_ctxt(call_site_ctxt, expn_id, transparency)
     }
 
+    fn alloc_ctxt(
+        &mut self,
+        parent: SyntaxContext,
+        expn_id: ExpnId,
+        transparency: Transparency,
+    ) -> SyntaxContext {
+        let ctxt = self.alloc_ctxt_1(parent, expn_id, transparency);
+        if let Ok(_) = std::env::var("RUSTC_PRINT") {
+            println!(
+                "alloc_ctxt: thread={:?}, parent={:?}, expn_id={:?}, transparency={:?} => ctxt={:?}",
+                std::thread::current().id(),
+                parent,
+                expn_id,
+                transparency,
+                ctxt
+            );
+            // if ctxt.as_u32() == 10 {
+            //     panic!()
+            // }
+        }
+        ctxt
+    }
     /// Allocate a new context with the given key, or retrieve it from cache if the given key
     /// already exists. The auxiliary fields are calculated from the key.
-    fn alloc_ctxt(
+    fn alloc_ctxt_1(
         &mut self,
         parent: SyntaxContext,
         expn_id: ExpnId,
@@ -582,9 +604,39 @@ impl HygieneData {
         // Reserve a new syntax context.
         // The inserted dummy data can only be potentially accessed by nested `alloc_ctxt` calls,
         // the assert below ensures that it doesn't happen.
-        let ctxt = SyntaxContext::from_usize(self.syntax_context_data.len());
-        self.syntax_context_data
-            .push(SyntaxContextData { dollar_crate_name: sym::dummy, ..SyntaxContextData::root() });
+        let ctxt = if let Ok(_) = std::env::var("RUSTC_PRINT") {
+            if expn_id.krate == CrateNum::new(2) && expn_id.local_id.as_u32() == 370 {
+                // Fill self.syntax_context_data with some dummy data to avoid panics
+
+                while self.syntax_context_data.len() < 10 {
+                    self.syntax_context_data.push(SyntaxContextData::root());
+                }
+                SyntaxContext::from_u32(9)
+            } else if expn_id.krate == CrateNum::new(2) && expn_id.local_id.as_u32() == 1121 {
+                while self.syntax_context_data.len() < 11 {
+                    self.syntax_context_data.push(SyntaxContextData::root());
+                }
+                SyntaxContext::from_u32(10)
+            } else if expn_id.krate == CrateNum::new(2) && expn_id.local_id.as_u32() == 18846 {
+                while self.syntax_context_data.len() < 12 {
+                    self.syntax_context_data.push(SyntaxContextData::root());
+                }
+                SyntaxContext::from_u32(11)
+            } else {
+                self.syntax_context_data.push(SyntaxContextData {
+                    dollar_crate_name: sym::dummy,
+                    ..SyntaxContextData::root()
+                });
+                SyntaxContext::from_usize(self.syntax_context_data.len() - 1)
+            }
+        } else {
+            self.syntax_context_data.push(SyntaxContextData {
+                dollar_crate_name: sym::dummy,
+                ..SyntaxContextData::root()
+            });
+            SyntaxContext::from_usize(self.syntax_context_data.len() - 1)
+        };
+
         self.syntax_context_map.insert(key, ctxt);
 
         // Opaque and semi-opaque versions of the parent. Note that they may be equal to the
