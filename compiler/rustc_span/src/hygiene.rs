@@ -564,7 +564,38 @@ impl HygieneData {
         }
         self.alloc_ctxt(call_site_ctxt, expn_id, transparency)
     }
+    // fn print_hygiene_data(&self) -> String {
+    //     let mut s = String::from("Expansions:");
+    //     let mut debug_expn_data = |(id, expn_data): (&ExpnId, &ExpnData)| {
+    //         s.push_str(&format!(
+    //             "\n{:?}: parent: {:?}, call_site_ctxt: {:?}, def_site_ctxt: {:?}, kind: {:?}",
+    //             id,
+    //             expn_data.parent,
+    //             expn_data.call_site.ctxt(),
+    //             expn_data.def_site.ctxt(),
+    //             expn_data.kind,
+    //         ))
+    //     };
+    //     self.local_expn_data.iter_enumerated().for_each(|(id, expn_data)| {
+    //         let expn_data = expn_data.as_ref().expect("no expansion data for an expansion ID");
+    //         debug_expn_data((&id.to_expn_id(), expn_data))
+    //     });
 
+    //     // Sort the hash map for more reproducible output.
+    //     // Because of this, it is fine to rely on the unstable iteration order of the map.
+    //     #[allow(rustc::potential_query_instability)]
+    //     let mut foreign_expn_data: Vec<_> = self.foreign_expn_data.iter().collect();
+    //     foreign_expn_data.sort_by_key(|(id, _)| (id.krate, id.local_id));
+    //     foreign_expn_data.into_iter().for_each(debug_expn_data);
+    //     s.push_str("\n\nSyntaxContexts:");
+    //     self.syntax_context_data.iter().enumerate().for_each(|(id, ctxt)| {
+    //         s.push_str(&format!(
+    //             "\n#{}: parent: {:?}, outer_mark: ({:?}, {:?})",
+    //             id, ctxt.parent, ctxt.outer_expn, ctxt.outer_transparency,
+    //         ));
+    //     });
+    //     s
+    // }
     fn alloc_ctxt(
         &mut self,
         parent: SyntaxContext,
@@ -573,17 +604,18 @@ impl HygieneData {
     ) -> SyntaxContext {
         let ctxt = self.alloc_ctxt_1(parent, expn_id, transparency);
         if let Ok(_) = std::env::var("RUSTC_PRINT") {
-            println!(
-                "alloc_ctxt: thread={:?}, parent={:?}, expn_id={:?}, transparency={:?} => ctxt={:?}",
-                std::thread::current().id(),
-                parent,
-                expn_id,
-                transparency,
-                ctxt
-            );
+            // println!(
+            //     "alloc_ctxt: thread={:?}, parent={:?}, expn_id={:?}, transparency={:?} => ctxt={:?}",
+            //     std::thread::current().id(),
+            //     parent,
+            //     expn_id,
+            //     transparency,
+            //     ctxt
+            // );
             // if ctxt.as_u32() == 10 {
             //     panic!()
             // }
+            // println!("syntax_ctxt {:?}", self.print_hygiene_data());
         }
         ctxt
     }
@@ -1379,11 +1411,14 @@ impl HygieneEncodeContext {
             // that we insert data into doesn't depend on insertion order.
             #[allow(rustc::potential_query_instability)]
             let latest_ctxts = { mem::take(&mut *self.latest_ctxts.lock()) }.into_iter();
+            println!("latest_ctxts: {:?}", latest_ctxts);
             let all_ctxt_data: Vec<_> = HygieneData::with(|data| {
+                println!("ctxts_data: {:?}", data.syntax_context_data);
                 latest_ctxts
                     .map(|ctxt| (ctxt, data.syntax_context_data[ctxt.0 as usize].key()))
                     .collect()
             });
+            println!("all_ctxt_data: {:?}", all_ctxt_data);
             for (ctxt, ctxt_key) in all_ctxt_data {
                 if self.serialized_ctxts.lock().insert(ctxt) {
                     encode_ctxt(encoder, ctxt.0, &ctxt_key);
@@ -1398,6 +1433,7 @@ impl HygieneEncodeContext {
                     .map(|expn| (expn, data.expn_data(expn).clone(), data.expn_hash(expn)))
                     .collect()
             });
+            println!("all_expn_data: {:?}", all_expn_data);
             for (expn, expn_data, expn_hash) in all_expn_data {
                 if self.serialized_expns.lock().insert(expn) {
                     encode_expn(encoder, expn, &expn_data, expn_hash);
@@ -1533,6 +1569,11 @@ pub fn raw_encode_syntax_context(
 ) {
     if !context.serialized_ctxts.lock().contains(&ctxt) {
         context.latest_ctxts.lock().insert(ctxt);
+    }
+    if let Ok(_) = std::env::var("RUSTC_PRINT") {
+        // if ctxt.0 == 12 || ctxt.0 == 10 {
+        //     panic!()
+        // }
     }
     ctxt.0.encode(e);
 }
