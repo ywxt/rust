@@ -529,6 +529,9 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
     }
 
     fn encode_def_path_hash_map(&mut self) -> LazyValue<DefPathHashMapRef<'static>> {
+        // if let Ok(_) = std::env::var("RUSTC_PRINT1") {
+        //     println!("def_path_hash_map: {:?}", self.tcx.def_path_hash_to_def_index_map());
+        // }
         self.lazy(DefPathHashMapRef::BorrowedFromTcx(self.tcx.def_path_hash_to_def_index_map()))
     }
 
@@ -674,6 +677,9 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
                 }
                 n = new_n;
             }
+            // if let Ok(_) = std::env::var("RUSTC_PRINT1") {
+            //     println!("interpret: {:?}", interpret_alloc_index);
+            // }
             self.lazy_array(interpret_alloc_index)
         });
 
@@ -681,6 +687,7 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
         // encode the tables. This overwrites def_keys, so it must happen after
         // encode_def_path_table.
         let proc_macro_data = stat!("proc-macro-data", || self.encode_proc_macros());
+        // println!("{:?}", proc_macro_data);
 
         let tables = stat!("tables", || self.tables.encode(&mut self.opaque));
 
@@ -695,6 +702,8 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
         // Encode exported symbols info. This is prefetched in `encode_metadata`.
         let (exported_non_generic_symbols, exported_generic_symbols) =
             stat!("exported-symbols", || {
+                // println!("non-generic-symbols: {:?}", tcx.exported_non_generic_symbols(LOCAL_CRATE));
+                // println!("generic-symbols: {:?}", tcx.exported_generic_symbols(LOCAL_CRATE));
                 (
                     self.encode_exported_symbols(tcx.exported_non_generic_symbols(LOCAL_CRATE)),
                     self.encode_exported_symbols(tcx.exported_generic_symbols(LOCAL_CRATE)),
@@ -780,6 +789,9 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
         let total_bytes = self.position();
 
         let computed_total_bytes: usize = stats.iter().map(|(_, size)| size).sum();
+        if let Ok(_) = std::env::var("RUSTC_PRINT") {
+            println!("size: {:?}", computed_total_bytes);
+        }
         assert_eq!(total_bytes, computed_total_bytes);
 
         if tcx.sess.opts.unstable_opts.meta_stats {
@@ -1908,10 +1920,16 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
         self.hygiene_ctxt.encode(
             &mut (&mut *self, &mut syntax_contexts, &mut expn_data_table, &mut expn_hash_table),
             |(this, syntax_contexts, _, _), index, ctxt_data| {
+                // if let Ok(_) = std::env::var("RUSTC_PRINT1") {
+                //     println!("encoder_ctxt_data: {}: {:?}", index, ctxt_data);
+                // }
                 syntax_contexts.set_some(index, this.lazy(ctxt_data));
             },
             |(this, _, expn_data_table, expn_hash_table), index, expn_data, hash| {
                 if let Some(index) = index.as_local() {
+                    // if let Ok(_) = std::env::var("RUSTC_PRINT1") {
+                    //     println!("encoder_expn_data: {:?}: {:?} : {:?}", index, expn_data, hash);
+                    // }
                     expn_data_table.set_some(index.as_raw(), this.lazy(expn_data));
                     expn_hash_table.set_some(index.as_raw(), this.lazy(hash));
                 }
@@ -2190,6 +2208,11 @@ impl<'a, 'tcx> EncodeContext<'a, 'tcx> {
         empty_proc_macro!(self);
         let stable_order_of_exportable_impls =
             self.tcx.stable_order_of_exportable_impls(LOCAL_CRATE);
+        // let x: Vec<_> = stable_order_of_exportable_impls
+        //     .iter()
+        //     .map(|(def_id, idx)| (def_id.index, *idx))
+        //     .collect();
+        // println!("{:?}", x);
         self.lazy_array(
             stable_order_of_exportable_impls.iter().map(|(def_id, idx)| (def_id.index, *idx)),
         )

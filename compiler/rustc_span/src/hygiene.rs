@@ -1411,14 +1411,14 @@ impl HygieneEncodeContext {
             // that we insert data into doesn't depend on insertion order.
             #[allow(rustc::potential_query_instability)]
             let latest_ctxts = { mem::take(&mut *self.latest_ctxts.lock()) }.into_iter();
-            println!("latest_ctxts: {:?}", latest_ctxts);
+            // println!("latest_ctxts: {:?}", latest_ctxts);
             let all_ctxt_data: Vec<_> = HygieneData::with(|data| {
-                println!("ctxts_data: {:?}", data.syntax_context_data);
+                // println!("ctxts_data: {:?}", data.syntax_context_data);
                 latest_ctxts
                     .map(|ctxt| (ctxt, data.syntax_context_data[ctxt.0 as usize].key()))
                     .collect()
             });
-            println!("all_ctxt_data: {:?}", all_ctxt_data);
+            // println!("all_ctxt_data: {:?}", all_ctxt_data);
             for (ctxt, ctxt_key) in all_ctxt_data {
                 if self.serialized_ctxts.lock().insert(ctxt) {
                     encode_ctxt(encoder, ctxt.0, &ctxt_key);
@@ -1433,7 +1433,7 @@ impl HygieneEncodeContext {
                     .map(|expn| (expn, data.expn_data(expn).clone(), data.expn_hash(expn)))
                     .collect()
             });
-            println!("all_expn_data: {:?}", all_expn_data);
+            // println!("all_expn_data: {:?}", all_expn_data);
             for (expn, expn_data, expn_hash) in all_expn_data {
                 if self.serialized_expns.lock().insert(expn) {
                     encode_expn(encoder, expn, &expn_data, expn_hash);

@@ -122,6 +122,9 @@ impl FileEncoder {
 
     #[inline]
     fn write_all(&mut self, buf: &[u8]) {
+        if let Ok(_) = std::env::var("RUSTC_PRINT") {
+            println!("buff: {:?}", buf);
+        }
         #[cfg(debug_assertions)]
         {
             self.finished = false;
@@ -162,6 +165,9 @@ impl FileEncoder {
         // and if isn't, flush ensures that our empty buffer is now BUF_SIZE.
         // We produce a post-mono error if N > BUF_SIZE.
         let buf = unsafe { self.buffer_empty().first_chunk_mut::<N>().unwrap_unchecked() };
+        if let Ok(_) = std::env::var("RUSTC_PRINT") {
+            println!("buff: {:?}", buf);
+        }
         let written = visitor(buf);
         // We have to ensure that an errant visitor cannot cause self.buffered to exceed BUF_SIZE.
         if written > N {
