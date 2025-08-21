@@ -605,8 +605,7 @@ impl HygieneData {
         let ctxt = self.alloc_ctxt_1(parent, expn_id, transparency);
         if let Ok(_) = std::env::var("RUSTC_PRINT") {
             // println!(
-            //     "alloc_ctxt: thread={:?}, parent={:?}, expn_id={:?}, transparency={:?} => ctxt={:?}",
-            //     std::thread::current().id(),
+            //     "alloc_ctxt: parent={:?}, expn_id={:?}, transparency={:?} => ctxt={:?}",
             //     parent,
             //     expn_id,
             //     transparency,
@@ -615,7 +614,9 @@ impl HygieneData {
             // if ctxt.as_u32() == 10 {
             //     panic!()
             // }
-            // println!("syntax_ctxt {:?}", self.print_hygiene_data());
+            if self.syntax_context_data.len() > 20 {
+                println!("syntax_ctxt {:?}", self.syntax_context_data);
+            }
         }
         ctxt
     }
