@@ -291,6 +291,7 @@ const PERMITTED_RUSTC_DEPENDENCIES: &[&str] = &[
     "constant_time_eq",
     "cpufeatures",
     "crc32fast",
+    "crossbeam-channel",
     "crossbeam-deque",
     "crossbeam-epoch",
     "crossbeam-utils",
