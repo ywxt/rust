@@ -451,7 +451,8 @@ pub const fn is_ascii_simple(mut bytes: &[u8]) -> bool {
 /// (above) returns true, then we know the answer is false.
 #[cfg(not(any(
     all(target_arch = "x86_64", target_feature = "sse2"),
-    all(target_arch = "loongarch64", target_feature = "lsx")
+    all(target_arch = "loongarch64", target_feature = "lsx"),
+    all(target_arch = "aarch64", target_feature = "neon")
 )))]
 #[inline]
 #[rustc_allow_const_fn_unstable(const_eval_select)] // fallback impl has same behavior
@@ -550,6 +551,36 @@ const fn is_ascii(s: &[u8]) -> bool {
     )
 }
 
+macro_rules! small_chunk_fallback {
+    ($capture:ident, $chunk_size:expr, $simd:ident) => {
+        {
+            const USIZE_SIZE: usize = size_of::<usize>();
+            const NONASCII_MASK: usize = usize::MAX / 255 * 0x80;
+            const_eval_select!(
+                @capture { $capture: &[u8] } -> bool:
+                if const {
+                    is_ascii_simple($capture)
+                } else {
+                    // For small inputs, use usize-at-a-time processing to avoid SSE2 call overhead.
+                    if $capture.len() < $chunk_size {
+                        let chunks = $capture.chunks_exact(USIZE_SIZE);
+                        let remainder = chunks.remainder();
+                        for chunk in chunks {
+                            let word = usize::from_ne_bytes(chunk.try_into().unwrap());
+                            if (word & NONASCII_MASK) != 0 {
+                                return false;
+                            }
+                        }
+                        return remainder.iter().all(|b| b.is_ascii());
+                    }
+
+                    $simd($capture)
+                }
+            )
+        }
+    };
+}
+
 /// Chunk size for SSE2 vectorized ASCII checking (4x 16-byte loads).
 #[cfg(all(target_arch = "x86_64", target_feature = "sse2"))]
 const SSE2_CHUNK_SIZE: usize = 64;
@@ -592,30 +623,7 @@ fn is_ascii_sse2(bytes: &[u8]) -> bool {
 #[inline]
 #[rustc_allow_const_fn_unstable(const_eval_select)]
 const fn is_ascii(bytes: &[u8]) -> bool {
-    const USIZE_SIZE: usize = size_of::<usize>();
-    const NONASCII_MASK: usize = usize::MAX / 255 * 0x80;
-
-    const_eval_select!(
-        @capture { bytes: &[u8] } -> bool:
-        if const {
-            is_ascii_simple(bytes)
-        } else {
-            // For small inputs, use usize-at-a-time processing to avoid SSE2 call overhead.
-            if bytes.len() < SSE2_CHUNK_SIZE {
-                let chunks = bytes.chunks_exact(USIZE_SIZE);
-                let remainder = chunks.remainder();
-                for chunk in chunks {
-                    let word = usize::from_ne_bytes(chunk.try_into().unwrap());
-                    if (word & NONASCII_MASK) != 0 {
-                        return false;
-                    }
-                }
-                return remainder.iter().all(|b| b.is_ascii());
-            }
-
-            is_ascii_sse2(bytes)
-        }
-    )
+    small_chunk_fallback!(bytes, SSE2_CHUNK_SIZE, is_ascii_sse2)
 }
 
 /// ASCII test optimized to use the `vmskltz.b` instruction on `loongarch64`.
@@ -660,4 +668,38 @@ const fn is_ascii(bytes: &[u8]) -> bool {
     }
 
     is_ascii
+}
+
+#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+const NEON_CHUNK_SIZE: usize = 16;
+
+#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+#[inline]
+const fn is_ascii_neon(bytes: &[u8]) -> bool {
+    use crate::arch::aarch64::{uint8x16_t, vaddvq_u8, vld1q_u8, vtstq_u8};
+
+    const CHUNK_SIZE: usize = 16;
+
+    let (chunks, rest) = bytes.as_chunks::<CHUNK_SIZE>();
+    // SAFETY: Creating a vector of 0x80 bytes is always valid.
+    let mask_80 = unsafe { vdupq_n_u8(0x80) };
+    for chunk in chunks {
+        // SAFETY: chunk is 16 bytes. NEON is baseline on aarch64.
+        let hight_bi_set = unsafe {
+            let chunk = vld1q_u8(chunk.as_ptr());
+            let mask = vtstq_u8(chunk, mask_80);
+            vaddvq_u8(mask)
+        };
+        if hight_bit_set != 0 {
+            return false;
+        }
+    }
+    rest.iter().all(|b| b.is_ascii())
+}
+
+#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+#[inline]
+#[rustc_allow_const_fn_unstable(const_eval_select)]
+const fn is_ascii(bytes: &[u8]) -> bool {
+    small_chunk_fallback!(bytes, NEON_CHUNK_SIZE, is_ascii_neon)
 }
