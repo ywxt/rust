@@ -675,7 +675,7 @@ const NEON_CHUNK_SIZE: usize = 16;
 
 #[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
 #[inline]
-const fn is_ascii_neon(bytes: &[u8]) -> bool {
+fn is_ascii_neon(bytes: &[u8]) -> bool {
     use crate::arch::aarch64::{vaddvq_u8, vdupq_n_u8, vld1q_u8, vtstq_u8};
 
     const CHUNK_SIZE: usize = 16;
