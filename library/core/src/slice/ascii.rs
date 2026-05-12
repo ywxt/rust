@@ -676,7 +676,7 @@ const NEON_CHUNK_SIZE: usize = 16;
 #[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
 #[inline]
 const fn is_ascii_neon(bytes: &[u8]) -> bool {
-    use crate::arch::aarch64::{uint8x16_t, vaddvq_u8, vld1q_u8, vtstq_u8};
+    use crate::arch::aarch64::{vaddvq_u8, vdupq_n_u8, vld1q_u8, vtstq_u8};
 
     const CHUNK_SIZE: usize = 16;
 
@@ -685,12 +685,12 @@ const fn is_ascii_neon(bytes: &[u8]) -> bool {
     let mask_80 = unsafe { vdupq_n_u8(0x80) };
     for chunk in chunks {
         // SAFETY: chunk is 16 bytes. NEON is baseline on aarch64.
-        let hight_bi_set = unsafe {
+        let high_bit_set = unsafe {
             let chunk = vld1q_u8(chunk.as_ptr());
             let mask = vtstq_u8(chunk, mask_80);
             vaddvq_u8(mask)
         };
-        if hight_bit_set != 0 {
+        if high_bit_set != 0 {
             return false;
         }
     }
