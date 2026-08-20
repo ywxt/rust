@@ -1,3 +1,4 @@
+use crate::intrinsics::const_eval_select;
 use crate::mem::{MaybeUninit, SizedTypeProperties};
 use crate::ptr;
 
@@ -11,6 +12,7 @@ type BufType = [usize; 32];
 ///
 /// The specified range must be valid for reading and writing.
 #[inline]
+#[rustc_allow_const_fn_unstable(const_eval_select)] // both branches rotate the same bytes
 pub(super) const unsafe fn ptr_rotate<T>(left: usize, mid: *mut T, right: usize) {
     if T::IS_ZST {
         return;
@@ -19,6 +21,50 @@ pub(super) const unsafe fn ptr_rotate<T>(left: usize, mid: *mut T, right: usize)
     if (left == 0) || (right == 0) {
         return;
     }
+    const_eval_select!(
+        @capture[T] { left: usize, mid: *mut T, right: usize }:
+        if const {
+            // SAFETY: guaranteed by the caller
+            unsafe { ptr_rotate_dispatch(left, mid, right) }
+        } else {
+            // A rotation is a permutation of raw bytes, so when the element type is
+            // large but its size is a multiple of the word size, the same range can
+            // be rotated as if it were a slice of words. This sidesteps algorithm 2,
+            // whose cache- and TLB-hostile strides of `left * size_of::<T>()` bytes
+            // and large per-element temporary make it much slower than algorithm 3
+            // once the slice no longer fits in cache, and lets the swap loop use
+            // wide vector copies. `MaybeUninit<usize>` is used so that any padding
+            // bytes of `T` remain valid to read. This must not run in const eval,
+            // where untyped reads of pointer fragments are not possible.
+            if !cfg!(feature = "optimize_for_size")
+                && size_of::<T>() > size_of::<[usize; 4]>()
+                && size_of::<T>() % size_of::<usize>() == 0
+                && align_of::<T>() >= align_of::<usize>()
+            {
+                let ratio = size_of::<T>() / size_of::<usize>();
+                // SAFETY: the range covers the same bytes as `[mid-left, mid+right)`
+                // (`left * ratio` words of `size_of::<usize>()` bytes each equal
+                // `left` elements of `size_of::<T>()` bytes, and likewise for
+                // `right`), `mid` is aligned for `usize` by the check above, and the
+                // total byte count is unchanged so no overflow can be introduced.
+                unsafe {
+                    ptr_rotate_dispatch(left * ratio, mid as *mut MaybeUninit<usize>, right * ratio)
+                }
+            } else {
+                // SAFETY: guaranteed by the caller
+                unsafe { ptr_rotate_dispatch(left, mid, right) }
+            }
+        }
+    )
+}
+
+/// Chooses between the three rotation algorithms. See the algorithm docs below.
+///
+/// # Safety
+///
+/// The specified range must be valid for reading and writing.
+#[inline]
+const unsafe fn ptr_rotate_dispatch<T>(left: usize, mid: *mut T, right: usize) {
     // `T` is not a zero-sized type, so it's okay to divide by its size.
     if !cfg!(feature = "optimize_for_size")
         // FIXME(const-hack): Use cmp::min when available in const
@@ -223,6 +269,12 @@ const unsafe fn ptr_rotate_gcd<T>(left: usize, mid: *mut T, right: usize) {
 /// ```
 /// when `left < right` the swapping happens from the left instead.
 ///
+/// Each round shrinks the problem to `(left % right, right)` (or the mirror image), so when the
+/// two sides are nearly equal the remainder becomes tiny and plain swapping would degenerate into
+/// many rounds of short swaps (e.g. `left = right + 1` leaves swaps of just one element each).
+/// Once `min(left, right)` fits in the on-stack buffer, algorithm 1 finishes the remaining
+/// rotation in a single pass instead.
+///
 /// # Safety
 ///
 /// The specified range must be valid for reading and writing.
@@ -266,6 +318,14 @@ const unsafe fn ptr_rotate_swap<T>(mut left: usize, mut mid: *mut T, mut right: 
             }
         }
         if (right == 0) || (left == 0) {
+            return;
+        }
+        if !cfg!(feature = "optimize_for_size")
+            && const_min(left, right) <= size_of::<BufType>() / size_of::<T>()
+        {
+            // SAFETY: the remaining range `[mid-left, mid+right)` is a subrange of the
+            // original input, so it is valid for reading and writing.
+            unsafe { ptr_rotate_memmove(left, mid, right) };
             return;
         }
     }
