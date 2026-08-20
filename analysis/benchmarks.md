@@ -53,32 +53,61 @@ benchmarks:
     slice::memchr_benches::len_64k::rev_match_none   5368.44ns/iter +/- 19.57
 
 benchmarks:
-    pattern::contains_char_missing        3082.19ns/iter  +/- 26.38
-    pattern::contains_char_short_missing  9194.34ns/iter +/- 319.57
-    pattern::ends_with_char               4598.78ns/iter   +/- 5.27
-    pattern::find_char_missing            3081.17ns/iter  +/- 28.15
-    pattern::find_char_short_missing     10253.89ns/iter +/- 273.56
-    pattern::find_char_sparse               55.91ns/iter   +/- 0.35
-    pattern::matches_char_sparse_count    3653.83ns/iter  +/- 58.62
-    pattern::rfind_char_missing           3235.95ns/iter  +/- 23.67
-    pattern::split_char_dense_count       8908.60ns/iter  +/- 44.02
-    pattern::starts_with_char             4599.79ns/iter  +/- 22.12
+    pattern::ends_with_char                      4597.97ns/iter   +/- 5.92
+    pattern::ends_with_str                       4598.14ns/iter   +/- 3.82
+    pattern::find_1byte_str_early_return        11512.55ns/iter   +/- 6.60
+    pattern::find_1byte_str_long_match_end       5180.74ns/iter   +/- 9.93
+    pattern::find_1byte_str_long_nomatch         5172.59ns/iter   +/- 6.81
+    pattern::find_1byte_str_short_haystack       9242.62ns/iter +/- 204.13
+    pattern::find_char_early_return              7787.22ns/iter   +/- 7.72
+    pattern::find_char_long_match_end            5096.61ns/iter   +/- 5.25
+    pattern::find_char_long_nomatch              5104.69ns/iter   +/- 6.13
+    pattern::find_char_short_haystack            5313.39ns/iter   +/- 6.93
+    pattern::find_str                            7090.74ns/iter   +/- 5.68
+    pattern::find_str_worst_case                 1482.15ns/iter   +/- 8.95
+    pattern::rfind_1byte_str_long_nomatch        5391.75ns/iter   +/- 9.99
+    pattern::rfind_char_long_nomatch             5351.41ns/iter  +/- 10.68
+    pattern::rfind_str                           5708.62ns/iter   +/- 4.87
+    pattern::rfind_str_worst_case               23512.81ns/iter  +/- 17.75
+    pattern::split_1byte_str_dense              54059.19ns/iter  +/- 29.86
+    pattern::split_1byte_str_multibyte_haystack 80609.83ns/iter  +/- 70.10
+    pattern::split_1byte_str_sparse             16889.26ns/iter  +/- 42.32
+    pattern::split_char_dense                   42748.78ns/iter  +/- 30.34
+    pattern::split_char_multibyte_haystack      69253.86ns/iter  +/- 57.51
+    pattern::split_char_sparse                  14326.42ns/iter  +/- 14.53
+    pattern::starts_with_char                    4598.04ns/iter   +/- 3.52
+    pattern::starts_with_str                     4597.53ns/iter   +/- 3.53
+
 
 
 
 ### 優化後
 
 benchmarks:
-    pattern::contains_char_missing        1254.59ns/iter +/- 421.52
-    pattern::contains_char_short_missing  7075.88ns/iter   +/- 7.70
-    pattern::ends_with_char               4599.33ns/iter  +/- 24.52
-    pattern::find_char_missing             783.28ns/iter  +/- 10.23
-    pattern::find_char_short_missing      8135.74ns/iter +/- 171.58
-    pattern::find_char_sparse               18.01ns/iter   +/- 0.09
-    pattern::matches_char_sparse_count    1110.85ns/iter   +/- 3.02
-    pattern::rfind_char_missing            877.37ns/iter  +/- 29.95
-    pattern::split_char_dense_count       6501.38ns/iter +/- 141.05
-    pattern::starts_with_char             4598.40ns/iter   +/- 6.84
+    pattern::ends_with_char                      4600.08ns/iter  +/- 83.31
+    pattern::ends_with_str                       4599.04ns/iter   +/- 7.30
+    pattern::find_1byte_str_early_return        12162.06ns/iter +/- 266.43
+    pattern::find_1byte_str_long_match_end       1182.60ns/iter   +/- 5.33
+    pattern::find_1byte_str_long_nomatch         1286.60ns/iter  +/- 12.17
+    pattern::find_1byte_str_short_haystack       9314.57ns/iter  +/- 51.13
+    pattern::find_char_early_return              7784.51ns/iter   +/- 5.90
+    pattern::find_char_long_match_end            1242.24ns/iter  +/- 10.21
+    pattern::find_char_long_nomatch              1318.24ns/iter   +/- 3.43
+    pattern::find_char_short_haystack            5569.64ns/iter   +/- 9.63
+    pattern::find_str                            7093.10ns/iter   +/- 7.14
+    pattern::find_str_worst_case                 1460.42ns/iter  +/- 10.55
+    pattern::rfind_1byte_str_long_nomatch        1302.14ns/iter   +/- 7.33
+    pattern::rfind_char_long_nomatch             1279.11ns/iter   +/- 4.52
+    pattern::rfind_str                           6225.30ns/iter   +/- 8.46
+    pattern::rfind_str_worst_case               24622.20ns/iter  +/- 39.85
+    pattern::split_1byte_str_dense              55237.39ns/iter +/- 435.06
+    pattern::split_1byte_str_multibyte_haystack 78901.17ns/iter +/- 132.03
+    pattern::split_1byte_str_sparse              7111.13ns/iter  +/- 12.05
+    pattern::split_char_dense                   43158.21ns/iter  +/- 11.31
+    pattern::split_char_multibyte_haystack      62913.94ns/iter  +/- 18.51
+    pattern::split_char_sparse                   4654.07ns/iter   +/- 2.46
+    pattern::starts_with_char                    4598.76ns/iter   +/- 5.49
+    pattern::starts_with_str                     4599.39ns/iter   +/- 6.96
 
 benchmarks:
     slice::memchr_benches::len_0016::fwd_match_first    3.45ns/iter   +/- 0.01

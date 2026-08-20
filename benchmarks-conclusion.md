@@ -1964,3 +1964,224 @@ build/aarch64-unknown-linux-gnu/stage1/bin/rustc --edition=2021 -C opt-level=3 -
 perf stat -e cycles,instructions,branches,branch-misses \
   /tmp/heap_pop_candidates {current|select} 1000
 ```
+
+---
+
+# `btree::map::iteration_mut_1000`:健康的樹遍歷,成本在結構不在事件;iter_mut 對 iter 只差 4–6%
+
+- 日期:2026-08-20
+- 分析對象:`library/alloctests/benches/btree/map.rs:201`(`bench_iteration_mut`,size=1000)
+- 接口:`BTreeMap::iter_mut` → `LazyLeafRange<ValMut>::next_unchecked` → `navigate.rs::next_kv`(葉內推進 + 滿邊界時 ascend/descend)
+- 平臺:本機 HiSilicon aarch64
+
+## benchmark 實際測甚麼
+
+1000 個隨機 `i32→i32`(B=6,節點容量 11,實測樹高 3),`iter_mut()` 全遍歷,每個 `(&K, &mut V)` 過 `black_box`。`Iter/IterMut::next` 沒有 fold/try_fold 覆寫——每個元素都走一次 `next()` 狀態機:`length` 遞減、葉內 `right_kv` 推進;葉尾則沿 parent 指針 `ascend`,遇 internal KV 後再下降到下一個 first leaf。
+
+## 正式基線與 perf
+
+```text
+iteration_mut_1000      1,865–1,880 ns/iter(1.87 ns/元素)
+iteration_1000          1,773–1,776 ns/iter(對照:不可變)
+iteration_mut_20        24.51 ns(1.23 ns/元素)
+iteration_mut_100000    365–409 µs(3.7–4.1 ns/元素,出 L1 後)
+```
+
+IPC **3.64**,branch miss 1.61%,**L1d miss 0.00%**(1000 元素的樹 ~30KB 常駐)。`perf annotate`(99.7% 單符號)樣本分佈在三個結構區:葉內推進的 `cbz/ldrh len` 檢查(20.4%+5.8%)、`next_kv` 的 ascend 迴圈 `ldr x14,[x13]` + `ldrh [x13,#96]`(7.7%+14.0%)、下降迴圈 `ldr [x15]`(9.7%)。**沒有單一病灶——熱點就是樹遍歷本身的指針追逐與每元素狀態機。**
+
+## 對照矩陣(standalone,1M 次固定迭代)
+
+| 形狀 | ns/元素 | branch miss | 說明 |
+|---|---:|---:|---|
+| `iter_mut` | 1.77 | 1.93% | ≈正式 bench(1.87,殼差) |
+| `iter`(不可變) | 1.69 | — | mut 貴 4–6%:`ValMut` 雙指針簿記 |
+| `values_mut` | 1.59 | — | 少一個 K 引用的物化 |
+| **`Vec<(i32,i32)>` iter_mut** | **0.36** | 0.10% | **5× 差距 = BTree 結構稅** |
+
+Vec 對照隔離出結論:BTree 遍歷的 1.4 ns/元素額外成本不是 miss 事件(兩者 L1d miss 都≈0,branch miss 都低),而是**每元素指令數**:BTree 18.6 條/元素對 Vec 4.0 條/元素——狀態機檢查、node/idx 簿記、每 11 個元素一次的邊界爬樹。IPC 反而高達 3.63,機器在高效地執行多餘的工作。
+
+## 判斷
+
+1. **無 std 病灶可修**:這不是 BinaryHeap 那種 miss 災難(15–21%),也不是 epilogue 那種形狀缺陷;1.6% miss、0% L1d miss、IPC 3.64 的遍歷已經被硬件執行得很好。要快只能減指令——即 `fold`/`try_fold` 特化:按葉節點批量發元素(葉內 `for i in 0..len` 直線迴圈),把爬樹成本從每元素攤到每節點。已知方向(`Iter` 缺 fold 覆寫),非本 benchmark 暴露的新問題;收益上限可從 `values_mut`(-10%)與葉內佔比估計約 20–40%,值得原型但工程量在 navigate 層不小。
+2. `iter_mut` 對 `iter` 的 4–6% 差距是 `ValMut` 借用形態的固有簿記,合理。
+3. benchmark 自身健康:隨機鍵、樹高與真實使用一致;100000 版(3.7–4.1 x ns/元素)補充了出緩存後的形態,其 variance(±26 µs)來自 TLB/L2,不是測量問題。
+4. 未做 x86 對照:遍歷是指針追逐+標量簿記,無向量化與 if-conversion 分歧空間,兩平臺 code shape 同構無懸念。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib \
+  build/.../allocbenches-2cf0e8badf7482bf --bench 'btree::map::iteration'
+
+build/aarch64-unknown-linux-gnu/stage1/bin/rustc --edition=2021 -C opt-level=3 -C target-cpu=native \
+  /tmp/btree_iter_candidates.rs -o /tmp/btree_iter_candidates
+/tmp/btree_iter_candidates {mut|ref|values|vec} 1000 1000000
+```
+
+---
+
+# `ascii::long::is_ascii_whitespace`:謂詞在第 6 字節就假,190 ns 全是 memcpy——benchmark 沒測到目標
+
+- 日期:2026-08-20
+- 分析對象:`library/coretests/benches/ascii.rs` 的 `@iter` 宏生成項(`bytes.iter().all(u8::is_ascii_whitespace)`)
+- 平臺:本機 HiSilicon aarch64
+
+## benchmark 實際測甚麼(和它以爲的不同)
+
+宏形狀決定一切:
+
+```rust
+bencher.iter(|| {
+    let mut vec = LONG.as_bytes().to_vec();   // ← 每輪重新分配+複製 7000B
+    { let bytes = &mut vec[..]; black_box(bytes.iter().all(u8::is_ascii_whitespace)); }
+    vec
+})
+```
+
+兩個事實疊加:
+
+1. **每輪 `to_vec()` 複製 7000 字節**(這個宏是為 `make_ascii_uppercase` 類原地修改設計的,重建輸入是必要的;但 `@iter` 謂詞是只讀的,複製純屬遺留);
+2. **LONG 的第 6 個字節是 'L'**(開頭 `"\n    La Guida…"`),`all(is_ascii_whitespace)` 在 6 個字節後短路返回 false。
+
+三方證據:
+
+- `case00_alloc_only`(空 body)**189.8 ns** ≡ `is_ascii_whitespace` **189.8–190.4 ns**,逐 ns 相同;`is_ascii_control`/`is_ascii_digit` 同樣 189.5–189.7(它們第 1 字節就假);
+- `perf record`:65%+ 樣本在 libc 的 memcpy 內核 64B/輪 `ldp/stp` 迴圈(符號表歸給鄰近的 `__xpg_strerror_r`,實為 glibc 內部 memcpy 例程);
+- standalone:對 7000B 輸入,early-exit(第 6 字節假)謂詞本體 **4.1 ns**,全掃描(全空白輸入)**3636 ns**——bench 的 190 ns 裏謂詞佔 ~2%。
+
+`bencher.bytes` 還把 190 ns 折算成 "36984 MB/s" 的假吞吐,恰等於 alloc+memcpy 的速度。對比:`is_ascii`(唯一全真、真正掃完的謂詞)317 ns,其中 ~127 ns 纔是掃描本體。
+
+## 結論
+
+1. **這個 benchmark(以及 `@iter` 家族中除 `is_ascii` 外的全部 10 項)沒有測到它命名的東西**:輸入是英文書目文本,對 whitespace/digit/control/uppercase 等謂詞在頭幾個字節就短路,測得的 189.8 ns 是「分配 + 複製 7000B」的固定成本,謂詞貢獻 ~2%。
+2. 因此在此 benchmark 上做 `is_ascii_whitespace` 的「優化」毫無意義,任何 std 修改都不可能移動這個數字(除非改掉 to_vec)。
+3. Benchmark 修復建議(比任何 std 改動有價值):`@iter` 分支的宏不應 `to_vec()`(只讀謂詞直接借用靜態輸入);且每個謂詞應配「全真輸入」(全空白、全數字等)才能測到掃描成本,現狀只測了短路路徑。修好後,真正的問題纔可見:`all(is_ascii_whitespace)` 的全掃描是 0.52 ns/B 標量匹配(3636 ns / 7000B),對比 `is_ascii` 的 0.018 ns/B(SWAR/SIMD)有 ~29× 差距——bitset/SWAR 化這些 u8 謂詞纔是有數據支撐的候選,但必須先有能測到它的 benchmark。
+4. 分類:與 `same_vector` 常量摺疊、`ends_with` 最好情形誤標同屬「benchmark 測量陷阱」類;本節無 ISA 對比必要(memcpy 是 libc 例程,謂詞未被執行)。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=... build/.../corebenches-14ea307f41bce867 \
+  --bench 'ascii::long::is_ascii_whitespace' --exact   # ≡ case00_alloc_only
+/tmp/ws_probe early   # 4.1 ns:LONG 形狀的謂詞本體
+/tmp/ws_probe full    # 3636 ns:全空白輸入的真實掃描
+```
+
+---
+
+# `num::flt2dec::strategy::*`:Grisu 快路徑健康;`exact_inf` 全部落入 Dragon 的 32-bit bignum 除法
+
+- 日期:2026-08-20
+- 分析對象:`library/coretests/benches/num/flt2dec/strategy/{grisu,dragon}.rs` 全部 19 項
+- 接口:`grisu::format_shortest/format_exact`(帶 Dragon fallback)與 `dragon::format_shortest/format_exact`;bignum 為 `Big32x40`(u32 limb × 40)
+- 平臺:本機 HiSilicon aarch64
+
+## 基線總表(ns/iter,單輪代表值,變異 <2%)
+
+| bench | grisu | dragon | grisu/dragon |
+|---|---:|---:|---:|
+| small_shortest | **33.2** | 166.4 | 5.0× |
+| big_shortest | **69.6** | 3,461 | 49.7× |
+| small_exact_3 | **23.0** | 86.0 | 3.7× |
+| big_exact_3 | **27.4** | 828.5 | 30.2× |
+| small_exact_12 | **38.7** | 152.7 | 3.9× |
+| big_exact_12 | **52.5** | 1,826 | 34.8× |
+| small_exact_inf | 1,058 | **1,010** | **0.95×(grisu 更慢)** |
+| big_exact_inf | 42,152 | **41,967** | 1.00× |
+| (grisu only) one/halfway/trailing_zero_exact_inf | 604–613 | — | — |
+
+## 三個結論層次
+
+**1. Grisu 快路徑工作正常,無分析必要。** shortest/exact-with-limit 檔位 23–70 ns,對 Dragon 有 4–50× 優勢,正是 Grisu3 設計目標;`{}` 格式化(`bench_small_shortest` 頂層版 write! 全鏈路)的主要成本也不在這裏。
+
+**2. `exact_inf` 的 grisu ≈ dragon 不是巧合,是 100% fallback。** `grisu::format_exact` 是 `format_exact_opt(...).unwrap_or_else(dragon)`;要求 1024 位精確數字時 Grisu 的 64-bit 近似必然判定不可行返回 `None`,每次調用都白做一遍 Grisu 再全量走 Dragon(grisu 1,058 vs dragon 1,010 ns 的差值就是被丟棄的 Grisu 嘗試)。benchmark 名義上測 grisu,實際測 dragon——與 ascii 節同屬「測非所名」,但這裏是**設計如此**(fallback 是公開契約),不是 bug。
+
+**3. Dragon `exact_inf` 的熱點是 32-bit limb bignum。** perf(99.3% 在 `dragon::format_exact`)樣本集中在兩個迴圈:
+
+```asm
+; div_rem_small(10):除以常數 10 的倒數乘法,每輪只消化 32 位
+ldr  w14, [x9, x12]        ; 14.5%(load limb)
+orr  x13, x14, x13, lsl 32
+umulh x14, x14, x10        ; 1/10 定點倒數
+lsr/str/msub               ; 商回寫 + 餘數
+; bignum add 的 adcs 鏈(比較/加法)
+ldr w / adcs w ×3          ; ~25% 合計
+str  w4, [x0], #4          ; 11.3%(digit 輸出)
+```
+
+`Big32x40` 是 32-bit limb——在 64-bit 硬件上,`div_rem_small`、`add`、`mul_small` 每迭代只處理一半字寬。1024 個十進制位 × 每位一次 O(n) bignum 除 10,是 O(digits × limbs) 的平方級行為,42 µs 全花在這。
+
+## 優化方向(未原型化,標記爲候選)
+
+1. **64-bit limb bignum**(`Big64x20`):除 10 迴圈、adcs 鏈、輸出迴圈的迭代次數全部減半,`umulh` 開銷不變。預期對 exact_inf 類 ~1.5–2×,對 big_shortest(3.5 µs,同樣 Dragon)同比例。代價:`define_bignum!` 宏已參數化,改動集中;但 flt2dec 的 Dragon 路徑僅在「shortest 且 Grisu 失敗(<1%)」或「超高精度 exact」時到達,真實 workload 覆蓋窄,收益/工程比一般。
+2. digit 批量化:每次 bignum 除法改除 10⁹(u32)或 10¹⁹(u64),一次取 9/19 個十進制位,把 O(digits) 次大數操作降為 O(digits/9)——這是比 limb 加寬更大的算法級槓桿,ryū/dragonbox 類現代實現的常規手法。
+3. 不建議動 fallback 結構:`exact_inf` 白做的 Grisu 嘗試僅 ~50 ns(對 42 µs 無感);低精度檔位 fallback 命中率近 0,現狀合理。
+4. ISA 對比無必要:umulh/adcs 鏈在 x86 是 mulx/adc 同構,無 codegen 分歧;瓶頸是算法(limb 寬度與逐位輸出),平臺無關。
+
+## 誠實邊界
+
+本節無 standalone 原型與 perf stat 逐項計數(熱點歸屬由 perf record/annotate 的 3014 樣本支撐);`exact_inf` 的 100% fallback 判定由源碼結構(1024 位需求 vs Grisu 64-bit 精度上限)與 grisu≈dragon 的時間巧合共同推出,未插樁直接計數。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=... build/.../corebenches-14ea307f41bce867 --bench 'flt2dec::strategy'
+LD_LIBRARY_PATH=... perf record -e cycles:u -o dragon.data \
+  build/.../corebenches-14ea307f41bce867 \
+  --bench 'num::flt2dec::strategy::dragon::bench_big_exact_inf' --exact
+perf annotate --symbol '...dragon12format_exact'
+```
+
+---
+
+# `vec::bench_in_place_zip_recycle`:in-place collect 生效,無 alloc;剩餘差距是移動所有權的簿記稅
+
+- 日期:2026-08-20
+- 分析對象:`library/alloctests/benches/vec.rs:478`
+- 接口:`vec::IntoIter` → `Zip` → `Enumerate` → `Map` → `collect::<Vec<_>>()`(InPlaceIterable 特化)
+- 平臺:本機 HiSilicon aarch64
+
+## benchmark 實際測甚麼
+
+每輪 `mem::take` 取走 1000B 的 Vec,經 `into_iter().zip(subst).enumerate().map(...)` 重新 `collect`。它守護的是 **in-place collect 特化**:`vec::IntoIter` 是 `InPlaceIterable`,collect 應復用原 allocation 而非新分配。與 `zip_iter_mut`(24.6 ns,借用+索引)是同一計算的另一種所有權形態。
+
+## 正式基線與熱點
+
+```text
+bench_in_place_zip_recycle    39.6–39.9 ns/iter(1000B)
+bench_in_place_zip_iter_mut   24.6 ns(對照:借用 iter_mut + subst[i])
+```
+
+IPC **3.94**,branch/L1d miss ≈0。`perf record` 99.88% 單符號;反彙編確認:
+
+1. **熱區無任何 alloc/dealloc 調用——in-place 特化生效**,守護目標成立;
+2. 主迴圈是 32B/輪 NEON(`ldp q ×2 → add/eor → stp q`),與 iter_mut 版逐指令同構;
+3. `zip` 形狀(真 zip,無 bounds check)同樣攜帶 requiresScalarEpilogue 尾巴與 guards——與 zip_iter_mut 節同機理。
+
+## 對照分解(standalone,1000B,10M 次)
+
+| 形狀 | ns/iter | 說明 |
+|---|---:|---|
+| recycle(=官方形狀) | 40.4 | 復刻正式 39.9 |
+| fresh(同計算,每次新分配) | 43.5 | **in-place 只省 ~3 ns**:1KB malloc/free 本就便宜 |
+| iter_mut in-place(zip 形狀,無所有權移動) | **32.2** | -20%:無 IntoIter 簿記 |
+
+三個結論:
+
+1. **in-place collect 的省分配收益在小 buffer 上很小**(~3 ns/1KB);它的真正價值在大 allocation 與 allocator 壓力場景,本 benchmark 的 1000B 只能驗證「不退化」而非展示收益。
+2. recycle(40.4)對 iter_mut(32.2)慢 25% 的差距是 **`vec::IntoIter` 的所有權簿記**:take/收尾的 ptr/cap/len 搬運、IntoIter 的 front/back 指針推進、collect 端的長度重建——每輪 ~8 ns 固定稅,與元素數無關的部分佔多數。
+3. 官方 `zip_iter_mut`(24.6)比本節 standalone iter_mut(32.2)快是內聯上下文差異(官方 bench 的 subst[i] 索引版在正式二進制裏長度可見;本節用 zip 形狀+不透明長度),兩者不直接可比——可比的是同 harness 內的三行。
+
+## 判斷
+
+1. benchmark 健康,守護目標(in-place collect 不退化為新分配)實測成立;無 std 病灶。
+2. 40 ns 的構成:~29 ns 向量計算+epilogue(與 zip_iter_mut 同)+ ~8 ns IntoIter 所有權簿記 + ~3 ns 已省下的分配(對照 fresh)。想更快的用戶側答案與 zip_iter_mut 節相同:能用 `iter_mut` 原地改就不要走 IntoIter+collect,快 20%。
+3. LLVM 側的 epilogue 改進(zip_iter_mut 節)同樣惠及此形狀,無新增修復點。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib \
+  build/.../allocbenches-2cf0e8badf7482bf --bench 'vec::bench_in_place_zip_recycle' --exact
+/tmp/zip_recycle_candidates {recycle|fresh-noclone|inplace} 1000 10000000
+```
