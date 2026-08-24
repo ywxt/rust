@@ -2185,3 +2185,582 @@ LD_LIBRARY_PATH=build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unkno
   build/.../allocbenches-2cf0e8badf7482bf --bench 'vec::bench_in_place_zip_recycle' --exact
 /tmp/zip_recycle_candidates {recycle|fresh-noclone|inplace} 1000 10000000
 ```
+
+---
+
+# `string::bench_push_char_two_bytes`:與 `Vec::push` 同一塊 store-forward 地板,UTF-8 編碼幾乎免費
+
+- 日期:2026-08-21
+- 分析對象:`library/alloctests/benches/string.rs:47`
+- 接口:`String::push` → `reserve(ch_len)` + `encode_utf8_raw_unchecked` + `set_len`(`library/alloc/src/string.rs:1432`)
+- 平臺:本機 HiSilicon aarch64
+
+## benchmark 實際測甚麼
+
+每輪新建空 `String`,push 10,000 次 `'â'`(2 字節 UTF-8),`black_box` 同時打在 receiver 與 char 上——後者使 `len_utf8`/編碼分支不可常量摺疊,每次 push 都要走完整的「按 char 值分 1/2/3/4 字節」判定鏈。字符串從 0 增長到 20,000 字節,途中 doubling realloc ~15 次。
+
+## 正式基線與 perf
+
+```text
+bench_push_char_two_bytes    26.77–26.92 µs/iter(2.69 ns/push,747 MB/s)
+bench_push_char_one_byte     25.07 µs(2.51 ns/push,398 MB/s)
+bench_push_str_one_byte      35.23 µs(3.52 ns/push,對照:push_str 單字節)
+```
+
+IPC **3.91**,branch miss 0.05%,backend stall 極低。`perf record` 96.6% 單符號;反彙編顯示內聯後的完整 push 迴圈:每輪從記憶體重讀 `(cap,ptr,len)`(black_box 逃逸所致)、`cmp w22, #0x80 / #0x800 / #0x10,lsl 12` 的長度判定鏈(`cinc/csel` 無分支)、`reserve` 的 `cmp x2, x8` 容量檢查、兩條 `strb` 寫出 UTF-8 字節、`str x8, [x20,#16]` 寫回 len。樣本聚在 `strb`(52.5%)與 len 寫回/重讀(12.7%)——**與 `slice::push` 節相同的 store→load 轉發鏈歸因**。
+
+## 分解實驗(standalone,2.6 ns 地板的歸屬)
+
+| 變體 | ns/push | 結論 |
+|---|---:|---|
+| official(復刻正式形狀) | 2.64 | ≈正式 2.69 |
+| pre-reserved(去掉全部 realloc) | 2.61 | **grow 攤銷僅 ~1%** |
+| const char(編碼分支迴圈外) | 2.61 | **1/2/3/4 字節判定鏈 ~1%** |
+| 手寫 u16 單 store 編碼(替代兩條 strb) | 2.62 | **雙 strb 合併無收益** |
+| registerized(receiver 不逃逸) | 2.60 | 欄位重讀稅也只 ~2% |
+
+**全部候選壓在同一塊 2.6 ns 地板上**:瓶頸是每 push 一次的 `str len → 下輪 ldr len` store-forward 往返(本核 ~7 cycles),與元素編碼、容量管理、black_box 形態幾乎無關。one_byte(2.51)與 two_bytes(2.69)只差 7%,同理。
+
+## 結論
+
+1. **無 std 可改**:`String::push` 的實現(reserve + encode_unchecked + set_len)已是最優形狀;2.69 ns 的構成 ≈ 95% store-forward 稅 + ~5% 其餘。與 `slice::push`(2.49 ns)是同一個微架構地板,String 多出的 0.2 ns 是 UTF-8 判定鏈的邊際成本。
+2. 用戶側可移植結論與 Vec 節一致:熱迴圈逐字符 `push` 的上限由 store-forward 決定;批量形態(`push_str`/`extend`/`String::from_iter`)纔有數量級空間。注意 `bench_push_str_one_byte`(3.52 ns)反而比 push_char 慢——單字節 `push_str` 的 memcpy 調用開銷超過內聯編碼,「批量接口」只在真的批量時才贏。
+3. benchmark 健康,是守護型:守護「push 不因 UTF-8 通用性付出可測代價」,實測成立(one_byte vs two_bytes 僅 7%)。
+4. x86 對照無必要:與 `slice::push` 節同構(store-forward 延遲是各微架構常數),無 codegen 分歧空間。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib \
+  build/.../allocbenches-2cf0e8badf7482bf --bench 'push_char'
+/tmp/push_char_candidates {official|prereserved|const|wide|registerized} 2000
+```
+
+---
+
+# `str::char_iterator_for`:完整 UTF-8 解碼 @ 完美預測,0.72 ns/char 已是該串行形狀的上限
+
+- 日期:2026-08-21
+- 分析對象:`library/alloctests/benches/str.rs:11`
+- 接口:`str::chars()` 的 `Chars::next` → `next_code_point`(`library/core/src/str/validations.rs`)
+- 平臺:本機 HiSilicon aarch64
+
+## benchmark 實際測甚麼
+
+65 字節混合字符串(7 個 3 字節泰文/CJK + 44 個 ASCII,共 51 chars),`for ch in s.chars() { black_box(ch) }`。**`black_box(ch)` 是與鄰居的本質區別**:消費 char 值使解碼不可 DCE——對照 `char_iterator`(`chars().count()`,同輸入)只要 11.4 ns,因為 count 不用 char 值,LLVM 把解碼計算全部刪除只留步進(char_count 節 case02 已證此機理)。
+
+```text
+char_iterator          11.44 ns(count:解碼被 DCE)
+char_iterator_for      36.82 ns(0.72 ns/char:真解碼)← 本節
+char_iterator_rev      48.00 ns(反向 count:反向解碼不可全 DCE)
+char_iterator_rev_for  38.69 ns(反向真解碼)
+```
+
+## perf 與熱迴圈
+
+IPC **4.65**,branch miss **0.00%**,99.76% 單符號。反彙編是教科書式的 UTF-8 前向解碼:
+
+```asm
+ldrsb w12, [x11], #1        ; 首字節(post-increment)
+tbz   w12, #31, ascii       ; ASCII → char 即字節值
+ldrb  w11, [x9, #1]         ; 續字節 1
+cmp   w10, #0xe0 / b.cc     ; 2 字節出口
+ldrb  w12, [x9, #2]         ; 續字節 2
+cmp   w10, #0xf0 / b.cc     ; 3 字節出口(orr w10, w12, w11, lsl #12)
+ldrb  w10, [x9, #3]         ; 4 字節路徑
+```
+
+樣本 64% 聚在迴圈頭的指針搬運(skid 聚集於 `mov x9, x11`)——成本均勻塗抹在整條解碼鏈上,無單點異常。約 2.1 cycles/char。
+
+**關鍵限定:0.00% miss 是 benchmark 假象的一半。** 每輪迭代重複同一個 65 字節串,預測器把 51 個字符的分支序列整條背下來——它測的是「完美訓練預測器下的解碼吞吐」。真實非重複文本的形態見 char_count 節 case02:zh_huge 0.9 GB/s(依賴鏈鎖死)對本節 1.77 GB/s。兩者機器碼相同(case02 的 iter 展開形狀:1/2 字節路徑分支+常量增量,3-vs-4 才有資料依賴),差異全在輸入統計。
+
+## 結論
+
+1. **無 std 可改**:`Chars::next` 的逐字符解碼已是該語義(必須產出每個 char 值)的最優串行形狀;0.72 ns/char @ IPC 4.65 貼近發射寬度。要快一個量級只能改語義——不用 char 值就用 `count()`/字節接口(11.4 ns,3.2×),要值且能批量就走 `char_indices` + 按需解碼或 SIMD 驗證後的批解碼(超出 std 現有 API)。
+2. benchmark 定位正確但有兩點值得記錄:(a)65B 重複輸入使分支完美可預測,數字代表**上限**而非典型值;(b)`char_iterator_rev`(count 版反向,48.0 ns)比 `rev_for`(38.7)還慢——反向解碼(`next_code_point_reverse`)的續字節探測結構讓 LLVM 無法像正向那樣把 count 版 DCE 乾淨,rev 家族值得單獨一看,但屬 benchmark 解讀而非性能缺陷。
+3. 與 char_count 節閉環:同一臺機器上「數字符」四種寫法的完整層級是 case00 SWAR 13.2 GB/s → 本節真解碼 1.77 GB/s(完美預測)→ case02 真實文本 0.9–2.1 GB/s。教學結論不變:不需要 char 值就永遠不要逐字符解碼。
+4. x86 對照無必要:case02 節已證兩平臺此形狀逐塊同構(`tbz`/`jns`、`cinc`/`sbb` 慣用法差異,無結構分歧)。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib \
+  build/.../allocbenches-2cf0e8badf7482bf --bench 'char_iterator'
+perf record -e cycles:u ... --bench 'str::char_iterator_for' --exact && perf annotate
+```
+
+---
+
+# `io::cursor::bench_write_vec`:77 ns 裏 write 本體只佔一半,另一半是 harness 的 to_vec + realloc
+
+- 日期:2026-08-21
+- 分析對象:`library/alloctests/tests/io/cursor.rs:535`(注意:在 **tests** target 裏,`./x bench` 不跑它;需 `./x test --test-args --bench`。倉庫裏另有同名 `io::bench_write_vec` 在 benches/io.rs,測的是 `&mut [u8]` 的 Write,兩者無關)
+- 接口:`Cursor<&mut Vec<u8>>::write_all` → `vec_write_all`(`library/alloc/src/io/cursor.rs:194`):`reserve_and_pad` + `vec_write_all_unchecked` + `set_len`
+- 平臺:本機 HiSilicon aarch64
+
+## benchmark 實際測甚麼
+
+每輪:`b"some random data to overwrite".to_vec()`(29 字節,分配)→ `Cursor::new(&mut buf)` → `write_all(&[1; 128])`。position 0 + 128 字節寫入 → `reserve_and_pad` 觸發 29→128+ 的 **realloc**,無 padding(pos=0 ≤ len),然後 `copy_from` 128 字節、`set_len(128)`。每輪 1 alloc + 1 realloc + 1 free + 兩次 memcpy(29B 初始化 + 128B 寫入)。
+
+## 正式基線(stage1 重建後;舊二進制不含 39bf757d697 搬入的 cursor tests)
+
+```text
+io::cursor::bench_write_vec            77.32 ns/iter
+io::cursor::bench_write_vec_vectored  722.05 ns/iter(8 段 16KB 總量,對照)
+io::bench_write_vec(benches/io.rs)     22.07 ns/iter(&mut [u8] 版,無分配)
+```
+
+## 分解實驗(standalone,固定 1000 萬次)
+
+| 變體 | ns/iter | 隔離出的成分 |
+|---|---:|---|
+| official(復刻) | 70.1 | ≈正式 77.3(閉包殼差) |
+| alloc-only(同分配,無 write) | **12.9** | 純 to_vec + free |
+| presized(`vec![0;128]`,無 realloc) | 39.9 | **去掉 realloc 省 30 ns** |
+| direct(無 Cursor:clear + extend_from_slice) | 67.8 | **Cursor 抽象稅 ≈ 2 ns** |
+
+perf(official):IPC 3.71,miss 0.08%;樣本 **malloc 16.2% + realloc 6.7% + free 4.5% + glibc memcpy 碎片 ~6%**,官方 write 路徑本體(內聯進 official)15.7%。
+
+成本賬:77 ns ≈ 13(alloc/free)+ 30(realloc 29→128,含 29B 搬移與 allocator 簿記)+ ~25(兩次 memcpy + reserve/pad/set_len 分派)+ ~8(harness)。**write_all 真正的邏輯(容量檢查、pad 判斷、copy、set_len)只佔 ~1/3;Cursor 對 direct Vec 寫法的淨開銷僅 ~2 ns**——`vec_write_all` 的實現(手動 spare_capacity fill 避免 resize 的多餘分支、`copy_from` 直寫)已經很緊。
+
+## 結論
+
+1. **std 無可改**:`vec_write_all` 鏈路(reserve_and_pad 的 saturating 容量計算、手動 pad、unchecked copy)已是緊實現,Cursor 抽象稅 ~2 ns;其餘全是 allocator 行為。
+2. **benchmark 形狀值得改**:29 字節初始 vec 保證每輪 realloc——它把「Cursor 覆寫」與「Vec 增長」混在一起測。若意圖是測 write 路徑,初始 vec 應 `with_capacity(128)`(或至少加一個 presized 變體);現狀下任何 write 路徑的優化都會被 ~43 ns 的分配噪聲稀釋一半以上。
+3. 發現的工程事實:這組 cursor benches 在 tests target 裏,`./x bench library/alloctests` **不會運行它們**(只跑 benches/);要跑需 `./x test --test-args --bench`。這解釋了它們長期無人關注的原因,也值得在 benchmark 整理時遷移到 benches/。
+4. x86 對照無必要:成本由 glibc allocator 與 memcpy 主導,無 codegen 分歧空間。
+
+## 復現
+
+```bash
+./x test library/alloctests --stage 1 --test-args --bench --test-args bench_write_vec
+/tmp/cursor_write_candidates {official|presized|alloc|direct} 10000000
+```
+
+---
+
+# `ascii::long::is_ascii_*` 全家 + x86 對比:兩平臺同樣拒絕向量化,標量形狀逐條同構,NEON 原型 17×
+
+- 日期:2026-08-21
+- 分析對象:`ascii.rs` `@iter` 家族的謂詞本體(`iter().all(u8::is_ascii_xxx)`),接續前節「benchmark 測不到謂詞」的結論,本節直接測謂詞真實掃描並做跨 ISA codegen 對比
+- 平臺:aarch64 實測;x86 為同一 IR 剝 target-features 後 `llc -mcpu=x86-64` 的形狀對照(無 x86 硬件時間)
+
+## 真實掃描成本(全真輸入,7000B,aarch64 實測)
+
+| 謂詞 | ns/B | vs `<[u8]>::is_ascii` | 實現形狀 |
+|---|---:|---:|---|
+| `<[u8]>::is_ascii`(slice 方法,SWAR) | **0.017** | 1× | usize 高位批查 |
+| `iter().all(u8::is_ascii)` | 0.218 | 12.7× | 逐字節 `tbnz`(僅 4× 展開) |
+| whitespace | 0.520 | 30× | **bitmask**:`lsr x10, x9, x10` + `tbz` |
+| digit / uppercase / graphic | 0.653 | 38× | 單區間:`sub + cmp + ccmp` |
+| control | 0.763 | 45× | 單比較變體 |
+| alphanumeric / hexdigit | 1.383 | 81× | **三區間 csel 級聯** |
+| punctuation | 1.710 | **100×** | 四區間級聯 |
+
+成本階梯精確對應謂詞的區間數——每字節的比較鏈長度就是成本,加上 `all()` 的早退迫使逐字節串行。
+
+## aarch64 / x86_64 codegen 對比:完全同構,無平臺分歧
+
+同一 no_std probe(9 個 `all_*` 函數)生成兩 ISA 彙編,逐項對比:
+
+**1. 兩平臺都零向量化。** `cmhi/cmeq/ldp q/pcmp/pmovmskb` 計數全部為 0——LLVM 對帶早退的 `all()` 迴圈在兩個後端都只給標量。這不是 aarch64 特有病理(對比 char_count 的 ld4 病理),而是共同的「早退殺向量化」限制。
+
+**2. 標量迴圈逐條同構,指令數幾乎相同:**
+
+| 謂詞 | aarch64 全函數指令 | x86 | 慣用法差異 |
+|---|---:|---:|---|
+| whitespace | 14 | 15 | bitmask 測試:`lsr+tbz` vs **`btq`**(x86 有專用位測指令,反而少一步移位) |
+| digit/uppercase/graphic | 14 | 15 | `sub+cmp+ccmp` vs `addb $-48 + cmpb + setb` |
+| alphanumeric/hexdigit | 22 | 27 | 多區間合併:aarch64 `csel` 級聯 vs x86 `setb+cmovael` 級聯 |
+| punctuation | 26 | 32 | 同上,x86 的 `xorl` 清零準備多幾條 |
+| is_ascii(iter 版) | 29 | 30 | 都做了 4× 展開的 `tbnz`/`js` 符號位測試 |
+
+x86 在多區間謂詞上略多 15–23% 指令(`setcc` 需要先 `xor` 清零,aarch64 的 `ccmp/csel` 更緊湊),但**結構完全一致:每字節一條比較鏈 + 一個早退分支**。x86 硬件上的每字節成本階梯預期與 aarch64 同形(僅微架構係數差異)。
+
+**3. 對比的含義**:這與 BinaryHeap(x86 branchless、aarch64 分支)不同,也與 char_count(aarch64 獨有 ld4 病理)不同——is_ascii_* 家族是「兩平臺同病」:病根在 LLVM 對早退迴圈的通用限制 + 謂詞逐字節語義,不在任何一個後端。修復必須在庫層改形狀,對兩平臺同時生效。
+
+## NEON 原型:區間檢查天然是向量操作
+
+按 dedup-prescan 同樣的「分塊無早退 + 命中回退」方法,16B/輪:
+
+```rust
+// digit: (b - '0') <= 9 無符號 → 一條 vsubq + vcleq
+let d = vsubq_u8(c, vdupq_n_u8(b'0'));
+ok = vandq_u8(ok, vcleq_u8(d, vdupq_n_u8(9)));
+// alnum: 三個區間各自 sub+cle 後 vorrq 合併;塊尾 vminvq_u8 判全真
+```
+
+| 謂詞 | 標量 | NEON | 提升 |
+|---|---:|---:|---:|
+| digit(7000B) | 4578 ns | **266 ns** | **17.2×** |
+| alphanumeric | 9681 ns | **562 ns** | **17.2×** |
+
+(混合輸入與空輸入正確性已對標量驗證。)x86 側同樣的形狀會被 SSE2 `psubb/pcmpgtb/pmovmskb` 承接,收益同構——因為兩平臺的病是同一個。
+
+## 結論
+
+1. `is_ascii_*` 謂詞族的掃描成本階梯(0.52–1.71 ns/B)由區間數決定,對比 slice `is_ascii` 的 SWAR(0.017)有 **30–100×** 差距;`iter().all(u8::is_ascii)` 也比 slice 方法慢 12.7×(用戶側:永遠用 `v.is_ascii()` 而非 iter 版)。
+2. **跨 ISA 結論:兩平臺同病同構**。零向量化、標量鏈逐條對應、x86 多區間謂詞略多 15–23% 指令但無結構差異。這是「LLVM 早退限制」類問題,不是後端分歧類——庫層分塊化修復對兩平臺同時生效。
+3. NEON 原型 17× 驗證了修復上限;x86 SSE2 同形狀可承接。落地路徑:`<[u8]>::is_ascii` 已有的 SWAR 模式推廣為按謂詞參數化的分塊掃描(區間集合在編譯期已知,可 generic 展開),或至少為 whitespace/digit 等高頻謂詞提供 slice 級方法。
+4. 前提仍然是前節的 benchmark 修復——現有 `ascii::long::is_ascii_*` 對這一切不可見(190 ns 全是 to_vec)。
+
+## 復現
+
+```bash
+# codegen 對比
+rustc --crate-type=lib --edition=2024 -C opt-level=3 --emit=llvm-ir,asm ascii_pred_probe.rs
+sed -e 's/"target-cpu"="generic"/"target-cpu"="x86-64"/' -e 's/"target-features"="[^"]*"//g' \
+  ascii_pred_probe.ll > clean.ll && llc -mtriple=x86_64-unknown-linux-gnu -mcpu=x86-64 -O3 clean.ll
+# 實測 + NEON 原型
+/tmp/ascii_pred_bench
+```
+
+## 追問:LLVM 為什麼不向量化,以及熱點精確在哪(2026-08-21 補充實驗)
+
+### 為什麼不向量化:remark 給出的直接答案
+
+用 `-Cremark=loop-vectorize -Cdebuginfo=1` 對三個變體取 LLVM 自己的診斷:
+
+| 變體 | 形狀 | remark | 結果 |
+|---|---|---|---|
+| `iter().all(pred)` | 早退 | `value that could not be identified as reduction is used outside the loop` | 標量 |
+| 手寫 `while + return false` | 早退 | `loop induction variable could not be identified` / `could not determine number of loop iterations` | 標量 |
+| **`fold(true, \|acc,b\| acc & pred(b))`** | **無早退** | **`vectorized loop (vectorization width: vscale x 128)`** | **SVE 向量化!** |
+
+機理分解:
+
+1. **早退迴圈的根本障礙是 trip count 不可知**。向量化的前提是「這 16 個元素都會被讀」;`all()` 在第 i 個元素為假時**必須不讀** i+1(語義上迭代器就停在那裏)。LLVM 要向量化早退迴圈只能靠 speculative load + 事後修正,它只在極窄的模式(如 std::find 類 pattern,且需證明越界讀安全)嘗試,這裏的 slice iterator + 任意謂詞組合不在窗口內。兩個 remark(「reduction 用在迴圈外」「無法確定迭代次數」)是同一障礙在不同 IR 形狀上的兩種報法。
+2. **拿掉早退,向量化立即發生**——`fold + &`(位與,非短路 `&&`)版本被成功編成 SVE(`ptrue/rdvl`,vscale×128 的巨塊)。這修正了上節「兩平臺都拒絕向量化」的過廣表述:**準確說法是「早退形狀不可向量化;無早退形狀可以,但沒有任何 std 謂詞 API 生成無早退形狀」**。`all()`/`any()` 的短路語義是 API 契約,LLVM 無權改。
+3. 上節 no_std probe 的 `fold` 版沒測——generic 構建無 SVE,LLVM 對 NEON 是否給同樣待遇需另驗(cost model 不同);但 dedup-prescan 節已證 NEON 對無早退塊狀歸約工作正常。
+
+### 實測:fold 版就地拿到 21×
+
+| 變體(7000B digit,全真) | ns/B | vs all() |
+|---|---:|---:|
+| `iter().all()`(早退,標量) | 0.655 | 1× |
+| 手寫 while+break(早退,標量) | 0.722 | 0.91×(更慢:LLVM 對 iterator 版形狀略優) |
+| **`fold(true, acc & pred)`**(無早退,SVE) | **0.031** | **21×** |
+| (參照:上節手寫 NEON 原型) | 0.038 | 17× |
+
+**`fold + &` 是純安全、純庫外、零 unsafe 的寫法,性能已超過我上節的手寫 NEON 原型**——這同時給出了比「std 加分塊特化」更便宜的落地路徑:`all(pred)` 語義上等於「先無早退掃完再看結果」當謂詞無副作用時,std 可以在 `iter().all` 的 slice 特化裏對無副作用謂詞(需 specialization 或新 API)改用 fold 形狀;用戶側則今天就能用 fold 重寫。
+
+代價:fold 版永遠掃完整個輸入。首字節即假的輸入上,早退版 ~1 ns,fold 版 7000B 仍要 ~218 ns——**這是「隨資料分佈的取捨」,與 binary_search 的 branch-vs-csel 同構**:失敗位置的期望值決定哪邊贏,平衡點約在「期望掃描比例 > 幾個百分點」時 fold 勝。
+
+### 熱點精確在哪
+
+`perf annotate`(a_all,99.92% 樣本):**單條 `ldrb w8, [x0], #1`**。完整迴圈只有 7 條:
+
+```asm
+loop:
+  ldrb w8, [x0], #1      ; 99.92% 樣本(skid 聚集點)
+  sub  w10, w8, #0x30    ; b - '0'
+  cmp  w10, #0xa
+  cset w8, cc            ; 謂詞結果
+  cmp  w10, #0x9
+  ccmp x9, #0, #4, ls    ; 迴圈條件 & 早退條件融合
+  sub  x9, x9, #1
+  b.ne loop
+```
+
+樣本堆在 `ldrb` 是 PMU skid 對迴圈 backedge 的慣常歸因;真實瓶頸不是 load(L1 命中,IPC 高)而是**每字節必須退休這 7-8 條指令**——0.65 ns/B ≈ 1.9 cycles/B ≈ 每字節 7 條 @ IPC ~3.7,純指令吞吐限制。無 miss、無停頓,機器高效地執行着逐字節的多餘工作,與 BTree 遍歷一節同類。所以「熱點」的正確描述是:**整條 7 指令迴圈體都是熱點,消滅它的唯一方式是換掉逐字節形狀**(fold/SIMD),而不是優化其中任何一條指令。
+
+復現:`/tmp/vect_experiment.rs`(remarks + codegen)、`vect_timing.rs`(三變體計時)。
+
+---
+
+# `str::to_lowercase::short_pile_of_poo`:16 個 emoji 各付一次 4 輪 binary search 只為確認「無映射」;astral fast-reject 原型 -67%
+
+- 日期:2026-08-21
+- 分析對象:`library/alloctests/benches/str.rs` make_test 宏生成的 `str::to_lowercase::short_pile_of_poo`
+- 接口:`str::to_lowercase`(`library/alloc/src/str.rs:433`)→ `convert_while_ascii` + 逐字符 `conversions::to_lower` → `lookup`
+- 平臺:本機 HiSilicon aarch64;x86 為 IR 重定目標的形狀對照
+
+## 源碼層:輸入決定路徑
+
+輸入 `"💩"×16 + "!"`(65B,17 chars)。`to_lowercase` 兩段式:
+
+1. `convert_while_ascii`:16B 塊 SIMD 化的 ASCII 前綴快轉——首字節 0xF0 立即退出,**前綴長度 0,此路徑只貢獻 Vec::with_capacity(65)**;
+2. 其餘 17 個字符逐個走 `char_indices` → 💩 非 Σ → `conversions::to_lower(c)` → `c >= '\u{C0}'` → `lookup(c, &LOWERCASE_LUT)`。
+
+💩 = U+1F4A9 在 plane 1:`lookup` 按 `c >> 16 = 1` 取 plane-1 L2Lut(**12 條 singles,0 條 multis**——Deseret/Osage/Medefaidrin/Adlam 等少數有大小寫的輔助平面文字),對 low half 0xF4A9 做 4 輪 binary search,全 miss 返回 None → 原樣 push。**16 個 emoji 各付一次完整表搜索,買到的答案全是「不變」。**
+
+## 基線與 perf
+
+```text
+short_pile_of_poo   265.8–266.1 ns/iter(15.6 ns/char)
+short_ascii          17.98 ns(對照:全走 convert_while_ascii SIMD 路徑,14.8×)
+short_mixed         339.5 ns(泰文在 plane 0,搜 172 條大表,更貴)
+long_lorem_ipsum    221.7 ns(1013B 全 ASCII:SIMD 路徑 0.22 ns/B)
+```
+
+perf:IPC 3.61,branch miss 0.18%;符號分佈 **`lookup` 80.5%** + `to_lowercase` 本體 9.3% + `to_lower` 4.9% + malloc 2.2%。annotate 樣本聚在 binary search 迴圈(`b.hi` backedge 53.6%、行內加載 23.8%)——與 char::to_uppercase 節同一形狀:`ldrh → cmp → csel` 串行鏈,每字符 4 輪。
+
+## LLVM/彙編層與 x86 對比
+
+`lookup` 的 search 迴圈(libstd 實物)是 `binary_search_by` 的標準 csel 形狀;用最小 probe(同構 6 字節行 binary search)重定目標:
+
+- aarch64:`ldrh + cmp + csel x0, x0, x10, hi` + `b.hi` 迴圈
+- x86:`cmpw (%rdi,%r10,2) + cmovbq` + `ja` 迴圈
+
+**逐條同構(csel ↔ cmov),無平臺分歧**——binary_search 一節的結論在此複用:兩平臺都會被同樣的 4 輪串行依賴鏈限制,x86 硬件的每字符成本同形。瓶頸在算法層(每字符一次表搜索),不在後端。
+
+## 原型:astral fast-reject(-67%)
+
+輔助平面(U+10000+)有大小寫映射的碼位全部落在 7 個窄區間(從 LOWERCASE_LUT plane-1 表直接讀出)。在進表搜索前先做區間拒絕:
+
+```rust
+if u >= 0x10000 && !in_cased_astral_ranges(u) { out.push(c); continue; }
+// 7 個 contains() 的並聯比較,LLVM 編成無查表的直線比較鏈
+```
+
+| | ns/iter | 變化 |
+|---|---:|---:|
+| official(std 現狀) | 257.3 | — |
+| astral_skip 原型 | **85.1** | **-67%** |
+
+正確性:對 U+10000..U+20000 + U+1E000..U+1F000 全碼位逐字符與 std 輸出比對通過(覆蓋全部 7 個 cased 區間與邊界)。
+
+落地評估:與 char::to_uppercase 節的 Latin-1 fast path 同族——「高頻無映射輸入付最貴路徑」的第三個實例(Latin-1 無映射 34%、plane-0 標點、astral emoji)。統一的修法是 generator 生成「Changes_When_Cased」bitmap/區間集在 lookup 前快拒;emoji 在現代文本的密度使 astral 檔位可能是三者中實際收益最高的。正式落地仍應改 `unicode-table-generator`,並用 plane-1 表自動導出區間(手抄區間有 Unicode 版本漂移風險)。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=... build/.../allocbenches-2cf0e8badf7482bf --bench 'to_lowercase'
+/tmp/poo_probe          # official vs astral_skip + 全碼位正確性
+/tmp/lookup_probe.rs    # → llc x86 形狀對照
+```
+
+---
+
+# `hash::set_ops::set_union`:106 ns 裏 92% 是 difference 側的 10 次 SipHash+probe;SipHash 佔 2/3
+
+- 日期:2026-08-21
+- 分析對象:`library/std/benches/hash/set_ops.rs::set_union`(small=10,large=100 個 i32)
+- 接口:`HashSet::union` → `large.iter().chain(small.difference(&large))`(`set.rs:781`:較大集合直接迭代,較小集合逐元素查另一側)→ `Difference::next` 的 `other.contains(elt)` → SipHash-1-3 + hashbrown group probe
+- 平臺:本機 HiSilicon aarch64;x86 為 IR 重定目標形狀對照
+- 方法注記:`./x bench library/std` 在本工作樹遇 `duplicate lang item`(stage1-std 構建緩存與 sysroot 衝突),官方 harness 數字缺;以下全部來自 standalone 複製品(與官方 bench 逐行同構)
+
+## 源碼層:union 的算法選擇
+
+`union` 選 `len` 較大側全量迭代,較小側過 `difference` 過濾——benchmark 輸入(10 vs 100,小集是大集子集)下即 `large.iter()(100 個)+ small.difference(&large)(10 次 contains,全命中,全被濾掉)`。結果 110 個迭代步,其中 10 步各付一次完整 hash+lookup。
+
+## 分解實測(2M 次固定迭代)
+
+| 成分 | ns/iter | 佔比 |
+|---|---:|---:|
+| union 全量 | 106.7 | 100% |
+| large.iter().count()(100 元素 RawTable 掃描) | 3.8 | 3.6% |
+| **small.difference(&large).count()(10 次 contains)** | **98.1** | **92%** |
+| union with FxHash(同結構,換掉 SipHash) | **36.1** | — |
+
+三個結論:
+
+1. **RawTable 迭代快得驚人**:0.04 ns/元素——control-byte 掃描 + 位操作,100 個元素只要 3.8 ns。union 的「大側全迭代」策略本身零負擔。
+2. **成本全在 10 次 contains:每次 ~9.6 ns**,其中 SipHash-1-3 對 4 字節 key 的固定成本 ~7 ns(FxHash 對照:106→36 ns,**SipHash 佔 union 總時間 2/3**)。
+3. contains 剩餘 ~2.6 ns 是 hashbrown probe:h1 定位 group、8 字節 control 比較、h2 確認、key 比對。
+
+## perf/彙編層
+
+96.7% 樣本在 `Difference::fold` 單符號(count 經 fold 內聯了整條鏈)。annotate 三個熱區:SipHash 輪函數(`eor/ror #48/add` 鏈,~50% 樣本分散)、group 匹配(`cmeq.8b + fmov + rbit/clz`,~25%)、命中確認迴圈。aarch64 的 group probe 用 NEON 8 字節 `cmeq`;SipHash 是純標量 ARR(add-rotate-xor)鏈——**串行依賴,無 ILP 可挖**,這就是每 key 7 ns 的來源(1-3 輪對 4B key 已是 SipHash 家族最便宜配置)。
+
+## x86 對比
+
+SWAR group-match probe 重定目標:aarch64 `mul(splat) + eor + add/bic + rbit + clz` ↔ x86 `imulq + xorq + addq/notq/andq + rep bsfq`——**逐步同構**(x86 缺 rbit 用 bsf 正向位掃,方向差異無成本影響)。SipHash 輪在 x86 同樣是標量 `add/rol/xor` 串行鏈。**無平臺分歧**:兩邊瓶頸都是 SipHash 串行延遲,微架構係數外行為同形。
+
+## 判斷
+
+1. **無 std 病灶**:union 的「大側迭代+小側過濾」已是正確算法;RawTable 迭代與 probe 都貼近極限。106 ns 的 2/3 是 **HashDoS 防護的有意代價**(SipHash 隨機化),與 hash::map::new_drop 節的 TLS 計數器同屬語義權衡——用戶側如不需防護,`FxHashSet` 一行換掉即 3×。
+2. benchmark 形狀注記:10/100 且 small ⊂ large 是「difference 全過濾」的特例;若兩集不相交,difference 側每次 miss 的 probe 更短(h2 不匹配即返回),數字會更低。現輸入測的是 contains-hit 路徑,合理但單一。
+3. 唯一可探討的 std 方向:`Difference` 對連續多次 contains 沒有批量化(每個 key 獨立走完整 hash+probe);理論上可以 hash 流水化(計算 key[i+1] 的 hash 同時 probe key[i]),但 iterator 逐元素契約使之只能在 `fold`/`count` 特化裏做,收益上限 ~30%(hash 與 probe 部分重疊),工程複雜度高——不建議,先記錄。
+
+## 復現
+
+```bash
+/tmp/set_union_probe   # union/large_iter/difference/union_fxhash 分解
+/tmp/setops_codegen.rs # → llc x86 group-probe 形狀對照
+```
+
+---
+
+# `sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy`:「慢」在每 iter ~4.4 次 syscall 的內核往返,splice 零拷貝本身工作正常
+
+- 日期:2026-08-21
+- 分析對象:`library/std/src/sys/io/kernel_copy/linux/tests.rs:229`
+- 接口:`io::copy(&mut pipe.take(128K), &mut socket)` → kernel_copy 特化 → `splice(2)` syscall
+- 平臺:本機 aarch64,kernel 6.6.0(openEuler);數據來自逐行同構的 standalone 複製品(std 官方 unit-test bench 因本工作樹 stage1-std 構建緩存的 duplicate-lang-item 衝突無法直接運行)
+
+## benchmark 拓撲與測量對象
+
+三線程數據環:remote socket 非阻塞灌水 → 後臺線程 `splice(socket→pipe)` 無限泵 → **被測主迴圈 `io::copy(pipe→socket, 128KB/次)`**(廻到 remote 排水)。`io::copy` 識別 pipe→socket 走 kernel_copy 的 splice 路徑——測的是「零拷貝轉發 128KB」的端到端成本,不含任何用戶態數據搬運。
+
+## 複製過程中的兩個發現(供復現者避坑)
+
+1. **`splice(len = u64::MAX)` 直接 EINVAL**:我的第一版複製品每秒 38 萬次 splice 全失敗(strace: 383,132 calls = 383,132 errors),pipe 無數據流入,io::copy 永久阻塞——看似 hang,實為泵線程空轉。官方 `sendfile_splice` 把 len 截到 `0x7ffff000`(linux.rs:845),照抄後即通。內核對超過 MAX_RW_COUNT 的 len 不截斷而是拒絕。
+2. 官方 bench 先用 1 字節 probe 驗證 splice 可用纔進主迴圈——這個防護正是為了避免我踩的坑。
+
+## 實測與瓶頸歸屬
+
+```text
+複製品:22.2–31.8 µs/iter(128KB → 3.9–5.6 GB/s,受 timeout/strace 擾動浮動)
+```
+
+決定性計數:
+
+- **user 0.004 s vs sys 0.515 s——99% 時間在內核**;
+- strace 3000 iter:13,201 次 splice(≈4.4 次/iter:io::copy 側 pipe→socket 每 64KB pipe 容量分段 ~2 次 + 泵線程 socket→pipe ~2 次)+ 少量 sendto/recvfrom(remote 排水,其中 sendto 48% EAGAIN——非阻塞空轉);
+- perf:38.6% 單一內核地址(kallsyms 無權限,按上下文為 splice 的 pipe/socket 傳輸路徑)+ 25.4% libc syscall stub。
+
+**「慢在哪」的答案:每 128KB 轉發要付 ~4 次 syscall 進出(每次 ~2–5 µs 的內核路徑:上下文保存、pipe buffer 頁引用移交、socket 發送路徑),外加泵線程與主迴圈在同一條 pipe 上的鎖競爭。** 沒有用戶態 memcpy(splice 本義),0.5 GB/s 級的 memcpy 成本已被消掉;剩下的就是 syscall 邊界成本 × 次數。
+
+## 判斷
+
+1. **std 無病灶**:kernel_copy 已把 io::copy 特化到 splice(這正是這組 tests 守護的行為);128KB/iter 只需 2 次 splice 是 pipe 默認容量(64KB)決定的,`fcntl(F_SETPIPE_SZ)` 加大 pipe 可減半 syscall 數,但那是 benchmark 參數不是 std 職責。
+2. benchmark 定位是**行為守護**(splice 路徑被選中且正確)而非吞吐極限測量:三線程環的調度耦合使數字方差大(同機 22–32 µs),不適合做回歸閾值。
+3. 內核側成本(頁引用移交、socket 路徑)非 std 可及;唯一用戶可見的槓桿是更大的 pipe 容量與 batch 大小。
+4. x86 對照無意義:純 syscall/內核路徑成本,無用戶態 codegen 分歧。
+
+## 復現
+
+```bash
+/tmp/kernel_copy_probe 20000     # 逐行同構複製品(注意 len 截斷)
+/tmp/splice_check                # 單次 splice 可用性探針
+strace -c -f ./kernel_copy_probe 3000              # syscall 分解
+```
+
+## 官方 harness 直測驗證(2026-08-21,替代複製品數據)
+
+按要求改用**官方 benchmark 本身**測量(`./x test library/std --test-args --bench --test-args bench_socket_pipe_socket_copy`,及直接運行構建出的 `std-4eef337f42a5c3f9` 測試二進制配 stage1 libstd):
+
+```text
+官方基線:26,499–29,397 ns/iter(±466–19,607,4.5 GB/s 級)
+strace 下:58,759–60,939 ns/iter(ptrace 攔截使每 syscall +~10 µs,數字翻倍——
+         這本身就是「syscall 次數主導」的直接證據)
+```
+
+perf stat(官方 bench 進程):**user 0.045 s vs sys 6.29 s——98.6% 時間在內核**;用戶態 IPC 0.82,cycles:u 僅 138M(全程 3.2s)。perf record 樣本 72% 在內核地址(本機 perf_event_paranoid=2 且 kallsyms 地址隱藏,無法解析到函數名;49.8% 集中在單一地址,按 syscall 構成應為 splice 的 pipe→socket 傳輸路徑)。
+
+**strace 逐 syscall 證據(官方 bench 全程)**:
+
+- splice 317,300 次(65% strace 時間),recvfrom 72,552、sendto 72,553(其中 59% EAGAIN——remote 排水線程的非阻塞空轉);
+- splice 延遲分佈:**p50 = 14 µs,p90 = 24 µs,p99 = 40 µs**(strace 膨脹後;無 strace 時按 26.5 µs/iter ÷ ~4 次 ≈ 6–7 µs/次);
+- **per-thread 拆分**:被測 io::copy 線程 164,885 次 splice,泵線程 158,329 次——兩側幾乎 1:1;
+- **splice 返回值分佈**:io::copy 側 42% 是 65536(= pipe 默認容量,每 128KB iter 需 2 次滿容量 splice),其餘為 61440/57344/... 的部分傳輸(與泵線程競速時 pipe 未滿就被取走);泵線程側同樣以 64KB 段為主。
+
+官方數據與此前複製品結論一致並更精確:**慢在每 iter ~4 次(兩側合計)splice syscall 的內核往返,每次搬運上限被 pipe 64KB 容量卡住**;部分傳輸的長尾(splice 返回 108 字節這類碎片有 7,765 次)說明兩線程在同一條 pipe 上的生產-消費競速還會放大 syscall 次數。零拷貝語義本身工作正常,用戶態計算可忽略(0.7% 時間)。
+
+---
+
+# `ascii::bench_ascii_escape_display_no_escape`:fast path 本身是逐字節標量掃描,NEON 原型 4.6×;自動向量化這次連分塊都救不了
+
+- 日期:2026-08-21
+- 分析對象:`library/coretests/benches/ascii.rs:360`(139B 純可打印 ASCII 路徑,無一字節需轉義)
+- 接口:`<[u8]>::escape_ascii` 的 `Display`(`library/core/src/slice/ascii.rs:378`)→ `take_while(!needs_escape)` prefix 掃描 + `write_str`
+- 平臺:本機 HiSilicon aarch64
+
+## benchmark 實際測甚麼
+
+`EscapeAscii::fmt` 的設計已經有 fast path:用 `take_while` 數出無需轉義的前綴長度,整段一次 `write_str`,只對需轉義的單字節走 `escape_default`。本輸入(139B 全部可打印)恰好走**一次完整 take_while 掃描 + 一次 write_str**——測的就是這個 fast path 的掃描吞吐。
+
+```text
+bench_ascii_escape_display_no_escape   117.4–120.3 ns/iter(0.85 ns/B)
+bench_ascii_escape_display_mixed     5,211–5,262 ns/iter(對照:1466B 含大量轉義)
+```
+
+## perf 與熱迴圈
+
+IPC 4.85,branch miss 0.00%,94.3% 樣本在 `EscapeAscii::fmt` 單符號。annotate 熱點集中在 take_while 迴圈:
+
+```asm
+loop:
+  ldrb w8, [x20, x21]      ; 逐字節載入
+  sub  w9, w8, #0x7f
+  cmn  w9, #0x5f           ; b > 0x7E || b < 0x20(合併範圍檢查)
+  b.cc escape
+  sub  w8, w8, #0x22
+  cmp  w8, #0x3a
+  b.hi next                ; 0x22..0x5C 窗口外 → 無需查掩碼
+  lsr  x8, x28, x8         ; 64-bit 立即掩碼(x28)測 \ ' "
+  tbz  w8, #0, next
+```
+
+LLVM 把 `needs_escape` 的 5 個條件優化成「範圍檢查 + 64-bit 位掩碼」的緊標量形狀(~7 指令/字節,64.9% 樣本堆在掩碼路徑,IPC 4.85 已到標量發射極限)——**與 is_ascii_* 謂詞族同病:每字節指令數,不是任何 miss**。
+
+## 原型對照:分塊救不了,顯式 NEON 4.6×
+
+| 形狀 | ns(139B) | ns/B | 說明 |
+|---|---:|---:|---|
+| take_while(=std 現狀) | 113.1 | 0.79 | 標量極限 |
+| 分塊 16B 無早退(dedup 配方) | 141.9 | 0.99 | **LLVM 未向量化,反而慢 25%** |
+| 顯式 NEON(5 條件 → cmgt/cmlt/ceq×3 + vorr + vmaxvq) | **24.4** | **0.17** | **4.6×** |
+
+關鍵教訓:**dedup-prescan 的「分塊即向量化」配方在這裏失效**——`needs_escape` 是 5 條件 OR(兩個範圍+三個等值),LLVM 對這種塊內歸約直接放棄(對比 dedup 的單一相等比較)。自動向量化的可行窗口比「無早退」更窄:謂詞本身也要足夠簡單。顯式 SIMD 是唯一路徑,5 個條件恰好是 5 條 NEON 比較 + 3 條 OR + 1 條 vmaxvq 歸約,16B/輪。
+
+正確性:空輸入、含 `\` / `"` / 控制字節、64 邊界跨塊命中等 6 組探針與 std 掃描逐一一致。
+
+## 判斷
+
+1. fast path 結構(prefix 掃描 + 整段 write_str)是對的,慢在掃描本身逐字節;139B 輸入 0.85 ns/B 對比 NEON 0.17 ns/B 有 **4.6×** 已驗證空間。
+2. 落地位置就是 `EscapeAscii::fmt` 裏的 `needs_escape` 掃描(core 內可用 `#[cfg(target_arch)]` NEON,x86 對應 SSE2 `pcmpgtb/pcmpeqb/pmovmskb` 同構形狀——但 core 的 fmt 路徑加 arch 特化需要權衡代碼量);mixed 輸入(轉義密集)收益遞減,escape 段主導時瓶頸轉移到 `escape_default` 的單字節 Display。
+3. 歸類:與 `is_ascii_*`(§ascii 謂詞族)同根——「標量逐字節分類」;但本例證明其修復配方分兩檔:簡單謂詞(相等/單範圍)分塊即可讓 LLVM 自動向量化,複合謂詞必須顯式 SIMD。
+4. x86 對照未做硬件實測;`needs_escape` 的向量形狀在 SSE2 有逐條對應指令,結構收益可移植(判斷,非實測)。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=... build/.../corebenches-14ea307f41bce867 --bench 'ascii_escape_display'
+/tmp/escape_scan_probe    # takewhile vs chunked16 vs neon + 正確性
+```
+
+---
+
+# `iter::bench_skip_while_sum`:skip_while 被完全優化掉,測的是 `map(black_box)` 的每元素棧屏障;兩 ISA 逐條同構
+
+- 日期:2026-08-21
+- 分析對象:`library/coretests/benches/iter.rs:314`(`bench_sums!` 宏:`(0i64..1000000).skip_while(|&x| x < 1000).map(black_box).sum()`)
+- 接口:`SkipWhile::{next,try_fold,fold}`(`library/core/src/iter/adapters/skip_while.rs`)
+- 平臺:本機 HiSilicon aarch64;x86 為同一 IR 重定目標形狀對照
+
+## 源碼層:bench_sums 宏的度量意圖
+
+`bench_sums!` 生成 value 版(`$iter.map(black_box).sum()`,fold 可優化)與 ref 版(`.by_ref().sum()`,只能逐 next)。`SkipWhile::fold` 的實現:flag 未立時先用 `next()` 消化 skip 前綴,之後**直接把 inner iterator 的 fold 接管**(`self.iter.try_fold(init, fold)`)——skip 完成後的 999,000 個元素不再經過任何謂詞檢查。
+
+## LLVM 層:三個決定性事實
+
+用 no_std probe 對照(同源碼 ± black_box):
+
+1. **不帶 `map(black_box)` 的純形狀被完全常量摺疊**:`skip_while_sum_pure` 編譯成單條 `mov x0, #499999000500; ret`——LLVM 對 Range+skip_while+sum 直接閉式求和。這說明 `map(black_box)` 不是點綴,是這個 benchmark 能測到任何東西的前提。
+2. 帶 black_box 的版本:skip 前綴(0..1000)也被摺掉(彙編直接從 `mov w10, #1001` 起步,初值 `str x8=1000` 進棧)——**skip_while 謂詞在最終代碼裏零指令**,`fold` 移交給 inner Range 的結構被 LLVM 徹底看穿。
+3. 剩下的迴圈是純粹的「black_box 稅」:每元素把值寫進棧槽、過空 asm 屏障、再從棧槽讀回來累加。
+
+## 彙編/perf:兩 ISA 逐條同構的棧往返迴圈
+
+official 二進制熱迴圈(99.9% 單符號,樣本 83% 堆在 `stur`——棧寫即屏障本體):
+
+```asm
+; aarch64(7 條/元素)                 ; x86(同構 6 條/元素)
+stur x10, [x29, #-32]   ; black_box 寫   movq %rdx, -8(%rsp)
+add  x10, x10, #1                        incq %rdx
+add  x12, x10, x20      ; 迴圈計數
+ldur x11, [x29, #-32]   ; black_box 讀   addq -8(%rsp), %rax
+cmp  x12, #0x3e9
+add  x9, x11, x9        ; sum
+b.ne loop                                cmpq $1000000; jne
+```
+
+實測 641,272 ns / 999,000 元素 = **0.64 ns/元素 ≈ 1.86 cycles**,IPC 3.76、miss 0.00%——每元素一次 store→forward→load 棧往返(與 slice::push 節同類的轉發鏈,但這裏無依賴串行化,吞吐型)。x86 形狀逐條對應(`movq/incq/addq-mem/jne`),無任何平臺分歧;x86 的 memory-operand `addq` 還省一條顯式 load。
+
+旁證:`bench_skip_while_sum`(641.3 µs)與 `bench_skip_sum`(641.6 µs)、`bench_skip_while_ref_sum`(641.4 µs)三者相等——skip 家族全部歸一到同一個 black_box 迴圈;chain 版(995 µs)多出的是 chain 的分支結構。ref 版與 value 版相等說明對 Range 這種簡單 inner,逐 next 與 fold 生成了同樣的迴圈。
+
+## 判斷
+
+1. **skip_while 適配器本身零開銷**(fold 移交 + LLVM 摺疊做得好到謂詞完全消失)——這正是 benchmark 守護的目標,現狀成立。
+2. 641 µs 的數字全部是 `map(black_box)` 的每元素棧屏障成本,**不反映 skip_while 的任何性質**;它作為「適配器沒有引入額外開銷」的相對守護有效(與 bench_skip_sum 等值可比),作為絕對數字無意義。
+3. 無 std 可改、無 LLVM 可改;x86 同構無分歧。歸類為「守護型」benchmark(同 peek_mut_deref_mut)。
+4. 若想真正測 skip_while 的謂詞開銷,需要 ref_sum 形狀 + 不可預測的 skip 邊界(現輸入固定 1000,分支完美可預測);現有 ref 版與 value 版等值恰好說明現輸入測不出差異。
+
+## 復現
+
+```bash
+LD_LIBRARY_PATH=... build/.../corebenches-14ea307f41bce867 --bench 'skip_while'
+# probe:/tmp/skipwhile_probe.rs → asm(aarch64)+ llc x86;pure 版一條 mov 是決定性證據
+```
