@@ -167,6 +167,26 @@ while i + N <= len {
 
 x86:同構收益可移植,AVX2 穩態指令數(9/塊)優於 NEON(13/塊),預期只高不低。
 
+### 10. `BTreeMap` 節點內搜索(原生整數鍵無分支特化)——樹內原型已驗證
+
+**接口**:`library/alloc/src/collections/btree/search.rs::find_key_index`——`get`/`insert`/`remove`/`range` 及 `BTreeSet` 對應接口全部經此。
+
+**慢的原因**:cap=11 節點內的 early-exit 線性掃描,三向比較本身已被 if-conversion(`cset/csinv`),但「首個非 Greater 即退出」是數據依賴分支,退出位置隨訪問掃過節點而漂移。`clone_slim_10k_and_remove_half` 實測:每次 remove ~2.9 次分支失誤(4 層節點幾乎每層一次),搜索佔 remove 成本 86%,8.6 ns/節點訪問。
+
+**優化方法**(樹內原型,2026-09-07 已實測):`find_key_index` 經 `min_specialization` 內部 trait 對 12 個原生整數類型特化——**僅滿節點**走外聯(`#[inline(never)]`,保調用點內聯預算)的無分支定長掃描(NEON 5×`cmhi`+`addp` / SSE2 `pcmpgtd`),掃描前一條首鍵三向守衛保住最左偏置模式的 O(1) 退出;非滿節點保持 early-exit 原形。三要素缺一不可:無條件全掃描令 `remove_all` +96%、`find_rand_100` +144%;內聯體膨脹令 `insert_rand` +43%(`search_tree` 失去內聯)。
+
+**Benchmarks**(`./x bench library/alloctests`,aarch64 stage1;含 #11 疊加):`clone_slim_10k_and_remove_half` **−36%**(349→222µs,branch-miss 3.50%→1.02%,IPC 2.45→3.29)、`find`/`insert` 全系 ±3%、`remove_all` −0.6%。落地待辦:miri、x86 實機、u128 剔除、部分消費 IntoIter。核心微基準:`/tmp/btree_bench/probe_kernel.rs`(隨機退出 9.6–9.9 → 3.7–5.1 ns,1.9–2.7×)。
+
+### 11. `BTreeMap::IntoIter` drop 的逐元素 dying 走查(`!needs_drop` 節點級特化)——樹內原型已驗證
+
+**接口**:`library/alloc/src/collections/btree/map.rs` 的 `impl Drop for BTreeMap`/`IntoIter`(map drop、`clear`、clone 臨時對象全部經此)。
+
+**慢的原因**:drop 逐元素調用 `deallocating_next`(每元素一次函數調用)。小 crate 裡內聯後 LLVM 可將無 drop 元素的走查坍縮成逐節點;官方 allocbenches 這種多調用點的大 crate 裡不內聯——`clone_slim_10k` 的 125 µs 裡 **42%(5.2 ns/元素)是這條退化路徑**,整個 `clone_slim_10k_and_*` 系列的減法基線被放大 ~2.2×。
+
+**優化方法**(樹內原型已實測):`BTreeMap::drop` 對 `!needs_drop::<K>() && !needs_drop::<V>()` 走新增的 `NodeRef<Dying,_,_,LeafOrInternal>::deallocate_subtree`(navigate.rs):後序節點級釋放,結構性 O(節點數),不賭內聯運氣。
+
+**Benchmarks**:`clone_slim_10k` **−57%**(125.0→53.9µs)、`_and_clear` **−56%**、`_and_drain_half` −12%(基線端受益);btree 測試 278 項全過。殘餘:into_iter/pop_all +3–4.5% 佈局噪聲待多 seed 複測;部分消費的 `IntoIter::drop` 仍逐元素。
+
 ---
 
 ## 三、候選方向(根因已定位,修復未原型化)
@@ -229,15 +249,15 @@ fn fold<B, F>(self, init: B, mut f: F) -> B {
 
 **Benchmarks**(`library/alloctests/benches/btree/map.rs`):`iteration_20/1000/100000`、`iteration_mut_20/1000/100000`。收益上限估 20–40%(僅惠及 `for`/fold 類消費);工程量在 navigate 層不小。
 
-### 9. `u8::is_ascii_*` 謂詞族(SWAR/bitset 化)——前提是先修 benchmark
+### 9. `u8::is_ascii_*` 謂詞族(SWAR/bitset 化)——前提是先修 benchmark(2026-09-08 更新:全家族無效,含 `is_ascii` 自身)
 
 **接口**:`u8::is_ascii_whitespace/digit/alphanumeric/...` 經 `iter().all()` 的批量掃描形態。
 
-**慢的原因**:全掃描是 0.52 ns/B 的逐字節 match,對比 `is_ascii` 的 0.018 ns/B(SWAR)有 **29× 差距**。但現有 benchmark(`ascii::{short,medium,long}::is_ascii_*`)測不到它:輸入對這些謂詞在頭幾字節就短路,190 ns 全是 harness 的 `to_vec()` memcpy。
+**慢的原因**:全掃描是 0.52 ns/B 的逐字節 match,對比 `<[u8]>::is_ascii`(NEON,探針真值 61 GB/s ≈ 0.0164 ns/B)有 **~30× 差距**。但現有 benchmark 全部測不到真東西——三層失效(詳見 benchmarks-conclusion 的 `ascii::long::is_ascii` 章):(1) 外層宏 `to_vec()` 在計時迴圈內,佔 60–100%;(2) 常量輸入被 LLVM 部分編譯期求值,`long::is_ascii` 運行時只掃 ~400B/6990B(先前本條引用的「is_ascii 0.018 ns/B 有效」係虛構值,已撤回);(3) `is_ascii.rs` 家族的 `black_box(&mut vec)` 攔不住迴圈摺疊,`case00_libcore` 的 n 次計時迭代被摺疊成 1 次(報 6.38 ns,真值 114.5 ns,18×)。
 
-**優化方法**:第一步修 benchmark(`@iter` 宏去掉 `to_vec`,補全真輸入);第二步纔是 128-bit bitset 查表或 SWAR 化謂詞本體。
+**優化方法**:第一步修 benchmark(切片值過 black_box、輸入運行時生成、去 to_vec);第二步纔是 128-bit bitset 查表或 SWAR 化謂詞本體。`<[u8]>::is_ascii` 本體已有 NEON 特化且貼近發射上限,僅剩「`umaxv` 歸約攤薄到每 256B」的 +30–40% 小頭寸。
 
-**Benchmarks**(`library/coretests/benches/ascii.rs`):`{short,medium,long}::is_ascii_{whitespace,digit,control,uppercase,lowercase,alphabetic,alphanumeric,hexdigit,punctuation,graphic}`(現狀全部無效,僅 `is_ascii` 有效)。
+**Benchmarks**(`library/coretests/benches/ascii.rs` + `ascii/is_ascii.rs`):`{short,medium,long}::is_ascii_*`(30 項)與 `is_ascii::{short,medium,long,unaligned_*}::case00–04`(50 項)——**現狀全部無效**。真值探針:`/tmp/btree_bench/probe_isascii.rs`、`probe_iterall.rs`。
 
 ---
 
@@ -339,4 +359,6 @@ select cost = csel 延遲 + (cmp → csel → address → load) 佔據關鍵路�
 | `flt2dec`(Dragon) | `num::flt2dec::strategy::{dragon,grisu}::*`(19 項中的 exact_inf/shortest 類) | 候選 |
 | `Iterator::array_chunks` | `iter::bench_next_chunk_trusted_random_access`(+建議新增不定長變體) | 候選 |
 | `BTreeMap::iter[_mut]` | `btree::map::iteration[_mut]_{20,1000,100000}` | 候選 |
-| `u8::is_ascii_*` | `ascii::{short,medium,long}::is_ascii_*`(30 項,需先修 harness) | 候選(先修 bench) |
+| `u8::is_ascii_*` / `[u8]::is_ascii` | `ascii::*::is_ascii_*` + `ascii::is_ascii::*`(80 項,**全部無效**) | 先修 bench(三層失效已定位) |
+| `BTreeMap` 節點內搜索(整數鍵) | `btree::{map,set}::clone_*_and_remove_*`、`find_*`、`insert_*` | **原型驗證**(remove_half −36%) |
+| `BTreeMap::IntoIter` drop | `btree::map::clone_slim_10k` 及全部 `clone_*` 系列(基線端) | **原型驗證**(clone −57%) |
