@@ -848,7 +848,18 @@ impl<T: Ord, A: Allocator> BinaryHeap<T, A> {
             //  child + 1 == 2 * hole.pos() + 2 != hole.pos().
             // FIXME: 2 * hole.pos() + 1 or 2 * hole.pos() + 2 could overflow
             //  if T is a ZST
-            child += unsafe { hole.get(child) <= hole.get(child + 1) } as usize;
+            let right_is_greater = unsafe { hole.get(child) <= hole.get(child + 1) };
+            // On aarch64, the hint makes backends to generate branchless instructions,
+            // which would reduce branch miss.
+            #[cfg(target_arch = "aarch64")]
+            {
+                child = core::hint::select_unpredictable(right_is_greater, child + 1, child)
+            };
+
+            #[cfg(not(target_arch = "aarch64"))]
+            {
+                child += right_is_greater as usize
+            };
 
             // if we are already in order, stop.
             // SAFETY: child is now either the old child or the old child+1
@@ -908,7 +919,18 @@ impl<T: Ord, A: Allocator> BinaryHeap<T, A> {
             //  child + 1 == 2 * hole.pos() + 2 != hole.pos().
             // FIXME: 2 * hole.pos() + 1 or 2 * hole.pos() + 2 could overflow
             //  if T is a ZST
-            child += unsafe { hole.get(child) <= hole.get(child + 1) } as usize;
+            let right_is_greater = unsafe { hole.get(child) <= hole.get(child + 1) };
+            // On aarch64, the hint makes backends to generate branchless instructions,
+            // which would reduce branch miss.
+            #[cfg(target_arch = "aarch64")]
+            {
+                child = core::hint::select_unpredictable(right_is_greater, child + 1, child)
+            };
+
+            #[cfg(not(target_arch = "aarch64"))]
+            {
+                child += right_is_greater as usize
+            };
 
             // SAFETY: Same as above
             unsafe { hole.move_to(child) };
