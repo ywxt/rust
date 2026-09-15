@@ -221,12 +221,15 @@ where
         F: FnMut(B, Self::Item) -> B,
     {
         let mut accum = init;
-        let inner_len = self.iter.size();
-        let mut i = 0;
-        // Use a while loop because (0..len).step_by(N) doesn't optimize well.
-        while inner_len - i >= N {
+        let chunks = self.iter.size() / N;
+        // Use a counted loop over chunks rather than `while len - i >= N`:
+        // (0..len).step_by(N) doesn't optimize well, and the `while` form
+        // leaves LLVM unable to compute the trip count when the length is
+        // not a compile-time constant, which defeats vectorization.
+        for chunk_idx in 0..chunks {
+            let i = chunk_idx * N;
             let chunk = crate::array::from_fn(|local| {
-                // SAFETY: The method consumes the iterator and the loop condition ensures that
+                // SAFETY: The method consumes the iterator and the loop bound ensures that
                 // all accesses are in bounds and only happen once.
                 unsafe {
                     let idx = i + local;
@@ -234,7 +237,6 @@ where
                 }
             });
             accum = f(accum, chunk);
-            i += N;
         }
 
         // unlike try_fold this method does not need to take care of the remainder

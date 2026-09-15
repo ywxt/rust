@@ -183,6 +183,66 @@ fn bench_iteration(b: &mut Bencher, size: i32) {
     });
 }
 
+fn bench_iteration_fold(b: &mut Bencher, size: i32) {
+    let mut map = BTreeMap::<i32, i32>::new();
+    let mut rng = crate::bench_rng();
+
+    for _ in 0..size {
+        map.insert(rng.random(), rng.random());
+    }
+
+    b.iter(|| {
+        map.iter().for_each(|entry| {
+            black_box(entry);
+        })
+    });
+}
+
+#[bench]
+pub fn iteration_fold_20(b: &mut Bencher) {
+    bench_iteration_fold(b, 20);
+}
+
+#[bench]
+pub fn iteration_fold_1000(b: &mut Bencher) {
+    bench_iteration_fold(b, 1000);
+}
+
+#[bench]
+pub fn iteration_fold_100000(b: &mut Bencher) {
+    bench_iteration_fold(b, 100000);
+}
+
+fn bench_iteration_mut_fold(b: &mut Bencher, size: i32) {
+    let mut map = BTreeMap::<i32, i32>::new();
+    let mut rng = crate::bench_rng();
+
+    for _ in 0..size {
+        map.insert(rng.random(), rng.random());
+    }
+
+    b.iter(|| {
+        map.iter_mut().for_each(|entry| {
+            black_box(entry);
+        })
+    });
+}
+
+#[bench]
+pub fn iteration_mut_fold_20(b: &mut Bencher) {
+    bench_iteration_mut_fold(b, 20);
+}
+
+#[bench]
+pub fn iteration_mut_fold_1000(b: &mut Bencher) {
+    bench_iteration_mut_fold(b, 1000);
+}
+
+#[bench]
+pub fn iteration_mut_fold_100000(b: &mut Bencher) {
+    bench_iteration_mut_fold(b, 100000);
+}
+
 #[bench]
 pub fn iteration_20(b: &mut Bencher) {
     bench_iteration(b, 20);

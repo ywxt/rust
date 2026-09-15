@@ -35,7 +35,7 @@ use core::marker::PhantomData;
 use core::mem::{self, MaybeUninit};
 use core::num::NonZero;
 use core::ptr::{self, NonNull};
-use core::slice::SliceIndex;
+use core::slice::{self, SliceIndex};
 
 use crate::alloc::{Allocator, Layout};
 use crate::boxed::Box;
@@ -390,6 +390,22 @@ impl<'a, K: 'a, V: 'a, Type> NodeRef<marker::Immut<'a>, K, V, Type> {
         unsafe { &*ptr }
     }
 
+    /// Borrows the keys and values of the node, starting at `idx`, as slices
+    /// that live as long as the tree borrow.
+    ///
+    /// # Safety
+    /// `idx` must not exceed the node's length.
+    pub(super) unsafe fn into_key_val_slices_from(self, idx: usize) -> (&'a [K], &'a [V]) {
+        debug_assert!(idx <= self.len());
+        let len = self.len() - idx;
+        let leaf = self.into_leaf();
+        unsafe {
+            let keys = slice::from_raw_parts(leaf.keys.as_ptr().add(idx).cast::<K>(), len);
+            let vals = slice::from_raw_parts(leaf.vals.as_ptr().add(idx).cast::<V>(), len);
+            (keys, vals)
+        }
+    }
+
     /// Borrows a view into the keys stored in the node.
     pub(super) fn keys(&self) -> &[K] {
         let leaf = self.into_leaf();
@@ -541,6 +557,30 @@ impl<'a, K, V, Type> NodeRef<marker::ValMut<'a>, K, V, Type> {
         let key = unsafe { (&*keys.get_unchecked(idx)).assume_init_ref() };
         let val = unsafe { (&mut *vals.get_unchecked_mut(idx)).assume_init_mut() };
         (key, val)
+    }
+
+    /// Borrows the keys and values of the node, starting at `idx`, as slices
+    /// that live as long as the tree borrow. Only the elements from `idx`
+    /// onwards are referenced, to avoid aliasing with references to earlier
+    /// elements that were handed out before.
+    ///
+    /// # Safety
+    /// `idx` must not exceed the node's length, and no references to the
+    /// elements at `idx..` may have been handed out already.
+    pub(super) unsafe fn into_key_val_slices_from(
+        mut self,
+        idx: usize,
+    ) -> (&'a [K], &'a mut [V]) {
+        debug_assert!(idx <= self.len());
+        let len = self.len() - idx;
+        let leaf = Self::as_leaf_ptr(&mut self);
+        let keys = unsafe { &raw const (*leaf).keys };
+        let vals = unsafe { &raw mut (*leaf).vals };
+        unsafe {
+            let keys = slice::from_raw_parts(keys.cast::<K>().add(idx), len);
+            let vals = slice::from_raw_parts_mut(vals.cast::<V>().add(idx), len);
+            (keys, vals)
+        }
     }
 }
 

@@ -211,6 +211,42 @@ macro_rules! define_bignum {
             }
 
             /// Multiplies itself by `2^bits` and returns its own mutable reference.
+            /// Computes `self = self * mul - other * sub` in a single pass over
+            /// the digits. The result must be non-negative. Returns whether
+            /// the result is zero.
+            pub fn mul_small_sub_mul_small(
+                &mut self,
+                mul: $ty,
+                other: &$name,
+                sub: $ty,
+            ) -> bool {
+                use crate::cmp;
+
+                // `self * mul` may need one more digit than `self`.
+                let sz = cmp::min(cmp::max(self.size, other.size) + 1, $n);
+                let mut carry_mul: $ty = 0;
+                let mut carry_sub: $ty = 0;
+                let mut borrow = false;
+                let mut top = 0;
+                for (i, (a, b)) in crate::iter::zip(&mut self.base[..sz], &other.base[..sz]).enumerate() {
+                    let (lo_a, hi_a) = (*a).carrying_mul(mul, carry_mul);
+                    let (lo_b, hi_b) = (*b).carrying_mul(sub, carry_sub);
+                    let (v, br) = lo_a.borrowing_sub(lo_b, borrow);
+                    *a = v;
+                    if v != 0 {
+                        top = i + 1;
+                    }
+                    carry_mul = hi_a;
+                    carry_sub = hi_b;
+                    borrow = br;
+                }
+                assert!(carry_mul == carry_sub + borrow as $ty);
+                // Unlike other operations, trim `size` to the digits in use so
+                // that the cost of a long sequence of calls does not creep up.
+                self.size = top;
+                top == 0
+            }
+
             pub fn mul_pow2(&mut self, bits: usize) -> &mut $name {
                 let digitbits = <$ty>::BITS as usize;
                 let digits = bits / digitbits;

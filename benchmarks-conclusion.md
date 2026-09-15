@@ -928,7 +928,359 @@ b.hs  finish                 // 保留 early exit
 2. native aarch64 random case 的決定性熱點是 larger-child branch，branch miss 20.84%、IPC 1.16；不是 cache/backend 問題。
 3. x86_64 已用 `sbb` 對 child choice if-convert；aarch64 current 卻生成 `b.hi`，這是兩平臺最重要的 codegen 差異。
 4. 在 aarch64 `u32` 上，`hint::select_unpredictable` 使 LLVM 生成 `csel`，random 快 **41%**、duplicates 快 **36%**、descending 快 **22%**，但 ascending 回退 **6%**；branch misses 減少 74.5%。
-5. 這還不能直接作爲通用 std 修改：large element 上收益消失，且資料分佈存在 regression。合理下一步是把 `select_unpredictable` 原型放進實際 `Hole<T>` 實現，跑 std 的完整 BinaryHeap benchmark/test matrix，並特別評估昂貴 comparator、非 `Copy`/大 `T` 及不同 aarch64 微架構；若無跨類型穩定收益，應把問題交給 LLVM 改善 aarch64 對 `(cmp) as usize` 的 if-conversion，而不是在通用 collection 中強制 branchless。
+5. 這還不能直接作爲通用 std 修改：large element 上收益消失，且資料分佈存在 regression。合理下一步是把 `select_unpredictable` 原型放進實際 `Hole<T>` 實現，跑 std 的完整 BinaryHeap benchmark/test matrix，並特別評估昂貴 comparator、非 `Copy`/大 `T` 及不同 aarch64 微架構；若無跨類型穩定收益，應把問題交給 LLVM 改善 aarch64 對 `(cmp) as usize` 的 if-conversion，而不是在通用 collection 中強制 branchless。分支的具體來源（AArch64 `select-optimize` pass 的內層迴圈啓發式）見後文「`BinaryHeap` sift_down：aarch64 child-choice 分支的 LLVM 來源定位」一節。
+
+---
+
+# `BinaryHeap` sift_down：aarch64 child-choice 分支的 LLVM 來源定位
+
+- 日期：2026-09-15
+- 分析對象：`sift_down_range` / `sift_down_to_bottom` 中的 `child += (hole.get(child) <= hole.get(child + 1)) as usize`；本文件中 `bench_from_vec`、`bench_find_smallest_1000`、`bench_pop` 三節均已把熱點歸結到這一行在 aarch64 上生成的真分支 `b.hi`
+- 目的：回答「爲甚麼 LLVM 在 aarch64 上把這個表達式生成分支，而 x86_64 生成 `sbb`」，並確認 `hint::select_unpredictable` 原型生效的機制
+- 工具鏈：`rustc 1.100.0-nightly (e457a7b0d 2026-08-27)`，LLVM 23.1.0；LLVM 源碼引用自 rust 樹內 `src/llvm-project`
+- 平臺：本機 HiSilicon aarch64（implementer 0x48）；`rustc --print target-cpus` 顯示 `native` 解析爲 `generic`
+
+## 結論摘要
+
+分支不是指令選擇（SelectionDAG）或 early if-conversion 的產物，而是 AArch64 後端在 `-O3`（rustc `opt-level=3`）下額外插入的 IR 級 pass **`select-optimize`**（LLVM `lib/CodeGen/SelectOptimize.cpp`）主動把 branchless 的 `zext(i1) + add` 改寫成分支。該 pass 由 subtarget feature `FeatureEnableSelectOptimize` 控制，`generic` CPU 以及 Neoverse N1/N2/V1/V2、Cortex-A76/A78/X1 等 tune list 預設開啓；x86 後端根本不運行此 pass。它的內層迴圈成本模型以固定 25% 的誤預測率估算分支成本，對本案例算出 `BranchCost=8.56 < SelectCost=15.0` 而選擇分支；實際 sibling 比較在隨機堆上接近 50% 熵，模型假設不成立。
+
+`select_unpredictable` 原型最終生成 `csel` 並非因爲 `select-optimize` 尊重 `!unpredictable` metadata——內層迴圈路徑不檢查該 metadata，原型同樣被轉成分支——而是後續機器層 `early-ifcvt` 把它折回 `csel`，且僅以 1 個 cycle 的餘量落在門檻之內。
+
+## 最小復現
+
+以下獨立源碼與 `Hole<T>` 版 `sift_down_range` 同構（`u64` 元素，`get_unchecked` 消除邊界檢查，避免 panic 分支干擾迴圈形狀）。第二個函數是 `select_unpredictable` 原型。
+
+```rust
+#[inline(never)]
+pub fn sift_down_range(v: &mut [u64], pos: usize, end: usize) -> usize {
+    let mut hole = pos;
+    let elt = v[pos];
+    let mut child = 2 * hole + 1;
+    while child <= end.saturating_sub(2) {
+        child += (unsafe { *v.get_unchecked(child) <= *v.get_unchecked(child + 1) }) as usize;
+        if elt >= unsafe { *v.get_unchecked(child) } { v[hole] = elt; return hole; }
+        unsafe { *v.get_unchecked_mut(hole) = *v.get_unchecked(child) };
+        hole = child;
+        child = 2 * hole + 1;
+    }
+    if child == end - 1 && elt < v[child] {
+        unsafe { *v.get_unchecked_mut(hole) = *v.get_unchecked(child) };
+        hole = child;
+    }
+    v[hole] = elt;
+    hole
+}
+
+#[inline(never)]
+pub fn sift_down_sel(v: &mut [u64], pos: usize, end: usize) -> usize {
+    let mut hole = pos;
+    let elt = v[pos];
+    let mut child = 2 * hole + 1;
+    while child <= end.saturating_sub(2) {
+        let r = unsafe { *v.get_unchecked(child) <= *v.get_unchecked(child + 1) };
+        child = core::hint::select_unpredictable(r, child + 1, child);
+        if elt >= unsafe { *v.get_unchecked(child) } { v[hole] = elt; return hole; }
+        unsafe { *v.get_unchecked_mut(hole) = *v.get_unchecked(child) };
+        hole = child;
+        child = 2 * hole + 1;
+    }
+    if child == end - 1 && elt < v[child] {
+        unsafe { *v.get_unchecked_mut(hole) = *v.get_unchecked(child) };
+        hole = child;
+    }
+    v[hole] = elt;
+    hole
+}
+```
+
+```bash
+rustc -O --crate-type=lib --emit=asm,llvm-ir -C panic=abort s.rs
+```
+
+兩個函數的迴圈主體：
+
+```asm
+; sift_down_range（現狀）
+.LBB1_2:
+    add   x12, x8, x13, lsl #3
+    ldr   x13, [x8, x0, lsl #3]      ; left
+    ldr   x12, [x12, #16]            ; right
+    cmp   x13, x12
+    b.hi  .LBB1_4                    ; ← child choice 是真分支
+    add   x12, x0, #1                ; 走 right
+    ldr   x14, [x8, x12, lsl #3]
+    cmp   x9, x14
+    b.lo  .LBB1_5
+    b     .LBB1_14
+.LBB1_4:
+    mov   x12, x0                    ; 走 left
+    ldr   x14, [x8, x0, lsl #3]
+    cmp   x9, x14
+    b.hs  .LBB1_14
+.LBB1_5:
+    ...
+
+; sift_down_sel（select_unpredictable 原型）
+.LBB0_2:
+    add   x12, x12, #2
+    ldr   x13, [x8, x0, lsl #3]
+    ldr   x14, [x8, x12, lsl #3]
+    cmp   x13, x14
+    csel  x13, x0, x12, hi           ; 無分支
+    ldr   x14, [x8, x13, lsl #3]
+    cmp   x9, x14
+    b.hs  .LBB0_12
+    ...
+```
+
+x86_64 對照（`--target x86_64-unknown-linux-gnu`）的同一位置是 `cmpq (%rdi,%rax,8), %r9; movq %rax, %r9; sbbq $-1, %r9`，與前節觀察一致。
+
+## 第一步：分支不在 IR 優化管線中產生
+
+`--emit=llvm-ir` 得到的是中端優化完成後的 IR。迴圈主體中 child 的選擇仍是純算術：
+
+```llvm
+%_14 = icmp ule i64 %_15, %_17
+%_13 = zext i1 %_14 to i64
+%2   = add nuw nsw i64 %child.sroa.0.028, %_13
+%_44 = getelementptr inbounds nuw [8 x i8], ptr %v.0, i64 %2
+%_21 = load i64, ptr %_44, align 8
+%_20.not = icmp ult i64 %elt, %_21
+br i1 %_20.not, label %bb6, label %bb15
+```
+
+因此問題出在後端。用 `-print-after-all` 逐 pass 導出後端 IR/MIR，並找出 `freeze i1` + `br i1` 首次替代 `zext` 的位置：
+
+```bash
+rustc -O --crate-type=lib --emit=asm -C panic=abort -C codegen-units=1 \
+  -C llvm-args=-print-after-all \
+  -C llvm-args=-filter-print-funcs=_RNvCsewkfLJIkpWD_1s15sift_down_range \
+  -o out.s s.rs 2> dump.txt
+awk '/^\*\*\* IR Dump After/{hdr=$0} /freeze i1/ {print hdr; exit}' dump.txt
+# *** IR Dump After Optimize selects (select-optimize) ***
+```
+
+該 pass 前一個 dump（`expand-reductions`）中迴圈塊仍是 `zext + add`；該 pass 之後：
+
+```llvm
+22:
+  ...
+  %32 = icmp ule i64 %27, %31
+  %33 = zext i1 %32 to i64          ; 已無使用者
+  %34 = freeze i1 %32
+  br i1 %34, label %35, label %37
+
+35:
+  %36 = add nuw nsw i64 %23, 1
+  br label %37
+
+37:
+  %38 = phi i64 [ %36, %35 ], [ %23, %22 ]
+  %40 = getelementptr inbounds nuw [8 x i8], ptr %0, i64 %38
+  %41 = load i64, ptr %40, align 8
+  %42 = icmp ult i64 %8, %41
+  br i1 %42, label %60, label %56
+```
+
+隨後的 CodeGenPrepare、ISel、early-ifcvt 均未改變此結構，ISel 後的 MIR 直接是 `SUBSXrr; Bcc 8(hi)`。
+
+## 第二步：`select-optimize` 的啓用條件
+
+AArch64 後端在 `addIRPasses` 末尾自行加入這個 pass（`lib/Target/AArch64/AArch64TargetMachine.cpp`）：
+
+```cpp
+TargetPassConfig::addIRPasses();
+
+if (getOptLevel() == CodeGenOptLevel::Aggressive && EnableSelectOpt)
+  addPass(createSelectOptimizePass());
+```
+
+`EnableSelectOpt` 是 `cl::opt` `-aarch64-select-opt`（預設 true）。通用的 `TargetPassConfig` 也有一份加入邏輯，但受 `-disable-select-optimize` 控制且**預設爲 true**（`lib/CodeGen/TargetPassConfig.cpp:255`），所以 x86 等其他目標實際上不運行此 pass；這也解釋了爲何 `-C llvm-args=-disable-select-optimize` 對 aarch64 輸出無影響——它控制的是那個本來就關閉的實例。
+
+pass 內部再以 TTI 門控（`SelectOptimize.cpp:366`）：
+
+```cpp
+if (!TTI->enableSelectOptimize())
+  return PreservedAnalyses::all();
+```
+
+AArch64 的實現轉發到 subtarget feature（`AArch64TargetTransformInfo.h:473`）：
+
+```cpp
+bool enableSelectOptimize() const override {
+  return ST->enableSelectOptimize();   // FeatureEnableSelectOptimize
+}
+```
+
+`lib/Target/AArch64/AArch64Features.td`：
+
+```tablegen
+def FeatureEnableSelectOptimize : SubtargetFeature<
+    "enable-select-opt", "EnableSelectOptimize", "true",
+    "Enable the select optimize pass for select loop heuristics">;
+```
+
+`lib/Target/AArch64/AArch64Processors.td` 的 `generic` 定義帶此 feature：
+
+```tablegen
+def : ProcessorModel<"generic", CortexA510Model, ProcessorFeatures.Generic,
+                     [FeatureFuseAES, FeatureFuseAdrpAdd, FeaturePostRAScheduler,
+                      FeatureEnableSelectOptimize]>;
+```
+
+含此 feature 的 tune list：A57、A65、A72、A73、A75、A76、A77、A78/A78AE/A78C、A710、A715、A720/A720AE、A725、X1、X2、X3、X4、X925、Neoverse N1/N2/N3/V1/V2/V3/V3AE/512TVB、Ampere1B、Oryon、Olympus、MONAKA。
+
+以下驗證直接指向該 pass：
+
+```bash
+# 關閉 pass（AArch64 專用開關）
+rustc -O --crate-type=lib --emit=asm -C panic=abort -C llvm-args=-aarch64-select-opt=false s.rs
+# 或關閉 subtarget feature
+rustc -O --crate-type=lib --emit=asm -C panic=abort -C target-feature=-enable-select-opt s.rs
+```
+
+兩者的迴圈主體均變爲：
+
+```asm
+ldr   x13, [x8, x0, lsl #3]
+ldr   x12, [x12, #16]
+cmp   x13, x12
+cinc  x13, x0, ls                ; child += (left <= right)
+ldr   x14, [x8, x13, lsl #3]
+cmp   x9, x14
+b.hs  ...
+```
+
+`cinc ... ls` 正是 x86 `sbbq $-1` 的 aarch64 對應形式。也就是說，SelectionDAG 對 `zext(i1) + add` 本來就能生成 branchless 代碼；分支是 `select-optimize` 在其之前主動引入的。
+
+按 `-C target-cpu` 掃描（同一源碼，讀迴圈主體中 child 選擇的指令）：
+
+| target-cpu | child 選擇 | 說明 |
+|---|---|---|
+| generic（本機 `native` 的解析結果） | `b.hi` | tune list 含 feature |
+| neoverse-n1 / n2 / v1 / v2 | `b.hi` | 含 feature |
+| cortex-a76 / a78 / x1 | `b.hi` | 含 feature |
+| cortex-a72 | `cinc` | 含 feature，但成本模型判定不轉換 |
+| cortex-a53 / a55 | `cinc` | 不含 feature |
+| apple-m1 / m4 | `cinc` | 不含 feature |
+| tsv110（Kunpeng 920） | `cinc` | 不含 feature |
+| a64fx、ampere1 | `cinc` | 不含 feature |
+
+cortex-a72 一列說明 feature 只是必要條件；最終決定仍取決於該 CPU 調度模型給出的延遲數字。
+
+## 第三步：pass 爲何把 `zext + add` 當作 select
+
+`select-optimize` 的處理對象不限於 `select` 指令。`SelectOptimize.cpp:790–843` 把「二元運算的一個操作數是單次使用的 `zext/sext i1`」識別爲 select-like：
+
+```cpp
+// `Aux` can be either `ZExt(1bit)`, `SExt(1bit)` or `XShr(Val), ValBitSize - 1`
+auto MatchZExtOrSExtPattern =
+    m_c_BinOp(m_Value(), m_OneUse(m_ZExtOrSExt(m_Value(X))));
+...
+if ((match(I, MatchZExtOrSExtPattern) && X->getType()->isIntegerTy(1)) || ...)
+```
+
+`child + zext(c)` 因而被視爲 `select c, child + 1, child`，true 分支帶一條 `add`，false 分支爲空。轉換函數 `convertProfitableSIGroups` 對條件插入 `freeze` 後生成上面看到的 diamond。
+
+## 第四步：內層迴圈成本模型的判定
+
+pass 對最內層迴圈使用專門的路徑 `findProfitableSIGroupsInnerLoops`，以 `-C remark=select-optimize` 可以直接讀到其判定：
+
+```text
+s.rs:7:9   select-optimize (success): Profitable to convert to branch (loop analysis).
+           BranchCost=8.5625, SelectCost=15.0.
+hint.rs:879 select-optimize (success): Profitable to convert to branch (loop analysis).
+           BranchCost=7.8125, SelectCost=15.0.
+```
+
+（`neoverse-n1` 下爲 8.25 / 15.0 與 9.0 / 15.0，結論相同。）第二行針對的是 `sift_down_sel` 中 `select_unpredictable` 內部的 `select`，下一節討論。
+
+成本計算（`computeLoopCosts`，`SelectOptimize.cpp:1279` 起）對迴圈中每條指令累積延遲，select 版本的成本是整條依賴鏈：
+
+```text
+InstCost      = InstLatency + max(OpCosts)
+BranchCost    = PredictedPathCost + MispredictCost
+PredictedPathCost = TrueOpCost × P(true) + FalseOpCost × P(false)
+MispredictCost    = max(MispredictPenalty, CondCost) × MispredictRate / 100
+```
+
+```cpp
+static cl::opt<unsigned> MispredictDefaultRate(
+    "mispredict-default-rate", cl::Hidden, cl::init(25),
+    cl::desc("Default mispredict rate (initialized to 25%)."));
+```
+
+無 profile 時 `MispredictRate` 固定取 25%。本案例中 select 版本的關鍵路徑是 `ldr(left/right) → cmp → csel → ldr(child) → cmp(elt) → 下一輪 phi`，`SelectCost=15`；分支版本把 `cmp → csel` 從地址鏈上移除，加上 25% × 誤預測懲罰後得 8.56。之後的迴圈級門檻（`checkLoopHeuristics`）全部通過：
+
+```cpp
+GainGradientThreshold  = 25   // %
+GainCycleThreshold     = 4    // cycles
+GainRelativeThreshold  = 8    // 即 gain ≥ PredCost / 8 = 12.5%
+```
+
+問題不在公式而在輸入：sibling 比較在隨機堆上的實測 miss 率是 20.8%（`from_vec`）到 9.1%（top-k），對應分支本身的熵接近 50%，而模型以 25% 估算並且在 `PredictedPathCost` 中假設可以完全預測執行路徑。在這個假設下 `b.hi` 的期望成本被低估約一倍，判定隨之反轉。這也是 x86 天然無此問題的原因：x86 從未運行該 pass，SelectionDAG 直接把 `zext + add` 降爲 `sbb`。
+
+## 第五步：`select_unpredictable` 原型爲何仍是 `csel`
+
+`select-optimize` 對 `!unpredictable` 的檢查只有一處，位於非迴圈路徑 `isConvertToBranchProfitableBase`（`SelectOptimize.cpp:1021`）：
+
+```cpp
+if (SI.getI()->getMetadata(LLVMContext::MD_unpredictable)) {
+  ++NumSelectUnPred;
+  ORmiss << "Not converted to branch because of unpredictable branch. ";
+  return false;
+}
+```
+
+內層迴圈路徑 `optimizeSelectsInnerLoops → findProfitableSIGroupsInnerLoops` 不經過這個函數。對 `sift_down_sel` 的 dump 證實原型同樣被轉成了分支，metadata 只是被搬到了 `br` 上：
+
+```llvm
+%32 = icmp ugt i64 %27, %31
+%33 = freeze i1 %32
+br i1 %33, label %35, label %34, !unpredictable !12
+
+34:
+  br label %35
+
+35:
+  %36 = phi i64 [ %23, %22 ], [ %28, %34 ]
+```
+
+最終 asm 仍是 `csel`，是因爲機器層的 `early-ifcvt` 又把這個 diamond 折了回去。`-C remark=early-ifcvt`：
+
+```text
+hint.rs:879  early-ifcvt (success): performing if-conversion on branch: the condition
+             adds 5 cycles to the critical path, and the short leg adds another 1 cycle,
+             and the long leg adds another 2 cycles, each staying under the threshold of 5 cycles.
+s.rs:7:9     early-ifcvt (missed): did not if-convert branch: the condition would add
+             6 cycles to the critical path exceeding the limit of 5 cycles, ...
+```
+
+門檻 `CritLimit = MispredictPenalty / 2`（`EarlyIfConversion.cpp`）。兩個版本相差的 1 個 cycle 來自 diamond 的形狀：原型的 true 塊爲空（`child + 1` 復用了已算好的 `child + 2` 減一，phi 直接取值），而 `zext + add` 版本的 true 塊多一條 `add`。`early-ifcvt` 本身不讀 `!unpredictable`。
+
+驗證：對原型加 `-C llvm-args=-disable-early-ifcvt`，迴圈主體同樣退化爲 `b.hi`。
+
+因此當前原型的收益依賴兩個互不相干的機制恰好對齊，而不是 `select_unpredictable` 的語義被後端遵守。若 `Hole<T>` 版本的實際 IR 形狀、元素類型或比較器導致 diamond 多出一條指令，`early-ifcvt` 就會拒絕折回，原型將靜默失效。落地時必須以 asm 或 `-C remark=early-ifcvt` 確認，不能只看 benchmark 數字。
+
+## 結論
+
+1. aarch64 上 `child += (cmp) as usize` 的真分支由 AArch64 專用的 `select-optimize` pass 產生，觸發條件是 `opt-level=3` 且 target-cpu 的 tune list 含 `FeatureEnableSelectOptimize`；`generic`（即多數 Linux 發行版與 `target-cpu=native` 在非白名單 CPU 上的結果）及 Neoverse/Cortex 大核均開啓。關閉該 pass 後 SelectionDAG 生成 `cinc`，與 x86 的 `sbb` 同構。
+2. 判定錯誤的直接原因是內層迴圈成本模型以固定 25% 誤預測率估算分支成本；對接近 50% 熵的 sibling 比較，分支成本被低估約一倍。這是 pass 的通用缺陷，任何 `zext(i1)` 餵 `add/or` 且結果進入地址鏈的迴圈都可能命中。
+3. `select_unpredictable` 在此路徑上並未被 `select-optimize` 尊重（只在非迴圈路徑檢查 metadata），原型的 `csel` 是 `early-ifcvt` 以 1 cycle 餘量折回的結果。這降低了源碼層修法的穩健性，也把前節結論 5「交給 LLVM 改善 if-conversion」的目標具體化爲兩點：`select-optimize` 的內層迴圈路徑應尊重 `!unpredictable`；`MispredictDefaultRate` 應由條件的可預測性（profile 或 select-like 形狀的靜態特徵）調整而非固定常數。
+4. 對 std 的 `BinaryHeap` 修改，`select_unpredictable` 仍是當前可用的最小改動，但 PR 說明應把原因寫爲「`select-optimize` 對 `zext+add` select-like 形狀的迴圈啓發式誤判」，並附上本節的 remark 與 asm 作爲依據。
+5. 復現與驗證命令：
+
+```bash
+# 定位 pass
+rustc -O --crate-type=lib --emit=asm -C panic=abort -C codegen-units=1 \
+  -C llvm-args=-print-after-all -C llvm-args=-filter-print-funcs=<mangled> -o out.s s.rs 2> dump.txt
+# 讀判定依據
+rustc -O --crate-type=lib --emit=asm -C panic=abort -C codegen-units=1 -C debuginfo=1 \
+  -C remark=select-optimize -C remark=early-ifcvt -o out.s s.rs
+# 反向驗證
+rustc -O --crate-type=lib --emit=asm -C panic=abort -C llvm-args=-aarch64-select-opt=false -o out.s s.rs
+rustc -O --crate-type=lib --emit=asm -C panic=abort -C target-feature=-enable-select-opt -o out.s s.rs
+```
 
 ---
 
@@ -1949,7 +2301,7 @@ pop 的獨特之處:`sift_down_to_bottom` 註釋明言為 pop 場景設計(來�
 ## 結論
 
 1. `bench_pop` 是 BinaryHeap sibling-choice 分支病灶的**第三個獨立現場**,且形態最純(無 early-exit 干擾):miss 率 15.9%,`select_unpredictable` 化後 -97.6% misses、-34% 時間。
-2. 至此三大 BinaryHeap 熱路徑全部實證同一修復點:`from_vec` -41%、top-k 替換 -37%、`pop` -34%——都指向 `Hole` 版 sift_down 家族(`sift_down_range`/`sift_down_to_bottom`)的 `child += (cmp) as usize` 行。x86_64 的 `sbb`/`cmov` codegen 天然無此問題(from_vec 節已證),這是 aarch64 特有的 if-conversion 缺失。
+2. 至此三大 BinaryHeap 熱路徑全部實證同一修復點:`from_vec` -41%、top-k 替換 -37%、`pop` -34%——都指向 `Hole` 版 sift_down 家族(`sift_down_range`/`sift_down_to_bottom`)的 `child += (cmp) as usize` 行。x86_64 的 `sbb`/`cmov` codegen 天然無此問題(from_vec 節已證),這是 aarch64 特有的問題，來源已在「`BinaryHeap` sift_down：aarch64 child-choice 分支的 LLVM 來源定位」一節確認爲 `select-optimize` pass 的迴圈啓發式。
 3. 落地評估與前兩節共享的局限不變:大元素(72B)收益消失、昂貴 comparator 未測、ascending 類可預測輸入在 from_vec 有 +6% 回退;但 pop 場景的輸入(堆頂替換元素)本質上就是高熵的,可預測輸入不構成 pop 的常見情形,回退風險比 from_vec 低。改動即把兩處 `child += ... as usize` 換成 `hint::select_unpredictable`,建議在真實 `binary_heap/mod.rs` 上打補丁跑完整 alloctests suite + 全部 BinaryHeap benchmark 矩陣。
 
 ## 復現

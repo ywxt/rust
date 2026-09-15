@@ -6,7 +6,102 @@ use SearchBound::*;
 use SearchResult::*;
 
 use super::node::ForceResult::*;
-use super::node::{Handle, NodeRef, marker};
+use super::node::{CAPACITY, Handle, NodeRef, marker};
+
+/// Internal specialization of the in-node linear search.
+///
+/// The generic implementation must call `cmp` in ascending key order and stop
+/// at the first non-`Greater` result, because `Ord` impls can have observable
+/// side effects. For primitive integer keys the comparison is pure, so a full
+/// node can instead be scanned branchlessly (counting `key > k`), which
+/// auto-vectorizes and avoids the branch mispredictions of the early-exit
+/// loop.
+trait SpecSearchLinear<Q: ?Sized>: Borrow<Q> + Sized {
+    /// See [`NodeRef::find_key_index`]. `start_index` must not exceed `keys.len()`.
+    unsafe fn spec_find_key_index(keys: &[Self], key: &Q, start_index: usize) -> IndexResult;
+}
+
+impl<K, Q: ?Sized> SpecSearchLinear<Q> for K
+where
+    Q: Ord,
+    K: Borrow<Q>,
+{
+    #[inline]
+    default unsafe fn spec_find_key_index(
+        keys: &[K],
+        key: &Q,
+        start_index: usize,
+    ) -> IndexResult {
+        for (offset, k) in unsafe { keys.get_unchecked(start_index..) }.iter().enumerate() {
+            match key.cmp(k.borrow()) {
+                Ordering::Greater => {}
+                Ordering::Equal => return IndexResult::KV(start_index + offset),
+                Ordering::Less => return IndexResult::Edge(start_index + offset),
+            }
+        }
+        IndexResult::Edge(keys.len())
+    }
+}
+
+macro_rules! spec_search_linear_int {
+    ($($t:ty),+) => {$(
+        impl SpecSearchLinear<$t> for $t {
+            #[inline]
+            unsafe fn spec_find_key_index(
+                keys: &[$t],
+                key: &$t,
+                start_index: usize,
+            ) -> IndexResult {
+                let key = *key;
+                let sub = unsafe { keys.get_unchecked(start_index..) };
+                if sub.len() == CAPACITY {
+                    // Full node: branchless fixed-length scan. Outlined so
+                    // that the code size of callers inlining the search
+                    // stays close to the generic early-exit loop.
+                    let full = unsafe { &*(sub.as_ptr() as *const [$t; CAPACITY]) };
+                    return match spec_full_scan(full, key) {
+                        (idx, true) => IndexResult::KV(start_index + idx),
+                        (idx, false) => IndexResult::Edge(start_index + idx),
+                    };
+                }
+                // Partial node: early-exit scan, same as the generic path.
+                // A branchless scan over a dynamic length does not vectorize
+                // well and regresses leftmost-biased patterns.
+                for (offset, &k) in sub.iter().enumerate() {
+                    match key.cmp(&k) {
+                        Ordering::Greater => {}
+                        Ordering::Equal => return IndexResult::KV(start_index + offset),
+                        Ordering::Less => return IndexResult::Edge(start_index + offset),
+                    }
+                }
+                IndexResult::Edge(keys.len())
+            }
+        }
+
+    )+};
+}
+spec_search_linear_int!(u8, u16, u32, u64, u128, usize, i8, i16, i32, i64, i128, isize);
+
+/// Branchless scan of a full node. Returns the edge index within the node and
+/// whether the key at that index equals the searched key. Outlined
+/// (`inline(never)`) so callers keep the code size of the early-exit loop.
+#[inline(never)]
+fn spec_full_scan<T: Copy + Ord>(full: &[T; CAPACITY], key: T) -> (usize, bool) {
+    // First-key guard: keeps the O(1) exit of leftmost-biased access patterns
+    // (e.g. draining a map through ascending `remove` calls) that a full scan
+    // would otherwise lose. Low entropy for both leftmost (always taken) and
+    // uniform (rarely taken) patterns.
+    match key.cmp(&full[0]) {
+        Ordering::Less => return (0, false),
+        Ordering::Equal => return (0, true),
+        Ordering::Greater => {}
+    }
+    let mut count = 0usize;
+    for &k in full {
+        count += (k < key) as usize;
+    }
+    (count, count < CAPACITY && full[count] == key)
+}
 
 pub(super) enum SearchBound<T> {
     /// An inclusive bound to look for, just like `Bound::Included(T)`.
@@ -222,14 +317,7 @@ impl<BorrowType, K, V, Type> NodeRef<BorrowType, K, V, Type> {
         let node = self.reborrow();
         let keys = node.keys();
         debug_assert!(start_index <= keys.len());
-        for (offset, k) in unsafe { keys.get_unchecked(start_index..) }.iter().enumerate() {
-            match key.cmp(k.borrow()) {
-                Ordering::Greater => {}
-                Ordering::Equal => return IndexResult::KV(start_index + offset),
-                Ordering::Less => return IndexResult::Edge(start_index + offset),
-            }
-        }
-        IndexResult::Edge(keys.len())
+        unsafe { <K as SpecSearchLinear<Q>>::spec_find_key_index(keys, key, start_index) }
     }
 
     /// Finds an edge index in the node delimiting the lower bound of a range.

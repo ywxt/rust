@@ -205,6 +205,17 @@ pub struct BTreeMap<
 #[stable(feature = "btree_drop", since = "1.7.0")]
 unsafe impl<#[may_dangle] K, #[may_dangle] V, A: Allocator + Clone> Drop for BTreeMap<K, V, A> {
     fn drop(&mut self) {
+        // When neither keys nor values need dropping, deallocate the tree
+        // node by node instead of walking every element through the dying
+        // iterator. The element-wise walk only collapses to this shape when
+        // `deallocating_next` happens to be inlined.
+        if !mem::needs_drop::<K>() && !mem::needs_drop::<V>() {
+            if let Some(root) = self.root.take() {
+                unsafe { root.into_dying().deallocate_subtree((*self.alloc).clone()) };
+            }
+            unsafe { ManuallyDrop::drop(&mut self.alloc) };
+            return;
+        }
         drop(unsafe { ptr::read(self) }.into_iter())
     }
 }
@@ -1745,6 +1756,14 @@ impl<'a, K: 'a, V: 'a> Iterator for Iter<'a, K, V> {
         (self.length, Some(self.length))
     }
 
+    fn fold<B, F>(self, init: B, f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        // SAFETY: `length` counts the remaining key-value pairs.
+        unsafe { self.range.fold_unchecked(self.length, init, f) }
+    }
+
     fn last(mut self) -> Option<(&'a K, &'a V)> {
         self.next_back()
     }
@@ -1821,6 +1840,14 @@ impl<'a, K, V> Iterator for IterMut<'a, K, V> {
 
     fn size_hint(&self) -> (usize, Option<usize>) {
         (self.length, Some(self.length))
+    }
+
+    fn fold<B, F>(self, init: B, f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        // SAFETY: `length` counts the remaining key-value pairs.
+        unsafe { self.range.fold_unchecked(self.length, init, f) }
     }
 
     fn last(mut self) -> Option<(&'a K, &'a mut V)> {
@@ -2003,6 +2030,13 @@ impl<'a, K, V> Iterator for Keys<'a, K, V> {
         self.inner.size_hint()
     }
 
+    fn fold<B, F>(self, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        self.inner.fold(init, |acc, (k, _)| f(acc, k))
+    }
+
     fn last(mut self) -> Option<&'a K> {
         self.next_back()
     }
@@ -2073,6 +2107,13 @@ impl<'a, K, V> Iterator for Values<'a, K, V> {
 
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.inner.size_hint()
+    }
+
+    fn fold<B, F>(self, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        self.inner.fold(init, |acc, (_, v)| f(acc, v))
     }
 
     fn last(mut self) -> Option<&'a V> {

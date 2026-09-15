@@ -167,7 +167,83 @@ impl<'a, K, V> LazyLeafRange<marker::Immut<'a>, K, V> {
     }
 }
 
-impl<'a, K, V> LazyLeafRange<marker::ValMut<'a>, K, V> {
+impl<'a, K: 'a, V: 'a> LazyLeafRange<marker::Immut<'a>, K, V> {
+    /// Folds over the next `length` key-value pairs in ascending order,
+    /// visiting the elements of each leaf in a plain loop and only climbing
+    /// the tree once per node instead of once per element.
+    ///
+    /// # Safety
+    /// There must be at least `length` key-value pairs ahead of the front.
+    pub(super) unsafe fn fold_unchecked<B, F>(mut self, mut length: usize, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, (&'a K, &'a V)) -> B,
+    {
+        let mut acc = init;
+        if length == 0 {
+            return acc;
+        }
+        let mut edge = *self.init_front().unwrap();
+        loop {
+            let node = edge.into_node();
+            let (keys, vals) = unsafe { node.into_key_val_slices_from(edge.idx()) };
+            let take = keys.len().min(length);
+            for (k, v) in keys[..take].iter().zip(&vals[..take]) {
+                acc = f(acc, (k, v));
+            }
+            length -= take;
+            if length == 0 {
+                return acc;
+            }
+            // The leaf is exhausted; the next KV is in an ancestor node,
+            // and the next leaf is the leftmost one below its right edge.
+            let kv = unsafe { Handle::new_edge(node, node.len()) }.next_kv().ok().unwrap();
+            acc = f(acc, kv.into_kv());
+            length -= 1;
+            if length == 0 {
+                return acc;
+            }
+            edge = kv.next_leaf_edge();
+        }
+    }
+}
+
+impl<'a, K: 'a, V: 'a> LazyLeafRange<marker::ValMut<'a>, K, V> {
+    /// See [`LazyLeafRange::<marker::Immut>::fold_unchecked`].
+    ///
+    /// # Safety
+    /// There must be at least `length` key-value pairs ahead of the front.
+    pub(super) unsafe fn fold_unchecked<B, F>(mut self, mut length: usize, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, (&'a K, &'a mut V)) -> B,
+    {
+        let mut acc = init;
+        if length == 0 {
+            return acc;
+        }
+        let mut edge = unsafe { ptr::read(self.init_front().unwrap()) };
+        loop {
+            let idx = edge.idx();
+            let node = edge.into_node();
+            let node_len = node.len();
+            let (keys, vals) = unsafe { ptr::read(&node).into_key_val_slices_from(idx) };
+            let take = keys.len().min(length);
+            for (k, v) in keys[..take].iter().zip(&mut vals[..take]) {
+                acc = f(acc, (k, v));
+            }
+            length -= take;
+            if length == 0 {
+                return acc;
+            }
+            let kv = unsafe { Handle::new_edge(node, node_len) }.next_kv().ok().unwrap();
+            edge = unsafe { ptr::read(&kv) }.next_leaf_edge();
+            acc = f(acc, kv.into_kv_valmut());
+            length -= 1;
+            if length == 0 {
+                return acc;
+            }
+        }
+    }
+
     #[inline]
     pub(super) unsafe fn next_unchecked(&mut self) -> (&'a K, &'a mut V) {
         unsafe { self.init_front().unwrap().next_unchecked() }
@@ -620,6 +696,36 @@ impl<K, V> Handle<NodeRef<marker::Dying, K, V, marker::Leaf>, marker::Edge> {
         super::mem::replace(self, |leaf_edge| unsafe {
             leaf_edge.deallocating_next_back(alloc).unwrap()
         })
+    }
+}
+
+impl<K, V> NodeRef<marker::Dying, K, V, marker::LeafOrInternal> {
+    /// Deallocates every node of the subtree headed by this node, in postorder,
+    /// without reading or dropping any of the contained key-value pairs.
+    ///
+    /// # Safety
+    /// The keys and values of the subtree must not need dropping (or must have
+    /// been moved out / dropped already), and the subtree must never be
+    /// accessed again.
+    pub(super) unsafe fn deallocate_subtree<A: Allocator + Clone>(self, alloc: A) {
+        // Walk to the leftmost leaf, deallocate it and ascend; whenever the
+        // parent edge we surface at has a further child, dive to that child's
+        // leftmost leaf; once a node's children are exhausted, the node itself
+        // is deallocated by the next round.
+        let mut node = self.first_leaf_edge().into_node().forget_type();
+        loop {
+            match unsafe { node.deallocate_and_ascend(alloc.clone()) } {
+                None => return,
+                Some(parent_edge) => {
+                    node = match parent_edge.right_kv() {
+                        Ok(kv) => {
+                            kv.right_edge().descend().first_leaf_edge().into_node().forget_type()
+                        }
+                        Err(last_edge) => last_edge.into_node().forget_type(),
+                    };
+                }
+            }
+        }
     }
 }
 

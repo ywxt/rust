@@ -504,6 +504,26 @@ fn bench_next_chunk_trusted_random_access(b: &mut Bencher) {
     })
 }
 
+/// Same as above, but with a length that is not visible at compile time.
+#[bench]
+#[allow(noop_method_call)]
+fn bench_next_chunk_trusted_random_access_runtime_len(b: &mut Bencher) {
+    let v = vec![1u8; 1024];
+    let len = black_box(1024);
+
+    b.iter(|| {
+        black_box(&v[..len])
+            .iter()
+            .map(|b| *b.borrow())
+            .array_chunks::<{ size_of::<u64>() }>()
+            .map(|ary| {
+                let d = u64::from_ne_bytes(ary);
+                Wrapping(d.rotate_left(7).wrapping_add(1))
+            })
+            .sum::<Wrapping<u64>>()
+    })
+}
+
 #[bench]
 fn bench_next_chunk_filter_even(b: &mut Bencher) {
     let a = (0..1024).next_chunk::<1024>().unwrap();

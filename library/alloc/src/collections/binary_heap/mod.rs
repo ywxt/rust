@@ -148,7 +148,7 @@ use core::iter::{FusedIterator, InPlaceIterable, SourceIter, TrustedFused, Trust
 use core::mem::{self, ManuallyDrop, swap};
 use core::num::NonZero;
 use core::ops::{Deref, DerefMut};
-use core::{fmt, ptr};
+use core::{fmt, hint, ptr};
 
 use crate::alloc::Global;
 use crate::collections::TryReserveError;
@@ -850,12 +850,24 @@ impl<T: Ord, A: Allocator> BinaryHeap<T, A> {
             //  child + 1 == 2 * hole.pos() + 2 != hole.pos().
             // FIXME: 2 * hole.pos() + 1 or 2 * hole.pos() + 2 could overflow
             //  if T is a ZST
-            child += unsafe { hole.get(child) <= hole.get(child + 1) } as usize;
+            let (left, right) = unsafe { (hole.get(child), hole.get(child + 1)) };
+            let right_is_greater = left <= right;
+
+            // Which child is greater is close to a coin flip on typical heap
+            // contents, so a branch here mispredicts constantly. On AArch64,
+            // LLVM's `select-optimize` pass rewrites `child += (cmp) as usize`
+            // followed by a load through `child` into a real branch, because
+            // its cost model rates the cmp -> select -> address -> load chain
+            // as more expensive than a (mispredicting) branch. Selecting the
+            // index explicitly and reusing the element we already loaded,
+            // instead of re-reading `hole.get(child)`, keeps it branchless.
+            child = hint::select_unpredictable(right_is_greater, child + 1, child);
+            let greater = if right_is_greater { right } else { left };
 
             // if we are already in order, stop.
             // SAFETY: child is now either the old child or the old child+1
             //  We already proven that both are < self.len() and != hole.pos()
-            if hole.element() >= unsafe { hole.get(child) } {
+            if hole.element() >= greater {
                 return hole.pos();
             }
 
@@ -910,7 +922,9 @@ impl<T: Ord, A: Allocator> BinaryHeap<T, A> {
             //  child + 1 == 2 * hole.pos() + 2 != hole.pos().
             // FIXME: 2 * hole.pos() + 1 or 2 * hole.pos() + 2 could overflow
             //  if T is a ZST
-            child += unsafe { hole.get(child) <= hole.get(child + 1) } as usize;
+            // See `sift_down_range` for why this is a `select_unpredictable`.
+            let right_is_greater = unsafe { hole.get(child) <= hole.get(child + 1) };
+            child = hint::select_unpredictable(right_is_greater, child + 1, child);
 
             // SAFETY: Same as above
             unsafe { hole.move_to(child) };

@@ -318,17 +318,31 @@ pub fn format_exact<'a>(
     };
 
     if len > 0 {
-        // cache `(2, 4, 8) * scale` for digit generation.
-        // (this can be expensive, so do not calculate them when the buffer is empty.)
-        let mut scale2 = scale.clone();
-        scale2.mul_pow2(1);
-        let mut scale4 = scale.clone();
-        scale4.mul_pow2(2);
-        let mut scale8 = scale.clone();
-        scale8.mul_pow2(3);
+        // cache `10 * scale` for digit generation.
+        // (this can be expensive, so do not calculate it when the buffer is empty.)
+        let mut scale10 = scale.clone();
+        scale10.mul_small(10);
 
-        for i in 0..len {
-            if mant.is_zero() {
+        // digits are generated in batches of up to 9: `q = mant * 10^(m-1) / scale`
+        // are the next `m` digits, and `mant * 10^m - q * scale10` is the next
+        // remainder, computed in a single pass over the digits. `q` is first
+        // estimated from 64-bit windows below the most significant digit of
+        // `scale`, which never overshoots and undershoots by a few units at
+        // most; the estimate is then corrected by comparing against `scale10`.
+        const BATCH: usize = 9;
+        const POW10U32: [u32; BATCH + 1] =
+            [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000];
+        let sdigits = scale.digits();
+        let top = sdigits.iter().rposition(|&d| d != 0).unwrap();
+        let limb = |digits: &[Digit], i: usize| digits.get(i).copied().unwrap_or(0) as u128;
+        let slo = if top > 0 { limb(sdigits, top - 1) } else { 0 };
+        // `sdiv > scale / 2^(32 * (top - 1))`, so the estimate never overshoots.
+        let sdiv = ((limb(sdigits, top) << 32) | slo) + 1;
+
+        let mut zero = mant.is_zero();
+        let mut i = 0;
+        while i < len {
+            if zero {
                 // following digits are all zeroes, we stop here
                 // do *not* try to perform rounding! rather, fill remaining digits.
                 for c in &mut buf[i..len] {
@@ -338,27 +352,25 @@ pub fn format_exact<'a>(
                 return (unsafe { buf[..len].assume_init_ref() }, k);
             }
 
-            let mut d = 0;
-            if mant >= scale8 {
-                mant.sub(&scale8);
-                d += 8;
+            let m = (len - i).min(BATCH);
+            // `mant < 10 * scale` may have one more digit than `scale`.
+            let mdigits = mant.digits();
+            let mlo = if top > 0 { limb(mdigits, top - 1) } else { 0 };
+            let mwin = (limb(mdigits, top + 1) << 64) | (limb(mdigits, top) << 32) | mlo;
+            let mut q = (mwin * POW10U32[m - 1] as u128 / sdiv) as u32;
+            // `mant = mant * 10^m - q * scale10`
+            zero = mant.mul_small_sub_mul_small(POW10U32[m], &scale10, q);
+            while mant >= scale10 {
+                mant.sub(&scale10);
+                q += 1;
+                zero = mant.is_zero();
             }
-            if mant >= scale4 {
-                mant.sub(&scale4);
-                d += 4;
+            debug_assert!(q < POW10U32[m]);
+            for c in buf[i..i + m].iter_mut().rev() {
+                *c = MaybeUninit::new(b'0' + (q % 10) as u8);
+                q /= 10;
             }
-            if mant >= scale2 {
-                mant.sub(&scale2);
-                d += 2;
-            }
-            if mant >= scale {
-                mant.sub(&scale);
-                d += 1;
-            }
-            debug_assert!(mant < scale);
-            debug_assert!(d < 10);
-            buf[i] = MaybeUninit::new(b'0' + d);
-            mant.mul_small(10);
+            i += m;
         }
     }
 
