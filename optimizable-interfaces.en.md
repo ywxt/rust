@@ -1,6 +1,6 @@
 # Optimizable Interfaces Summary
 
-Distilled from the full analyses in `benchmarks-conclusion.md`, keeping **only interfaces with an actionable optimization**. Grouped by verification level: landed in-tree and verified against the official harness, prototype-verified, and candidate directions (root cause located, fix not yet prototyped). Interfaces confirmed to have no optimization headroom (`binary_search`, `starts_with`, `Vec::push`, `HashMap::new`, `PeekMut::deref_mut`, `int_log`, memcmp-class paths) are intentionally excluded.
+Distilled from the full analyses in `benchmarks-conclusion.md`, keeping **only interfaces with an actionable optimization**. Grouped by verification level: landed in-tree and verified against the official harness, prototype-verified, and candidate directions (root cause located, fix not yet prototyped). Interfaces confirmed to have no optimization headroom (`binary_search`, `starts_with`, `Vec::push`, `HashMap::new`, `PeekMut::deref_mut`, `int_log`, memcmp-class paths, `<&mut [u8] as Write>::write` — its −25% on `bench_write_slice` is specific to the harness's `black_box(&wr)` shape and regresses real serialization shapes by 4–7%) are intentionally excluded.
 
 All numbers are native measurements on a HiSilicon aarch64 machine (2.9 GHz, SVE-256); x86 impact is noted per section.
 
@@ -391,6 +391,37 @@ loop {
 
 **Regression surface**: none (all 278 btree tests pass). `for entry in &map` desugars to `next()`, not fold, so the gain only reaches `for_each`/`fold`/`sum`/`count`/`map().collect()`-style consumption; `Range`/`IntoIter`/the `next_back` direction are not done.
 
+### 12. `for` loops over `VecDeque::iter` / `iter_mut` (register rotation from the inlined swap in `next()`) — in-tree prototype verified
+
+**Interface**: `Iter::next`/`next_back` in `library/alloc/src/collections/vec_deque/{iter,iter_mut}.rs` (`for x in &deque`, `while let Some = it.next()`, and every adapter chain driven through `next()`; `fold`/`sum`/`try_fold` have overrides and are unaffected).
+
+**Why it is slow**: when `i1` runs dry, `next()` does `mem::swap(i1, i2)` and retries. Once inlined into a `for` loop, LLVM SROAs the two `slice::Iter`s' 4 words into registers, and the loop-header phis must merge the "not swapped" and "swapped" incoming edges — a register **permutation** that regalloc can only realize by inserting copies on the back-edge: **6 of the 10 instructions** in the hot loop are `mov`s, 2.0 cycles per element (IPC 4.96, branch-miss 0.1% — pure instruction count). `iter().sum()` on the same deque goes through the `fold` override and takes 48 ns — the `for` loop is 14× slower. A `for` over `Chain<slice::Iter, slice::Iter>` has the same disease (683 ns).
+
+**Fix** (in-tree prototype): outline the `None` arm into `#[cold] #[inline(never)] fn next_slow()`, so only `i1`'s `ptr/end` stay live inside the loop and the back-edge carries no copies; `next_back` symmetrically. Zero change to semantics, layout or API.
+
+**Prototype core** (`iter.rs` / `iter_mut.rs`):
+
+```rust
+fn next(&mut self) -> Option<&'a T> {
+    match self.i1.next() { Some(v) => Some(v), None => self.next_slow() }
+}
+#[cold] #[inline(never)]
+fn next_slow(&mut self) -> Option<&'a T> { mem::swap(&mut self.i1, &mut self.i2); self.i1.next() }
+```
+
+**Benchmarks** (`library/alloctests/benches/vec_deque.rs`, 3 interleaved runs; all 187 vec_deque tests pass):
+
+| benchmark | current | prototype | change |
+|---|---:|---:|---:|
+| `bench_iter_1000` | 696 ns | **479–484 ns** | **−31%** (instructions 4.62G→3.29G, hot loop 10→5 insns) |
+| `bench_mut_iter_1000` | 696 ns | **481 ns** | **−31%** |
+| probe `.rev()` contiguous / wrapped | 894 / 907 ns | ~560 | ≈ −37% |
+| `bench_try_fold` | 64–77 ns | 45–52 ns | noise (`try_fold` does not go through `next`) |
+| `bench_into_iter*` (4) | — | −40%…+4% across two builds of the same patch | **pure layout noise**, unusable as a guard |
+| remaining `vec_deque::*` (11) | — | ±1% | flat |
+
+**Follow-up candidate**: represent the second segment as `Option<&[T]>` with a loop-form `next` (probe 357–478 ns, another −25…−35%), but that rewrites every `Iter` method and the `as_slices` semantics. A `for` loop can never reach `sum()`'s 48 ns — the two-segment state machine does not vectorize; use `fold`/`sum`/`as_slices` for speed. x86: same mechanism (IR-level phi permutation), not measured.
+
 ---
 
 ## Tier 3: Candidate directions (root cause located, fix not prototyped)
@@ -521,3 +552,4 @@ select cost = csel_latency + (cmp → csel → address → load) chain on the cr
 | `u8::is_ascii_*` / `[u8]::is_ascii` | `ascii::*::is_ascii_*` + `ascii::is_ascii::*` (80, **all invalid**) | fix bench first (three-layer breakage located) |
 | `BTreeMap` in-node search (integer keys) | `btree::{map,set}::clone_*_and_remove_half`, `range_included_*`, `find_*`, `insert_*`; regressions: `set::difference_*`, `intersection_*`, `range_included_unbounded` | **prototype-verified** (remove_half −36%, range −48%; `difference_random` +89% to fix) |
 | `BTreeMap::IntoIter` drop | `btree::{map,set}::clone_*`, `from_iter_seq_*` (baseline side) | **prototype-verified** (clone −57…−66%, no regressions) |
+| `for` over `VecDeque::iter[_mut]` (`next()`) | `vec_deque::bench_{iter,mut_iter}_1000` (`into_iter*`/`try_fold` are layout noise) | **prototype-verified** (−31%, zero semantic change) |

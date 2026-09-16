@@ -3593,3 +3593,182 @@ $BIN --bench 'skip'
 # 同碼驗證:objdump -d $BIN 取兩符號,地址歸一化後 diff(本章 sed/awk 流程)
 # 探針:/tmp/btree_bench/probe_skipwhile.rs(Range 三體制+asm)、probe_sw_slice.rs(切片內層)
 ```
+
+# `io::bench_write_slice`:`min(data.len(), self.len())` 令 128B 拷貝退化為 `memcpy@plt` 調用——但只在 harness 的 `black_box(&wr)` 形態下發生,真實形態零收益
+
+- 日期:2026-09-15
+- 分析對象:`library/alloctests/benches/io.rs` 的 `bench_write_slice`(`&mut [u8; 1024]` 切片上 8 次 `write_all(&[u8; 128])`,每次之間 `black_box(&wr)`)
+- 基線:**33.8–34.0 ns/iter**(6 次交錯複測;偶發 38.7 為佈局噪聲)。對照 `bench_read_slice` 16.0 ns——同樣 8×128 B,讀比寫快 2.1×
+- 實現:`library/core/src/io/impls.rs` 的 `impl Write for &mut [u8]`
+
+## perf 畫像:74.7% 在 libc `__memcpy_generic`
+
+| 符號 | 佔比 |
+|---|---:|
+| `libc.so.6 __memcpy_generic` | 74.7% |
+| bench 閉包本體(`ns_iter_inner::<bench_write_slice>`) | 23.1% |
+| `memcpy@plt` | 1.9% |
+
+閉包彙編:第 1 次 `write_all` 被完全內聯成 `ldp/stp q` 直線拷貝(`wr` 初始長度 1024 為編譯期已知);之後 **7 次全是 `bl memcpy@plt`**,每次前面一段 `ldp x0,x8,[sp,#24]; cmp x8,#0x80; csel x2,x8,x26,cc`——即 `min(128, wr.len())` 用 `csel` 算出動態長度後交給 libc。指令 2.07G/run,IPC 3.05,分支失誤 0.01%:完全是 call 開銷 + libc memcpy 的通用入口分派,不是微架構事件。
+
+**根因**:`black_box(&wr)` 迫使 `wr` 每輪落棧重載,LLVM 失去 `wr.len()` 的常量;`write` 用 `cmp::min(data.len(), self.len())` 算拷貝長度,結果 `data.len() = 128` 這個常量被 `min` 混成動態值,`copy_from_slice` 無法內聯成定長拷貝,只能發 `memcpy` 調用。`read` 側沒這個問題純屬巧合:`bench_read_slice` 的 `black_box(&dst)` 攔的是目標緩衝而不是 `rd`,`rd` 的長度鏈 1024→896→… 仍可推導,8 次全內聯(見本文件首章)。把 read bench 改成 `black_box(&rd)` 立刻變 36 ns——**兩個 bench 的差距是 black_box 放的位置,不是 read/write 實現的差距**。
+
+## 原型:分支形 write/write_all,fits 路徑用 `data.len()` 拷貝
+
+```rust
+fn write(&mut self, data: &[u8]) -> io::Result<usize> {
+    if data.len() <= self.len() {             // 常見路徑:長度用 data.len(),調用點常量可內聯
+        let (a, b) = mem::take(self).split_at_mut(data.len());
+        a.copy_from_slice(data); *self = b; Ok(data.len())
+    } else {                                   // 短寫:拷滿剩餘
+        let amt = self.len();
+        mem::take(self).copy_from_slice(&data[..amt]); Ok(amt)
+    }
+}
+// write_all 同構,else 分支直接 Err(WRITE_ALL_EOF),省掉中間 usize
+```
+
+官方 harness:**34.0 → 25.4–26.2 ns(−25%)**,perf 中 7 個 `memcpy@plt` 調用點採樣全為 0(冷的 else 分支),8 次拷貝全部內聯成 `stp q2,q3` 鏈;IPC 3.05→1.64(內聯後變成 store-bound,這是正常的)。alloctests io 132 項 + coretests io 167 項全過。
+
+## 但真實形態下零收益甚至微退(決定性實驗)
+
+同一段實現放進 `#[inline(never)]` 函數,換掉 harness 的兩個人工條件(`src` 長度常量 128、`black_box(&wr)` 抹掉 `wr` 長度):
+
+| 形態 | 現狀 | 分支形 | 變化 |
+|---|---:|---:|---:|
+| 官方形態(const 128 + `black_box(&wr)`) | 30.8 ns | 27.4 ns | −11% |
+| const 128 ×8,無 black_box | 24.5 | 26.3 | **+7%** |
+| 運行時長度 128 ×8 | 24.5 | 26.2 | **+7%** |
+| 運行時長度 16 ×8 | 15.2 | 15.5 | +2% |
+| 運行時長度 4096 ×8(短寫路徑) | 37.4 | 37.7 | 持平 |
+| 單次 write,運行時長度 128 | 4.6 | 4.6 | 持平 |
+| 序列化:1000× `write_all(&u64.to_le_bytes())` | 2436 ns | 2426 ns | 持平(兩者都已內聯 8B 拷貝) |
+| 序列化:1000× 記錄(u32+u64+u16 三次 write) | 9700 ns | 10058 ns | **+4%** |
+
+- 沒有 `black_box(&wr)` 時,現狀實現本來就能推導 `wr` 長度而全內聯——分支形反而多一條 `cmp/b.ls`,+7%;
+- 運行時長度的資料兩者都得走 `memcpy`,分支形多的比較純屬開銷;
+- 小常量寫(序列化最常見)在現狀下 LLVM 已把 `min(8, len)` 的 memcpy 展開成內聯 8B 拷貝,分支形沒東西可省,記錄形態還因分支密度變高退 4%。
+
+只有「**常量長度 ≥ 數十字節 + 目標切片長度對編譯器不可見**」這一窄形態受益,而這恰好是 harness 用 `black_box(&wr)` 人工製造的。混合形 D(`amt = min(...)`,`if amt == data.len() { copy(data) }`)也試過:官方 bench 上 32.8/34.1 ns 與現狀在噪聲內——LLVM 把兩個分支的 memcpy 合併回一個動態長度調用,等於白改。
+
+## 附帶發現:`bench_write_vec` 測的是錯誤路徑
+
+`let mut buf = Vec::with_capacity(1024); let mut wr = &mut buf[..];`——`with_capacity` 的 `len` 是 0,`wr` 是**空切片**,8 次 `write_all` 全部立即返回 `WriteZero` 錯誤。25.5 ns 測的是 8 次錯誤構造 + 丟棄,與拷貝無關(原型前後 25.54/25.55 ns 分毫不動即為證據)。要測 `Vec` 就該直接 `buf.write_all(&src)` 走 `impl Write for Vec<u8>`,或 `vec![0; 1024]`。
+
+## 判斷
+
+1. `<&mut [u8] as Write>::write` 現實現已是最優:在編譯器能看到長度的地方全內聯,看不到的地方 `memcpy` 是正確選擇。**不建議落地分支形**——官方 bench 的 −25% 換來真實序列化形態的 +4–7%。
+2. `bench_write_slice` 相對 `bench_read_slice` 慢 2.1× 不是 write 慢,是 `black_box` 擋在不同位置。若要兩者可比,read 側應同樣 `black_box(&rd)`(實測 36 ns,與 write 同級),或 write 側改 `black_box(&buf)`。
+3. `bench_write_vec` 是失效 bench,應修。
+4. x86:同機理(`min` → 動態長度 → `call memcpy`),分支形在 x86 也會有同樣的「bench 贏、真實輸」,無需另測。
+
+## 復現
+
+```bash
+BIN=build/.../allocbenches-2cf0e8badf7482bf
+$BIN --bench 'io::'
+perf record $BIN --bench io::bench_write_slice   # 74.7% __memcpy_generic;閉包內 7× bl memcpy@plt
+# 原型:core/src/io/impls.rs 的 write/write_all 改分支形(未提交,已回退);原型二進位 /tmp/btree_bench/io_pat/
+# 探針:/tmp/btree_bench/probe_io/probe{,2,3,4,5}.rs(官方形態/無 black_box/運行時長度/混合形 D/序列化)
+```
+
+# `vec_deque::bench_iter_1000` / `bench_mut_iter_1000`:`Iter::next` 內聯的 `mem::swap(i1, i2)` 把 `for` 迴圈變成雙狀態機,每元素 6 條 `mov` 暫存器輪轉——外聯 swap 即 −31%
+
+- 日期:2026-09-15
+- 分析對象:`library/alloctests/benches/vec_deque.rs` 的 `bench_iter_1000`(`for &i in &ring { sum += i }`,1000 個 i32,連續佈局)與 `bench_mut_iter_1000`(同形 `iter_mut`);順帶 `bench_try_fold`、`bench_into_iter*`
+- 基線:**695.9 ns**(iter)/ **696.0 ns**(mut),3 次交錯複測 ±0.3;`bench_try_fold` 64–77 ns(噪聲大);對照 `ring.iter().sum()` 48 ns、裸切片 `for` 44 ns
+- 實現:`library/alloc/src/collections/vec_deque/{iter,iter_mut}.rs`
+
+## 現象:同一個 deque,`for` 迴圈比 `sum()` 慢 14×
+
+| 消費形態(1000 元素,連續) | ns | 每元素 |
+|---|---:|---:|
+| `for &i in &ring`(bench 原文) | 702.6 | 0.70 ns ≈ 2.0 cycles |
+| `while let Some(&i) = it.next()` | 574.7 | 0.57 |
+| `ring.iter().sum()` / `.fold()` / `.try_fold()` | 48.4 | 0.048(向量化) |
+| `as_slices()` 兩個 `for` | 48.8 | 0.049 |
+| 裸切片 `for`(上限) | 44.3 | 0.044 |
+| `a.iter().chain(b)` 的 `for` | 682.9 | 0.68(同病) |
+
+`fold`/`try_fold` 有覆寫(`i1.fold` 再 `i2.fold`,兩段各自向量化),`for` 走 `next()`。無微架構事件:IPC 4.96,branch-miss 0.10%,4.62G 指令——純指令數。
+
+## 根因:內聯後的 swap 讓迴圈攜帶兩個活躍迭代器
+
+`next()` 現狀:
+
+```rust
+match self.i1.next() { Some(v) => Some(v), None => { mem::swap(&mut self.i1, &mut self.i2); self.i1.next() } }
+```
+
+註釋說 swap 是為了「讓第一個分支儘量常被命中」。但內聯進 `for` 之後,LLVM 把 `(i1.ptr, i1.end, i2.ptr, i2.end)` 全 SROA 成 4 個暫存器,迴圈頭的 phi 要同時合併「未 swap」和「已 swap」兩條入邊——這是一個暫存器**置換**,寄存器分配器只能在回邊上插拷貝。官方二進位的熱迴圈(82.8% 樣本落在 `62d54`):
+
+```asm
+62d38: mov  x0, x13        ; ┐
+       mov  x1, x10        ; │ 6 條 mov:輪轉 i1/i2 的 4 個暫存器
+       mov  x10, x12       ; │
+       ldr  w12, [x11], #4 ; ← 真正的工作:載入 + 步進
+       mov  x13, x0        ; │
+       add  w9, w12, w9    ; ← 累加
+       mov  x12, x10       ; │
+       mov  x10, x1        ; ┘
+       cmp  x11, x12
+       b.ne 62d38
+```
+
+10 條指令做 1 個元素,其中 6 條是搬運。`Chain<slice::Iter, slice::Iter>` 的 `for` 是 682 ns 同病,說明這不是 VecDeque 特有,而是「兩段迭代器在 `next()` 內切換」這一寫法在 `for` 迴圈裡的通病;`fold` 覆寫繞開了它。
+
+## 探針:五種 `next()` 形態(`#[inline(never)] fn run(it) { for &i in it {..} }`,中位數/7,ns)
+
+| 形態 | 連續 (i2 空) | 繞回 524+476 | `.rev()` 連續 / 繞回 |
+|---|---:|---:|---:|
+| S0 現狀(swap 內聯) | 827 | 839 | 894 / 907 |
+| **S1 swap 外聯 `#[cold] #[inline(never)]`** | **545** | **559** | — |
+| S5 第二段改 `Option<&[T]>`,迴圈形 `loop { if let Some = i1.next() {..} i1 = rest.take()?.iter() }` | 357–478* | 388–523* | 705 / 577 |
+| S5c S5 + 切換外聯 | 551 | 547 | — |
+| S6 保留兩個 Iter,迴圈形 + swap/take | 796–822 | 776–816 | 897 / 913 |
+| 裸切片(上限) | 46 | — | — |
+
+\* S5 跨編譯擺動大(357/478/415 三次構建),同一二進位內穩定——微迴圈佈局噪聲,與本文件多章一致。
+
+S1 的機理:None 臂變成一個不內聯的 call,迴圈體內只剩 i1 的 `ptr/end` 兩個活躍值,回邊無拷貝。S6 證明「迴圈形」本身沒用,關鍵是把置換移出迴圈體。S5 更快是因為第二段只剩一個 `Option<&[T]>`(2 字 + 判空),迴圈只需保活 3 個暫存器;但它改變 `Iter` 佈局,`as_slices`/`advance_by`/`rfold`/`__iterator_get_unchecked`/`len` 全要重寫,`next_back` 在 rest 側要用 `split_last` 收縮——工程量與風險都是另一量級。
+
+## 樹內原型(S1,`iter.rs` + `iter_mut.rs`,各 +25/−18 行)
+
+```rust
+fn next(&mut self) -> Option<&'a T> {
+    match self.i1.next() { Some(val) => Some(val), None => self.next_slow() }
+}
+#[cold] #[inline(never)]
+fn next_slow(&mut self) -> Option<&'a T> { mem::swap(&mut self.i1, &mut self.i2); self.i1.next() }
+// next_back / next_back_slow 對稱
+```
+
+官方 harness(`./x bench library/alloctests --stage 1`,3 次交錯):
+
+| benchmark | 現狀 | S1 | 變化 |
+|---|---:|---:|---:|
+| `vec_deque::bench_iter_1000` | 695.9 ns | **479–484 ns** | **−31%**(指令 4.62G→3.29G) |
+| `vec_deque::bench_mut_iter_1000` | 696.0 ns | **481 ns** | **−31%** |
+| `vec_deque::bench_try_fold` | 64–77 ns | 45–52 ns | 噪聲大;`try_fold` 有覆寫不經 `next`,差異為佈局 |
+| `vec_deque::bench_into_iter{,_fold,_try_fold,_next_chunk}` | 2.89 µs / 687 / 713 / 975 ns | 同構建 A:2.88/718/**429**/**702**;構建 B:2.93/687/708/977 | **純佈局噪聲**——`IntoIter` 不經 `Iter`,兩次構建同一補丁擺動 −40%…+4% |
+| 其餘 `vec_deque::*`(extend/grow/from_array,11 項) | — | ±1% | 持平 |
+
+vec_deque 測試 56+116+15 全過。熱迴圈變成 `ldr; add; add; cmp; b.ne`(5 條),82% 樣本在 `b.ne`。
+
+## 判斷
+
+1. 落地建議:**S1 直接可落地**——語義零改動、佈局零改動、兩個文件各改十幾行,`for`/`while let` 形態 −31%,`.rev()` 同理受益(探針 894→~560 級)。
+2. S5 是後續候選(再 −25…−35%),需要重寫 `Iter`/`IterMut` 全部方法,且 `as_slices()`(unstable API)語義要重新定義 rest 側。
+3. `bench_into_iter*` 四項對佈局極敏感(同補丁兩次構建 −40%…+4%),不能作為 `IntoIter` 的回歸守衛;`bench_try_fold` 同樣噪聲 ±20%。
+4. x86:置換拷貝發生在 LLVM IR phi/regalloc 層,與目標無關,預期同樣受益(本機無 x86 sysroot,未實測)。
+5. `for` 迴圈永遠到不了 `sum()` 的 48 ns——那需要 LLVM 把雙段狀態機拆成兩個連續迴圈(loop unswitching on iterator state),不現實;想要向量化就用 `fold`/`sum`/`as_slices`。
+
+## 復現
+
+```bash
+BIN=build/.../allocbenches-2cf0e8badf7482bf
+$BIN --bench 'vec_deque::bench_iter_1000'
+perf record $BIN --bench vec_deque::bench_iter_1000   # 82.8% 在迴圈末尾 mov,6 mov/元素
+# 原型:vec_deque/{iter,iter_mut}.rs 的 next/next_back 外聯 None 臂(工作樹,未提交);二進位 /tmp/btree_bench/vd_s1/
+# 探針:/tmp/btree_bench/probe_vd/{probe,shapes,shapes2,shapes3,shapes4,noise,intoiter}.rs
+```

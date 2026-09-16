@@ -20,6 +20,29 @@ impl<'a, T> IterMut<'a, T> {
         Self { i1, i2 }
     }
 
+    // Most of the time, the iterator will either always call next(), or
+    // always call next_back(). By swapping the iterators once the first one
+    // is empty, we ensure that the fast path is taken as often as possible,
+    // without sacrificing correctness, as i1 is empty anyways.
+    //
+    // Kept out of line: when the swap is inlined into a `for` loop, LLVM
+    // turns the loop into a two-state machine that keeps both slice
+    // iterators live and rotates their registers on every iteration
+    // (6 extra `mov`s per element on AArch64).
+    #[cold]
+    #[inline(never)]
+    fn next_slow(&mut self) -> Option<&'a mut T> {
+        mem::swap(&mut self.i1, &mut self.i2);
+        self.i1.next()
+    }
+
+    #[cold]
+    #[inline(never)]
+    fn next_back_slow(&mut self) -> Option<&'a mut T> {
+        mem::swap(&mut self.i1, &mut self.i2);
+        self.i2.next_back()
+    }
+
     /// Views the underlying data as a pair of subslices of the original data.
     ///
     /// The slices contain, in order, the contents of the deque not yet yielded
@@ -157,15 +180,7 @@ impl<'a, T> Iterator for IterMut<'a, T> {
     fn next(&mut self) -> Option<&'a mut T> {
         match self.i1.next() {
             Some(val) => Some(val),
-            None => {
-                // most of the time, the iterator will either always
-                // call next(), or always call next_back(). By swapping
-                // the iterators once the first one is empty, we ensure
-                // that the first branch is taken as often as possible,
-                // without sacrificing correctness, as i1 is empty anyways
-                mem::swap(&mut self.i1, &mut self.i2);
-                self.i1.next()
-            }
+            None => self.next_slow(),
         }
     }
 
@@ -228,15 +243,7 @@ impl<'a, T> DoubleEndedIterator for IterMut<'a, T> {
     fn next_back(&mut self) -> Option<&'a mut T> {
         match self.i2.next_back() {
             Some(val) => Some(val),
-            None => {
-                // most of the time, the iterator will either always
-                // call next(), or always call next_back(). By swapping
-                // the iterators once the first one is empty, we ensure
-                // that the first branch is taken as often as possible,
-                // without sacrificing correctness, as i2 is empty anyways
-                mem::swap(&mut self.i1, &mut self.i2);
-                self.i2.next_back()
-            }
+            None => self.next_back_slow(),
         }
     }
 

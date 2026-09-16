@@ -20,6 +20,39 @@ Rust Foundation 在 RustConf 2026 开幕致辞中宣布，NVIDIA 与 Solana Foun
 
 目前**没有证据**显示 NVIDIA 员工已进入 rust-lang 官方 Core Team / Lang Team / Compiler Team 等决策团队。
 
+### cuTile Rust 的设计与路线图
+
+**核心定位**：基于 tile（分块）的安全、地道（idiomatic）GPU 内核编写系统，是《Fearless Concurrency on the GPU》论文的实现成果，也是 cutile-rs 库的技术基础。
+
+**编程模型**
+- Tile 是不可变、固定大小的数组类值：从内存中的张量（tensor）加载数据产生一个 tile；对 tile 的操作产生新的 tile；写回（store）操作针对内存中的可变子张量
+- 内核 = 一组 tile 程序的网格（grid），每个 tile 程序被建模为对数据 tile 进行操作的单一逻辑执行线程
+- 多输出场景下，cuTile Rust 提供"带标记的分区索引"（branded partition indices）和有界维度迭代器，让前端能够证明常见的分区访问是有界且互不相交的
+
+**所有权与安全设计（核心创新）**
+- 把 Rust 的所有权规则跨越 GPU launch 边界延伸：可变张量在 launch 前被划分为互不相交的若干块，不可变张量被共享，生成的 launcher 在 GPU 任务执行期间保持所有权
+- 每个 tile 程序获得对自己内存的独占 `&mut` 视图，加上作为共享引用的输入
+- `#[cutile::module]` 宏是实现核心：把函数转换为 GPU 内核，同时生成 host 端 launcher；host 代码构造惰性的张量操作，把可变输出分块，调用 `.sync()` 才真正 JIT 编译并执行
+- 编译期由 Rust 借用检查器本身强制检查：把 kernel 的输出 buffer 又作为自己的输入传入会触发 `E0502`（cannot borrow as mutable because it is also borrowed as immutable），Tile 侧对应的别名问题则触发 `E0382`（use of moved value）
+- 与此前 GPU-Rust 尝试的根本区别：以往方案把要编译的内核当作 unsafe 代码处理，而 cuTile Rust 让 host 和 device 两端代码都能享受 Rust 的所有权保证
+
+**Host 端执行模型（可组合）**
+- 生成的 launcher 接管所有张量的所有权，GPU 计算完成后再归还；调用链中的所有操作只是记录下来，直到调用 `.sync_on(&stream)` 才真正触发编译执行
+- 涵盖三种执行方式：同步 launch、异步流水线（asynchronous pipelines）、CUDA graph 重放（replay）
+- 效果：给 Rust 程序员提供所有权检查过的张量句柄、异步内核启动，以及一套防止设备指针逃逸出其生命周期的 host API
+
+**性能数据（NVIDIA B200 GPU）**
+- 逐元素运算：7 TB/s；GEMM：2 PFlop/s（cuBLAS 性能的 96%），与 cuTile Python 持平
+- 安全性几乎不带来可测量的运行时开销：安全 Rust 持久化 GEMM 在 M=N=K=8192 时达到 2.07 PFlop/s（B200 密集 f16 峰值的 92%），与底层 Tile IR 版本相差仅 0.3%
+
+**实际验证：Grout 推理引擎**
+与 Hugging Face 合作构建的 Grout（基于 cuTile Rust 的 Qwen3 推理引擎）：Qwen3-4B 在 RTX 5090 上 batch-1 解码达 171 tokens/s，Qwen3-32B 在 B200 上达 82 tokens/s。
+
+**路线图与近期进展**
+- v0.2.0 已发布：新增 CUDA 13.3 低精度支持（NVFP4 打包/解包、块缩放矩阵乘法），新增 `cutile-kernels`（可复用推理算子库）
+- 硬件/环境要求：compute capability 8.0+、CUDA 13.3、stable Rust 1.89+（无需 nightly、无需自定义 LLVM）、Linux
+- 作为 NVIDIA "CUDA Rust" 整体计划的一部分，与偏底层的 cuda-oxide（SIMT 路线）并行发展，NVIDIA 计划持续打磨两条路线直到 2027 年及以后
+
 ---
 
 ## 二、NVIDIA 自己的 Rust 生态
@@ -95,6 +128,42 @@ NVIDIA 目前公开招聘多个 Rust 岗位，包括专门的 **Senior Software 
 
 ---
 
+## 四、白金会员的官方目的声明与配套动作
+
+### 4.1 官方声明
+
+**NVIDIA 自身在 Rust Foundation 官网的会员声明**：
+
+> "NVIDIA is committed to open source and the communities that make technology more trustworthy, customizable and accessible. Our contributions include open models, datasets, training recipes, safety resources, software, standards, benchmarks and community collaborations. NVIDIA supports the Rust community as part of this broader commitment to open source software."
+
+这段表态较为**通用/公关化**，套用 NVIDIA 对多个开源基金会的一贯话术模板，并非专门为 Rust 定制。
+
+**更具体的动机**：据报道，NVIDIA 承诺让 Rust 开发者能够在其**整个 CUDA 平台（从 CPU 到 GPU）**上构建应用；白金会员资格是这一承诺的一部分，同时包含**投入专职工程资源与社区合作推进新项目**。
+
+**Rust Foundation 一方**：执行董事 Dr. Rebecca Rumbul 表示，NVIDIA 的加入标志着一个重要时刻，因为 Rust 在编排现代 AI 基础设施核心的 GPU 加速工作负载中扮演着越来越重要的角色；像 NVIDIA 这种规模和地位的组织提供白金会员资格，增强了基金会投资于 Rust 语言本身、工具链、以及开发者群体的能力。
+
+### 4.2 "CPU 到 GPU 全平台支持 Rust" 目标的配套动作核查
+
+| CUDA 全平台环节 | 目标声明中的范围 | 当前配套动作 | 官方 vs 社区 |
+|---|---|---|---|
+| GPU 内核编写 | GPU | cuda-oxide、cutile-rs | NVIDIA 官方 |
+| Host 端 CCCL（CUDA Core Compute Libraries）绑定 | CPU | 招聘 "Senior Software Engineer, CUDA Rust Core Libraries"，筹备官方 Rust API | NVIDIA 官方（筹备中，尚未发布） |
+| Host 端 driver / cuBLAS / cuBLASLt / cuRAND / cuFFT / cuDNN / cuSPARSE / cuSOLVER / NCCL / NVRTC / CUPTI / NVTX 等库绑定 | CPU | `cudarc` crate（覆盖上述几乎全部库，分三层：sys FFI / result / safe API） | 社区维护，非 NVIDIA 官方发布，但被 cuda-oxide/cutile-rs 的 host 运行时设计为可互操作 |
+| 驱动/系统层 | 系统 | Nova Linux 驱动（nova-core + DRM 层，目标取代 Nouveau） | NVIDIA 官方 |
+| AI 推理框架 | 应用层 | Dynamo（Rust 核心）、Grout（基于 cuTile Rust，与 Hugging Face 合作） | NVIDIA 官方 |
+
+**具体细节**：
+
+- **CCCL 官方 Rust 绑定筹备中**：招聘描述写明,该职位要"为 CUDA Core Libraries 开发 Rust 体验",设计安全、地道的 Rust API 做 GPU 计算,同时与原生 C/C++ 组件紧密集成。这说明 NVIDIA 打算亲自下场做 CCCL(Thrust/CUB/libcudacxx)的官方 Rust 绑定层,而目前 NVIDIA/cccl 官方仓库本身**仍只服务 C++**,尚无官方 Rust 支持。
+- **`cudarc` 是事实标准，但非官方**：搜索未发现 NVIDIA 官方发布的 CUDA/cuBLAS/cuDNN/NCCL Rust 绑定；社区维护的 `cudarc` crate 是当前 Rust GPU 计算生态事实上的标准 host 端库，版本覆盖 CUDA 11.4-13.3、cuDNN 8.9.7-9.21.1、NCCL 2.22-2.30。
+- **生态互操作信号**：cuda-oxide 的 host 端运行时（`cuda-core`，与 cutile-rs 共享）被设计为与 `cudarc` 的 launch 宏兼容——cuda-oxide 产生的 PTX 是可移植的，不依赖 cuda-oxide 全栈的项目也可以直接用 `cudarc` 启动，说明 NVIDIA 有意识地对接既有社区工具而非排斥。
+
+### 4.3 结论
+
+"CPU 到 GPU 全平台支持 Rust"这句承诺，**GPU 内核编写、驱动层、推理框架层已有实质产品落地**；但 **CPU 侧的官方核心库（CCCL）绑定目前仍处于"招聘筹备"阶段，尚未正式发布**，这块空白目前仍由社区的 `cudarc` 顶着。整体来看，NVIDIA 的白金会员声明与实际动作基本吻合，但"全平台"覆盖尚未完全兑现。
+
+---
+
 ## 参考来源
 
 - [Rust Foundation Announces Solana Foundation and NVIDIA as Platinum Members](https://rustfoundation.org/media/rust-foundation-announces-solana-foundation-and-nvidia-as-platinum-members/)
@@ -119,3 +188,10 @@ NVIDIA 目前公开招聘多个 Rust 岗位，包括专门的 **Senior Software 
 - [rustc-dev-guide: gpu-target notification group](https://rustc-dev-guide.rust-lang.org/notification-groups/gpu-target.html)
 - [NVIDIA CUDA Tile](https://developer.nvidia.com/cuda/tile)
 - [GitHub - NVIDIA/cutile-python](https://github.com/nvidia/cutile-python)
+- [GitHub - NVlabs/cutile-rs](https://github.com/nvlabs/cutile-rs)
+- [96% of cuBLAS, no `unsafe`: what cuTile Rust proves - DEV Community](https://dev.to/creeta/96-of-cublas-no-unsafe-what-cutile-rust-proves-4ldp)
+- [cuTile Rust v0.2.0 — NVIDIA Labs ships NVFP4 GPU support | AI/TLDR](https://ai-tldr.dev/releases/nvidia-cutile-rs-v0-2-0/)
+- [The Rust + GPU Ecosystem — cuda-oxide docs](https://nvlabs.github.io/cuda-oxide/appendix/ecosystem.html)
+- [cudarc - Rust (docs.rs)](https://docs.rs/cudarc/latest/cudarc/)
+- [GitHub - NVIDIA/cccl: CUDA Core Compute Libraries](https://github.com/NVIDIA/cccl)
+- [The Rust Foundation - Official Members Page](https://rustfoundation.org/)

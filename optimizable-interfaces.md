@@ -1,6 +1,6 @@
 # 可優化接口總結
 
-從 `benchmarks-conclusion.md` 的全部分析中,只保留**存在可行優化**的接口。按驗證程度分三層:已落地並通過官方 harness、原型已實測驗證、候選方向(未原型化)。已確認無優化空間的接口(`binary_search`、`starts_with`、`Vec::push`、`HashMap::new`、`PeekMut::deref_mut`、`int_log`、`memcmp` 類)不在此列。
+從 `benchmarks-conclusion.md` 的全部分析中,只保留**存在可行優化**的接口。按驗證程度分三層:已落地並通過官方 harness、原型已實測驗證、候選方向(未原型化)。已確認無優化空間的接口(`binary_search`、`starts_with`、`Vec::push`、`HashMap::new`、`PeekMut::deref_mut`、`int_log`、`memcmp` 類、`<&mut [u8] as Write>::write`——其 `bench_write_slice` 的 −25% 為 harness `black_box(&wr)` 形態特有,真實序列化形態 +4–7% 回退)不在此列。
 
 所有數據均為本機 HiSilicon aarch64(2.9 GHz,SVE-256)實測;x86 影響已在各節單獨標註。
 
@@ -391,6 +391,37 @@ loop {
 
 **回退面**:無(btree 測試 278 項全過)。`for entry in &map` 這種 `for` 迴圈語法糖不經 fold,收益僅惠及 `for_each`/`fold`/`sum`/`count`/`map().collect()` 類消費;`Range`/`IntoIter`/`next_back` 方向未做。
 
+### 12. `VecDeque::iter` / `iter_mut` 的 `for` 迴圈(`next()` 內聯 swap 的暫存器輪轉)——樹內原型已驗證
+
+**接口**:`library/alloc/src/collections/vec_deque/{iter,iter_mut}.rs` 的 `Iter::next`/`next_back`(`for x in &deque`、`while let Some = it.next()`、所有經 `next()` 的 adapter 鏈全部經此;`fold`/`sum`/`try_fold` 有覆寫不受影響)。
+
+**慢的原因**:`next()` 在 `i1` 耗盡時 `mem::swap(i1, i2)` 再取——內聯進 `for` 後,LLVM 把兩個 `slice::Iter` 的 4 個字全 SROA 進暫存器,迴圈頭 phi 要合併「未 swap/已 swap」兩條入邊,這是暫存器**置換**,regalloc 只能在回邊插拷貝:熱迴圈 10 條指令裡 **6 條是 `mov`**,每元素 2.0 cycles(IPC 4.96、branch-miss 0.1%,純指令數)。同一 deque 的 `iter().sum()` 走 `fold` 覆寫只要 48 ns——`for` 比它慢 14×。`Chain<slice::Iter, slice::Iter>` 的 `for` 同病(683 ns)。
+
+**優化方法**(樹內原型):把 None 臂外聯成 `#[cold] #[inline(never)] fn next_slow()`,迴圈體內只剩 `i1` 的 `ptr/end` 活躍,回邊無拷貝;`next_back` 對稱。語義、佈局、API 零改動。
+
+**原型核心**(`iter.rs` / `iter_mut.rs`):
+
+```rust
+fn next(&mut self) -> Option<&'a T> {
+    match self.i1.next() { Some(v) => Some(v), None => self.next_slow() }
+}
+#[cold] #[inline(never)]
+fn next_slow(&mut self) -> Option<&'a T> { mem::swap(&mut self.i1, &mut self.i2); self.i1.next() }
+```
+
+**Benchmarks**(`library/alloctests/benches/vec_deque.rs`,3 次交錯;vec_deque 測試 187 項全過):
+
+| benchmark | 現狀 | 原型 | 變化 |
+|---|---:|---:|---:|
+| `bench_iter_1000` | 696 ns | **479–484 ns** | **−31%**(指令 4.62G→3.29G,熱迴圈 10→5 條) |
+| `bench_mut_iter_1000` | 696 ns | **481 ns** | **−31%** |
+| 探針 `.rev()` 連續/繞回 | 894 / 907 ns | ~560 級 | ≈ −37% |
+| `bench_try_fold` | 64–77 ns | 45–52 ns | 噪聲(`try_fold` 不經 `next`) |
+| `bench_into_iter*`(4 項) | — | 同補丁兩次構建 −40%…+4% | **純佈局噪聲**,不可作守衛 |
+| 其餘 `vec_deque::*`(11 項) | — | ±1% | 持平 |
+
+**後續候選**:第二段改成 `Option<&[T]>` + 迴圈形 `next`(探針 357–478 ns,再 −25…−35%),但要重寫 `Iter` 全部方法與 `as_slices` 語義。`for` 到不了 `sum()` 的 48 ns——雙段狀態機無法向量化,要快就用 `fold`/`sum`/`as_slices`。x86 同機理(IR 層 phi 置換),未實測。
+
 ---
 
 ## 三、候選方向(根因已定位,修復未原型化)
@@ -509,3 +540,4 @@ select cost = csel 延遲 + (cmp → csel → address → load) 佔據關鍵路�
 | `u8::is_ascii_*` / `[u8]::is_ascii` | `ascii::*::is_ascii_*` + `ascii::is_ascii::*`(80 項,**全部無效**) | 先修 bench(三層失效已定位) |
 | `BTreeMap` 節點內搜索(整數鍵) | `btree::{map,set}::clone_*_and_remove_half`、`range_included_*`、`find_*`、`insert_*`;回退:`set::difference_*`、`intersection_*`、`range_included_unbounded` | **原型驗證**(remove_half −36%、range −48%;`difference_random` +89% 待修) |
 | `BTreeMap::IntoIter` drop | `btree::{map,set}::clone_*`、`from_iter_seq_*`(基線端) | **原型驗證**(clone −57…−66%,無回退) |
+| `VecDeque::iter[_mut]` 的 `for`(`next()`) | `vec_deque::bench_{iter,mut_iter}_1000`(`into_iter*`/`try_fold` 為佈局噪聲) | **原型驗證**(−31%,零語義改動) |
