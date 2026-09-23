@@ -1817,6 +1817,70 @@ impl<'a, K, V> Handle<NodeRef<marker::Mut<'a>, K, V, marker::LeafOrInternal>, ma
     }
 }
 
+impl<'a, K: 'a, V: 'a, Type> NodeRef<marker::Immut<'a>, K, V, Type> {
+    /// Returns slices of keys and values starting at `idx`, containing at most
+    /// `length` kvs.
+    ///
+    /// # Safety
+    ///
+    /// - `idx <= self.len()`
+    /// - Keys and values in `idx..idx + min(length, self.len() - idx)` must be initialized.
+    pub(super) unsafe fn key_and_value_slices_from(
+        &self,
+        idx: usize,
+        length: usize,
+    ) -> (&'a [K], &'a [V]) {
+        let take = core::cmp::min(length, self.len() - idx);
+        let leaf = Self::as_leaf_ptr(self);
+        // SAFETY: `idx <= self.len()` is guaranteed by the caller.
+        let keys = unsafe { (&raw const (*leaf).keys).cast::<MaybeUninit<K>>().add(idx) };
+        // SAFETY: `idx <= self.len()` is guaranteed by the caller.
+        let vals = unsafe { (&raw const (*leaf).vals).cast::<MaybeUninit<V>>().add(idx) };
+
+        // SAFETY: The caller guarantees that the `take` elements starting at
+        // `idx` are initialized.
+        unsafe {
+            (
+                core::slice::from_raw_parts(keys, take).assume_init_ref(),
+                core::slice::from_raw_parts(vals, take).assume_init_ref(),
+            )
+        }
+    }
+}
+
+impl<'a, K: 'a, V: 'a, Type> NodeRef<marker::ValMut<'a>, K, V, Type> {
+    /// Returns slices of keys and values starting at `idx`, containing at most
+    /// `length` kvs.
+    ///
+    /// # Safety
+    ///
+    /// - `idx <= self.len()`
+    /// - Keys and values in `idx..idx + min(length, self.len() - idx)` must be initialized.
+    /// - No other reference may access the values in `idx..idx + min(length, self.len() - idx)`
+    /// for the duration of `'a`.
+    pub(super) unsafe fn key_and_value_slices_from(
+        &self,
+        idx: usize,
+        length: usize,
+    ) -> (&'a [K], &'a mut [V]) {
+        let take = core::cmp::min(length, self.len() - idx);
+        let leaf = Self::as_leaf_ptr(self);
+        // SAFETY: `idx <= self.len()` is guaranteed by the caller.
+        let keys = unsafe { (&raw const (*leaf).keys).cast::<MaybeUninit<K>>().add(idx) };
+        // SAFETY: `idx <= self.len()` is guaranteed by the caller.
+        let vals = unsafe { (&raw mut (*leaf).vals).cast::<MaybeUninit<V>>().add(idx) };
+
+        // SAFETY: The caller guarantees that the `take` elements starting at
+        // `idx` are initialized.
+        unsafe {
+            (
+                core::slice::from_raw_parts(keys, take).assume_init_ref(),
+                core::slice::from_raw_parts_mut(vals, take).assume_init_mut(),
+            )
+        }
+    }
+}
+
 pub(super) enum ForceResult<Leaf, Internal> {
     Leaf(Leaf),
     Internal(Internal),

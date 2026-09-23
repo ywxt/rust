@@ -525,6 +525,56 @@ fn test_iter_mixed() {
 }
 
 #[test]
+fn test_iter_fold_after_mixed_iteration() {
+    for size in [1, node::CAPACITY, MIN_INSERTS_HEIGHT_1, MIN_INSERTS_HEIGHT_2] {
+        let map = BTreeMap::from_iter((0..size).map(|i| (i, i)));
+        let front = size / 3;
+        let back = size / 4;
+        let mut iter = map.iter();
+
+        for i in 0..front {
+            assert_eq!(iter.next(), Some((&i, &i)));
+        }
+        for i in 0..back {
+            let expected = size - i - 1;
+            assert_eq!(iter.next_back(), Some((&expected, &expected)));
+        }
+
+        let folded = iter.fold(Vec::new(), |mut entries, (&key, &value)| {
+            entries.push((key, value));
+            entries
+        });
+        assert_eq!(folded, (front..size - back).map(|i| (i, i)).collect::<Vec<_>>());
+    }
+}
+
+#[test]
+fn test_iter_mut_fold_with_live_refs() {
+    let size = MIN_INSERTS_HEIGHT_2;
+    let mut map = BTreeMap::from_iter((0..size).map(|i| (i, i)));
+    let mut iter = map.iter_mut();
+    let first = iter.next().unwrap().1;
+    let second = iter.next().unwrap().1;
+    let last = iter.next_back().unwrap().1;
+    let second_last = iter.next_back().unwrap().1;
+
+    let middle = iter.fold(Vec::new(), |mut values, (_, value)| {
+        values.push(value);
+        values
+    });
+
+    *first += size;
+    *second += size;
+    for value in middle {
+        *value += size;
+    }
+    *second_last += size;
+    *last += size;
+
+    assert!(map.into_iter().eq((0..size).map(|i| (i, i + size))));
+}
+
+#[test]
 fn test_iter_min_max() {
     let mut a = BTreeMap::new();
     assert_eq!(a.iter().min(), None);

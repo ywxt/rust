@@ -807,3 +807,84 @@ impl<BorrowType: marker::BorrowType, K, V> NodeRef<BorrowType, K, V, marker::Lea
         }
     }
 }
+
+impl<'a, K: 'a, V: 'a> LazyLeafRange<marker::Immut<'a>, K, V> {
+    /// `length`: the remaining number of elements in the range.
+    ///
+    /// # Safety
+    ///
+    /// `length` must not exceed the number of elements remaining in the range.
+    pub(super) unsafe fn fold_unchecked<B, F>(&mut self, mut length: usize, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, (&'a K, &'a V)) -> B,
+    {
+        let mut acc = init;
+        if length == 0 {
+            return acc;
+        }
+
+        let mut edge = *self.init_front().unwrap();
+        loop {
+            let node = edge.into_node();
+            // SAFETY: `idx` comes from `edge`, which belongs to `node`.
+            let (keys, vals) = unsafe { node.key_and_value_slices_from(edge.idx(), length) };
+
+            acc = keys.iter().zip(vals.iter()).fold(acc, &mut f);
+            length -= keys.len();
+            if length == 0 {
+                return acc;
+            }
+            edge = node.last_edge();
+            // SAFETY: `length != 0` guarantees that at least one element remains.
+            let kv_val = unsafe { edge.next_unchecked() };
+            acc = f(acc, kv_val);
+            length -= 1;
+            if length == 0 {
+                return acc;
+            }
+        }
+    }
+}
+
+impl<'a, K: 'a, V: 'a> LazyLeafRange<marker::ValMut<'a>, K, V> {
+    /// Folds the remaining `length` kvs.
+    ///
+    /// # Safety
+    ///
+    /// - `length` must not exceed the number of kvs remaining in the range.
+    /// - Values consumed by the call must not overlap with any values already
+    ///   mutably borrowed from this range.
+    pub(super) unsafe fn fold_unchecked<B, F>(&mut self, mut length: usize, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, (&'a K, &'a mut V)) -> B,
+    {
+        let mut acc = init;
+        if length == 0 {
+            return acc;
+        }
+        // SAFETY: A nonzero valid `length` guarantees that the range is nonempty, so
+        // `init_front()` returns Some. `ptr::read` duplicates the handle, and the tree
+        // is not accessed through that original handle again after this point.
+        let mut edge = unsafe { ptr::read(self.init_front().unwrap()) };
+        loop {
+            let idx = edge.idx();
+            let node = edge.into_node();
+            // SAFETY: `idx` comes from `edge`, which belongs to `node`.
+            let (keys, vals) = unsafe { node.key_and_value_slices_from(idx, length) };
+
+            acc = keys.iter().zip(vals.iter_mut()).fold(acc, &mut f);
+            length -= keys.len();
+            if length == 0 {
+                return acc;
+            }
+            edge = node.last_edge();
+            // SAFETY: `length != 0` guarantees that at least one element remains.
+            let kv = unsafe { edge.next_unchecked() };
+            acc = f(acc, kv);
+            length -= 1;
+            if length == 0 {
+                return acc;
+            }
+        }
+    }
+}

@@ -1765,6 +1765,14 @@ impl<'a, K: 'a, V: 'a> Iterator for Iter<'a, K, V> {
     {
         self.next_back()
     }
+
+    fn fold<B, F>(mut self, init: B, f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        // SAFETY: `self.length` is the number of elements remaining in the range
+        unsafe { self.range.fold_unchecked(self.length, init, f) }
+    }
 }
 
 #[stable(feature = "fused", since = "1.26.0")]
@@ -1844,6 +1852,13 @@ impl<'a, K, V> Iterator for IterMut<'a, K, V> {
         (&'a K, &'a mut V): Ord,
     {
         self.next_back()
+    }
+    fn fold<B, F>(mut self, init: B, f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        // SAFETY: `self.length` is the number of elements remaining in the range
+        unsafe { self.range.fold_unchecked(self.length, init, f) }
     }
 }
 
@@ -2030,6 +2045,13 @@ impl<'a, K, V> Iterator for Keys<'a, K, V> {
     {
         self.next_back()
     }
+
+    fn fold<B, F>(self, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        self.inner.fold(init, |acc, (k, _)| f(acc, k))
+    }
 }
 
 #[stable(feature = "rust1", since = "1.0.0")]
@@ -2087,6 +2109,13 @@ impl<'a, K, V> Iterator for Values<'a, K, V> {
 
     fn last(mut self) -> Option<&'a V> {
         self.next_back()
+    }
+
+    fn fold<B, F>(self, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        self.inner.fold(init, |acc, (_, v)| f(acc, v))
     }
 }
 
@@ -2332,6 +2361,12 @@ impl<'a, K, V> Iterator for ValuesMut<'a, K, V> {
 
     fn last(mut self) -> Option<&'a mut V> {
         self.next_back()
+    }
+    fn fold<B, F>(self, init: B, mut f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        self.inner.fold(init, |acc, (_, v)| f(acc, v))
     }
 }
 
