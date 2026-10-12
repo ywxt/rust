@@ -1,6 +1,6 @@
 # Optimizable Interfaces Summary
 
-Distilled from the full analyses in `benchmarks-conclusion.md`, keeping **only interfaces with an actionable optimization**. Grouped by verification level: landed in-tree and verified against the official harness, prototype-verified, and candidate directions (root cause located, fix not yet prototyped). Interfaces confirmed to have no optimization headroom (`binary_search`, `starts_with`, `Vec::push`, `HashMap::new`, `PeekMut::deref_mut`, `int_log`, memcmp-class paths, `<&mut [u8] as Write>::write` — its −25% on `bench_write_slice` is specific to the harness's `black_box(&wr)` shape and regresses real serialization shapes by 4–7%) are intentionally excluded.
+Distilled from the full analyses in `benchmarks-conclusion.md`, keeping **only interfaces with an actionable optimization**. Grouped by verification level: landed in-tree and verified against the official harness, prototype-verified, and candidate directions (root cause located, fix not yet prototyped). Interfaces confirmed to have no optimization headroom (`binary_search`, `starts_with`, `Vec::push`, `HashMap::new`, `PeekMut::deref_mut`, `int_log`, memcmp-class paths, `<&mut [u8] as Write>::write` — its −25% on `bench_write_slice` is specific to the harness's `black_box(&wr)` shape and regresses real serialization shapes by 4–7%; `Vec` in-place collect — more than half of `bench_in_place_xxu8_*` is glibc malloc/calloc/memset, the loop is already at NEON throughput, and the 83% slower `_i0` is calloc bypassing tcache, and `u128_0100_i0` likewise is 53% `_int_malloc` with the loop at 0.31 ns/element store throughput; `VecDeque::extend(&[T])` — 77% of `bench_extend_bytes` is a 512 B memcpy, bookkeeping is 2 ns; `<dyn Any>::downcast_ref` — its 3.2 ns is one non-devirtualizable vtable call + a 128-bit compare, the compare itself costs 0.02 ns, and the only 0.2 ns of headroom is the AArch64 sret return caused by `TypeId`'s array layout, a compiler-side matter; `FilterMap::next_chunk` — already a branchless compaction loop at 2.4 cycles/element, within 10% of the scan-only floor, `Filter::next_chunk` is the same code and its 17% gap is the inherent 8 B store of `&T` items; `HashSet::difference` / `symmetric_difference` — the former's 91 ns is 10 `contains` calls at SipHash 5.9 + probe 3.7 ns each; the latter's 892 ns comes from scanning both directions, so it costs `|A|+|B|` (110) lookups rather than 10 — both are deliberate HashDoS cost plus semantics, one line of `FxHash` gives −65%; `format!` of short integers — the six `write_u*_{min,max}` benches sit at 51–63 ns, ~73% of which is the allocation chain from an empty-capacity `String` (`malloc`/`finish_grow`/`free`), the rest being fmt dispatch and conversion (same value across types differs by ≤0.8 ns; 1–3 digits by ≤0.6 ns — see the `write_u8_max` chapter); the AArch64 frontend stall is layout-sensitive by 4–5× (the old libstd's 44.8 ns `u64::MAX` is such a case; on every current libstd both types are ~52 ns); `estimated_capacity()=8` is moot now that the gap is gone; `BTreeMap::from_iter` — 65% of `from_iter_rand_10_000` is the generic driftsort at 13.8 ns/element, normal for a comparison sort, `bulk_push` is 5.7 ns/element and 3.3× faster than per-element insert; the `Enumerate`/`Map`/`sum` chain — in `bench_enumerate_ref_sum` the counter is fused into the induction variable, 35% of the 7-instruction loop is `black_box`'s stack round-trip, and ref ≡ value; `uN::deposit_bits`/`extract_bits` with a constant mask — `prepare()` is fully constant-folded, 28 NEON ops per 16 elements is at throughput, the 22% headroom needs mask-structure specialization; unused x86 BMI2 `pdep` / SVE2 `BDEP` is a platform-side lead; forward `str::char_indices().count()` — it is the SWAR `count_chars` at 11 ns, nothing to do; its `_rev` sibling's defect is in `Rev::count`, see §13; `[u8]::make_ascii_uppercase` — `ascii::*::case06_libcore` is already auto-vectorized to 0.029 ns/B, the sibling `case07/08_fake_simd` are hand-written in-bench references that are wrong (FIXME carry bug) and 57% slower, not a std interface; the medium/short tiers are 76–98% `to_vec`; `[u8]::cmp` → `memcmp` — 64% of `sort_unstable_large_strings` is memcmp's entry dispatch for comparisons decided by the first byte on average, but 8 inlined-prefix comparators each regress 5–44% on some of 6 input distributions, memcmp is the robust compromise; `<[T]>::to_vec` — `bench_from_slice_0100`'s 27 ns is malloc/free 12 + memcpy 12 + 2.6 bookkeeping, the `Copy` specialization is already one allocation and one copy; `VecDeque::Iter::try_fold` — `bench_try_fold`'s `Some(a+b)` never short-circuits and is folded into a 4-accumulator NEON reduction at 0.046 ns/element, same code as `sum`) are intentionally excluded.
 
 All numbers are native measurements on a HiSilicon aarch64 machine (2.9 GHz, SVE-256); x86 impact is noted per section.
 
@@ -422,11 +422,584 @@ fn next_slow(&mut self) -> Option<&'a T> { mem::swap(&mut self.i1, &mut self.i2)
 
 **Follow-up candidate**: represent the second segment as `Option<&[T]>` with a loop-form `next` (probe 357–478 ns, another −25…−35%), but that rewrites every `Iter` method and the `as_slices` semantics. A `for` loop can never reach `sum()`'s 48 ns — the two-segment state machine does not vectorize; use `fold`/`sum`/`as_slices` for speed. x86: same mechanism (IR-level phi permutation), not measured.
 
+### 13. `Rev<I>::count` (missing forward `count` forwarding) — in-tree prototype verified
+
+**Interface**: `impl Iterator for Rev<I>` in `library/core/src/iter/adapters/rev.rs` — every `.rev().count()`, most visibly on `str::Chars`/`CharIndices` (which have a SWAR forward `count`).
+
+**Why it is slow**: `Rev` overrides `advance_by→advance_back_by`, `nth→nth_back`, `fold→rfold`, but not `count`; the default `count` goes through `fold`→`rfold` and walks backwards element by element — `Chars`' reverse decode is ~8 instructions + a poorly predicted branch per char, while forward `count_chars` is 0.23 ns/B SWAR. `count()`'s result is direction-independent.
+
+**Fix** (in-tree prototype): `fn count(self) -> usize { self.iter.count() }`. **Landing must use an internal specialization trait**: a blanket forward changes the order of closure side effects in `Rev<Map<..>>` from reverse to forward (`count` is documented as repeated `next`); specializing for pure sources (`Chars`/`CharIndices`/`Bytes`/`slice::Iter`) keeps semantics unchanged.
+
+**Prototype core**:
+
+```rust
+// rev.rs — prototype (blanket); land as SpecRevCount: default → rfold count, pure sources → self.iter.count()
+#[inline]
+fn count(self) -> usize { self.iter.count() }
+```
+
+**Benchmarks** (`library/alloctests/benches/str.rs`; coretests rev/iter 357 + alloctests 113 tests pass):
+
+| benchmark | current | prototype | change |
+|---|---:|---:|---:|
+| `str::char_indicesator_rev` | 34.9 ns | **11.2 ns** | **−68%** |
+| `str::char_iterator_rev` | 48.0 ns | **11.5 ns** | **−76%** |
+| probe `chars().rev().count()` 4 KB | 2165 ns | 239 ns | **9.1×** (= forward) |
+| `str::char_indicesator` / other 5 | 11.3 | 11.4 | flat |
+
+### 16. Serial per-digit multiply-add chain in `from_str_radix(_, 10)` (8-digit SWAR fast path) — in-tree prototype verified
+
+**Interface**: `library/core/src/num/mod.rs::from_ascii_bytes_radix_impl` (`str::parse::<{u32,u64,i32,i64}>()`, `from_str_radix(_, 10)`).
+
+**Why it is slow**: one `result = result * 10 + digit` per digit, a serial dependency chain through a 3–4-cycle `mul` — ~1.3 ns/digit, 25.5 ns for a 19-digit string; perf puts 30% on the `mul`.
+
+**Fix** (in-tree prototype): for `radix == 10`, 32/64-bit types and ≤19 digits, validate and combine 8 digits at a time with SWAR (one check + three multiplications), no per-digit overflow checks (≤19 digits cannot overflow a `u64`), one final MAX compare; >19 digits keep the checked loop.
+
+**Prototype core**:
+
+```rust
+fn parse_8_decimal_digits(chunk: u64) -> Option<u64> {
+    let v = chunk.wrapping_sub(0x3030_3030_3030_3030);
+    if (v | v.wrapping_add(0x7676_7676_7676_7676)) & 0x8080_8080_8080_8080 != 0 { return None; }
+    let v = (v * (1 + (10 << 8)) >> 8) & 0x00FF_00FF_00FF_00FF;
+    let v = (v * (1 + (100 << 16)) >> 16) & 0x0000_FFFF_0000_FFFF;
+    Some(v * (1 + (10000 << 32)) >> 32)
+}
+```
+
+**Benchmarks** (12 032 cases identical to the current implementation; coretests num/parse 1697 + alloctests 34 tests pass):
+
+| input (u64, radix 10) | current | prototype | change |
+|---|---:|---:|---:|
+| 9 digits `987245987` | 8.9 ns | **3.1** | **−65%** |
+| 16 digits | 16.6 | **4.2** | **−75%** |
+| 20 digits `u64::MAX` (original path) | 26.5 | 11.3–31.9 | layout-dependent |
+| 2 / 5 digits / invalid `abc` | 2.5 / 5.0 / 1.6 | 2.2 / 4.0 / 1.3 | −11% / −21% / −18% |
+| official `bench_u64/u32_from_str_radix_10` (mix averaging 2.8 digits) | 26.2 / 24.1 µs | 21.5 / 22.0 | −18% / −9% |
+| the 33 official benches that never take the fast path | — | −27…+7% | **layout noise** (inlining decisions changed) |
+
+**To do before landing**: 8/16-bit types (currently excluded), `u128/i128` accumulation, a CTFE path for `from_le_bytes` under `const fn`; the official 19-string mix averages 2.8 digits and needs long-string inputs to guard this. x86 SWAR is isomorphic.
+
 ---
+
+### 17. BMP printable-block bitmap for `escape_debug_ext` (saves four sparse table lookups per non-ASCII char) — in-tree prototype verified
+
+**Interface**: `library/core/src/char/methods.rs::escape_debug_ext` — reached by `Debug for str`, `Debug for char`, `str::escape_debug()` and `char::escape_debug()`; i.e. every `{:?}` of non-ASCII text.
+
+**Why it is slow**: a non-ASCII char pays four sparse-table lookups (`skip_search`: binary search + prefix-sum scan) — `grapheme_extend` (383 ranges), `default_ignorable` (17), `cf` (21), `cn_planes_0_3` (730). **85%** of `str::debug::mostly_unicode`'s samples land in those four; a single `escape_debug().len()` costs **51.2 ns**.
+
+**Fix** (in-tree prototype): a 128 B `[u64; 16]` bitmap, one bit per 64-codepoint BMP block meaning "every char in the block is printable", computed under the strictest `escape_grapheme_extender: true` so it is also valid for `false`. A hit short-circuits all four lookups; `impl Debug for str` additionally consults it to skip constructing an `EscapeDebug` at all.
+
+**Prototype core**:
+
+```rust
+#[inline]
+pub(crate) fn is_printable_block(self) -> bool {
+    let u = self as u32;
+    u <= 0xFFFF && PRINTABLE_BLOCKS_BMP[(u >> 12) as usize] >> ((u >> 6) & 63) & 1 != 0
+}
+```
+
+**Benchmarks** (clean protocol: one bench per process, `--test-threads=1`, median of 3; `A` = bitmap arm, `B` = `Debug for str` skip):
+
+| benchmark | baseline | A | A+B |
+|---|---:|---:|---:|
+| `str::debug::mostly_unicode` | 1806 ns | 326 (−82%) | **242 (−87%)** |
+| `str::debug::mixed` | 1415 | 457 (−68%) | 401 (−72%) |
+| `str::debug::some_unicode` | 293 | 200 (−32%) | 189 (−36%) |
+| `fmt::write_str_macro_debug` | 82.0 µs | 23.9 (−71%) | **20.8 (−75%)** |
+| `fmt::write_vec_macro_debug` | 87.9 µs | 28.1 (−68%) | 24.9 (−72%) |
+| `str::debug::ascii_only` / `ascii_escapes` | 186 / 300 | flat | flat |
+
+Per char: `escape_debug().len()` 51.2 → **2.09 ns** (Cyrillic), `format!("{:?}", c)` 92.6 → 34.2, whole-string `format!` 1737 → **209 ns**. Exhaustive check over all 63 360 non-ASCII BMP scalars under three argument combinations: **0 false positives**; coverage 74.7% (CJK/Hangul 100%, Cyrillic 77%, Devanagari 0%).
+
+**Regression surface**: the ASCII path is untouched (the arm sits after it). `char::methods::{to_ascii_uppercase, ascii_char_to_uppercase, to_digit_radix_36}` show apparent −56%/−15%/−31% but that is a **code-layout artifact** (none of them calls this function; a `core_inert` build with the constant but not the arm reproduces baseline) — report separately, not as a gain.
+
+**To do before landing**: generate the bitmap from `src/tools/unicode-table-generator` (precedent: `Cn_Planes_0_3` is synthesized in `load_data()` with an assertion keeping it in sync), slotting in at `main.rs:347` or as a new emitter beside `emit_bitset`; emit the matching assertion test.
+
+### 18. `isqrt` final-division narrowing (`numerator / (2s)` → `(numerator >> 1) / s`) — in-tree prototype verified
+
+**Interface**: `library/core/src/num/imp/int_sqrt.rs::last_stage!` (`u128::isqrt()`, `NonZeroU128::isqrt()`).
+
+**Why it is slow**: Karatsuba's last stage computes `q = numerator / (s << 1)`, where `numerator < 2^65` (forced by `middle_stage!`'s `r < 2s < 2^33`). A 65/33 divide exceeds the hardware `udiv` width and lands in `compiler_builtins::int::specialized_div_rem::u128_div_rem`. `perf` on `u128_sqrt_uniform` puts **87%** of samples there.
+
+**Fix** (in-tree prototype): the nested-division identity `floor(floor(a/2)/b) == floor(a/(2b))` means halving first brings `numerator >> 1` under `2^64`, so the divide becomes one native `udiv`. **Enabled for u128 only** — u16/u32/u64 numerators already fit their type, and applying it uniformly regresses u16/u32 by 3–5%.
+
+**Prototype core**:
+
+```rust
+// end of last_stage!; for u128 pass $narrow = true, $div_ty = u64
+let q = if $narrow {
+    let q = ((numerator >> 1) as $div_ty) / ($s as $div_ty);
+    q as $ty
+} else {
+    numerator / (($s as $ty) << 1)
+};
+```
+
+**Benchmarks** (interleaved A/B, one bench per process, `--test-threads=1`, median of 5):
+
+| benchmark | current | prototype | change |
+|---|---:|---:|---:|
+| `u128_sqrt_uniform` | 7937 ns | 5818 | **−26.7%** |
+| `u128_sqrt_predictable` | 30879 | 25074 | **−18.8%** |
+| `u128_sqrt_random` | 4727 | 3855 | **−18.4%** |
+| u16/u32/u64/u8, 16 benches | — | — | ±0.2% |
+| controls (`int_log`/`int_bits`/`int_pow`, 3 each) | — | — | ±0.1% |
+
+The isolated last-stage divide goes 11.117 → **4.617 ns** (2.4×). Correctness: 0 mismatches against the unmodified formula over 21M+ inputs; 0 violations of `numerator ≥ 2^65` over a 50.3M-input sweep; `./x test library/core --test-args isqrt` passes.
+
+**Rejected**: the f64 seed for `u64::isqrt` (`(x as f64).sqrt() as u64` is exact to ±1; 9.72 → **2.62 ns**, 3.7×) is **unusable** because `isqrt` is a `const fn` while `intrinsics::sqrtf64` is not — `error: cannot call non-const intrinsic sqrtf64 in constant functions`.
+
+
+### 19. `Filter`/`FilterMap::next_chunk` compaction loop (unconditional store → conditional) — in-tree prototype verified
+
+**Interface**: `library/core/src/iter/adapters/filter.rs::next_chunk_dropless`, `library/core/src/iter/adapters/filter_map.rs::FilterMap::next_chunk` (the `Iterator::next_chunk` overrides on these two adapters).
+
+**Why it is slow**: the inner loop is deliberately branchless — the index advances via `cinc`/`csinc`, and **every scanned element is stored unconditionally**, even ones the predicate rejects. When matches are sparse (32 wanted out of 933 scanned) that is 901 wasted stores, a 29× overshoot; and the store address depends on the loop-carried `idx += pred` chain.
+
+**Fix** (in-tree prototype): move the store inside `if pred { ... }` and advance the index only on a match. Semantically equivalent (0 mismatches over 1194 differential cases; panic safety verified).
+
+**Prototype core**:
+
+```rust
+// Filter::next_chunk_dropless
+self.iter.try_for_each(|element| {
+    if (self.predicate)(&element) {
+        let idx = initialized;
+        unsafe { array.get_unchecked_mut(idx) }.write(element);
+        initialized = idx + 1;
+        if initialized < N { ControlFlow::Continue(()) } else { ControlFlow::Break(()) }
+    } else {
+        ControlFlow::Continue(())
+    }
+})
+```
+
+**Benchmarks** (interleaved A/B, one bench per process, `--test-threads=1`, median of 5–8):
+
+| benchmark | current | prototype | change |
+|---|---:|---:|---:|
+| `filter_map_mostly_false` | 601 ns | 355 | **−41.0%** |
+| `filter_mostly_false` | 640 | 398 | **−37.8%** |
+| `filter_map_shuffled_12pct` (new) | 199 | 131 | **−34.3%** |
+| `filter_shuffled_12pct` (new) | 194 | 158 | **−18.9%** |
+| `filter_even` | 61.6 | 52.2 | **−15.3%** |
+| `filter_shuffled_50pct` (new) | 68.8 | 62.3 | −9.5% |
+| `filter_predictably_true` | 34.3 | 31.4 | −8.5% |
+| `filter_map_even` | 49.1 | 50.7 | **+3.3%** |
+| `filter_map_predictably_true` | 28.3 | 28.6 | +1.0% |
+| `copied` / TRA ×2 (controls) | — | — | ±0.1% |
+
+**Attribution**: a per-file A/B shows a clean 2×2 block (patching `filter.rs` moves only `filter::*` and vice versa), ruling out a global layout artifact. **Three new shuffled benches** cover the "unpredictable branch" case the original comment claims to favour — the prototype wins there too, so that rationale is not supported by measurement.
+
+**Hybrid rejected**: keeping the branchless index and only conditioning the store is slower (`filter_map_even` 49.1 → 72.8).
+
+**Open**: two small regressions, `filter_map_even` +3.3% and `filter_map_predictably_true` +1.0% (cheap predicate, 50% hit rate); the same shape in `filter_even` is −15.3%.
+
+### 20. `[T]::cmp` / `partial_cmp` / `<` (specialization of `SliceOrd`/`SliceChain` for wide integers) — SVE prototype verified
+
+**Interface**: `SliceOrd::compare`, `SlicePartialOrd::partial_compare` and `SliceChain::chaining_{lt,le,gt,ge}` in `library/core/src/slice/cmp.rs`; reached through `impl Ord/PartialOrd for [T]`, the comparisons inside `<[T]>::binary_search`, and `BTreeMap<Vec<u32>, _>` key lookups.
+
+**Why it is slow**: the dispatch hook **already exists and already specializes** — `UnsignedBytewiseOrd` covers only `u8`/`bool`/`NonZero<u8>`/`Option<NonZero<u8>>`/`ascii::Char`, which take `compare_bytes` (memcmp). Integers of `u16` and wider, and `char`, do not satisfy the bytewise-equivalence requirement and fall back to the per-element early-exit loop inside `chaining_impl` (`ldr/ldr/cmp/b.ne`), at 0.36 ns/element. A loop with an early exit cannot be vectorized by LLVM.
+
+**Fix**: compare VL/4 lanes at a time with SVE `cmpne`; on a hit, recover the **exact index of the lowest unequal lane** with `brkb`+`cntp`, then do one scalar comparison at that lane to produce the `Ordering`/boolean result. The tail block is masked automatically by `whilelo`, so there is no scalar tail loop. Semantic key: SVE `cmpne` produces an "unequal" mask independently of element width, so `u16`/`u32`/`u64`/`u128` share one kernel structure, differing only in the `ld1w`/`ld1d` load and the lane count. The hook can reuse `AlwaysApplicableOrd` (which already lists every primitive integer), or a new internal trait restricted to primitive types whose `Ord` has no side effects.
+
+**Prototype core**:
+
+```rust
+// find the first unequal lane; on a hit brkb+cntp gives the index, then order scalar-ly
+"whilelo p0.s, {i}, {n}",
+"2:",
+"ld1w {{z0.s}}, p0/z, [{a}, {i}, lsl #2]",
+"ld1w {{z1.s}}, p0/z, [{b}, {i}, lsl #2]",
+"cmpne p1.s, p0/z, z0.s, z1.s",
+"b.any 4f",
+"incw {i}", "whilelo p0.s, {i}, {n}", "b.any 2b",
+"4:", "brkb p1.s, p0/z, p1.s", "cntp {off}, p0, p1.s", "add {i}, {i}, {off}",
+```
+
+**Benchmarks** (equal-length slices that are **fully equal**, i.e. the worst case that must scan to the end; core-pinned, ns/element, best of 4):
+
+| n | std (`[T]::cmp`) | chunk16 (NEON autovectorized) | SVE | SVE vs std |
+|---|---:|---:|---:|---:|
+| 64 | 0.37 | 0.12 | **0.10** | **3.7×** |
+| 1,000 | 0.36 | 0.12 | **0.10** | 3.6× |
+| 10,000 | 0.36 | 0.13 | **0.11** | 3.3× |
+| 100,000 | 0.38 | 0.16 | **0.15** | 2.5× |
+
+Non-worst case (element 0 differs, the latency floor): at n=1000 std is 1.4 ns, chunk16 **2.9 ns**, SVE **1.5 ns** — the chunked version pays for a whole block when the first block already hits, while SVE's first round is masked, so there is no such regression and no hybrid startup is needed.
+
+**Regression surface**: none measured; the only semantic risk is a user `Ord` with observable side effects (hence the specialization must be restricted to primitive integers/`char` and cannot be a blanket impl).
+
+**Landing TODO**: `u128` needs 128-bit lanes (or two `ld1d` halves spliced); `char` needs the (true) fact that `Ord` over values below `0x110000` agrees with unsigned integer order. x86 counterpart: the same shape is `pcmpeqd`+`pmovmskb`+`tzcnt`, structurally isomorphic, not measured.
+
+---
+
+### 21. Floating-point slice equality `[f32]`/`[f64] ==` (specialization of `SlicePartialEq`) — SVE prototype verified
+
+**Interface**: `SlicePartialEq::equal_same_length` in `library/core/src/slice/cmp.rs`; `[f32]==[f32]`, `[f64]==[f64]`, and `starts_with`/`ends_with`/`[T]::eq` on float slices.
+
+**Why it is slow**: floats are **not** `BytewiseEq` (`NaN != NaN`, `-0.0 == +0.0`, and the quiet bit of a signaling NaN does not participate in the comparison), so the `compare_bytes` specialization does not apply and the code falls back to a per-element `fcmp`+`cset` early-exit loop at 0.67 ns/element — slower than the integer slice comparison, because each element adds an `fcmp`-to-`cset` latency.
+
+**Fix**: SVE `fcmne` **is** the IEEE `!=` semantics (NaN compares true, `-0.0` equals `+0.0`), so the mask is correct with no special handling. On a hit, `brkb`+`cntp` again recover the index (here only "is anything unequal" is needed; the index enables the early exit). The hook is an `f32`/`f64` impl added to `SlicePartialEq` (float and integer `PartialEq` have different semantics, so they must stay separate).
+
+**Prototype core**:
+
+```rust
+"whilelo p0.s, {i}, {n}",
+"2:",
+"ld1w {{z0.s}}, p0/z, [{a}, {i}, lsl #2]",
+"ld1w {{z1.s}}, p0/z, [{b}, {i}, lsl #2]",
+"fcmne p1.s, p0/z, z0.s, z1.s",   // IEEE !=: true for NaN, equal for ±0
+"ptest p0, p1.b",                 // key: fcm* does not set NZCV, so b.any needs ptest first
+"b.any 4f",
+"incw {i}", "whilelo p0.s, {i}, {n}", "b.any 2b",
+```
+
+**Benchmarks** (equal-length, fully equal `[f32]`, ns/element):
+
+| n | std | chunk16 (NEON) | SVE | SVE vs std |
+|---|---:|---:|---:|---:|
+| 64 | 0.66 | 0.12 | **0.11** | **6.0×** |
+| 1,000 | 0.67 | 0.13 | **0.11** | 6.1× |
+| 10,000 | 0.66 | 0.14 | **0.12** | 5.5× |
+| 100,000 | 0.68 | 0.16 | **0.15** | 4.5× |
+
+**Correctness**: fuzzed over NaN, `-0.0`/`+0.0`, and equal/unequal-length inputs containing NaN; matches std everywhere.
+
+**Landing TODO**: `f16`/`bf16` extend isomorphically if they ever gain `PartialEq`; `f64` uses `ld1d`/`fcmne p1.d`. **Gotcha on record**: integer `cmpne` sets NZCV for `b.any` to read, but float `fcm*` does **not** — a `ptest` must be inserted before `b.any`, otherwise the branch is never taken (the first draft of this prototype failed exactly this way).
+
+---
+
+### 22. `VecDeque::retain` / `retain_mut` (SVE `COMPACT`) — prototype verified
+
+**Interface**: `retain`/`retain_mut` in `library/alloc/src/collections/vec_deque/mod.rs`.
+
+**Why it is slow**: three stages — stage 1 probes element by element, stage 2 does `self.swap(idx, cur)` for every retained element, stage 3 `truncate`s. Every element pays two ring indices (`self[cur]` and the `swap`, each with a wrap modulo) plus an `if keep` mispredict. The same lesion as `Vec::retain`, but heavier: it is **slower than the scalar `Vec::retain`** (451 µs vs 348 µs at n=100,000).
+
+**Fix**: reuse the two-phase template from `sve_retain.rs` — phase A runs the predicate scalar-ly, in order, writing only a bool mask (preserving the exactly-once/in-order contract); phase B moves whole vectors with `COMPACT`. The **only** difference from `Vec::retain` is the ring layout, which needs two new pieces: (1) chunk by **physical segment** (`min(CHUNK, remaining length, distance to the buffer end)`) so no round straddles the wrap; (2) if the write cursor's physical position is not ahead of the read position (or this round would cross the buffer end), compact into a 64-element stack scratch first and copy back into the ring in two pieces. The panic guard is the same design.
+
+**Prototype core**:
+
+```rust
+// per round: take a source segment that does not straddle the wrap
+let phys = wrap(head + read);
+let n = CHUNK.min(len - read).min(cap - phys);
+for i in 0..n { mask[i] = f(&mut *base.add(phys + i)); }
+let wphys = wrap(head + write);
+let kept = if wphys + n <= cap && wphys <= phys {
+    compact32(base.add(phys), base.add(wphys), mask.as_ptr(), n)   // in place
+} else {
+    let k = compact32(base.add(phys), scratch.as_mut_ptr(), mask.as_ptr(), n);
+    let first = k.min(cap - wphys);                                 // straddling: two pieces
+    copy_nonoverlapping(scratch.as_ptr(), base.add(wphys), first);
+    copy_nonoverlapping(scratch.as_ptr().add(first), base, k - first);
+    k
+};
+write += kept; read += n;
+```
+
+**Benchmarks** (u32, `x & 1 == 0`, input rebuild subtracted, core-pinned):
+
+| n | std | SVE (contiguous) | SVE (wrap at 1/3) | SVE vs std |
+|---|---:|---:|---:|---:|
+| 64 | 60 ns | **27 ns** | 42 ns | **2.20×** / 1.43× |
+| 1,000 | 906 ns | **442 ns** | 463 ns | **2.05×** / 1.96× |
+| 100,000 | 451 µs | **43.3 µs** | 45.6 µs | **10.43×** / 9.91× |
+
+**Correctness**: differential fuzz over lengths 0–400 × capacity slack × wrap position (0/1/37/130), matching `VecDeque::retain` exactly in element order and contents.
+
+**Regression surface**: below the threshold it must fall back to the scalar path via `sve_retain.rs`'s per-width thresholds (`MIN_SVE_SIZE_*`); the wrapped layout pays one extra physical-segment computation per round, about 5% behind the contiguous layout at large sizes.
+
+**Landing TODO**: same build prerequisite as `sve_retain.rs` (static `+sve` build or runtime dispatch); the panic guard needs its "copy the undecided tail back" step rewritten for the ring layout; `VecDeque::extract_if` is isomorphic (the same mask compacted both ways) and can be done together.
+
+---
+
+### 23. `Vec::extract_if(..)` fully consumed (SVE two-way compaction) — prototype verified
+
+**Interface**: `ExtractIf::next` in `library/alloc/src/vec/extract_if.rs`; the benefiting shapes are `extract_if(.., pred).collect::<Vec<_>>()`, `extend(...)`, and `for` loops that consume it fully.
+
+**Why it is slow**: `next()` tests `pred` per element, `ptr::read`s on a hit and `copy_nonoverlapping`s to fill the hole on a miss — one `ptr::copy` branch plus one `del > 0` check per element, and the `Vec::with_capacity` target still needs a per-element push.
+
+**Fix**: run `COMPACT` twice over the same bool mask — retained elements stay in place (compacted to the write cursor) and removed elements are compacted onto the end of a new `Vec`. The hook is a specialization of `Vec: Extend<T>`/`SpecFromIter` for `ExtractIf`, or a batch `next` helper on `ExtractIf` itself. **Semantic constraint**: the `pred` call timing changes from "once per `next()`" to "once per chunk (groups of 64)", which is observable for predicates with side effects; whether the docs permit that must be settled before landing.
+
+**Benchmarks** (u32, `x % 3 == 0`, input rebuild subtracted, core-pinned):
+
+| n | `collect()` | `into with_capacity` | SVE | vs prealloc | vs collect |
+|---|---:|---:|---:|---:|---:|
+| 64 | 158 ns | 67 ns | **56 ns** | 1.20× | **2.8×** |
+| 1,000 | 1,268 ns | 812 ns | **736 ns** | 1.10× | 1.72× |
+| 100,000 | 383 µs | 365 µs | **71.2 µs** | **5.13×** | **5.38×** |
+
+**Regression surface**: gains are small at small sizes (1.1–1.2×, where phase A's predicate calls and the allocation/free costs dominate); the comparison must be against the `with_capacity` version and not only `collect()`, or the target `Vec`'s growth cost gets misrecorded as a gain.
+
+---
+
+### 24. `chunk_by()` / run-length counting (`cmpne`+`cntp`) — SVE prototype verified
+
+**Interface**: the `count()` shape of `<[T]>::chunk_by` (equivalent to the number of adjacent runs, `1 + Σ[v[i] != v[i+1]]`); it also covers full-block scans that decide "are adjacent elements unequal".
+
+**Why it is slow**: `ChunkBy` is a generic iterator, so `count()` walks a state machine per element. `chunk_by(|a,b| a==b).count()` is newly measured here (same family as the §5 `dedup` prescan, but returning a count rather than an index).
+
+**Fix**: `cmpne` produces the "adjacent unequal" mask and `cntp` accumulates it; `whilelo` masks the tail block automatically. Loading `v[i..]` and `v[i+1..]` into two vectors and comparing needs no shift.
+
+**Prototype core**:
+
+```rust
+"whilelo p0.s, {i}, {n}",
+"2:",
+"ld1w {{z0.s}}, p0/z, [{p}, {i}, lsl #2]",
+"add {t}, {i}, #1",
+"whilelo p1.s, {t}, {n}",
+"ld1w {{z1.s}}, p1/z, [{p}, {t}, lsl #2]",
+"cmpne p2.s, p1/z, z0.s, z1.s",
+"cntp {k}, p1, p2.s", "add {tot}, {tot}, {k}",
+```
+
+**Benchmarks** (u32, value range 8, ns; std = `chunk_by(|a,b| a==b).count()`):
+
+| n | std | SVE | change |
+|---|---:|---:|---:|
+| 16 | 7.2 | **2.7** | **2.69×** |
+| 64 | 24.3 | **9.4** | 2.57× |
+| 256 | 92.9 | **35.7** | 2.60× |
+| 4,096 | 1,471 | **591** | 2.49× |
+| 65,536 | 23,699 | **10,614** | 2.23× |
+
+**Regression surface**: none (wins from 16 up). Differential fuzz over all lengths 0–400 and several run distributions matches `chunk_by().count()`.
+
+---
+
+### 25. ASCII closed-class counting (the `filter(pred).count()` shape, `cmphs`/`cmpls`+`cntp`) — SVE prototype verified
+
+**Interface**: the **counting** shape of closed predicates such as `<[u8]>::is_ascii_digit`/`is_ascii_whitespace`/`is_ascii_alphanumeric` (`v.iter().filter(|b| b.is_ascii_digit()).count()`); std has no dedicated API for it, so the landing shape is a new slice helper or a specialization of an existing counting path.
+
+**Why it is slow**: per-byte `filter().count()`, one comparison plus one branch per element. **The difference from §9**: §9 is about the **early-exit** shape of `iter().all()` (whose benchmarks are invalidated three ways); this one is the **non-early-exit counting** shape, which is already the ideal vectorization shape and whose true value is measurable without fixing any benchmark.
+
+**Fix**: closed classes use two range comparisons, `cmphs` (>= lower bound) + `cmpls` (<= upper bound), combined with `and` and accumulated with `cntp`. Whitespace (five discrete values) instead uses five `cmpeq`s merged with `orr` — **key point**: the governing predicate of `orr p1.b, p0/z, p1.b, p2.b` must be the **loop predicate `p0`**; if it is written as the accumulation target `p1`, the `/z` zeroes every newly matched lane (the first draft of this prototype was wrong across the board exactly this way).
+
+**Prototype core**:
+
+```rust
+"mov z1.b, #48", "cmphs p1.b, p0/z, z0.b, z1.b",   // >= '0'
+"mov z1.b, #57", "cmpls p2.b, p0/z, z0.b, z1.b",   // <= '9'
+"and p1.b, p0/z, p1.b, p2.b",
+"cntp {k}, p0, p1.b", "add {t}, {t}, {k}",
+```
+
+**Benchmarks** (ns; std = `filter().count()`; inputs are all digits, or contain 1/3 whitespace):
+
+| n | digit count std | digit count SVE | change | ws count std | ws count SVE | change |
+|---|---:|---:|---:|---:|---:|---:|
+| 8 | 4.4 | **1.7** | 2.60× | — | — | — |
+| 16 | 7.1 | **1.7** | 4.20× | 6.8 | **3.5** | 1.92× |
+| 24 | 10.1 | **1.7** | **6.00×** | — | — | — |
+| 64 | — | — | — | 21.9 | **6.4** | **3.42×** |
+| 96 | 31.6 | **4.3** | **7.31×** | — | — | — |
+| 256 | 65.8 | **12.8** | 5.15× | 76.3 | **28.2** | 2.70× |
+| 4,096 | 987 | **199** | 4.95× | 1,152 | **444** | 2.59× |
+| 65,536 | 16,050 | **3,199** | 5.02× | 18,374 | **7,222** | 2.54× |
+
+**Regression surface**: none (wins from 8 up); discrete-value classes (whitespace) need 4–5 `cmpeq`s to merge, so they gain less (1.9–3.4×) than range classes (4.2–7.3×).
+
+**Landing TODO**: std has no public "count a closed class" interface today, so the smallest landing surface is to specialize the internal `[u8]` counting helpers, or propose it first as a closed API (e.g. `count_ascii_digits`); the `filter()` closure shape cannot be seen through inside std, so the generic path cannot be specialized directly.
+
+---
+
+### 26. `unzip` of structured data (`ld2w`/`st1w`) — SVE prototype verified
+
+**Interface**: the `Iterator::unzip` shape over AoS slices such as `&[(u32,u32)]` (`v.iter().copied().unzip()`), producing two `Vec`s.
+
+**Why it is slow**: generic `unzip` goes through `Extend::extend_one` per element, one `size_hint` check and two `Vec::push`es (each with a capacity branch) per element. AoS→SoA is, at the memory level, a half-width interleaved load — exactly what `ld2` is for.
+
+**Fix**: `ld2w {z0.s, z1.s}, p0/z, [src]` fetches both lane groups in one go, and `st1w` writes them into the two targets. A separate specialization is needed for slice-source `unzip` (a generic iterator gives no such guarantee); `extend`/`collect` paths likewise. **Key detail**: the register-offset form of `ld2w` scales by the element size (`lsl #2`), so the index must be precomputed as `t = i + i`; `lsl #3` does not assemble.
+
+**Benchmarks** (ns; std = `v.iter().copied().unzip()`):
+
+| n | std `Iterator::unzip` | SVE `ld2w`/`st1w` | change |
+|---|---:|---:|---:|
+| 16 | 47.8 | **3.8** | **12.44×** |
+| 64 | 50.1 | **9.1** | 5.52× |
+| 256 | 85.0 | **44.5** | 1.91× |
+| 1,024 | 209 | **146** | 1.43× |
+| 4,096 | 623 | **601** | 1.04× |
+| 65,536 | 102,767 | **10,742** | **9.57×** |
+
+**Note**: the near-tie across 1K–4K is memory-bandwidth-bound (both versions are in steady state); the large gaps at both ends come from mid-range growth/allocation cost (of std's 102 µs at n=65,536, most is repeated reallocation). Against a "hand-written push loop + `reserve`" baseline, SVE is 3.0×/15.6×/13.4×/16.9×/15.1× at n=16/64/256/4096/65536.
+
+**Landing TODO**: needs a new slice-source `unzip` hook; `(u64,u64)` uses `ld2d`, `(u16,u16)` uses `ld2h`/`ld2w` (16-bit needs widening); `f32`/`f64` are isomorphic.
+
+---
+
+### 27. `trim_ascii_start` / `trim_ascii_end` (SVE leading-whitespace scan, threshold required) — prototype verified
+
+**Interface**: `trim_ascii_start`/`trim_ascii_end` in `library/core/src/slice/ascii.rs` (the `&[u8]` and `<str>` versions).
+
+**Why it is slow**: a per-byte `is_ascii_whitespace` early-exit scan — purely scalar over long leading whitespace runs.
+
+**Fix**: five `cmpeq`s merged into a whitespace mask; the complement feeds `brkb` to get the length of the leading non-whitespace position. **The key is whole-block continuation**: only when a block is entirely whitespace (`cntp(ws) == cntp(active)`) does the loop `incb` and continue; otherwise it exits immediately. The head is checked scalar-ly first (see regression surface).
+
+**Prototype core**:
+
+```rust
+"not p2.b, p0/z, p1.b",        // p1 = whitespace mask
+"brkb p3.b, p0/z, p2.b",       // BRKB = trues before the first true = leading whitespace length
+"cntp {k}, p0, p3.b",
+"cntp {k2}, p0, p0.b",         // active lanes in this block
+"cmp {k}, {k2}", "b.ne 4f",    // not a full whitespace block -> stop
+```
+
+**Benchmarks** (ns; three input shapes):
+
+| n | no leading ws (std/SVE) | 1/3 leading ws (std/SVE) | change (1/3 ws) | change (no ws) |
+|---|---:|---:|---:|---:|
+| 16 | 1.7 / 4.1 | 3.8 / 4.1 | 0.92× | **0.42×** |
+| 64 | 1.7 / 4.1 | 12.6 / 4.6 | **2.77×** | 0.42× |
+| 256 | 1.7 / 4.6 | 45.9 / 18.7 | 2.45× | 0.38× |
+| 4,096 | 1.8 / 4.7 | 724 / 417 | 1.74× | 0.38× |
+| 65,536 | 1.8 / 4.7 | 11,460 / 6,934 | 1.65× | 0.39× |
+
+**Regression surface**: **2.4–2.6× slower when the first byte is not whitespace** (std returns after one comparison at 1.7 ns; SVE pays a fixed 4.1 ns of vector setup). This is the canonical "needs a threshold" case: landing **must** do a scalar first-byte check, returning immediately when it is not whitespace, and only enter the SVE loop when the first block is entirely whitespace. With that gate the common case (std's 1.7 ns path) is untouched while long leading-whitespace runs gain 1.65–2.77×.
+
+**Landing TODO**: `const fn` semantics (`trim_ascii_*` are `const fn`, so CTFE must keep the scalar path, following the `const_eval_select!` pattern); `trim_ascii_end` is symmetric with `lastb`; the `<str>` version requires the result to land on a char boundary (trimming only ASCII whitespace makes this automatic).
+
+---
+
+### 28. The tail block and short lengths of `[T]::is_sorted` (currently NEON-chunked, scalar tail) — candidate
+
+**Interface**: `is_sorted` in `library/core/src/slice/mod.rs` (the current `CHUNK_SIZE = 33` overlapping chunking plus `windows(2).fold` autovectorization).
+
+**Why it is slow**: at large sizes the chunked shape vectorizes well (0.14 ns/element), but the **last 31 elements go through the scalar `windows(2).all`**; at n=64 that segment is the overwhelming majority — std 23.2 ns (0.36 ns/element), where the vector body should be 0.10–0.13 ns/element. **This is a pure shape problem and does not need SVE to fix** (make the tail the last full overlapping block).
+
+**Fix**: either (a) fix the tail in pure Rust (overlap the last full block: no SVE, no specialization, benefits every target), or (b) SVE `cmphi` comparing `v[i..]` against `v[i+1..]`, with the tail masked by `whilelo`.
+
+**Benchmarks** (sorted `[u32]`, ns):
+
+| n | std (NEON chunked) | SVE | change |
+|---|---:|---:|---:|
+| 64 | 23.2 | **6.5** | **3.57×** |
+| 1,000 | 139.3 | **114.4** | 1.22× |
+| 10,000 | 1,355.7 | **1,089.0** | 1.24× |
+| 100,000 | 13,729.4 | **13,015.1** | 1.05× |
+
+**Note**: the 3.57× at n=64 comes entirely from the scalar tail segment; past n≥1000 the gain converges to 1.05–1.24× because the vector body is already near memory bandwidth. **The main payoff of this entry is therefore option (a)** (fixing the tail shape); the SVE version adds only a second-order 5–24% over the NEON chunking.
+
+**Regression surface**: the SVE version needs `<` with side-effect-free `PartialOrd` (so the specialization is limited to primitive types); `f32`/`f64` `is_sorted` with `NaN` needs separate measurement (SVE `fcm*` NaN behavior differs from Rust `<=`).
+
+---
+
+### 29. The SVE mid-range window of `[u8]::is_ascii` (wins only across 16–192 B) — verified, narrow payoff window
+
+**Interface**: `is_ascii` in `library/core/src/slice/ascii.rs` (which already has an in-tree NEON specialization: 64 B unroll + `vorrq` reduction).
+
+**Why it is slow**: the in-tree NEON version is efficient for long inputs, but its fixed setup (loads plus the reduction tree) is heavy for small and medium lengths.
+
+**Fix**: a single predicated block (`whilelo` + `cmplt` on the high bit) in a loop, without the 64 B unroll's fixed cost.
+
+**Benchmarks** (all-ASCII input, ns):
+
+| n | std (in-tree NEON) | SVE | change |
+|---|---:|---:|---:|
+| 8 | 1.59 | 1.72 | **0.92×** |
+| 16 | 1.95 | 1.73 | 1.13× |
+| 24 | 2.76 | 1.73 | **1.60×** |
+| 32 | 3.10 | 1.73 | **1.80×** |
+| 96 | 2.65 | 2.76 | 0.96× |
+| 128 | 3.80 | 3.14 | 1.21× |
+| 192 | 4.49 | 3.80 | 1.18× |
+| 256 | 5.17 | 5.88 | **0.88×** |
+| 1,024 | 18.32 | 26.57 | **0.69×** |
+| 4,096 | 64.58 | 94.61 | **0.68×** |
+| 65,536 | 1,026 | 1,483 | **0.69×** |
+
+**Conclusion**: SVE wins only across the **16–192 B** window (1.1–1.8×, an absolute 1–1.7 ns) and loses steadily to the in-tree 64 B unroll NEON version past 256 B (0.68–0.69×). **This is the only interface in this round where SVE wins only at mid-range lengths**, so swapping it in outright would regress long inputs; if used at all, the gate must be "16 ≤ len < 192 goes SVE, everything else keeps the existing NEON". The payoff ceiling is tiny (under 2 ns absolute), so priority is low.
+
+**Note**: this entry's std baseline independently reconfirms, outside §9, that the in-tree NEON `is_ascii` does 65 KB in 1.03 µs (≈0.016 ns/B, a 61 GB/s class figure), matching §9's probe truth value.
+
+---
+
+### 30. Rejected SVE shapes (measured negative, do not implement) — verified
+
+| Interface | SVE shape | Measurement | Why rejected |
+|---|---|---|---|
+| `[u8]::make_ascii_uppercase` / `make_ascii_lowercase` | `cmphs`+`cmpls` range mask + `sub`/`add` of 0x20 | **0.48–0.78×** (n=16 0.78×, 256 0.52×, 4,096 0.48×, 65,536 0.48×) | LLVM already emits high-quality NEON for this loop (§9 already records `case06_libcore` at 0.029 ns/B); the SVE version pays extra setup with no width advantage |
+| `Vec::dedup_by` / `dedup_by_key` (arbitrary closure) | two-phase mask + `COMPACT` (the retain template) | **0.80–0.86×** (n=64 0.81, 1,000 0.86, 100,000 0.80) | Phase A is not a pure map: `same_bucket(cur, prev)`'s `prev` is "the last retained element", a per-element serial dependency, and there is one more predicate-driven branch — together they cancel the retain template's advantage. `Vec::dedup` (`T: PartialEq`) is not in this group — §5 measured it at −50%…−94%, because it vectorizes the comparison itself |
+| `String::retain` | mask widened to per-byte + `COMPACT` | **+36%…+212%** across every shape (both eager and lazy variants, all sizes × drop rates) | UTF-8 decoding plus the per-char closure call is the contractually serial part, and the scalar version writes nothing at all in the keep-all/drop-all cases; see `STRING_RETAIN_SVE_ANALYSIS.md` |
+| `LinkedList::retain` / `BTreeMap::retain` / `BinaryHeap::retain` | — | — | Non-contiguous storage (`BinaryHeap::retain` is `Vec::retain` plus `rebuild`, so it picks up §22's specialization for free) |
+| `[T]::partition_dedup_by` / `sort`'s `partition` | — | — | Under swap semantics both sides must be preserved and `COMPACT` produces only one; quicksort partition is already branchless Lomuto and would need dual output (SVE2 `SPLICE`) |
+| `Iterator::position` (generic closure) | — | — | See the note below: the generic path cannot see through the closure and needs a new closed API |
+
+**`Iterator::position` gap note**: `v.iter().position(|&y| y == x)` measures 0.46 ns/element while `v.contains(&x)` (which has a chunked specialization) is 0.07 ns/element — **the same operation, 6× slower** — because `position`'s predicate is an arbitrary closure that specialization cannot identify. This is an **API gap** in std (the lack of a closed lookup such as `[T]::index_of`), not a performance problem fixable inside std; if that interface is added, its SVE shape is isomorphic to §20 (`cmpeq`+`brkb`+`cntp`), measured at 0.07 ns/element.
+
+---
+
+### SVE landing prerequisites and this host's ISA facts (2026-10 scan)
+
+- **Host**: HiSilicon aarch64, VL = 32 B (256-bit), the full base SVE set is available — `compact`/`tbl`/`uzp1`/`trn1`/`zip1`/`lasta`/`lastb`/`brka`/`brkb`/`ptest`/`cntp`/`whilelo`/`incb`/`incw`/`ext`/`ld1w`/`st1w`/`ld2w`/`st2w`/`cmpeq`/`cmphi`/`cmphs`/`cmpls`/`cmplt` all assemble and execute.
+- **SVE2 is unavailable** (`is_aarch64_feature_detected!("sve2")` is false at runtime, and the assembler rejects `revb`/`histcnt`/`match`/`splice` with `requires sve2`). The following can only be listed as **future-hardware** candidates, unmeasurable this round: `count_bytes` histograms (`histcnt`), `split(char)`/`find`/`rfind` (`match`+`splice`), `bytes_rev`/`chars_rev` (`revb`), and dual-output sort partition (`splice`).
+- **Build prerequisite**: rustc's default `generic` CPU does not include the `sve` feature, so released std builds cannot reach any SVE path; landing must follow the `sve_retain.rs` precedent of a **static `+sve` build**, or introduce runtime dispatch. Under `-Ctarget-cpu=native` LLVM emits SVE on its own for `reverse`/`unzip`/`count`/`sum`/`dot`/`fill`, but released builds do not take that path.
+- **stdarch status**: it already has 5,543 `sv*` functions, but scalable vector types have no sound Rust representation in `core`/`alloc` (no provenance or uninitialized-padding semantics), so every kernel in §20–§27 is written in inline asm, consistent with `sve_retain.rs` and the `memchr` prototype.
+
+**Two error-prone ISA details** (confirmed while debugging this round; required reading for any follow-up):
+
+1. **`BRKB(P)` = the number of trues before the first true** (i.e. the count of leading **false** lanes); when the source is all-false it returns the full lane count. `BRKA` is symmetric (including the first true). Getting "leading whitespace length" requires `BRKB(complement-of-whitespace-mask)`; and if the mask can be all-false, that case must be handled first (all-zero returns the lane count rather than 0).
+2. **The governing predicate of `orr pA.b, pB/z, ...` must be the loop predicate**, not the accumulation target itself — governing `p1` with `p1` lets `/z` zero every newly matched lane, leaving the mask permanently empty.
+
+---
+
+### 31. `Fuse` lacks `InPlaceIterable` (`.fuse()` silently adds an allocation to `collect`) — in-tree prototype verified
+
+**Interface**: `library/core/src/iter/adapters/fuse.rs`; affects chains of the form `vec.into_iter()….fuse()….collect::<Vec<_>>()`.
+
+**Why it is slow**: `Fuse` implements `SourceIter` but not `InPlaceIterable`, so the in-place collect specialization does not apply and `collect` falls back to a fresh allocation plus a copy. The impl was removed together with `SourceIter` in 2021-06 (`6f5e933adb57`, fixing #85863); in 2023-04 (`3ca6bb0b44c3`) only `SourceIter` came back, bounded by `TrustedFused`.
+
+**Fix** (in-tree prototype): restore `InPlaceIterable`, forwarding the inner constants. Soundness rests on the existing `I: TrustedFused` bound on `SourceIter`.
+
+**Prototype core**:
+
+```rust
+unsafe impl<I: InPlaceIterable> InPlaceIterable for Fuse<I> {
+    const EXPAND_BY: Option<NonZero<usize>> = I::EXPAND_BY;
+    const MERGE_BY: Option<NonZero<usize>> = I::MERGE_BY;
+}
+```
+
+**Results**:
+
+| | current | prototype |
+|---|---:|---:|
+| `bench_in_place_recycle` shape, allocations per iteration | 1.000 | **0.000** |
+| standalone-process probe (1000 × usize) | 282–285 ns | **248 ns (−12%)** |
+| official `vec::bench_in_place_recycle` | ~185 ns | indistinguishable by time (the allocation is offset by a faster copy loop) |
+
+Tests: `coretests fuse` and `flatten`, `alloctests in_place` and `from_iter`, 92 in total, all pass.
+
+**Open**: needs a soundness sign-off from the `inplace_iteration` maintainers. `bench_in_place_recycle` has not exercised the in-place path since 2021 and timing cannot show it, so it should assert on allocation count. `Peekable` has the same gap; not evaluated.
 
 ## Tier 3: Candidate directions (root cause located, fix not prototyped)
 
-(#6, #7 and #8 were prototyped on 2026-09-15 and moved up to Tier 2.)
+(#6, #7, #8, #10–#13, #16–#28 have been prototyped and moved up to Tier 2; #29–#30 are verified limits and rejections, also in Tier 2; #31 is prototyped and also in Tier 2.)
+
+### 14. `BTreeMap` tree shape under sequential insert (`splitpoint` does not bias right-edge inserts) — candidate
+
+**Interface**: `library/alloc/src/collections/btree/node.rs::splitpoint`; affects `get`/`range`/iteration on every tree built by sequential `insert`.
+
+**Why it is slow**: sequential `insert` always hits the rightmost leaf; a full node splits at the centre, freezing every left node at 6/11 keys (55% fill: 1666 nodes for 10 000 keys vs 913 with `collect`), one extra level; partial nodes use the early-exit scan, so a sequential `get` mispredicts once per level (2.98 misses/get, IPC 1.90). Same data built by `collect`: `get` 116 → **59 cycles**.
+
+**Fix** (not prototyped): bias `splitpoint` when the insertion edge is `CAPACITY` (rightmost) — keep `CAPACITY − 1` (or −2) keys in the left node and only the new key in the right, giving ~90% fill for sequential insert; keep the current rule otherwise. Needs re-validation of #74834's bidirectional-insert balance and `remove` underflow-merge frequency.
+
+**Benchmarks** (estimated): `find_seq_10_000` 41.7 → ~22 ns (−47%); `range_*`, `iteration_*` and memory (−45% nodes) benefit alongside; `insert_seq_*` halves its splits. Ruled out alternative: branchless scan of partial nodes (+75…+270%, dominated by the copy).
+
+### 15. `core::slice::memchr` (portable SWAR, no SIMD body) — candidate
+
+**Interface**: `library/core/src/slice/memchr.rs::memchr`; `str::split/find/contains(char)`, `CStr::from_bytes_with_nul`, `[u8]::contains` all go through it. Since `88ac7ace569c` removed std's arch-specific versions only the portable SWAR remains.
+
+**Why it is slow**: outside the 2×usize SWAR body, both the alignment prologue and the post-match localization are byte loops — 46% of the samples of `split_unicode_ascii`'s three memchr calls are in byte loops; on long scans the 16 B/iteration SWAR is 40% of NEON throughput.
+
+**Fix** (probe-verified, not in-tree): first 16 B via unaligned SWAR words + `ctz` localization (short segments resolve in one step), then NEON `cmeq` at 16 B/iteration, byte-loop tail as today.
+
+**Benchmarks / probes** (variant G, two consistent runs per input): `split_unicode_ascii` −38%, ~5 B segments −10%, **16–40 B segments +9…+19%**, 97 B segments −24%, long no-match scans −57…−58%. No single shape wins in all three regimes; landing hinges on accepting the 16–40 B regression and on std re-accepting arch-specific memchr. x86's `pcmpeqb+pmovmskb` mask extraction is shorter, so the mid-range penalty should be smaller — unmeasured.
 
 ### 9. `u8::is_ascii_*` predicate family (SWAR/bitset) — fix the benchmark first (2026-09-08 update: the whole family is invalid, including `is_ascii` itself)
 
@@ -547,9 +1120,29 @@ select cost = csel_latency + (cmp → csel → address → load) chain on the cr
 | `str::chars().count()` | `str::char_count::case00_libcore::*` (20) | prototype-verified |
 | `Vec::dedup` | `vec::bench_dedup_{none,all,random,slice_truncate}_{100..100000}` | prototype-verified |
 | `flt2dec` (Dragon `format_exact`) | `num::flt2dec::strategy::{dragon,grisu}::bench_{small,big}_exact_{3,12,inf}` | **prototype-verified** (big_exact_inf −69%, no regressions) |
+| `u128::isqrt` final divide | `num::int_sqrt::u128_sqrt_{predictable,random,uniform}` | **prototype-verified** (narrowed to a native `udiv`; uniform −26.7%, predictable −18.8%, random −18.4%; u16/u32/u64/u8 ±0.2%) |
+| `Filter`/`FilterMap::next_chunk` loop | `iter::bench_next_chunk_{filter,filter_map}_*` (3 new shuffled benches) | **prototype-verified** (mostly_false −38%/−41%, shuffled −19%/−34%, `filter_even` −15%; `filter_map_even` +3.3%) |
+| `Fuse` lacks `InPlaceIterable` | `vec::bench_in_place_recycle` (invisible by time; allocations 1 → 0) | **prototype-verified** (standalone probe −12%; needs soundness sign-off) |
 | `Iterator::array_chunks` | `iter::bench_next_chunk_trusted_random_access[_runtime_len]` (harness cannot see it; probe 3.06×) | **prototype-verified** (root cause is loop shape, not field access) |
+| `BTreeMap` sequential-insert tree shape (`splitpoint`) | `btree::map::find_seq_10_000`, `range_*`, `insert_seq_*` | candidate (same query on a `collect`-built tree −50%) |
+| `escape_debug_ext` BMP bitmap | `str::debug::{mostly_unicode,mixed,some_unicode}`, `fmt::write_{str,vec}_macro_debug` | **prototype-verified** (−87%/−75%; `ascii_*` flat) |
+| `core::slice::memchr` | `str::split_unicode_ascii`, `split_*` (short segments); `contains`/`CStr` long scans | candidate (short −38%, long −58%; 16–40 B segments +9…19%) |
 | `BTreeMap::iter[_mut]` fold | `btree::map::iteration[_mut]_fold_{20,1000,100000}` (new) | **prototype-verified** (fold_1000 −43%, no regressions) |
 | `u8::is_ascii_*` / `[u8]::is_ascii` | `ascii::*::is_ascii_*` + `ascii::is_ascii::*` (80, **all invalid**) | fix bench first (three-layer breakage located) |
 | `BTreeMap` in-node search (integer keys) | `btree::{map,set}::clone_*_and_remove_half`, `range_included_*`, `find_*`, `insert_*`; regressions: `set::difference_*`, `intersection_*`, `range_included_unbounded` | **prototype-verified** (remove_half −36%, range −48%; `difference_random` +89% to fix) |
 | `BTreeMap::IntoIter` drop | `btree::{map,set}::clone_*`, `from_iter_seq_*` (baseline side) | **prototype-verified** (clone −57…−66%, no regressions) |
 | `for` over `VecDeque::iter[_mut]` (`next()`) | `vec_deque::bench_{iter,mut_iter}_1000` (`into_iter*`/`try_fold` are layout noise) | **prototype-verified** (−31%, zero semantic change) |
+| `from_str_radix(_, 10)` for 32/64-bit | `num::bench_{u32,u64,i32,i64}_from_str[_radix_10]` (mix averages 2.8 digits; single strings ≥8 digits −65…−75%) | **prototype-verified** (±27% layout noise swamps the official numbers) |
+| `Rev<I>::count` | `str::char_{indicesator,iterator}_rev` | **prototype-verified** (−68…−76%; landing needs a specialization trait to preserve side-effect order) |
+| `[T]::cmp`/`partial_cmp`/`<` (wide integers) | `slice` comparisons, `binary_search`, `BTreeMap<Vec<T>,_>` keys; standalone prototype (equal slices 0.36→0.10 ns/elem, 3.3–3.7×) | **SVE prototype-verified** (hook `AlwaysApplicableOrd` already exists; `u8`/`bool` already go through memcmp) |
+| `[f32]`/`[f64]` slice equality | `[f32]==[f32]`, float `starts_with`/`ends_with`; standalone prototype (0.67→0.11 ns/elem, 4.5–6.1×) | **SVE prototype-verified** (`fcmne` is IEEE `!=`; `ptest` required before `b.any`) |
+| `VecDeque::retain`/`retain_mut` | standalone prototype u32 (64→2.20×, 1,000→2.05×, 100,000→10.43×; 9.91× with wrap at 1/3) | **SVE prototype-verified** (ring segmented into physical chunks + scratch copy-back; panic guard follows the `sve_retain.rs` template) |
+| `Vec::extract_if(..)` fully consumed | standalone prototype u32 (100,000: 5.13× vs `with_capacity`; 64: 1.20×) | **SVE prototype-verified** (same mask compacted both ways; must confirm pred timing may change from per-`next` to per-chunk) |
+| `chunk_by().count()` / run counting | standalone prototype u32 (16→2.69×, 4,096→2.49×, 65,536→2.23×) | **SVE prototype-verified** (`cmpne`+`cntp`, no regressions) |
+| ASCII closed-class counting (`filter(pred).count()`) | standalone prototype (digits: 24→6.00×, 96→7.31×, 65,536→5.02×; whitespace: 64→3.42×) | **SVE prototype-verified** (`cmphs`/`cmpls`+`cntp`; std has no matching public API) |
+| `unzip` AoS→SoA (`&[(u32,u32)]`) | standalone prototype (16→12.44×, 64→5.52×, 65,536→9.57×; ~1.0× across 1K–4K, bandwidth-bound) | **SVE prototype-verified** (`ld2w`/`st1w`; needs a new slice-source `unzip` hook) |
+| `trim_ascii_start`/`_end` | standalone prototype (1/3 leading ws: 64→2.77×, 4,096→1.74×; **0.38–0.42× regression with no whitespace**) | **SVE prototype-verified** (needs a scalar first-byte gate; `const_eval_select!` for CTFE) |
+| `[T]::is_sorted` tail block | standalone prototype u32 (64→3.57×, 1,000→1.22×, 100,000→1.05×) | **SVE prototype-verified** (main payoff is fixing the scalar tail, 3.57× in pure Rust; SVE is second-order) |
+| `[u8]::is_ascii` SVE mid-range | standalone prototype (16–192 B wins 1.13–1.80×; **0.68–0.69× regression past 256 B**) | **verified, narrow payoff window** (in-tree NEON 64 B unroll is stronger on long input; low priority) |
+| Rejected SVE shapes | standalone prototype: `make_ascii_uppercase` 0.48–0.78×, `Vec::dedup_by` (closure) 0.80–0.86×, `String::retain` +36…+212% | **measured negative, do not implement** |
+| `Iterator::position` (generic closure) | 0.46 ns/elem vs `contains` 0.07 (same operation, 6× slower) | **API gap** (no closed `[T]::index_of`; with one, the SVE shape matches §20) |

@@ -3171,6 +3171,8 @@ x86 probe 的符號名直接給出調用鏈:`...Iterator8try_fold...map_try_fold
 ## 判斷
 
 1. **Chain/Enumerate 適配器在 fold 消費下零開銷**(狀態機、計數器全部被結構性消除),ref 轉發鏈同樣兌現——守護目標成立,無 std 病灶。
+> **2026-10-10 修正**:「全系」不成立——`bench_filter_map_sum` / `_ref_sum` 差 51%。原因不是 ref 無法優化 fold,而是 ref 形狀讓常數界晚於迴圈旋轉才可見,錯過 InstCombine 消除 `checked_mul` 溢出檢查的時機。見 `iter::bench_filter_map_chain_ref_sum` 章。
+
 2. benchmark 系列級發現:`bench_sums!` 的 value/ref 對照已測不出差異,16 對 bench 實質重複;若要恢復對照意義,ref 側需用真正的 dyn 邊界(`&mut dyn Iterator`)或 `by_ref().take(n)` 這類打斷 try_fold 靜態轉發的形狀。
 3. 絕對數字由 black_box 屏障主導(同 skip_while 節),僅相對比較有效。
 4. x86 同構無分歧。
@@ -3202,6 +3204,8 @@ write_u128_min("0")            56.4–56.5 ns
 write_u128_max(39 字符)        62.2–63.2 ns   ← 僅 u128 恢復 max > min
 ```
 
+> **2026-09-30 修正**:本表的 `write_u64_max = 44.8–44.9 ns` **只存在於 2026-09-15 構建的舊 libstd**。在本工作階段所建的每一個 libstd 上(`core_inert`/`core_patch2`/`core_3b2`,以及**移除全部 core 原型後重新構建的對照組**),`u64::MAX` 與 `u8::MAX` 同為 **~52 ns**;固定 2000 萬次迭代的探針顯示兩個 arm 的**指令數逐位元組相同**(496 / 576,跨 libstd 亦同),差異全在 `STALL_FRONTEND`(u64 arm:舊 libstd 3.5 vs 現版 22.5 停頓/迭代;u8 arm 兩者皆 ~39–40)。因此「min 比 max 慢 19%」不成立於現版——四項 `{u8,u64}_{min,max}` 落在 51.5–56.3 ns 帶內,由佈局決定的前端停頓主導,而非輸入長度。詳見下方 `write_u8_max` 章(2026-09-30)。
+
 ## perf 分解(F=2000 record,按各自 ns/iter 換算)
 
 | 成分 | min("0") | max(20 位) |
@@ -3226,7 +3230,7 @@ write_u128_max(39 字符)        62.2–63.2 ns   ← 僅 u128 恢復 max > min
 ## 結論
 
 1. 這組 min/max benchmark 實際測的是**兩個不同的東西**:min 測 `format!` 機制固定成本(~48 ns,分配器佔 40%),max 測轉換迴圈+機制。命名暗示的「同路徑不同輸入」不成立,兩者不可做同軸比較。
-2. **std 可探討方向**(未原型):(a)機制鏈條的跨 so 小函數(`pad_integral`/`write_prefix` 對無 width/prefix 的 `{}` 快路徑可短路);(b)`estimated_capacity` 對純 `{}` 返回 0 導致必然 grow——若對整數 Display 給出保守非零估計(如 8),可把 grow 換成精確首次分配。兩者收益都在 5–10 ns 級,對真實 workload(格式化通常伴隨更多內容)佔比有限。
+2. **std 可探討方向**:(a)機制鏈條的跨 so 小函數(`pad_integral`/`write_prefix` 對無 width/prefix 的 `{}` 快路徑可短路)——**仍未原型**;(b)`estimated_capacity` 對純 `{}` 返回 0 導致必然 grow——**已於 `write_u8_min` 章原型並實測為零和**(min −47% 但把前端停頓原樣轉移到 `u64_max` +47%),且 2026-09-30 的 `write_u8_max` 章顯示該 8 ns 差距只存在於舊 libstd,現版兩型別同為 ~52 ns,**此方向作廢**。兩者收益都在 5–10 ns 級,對真實 workload(格式化通常伴隨更多內容)佔比有限。
 3. ISA 對比無必要:機制鏈是調用開銷+分配器,÷10 迴圈兩平臺同構(`umulh` 倒數乘法),無結構分歧。
 
 ## 復現
@@ -3771,4 +3775,2021 @@ $BIN --bench 'vec_deque::bench_iter_1000'
 perf record $BIN --bench vec_deque::bench_iter_1000   # 82.8% 在迴圈末尾 mov,6 mov/元素
 # 原型:vec_deque/{iter,iter_mut}.rs 的 next/next_back 外聯 None 臂(工作樹,未提交);二進位 /tmp/btree_bench/vd_s1/
 # 探針:/tmp/btree_bench/probe_vd/{probe,shapes,shapes2,shapes3,shapes4,noise,intoiter}.rs
+```
+
+# `vec::bench_in_place_xxu8_1000_i1`:一半是 malloc/memset/free,另一半是已達 NEON 吞吐的 in-place 迴圈;`_i0` 慢 83% 是 glibc `calloc` 繞過 tcache,與 in-place collect 無關
+
+- 日期:2026-09-16
+- 分析對象:`library/alloctests/benches/vec.rs` 的 `bench_in_place![...]` 家族,重點 `bench_in_place_xxu8_1000_i1`(`black_box(vec![1u8; 1000]).into_iter().enumerate().map(|(i, e)| i as u8 ^ e).collect::<Vec<u8>>()`)
+- 基線(18 項中 u8 六項):`0010_i0/i1` 21.5 / 15.1 ns、`0100_i0/i1` 25.6 / 17.4、`1000_i0/i1` **92.0 / 50.3**;u32 `1000_i0/i1` 178.6 / 209.9;u128 `1000_i0/i1` 533 / 715
+- 實現:`library/alloc/src/vec/in_place_collect.rs`(`from_iter_in_place` → `SpecInPlaceCollect::collect_in_place`,`Enumerate<Map<IntoIter>>` 是 `TrustedRandomAccessNoCoerce`,走索引迴圈特化)
+
+## 這個 bench 測的是什麼:每輪一次 1000 B 分配 + 一次釋放 + 一個 1000 B 迴圈
+
+計數分配器確認每輪恰好 **1 次 `alloc`(i1)/ 1 次 `alloc_zeroed`(i0)、0 次 realloc**——in-place collect 生效,結果複用來源緩衝,無第二次分配。perf 按 DSO 切分:
+
+| | i1(50.3 ns) | i0(92.0 ns) |
+|---|---:|---:|
+| `libc.so.6`(malloc/calloc/memset/free) | **52.8%** | **62.4%** |
+| bench 本體(in-place 迴圈 + harness) | 45.5% | 34.7% |
+
+探針拆分(`#[inline(never)]`,同形態):`vec![1u8;1000]` + drop 單獨 28.2 ns,官方 body 56.6 ns → **in-place 迴圈 ≈ 27–28 ns / 1000 B**;對照 `iter_mut().enumerate()` 原地 xor 26.9 ns、借用 `extend` 進復用 Vec 28.7 ns、`try_fold` 路徑(加 `filter(|_| true)` 逃出 TRA 特化)55.6 vs TRA 55.2——**三條路徑等價,in-place collect 本身零額外開銷**。
+
+按尺寸看固定開銷:n=10 body 21.0 vs alloc 14.4(迴圈+簿記 6.6 ns);n=100 24.0 vs 14.5(9.5);n=1000 56.7 vs 28.3(28.4);n=10000 496 vs 180(315)。in-place 收尾(`forget_allocation_drop_remaining` + cap 比較 + `from_nonnull`)≈ 6 ns 常數,線性部分 0.028 ns/B。
+
+## in-place 迴圈已在 NEON 吞吐上
+
+熱迴圈(perf 67% 樣本落在兩條 `add v.16b`):
+
+```asm
+1ed18: add  v1.16b, v0.16b, v4.16b     ; idx+16
+       ldp  q2, q3, [x13, #-16]        ; 32 B
+       subs x14, x14, #0x20
+       eor  v2.16b, v2.16b, v0.16b     ; e ^ idx
+       eor  v1.16b, v3.16b, v1.16b
+       add  v0.16b, v0.16b, v5.16b     ; idx += 32(loop-carried)
+       stp  q2, q1, [x13, #-16]
+       add  x13, x13, #0x20
+       b.ne 1ed18
+```
+
+32 B/迭代、9 條指令、IPC 4.0、分支失誤 0.00%,約 2.3 cycles/迭代 → 37 GB/s。之後是 8 B 尾(`eor v.8b`)和逐字節尾。樣本集中在 `add v0` 是因為 `idx` 向量是唯一的 loop-carried 鏈(每輪 +32),不是瓶頸本身。
+
+可壓的頭寸只在 LLVM 側:
+
+| 迴圈單獨(1000 B,復用緩衝) | ns |
+|---|---:|
+| 現狀(interleave 2 → 32 B/迭代) | 26.9 |
+| `-Cllvm-args=-force-vector-interleave=4`(64 B/迭代) | **21.3(−21%)** |
+| `-Ctarget-cpu=native` | 22.2 |
+| `-Ctarget-feature=+sve`(有 z 暫存器指令) | 22.6 |
+| 手寫 64 B 塊 | 24.7 |
+| `-force-vector-interleave=1` | 33.8 |
+
+但放回官方 body,interleave=4 只從 59.0 → 57.6(−2%):迴圈只佔一半,而 TRA 索引迴圈形態下 LLVM 未同樣受益。這是 AArch64 cost model 對字節迴圈 interleave 偏保守(與 L5 章同族),std 源碼無從下手。
+
+## `_i0` 比 `_i1` 慢 83%:glibc `calloc` 不走 tcache
+
+`vec![0u8; n]` → `alloc_zeroed` → `libc::calloc`;`vec![1u8; n]` → `malloc` + `memset`。perf 對比:i1 的 libc 部分是 `malloc` 11.3%(tcache 快路徑)+ `__memset_sve_zva64` 27.6%;i0 的是 **`_int_malloc` 27.5% + `__libc_calloc` 8.6%**——glibc 2.38 的 `calloc` 不查 tcache,每次都進 `_int_malloc`/`_int_free` 慢路徑。單測 1000 B:`vec![0;n]` 33.5 ns vs `vec![1;n]` 27.0 vs `with_capacity + resize(n,0)` 20.8。**i0/i1 的 42 ns 差距全是分配器,與 in-place collect 無關**;u32(4 KB)與 u128(16 KB)上 calloc 反而快(memset 成本超過 tcache 收益,且大塊走 mmap 零頁),所以 `xu32_1000_i0 < _i1`、`u128_1000_i0 < _i1` 方向相反——三組 i0/i1 的符號翻轉本身就是「測的是分配器」的證據。
+
+std 側可想的招是 `alloc_zeroed` 對小尺寸改 `malloc + write_bytes`(1000 B 上 −38%),但閾值是 glibc 版本/tcache 配置相關的平臺細節,且新版 glibc 若給 calloc 加 tcache 即失效——不建議。
+
+## 判斷
+
+1. `in_place_collect` 現實現沒有優化空間:零多餘分配、TRA 與 try_fold 路徑等價、迴圈已向量化到 NEON 吞吐、收尾 6 ns 常數。**排除**。
+2. 這組 bench 一半以上在測 glibc:`_i0/_i1` 的差異和符號翻轉都是 calloc/tcache/memset 的交互,若要守護 in-place 路徑,應改成復用來源緩衝(像 `bench_in_place_recycle` 那樣)或至少把分配移出計時。
+> **2026-10-09 修正**:`bench_in_place_recycle` 因鏈中的 `.fuse()` 並未走 in-place 路徑(每輪 1 次分配);可作典範的是 `bench_in_place_zip_recycle`。見 `vec::bench_in_place_*`(22 項全覽)章。
+3. 迴圈本身 −21% 的頭寸在 LLVM AArch64 interleave 成本模型(字節寬 loop-carried 索引向量下偏保守),歸入 L 層,不另立條目。
+4. x86:同機理——glibc 同一份,`calloc` 行為一致;迴圈 SSE2 16 B/迭代會比 NEON 慢一倍,AVX2 追平。
+
+## 復現
+
+```bash
+BIN=build/.../allocbenches-2cf0e8badf7482bf
+$BIN --bench 'vec::bench_in_place_xx'
+perf record $BIN --bench vec::bench_in_place_xxu8_1000_i1   # 52.8% libc;熱迴圈 1ed18–1ed38
+perf record $BIN --bench vec::bench_in_place_xxu8_1000_i0   # _int_malloc 27.5%:calloc 繞過 tcache
+# 探針:/tmp/btree_bench/probe_ip/{probe,probe2,count,calloc,sve}.rs(拆分/路徑對照/分配計數/calloc 對照/interleave)
+```
+
+# `vec_deque::bench_extend_bytes`:一次 512 B `memcpy` 佔 77%,VecDeque 簿記 ≈ 2 ns,已貼 `Vec::extend_from_slice` 與裸 memcpy 底線
+
+- 日期:2026-09-16
+- 分析對象:`library/alloctests/benches/vec_deque.rs` 的 `bench_extend_bytes`(`ring.clear(); ring.extend(black_box(&[128u8; 512]))`,容量 1000,永不繞回)
+- 基線:**16.4–16.5 ns/iter**;同組 `bench_extend_vec` 34.1、`_trustedlen` 24.2、`_chained_trustedlen` 34.3、`_chained_bytes` 27.0
+- 實現:`library/alloc/src/collections/vec_deque/spec_extend.rs` 的 `SpecExtend<&T, slice::Iter<T>>`(`reserve` → `copy_slice` → `len +=`),`copy_slice` 是一或兩次 `ptr::copy_nonoverlapping`
+
+## perf 畫像
+
+| 符號 | 佔比 |
+|---|---:|
+| `libc.so.6 __memcpy_generic` | **77.0%** |
+| bench 閉包(reserve/wrap 簿記 + harness) | 22.6% |
+| `memcpy@plt` | 0.3% |
+
+IPC 2.64,branch-miss 0.01%。熱點全在 memcpy 的 `stp x,x` 對(glibc ifunc 在本核選了 GPR 版 `__memcpy_generic`,64 B/迭代)。
+
+## 拆分(探針,`-O`,同形態)
+
+| 形態 | ns |
+|---|---:|
+| 官方:`clear` + `extend(&[u8;512])` | 16.9 |
+| `clear` 單獨 | 0.4 |
+| `extend` 不 clear(每輪繞回一次,走兩段 copy) | 17.5(+0.6) |
+| `Vec::clear` + `extend_from_slice` 512 B | 13.9 |
+| `[u8;1000][..512].copy_from_slice`(內聯 NEON `ldp/stp q`) | 14.9 |
+| 裸 `ptr::copy_nonoverlapping` 512 B | 14.5 |
+
+512 B 的複製底線 ≈ 14.5 ns(≈42 cycles,約 12 B/cycle 的 store 吞吐;內聯 NEON 與 libc GPR 版相同,說明卡在儲存端口不是指令選擇)。VecDeque 在其上多 **≈ 2 ns**:`reserve` 的 `checked_add` + 容量比較、`to_wrapped_index` 的加法 + 條件減、`copy_slice` 的 `head_room` 比較、`len +=`——十來條標量指令。繞回時多一次 split + 第二個 memcpy,+0.6 ns。
+
+## 判斷
+
+1. `VecDeque::extend(&[T])` 對 `T: Copy` 已是「reserve + memcpy」形態,離裸 memcpy 只差 2 ns 固定簿記,無可壓空間。**排除**。
+2. 同組其他項:`bench_extend_vec` 34 ns 中 ~17 ns 是 `input.clone()` 的 malloc + memcpy(bench 自身成本),`_trustedlen` 24 ns 是 `Range<u16>` 經 `write_iter_wrapping` 物化 1 KB(0.024 ns/B,已向量化);未見異常,不另立章。
+3. x86:同構,memcpy 底線由平臺決定。
+
+## 復現
+
+```bash
+BIN=build/.../allocbenches-2cf0e8badf7482bf
+$BIN --bench 'vec_deque::bench_extend'
+perf record $BIN --bench vec_deque::bench_extend_bytes   # 77% __memcpy_generic
+# 探針:/tmp/btree_bench/probe_ext/probe.rs
+```
+
+# `any::bench_downcast_ref`:3.2 ns = 一次不可去虛化的 vtable 調用 + 128-bit 比較 + 兩個 black_box 的棧往返;唯一頭寸是 `TypeId` 陣列佈局導致的 sret 回傳(≈0.2 ns)
+
+- 日期:2026-09-17
+- 分析對象:`library/coretests/benches/any.rs` 的 `bench_downcast_ref`(`let mut y = &mut x as &mut dyn Any; black_box(&mut y); black_box(y.downcast_ref::<isize>() == Some(&0))`)
+- 基線:**3.23 ns/iter**(±0.20),IPC 2.30,branch-miss 0.00%
+- 實現:`library/core/src/any.rs` 的 `<dyn Any>::downcast_ref` → `is::<T>()` → `TypeId::of::<T>() == self.type_id()`;`TypeId` 是 `[*const (); 2]`(16 B),`==` 經 `type_id_eq` 內建 = `transmute::<u128>` 比較
+
+## 熱迴圈就是全部
+
+```asm
+58d8c: stp  x26, x24, [x29, #-64]   ; black_box(&mut y):胖指標落棧
+       stur x8, [x29, #-48]
+       ldp  x20, x8, [x29, #-64]    ; 重載 (data, vtable)
+       ldr  x9, [x8, #24]           ; vtable[3] = type_id
+       blr  x9                      ; 不可去虛化(y 經 black_box 變不透明)
+       ldp  x9, x8, [x29, #-48]     ; sret:被調方 str q0 → 這裡 ldp 回來
+       cmp  x8, x21
+       ccmp x9, x22, #0, eq         ; 128-bit 比較 = 2 條
+       b.ne ...                     ; 57.6% 樣本(等 blr 返回)
+58d78: sturb w8, [x29, #-48]        ; black_box(bool) 落棧,18.9%
+```
+
+被調的 `<isize as Any>::type_id` 本體:`adrp; add; ldr q0,[x9]; str q0,[x8]; ret`——16 B 常量經記憶體回傳(`[*const (); 2]` 是 Array ABI,走 sret),調用方再 `ldp` 讀回。
+
+## 拆分(探針,5000 萬次)
+
+| 形態 | ns |
+|---|---:|
+| 官方 body(兩個 black_box) | 4.98(探針內聯差異;harness 3.23) |
+| `is::<isize>()`,`&dyn` 不透明 | 1.283 |
+| `downcast_ref::<isize>().is_some()` | 1.281 |
+| 錯配 `is::<u8>()` | 1.282(分支預測完美,無差) |
+| 只做 vtable 載入 + `type_id()` 調用 | **1.257** |
+| 空閉包(harness 地板) | 0.355 |
+
+`is`/`downcast_ref` 相對「一次 dyn 調用」只多 **0.02 ns**——比較本身免費。3.23 ns 裡約 1.3 ns 是那次間接調用(含 sret 往返),其餘是 bench 自己兩個 `black_box` 造成的胖指標落棧/重載與 bool 落棧。
+
+## 唯一頭寸:`TypeId` 回傳 ABI
+
+模擬兩種佈局經 `#[inline(never)]` dyn 調用回傳 16 B 並比較:
+
+| `TypeId` 佈局 | dyn 調用 + eq | 被調方回傳形態 |
+|---|---:|---|
+| `[*const (); 2]`(現狀,Array ABI) | 1.299 ns | `ldr q0; str q0,[x8]`(sret,記憶體) |
+| `{ a: *const (), b: *const () }`(ScalarPair) | **1.100 ns(−15%)** | `mov/movk x0, x1`(暫存器) |
+| 調用地板 | 1.035 | — |
+
+陣列佈局是 CTFE 的需要(commit 486ffda9dcd「opaque TypeId handles for CTFE」:首字段攜帶 provenance)。兩個具名指標字段同樣能攜帶 provenance,但 `TypeId` 是 lang item,`rustc_const_eval`/`size_of_type_id` 等都按 `data` 陣列讀,改動在編譯器側,收益每次 dyn `is`/`downcast` 約 0.2 ns。x86-64 SysV 對 16 B 聚合本就用 `rax:rdx` 回傳,無此稅——這是 AArch64 AAPCS(HFA/陣列 > 16 B 規則外的聚合按 sret)特有。
+
+## 判斷
+
+1. `downcast_ref` 的 std 側實現已是最小形態(一次調用 + 一次 128-bit 比較),**排除**。
+2. 候選(編譯器側,低優先):`TypeId` 改 ScalarPair 佈局省掉 AArch64 上的 sret 往返,−15%/調用;絕對值 0.2 ns,只在極高頻 `dyn Any` 分派場景可見。
+3. bench 本身 60% 是 `black_box` 的棧往返,量的是「一次不可去虛化調用」的成本,對 `downcast_ref` 的實現變化不敏感。
+
+## 復現
+
+```bash
+BIN=build/.../corebenches-14ea307f41bce867
+$BIN --bench 'any::bench_downcast_ref'
+perf annotate ...   # 57.6% 在 blr 後的 b.ne,18.9% 在 black_box(bool) 的 sturb
+# 探針:/tmp/btree_bench/probe_any/{probe,abi}.rs(拆分 / Array-vs-ScalarPair 回傳 ABI)
+```
+
+# `iter::bench_next_chunk_filter_map_even`:已是無分支壓縮迴圈,~2 cycles/元素貼近掃描地板;手寫 SIMD 掩碼上限僅 −10%
+
+- 日期:2026-09-17
+- 分析對象:`library/coretests/benches/iter.rs` 的 `bench_next_chunk_filter_map_even`(`[i32;1024].iter().filter_map(|&i| (i%2==0).then(|| i)).next_chunk::<32>()`——掃 64 個元素取 32 個偶數)
+- 基線:**52.6 ns/iter**(0.82 ns/元素 ≈ 2.4 cycles),IPC 4.77,branch-miss 0.00%;同組 `filter_even` 61.6、`filter_map_predictably_true` 28.4、`copied`(TRA)37.6
+> **2026-10-08 修正**:本章「貼近掃描地板」的結論**不成立**。該內層迴圈對每個被掃過的元素都無條件 store,改為條件式 store 後 `filter_even` −15.3%、`mostly_false` 家族 −38…−41%(見 `iter::bench_next_chunk_*` 章)。本章實測的 2.4 cycles/元素是該實現的成本,不是掃描本身的下限。
+- 實現:`library/core/src/iter/adapters/filter_map.rs` 的 `FilterMap::next_chunk` 覆寫——`try_for_each` 內無條件把 `Option<B>` 的 payload 拷進 `array[idx]`,`idx += val.is_some()`,滿 N 即 `Break`
+
+## 熱迴圈(99.75% 在閉包,單一迴圈)
+
+```asm
+3a1f0: ldr  w13, [x12, x11]        ; a[i]
+       str  w13, [x27, x10, lsl #2] ; array[idx] = i(無條件寫)
+       mvn  w14, w13
+       and  x10, x14, #0x1          ; pred = (i & 1) == 0
+       add  x10, x15, x10           ; idx += pred
+       cmp  x10, #0x20
+       b.cs 3a158                   ; idx == 32 → Break   (44% 樣本:等 idx 鏈)
+       add  x11, x11, #0x4
+       cmp  x11, #0x1, lsl #12
+       b.ne 3a1f0
+```
+
+9 條/元素、零數據依賴分支,唯一的 loop-carried 鏈是 `idx`(1 cycle add)+ 以 `idx` 為地址的 store。`Option<B>` 的 `then`/payload 拷貝/`forget` 全被摺掉,和 `filter` 的 `next_chunk_dropless` 設計意圖一致。
+
+## 對照(探針,同語義:掃到 32 個偶數即停)
+
+| 形態 | ns |
+|---|---:|
+| 官方 `filter_map(..).next_chunk::<32>()` | 48.7–52.3 |
+| 手寫:`MaybeUninit` 輸出 + 分支 `if even { push; if n==32 return }` | 63.3 |
+| 手寫:`while n<32 { next() }` | 60.1 |
+| 手寫:2× 展開無分支 | 46.4 |
+| 手寫:8 寬 SIMD 掩碼 + 標量壓縮(非泛型上限) | 43.5 |
+| **地板**:`filter_map(..).nth(31)`(只掃不寫) | 43.7 |
+| `-Ctarget-cpu=native` / `-unroll-runtime` | 52.5(無變化) |
+
+現實現比樸素分支寫法快 15–20%,離「只掃描不輸出」的地板差 5–9 ns(≈ 32 次 store + 收尾的 128 B `array_assume_init` 搬運);SIMD 掩碼上限也只到地板,因為瓶頸在 `idx` 依賴鏈與 store,不在謂詞計算。真正的壓縮向量化(`vcompress`/SVE `compact`)需要 `T: Copy` 定寬特化,收益上限 ~10%,不值得。
+
+## 附帶:`filter_even` 比 `filter_map_even` 慢 17%
+
+`Filter::next_chunk_dropless` 的元素是 `&i32`(8 B),熱迴圈多了 `ldr x10,[sp,#1248]`(每輪從棧重載迭代器指標)和 `ldp q1,q0,[sp,#976]`;閉包經 `&mut array`/`&mut initialized` 捕獲,LLVM 沒把 `initialized` 完全提進暫存器。`FilterMap` 版用 `Guard` 結構卻更乾淨——差異是閉包捕獲形態的 SROA 運氣,可能值 ~9 ns,但 `filter_even` 不是本次對象,記作線索。
+
+## 判斷
+
+1. `FilterMap::next_chunk` 已是無分支壓縮形態,2.4 cycles/元素,距地板 ≤10%,手寫與編譯器旗標均無法超越。**排除**。
+2. ~~線索:`Filter::next_chunk_dropless` 的閉包捕獲形態有 ~15% 棧往返,可另查。~~(已於 `bench_next_chunk_filter_even` 章證偽:差距是 `&i32` vs `i32` 元素寬度,Guard 形態同碼。)
+3. x86:同構,無 SVE `compact` 的平臺上限相同。
+
+## 復現
+
+```bash
+BIN=build/.../corebenches-14ea307f41bce867
+$BIN --bench 'next_chunk'
+perf annotate ...   # 44% 在 cmp idx,#0x20(idx 鏈),單迴圈 9 條/元素
+# 探針:/tmp/btree_bench/probe_nc/{probe,probe2}.rs
+```
+
+# `hash::set_ops::set_difference`:91 ns = 10 次 `large.contains`,每次 SipHash-1-3 ≈ 5.9 ns + hashbrown probe ≈ 3.7 ns;算法與 probe 已最優,2/3 是 HashDoS 防護的有意代價
+
+- 日期:2026-09-17
+- 分析對象:`library/std/benches/hash/set_ops.rs::set_difference`(`small(0..10).difference(&large(0..100)).count()`,small ⊂ large,10 次 lookup 全命中、全被過濾)
+- 基線:**91.4–93.1 ns/iter**(官方 `stdbenches` 二進位直跑;`./x bench library/std` 本工作樹仍遇 `duplicate lang item`,與 `set_union` 章同);同組 `set_is_subset` 92.7、`set_intersection` 98.0、`set_union` 92.2、`set_symmetric_difference` 892.7
+- 實現:`library/std/src/collections/hash/set.rs` 的 `Difference::next` = `self.iter.find(|e| !other.contains(e))`,`count` 經 `fold` 內聯;`contains` → hashbrown `find` → SipHash-1-3 + group probe
+- 前置:`set_union` 章(2026-08-21)已對同一條 difference 路徑做過分解,本章補官方 harness 直測數字、miss 路徑對照與流水化可行性
+
+## 官方 harness 畫像
+
+99.86% 樣本在 `set_difference` 閉包單符號(整鏈內聯)。1.38G 指令 / 0.52G 週期,IPC 2.65,branch-miss 0.01%——純指令與依賴鏈,無事件。
+
+## 分解(探針,同構)
+
+| 成分 | ns | 每次 lookup |
+|---|---:|---:|
+| `small.difference(&large).count()`(官方形態) | 97.3 | 9.7 |
+| `small.iter().count()`(10 元素 RawTable 掃描) | 0.65 | — |
+| 10× `BuildHasher::hash_one(i32)`(只算 SipHash) | 59.4 | **5.9** |
+| ⇒ probe(h1 定位 group、8 B control 比較、h2 確認、key 比對) | — | **3.7** |
+| 10 次 `contains` 手寫迴圈 | 103.6 | 10.4 |
+| **不相交**(10 次 miss) | 87.3 | 8.7(h2 不匹配即返回,省 1 ns) |
+| **FxHash** 同形態 | **33.6** | 3.4 |
+
+SipHash-1-3 對 4 B key 的固定成本 ~6 ns(初始化 4 個 v、1 輪壓縮 + 3 輪 finalize、加上 `RandomState` 的兩個 key 載入),probe ~3.7 ns。換 FxHash 整體 −65%。
+
+## 流水化不可行
+
+唯一想得到的 std 側方向是「先算 10 個 hash 再 probe」讓 SipHash 與 probe 重疊。實測「hash 10 個進陣列 + 10 次 contains」164 ns(hash 算了兩次,證明 hashbrown 沒有暴露「用預算 hash 查找」的公開 API;`RawTable::find(hash, eq)` 是 hashbrown 內部,std 的 `HashSet` 只包 `hashbrown::HashSet`,無法從 `Difference` 觸及)。且 10 次獨立 SipHash 之間 CPU 亂序本已可重疊——各 lookup 之間沒有真依賴,IPC 2.65 說明流水線並未空轉,顯式流水化的收益上限遠低於 `set_union` 章估的 30%。(獨立/串行依賴 SipHash 對照探針因工具環境中斷未跑;結論不依賴它。)
+
+## 判斷
+
+1. `difference` 的「小側逐元素查大側」是唯一正確算法;RawTable 掃描 0.065 ns/元素、probe 3.7 ns 均貼近極限。**排除**,與 `set_union` 章結論一致。
+2. 91 ns 的 2/3 是 SipHash——HashDoS 防護的語義選擇,不是病灶;用戶側 `FxHashSet`/`ahash` 一行 −65%。
+3. `set_symmetric_difference` 893 ns 同機理但**另有專章**(見下):查找次數是 `|A|+|B|` = 110 而非 10,兩個 `difference` 串接使成本翻倍於同族。
+4. x86:`set_union` 章已做 SWAR probe 的 llc 對照,逐步同構;SipHash 標量輪同構。
+
+## 復現
+
+```bash
+BIN=build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/5276defc8035ff52/out/stdbenches-5276defc8035ff52
+LD_LIBRARY_PATH=build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib $BIN --bench 'set_ops'
+# 探針:/tmp/btree_bench/probe_set/probe.rs(分解 / 不相交 / FxHash / 預算 hash)
+```
+
+# `fmt::write_u8_min`:54 ns 中 ~26 ns 是 AArch64 前端停頓——`format!` 的空 String 首次寫入走 `grow` 把調用鏈加深到觸發 return-stack 溢出;`estimated_capacity()=8` 令本項 −47%,但把 stall 原封不動搬到 `u64_max`/`u128_max`(+48%/+34%),不可落地
+
+- 日期:2026-09-17
+- 分析對象:`library/coretests/benches/fmt.rs::write_u8_min`(`format!("{}", black_box(u8::MIN))`)
+- 基線:**54.0–54.4 ns/iter**;`write_u8_max` 52.6、`write_u64_min` 55.2、`write_u64_max` 44.5、`write_u128_min` 57.5、`write_u128_max` 63.3
+- 實現鏈:`format_inner`(`estimated_capacity()` 對「以佔位符開頭且字面量 <16」的模板返回 **0**)→ `String::with_capacity(0)` → `fmt::write` → `<u8 as Display>::fmt` → `pad_integral` → `write_prefix` → `String::write_str` → `Vec::extend_from_slice` → `reserve` → `do_reserve_and_handle`(cold)→ `grow_amortized` → `finish_grow`(cold)→ `__rust_alloc` → `malloc`
+- 前置:`write_u64_min` 章(2026-08-21)已發現「min 的機制段比 max 貴 ~23 ns、無法定量歸因」;本章給出歸因
+- 後續(2026-09-30):`write_u8_max` 章以固定 2000 萬次迭代 + `perf stat` 直接驗證本機制——兩個 arm 的指令數逐位元組相同(496 / 576),差異全在 `STALL_FRONTEND`;並確認該 8 ns 差距僅見於 2026-09-15 的舊 libstd
+
+## 分解(探針,靜態鏈接 libstd)
+
+| 成分 | ns |
+|---|---:|
+| `format!("{}", u8::MIN)` | 32.7 |
+| `u8::MIN.to_string()`(`SpecToString`:`with_capacity(3)` + `_fmt` + `push_str`,不經 `fmt::write`) | 14.9 |
+| `String::with_capacity(1)` + `push('0')`(分配地板) | 11.6 |
+| `write!` 進復用 String(fmt 機制,無分配) | 12.4 |
+| `u8::_fmt` 進棧緩衝(轉換本體) | **1.7** |
+| `with_capacity(0)` + `write!`(= `format!` 路徑) | 27.7 |
+| `with_capacity(8)` + `write!` | 23.8 |
+
+靜態鏈接下 `format!` 只有 33 ns,fmt 機制 ~11 ns、分配 ~11 ns、grow 額外 ~4 ns,全部合理。**但官方 harness 是 54 ns**——差的 21 ns 只在 `-Cprefer-dynamic`(bootstrap 給 bench crate 的鏈接方式)下出現。
+
+## 歸因:前端停頓,由調用深度觸發
+
+同一探針靜態 vs 動態鏈接的 PMU 對比(每 iter):
+
+| | 指令 | 週期 | `STALL_FRONTEND` | `BR_MIS_PRED` | `L1I_REFILL` | `L1I_TLB_REFILL` |
+|---|---:|---:|---:|---:|---:|---:|
+| 靜態 `format!` | 467 | 93 | 0.1 | 0.01 | 0 | 0 |
+| **動態 `format!`** | 491 | **157** | **44** | 0.1 | 0 | 0 |
+| 動態 `with_capacity(8)+write!` | 380 | 74 | 0.1 | — | — | — |
+| 官方 harness `write_u8_min`(每 100 週期) | — | 100 | **29** | 0.10 | 0 | 0 |
+
+指令只多 5%,週期多 68%,全是 `STALL_FRONTEND`;icache/iTLB/分支預測全零。停頓採樣落點:`malloc` 入口 53%、`format_inner` 裡 `bl core::fmt::write@plt` **之後的第一條指令** 36%——即**從深層返回時取指停頓**,典型的 return-address-stack 溢出徵狀(返回目標從 RSB 掉出,改由 BTB/順序取指恢復)。
+
+決定性實驗——人為在 `format!` 外再包 k 層 `#[inline(never)]` 空函數:
+
+| 額外深度 k | 動態:週期 / STALL_FE | 靜態:週期 / STALL_FE |
+|---|---:|---:|
+| 0 | 91 / 0 | 86 / 1 |
+| 1 | 97 / 2.5 | 89 / 1 |
+| **2** | **133 / 28** | 87 / 1 |
+| 3 | 155 / 45 | 89 / 1 |
+| **5** | 168 / 53 | **128 / 25** |
+| 8 | 178 / 59 | 158 / 46 |
+
+動態鏈接在 +2 層觸發,靜態在 +5 層觸發——差 3 層恰好是 PLT stub 與跨 so 的 `format_inner`/`fmt::write`/`__rust_alloc` shim 不被內聯所多出的幀。短鏈的 `with_capacity(8)+write!` 要到 +8 層才觸發,純 `malloc/free` 到 +12 層仍不觸發。**本核的有效 RSB 深度在 `format!` 的 grow 路徑上恰好被踩滿**:harness 的 `Bencher::iter → 閉包 → format_inner → fmt::write → Display::fmt → pad_integral → write_prefix/write_str → extend_from_slice → do_reserve_and_handle → grow_amortized → finish_grow → __rust_alloc → __rdl_alloc → malloc → _int_malloc` 十餘層,`grow` 那 3 個 cold 幀是壓垮的最後一根稻草。
+
+## 原型:`estimated_capacity()` 對佔位符開頭模板返回 8 而非 0
+
+官方 harness,3 次交錯:
+
+| benchmark | 現狀 | cap=8 | 變化 | STALL_FE/100cyc 現狀→cap8 |
+|---|---:|---:|---:|---:|
+| `write_u8_min` | 54.3 | **28.8** | **−47%** | 29 → 0.1 |
+| `write_u8_max` | 52.6 | 29.9 | −43% | — |
+| `write_u64_min` / `u128_min` | 55.2 / 57.5 | 29.0 / 30.2 | −47% | — |
+| `write_u64_max`(20 B) | 44.4 | **65.1** | **+47%** | 2.7 → **25** |
+| `write_u128_max`(39 B) | 63.7 | **85.2** | **+34%** | 12.6 → 14 |
+| `write_i*_{hex,oct,bin,exp}`(17 項)、`write_str_*`/`write_vec_*`(11 項) | — | ±2% | 持平 |
+
+> **出處註記(2026-09-30)**:本表的「現狀」欄取自**舊 libstd**(`core_base`,2026-09-15),故 `write_u64_max` 記為 44.4;當前樹上該項為 51.5–51.8(六項見 `write_u8_max` 章),差距是佈局效應而非本原型造成。cap=8 的**相對**效果(把停頓從 min 轉移到 max)與該表的定性結論不受影響。
+
+停頓沒有消失,只是換了受害者:cap=8 讓 "0" 不再 grow(鏈短 3 層,退出 RSB 溢出區),卻讓 20 B/39 B 輸出從「一次 grow」變成「先分配 8 再 realloc」——同樣的深鏈。容量掃描(動態鏈接,每 iter 週期 / STALL_FE):
+
+| 預分配 | "0" | u64::MAX 20 B | u128::MAX 39 B | 100 字符 |
+|---|---:|---:|---:|---:|
+| 0(現狀) | 90 / 0 | 116 / 0 | 149 / 0 | 84 / 0 |
+| 8 | 75 / 0 | 126 / 3 | 263 / **43** | 193 / **41** |
+| 16 | 75 / 0 | 244 / **55** | 262 / 41 | 192 / 41 |
+| 24 | 76 / 0 | 104 / 0 | 263 / 41 | 192 / 41 |
+| 40 | 75 / 0 | 99 / 0 | 134 / 0 | 193 / 41 |
+
+任何固定非零估計都只是把「哪個長度會踩到 realloc 深鏈」挪一挪;現狀的 0(一次 grow 到精確大小)對長輸出反而是最優。
+
+## 判斷
+
+1. `write_u64_min` 章的未解之謎已關閉:min 比 max 慢的 ~20 ns 是 **AArch64 前端 return-stack 溢出停頓**,由「動態鏈接 + 空 String 首寫走 grow」的調用深度觸發,與分配器路徑、分支預測無關。
+2. **不建議改 `estimated_capacity`**:任何固定值都把停頓轉移到另一個輸出長度,總體零和;現狀對長輸出最優。**排除**。
+3. 真正的槓桿在鏈深本身:(a)`format_inner` 對整數 Display 走 `SpecToString` 式直寫(15 ns,但 `format!` 的 `Arguments` 在運行時不知道參數類型,需要編譯期特化);(b)把 `do_reserve_and_handle → grow_amortized → finish_grow` 三個 cold 幀合併——通用收益不明,且 x86 的 RSB 深度不同(通常 16–32),本機 HiSilicon 的觸發點不代表其他核。
+4. harness 注記:`-Cprefer-dynamic` 使 std 的 bench 比用戶靜態鏈接的程式多 3 層;這組 `write_*_min` 數字對真實(靜態)程式**高估 ~65%**。
+
+## 復現
+
+```bash
+BIN=build/.../corebenches-14ea307f41bce867
+LD_LIBRARY_PATH=... perf stat -e cycles,r23,r10 $BIN --bench 'fmt::write_u8_min'   # r23=STALL_FRONTEND 29%
+# 探針:/tmp/btree_bench/probe_fmt/{probe,cap,cap2,chain,depth,depth2,capn}.rs(拆分/容量/鏈環/深度掃描/容量×長度)
+# 原型:core/src/fmt/mod.rs estimated_capacity 返回 8(已回退);二進位 /tmp/btree_bench/core_cap8/
+```
+
+# `btree::map::from_iter_rand_10_000`:218 µs 中 ~140 µs(65%)是 `sort_by` 排序,`bulk_build` 55 µs;排序是通用 driftsort,13.3 次比較/元素已是比較排序的形態,無 std 病灶
+
+- 日期:2026-09-17
+- 分析對象:`library/alloctests/benches/btree/map.rs::from_iter_rand_10_000`(10 000 個 `(u32, u32)`,key 為 `rng % n`,約 6 337 個唯一鍵;`vec.iter().copied().collect::<BTreeMap>()`,結果 map 在 `b.iter` 內 drop)
+- 基線:**218–230 µs/iter**;`from_iter_seq_10_000` 200 µs(已排序輸入,排序退化為一趟掃描,見 §11 章 −51%)
+- 實現:`FromIterator for BTreeMap` = `collect::<Vec>()` → `sort_by(|a,b| a.0.cmp(&b.0))`(穩定,保留重複鍵的插入序以便 dedup 取最後值)→ `bulk_build_from_sorted_iter`(`DedupSortedIter` + `bulk_push` 右脊柱追加)
+
+## perf 畫像
+
+| 符號 | 佔比 |
+|---|---:|
+| `sort::stable::quicksort`(driftsort 主體) | 32.2% |
+| `smallsort::small_sort_general_with_scratch` | 23.1% |
+| `sort::stable::...::sort8_stable` / `median3_rec` / `drift::sort` | 11.1% |
+| **排序合計** | **~66%** |
+| `append::bulk_push`(NodeRef Owned) | 17.6% |
+| bench 閉包本體(collect 到 Vec + drop) | 3.9% |
+| memcpy / malloc / consolidate | 7.2% |
+
+1.79G 指令 / IPC 3.12,**branch-miss 5.54%**——全在排序的比較分支(隨機鍵,比較排序的本質熵);L1d miss 僅 2M。quicksort 熱點是分區迴圈的 `ldr` 載入鍵 + 比較。
+
+## 分解(探針,同構 LCG 輸入,6 337 唯一鍵)
+
+| 成分 | µs | 每元素 |
+|---|---:|---:|
+| 官方形態(clone → from_iter → drop) | 211 | 21 ns |
+| `Vec` clone | 1.2 | — |
+| **`sort_by(key)` 穩定** | **138** | **13.8 ns ≈ 13.3 次比較 × ~1 ns** |
+| `sort_unstable_by_key` | 145 | 不更快(ipnsort 對 8 B 元素無優勢) |
+| `sort()` 全元組 Ord | 209 | +50%(多比較第二字段) |
+| LSD radix 2×16-bit(非泛型對照) | 144 | 桶計數 1 MB 初始化吃掉收益 |
+| `bulk_build` 不 drop | 57 | 5.7 ns/元素 |
+| `bulk_build` + drop | 47–54 | drop 已被 §11 節點級釋放覆蓋 |
+| 對照:逐個 `insert` | 697 | 3.3× 慢——bulk 路徑本身正確 |
+
+## 判斷
+
+1. `FromIterator` 的「排序 + 順序批量建樹」是正確策略(比逐個 insert 快 3.3×);排序用的是 std 通用 driftsort,13.8 ns/元素對 10 k 隨機 u32 鍵是比較排序的正常水準,`sort_unstable` 亦無改善。`bulk_push` 5.7 ns/元素(每 11 元素填一葉、每 ~121 元素升一層)已貼近逐元素寫入成本。**排除**。
+2. 非比較排序(radix)對 `K: Ord` 泛型接口不可用;即便對整數鍵特化,10 k 規模下桶初始化成本抵消收益,需 ≥100 k 才划算——不是 std 該做的判斷。
+3. `from_iter_seq` 與 `from_iter_rand` 的 200 vs 218 µs 差距小,說明 seq 版有一半時間在 drop(§11 已修 −51%);rand 版 drop 佔比小(§10+§11 補丁 −3.6%),主體是排序。
+4. x86:driftsort 的分區/小排序在 x86 有 `cmov`/`pcmpgt` 同構實現,比較次數相同,無平臺差異。
+
+## 復現
+
+```bash
+BIN=build/.../allocbenches-2cf0e8badf7482bf
+$BIN --bench 'btree::map::from_iter'
+perf record $BIN --bench btree::map::from_iter_rand_10_000   # 排序 66% / bulk_push 18%
+# 探針:/tmp/btree_bench/probe_fi/{probe,probe2}.rs(拆分 / 排序變體 / radix 對照 / build-vs-drop)
+```
+
+# `iter::bench_enumerate_ref_sum`:Enumerate 計數器已融進歸納變量(`mul x10,x10`),7 條/元素的迴圈裡 35% 是 `black_box` 的 stur/ldur 棧往返;ref ≡ value,無 std 病灶
+
+- 日期:2026-09-17
+- 分析對象:`library/coretests/benches/iter.rs::bench_enumerate_ref_sum`(`(0i64..1M).enumerate().map(|(i,x)| x*i as i64).map(black_box).by_ref().sum()`)
+- 基線:**540.6 µs/iter = 0.541 ns/元素 ≈ 1.57 cycles**;`bench_enumerate_sum`(value 版)540.6,逐條同碼;IPC 4.46,branch-miss 0.00%
+- 前置:`bench_enumerate_chain_ref_sum` 章已證 `bench_sums!` 的 value/ref 對照全系失效(`&mut I` 轉發 `try_fold`);本章補非 chain 版的逐指令歸因與屏障成本定量
+
+## 熱迴圈(99.65% 單符號)
+
+```asm
+7a5f0: mul  x11, x10, x10       ; x*i,且 i == x → 融合成 i²(Enumerate 計數器零殘留)
+       add  x10, x10, #1
+       cmp  x20, x10
+       stur x11, [x29, #-32]    ; ┐ map(black_box):值經記憶體往返
+       ldur x11, [x29, #-32]    ; ┘
+       add  x9, x11, x9         ; sum
+       b.ne 7a5f0
+```
+
+7 條/元素,83% 樣本落在 `mul`(等前一輪 `ldur` 的 store-forwarding)。
+
+## 拆分(探針)
+
+| 形態 | ns/元素 |
+|---|---:|
+| 官方 ref 版 | 0.541 |
+| value 版(無 `by_ref`) | 0.541(同碼) |
+| 去掉 `black_box` | **0.000**——LLVM 把 Σi² 閉式求解,整個迴圈消失 |
+| 只留屏障:`(0..1M).map(black_box).sum()` | 0.353 |
+| 手寫 `s += black_box(i*i)` | 0.541(與官方同) |
+| 手寫,屏障改為暫存器級 `asm!` inout(無 store/load) | **0.352(−35%)** |
+
+`black_box` 的實現是「值落棧 + 記憶體 clobber + 重載」,每元素一對 stur/ldur 加一次 store-to-load forwarding 延遲;把屏障換成不經記憶體的暫存器 asm 後,mul+add+cmp+add+b 五條指令跑 0.35 ns ≈ 1 cycle/元素,即本核的 IPC 上限。**這組 bench 的絕對值有 35% 是屏障本身的實現方式**,與被測的 Enumerate/Map/sum 無關。
+
+## 判斷
+
+1. `Enumerate`/`Map`/`&mut I`/`sum` 在此形態下零開銷:計數器融合、無狀態檢查、無調用。**排除**。
+2. 與 chain 版結論一致:value/ref 對照失效,`bench_enumerate_sum`/`_ref_sum` 是同一份機器碼;若要對照有意義需真正的 dyn 邊界(注意 `&mut dyn Iterator` 在同函數內會被去虛化——探針中亦被閉式求解成 0)。
+3. `core::hint::black_box` 走記憶體是為了對所有類型通用;bench 側若想量純計算路徑,應改用暫存器級 asm 屏障。
+4. x86:前章已做 llc 對照,同構。
+
+## 復現
+
+```bash
+BIN=build/.../corebenches-14ea307f41bce867
+$BIN --bench 'iter::bench_enumerate'
+# 探針:/tmp/btree_bench/probe_en/probe.rs(閉式/屏障/暫存器屏障/dyn)
+```
+
+# `num::int_bits::u16::constant::deposit_bits`(原名 `scatter_bits`):常量掩碼下 `prepare()` 已被完全常量摺疊,熱迴圈 28 條 NEON 位運算 / 16 元素,0.245 ns/元素;掩碼特化的 morton 形態能省 22%,但那是掩碼結構特化而非通用改進
+
+- 日期:2026-09-18
+- 分析對象:`library/coretests/benches/num/int_bits/mod.rs` 的 `u16::constant::deposit_bits`(512 個 u16,掩碼 `const U::MAX/3 = 0x5555`,經 `black_box` 的 fn 指標調用 `vectored`;`scatter_bits` 已於 29596f87becf 更名 `deposit_bits`,API 仍 unstable `uint_gather_scatter_bits`)
+- 基線:**123–125 ns/iter = 0.245 ns/元素 ≈ 0.7 cycles**;同組 `constant::extract_bits` 150、`invariant::deposit` 188、`variable::deposit` 830
+- 實現:`library/core/src/num/imp/int_bits.rs` 的 `deposit_impl`:`prepare(mask)` 算 `STAGES = log2(BITS)` 個階段掩碼,每階段 `q = x & m; x ^= q; x ^= q << n`,最後 `& mask`;無任何架構特化(x86 BMI2 `pdep` 亦未使用)
+
+## 熱迴圈(99.5% 單符號,`vectored` 被完整向量化)
+
+`prepare(0x5555)` 在編譯期摺疊為 3 個非零階段掩碼(`0x00F0`/`0x30F0`/`0x0F0F`-類常量進 `v0..v4`),迴圈每次處理 2×8 個 u16:
+
+```asm
+c86dc: ldp  q5, q6, [x9, #-16]        ; 32 B(85.7% 樣本:等載入)
+       and/bic/shl/orr/eor ×2         ; 階段 n=4:5 條/向量
+       shl/and/and/eor ×2             ; 階段 n=2:4 條/向量
+       add/and/and/orr ×2             ; 階段 n=1(shl #1 → add v,v):4 條/向量,含最終 & mask
+       stp  q5, q6, [x8, #-16]
+```
+
+28 條向量 ALU / 迭代(16 元素),IPC 3.35,branch-miss 0.02%。0.7 cycles/元素已是 NEON 吞吐(4 個向量 ALU 端口的 ~1.75 op/cycle × 16 lane)。
+
+## 對照(探針,同 512×u16、同 fn 指標形態;三者輸出逐位相等)
+
+| 形態 | 向量 ALU/迭代 | ns | 每元素 |
+|---|---:|---:|---:|
+| 現狀 `deposit_bits(0x5555)` | 28 | 125.2 | 0.245 |
+| 現算法改寫為 `(x & !m) \| ((x & m) << n)` | 24 | 115.8 | 0.226(−7%) |
+| **0x5555 專用 morton spread** `x = (x \| x<<n) & m'`(3 階段 × 3 條) | 20 | **97.5** | **0.190(−22%)** |
+| 現狀 `extract_bits(0x5555)` | — | 151.8 | 0.296 |
+
+通用算法每階段 4 條(and, and-not, shl, eor);morton 每階段 3 條是因為 0x5555 的 run 等長、位移互不重疊,可用 `or` 合併並讓一個 `and` 同時完成「選位」與「清位」。這個結構對任意掩碼不成立(通用情形位移落點含任意位,需 xor 語義),所以 22% 是**掩碼結構特化**的收益,不是算法缺陷。
+
+## `variable` 與 `invariant` 檔位
+
+`variable::deposit_bits` 830 ns(6.7×):每元素重算 `prepare()`——3 階段 × parity 前綴 xor(4 次 `p ^= p << len`)≈ 48 條向量運算全在串行依賴鏈上,IPC 1.46。這是「無硬體 pdep 時逐元素可變掩碼」的固有成本;本核有 SVE 但無 SVE2 `BDEP/BEXT`(`/proc/cpuinfo` 無 `svebitperm`),無硬體路徑可走。`invariant` 188 ns 介於兩者:LLVM 沒把 `src[0]` 的 `prepare()` 提出迴圈(fn 指標調用邊界 + `prepare` 未標 `#[inline]` 之外的 hoist 判斷),多付一次每迭代的掩碼計算——若要優化,是把 `prepare` 提到迴圈外,那是調用方(bench)的形態問題。
+
+## 判斷
+
+1. 常量掩碼下實現已達 NEON 吞吐,通用算法 4 條/階段是 xor 語義所需;**排除**。
+2. 可探討但不推薦:`const fn` 內對「所有 run 等長且與位移對齊」的掩碼走 morton 形態——收益 22%,適用面窄,且此 API 尚 unstable。
+3. **x86 線索**:`int_bits.rs` 無任何 `target_feature` 分派,BMI2 機器上 `pdep`/`pext` 單指令(3 cycles)未被使用;對 `variable` 檔位可從 ~1.6 ns/元素降到 ~0.1。本機無法實測,記為 x86 側候選。
+4. ARM 側:SVE2 `BDEP.B/H/S/D` 同樣是單指令,對支持 `sve2-bitperm` 的核(Neoverse V2 等)可做同樣特化;本機不支持。
+
+## 復現
+
+```bash
+BIN=build/.../corebenches-14ea307f41bce867
+$BIN --bench 'int_bits::u16'
+perf annotate ...   # 85.7% 在 ldp(載入等待),28 條向量 ALU/16 元素
+# 探針:/tmp/btree_bench/probe_bits/probe.rs(現狀 / or-form / morton / extract 對照 + asm 計數)
+```
+
+# `str::char_indicesator`:11 ns 即 SWAR `count_chars`,無事;但 `_rev` 姊妹項 35 ns 是因為 `Rev::count` 走逐字符 `next_back`——對 `Rev` 轉發 `count` 到內層即 −68%(4 KB 串 9×)
+
+- 日期:2026-09-18
+- 分析對象:`library/alloctests/benches/str.rs::char_indicesator`(65 B / 51 char 混合串,`s.char_indices().count()`)與 `char_indicesator_rev`(`.rev().count()`)
+- 基線:**11.3 ns**(forward)/ **34.9 ns**(rev);`char_iterator` 11.5 / `char_iterator_rev` 48.0
+- 實現:`CharIndices::count` → `Chars::count` → `count::count_chars`(SWAR,見 `str::char_count` 章);`Rev<I>::count` **無覆寫** → 默認 `fold` → `Rev::fold` → `I::rfold` → 逐字符 `next_code_point_reverse`
+
+## forward:已在 SWAR 路徑,bench 本身還被部分常量摺疊
+
+官方二進位裡 `Bencher::iter` 閉包直接 `bl do_count_chars@plt`(常量 `&str` 的長度/指標可見,`char_indices()` 的 `front_offset` 簿記全消失);perf 樣本 92% 落在 `ld.so`/`calloc`(11 ns 的 bench 跑不滿採樣窗)。探針用 `black_box` 串:forward `char_indices().count()` 12.0 ns = `chars().count()` 12.0 ns。**無病灶。**
+
+## rev:逐字符反向解碼,3× 慢
+
+`Rev::count` 落到 `Chars::rfold` → 每字符 `next_code_point_reverse`(從尾部讀 1–4 個字節、判斷 continuation),熱迴圈 `ldrsb; tbz; ldrsb; cmn; b.gt ...` 每字符 ~8 條 + 1 個難預測分支(ASCII/多字節混合,branch-miss 顯著)。47.0G 指令 / 51 字符 ≈ 17 條/字符(含 assert);而 forward 的 SWAR 是 0.23 ns/B。
+
+`count()` 的結果與方向無關,`Chars`/`CharIndices`/`Bytes`/`slice::Iter` 都有 O(1) 或 SWAR 的 forward `count`——`Rev` 只需轉發。
+
+## 原型(`library/core/src/iter/adapters/rev.rs`,+8 行)
+
+```rust
+#[inline]
+fn count(self) -> usize { self.iter.count() }   // 與 advance_by → advance_back_by 同一風格
+```
+
+| benchmark / 探針 | 現狀 | 原型 | 變化 |
+|---|---:|---:|---:|
+| `str::char_indicesator_rev` | 34.9 ns | **11.2 ns** | **−68%** |
+| `str::char_iterator_rev`(`chars().rev().count()`) | 48.0 | **11.5** | **−76%** |
+| 探針 `chars().rev().count()` 4160 B | 2165 ns | **239**(= forward) | **9.1×** |
+| `slice.iter().rev().count()` / `(0..n).rev().count()` | 0 / 0.64 | 0 / 0.46 | 已是 O(1) |
+| `chars().rev().filter(..).count()` | 2342 | 2344 | 不受影響(Filter 在 Rev 外層) |
+| `str::char_*` 其餘 5 項 | — | ±2% | 持平 |
+
+coretests `rev` 27 項 + `iter` 330 項 + alloctests 113 項全過。
+
+## 落地注意:副作用順序
+
+`Iterator::count` 文檔為「反覆調用 `next` 直到 `None`」,`Rev::next = next_back`,因此 `(0..3).map(|x| { print!("{x}"); x }).rev().count()` 現在輸出 `210`;上述原型會變成 `012`(`Map` 無 `count` 覆寫,經 forward `fold`)。純 `Chars`/`Bytes`/`slice::Iter` 無副作用,轉發安全;但對任意 `I` 的 blanket 轉發改變可觀察順序。**正確落地形態**是內部 `min_specialization` trait(如 `SpecRevCount`):default 走現有 `rfold` 計數,對 `str::Chars`/`CharIndices`/`Bytes`/`slice::Iter<T>`/`Copied<slice::Iter>` 等已知純源特化為 `self.iter.count()`。收益不變,語義零改動。
+
+## 判斷
+
+1. `char_indices().count()` forward 無事;**`Rev::count` 缺特化**是真病灶,影響所有 `.rev().count()`。
+2. 原型 8 行;落地需改為特化 trait 以保住副作用順序(工程量 ~30 行)。x86 同構(純算法路徑選擇)。
+3. 另一線索:`str::char_iterator_rev_for`/`char_iterator_for`(逐字符 `for` + `black_box`)36–39 ns 是逐字符解碼 + 屏障,與 `chars().count()` 章結論同,不另立。
+
+## 復現
+
+```bash
+BIN=build/.../allocbenches-2cf0e8badf7482bf
+$BIN --bench 'str::char_'
+# 原型:core/src/iter/adapters/rev.rs 加 count 轉發(工作樹,未提交;補丁 /tmp/btree_bench/rev_count.patch)
+# 探針:/tmp/btree_bench/probe_ci/{probe,rev}.rs
+```
+
+# `ascii::medium::case07_fake_simd_u32`:這不是 std 接口而是 bench 內的手寫 SWAR 對照組——它比 libcore 慢 32%、且對 `\xFF` 相鄰字節算錯(源碼自帶 FIXME);medium 檔 76% 是 `to_vec` 分配
+
+- 日期:2026-09-20
+- 分析對象:`library/coretests/benches/ascii.rs` 的 `case07_fake_simd_u32`(`align_to_mut::<u32>` 後每 4 字節做 `w &= !((w+0x1f1f1f1f & !(w+0x05050505) & 0x80808080) >> 2)`,前後零頭走 `branchless_to_ascii_upper_case`);`medium` = "Alice's Adventures in Wonderland" 32 B
+- 基線:**16.2 ns/iter**;同檔 `case06_libcore`(`make_ascii_uppercase`)12.3、`case05_branchless` 12.9、`case00_alloc_only` **12.6**;long 檔(4640 B):case07 566 / case06 410 / alloc_only 190
+- 性質:case00–case09 是同一操作(ASCII 轉大寫)的 10 種寫法對照,case06 是 std 實現,其餘是手寫參照。**case07 沒有對應的 std 接口。**
+
+## medium 檔:76% 是 harness 的 `to_vec()`
+
+perf(閉包 + libc):`_int_free` 30.4% + `malloc` 22.2% + `cfree` 13.3% = **66% 在分配器**,閉包本體 29.7% 裡熱點是 `ldr x6,[x6,#24]`(`__rust_alloc` 的 shim 間接跳轉),真正的 SWAR 迴圈採樣 <5%。`case00_alloc_only` 12.6 ns 即地板;case07 的 16.2 只比它多 3.6 ns。這是 `ascii::long::is_ascii` 章已指出的宏缺陷(`to_vec` 在計時迴圈內)在 medium 檔的極端形態——32 B 上分配佔 76%,本組 10 項有 8 項擠在 12.2–12.9 ns 完全分不開。
+
+## 操作本體(探針,復用緩衝,無分配)
+
+| 形態 | 32 B | 4640 B | 每 B(long) |
+|---|---:|---:|---:|
+| case06 `make_ascii_uppercase`(std) | 6.27 ns | **133 ns** | **0.029** |
+| case05 逐字節 branchless | 6.29 | 132 | 0.028 |
+| case07 fake SWAR u32 | 7.64 | 209 | 0.045 |
+| case08 fake SWAR u64 | 7.13 | 209 | 0.045 |
+
+std 版與逐字節 branchless 版被 LLVM 自動向量化成 16 B/迭代 NEON(`cmhi`/`and`/`bic`),0.029 ns/B ≈ 34 GB/s;fake-SWAR 版因 `align_to_mut` 把切片切成三段 + u32 lane 上的加法進位模式,LLVM 對中段的向量化保守(33 條 NEON + 40 條標量 vs 18 + 11),反而**慢 57%**。「fake simd」在 2018 年寫下時是為了打敗當時未向量化的標量迴圈,現在已被自動向量化的樸素版超越。
+
+## 正確性:源碼自帶的 FIXME 是真的
+
+`case07(b"\xFFz  ")` 輸出 `[255, 122, 32, 32]`——`z` 沒有被轉大寫(期望 `[255, 90, 32, 32]`):`0xFF + 0x1f` 進位到相鄰字節,污染了 `z` 的判定位。這個對照組本身是錯誤實現,不能作為任何優化目標。
+
+## 判斷
+
+1. **無 std 接口可分析**:case07 是 bench 內的錯誤參照實現,std 的 `make_ascii_uppercase`(case06)已是自動向量化的最快形態,0.029 ns/B。**排除**。
+2. bench 側:medium/short 兩檔因 `to_vec` 佔 76–98%,10 項對照全部失效(同 `is_ascii` 章結論);case07/08 應刪除或修正進位(用 `!w & 0x80808080` 先遮 MSB 再加)。
+3. x86:自動向量化同構(SSE2 `pcmpgtb`/`pandn`),case07 的三段結構同樣不利。
+
+## 復現
+
+```bash
+BIN=build/.../corebenches-14ea307f41bce867
+$BIN --bench 'ascii::medium::case0'    # 8/10 項擠在 12.2–12.9 ns = alloc 地板
+# 探針:/tmp/btree_bench/probe_asc/probe.rs(復用緩衝 4 形態 × 2 尺寸 + FIXME 復現 + asm 計數)
+```
+
+# `vec::bench_in_place_u128_0100_i0`:102 ns = 1600 B `calloc`+`free` 走 `_int_malloc` 慢路徑(~45%)+ 100 個 16 B 元素的標量 xor 迴圈(0.31 ns/元素,store-bound);與 u8 章同一結論,無 std 病灶
+
+- 日期:2026-09-22
+- 分析對象:`bench_in_place![...]` 的 `u128_0100_i0`(`vec![0u128; 100]` → `into_iter().enumerate().map(|(i,e)| i as u128 ^ e).collect()`)
+- 基線:**101.7 ns**;同尺寸 `_i1` 109.3;`0010_i0/i1` 44.2 / 20.7;`1000_i0/i1` 527 / 715
+- 前置:`bench_in_place_xxu8_1000_i1` 章已證 in-place collect 零多餘分配、路徑等價;本章補 16 B 元素與 1600 B 分配檔的畫像
+
+## perf 畫像
+
+| 符號 | 佔比 |
+|---|---:|
+| bench 閉包(in-place 迴圈 + harness) | 41.1% |
+| `_int_malloc` | 22.7% |
+| `__memset_generic` | 9.0% |
+| `__libc_calloc` | 6.7% |
+| `unlink_chunk` / `_int_free_*` / `cfree` | 14.1% |
+| **分配器合計** | **~53%** |
+
+IPC 4.14,branch-miss 0.16%。1600 B 超過 tcache 上限(1032 B),i0 與 i1 都進 `_int_malloc`/`_int_free` 慢路徑——所以這一檔 i0/i1 只差 7%(u8 檔 i0 因 calloc 繞過 tcache 慢 83%,u128 1000 檔 i1 因 16 KB memset 反而慢 36%,三檔符號各異,再次證明測的是分配器)。
+
+## 拆分(探針)
+
+| 成分 | ns |
+|---|---:|
+| body i0 | 83.5 |
+| `vec![0u128;100]` + free(calloc 1600 B) | 38.1 |
+| body i1 / alloc i1 | 79.6 / 44.2 |
+| **迴圈單獨**(復用緩衝) | **31.4 = 0.31 ns/元素 = 0.020 ns/B** |
+
+## 迴圈:標量 `eor` × 2 / 元素,已是 store 吞吐
+
+熱點 `ldur x17,[x13,#-16]` 40% + `ldr`/`eor`/`str`——LLVM **未向量化**(u128 lane 的 `enumerate` 索引向量化需 128-bit 加法鏈,cost model 拒絕),每元素 2 載入 + 1 `eor`(高 64 位與 0 xor 被消掉)+ 2 存儲。手寫對照(輸出逐位相等):
+
+| 形態 | ns |
+|---|---:|
+| 標量(現狀) | 31.6 |
+| portable_simd 2 元素/32 B | 32.3 |
+| 只碰低 64 位(stride 16) | 31.1 |
+
+三者相同 → 瓶頸是 100 × 16 B 的讀改寫帶寬(每週期 ~1 個 16 B store),不是 ALU。無頭寸。
+
+## 判斷
+
+1. in-place collect 對 16 B 元素同樣零額外分配、迴圈在存儲吞吐上;**排除**,與 u8 章一致。
+2. `bench_in_place_*` 18 項的 i0/i1 差異全部由 glibc 分配尺寸檔位決定(tcache / `_int_malloc` / memset vs calloc),對 in-place 路徑不敏感;要守護該路徑應復用來源緩衝。
+> **2026-10-09 修正**:`bench_in_place_recycle` 因鏈中的 `.fuse()` 並未走 in-place 路徑(每輪 1 次分配);可作典範的是 `bench_in_place_zip_recycle`。見 `vec::bench_in_place_*`(22 項全覽)章。
+
+## 復現
+
+```bash
+$BIN --bench 'vec::bench_in_place_u128'
+perf record $BIN --bench vec::bench_in_place_u128_0100_i0   # 53% 分配器;閉包熱點在 ldur/eor/str
+# 探針:/tmp/btree_bench/probe_ip/{u128,u128b}.rs
+```
+
+# `iter::bench_next_chunk_filter_even`:比 `filter_map_even` 慢 17% 的原因是元素類型——`Filter` 產出 `&i32`(8 B 指標存儲)而 `FilterMap` 產出 `i32`(4 B);閉包捕獲形態的猜想被證偽,無 std 病灶
+
+- 日期:2026-09-22
+- 分析對象:`library/coretests/benches/iter.rs::bench_next_chunk_filter_even`(`[i32;1024].iter().filter(|&&i| i%2==0).next_chunk::<32>()`)
+- 基線:**60.4–61.6 ns**(`filter_map_even` 52.6);IPC 4.17,branch-miss 0.00%
+> **2026-10-08 修正**:本章把 17% 差距歸因於元素寬度(`&i32` vs `i32`)。元素寬度差確實存在,但改用**條件式 store** 後`filter_even` 61.6 → **52.2**(−15.3%),幾乎追平 `filter_map_even` 的 49.1——即 17% 的大部分來自兩者**共有**的無條件 store,而非元素寬度。見 `iter::bench_next_chunk_*` 章。
+- 實現:`library/core/src/iter/adapters/filter.rs` 的 `next_chunk_dropless`(`try_for_each` 閉包內無條件 `array[idx].write(el)`,`idx += pred`)
+- 前置:`filter_map_even` 章末尾記了一條線索「`Filter` 版閉包捕獲 `&mut array`/`&mut initialized` 令 LLVM 多了棧往返」——本章驗證該線索
+
+## 熱迴圈(99.6% 單符號)
+
+```asm
+38860: ldr  w12, [x10]              ; *el
+       str  x10, [x25, x9, lsl #3]  ; array[idx] = el(8 B 指標,無條件寫)
+       mvn/and/add x9              ; idx += even
+       cmp  x9, #0x20 ; b.cs        ; 50% 樣本:idx 鏈
+       subs/add/b.ne                ; 步進
+```
+
+10 條/元素,與 `filter_map` 的 9 條同形;差異只有 `str x10`(8 B)對 `str w13`(4 B),以及迴圈前一次 `ldr x10,[sp,#1240]` 重載迭代器指標。
+
+## 四種寫法對照(探針,同語義)
+
+| 形態 | ns |
+|---|---:|
+| 官方 `filter(even).next_chunk` | 60.4 |
+| 官方 `filter_map(even).next_chunk`(`i32` 元素) | 52.6 |
+| A:`next_chunk_dropless` 忠實複製(閉包捕獲 `&mut` 局部) | 61.1 |
+| B:同邏輯改 Guard 結構體(`FilterMap` 的寫法) | 61.1 |
+| C:顯式 `while let` 迴圈,無閉包 | 58.5(−4%) |
+| **A 但元素換成 `copied()` 的 `i32`** | **54.4** |
+
+Guard 形態與閉包捕獲形態逐 ns 相同——**前章線索不成立**;把元素從 `&i32` 換成 `i32` 即追平 `filter_map`。差距來自 `Filter<I>::Item = I::Item = &i32`:每個元素無條件寫 8 B 指標而非 4 B 值,64 次存儲多 256 B 寫帶寬,加上收尾 `array_assume_init` 搬運 256 B 而非 128 B。這是 `Filter` 的語義(借用迭代器產出引用),不是實現缺陷。
+
+## 判斷
+
+1. `Filter::next_chunk_dropless` 已是無分支壓縮形態,與 `FilterMap` 版同碼;17% 差距是元素寬度(8 vs 4 B)固有。**排除**。
+2. 撤回 `filter_map_even` 章的「閉包捕獲 SROA」線索。
+3. 顯式迴圈形 C 有 4%,但 `try_for_each` 形態是為了讓內層迭代器的 `try_fold` 特化(如 `Chain`/`Flatten`)生效,不值得換。
+
+## 復現
+
+```bash
+$BIN --bench 'iter::bench_next_chunk_filter'
+# 探針:/tmp/btree_bench/probe_nc/fe.rs(A/B/C 三形態 + copied 對照)
+```
+
+# `btree::map::find_seq_10_000`:41.7 ns 裡的病灶不在搜索而在**樹形**——升序 `insert` 建出的樹每節點僅 6 鍵(裝填率 55%),同數據 `collect` 建樹 11 鍵/節點時同一 `get` 只要 20 ns;非滿節點的 early-exit 掃描每次 get 3 次分支失誤
+
+- 日期:2026-09-22
+- 分析對象:`library/alloctests/benches/btree/map.rs::find_seq_10_000`(`for i in 0..n { map.insert(i,i) }` 建樹,然後 `get(&i)`,`i` 順序遞增取模)
+- 基線:**41.3–41.9 ns/iter**(§10+§11 補丁下 41.3,−1%);`find_seq_100` 9.4、`find_rand_10_000` 59.9;IPC 1.90,**branch-miss 6.24%**,L1d miss 極低
+- 實現:`BTreeMap::get` → `search_tree` → 每層 `find_key_index`(§10 的整數特化:滿節點無分支全掃,**非滿節點 early-exit**)
+
+## 決定性對比:同一數據、同一查詢序列、只換建樹方式
+
+分配計數(10 000 個 `(usize, usize)`):
+
+| 建樹方式 | 節點數 | 鍵/節點 | 裝填率(cap 11) |
+|---|---:|---:|---:|
+| 升序 `insert` 迴圈(官方 bench) | **1666** | **6.0** | 55% |
+| 降序 `insert` | 1666 | 6.0 | 55% |
+| `collect()`(`bulk_build_from_sorted_iter`) | 913 | 11.0 | 100% |
+
+每次順序 `get` 的 PMU(探針,2000 萬次):
+
+| | insert 建樹 | collect 建樹 |
+|---|---:|---:|
+| 週期 | **116** | **59** |
+| 指令 | 227 | 195 |
+| 分支 | 52 | 38 |
+| **branch-miss** | **2.98** | **0.10** |
+| L1d miss | 0.16 | 0.03 |
+
+ns/get 按規模:n=100 8.6 / 8.8;n=1000 15.3 / 14.0;**n=10 000 40.2 / 20.2**;n=100 000 43.1 / 28.1。
+
+## 機理
+
+1. **升序插入的樹形**:`splitpoint` 在節點滿時從中間分裂(`KV_IDX_CENTER`),右側新節點只得 5 鍵;順序插入永遠打在最右葉,於是每個左側節點被凍結在 6 鍵(這是 B-tree 對順序插入的經典行為,`splitpoint` 的 #74834 規則對「插在最右」不做偏置)。樹高 4 層而非 3 層(913 節點 → 3 層可容 11×12² = 1584 節點的葉數;1666 節點需 4 層)。
+2. **非滿節點走 early-exit**:§10 只對 `len == CAPACITY` 的節點做無分支掃描,6 鍵節點回到「首個非 Greater 即退出」迴圈。順序 `get` 每次的鍵比上一次大 1,退出位置在節點內逐格右移——每層一次分支失誤,4 層 ≈ 3 次(實測 2.98),每次 ~15 cycles ≈ 45 cycles,正好是 116 − 59 的差。
+3. 隨機 `get`(59.9 ns / 69.9 ns 探針)另加 cache miss;`find_seq_100` 兩種樹形同速(單葉)。
+
+## 嘗試:對 ≥4 鍵的非滿節點也走無分支——**大幅回退,已回退**
+
+把 `sub` 拷進 `[T::MAX; CAPACITY]` 緩衝再調 `spec_full_scan`:`find_seq_10_000` 41 → 72 ns(+75%),`find_rand_100` +248%,`range_*` +100%,`insert_seq_100` +153%,`intersection/difference` 系 +210–273%——每次搜索多 88 B 的拷貝 + 外聯調用,遠超它省下的 ~1 次分支失誤。§10 章「非滿節點保持 early-exit」的判斷是對的;無分支掃描只在**不拷貝**(節點本身已滿)時划算。
+
+## 判斷
+
+1. 搜索代碼無可改:滿節點已無分支,非滿節點的無分支化實測是淨損失。**排除**(bench 層面)。
+2. 真正的頭寸是**樹形**:順序插入產生 55% 裝填的樹,`get` 慢 2×、記憶體多 45%(342 KB vs 502 KB 但節點數 1666 vs 913——後者每節點滿載)。可探討的 std 方向是 `splitpoint` 對「插入點在最右邊緣」時偏置分裂(如 B*-tree 風格,左節點保留 CAPACITY−1),讓順序插入得到 ~90% 裝填;收益 `find_seq`/`range`/迭代 全部受益,代價是隨機插入的均衡性需重新驗證(#74834 的規則是為隨機/雙向插入調的)。這是獨立於本 bench 的算法改動,列為候選。
+3. bench 注記:`find_seq`/`find_rand` 用 `insert` 建樹,測的是「順序插入樹形上的查找」;若用 `collect` 建樹,兩項各自快 2×/1.3×。
+
+## 復現
+
+```bash
+$BIN --bench 'btree::map::find_'
+# 探針:/tmp/btree_bench/probe_fs/{probe,fill,height,sel}.rs(seq/rand、規模掃描、分配計數、PMU)
+# 失敗原型:search.rs 對 len>=4 非滿節點 pad 到 CAPACITY 再無分支掃(已回退)
+```
+
+# `str::split_unicode_ascii`:28 ns = 3 次 `core::slice::memchr`(78%),半數樣本在 SWAR 前後的**逐字節前綴/尾巴**迴圈;NEON/無對齊字前綴的替代在短段與長段上勝負互異,無單一形態全贏
+
+- 日期:2026-09-23
+- 分析對象:`library/alloctests/benches/str.rs::split_unicode_ascii`(86 B 泰/中/越混合串,`split('V').count()`,'V' 在 33、76 → 三段 33/42/9 B)
+- 基線:**28.3 ns/iter**;`split_ascii`(49 B,9 段 ~5 B)53.2、`split_closure` 32.4(逐字符謂詞,無 memchr)
+- 實現:`CharSearcher::next_match`(`pattern.rs:441`)→ `memchr::memchr(last_byte)`;`core::slice::memchr`:`<16 B` naive;否則「對齊前綴逐字節 + 對齊 2×usize SWAR + 逐字節尾」(`memchr_aligned`,portable,無 SIMD——`88ac7ace569c` 刪除了 std 的架構特化版本)
+
+## perf 畫像
+
+`memchr_aligned` 78.1%(IPC 4.79,branch-miss 0.00%)。其內部樣本:SWAR 主體 `sub/orr/and/bics` 約 28%,**逐字節前綴 `ldrb/cmp/add` 25.6%、逐字節尾 `ldrb/cmp/add` 20.2%**。原因:第一次 `memchr` 從偏移 0 起,命中後下一段從 34、77 起——**非對齊起點**,前綴要逐字節走 6–7 B 才到 8 B 邊界;SWAR 塊發現有匹配即 `break`,尾巴再逐字節定位(最多 15 B)。三段 33/42/9 B 裡,真正 SWAR 掃過的只有 ~40 B,另 ~40 B 全是字節迴圈。
+
+## 對照(探針,同 3 段;正確性對 n<300 × 8 種對齊 × 全部位置驗證)
+
+| 形態 | 86 B 'V'(本 bench) | 49 B ' '(~5 B 段) | 1160 B ' '(~6 B 段) | 1200 B(20 B 段) | 1580 B(38 B 段) | 4096 B(97 B 段) | 1160 B 無匹配 | 64 KB 無匹配 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 現狀 SWAR | 27.3 | 42.2 | 983 | 530 | 404 | 691 | 95.5 | 5101 |
+| libc `memchr` | 16.8 | — | — | — | — | — | — | — |
+| 純 NEON 16 B(memchr-crate 形態) | −43% | −0.5% | **+70%** | +19% | +9% | — | −59% | −58% |
+| E:現狀 + 尾巴改重疊 SWAR 字 | +2% | **+25%** | +53% | +30% | +28% | — | −31% | — |
+| B:全程無對齊 8 B 字 + 重疊尾 | −11% | −33% | — | — | +31% | — | — | — |
+| **G:前 16 B 無對齊 SWAR 字(ctz 定位)+ NEON 主體 + 字節尾** | **−38%** | **−10%** | −1% | **+19%** | **+9%** | **−24%** | **−57%** | **−58%** |
+| H:G + 32 B 雙向量 OR 歸約 | −36% | −17% | −10% | +28% | +21% | −14% | −62% | −53% |
+
+規律:
+- **段長 ≤ 16 B**:命中在首字,無對齊 SWAR 字 + `ctz` 定位一次到位,勝現狀的「字節前綴」(G −10…−38%);
+- **段長 16–40 B**:命中落在 NEON 首向量,`cmeq → 取 bitmask(shrn/fmov)→ ctz` 的延遲鏈比 2 個 SWAR 字 + `bics` 分支長,G/H 輸 9–28%;
+- **段長 ≥ 97 B 或無匹配**:16 B/迭代 NEON 吞吐是 SWAR 的 2.4×,−24…−62%。
+
+沒有一個形態在三個區間同時不輸;現狀 SWAR 恰好在最常見的「十幾到幾十字節的詞/欄位」區間最優,但在 `contains`/`CStr::from_bytes_with_nul`/長行搜索這類長掃描上留下 2.4× 頭寸。
+
+## 判斷
+
+1. `split_unicode_ascii` 的 28 ns 本身無病灶——是 3 次短段 `memchr` 的字節前綴/尾巴成本,由 bench 的 UTF-8 非對齊斷點造成。
+2. **候選**:`core::slice::memchr` 對 AArch64/x86 加 SIMD 主體(NEON `cmeq` / SSE2 `pcmpeqb`),前 16 B 保留無對齊 SWAR 字定位——長掃描 −58%、極短段 −10…−38%,代價是 16–40 B 段 +9–19%。要落地需先決定 std 是否重新接受架構特化 memchr(`88ac7ace569c` 刻意刪除),以及用 `memchr` crate 的實測分佈說服 16–40 B 區間的回退可接受。
+3. x86:SSE2 `pcmpeqb + pmovmskb` 取 mask 比 NEON 的 `shrn` 序列短 2–3 cycles,16–40 B 區間的劣勢會小於 AArch64;但同樣需要實測。
+
+## 復現
+
+```bash
+$BIN --bench 'str::split'
+perf annotate ... memchr_aligned   # 前綴/尾字節迴圈 ≈ 46% 樣本
+# 探針:/tmp/btree_bench/probe_mc/{probe,probe2,probe3,probe4,neon,neon2,hyb}.rs(形態 A–H × 8 種輸入分佈)
+```
+
+# `slice::sort_unstable_large_strings`:1.0 ms = 13.7 次比較/元素 × 7.5 ns,其中 64% 在 libc `memcmp` 的入口分派——平均只需看 1 個字節就分出勝負;內聯前綴比較在各輸入分佈上互有勝負,無單一形態全贏
+
+- 日期:2026-09-24
+- 分析對象:`library/alloctests/benches/slice.rs::sort_unstable_large_strings`(10 000 個 `&str`,長度 1–20 均勻、62 字母表隨機,`v.clone().sort_unstable()`)
+- 基線:**1000 µs/iter**(`sort_large_strings` 穩定版 1116);IPC 1.93,**branch-miss 8.8%**(隨機鍵比較排序的固有熵),L1d miss 10.8M/run(指標追 80 KB 外的字串堆)
+- 實現:`<[&str]>::sort_unstable` → ipnsort → `&str: Ord` → `<[u8] as SliceOrd>::compare`(`cmp.rs:323`,`UnsignedBytewiseOrd` 特化)→ `compare_bytes` 內建 → **libc `memcmp` 調用**(長度非常量,LLVM 不內聯)
+
+## perf 畫像
+
+| 符號 | 佔比 |
+|---|---:|
+| libc `memcmp` | **64.2%** |
+| ipnsort `quicksort` 分區 | 13.7% |
+| `small_sort_general` / `sort4/8_stable` | 18.0% |
+| `memcmp@plt` + 其他 | 4.1% |
+
+`memcmp` 內熱點是 `cmp x2,#16; b.cc` 尺寸分派 → `<16` 路徑的 `ldr/ldr/cmp` 與 `tbz` 位檢查鏈——**每次調用 ~4.8 ns 只為比出第 1–2 個字節**。
+
+## 拆分(探針,同分佈 LCG 輸入)
+
+- 比較次數 136 749 = **13.7/元素**;`v.clone()` 2.4 µs;每次比較 7.5 ns。
+- 首個不同字節位置:pos0 43.5%、**pos1 49.3%**、pos2+ 7.2%(排序後期相鄰元素共享首字節);`min(len) < 8` 的比較佔 53.9%。
+- 對照 `sort_unstable_by_key(|s| s.len())`(純指標搬運地板)42.7 µs——比較函數佔 96%。
+
+## 比較器形態 × 輸入分佈(`sort_unstable_by`,2 次一致,相對現狀 memcmp)
+
+| 輸入(10 k) | memcmp | 首字節內聯→memcmp | u32 BE 探測→memcmp | **u64 BE 探測→memcmp** | u64 探測→memcmp(跳 8) | `<8` 內聯字節迴圈 | `<16` 內聯 | 純字節迴圈 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 隨機 1..20(官方) | 1228 µs | −12% | **−41%** | −5% | +1% | −3% | −23% | −43% |
+| 隨機 1..4 | 913 | −4% | +18% | +2% | +4% | −15% | −13% | −27% |
+| 隨機 1..100 | 917 | +5% | −43% | −32% | −20% | +3% | +4% | −18% |
+| 8 B 共同前綴 | 981 | +7% | +5% | +8% | +42% | +8% | +44% | +44% |
+| 32 B 共同前綴 | 986 | +4% | +5% | +6% | +31% | +7% | +7% | +217% |
+| 128 B 共同前綴 | 2000 | +1% | +3% | 0% | +7% | +2% | +2% | +318% |
+
+每一種內聯都在某個分佈上回退 5–44%:純字節迴圈對長共同前綴災難性(memcmp 的 16 B/迭代 vs 1 B);前綴探測對短串(1..4)或共同前綴多付一次無用比較;`u32 BE` 對官方輸入 −41% 卻對 1..4 +18%。**`memcmp` 是各分佈的穩健折中**,而 bench 的「1–20 字節、62 字母表隨機」恰是它最吃虧的分佈(幾乎每次都在第 1 字節分出,但要付完整調用 + 尺寸分派)。
+
+## 判斷
+
+1. `[u8]::cmp` → `memcmp` 的選擇正確;bench 的 64% memcmp 開銷是「短隨機字串 + 比較排序」這一特定組合的代價,不是通用病灶。內聯前綴探測沒有無回退的形態。**排除**。
+2. 若 `sort` 內部想針對 `&str`/`&[u8]` 鍵做事,正確方向是**排序算法層**的 key-prefix 快取(把每個元素前 8 B 打包成 u64 與指標一起排,如 radix/多鍵 quicksort),而非改比較函數——工程量與 ipnsort 的通用性衝突,不在 std 範圍。
+3. x86:`memcmp` 入口同樣有尺寸分派(`cmp $16`),SSE2 `<16` 路徑用 `bsf` 定位差異,單次成本相近;各形態的相對勝負預期一致。
+
+## 復現
+
+```bash
+$BIN --bench 'slice::sort.*strings'
+perf record $BIN --bench slice::sort_unstable_large_strings   # 64% memcmp,入口 cmp #16 分派
+# 探針:/tmp/btree_bench/probe_ss/{probe,probe2,probe3,probe4}.rs(比較計數、首異字節分佈、8 種比較器 × 6 種分佈)
+```
+
+# `vec::bench_from_slice_0100`:27 ns = malloc+free 12 ns + 800 B memcpy 12 ns + 2.6 ns 簿記;`to_vec` 的 `T: Copy` 特化已是「with_capacity + copy_nonoverlapping + set_len」,無事
+
+- 日期:2026-09-24
+- 分析對象:`library/alloctests/benches/vec.rs::bench_from_slice_0100`(`Vec<usize>` 100 元素 800 B,`src.as_slice().to_vec()`)
+- 基線:**27.0 ns/iter**;`_0010` 14.9、`_1000` 155;同尺寸 `from_iter/from_fn/from_elem_0100` 25.1–25.4
+- 實現:`<[T]>::to_vec_in` → `ConvertVec` 的 `T: Copy` 特化(`slice.rs:~430`):`Vec::with_capacity_in` → `copy_nonoverlapping` → `set_len`
+
+## perf 畫像
+
+| 符號 | 佔比 |
+|---|---:|
+| `__memcpy_generic`(800 B) | 44.6% |
+| `_int_free` + `malloc` + `cfree` | **43.4%** |
+| bench 閉包 + shim | ~10% |
+
+IPC 4.17,branch-miss 0.01%。
+
+## 拆分(探針)
+
+| 成分 | ns |
+|---|---:|
+| `to_vec()` 100 × usize | 26.6 |
+| `with_capacity(100)` + drop(malloc + free) | 12.1 |
+| `clear + extend_from_slice` 進復用 Vec(純 memcpy 800 B) | 11.9 |
+| ⇒ `to_vec` 本體簿記 | **2.6** |
+| `iter().copied().collect()` | 24.2(TrustedLen 路徑,同構) |
+| 10 元素 / 1000 元素 | 13.5(alloc 12.3)/ 137(alloc 24.7,memcpy 8 KB ≈ 112) |
+
+分配與拷貝各佔一半,兩者都是 libc;`to_vec` 自身只剩 `with_capacity` 的容量檢查 + `set_len`。
+
+## 判斷
+
+1. `to_vec` 對 `Copy` 類型已是最小形態(一次分配 + 一次 memcpy)。**排除**。
+2. 這組 `bench_from_*_0100` 四項全在 25–27 ns,差異僅 ±1 ns,說明 `from_iter`/`from_fn`/`from_elem` 的 TrustedLen 路徑同樣貼近 alloc+copy 地板。
+3. 800 B memcpy 12 ns ≈ 67 GB/s、malloc+free 12 ns(tcache 命中),都是平臺常數;x86 同構。
+
+## 復現
+
+```bash
+$BIN --bench 'vec::bench_from_slice'
+# 探針:/tmp/btree_bench/probe_fsl/probe.rs
+```
+
+# `num::bench_*_from_str[_radix_*]`(40 項):測的是 19 個固定短串(平均 2.8 位、半數解析失敗)的混合;每位一次串行 `mul+add`(~1.3 ns/位)是成本模型;8 位 SWAR 十進制快路徑對 ≥8 位串 −57…−75%,但在官方混合上被 ±25% 的佈局噪聲淹沒
+
+- 日期:2026-09-24
+- 分析對象:`library/coretests/benches/num/mod.rs` 的 `from_str_bench!`/`from_str_radix_bench!`(8 類型 × {from_str, radix 2/10/16/36} = 40 項):`ASCII_NUMBERS`(19 串)`.cycle().take(5000).filter_map(|s| T::from_str_radix(black_box(s), R).ok()).max()`
+- 基線(u64):radix 2 **15.6 µs**、10 **26.3**、16 **36.7**、36 **50.6**;i16 radix 10 35.9;u8 radix 10 22.6。IPC 3.0–4.2,branch-miss ≤0.1%
+- 實現:`from_ascii_bytes_radix_impl`(`num/mod.rs:~1790`):符號 → `can_not_overflow`(radix ≤16 且位數 ≤ 2×size)選 unchecked/checked 迴圈 → 每位 `result*radix + to_digit(c)`
+
+## 這組 bench 在測什麼
+
+| radix | 19 串中可解析 | 平均消耗位數 | 每次調用 |
+|---|---:|---:|---:|
+| 2 | 2("0","1","-1","-0" 類) | 0.3 | 2.7–3.1 ns(幾乎全是首字節失敗) |
+| 10 | 10 | 2.8 | 4.9–5.3 ns |
+| 16 | 13 | 3.8 | 7.4–7.9 ns |
+| 36 | 14 | 3.9 | 9.5–10.1 ns |
+
+harness 地板(`cycle+take+filter_map` 不解析)0.69 ns/call。單串成本(u64,radix 10):1 位 2.1 ns、4 位 4.0、8 位 7.4、12 位 11.7、16 位 16.9、19 位 25.5——**每位 ~1.3 ns 的串行 `mul x18,x18,x12; add` 鏈**(perf 30% 在 `mul`);失敗串 1.5 ns。radix 36 每位 ~2 ns(`to_digit` 的字母分支);radix 2 的可解析串幾乎沒有,量的是符號/首字節錯誤路徑。字面量 radix 與運行時 radix 無差(8.75 vs 8.96 ns)。
+
+## 原型:radix 10、32/64 位整數的 8 位 SWAR 快路徑(樹內,`num/mod.rs` +60 行)
+
+```rust
+// 8 個 ASCII 十進制位一次驗證 + 三次乘法合併(經典 SWAR)
+fn parse_8_decimal_digits(chunk: u64) -> Option<u64> {
+    let v = chunk.wrapping_sub(0x3030_3030_3030_3030);
+    if (v | v.wrapping_add(0x7676_7676_7676_7676)) & 0x8080_8080_8080_8080 != 0 { return None; }
+    let v = (v * (1 + (10 << 8)) >> 8) & 0x00FF_00FF_00FF_00FF;
+    let v = (v * (1 + (100 << 16)) >> 16) & 0x0000_FFFF_0000_FFFF;
+    Some(v * (1 + (10000 << 32)) >> 32)
+}
+// from_ascii_bytes_radix_impl 內:radix == 10 && 4 ≤ size ≤ 8 && digits.len() ≤ 19
+//   → 8 位一組累加(≤19 位不可能溢出 u64),尾位標量,最後一次 MAX 比較;>19 位走原 checked 迴圈
+```
+
+正確性:12 032 個構造用例(邊界、溢出、符號、非法字符、前導零)逐一與現版比對相等;coretests `num` 1531 + `parse` 166 + alloctests 21+13 全過。
+
+單串(u64,radix 10,5000 次):
+
+| 串 | 現狀 | 原型 | 變化 |
+|---|---:|---:|---:|
+| `43` | 2.48 ns | 2.20 | −11% |
+| `76567` | 5.04 | 3.99 | −21% |
+| `987245987`(9 位) | 8.90 | **3.09** | **−65%** |
+| 16 位 | 16.6 | **4.17** | **−75%** |
+| `18446744073709551615`(20 位,走原路徑) | 26.5 | 11.3 / 31.9* | *官方 harness 下 20 位串 +20%(見下) |
+| `abc` | 1.59 | 1.30 | −18% |
+
+官方 harness(3 次交錯,單位 ns/iter):
+
+| bench | 現狀 | 原型 | 變化 | 是否經快路徑 |
+|---|---:|---:|---:|---|
+| `u64_from_str_radix_10` | 26 240 | **21 500** | **−18%** | 是 |
+| `u32_from_str_radix_10` | 24 130 | 22 020 | −9% | 是 |
+| `i64_from_str_radix_10` | 29 180 | 28 140 | −4% | 是 |
+| `i32_from_str_radix_10` | 29 630 | 28 780 | −3% | 是 |
+| `u8_from_str_radix_10` | 22 630 | 17 190 | −24% | **否**(size<4) |
+| `i16_from_str_radix_10` | 35 870 | 26 580 | −26% | **否** |
+| `u16_from_str_radix_10` | 27 470 | 27 990 | +2% | 否 |
+| `i32/i64/u32_from_str_radix_2` | 17 950 / 17 980 / 16 600 | 13 200 / 13 210 / 12 380 | **−27% / −27% / −25%** | **否**(radix 2) |
+| `i32_from_str_radix_36` | 39 920 | 42 620 | **+7%** | 否 |
+| 其餘 27 項 | — | −4…+1% | 噪聲 | — |
+
+**沒經快路徑的項目擺動 −27…+7%**:原型改變了 `from_ascii_bytes_radix_impl` 的內聯決策(基線二進位裡 i16/i32/i64 各有 3 份外聯副本 2–3 KB,原型後只剩 i32/i64 各 1 份),radix 2/36 與 u8/i16 的變化全部是佈局/內聯效應。真正經快路徑的 u32/u64 −9/−18% 落在同一噪聲帶內——**這組 bench 的 2.8 位平均長度測不出 SWAR 的收益**,收益只在 ≥8 位串上(單串 −65…−75%)。
+
+## 判斷
+
+1. 現實現對這組 bench 的輸入(短串、半數失敗)已接近地板:1–3 位串 2–4 ns,失敗 1.5 ns。**bench 層面排除**。
+2. **原型可作候選**:`from_str_radix(_, 10)` 對 ≥8 位十進制串 2–4×,對用戶的 `"1234567890".parse::<u64>()` 這類真實輸入是實打實的;短串不變或略降(`43` −11%);20 位邊界串多付一次長度判斷。落地需:i8/i16/u8/u16 補 `size < 4` 的路徑或明確排除、`i128/u128` 用 u128 累加、`const fn` 下 `from_le_bytes` 讀取的 CTFE 可行性。
+3. bench 側:40 項用同一份 19 串混合,radix 2 實際只測失敗路徑、radix 10 平均 2.8 位;若要守護解析吞吐,需加 8/16/19 位的專項輸入。整組對內聯佈局極敏感(同補丁下未觸及項 ±27%),回歸閾值不宜低於 30%。
+4. x86:SWAR 同構;`mul` 延遲 3 cycles 與本核相近,每位 ~1 ns 鏈同樣存在。
+
+## 復現
+
+```bash
+$BIN --bench 'num::bench_'                      # 40 項
+# 探針:/tmp/btree_bench/probe_radix/{probe,lit,swar,mix}.rs(拆分/字面量 radix/SWAR 原型+12k 用例/混合特徵)
+# 原型:core/src/num/mod.rs parse_8_decimal_digits + parse_decimal_magnitude + radix==10 快路徑(工作樹,未提交);二進位 /tmp/btree_bench/core_radix/
+```
+
+# `vec_deque::bench_try_fold`:`Some(a+b)` 永不短路,LLVM 把 `try_fold` 摺成普通歸約並向量化(64 B/迭代 NEON,0.046 ns/元素),與 `fold`/`sum` 同碼;24% 樣本是 `black_box(Option<i32>)` 的返回值落棧
+
+- 日期:2026-09-24
+- 分析對象:`library/alloctests/benches/vec_deque.rs::bench_try_fold`(1000 個 i32 的連續 deque,`ring.iter().try_fold(0, |a, b| Some(a + b))`)
+- 基線:**46–52 ns/iter**(早先各次構建間見過 45–77 ns 的擺動——`VecDeque` 章已記為佈局噪聲);IPC 3.80,branch-miss 0.01%
+- 實現:`vec_deque::Iter::try_fold` = `i1.try_fold(init)?` 再 `i2.try_fold`(`iter.rs:147`)→ `slice::Iter` 的默認 `try_fold`
+
+## 熱迴圈
+
+```asm
+2a63c: ldp  q4, q5, [x9, #-32]
+       ldp  q6, q7, [x9], #64        ; 64 B / 迭代(30% 樣本:載入)
+       add  v0.4s, v4.4s, v0.4s
+       add  v1.4s, v5.4s, v1.4s
+       add  v2.4s, v6.4s, v2.4s
+       add  v3.4s, v7.4s, v3.4s      ; 4 路累加器
+       b.ne 2a63c
+       ... addv s0, v0.4s            ; 收攏
+2a5e4: stur d0, [x29, #-40]          ; black_box(Option<i32>) 落棧,24% 樣本
+```
+
+`R = Option<i32>` 且閉包永遠返回 `Some`,`?` 的短路分支被證明不可達,`try_fold` 退化為 `fold`,slice 部分被 LoopVectorizer 以 4 累加器 × 16 B 展開。4000 B / 46 ns ≈ 87 GB/s,已是 L1 讀帶寬量級。`i2` 為空段,`?` 之後的第二段 `try_fold` 是零成本的空迴圈。
+
+## 對照(探針,同 1000 元素)
+
+| 形態 | ns |
+|---|---:|
+| 官方 `ring.iter().try_fold(0, \|a,b\| Some(a+b))` | 46.6 |
+| `ring.iter().fold(0, \|a,b\| a+b)` | 46.7 |
+| `ring.iter().sum::<i32>()` | 46.1 |
+| `Vec` 切片 `iter().sum()` / `try_fold(Some)` | 58.4 / 58.3(佈局/對齊差,同碼) |
+| 繞回 deque(524+476)`try_fold` | 61.8(兩段各自向量化 + 一次接縫) |
+| **真短路**:`try_fold(0, \|a,&b\| a.checked_add(b))` | **525.6(11×)** |
+
+最後一行才是 `try_fold` 區別於 `fold` 的形態:溢出檢查讓每步依賴上一步結果且可能退出,無法向量化,每元素 0.5 ns 的標量鏈——這是語義決定的成本,不是實現缺陷。
+
+## 判斷
+
+1. `VecDeque::Iter::try_fold` 的兩段轉發零開銷,`Some(a+b)` 形態已達向量化帶寬上限。**排除**。
+2. bench 注記:這個 bench 實際測的是「不短路的 try_fold」= `sum`,對 `try_fold` 的短路路徑無守護;`VecDeque` 章已記錄其 ±20% 佈局噪聲(`black_box(Option)` 的落棧位置隨構建變)。
+3. x86:同構(`paddd` 4 累加器)。
+
+## 復現
+
+```bash
+$BIN --bench 'vec_deque::bench_try_fold'
+# 探針:/tmp/btree_bench/probe_tf/probe.rs
+```
+
+# `str::debug::mostly_unicode`:每個非 ASCII 字符 4 次稀疏表查找(`cn_planes`/`grapheme_extend`/`cf`/`default_ignorable`)佔 85%;BMP 64 碼點塊位圖快路徑令 `mostly_unicode` −87%、`fmt::write_{str,vec}_macro_debug` −71…−75%
+
+- 日期:2026-09-29
+- 分析對象:`library/coretests/benches/str/debug.rs` 的 `str::debug::{mostly_unicode, mixed, some_unicode, ascii_only, ascii_escapes}`(64 B 定長串)與 `library/coretests/benches/fmt.rs` 的 `fmt::write_{str,vec}_macro_debug`
+- 基線(潔淨協議,單 bench/進程、`--test-threads=1`、3 次中位數):`mostly_unicode` **1806 ns**、`mixed` **1415**、`some_unicode` **293**、`ascii_only` **186**、`ascii_escapes` **300**;`fmt::write_str_macro_debug` **82.0 µs**
+- 實現:`impl Debug for str` → 每字符 `escape_debug_ext`(`char/methods.rs`)→ `is_control`/`is_private_use`/`is_whitespace` 為硬編碼或 cascading map,**其餘四個走 skiplist/稀疏表**:`is_grapheme_extender`(383 段)、`is_default_ignorable`(17 段)、`is_format_control`(21 段)、`!is_assigned`(`Cn_Planes_0_3`,730 段)
+
+## 熱點:一個字符要付四次稀疏表查找
+
+| 符號 | 基線佔比 |
+|---|---:|
+| `unicode_data::cn_planes_0_3::lookup_slow` | 36.1% |
+| `unicode_data::grapheme_extend::lookup_slow` | 35.6% |
+| `unicode_data::cf::lookup_slow` | 10.9% |
+| `unicode_data::default_ignorable_code_point::lookup_slow` | 2.4% |
+| **合計** | **~85%** |
+
+`skip_search` 的每次查詢 = `SHORT_OFFSET_RUNS` 二分(`binary_search_by_key`)+ 一段前綴和線性掃描;`mostly_unicode` 的 30 個非 ASCII 字符各付 4 次,單字符 `escape_debug().len()` 實測 **51.2 ns**。這些謂詞只在「是否可打印」的**合取**裏出現,所以有快照的餘地。
+
+## 原型 A:BMP 64 碼點塊「全可打印」位圖(45 行 + 7 行)
+
+一張 `[u64; 16]` = 128 B 的表,位 `b` 表示 64 碼點塊 `U+{(w*64+b)*64}`..`+63` 內**每個**碼點在 `escape_grapheme_extender: true`(最嚴設定)下都可打印——即不是控制/私用/空白/組合附標/預設可忽略/格式控制/未分配。命中即 `EscapeDebug::printable`,跳過全部四個查找。
+
+```rust
+// char/methods.rs
+#[inline]
+pub(crate) fn is_printable_block(self) -> bool {
+    let u = self as u32;
+    u <= 0xFFFF && PRINTABLE_BLOCKS_BMP[(u >> 12) as usize] >> ((u >> 6) & 63) & 1 != 0
+}
+// escape_debug_ext 內,ASCII 臂之後:
+_ if self.is_printable_block() => EscapeDebug::printable(self),
+
+// fmt/mod.rs,Debug for str 的非可打印分支開頭:
+if c.is_printable_block() { printable_range.end += c.len_utf8(); rest = chars.as_str(); continue; }
+```
+
+**正確性**:位圖由 std 自身謂詞鏈生成(塊內全體 `escape_debug().len() == 1`),對 BMP 全部 63 360 個非 ASCII 純量做**遍歷式**驗證——三種調用點參數組合(`grapheme_extender` true/false、`char` Debug、`str::escape_debug` 非首字符)**誤判 0**。覆蓋率 74.7%(47 360/63 360);CJK 100%、Hangul 100%、Latin-Ext 100%、Cyrillic 77%、Greek 47%、Devanagari 0%(塊內有組合附標,保守跳過)。非 BMP 永不命中。組合附標、`U+FF9E`/`U+FF9F`、私用區、`U+2028`、`U+FEFF` 等邊界值全部正確走慢路徑。
+
+## Benchmarks(潔淨協議:單 bench/進程、`--test-threads=1`、3 次中位數;`core_base` = HEAD+用戶在飛改動,`core_patch2` = +原型 A,`core_3b2` = +原型 A 與 B)
+
+| benchmark | 基線 | 原型 A | 原型 A+B |
+|---|---:|---:|---:|
+| `str::debug::mostly_unicode` | 1806.3 ns | **325.6(−82.0%)** | **242.2(−86.6%)** |
+| `str::debug::mixed` | 1415.4 | 457.4(−67.7%) | 400.6(−71.7%) |
+| `str::debug::some_unicode` | 293.3 | 199.8(−31.9%) | 189.0(−35.6%) |
+| `fmt::write_str_macro_debug` | 82.0 µs | 23.9(−70.9%) | **20.8(−74.7%)** |
+| `fmt::write_vec_macro_debug` | 87.9 µs | 28.1(−68.0%) | 24.9(−71.7%) |
+| `str::debug::ascii_only`(無非 ASCII) | 185.8 | 185.8(+0.0%) | 185.4(−0.2%) |
+| `str::debug::ascii_escapes` | 300.2 | 292.1(−2.7%) | 296.2(−1.3%) |
+
+單字符(靜態鏈接,兩次重建後各自測):`escape_debug().len()` Cyrillic **51.2 → 2.09 ns/call(24.5×)**、Latin-1 21.8 → 2.12(10.3×)、`format!("{:?}", c)` Cyrillic 92.6 → 34.2、`write!(reused, "{:?}", c)` 65.8 → 13.5、CJK `format!` 132.1 → 35.8;整串 `format!("{:?}", s)` **1736.7 → 208.6 ns(8.3×)**。
+
+## 回退面與歸因
+
+1. **`ascii_only`/`ascii_escapes` 不動**(設計如此,ASCII 在該臂之前處理),±3% 內。
+2. **`char::methods::{bench_to_ascii_uppercase, bench_ascii_char_to_uppercase, bench_to_digit_radix_36}` 表面 −56%/−15%/−31%,但那是代碼佈局偽影**:三者都不調用 `escape_debug_ext`;`core_inert`(常量進樹、臂不進)在潔淨協議下**重現基線**(to_ascii_uppercase 15 615 vs 基線 15 683/15 615),而只有加臂的構建才變化。反彙編顯示 `bench_to_ascii_uppercase` 的閉包在基線裏 `bl` 到一個外聯的 `Map::fold`(1240 B,310 條),在打過補丁的構建裏整條鏈內聯進 `ns_iter_inner`(1152 B,288 條)。**報告時應單獨列出,不計入收益。**
+3. 與 `test::black_box` 無關;`fmt::write_str_value`(Display,不走 escape)在 4 次交錯中 +1.4%/−10%,噪聲級。
+
+## 方法論:並行 bench 執行會系統性膨脹數字
+
+同一二進位、同一 bench,只換調用方式:`ascii_only` **單獨跑 186.9 / 185.4 ns,與 4 個同族 bench 同進程跑 264.7 / 263.8 ns(+42%)**。libtest 以線程池並行跑 bench(HW threads 320),同族 bench 互相爭搶;所有早先「一次選多個 bench」的數字因此偏高(例如 `mostly_unicode` 基線 1891 vs 潔淨 1806)。**本節全部數字改採單 bench/進程 + `--test-threads=1`。**
+
+## 判斷
+
+1. 成功:**`Debug for str`/`Debug for char`/`char::escape_debug` 的 BMP 常見文字路徑**從「每字符 4 次稀疏查找」變成「一次位測試」,`mostly_unicode` −87%,`fmt` 的 `{:?}` 宏 −71…−75%,且 ASCII 路徑零影響。覆蓋 74.7% 的 BMP 非 ASCII 純量,零誤判。
+2. **落地前必辦**:位圖必須由 `src/tools/unicode-table-generator` 生成(與 `unicode_data.rs` 同源,否則會與屬性表漂移);`Cn_Planes_0_3` 已有「生成器內合成派生屬性」的先例(`main.rs` 的 `load_data()` 內聯構造並帶斷言同步註釋),插入點在 `main.rs:347` 的屬性循環或 `emit_bitset` 旁新增一個 `[u64; 16]` 發射器。另外建議把「位圖為真 ⇒ 可打印」做成生成器內生成的斷言測試。
+3. x86 同構:純位測試與表查找的差別與 ISA 無關。
+
+## 復現
+
+```bash
+# 潔淨協議(單 bench/進程、單線程),否則數字會被 +42% 膨脹
+LD_LIBRARY_PATH=. ./corebenches --bench --exact --test-threads=1 str::debug::mostly_unicode
+# 探針:/tmp/btree_bench/probe_dbg/{gen,verify,verify2,charpath2}.rs(位圖生成、遍歷式驗證、字符路徑 A/B)
+# 對照二進位:/tmp/btree_bench/{core_base,core_inert,core_patch2,core_3b2}/
+```
+
+# `hash::set_ops::set_symmetric_difference`:892 ns = `|A|+|B|` = 110 次 hash+probe(不是 10 次);兩個 `difference` 串接,`large.difference(&small)` 一側佔 91%
+
+- 日期:2026-09-30
+- 分析對象:`library/std/benches/hash/set_ops.rs::set_symmetric_difference`(`small(0..10).symmetric_difference(&large(0..100)).count()`)
+- 基線(潔淨協議:單 bench/進程、`--test-threads=1`、3 次中位數):**891.8 ns**(897.6 / 887.9 / 890.0)。同族同協議對照:`set_difference` 91.5、`set_is_subset` 92.2、`set_union` 91.7、`set_intersection` 98.3——本項是唯一 ~9.7× 於同族的
+- 實現:`SymmetricDifference { iter: self.difference(other).chain(other.difference(self)) }`(`set.rs:722`);`Difference { iter, other }` 的 `next` 逐元素掃描 + `other.contains(elt)`
+
+## 10× 的來源:查找次數是 |A|+|B| 而不是 |A|
+
+按 size 分解(探針,與官方 bench 相同的 `black_box` 形態):
+
+| 成分 | ns |
+|---|---:|
+| `small.symmetric_difference(&large)` | 924.7 |
+| `small.difference(&large)`(10 次查找,全命中→全被濾掉) | 106.9 |
+| `large.difference(&small)`(100 次查找) | 813.3 |
+| ⇒ 兩半合計 | 920.2 |
+
+`set_difference` 只掃小側(10 次查找);`symmetric_difference` 必須**兩個方向都掃**,因為要輸出 `B \ A`。這是語義要求而非實現缺陷:**`B` 的每個元素至少要被查一次**,否則無法判定它在不在 `A` 中。
+
+size 掃描證實成本線性於 `|A|+|B|`:(10,100) 908 ns、(100,100) 1928、(100,10) 961、(1000,10000) 114.9 µs、(10000,1000) 119.7 µs。注意 (100,100) 比 (10,100) 貴——`|A|` 也進了成本;而不相交情形(`small` vs `1000..1100`)893 ns ≈ 子集情形,因為查找次數同為 110(差別只是輸出 110 個元素而非 90)。
+
+## 每次查找 8.1 ns = 5.9 ns SipHash + ~2 ns probe
+
+- 純雜湊:`hash_one(i32)` = **5.90 ns/op**(110 次/組,消除迴圈開銷)。
+- in-situ:813.3 / 100 = **8.13 ns/次** ⇒ probe ≈ 2.2 ns。
+- 逐次 `contains`(每次調用間有 `black_box`,含屏障開銷):命中 9.3–10.8 ns、未命中 9.0–10.0 ns;**被探查集合是 10 還是 100 元素只差 ~1 ns**——成本由固定的 SipHash 主導,不是探查長度。
+- perf annotate 的指令分佈與此一致:`eor` 48 / `add` 45 / `ror` 16(SipHash-1-3 輪函數)對 `cmeq.8b`(hashbrown 群組比較,佔 24% 樣本)。99.7% 樣本在單一內聯閉包裏。
+
+## 附帶:兩個集合的 `RandomState` 密鑰不同,但不影響正確性
+
+`RandomState::new()` 每次把 thread-local 的 `k0` 加一(`#36481`:防止迭代順序泄露成 DoS 面),所以兩個獨立構造的 `HashSet` 密鑰**不同**。`Difference::next` 的 `self.other.contains(elt)` 用的是 `other` 自己的 hasher,跨集合查找本就自洽。實測 `a.difference(&b).count() == 0`、`a.symmetric_difference(&b).count() == 90`、`a.intersection(&b).count() == 10`,全部正確。
+
+## 判斷
+
+1. 無 std 病灶:892 ns 中約 2/3 是 SipHash——HashDoS 防護的有意代價;其餘是 hashbrown probe。**查找次數 `|A|+|B|` 是 `symmetric_difference` 定義所必需**,不可省。承接 `set_difference` 章的結論,本項**排除**。
+2. 落地槓桿在語義而非實現:如不需防護,`FxHashSet`/`ahash` 一行換掉即可(同 `set_difference` 章,−65% 量級)。
+3. x86 同構:成本結構(固定雜湊 + 短 probe)與 ISA 無關。
+
+## 復現
+
+```bash
+BIN=build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/5276defc8035ff52/out/stdbenches-5276defc8035ff52
+LD_LIBRARY_PATH=build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib \
+  $BIN --bench --test-threads=1 'hash::set_ops::set_symmetric_difference'
+# 探針:/tmp/btree_bench/probe_sym/{probe,perop3,perop4,scale,keys}.rs(兩半分解、每次查找定價、size 掃描、密鑰正確性)
+```
+
+# `fmt::write_u8_max`:52 ns 全是 `format!` 機制(alloc + grow + free + dispatch),轉換本體不隨位數或型別變;先前「u64::MAX 快 8 ns」只存在於 2026-09-15 的舊 libstd,現版兩者同為 ~52 ns
+
+- 日期:2026-09-30
+- 分析對象:`library/coretests/benches/fmt.rs::write_u8_max`(`format!("{}", black_box(u8::MAX))`)與同族 `write_{u8,u64,u128}_{min,max}`
+- 基線(潔淨協議:單 bench/進程、`--test-threads=1`、3 次;兩組分列,`core_3b2` = **當前樹**,`core_base` = **舊 libstd**):
+
+| bench | 當前樹 | 舊 libstd(09-15) |
+|---|---:|---:|
+| `write_u8_max` | 51.5 / 51.5 / 51.6 | 52.5 |
+| `write_u8_min` | 53.2 / 53.2 / 53.6 | 54.1 |
+| `write_u64_max` | 51.5 / 51.8 / 51.8 | **44.5** |
+| `write_u64_min` | 55.6 / 56.0 / 56.3 | 55.4 |
+| `write_u128_max` | 62.2 / 62.5 / 62.6 | 63.3 |
+| `write_u128_min` | 55.9 / 56.0 / 56.1 | 56.9 |
+
+⇒ 六項中只有 `u64_max` 在舊 libstd 上明顯更快(44.5 vs 51.5–51.8);其餘五項兩組相差 ≤1.0 ns。
+
+- **`write_u64_max` 44.4 ns 只存在於 `/tmp/btree_bench/core_base`(libstd 建於 2026-09-15 10:34,早於 HEAD `d815fc5d1f9`);本次工作階段所建的每一個 libstd(`core_inert` 51.3、`core_patch2` 52.0、`core_3b2` 51.9、以及**移除全部 core 原型後重新構建的對照組** 52.3)上,`u64::MAX` 與 `u8::MAX` 同速。**
+
+## 成本分解(動態鏈接,對齊 harness 形態)
+
+| 形態(u8::MAX,3 位) | ns |
+|---|---:|
+| `format!("{}", u8::MAX)` | 52.7 |
+| `write!` 進復用 String(無分配、無 grow) | **14.1** |
+| ⇒ 分配 + grow + free | **38.6** |
+| `String::new() + push_str("255") + drop` | 19.2 |
+| `String::with_capacity(3) + push_str("255") + drop` | 15.9 |
+| `String::with_capacity(0)` 後首次 `push_str`(grow 路徑)vs `with_capacity(8)` 後(直接寫) | 19.8 vs 15.9 |
+
+轉換與格式化本體只佔 14 ns,其中 `push_str` 一次 3 位字串 3.1 ns;**約 38 ns(73%)是 `String` 從空容量起步的分配鏈**(`with_capacity(0)` → 首次 `push_str` 走 `reserve`/`grow_amortized`/`finish_grow` → `malloc`,結束時 `free`)。perf 一致:`malloc` 15.1% + `_int_free` 10.1% + `cfree` 7.8% + `finish_grow` 4.1%,`Display::fmt` 16.3%。DSO 分佈 libstd 58.7% / libc 37.1%。
+
+## 對照:型別、位數都不影響(靜態鏈接探針,固定迭代)
+
+| 形態 | ns |
+|---|---:|
+| `format!("{}", 255)` 以 u8 / u16 / u32 / u64 / usize | 31.6 / 32.2 / 32.4 / 32.3 / 32.3 |
+| `format!("{}", _)` u8 的 0 / 5 / 25 / 255(1–3 位) | 31.3 / 31.0 / 31.2 / 31.6 |
+| `format!("{}", _)` u64 的 0 / 255 / `u64::MAX`(1/3/20 位) | 31.4 / 32.3 / 39.5 |
+
+同值不同型別差 ≤0.8 ns;位數只在 20 位(u64::MAX 的 5 個 4 位塊迭代)時 +8 ns。**即 u8 的 3 位輸出與 u64 的 3 位輸出在轉換階段等價,「u8_max 比 u64_max 慢」不可能來自轉換。**
+
+## 8 ns 差距的真相:同指令數、不同前端停頓;觸發點是本倉庫的 §6
+
+固定 2000 萬次迭代的探針,`perf stat`;每個 libstd 5 次取中位數(括號內為 min–max):
+
+| libstd | arm | ns/iter | 指令/迭代 | IPC | **STALL_FE/迭代** |
+|---|---|---:|---:|---:|---:|
+| `core_base`(09-15,舊) | `u8::MAX` | 52.6 | 496 | 3.26 | 40.3(38.9–41.3) |
+| `core_base`(09-15,舊) | `u64::MAX` | **44.7** | 576 | **4.45** | **3.5(3.4–4.2)** |
+| `core_inert`(09-29) | `u8::MAX` | 52.5 | 496 | 3.26 | 38.5(37.5–38.9) |
+| `core_inert`(09-29) | `u64::MAX` | 51.8 | 576 | 3.84 | 23.8(21.5–24.5) |
+| `core_patch2`(09-29) | `u8::MAX` | 51.9 | 496 | 3.30 | 39.0(38.8–39.7) |
+| `core_patch2`(09-29) | `u64::MAX` | 51.8 | 576 | 3.83 | 23.0(22.3–25.2) |
+| `core_3b2`(09-29,現版) | `u8::MAX` | 52.1 | 496 | 3.28 | 39.7(39.3–41.6) |
+| `core_3b2`(09-29,現版) | `u64::MAX` | 51.8 | 576 | 3.82 | 22.5(22.2–23.4) |
+
+**u8 arm 在四個 libstd 上完全一致**(38.5–40.3 停頓/迭代,IPC 3.26–3.30);全部差異都在 u64 arm——舊 libstd 3.5 停頓/迭代、IPC 4.45,其餘三個 22.5–23.8、IPC 3.82–3.84。
+
+**機器碼沒變**:兩個 arm 的指令數逐位元組相同(496 / 576,跨 libstd 亦同);`<u8 as Display>::fmt` 與 `<u64 as Display>::fmt` 的符號大小(160 / 308)、指令條數(40 / 77)、以及逐條指令在四個 libstd 間完全一致——唯一不同的是 1 條 `adrp` 的立即數,兩者都指向**同一張 `DECIMAL_PAIRS` 表**(`.rodata` 內容 md5 相同)。所以純粹是同一段代碼在 `libstd.so` 內的落點差異。
+
+**觸發點定位**(逐檔回退 + 重建,同一固定迭代探針):
+
+| 只回退該檔(其餘保留) | u64::MAX cyc/迭代 | u64 STALL_FE/迭代 |
+|---|---:|---:|
+| `array_chunks.rs`(§7) | 151.0 | 22.8(**仍慢**) |
+| `dragon.rs`(§6) | **126.3** | **4.1(恢復到舊 libstd 水平)**,同構建下 u8 仍 150.1 |
+| `bignum.rs`(§6 的輔助函數所在) | 無法單獨回退 | §6 新增的 `Big32x40::mul_small_sub_mul_small` 定義在 `bignum.rs`、由 §6 的 `dragon.rs` 調用;單獨回退 `bignum.rs` 到 `cfbfefd5ffa` 時該函數消失而調用仍在,**編譯失敗**(該次記錄到的 ~0.02 cyc/迭代是殘留二進位,非測量值) |
+
+即 **`dragon.rs` 的 9 位批次 digit 迴圈(§6,2026-09-15 落地)改變了 `libstd.so` 的佈局**,使 `u64::MAX` 的格式化路徑前端停頓從 3.5 漲到 ~22 停頓/迭代。這是佈局副作用,不是算法代價——`<u64 as Display>::fmt` 的機器碼一個位元組都沒動。
+
+## 判斷
+
+1. `write_u8_max` 的 52 ns 與 `write_u64_min`/`u8_min`/`u128_min` 同級,都是 **`format!` 機制的固定成本**(分配鏈 73%、fmt 調度與轉換 27%)。這與 `write_u64_min` 章的結論一致(該章:「min 的機制段 ~48 ns,分配器佔 40%」)。**排除**。
+2. **修正前一章**:`write_u64_min` 章「min 比 max 慢 19%」不成立於現版——`u64::MAX` 的 44.8 ns 是舊 libstd 的佈局產物;現版 `{u8,u64}_{min,max}` 四項落在 51.5–56.3 ns 帶內,差異由前端停頓主導而非輸入長度。
+3. **`estimated_capacity()=8` 原型不再值得測**:它針對的是那 8 ns 差距(見 `write_u8_min` 章,該原型令 min −47% 但把停頓原樣轉移到 `u64_max`)。現版兩型別同在 ~52 ns,沒有可換取的差距;且分解顯示 grow 只值 ~3.9 ns(19.8 → 15.9),而它會給長輸出的 realloc 添一次分配。
+4. x86:分配鏈與 `format!` 調度與 ISA 無關;RSB 深度不同,前端停頓的門檻位置會不同。
+5. **副作用,需記錄**:§6(`dragon.rs` 批次 digit)落地後,`u64::MAX` 的 `{}` 格式化從 44.7 ns / IPC 4.45 退化到 51.8 ns / IPC 3.82(停頓 3.5 → 22.5/迭代),`u8::MAX` 不受影響。這不是 §6 的算法代價而是它的佈局成本;若要兩者兼得,需要在改動 flt2dec 後複測整數格式化的前端停頓(本機 5 次中位數可穩定分辨 4 vs 22 停頓/迭代)。
+
+## 復現
+
+```bash
+BIN=build/.../corebenches-<hash>
+LD_LIBRARY_PATH=<stage1 libdir> $BIN --bench --exact --test-threads=1 fmt::write_u8_max
+# 探針:/tmp/btree_bench/probe_fmt2/{dyn,floor,pinned,depth,matrix}.rs(分解、地板、固定迭代+計數、深度掃描、型別×位數矩陣)
+# 對照重構:/tmp/btree_bench/controlled_results.txt(移除全部 core 原型後重建,harness 52 ns 復現)
+# 量測條件:六項與 pinned 探針數據取得時,另一 checkout(/home/wheel/c00936152/rust)有 7 個對手進程(2 個 rustc 滿載);各項 3 次讀數落在 ±0.3 ns 內且與早先快照交叉一致,故採用;嚴格數字宜在閒置機器複核
+```
+
+# `num::int_sqrt::u128_sqrt_*`(20 項):`u128::isqrt` 的 Karatsuba 末端除法是 **128 位軟體除法**,佔 87% 時間;把 `numerator / (2s)` 改寫為 `(numerator >> 1) / s` 使其落進原生 `udiv`——u128 各檔 −18…−27%
+
+- 日期:2026-10-08
+- 分析對象:`library/coretests/benches/num/int_sqrt/mod.rs`(u8/u16/u32/u64/u128 × predictable/random/random_small/uniform)
+- 實現:`library/core/src/num/imp/int_sqrt.rs`(Karatsuba,Zimmermann 1999):u8 查表 → 每個型別 0–3 層 `middle_stage!` → 一層 `last_stage!`,每層一次除法
+- 基線(潔淨協議:單 bench/進程、`--test-threads=1`、5 次中位數,`ns/iter`)
+
+| 型別 | predictable | random | random_small | uniform |
+|---|---:|---:|---:|---:|
+| u8 | 69.7 | 216.7 | 216.9 | 217.5 |
+| u16 | 430.8 | 495.2 | 222.8 | 934.0 |
+| u32 | 1780.8 | 1123.6 | 232.0 | 1781.0 |
+| u64 | 5791.8 | 1958.5 | 265.1 | 2664.3 |
+| u128 | **30879.2** | **4726.6** | 296.6 | **7937.2** |
+
+## 病灶:u128 末端除法無法用硬體
+
+`perf` 對 `u128_sqrt_uniform` 的取樣:
+
+```text
+74.53%  compiler_builtins::int::specialized_div_rem::u128_div_rem
+12.30%  __udivti3
+11.04%  core::num::imp::int_sqrt
+```
+
+87% 在 `compiler_builtins` 的長除法。原因是 `last_stage!` 的除法:
+
+```rust
+let numerator = (($r as $ty) << QUARTER_BITS) | (lo >> QUARTER_BITS);
+let denominator = ($s as $ty) << 1;
+let q = numerator / denominator;      // u128: numerator 可達 65 位 → 軟體除法
+```
+
+`middle_stage!`(u64 層)輸出滿足 `r < 2·s < 2^33`,`lo >> QUARTER_BITS < 2^32`,故 **`numerator < 2^65`**、`denominator = 2s < 2^33`。AArch64 的 `udiv` 只吃 64 位,65/33 的除法只能走 `__udivti3`(Knuth D 長除法,逐位元試除)。
+
+**實測上界**(50.3M 輸入:`top 24 位` 窮舉 × 3 種低位填充,加上 `u128::MAX-i`、`2^64+i` 等邊界)——上界成立且保守:
+
+```text
+max numerator   = 36893488143124135935  (65 位;遠小於 2^66)
+max r           = 8589934590 (33 位)    max s = 4294967295 (32 位)
+numerator < 2^65 : true                 numerator>>1 fits u64 : true
+```
+
+## 修復:先折半,再除以 `s`
+
+嵌套除法恆等式 `floor(floor(a/2)/b) == floor(a/(2b))`(整數、`b ≥ 1`)給出
+
+```rust
+// numerator / (2 * s)  等價於  (numerator >> 1) / s
+let q = ((numerator >> 1) as u64) / (s as u64);   // 一次原生 udiv
+```
+
+折半後 `numerator >> 1 < 2^64`,除法落進硬體 `udiv`。**必須逐型別區分**:u16/u32/u64 的 `numerator` 本來就 ≤ 型別寬度,已是硬體除法,加一次移位純屬多餘——實驗證實對所有型別一律改寫會讓 **u16/u32 回退 3–5%**(見下)。
+
+## A/B(pre-patch 與 post-patch 二進位,交錯 5 次取中位數)
+
+| bench | 修復前 | 修復後 | 變化 |
+|---|---:|---:|---:|
+| `u128_sqrt_uniform` | 7937.2 | 5817.7 | **−26.7%** |
+| `u128_sqrt_predictable` | 30879.2 | 25074.0 | **−18.8%** |
+| `u128_sqrt_random` | 4726.6 | 3855.4 | **−18.4%** |
+| `u128_sqrt_random_small` | 296.6 | 300.2 | +1.2%(雜訊) |
+| `u16/u32/u8` 共 12 檔 | — | — | **±0.2%** |
+| `u64_sqrt_{random,random_small,uniform}` | — | — | **±0.2%** |
+| `u64_sqrt_predictable` | 5792 | 7380 | **+27.4%(佈局,見下)** |
+| 對照:`int_log::u64_log10_random`、`int_bits::u16::constant::deposit_bits`、`int_pow::pow_{variable,m7,m8}` | — | — | **±0.1%** |
+
+單獨量末端那一次除法(同一探針、同一輸入集,u128 前綴預先算好只計時除法):
+
+```text
+u128: numerator / (2s)   [libcall]   11.117 ns/div
+u128: (numerator>>1) / s [native]     4.617 ns/div      → 2.4×
+u64 : numerator / (2s)                2.072 ns/div      → 兩式等價,故不改
+u64 : (numerator>>1) / s              2.071 ns/div
+```
+
+移除了 2 處 `__udivti3` 引用(base 二進位 `int_sqrt` 區有 2 處、修復後 0 處)。
+
+### `u64_sqrt_predictable` 的 +27% 是佈局,不是本次改動的代價
+
+u64 並不走窄化路徑(見上表「u64 兩式等價」),其 `u64::isqrt` 機器碼在兩份二進位中**逐指令相同**:
+
+```text
+base ns_iter_inner u64_predictable: 173 insns   min: 173 insns   僅 2 行不同:
+  [11] adrp x10, <anon>+0x5bd8      →  adrp x10, <anon>+0x5c58
+  [12] add  x10, x10, #0x831        →  add  x10, x10, #0x7b1
+```
+
+兩行合起來的**有效位址相同**(`0x5bd8 + 0x831 == 0x5c58 + 0x7b1 == 0x6409`),差別只是 `adrp` 的 4 KB 分頁基準寫法;故這是「同一段程式碼被放到不同位址」。
+
+排除建置彩票:以**完全相同的(最小補丁)原始碼**再獨立建置兩次,`u64_sqrt_predictable` 得 7383.7 / 7393.0,與首次的 7376.8 一致;base 則穩定在 5792(`u128_sqrt_uniform` 三次建置為 5819.7/5819.9/5821.2,亦一致)。即該位移是補丁造成的**確定性**佈局效應,而非構建間隨機。
+
+判定:u128 的 −18…−27% 是演算法層(移除 libcall),而 u64 的 +27% 是同一段程式碼的落點效應——與 `fmt::write_u8_max` 章的機制同類。若要入上游,需在 PR 中說明此項為佈局偽影,或以 `-Z` 佈局微調/對齊消弭。
+
+## 正確性
+
+- **恆等式**:32 768 組 u128 輸入上 `num/(2s)` 與 `(num>>1)/s` 逐位元相同;邊界展開亦同。
+- **對照原型**:21 000 000+ 輸入(u128 全範圍隨機、`u128::MAX-i`、`2^64+i`、完全平方 ±1)與**未修改的公式**逐一比對,0 不符;u16/u32 以 `wide` 形式同樣 0 不符。
+- **不變量**:50.3M 輸入上 `r ≥ 2^33` 0 次、`numerator ≥ 2^65` 0 次。
+- `./x test library/core --stage 1 --test-args isqrt` 通過。
+
+## 一併排除:u64 的 f64 播種(可行但用不了)
+
+`(x as f64).sqrt() as u64` 對 u64 **精確到 ±1 以內**(15M 案例,最大誤差 1),加兩次比較修正即可,`u64::isqrt` 從 9.72 → **2.62 ns**(3.7×)。但 **`isqrt` 是 `const fn`(`rustc_const_stable since 1.84.0`),而 `intrinsics::sqrtf64` 不是 const**——`error: cannot call non-const intrinsic sqrtf64 in constant functions`。故本路徑在 `core` 內不可用,記為否決。
+
+u128 的 f64 播種同樣不可行且有額外問題:u128→f64 丟 75 位尾數,sqrt 後整數結果誤差最大達 **1726**(需修正迴圈);且 `wrapping_mul` 在 y 接近 2^64 時會回繞,使比較失去單調性(探針曾因此不收斂)。
+
+## 系列其餘:無可行動項
+
+1. **`int_pow`(7 項)排除**。`pow` ≡ `wrapping_pow`(4.22 ns/次,release 下 `overflow_checks()` 為假,不走 `strict_pow`);`overflowing_pow`/`checked_pow`/`saturating_pow` 5.6–6.4 ns/次,差額即每次乘法的溢位簿記。`pow_m8`(2.18)比 `pow_m7`(4.16)快 2× 是因為 `-8 = -2^3`:靜態已知的底數命中 `overflowing_pow` 開頭的「底數為 2 的冪」改基分支(O(1) 位移),`-7` 不命中。熱點是 `umulh/mul` + 指數位迴圈分支(`pow_variable` 的 `umulh` 佔 14.3%、`tbz` 10.6%),即平方乘的固有成本。**試把 `wrapping_pow` 改寫成不追蹤溢位的純平方乘反而更慢**(5.02 vs 4.48 ns)。
+2. **`int_bits`(30 項)**:u16 `constant::deposit_bits` 已有專章。補齊全部型別的**每元素**成本(iterations = 1024/size_of,故原始 `ns/iter` 不可跨型別比較):
+
+   | 型別 | deposit const | invariant | variable | extract const | invariant | variable |
+   |---|---:|---:|---:|---:|---:|---:|
+   | u8 | 0.060 | 0.110 | 0.468 | 0.100 | 0.106 | 0.399 |
+   | u16 | 0.210 | 0.352 | 1.601 | 0.294 | 0.345 | 1.354 |
+   | u32 | 0.655 | 0.932 | 5.024 | 0.789 | 0.894 | 4.000 |
+   | u64 | 1.747 | 2.355 | 14.049 | 2.028 | 2.257 | 11.446 |
+   | u128 | 3.287 | 6.553 | 28.734 | 5.183 | 6.432 | 23.281 |
+
+   `variable` 相對 `constant` 為 **4.0–8.7×**(deposit 7.6–8.7×、extract 4.0–5.7×),正是每元素重算 `prepare()` 的代價;`invariant` 1.05–2.0×。與既有章節結論一致,**排除**(常量掩碼已達 NEON 吞吐;可變掩碼的槓桿是 x86/SVE2 的單指令 `pdep`/`BDEP`)。
+3. **`int_log`(30 項)重測一致**:本次 u64 `ilog(b)` random 5.24 ns/調用 vs 專章 5.34;u128 12.64 vs 12.55(差 <1%)。既有 `int_log` 章(2026-08-13)結論「無可行動熱點」維持。
+
+## 判斷
+
+1. **可落地**:`int_sqrt` 末端除法窄化——語義零改動、u128 各檔 −18…−27%、其餘 19 檔與無關 bench 均在 ±0.2% 內(`u64_sqrt_predictable` 例外,為佈局偽影,見上)。改動僅 `last_stage!` 巨集加一個型別參數 + 一個布林,四處呼叫各帶自己的 `div_ty`。
+2. 關鍵是**只改 u128**。對稱地改所有型別會讓 u16/u32 回退 3–5%(多出的 `>> 1` 與型別轉換);u64 因兩式等價可改可不改,故一律保持原式。
+3. 更深的槓桿是**演算法層**:Karatsuba 末端那一次 65/33 除法可用「預算倒數 + 2 次乘法」的 Barrett/Möller–Granlund 形態替代,但那是 `u128` 上的 `mul` 鏈,需另測;本次的窄化是零風險的第一步。
+4. x86_64 同構:65 位除以 33 位同樣落入 `__udivti3`(GCC/LLVM 對 u128 除法一律 libcall),`div` 指令亦只到 64 位。收益預期相同或更大(`div r64` 較 AArch64 `udiv` 慢,libcall 差距更明顯)。
+
+## 復現
+
+```bash
+# 量測(交替 A/B,單 bench/進程)
+cd /tmp/btree_bench/isqrt_base  && LD_LIBRARY_PATH=. ./corebenches --bench --exact --test-threads=1 num::int_sqrt::u128_sqrt_uniform
+cd /tmp/btree_bench/isqrt_min   && LD_LIBRARY_PATH=. ./corebenches --bench --exact --test-threads=1 num::int_sqrt::u128_sqrt_uniform
+# 探針:/tmp/btree_bench/probe_ls2(窄化正確性+計時)、probe_inv(不變量 50.3M 掃描)、
+#      probe_div_ab(除法形狀 A/B)、probe_seed(f64 播種誤差)、probe_verify(21M 對照)、probe_fisqrt(u64 f64 播種)
+# 二進位快照:isqrt_base / isqrt_patch / isqrt_min(各含 corebenches + libstd-*.so)
+# 樹內改動:library/core/src/num/imp/int_sqrt.rs(未提交)
+```
+
+# `iter::bench_next_chunk_*`(9 項,另新增 3 項):`Filter`/`FilterMap` 的 `next_chunk` 壓縮迴圈「無條件 store」在稀疏謂詞下是純浪費——改為條件式 store 後 `mostly_false` −38%/−41%、`filter_even` −15%;既有的「已貼近掃描地板」結論需修正
+
+- 日期:2026-10-08
+- 分析對象:`library/coretests/benches/iter.rs` 的 `bench_next_chunk_*` 共 9 項,以及為覆蓋「不可預測謂詞」而新增的 3 項(見下)
+- 實現:`Filter::next_chunk_dropless`(`filter.rs`)、`FilterMap::next_chunk`(`filter_map.rs`)、`Copied::next_chunk`(`copied.rs`,`slice::Iter` 特化)、`ArrayChunks` 的 `SpecFold` TRA 特化(`array_chunks.rs`)
+
+## 基線(潔淨協議:單 bench/進程、`--test-threads=1`;A/B 交錯 5–8 次取中位數)
+
+| benchmark | ns/iter | 掃描元素 | 命中 |
+|---|---:|---:|---:|
+| `next_chunk_copied`(`Copied` + `slice::Iter` 特化) | 37.6 | — | — |
+| `next_chunk_trusted_random_access`(`ArrayChunks` TRA) | 37.7 | — | — |
+| `next_chunk_trusted_random_access_runtime_len` | 36.0 | — | — |
+| `next_chunk_filter_predictably_true`(`i < 100`) | 34.3 | 32 | 32 |
+| `next_chunk_filter_map_predictably_true` | 28.3 | 32 | 32 |
+| `next_chunk_filter_even`(`i % 2 == 0`) | 61.6 | 63 | 32 |
+| `next_chunk_filter_map_even` | 49.1 | 63 | 32 |
+| `next_chunk_filter_mostly_false`(`i > 900`) | **639.7** | 933 | 32 |
+| `next_chunk_filter_map_mostly_false` | **601.3** | 933 | 32 |
+
+## 病灶:壓縮迴圈對每個「被掃過」的元素都寫一次
+
+`Filter::next_chunk_dropless` 與 `FilterMap::next_chunk` 的內層迴圈刻意做成無分支:索引用 `cinc`/`csinc` 前進,**store 無條件執行**,被謂詞濾掉的元素也照寫一次。原始註解(`2be2d77c5017`,2024-06-24)的理由是:
+
+> branchless index update combined with unconditionally copying the value even when it is filtered reduces branching and dependencies in the loop.
+
+反彙編證實兩份二進位只差這一段(`filter_mostly_false` 的內層迴圈):
+
+```asm
+# 現狀(branchless):每元素都 store,idx 由 cinc 前進
+38b04: ldr  w12, [x10]
+38b08: str  x10, [x19, x9, lsl #3]     ; array[idx] = el —— 無條件
+38b0c: cmp  w12, #0x384                ; i > 900 ...
+38b10: cinc x9, x9, gt                 ; idx += pred(無分支)
+38b14: cmp  x9, #0x20
+38b18: b.cs <full>
+38b1c: subs x11, x11, #0x4
+38b20: add  x10, x10, #0x4
+38b24: b.ne 38b04
+
+# 原型(branched):只有命中才 store
+38b10: ldr  w12, [x10]
+38b14: cmp  w12, #0x385
+38b18: b.lt 38b04                      ; 未命中 → 直接下一個,不 store
+38b1c: cmp  x9, #0x1e
+38b20: str  x10, [x19, x9, lsl #3]     ; 僅命中時
+38b24: b.ls 38b00
+```
+
+代價差異是**掃描長度的函數**:`i % 2 == 0` 掃 63 個元素,`i > 900` 掃 933 個——兩者都只想要 32 個結果。無條件 store 讓前者多寫 31 次、後者多寫 **901 次(29×)**。此外 store 的位址依賴 `idx`,而 `idx += pred` 是迴圈攜帶依賴,未命中時本可整條鏈不動。
+
+## 原型與 A/B
+
+原型把 store 移進條件內(索引仍只在命中時前進,語義等價)。兩份二進位交錯量測:
+
+| benchmark | 現狀(無條件 store) | 原型(條件 store) | 變化 |
+|---|---:|---:|---:|
+| `filter_map_mostly_false` | 601.3 | 354.8 | **−41.0%** |
+| `filter_mostly_false` | 639.7 | 398.1 | **−37.8%** |
+| `filter_map_shuffled_12pct`(新增) | 198.6 | 130.5 | **−34.3%** |
+| `filter_shuffled_12pct`(新增) | 194.2 | 157.6 | **−18.9%** |
+| `filter_even` | 61.6 | 52.2 | **−15.3%** |
+| `filter_shuffled_50pct`(新增) | 68.8 | 62.3 | −9.5% |
+| `filter_predictably_true` | 34.3 | 31.4 | −8.5% |
+| `filter_map_even` | 49.1 | 50.7 | **+3.3%** |
+| `filter_map_predictably_true` | 28.3 | 28.6 | +1.0% |
+| `next_chunk_copied` | 37.6 | 37.6 | −0.0% |
+| `trusted_random_access`(TRA) | 37.7 | 37.7 | −0.0% |
+| `trusted_random_access_runtime_len` | 36.0 | 36.0 | −0.1% |
+
+**歸因(拆檔 A/B,`filter.rs` 與 `filter_map.rs` 各自單獨打)**:得到乾淨的 2×2 塊狀結構——打 `filter.rs` 只動 `filter::*`、`filter_map::*` 完全不動(601.3→601.3、49.1→49.1),打 `filter_map.rs` 反之(61.6→61.6、639.7→639.6),兩者合打等於各自效果之和。**排除了全域佈局偽影**(對照組 `copied`/TRA×2 在四欄中恆為 37.6/37.7/36.0)。
+
+**新增 3 項覆蓋不可預測謂詞**。原始註解主張無分支在**分支不可預測**時有利,而既有 9 項全是可預測輸入(`i<100` 前綴命中、`i>900` 後綴命中、`i%2` 規則週期),沒有任何一項驗證過該主張。故新增:同值同謂詞但**先洗牌**的 3 項(`bench_next_chunk_filter_shuffled_12pct` / `_50pct` / `filter_map_shuffled_12pct`)。結果:不可預測情形**原型同樣勝出**(−18.9% / −9.5% / −34.3%)——原註解的立論未被實測支持。
+
+**混合形態否決**:保留無分支索引前進、只把 store 放進 `if val.is_some()` 的混合版**更慢**(`filter_map_even` 49.1 → 72.8、`mostly_false` 601.3 → 666.6)。該輪中未觸及的 `filter_even` 在三欄恆為 61.6,再次確認無佈局效應。
+
+## 正確性
+
+- **差分測試 1194 組**對照現狀與原型:`Filter` 掃 N ∈ {1..64} × 密度 k ∈ {1,2,3,4,5,7,8,16,32} × 來源長度 ∈ {0,1,4,17,32,33,100,1024}(936 組)、`FilterMap` i32(240 組)、`FilterMap` **具 drop 的 `String`**(18 組)——**0 不符**。
+- **panic 安全**:閉包在第 3 個命中元素 panic(N 未填滿),`Guard` 正確 drop 部分初始化的陣列,無洩漏/重複釋放。
+- `./x test library/core --test-args next_chunk` 與 `--test-args filter` 全通過(含 `test_next_chunk_does_not_leak`)。
+
+## 與既有兩章的矛盾(需修正)
+
+1. `iter::bench_next_chunk_filter_map_even` 章(2026-09-17)結論「已是無分支壓縮迴圈,~2 cycles/元素貼近掃描地板」——**不成立**:該迴圈並非地板,條件式 store 讓 `filter_even` −15.3%、`mostly_false` 家族 −38…−41%。
+2. `iter::bench_next_chunk_filter_even` 章(2026-09-22)結論「比 `filter_map_even` 慢 17% 是元素類型所致」——**部分成立但結論要改**:`&i32`(8 B)vs `i32`(4 B)的寬度差確實存在,但改用條件式 store 後 `filter_even` 61.6 → 52.2,幾乎追平 `filter_map_even` 的 49.1,17% 差距的大部分來自兩者**共有的**無條件 store,而非元素寬度。
+
+## 判斷
+
+1. **可落地**:把 `next_chunk_dropless` 與 `FilterMap::next_chunk` 的 store 改為條件式。收益 −8…−41%,涵蓋稀疏與不可預測兩種輸入;代價是 `filter_map_even` +3.3% 與 `filter_map_predictably_true` +1.0% 兩項小幅回退。
+2. 兩項回退都在「謂詞便宜且命中率 50%」的角落,而 `filter_map_even` 的 +3.3% 恰是新增的分支在**完美可預測**時的邊際成本;`filter_even` 同形態卻是 −15.3%(元素指標較寬,省下的 store 更值錢)。是否接受這 3.3% 取決於對 `filter_map` + 規則週期謂詞的權重。
+3. **原註解的立論應更新**:「無分支減少分支與依賴」在 2024 年寫下時未附數據;本次在可預測、稀疏、洗牌三類輸入上都測到分支勝出。
+4. 其餘 3 項(`copied`、TRA×2)不受影響,`ArrayChunks` 的 TRA `SpecFold` 計數迴圈本來就是正確形態,無事。
+5. x86 同構:無條件 store 的浪費是 ISA 無關的(多出的 store 與迴圈攜帶依賴);x86 的 store-to-load forwarding 與更深的 store buffer 可能讓該項差距略小,但方向不變。
+
+## 復現
+
+```bash
+# 交錯 A/B(單 bench/進程)
+cd /tmp/btree_bench/nc2_base   && LD_LIBRARY_PATH=. ./corebenches --bench --exact --test-threads=1 iter::bench_next_chunk_filter_mostly_false
+cd /tmp/btree_bench/nc2_branch && LD_LIBRARY_PATH=. ./corebenches --bench --exact --test-threads=1 iter::bench_next_chunk_filter_mostly_false
+# 二進位快照:nc2_base/nc2_branch(兩檔合打)、nc3_filt/nc3_fm(拆檔歸因)、nc4_hy(混合形態)
+# 原型補丁:/tmp/btree_bench/patch2.py、patch3.py(混合);備份 filter.rs.orig / filter_map.rs.orig
+# 差分測試:/tmp/btree_bench/probe_diff/probe.rs(1194 組 + panic 安全)
+# bench 新增:library/coretests/benches/iter.rs 的 3 項 shuffled(工作樹,未提交)
+# 註:探針 probe_nc / probe_pred / probe_density 的閉包形態與真實 codegen 不符,
+#     對可預測謂詞給出與 harness 相反的符號,故本篇只採 harness A/B 數據
+```
+
+# `vec::bench_in_place_*`(22 項全覽):18 項數值格的 i0/i1 符號由「分配位元組數是否超過 tcache」決定,in-place collect 本身在每一格都生效;但 `bench_in_place_recycle` 因 `.fuse()` 自 2021 年起**並未 in-place**(每輪 1 次分配)——為 `Fuse` 補回 `InPlaceIterable` 後 1 → 0 次分配
+
+- 日期:2026-10-09
+- 分析對象:`library/alloctests/benches/vec.rs` 的 `bench_in_place![...]` 18 項(u8/u32/u128 × 10/100/1000 × `i0`/`i1`)與 `bench_in_place_{recycle,zip_recycle,zip_iter_mut,collect_droppable}`
+- 前置:`xxu8_1000_i1`(2026-09-16)、`u128_0100_i0`(09-22)、`zip_iter_mut`、`zip_recycle` 四章;本章補齊其餘 16 格與兩項未分析的 bench,並修正其中兩處結論
+- 環境:glibc 2.38;官方 harness 單 bench/進程、`--test-threads=1`、5–9 次中位數
+
+## 18 格基線:符號在 1032 B 翻轉
+
+| 型別 | n | 位元組 | i0(`calloc`) | i1(`malloc`+填充) | i1 相對 i0 | 分配檔位 |
+|---|---:|---:|---:|---:|---:|---|
+| u8 | 10 | 10 | 23.6 | 17.4 | −26% | tcache |
+| u8 | 100 | 100 | 25.8 | 18.4 | −29% | tcache |
+| u8 | 1000 | 1000 | 96.6 | 60.0 | −38% | tcache |
+| u32 | 10 | 40 | 23.9 | 17.4 | −27% | tcache |
+| u32 | 100 | 400 | 63.7 | 28.4 | −55% | tcache |
+| u32 | 1000 | 4000 | 159.7 | 176.9 | **+11%** | 超過 |
+| u128 | 10 | 160 | 64.5 | 17.5 | −73% | tcache |
+| u128 | 100 | 1600 | 87.1 | 104.0 | **+19%** | 超過 |
+| u128 | 1000 | 16000 | 543.2 | 721.4 | **+33%** | 超過 |
+
+六格 tcache 內 i0 較慢,三格超過後 i0 較快,無例外。細掃(探針,每 rep 內交錯)把翻轉點定在**請求 1032 → 1040 B 之間**,且三種型別都按位元組而非元素數翻轉:u8 n=1032/1040、u32 n=258/266、u128 n=64/65 的「僅分配+釋放」分別是 −22%/+9%、−21%/+14%、−14%/+12%。
+
+## 這是 glibc 的曲線,與 Rust 無關
+
+純 C 對照(`calloc(n)+free` 對 `malloc(n)+memset+free`,交錯 9 次中位數):
+
+| 請求 B | calloc | malloc+memset | calloc 相對 |
+|---:|---:|---:|---:|
+| 64 | 16.6 | 11.0 | +51% |
+| 160 | 26.6 | 11.9 | **+124%** |
+| 400 | 28.0 | 14.0 | +100% |
+| 1032 | 31.1 | 23.0 | +35% |
+| 1040 | 30.4 | 33.9 | −10% |
+| 4096 | 47.0 | 74.8 | −37% |
+| 16384 | 123.8 | 239.9 | −48% |
+
+`calloc` 自身的成本對尺寸幾乎平坦(1000 → 1040 B:31.1 → 30.4 ns),翻轉完全來自 `malloc` 一側在 1040 B 掉出 tcache(23.0 → 33.9 ns)。即:tcache 內 `malloc` 走快路徑而 `calloc` 不走,所以 i0 慢;超過後兩者都走 `_int_malloc`,而 `calloc` 省掉一次外部填充,所以 i0 快。160–400 B 處 `calloc` 的額外台階(16.6 → 26.6 ns)與 fastbin 上限的位置相符,這一點是依曲線形狀的推論,未讀 glibc 原始碼驗證。
+
+由此關閉 09-16 章留下的未解項:該章基線裡 u32 `1000_i0/i1` = 178.6 / 209.9(i1 較慢)與其「i0 慢」的主題相反而未解釋——4000 B 已超過 tcache,i1 較慢是正確行為。
+
+**絕對數字依賴進程的堆狀態**:`u128_0010_i0` 在 harness 內 64.7 ns,同形態獨立進程 34.0 ns,C 端 `calloc(160)` 26.6 ns。同一格在不同進程差 2×,i1 則一致(17.5 / 16.6)。tcache 內 i0 各格不宜作跨構建比較。
+
+## in-place collect 在全部數值格生效
+
+計數分配器:每輪恰 1 次分配(i0 為 `alloc_zeroed`,i1 為 `alloc`)、0 次 `realloc`、1 次釋放,各尺寸皆同。`alloc_zeroed` 在 aarch64 上 `MIN_ALIGN = 16`,故 u128(對齊 16)同樣走 `libc::calloc`。扣掉分配後的迴圈體 i0 與 i1 相同(u8 n=4096:119.3 對 118.5 ns)。
+
+i1 的填充方式因型別而異:`vec![1u8; n]` 編成 `bl memset`;`vec![1u128; n]` 是出線的 `SpecFromElem::from_elem` 逐元素寫入。`u128_1000` 的 DSO 切分因此不同——i0 有 25% 在 libc(`__memset_generic` 16%,`calloc` 內部清零),i1 有 94% 在 bench 本體(填充迴圈 + xor 迴圈)。
+
+## `bench_in_place_collect_droppable`(1115 ns):in-place 生效,一半是 `clone`
+
+每輪 1 次分配,來自 `v.clone()`;`skip(100).enumerate().map().collect()` 沒有第二次分配(`Skip` 具備 `InPlaceIterable` + `SourceIter`)。拆分:`v.clone()` + drop 單獨 514 ns,完整形態 1111 ns,管線與 1000 次 `Drop`(各含一次 `black_box`)約 597 ns。無病灶。
+
+## `bench_in_place_recycle`:名為 in-place,實際每輪分配
+
+鏈是 `into_iter().enumerate().map().fuse().collect()`,22 項中唯一含 `.fuse()`。計數分配器:
+
+| 形態 | 分配/輪 | 釋放/輪 |
+|---|---:|---:|
+| 官方原樣(含 `.fuse()`) | **1.000** | 1.000 |
+| 同鏈去掉 `.fuse()` | 0.000 | 0.000 |
+| `bench_in_place_zip_recycle` | 0.000 | 0.000 |
+
+原因在 `library/core/src/iter/adapters/fuse.rs`:`Fuse` 有 `SourceIter` 而沒有 `InPlaceIterable`,`collect` 退回 `SpecFromIterNested`(新分配 + 複製)。歷史:
+
+- 2019-11-20 `8ac96e6a9832` 加入此 bench(含 `.fuse()`);2019-11-23 `21a17d105c9c` 為 `Fuse` 實作 `SourceIter` + `InPlaceIterable`。
+- 2021-06-30 `6f5e933adb57`(修 rust-lang/rust#85863:特化的 `Fuse` 仍可能為 `None`)把兩個 impl 一併刪除。
+- 2023-04-15 `3ca6bb0b44c3` 以 `I: SourceIter + TrustedFused` 加回 `SourceIter`(註解:供 `Flatten` 使用),`InPlaceIterable` 未加回。
+
+所以這個 bench 自 2021-06 起不再走 in-place 路徑,而且**時間上看不出來**:官方 harness 內含 `.fuse()` 與去掉後的時間地板相同(約 185 ns,兩者各 15 次的最小值 184.3 / 183.8),`perf` 卻顯示前者 16.4% 在 libc(`_int_malloc` 8.1%)、後者 0%。8000 B 的分配+釋放成本恰被「讀舊寫新」迴圈較快所抵消。獨立進程探針則有差:282 對 248 ns(−12%)。
+
+### 原型:為 `Fuse` 補回 `InPlaceIterable`
+
+```rust
+unsafe impl<I: InPlaceIterable> InPlaceIterable for Fuse<I> {
+    const EXPAND_BY: Option<NonZero<usize>> = I::EXPAND_BY;
+    const MERGE_BY: Option<NonZero<usize>> = I::MERGE_BY;
+}
+```
+
+`Fuse` 原樣轉發內層每個元素;in-place collect 另需 `SourceIter`,而它只對 `I: TrustedFused` 實作(`iter` 不會被設成 `None`),2021 年的健全性問題由該約束擋住。結果:
+
+| | 現狀 | 原型 |
+|---|---:|---:|
+| 含 `.fuse()` 的鏈,分配/輪 | 1.000 | **0.000** |
+| 獨立探針(1000 × usize) | 282–285 ns | **248 ns(−12%)**,與無 `.fuse()` 相同 |
+
+測試:`coretests fuse` 23、`alloctests in_place` 26、`from_iter` 28、`coretests flatten` 15,全過。上游化前需要 `inplace_iteration` 維護者確認健全性論證。
+
+## 判斷
+
+1. 18 項數值格無 std 病灶;i0/i1 的差與符號是 glibc `calloc`/tcache 的性質,翻轉點 1032 B。**排除**,與前兩章一致,並補上了完整的檔位表與 C 端對照。
+2. **修正前兩章的建議**:`xxu8_1000_i1` 章與 `u128_0100_i0` 章都建議「要守護 in-place 路徑應像 `bench_in_place_recycle` 那樣復用來源緩衝」。該 bench 恰恰沒有走 in-place 路徑;可作典範的是 `bench_in_place_zip_recycle`(0 分配/輪)。
+3. **可落地(小)**:`Fuse` 補回 `InPlaceIterable`。使用者可見的效果是 `.fuse()` 不再讓 `collect` 悄悄多分配一次;同類缺口還有 `Peekable`(有 `SourceIter`、無 `InPlaceIterable`,未評估是否可補)。
+4. bench 側:`bench_in_place_recycle` 應加分配計數斷言或改測不會被分配成本抵消的尺寸,否則 in-place 失效無法從時間上發現。
+5. 方法記錄:同一進程內交替量 i0/i1 會互相污染堆狀態(`u128_1000_i1` 交替時 528 ns,獨立進程 701 ns,harness 722 ns);本章數字只採獨立進程與 harness。
+6. x86:glibc 同一份,檔位與翻轉點相同;`MIN_ALIGN` 同為 16。
+
+## 復現
+
+```bash
+# 基線與重測:/tmp/btree_bench/{ip_baseline,ip4_results}.txt
+# C 分配器曲線:/tmp/btree_bench/alloc_curve.c;交錯細掃:probe_ip2/il.rs
+# 分配計數:probe_ip3/count.rs;獨立進程複現與 droppable 拆分:probe_ip4/repl.rs
+# .fuse() A/B:probe_ip5/fuse.rs(獨立);ip6_fuse / ip6_nofuse(harness 快照)
+# 原型:library/core/src/iter/adapters/fuse.rs(工作樹,未提交;備份 fuse.rs.orig)
+```
+
+# `iter::bench_filter_map_chain_ref_sum`:多出的 50% 全是 `checked_mul` 倖存的溢出檢查——LLVM 只在界「先於迴圈旋轉」變成常數時才消得掉;Chain 與 `&mut I` 轉發均零成本
+
+- 日期:2026-10-10
+- 分析對象:`library/coretests/benches/iter.rs:262`(`(0i64..1M).chain(0..1M).filter_map(|x| x.checked_mul(x)).map(black_box).by_ref().sum()`)
+- 接口:`FilterMap::{fold,try_fold}`、`Chain::{fold,try_fold}`、`Range<i64>` 的預設 `fold`/`try_fold`(半開 `Range` 無覆寫,走 `while let Some(x) = self.next()`)
+- 平臺:本機 HiSilicon aarch64,stage1,`bootstrap.toml` rustflags 為空(**非** `+sve`,與前文基線可比);LLVM 23.1.0-rust-1.99.0-nightly
+
+## 基線(min of 3)
+
+```text
+bench_filter_map_sum               540,713 ns   0.541 ns/元素
+bench_filter_map_ref_sum           817,156 ns   0.817        (+51%)
+bench_filter_map_chain_sum       1,627,562 ns   0.814
+bench_filter_map_chain_ref_sum   1,628,454 ns   0.814
+bench_filter_sum / ref_sum         731,591 / 732,940(value ≡ ref)
+```
+
+chain 兩版彼此相同,但都對齊的是**非 chain 的 ref 版**,而非 value 版。
+
+## 彙編:差別只有一組 `smulh; cmp; b.ne`
+
+```asm
+; filter_map_sum(value,非 chain):7 條,1 個分支——溢出檢查已消失
+loop: mul  x11, x10, x10
+      add  x10, x10, #1
+      cmp  x19, x10
+      stur x11, [x29,#-160] ; ldur x11, [x29,#-160]   ; black_box 屏障
+      add  x8, x11, x8
+      b.ne loop
+
+; 其餘三版(chain 兩段各一份,逐條相同):11 條,3 個分支
+loop: add  x9, x9, #1
+      cmp  x19, x9          ; x19 = 1,000,000(常數界仍在)
+      b.eq exit
+      mul  x11, x9, x9
+      smulh x12, x9, x9
+      cmp  x12, x11, asr #63
+      b.ne loop             ; None → 下一個
+      stur/ldur ; add x8, x11, x8
+      b    loop
+```
+
+Chain 的段狀態在兩版都是零指令(兩段被分裂成兩個獨立迴圈,同 `enumerate_chain` 章);`&mut I` 的 `try_fold` 轉發同樣零殘留。
+
+## harness A/B:把檢查拿掉的上界
+
+臨時加入同形 bench,閉包改為 `Some(x.wrapping_mul(x))`(此值域 x² < 10¹² 不溢出,語義等價):
+
+| | `checked_mul` | `wrapping_mul` |
+|---|---|---|
+| 非 chain value | 540,713 | 540,701 |
+| 非 chain ref | 817,156 | 540,809 |
+| chain value | 1,627,562 | 1,081,258 |
+| **chain ref** | **1,628,454** | **1,081,204** |
+
+無檢查時 chain = 精確 2× 非 chain、ref ≡ value。**本 bench 的 50.6% 超額成本全部來自倖存的溢出檢查**(≈0.27 ns ≈ 0.8 cycle/元素)。
+
+## 機理:pass 相位順序,不是資訊缺失
+
+以 `opt -passes='default<O3>' -print-after-all` 逐 pass 追蹤(`rustc -C no-prepopulate-passes` 產 pre-IR,O3 重跑與 rustc 結果一致):
+
+1. **value/非 chain**:`Range::fold` 實例只有一個呼叫點,實參 `(0, 1000000, 0)` 為常數,IPSCCP 在模組最早期就把 `end = 1000000` 傳入 callee。閉包內聯進 callee 後,`smul.with.overflow(x, x)` 正被 `Range::next` 的 `icmp slt x, 1000000` 支配;**callee 內聯後的第一個 InstCombine** 即據此算出 `x ∈ [0,10⁶)`,改寫為 `mul nuw nsw`。此時迴圈尚未旋轉。
+2. **chain value**:`Chain::fold` 從自身欄位(記憶體)取 `Range` 傳給 `a.fold(acc, &mut f)` / `b.fold(acc, f)`——callee 裡界是未知參數,檢查保留;callee 隨後被 LoopRotate + IndVarSimplify(LFTR)改寫為 `icmp eq %iv.next, %end` 退出。內聯進呼叫端、SROA 後界才成為常數,但支配 `smul` 的只剩 `x ≠ 10⁶`,推不出上界。
+3. **ref(兩種)**:`&mut I` 使 `Range` 經指標傳遞,同 2。
+
+最終 IR 中迴圈起點 0、步長 +1、界 10⁶ 全是常數——**資訊完全足夠,只是後段沒有 pass 回頭證明**。在最終 IR 上單獨跑 `instcombine` / `correlated-propagation` / `constraint-elimination` / `indvars` 均無法消除。
+
+## LLVM 最小重現(與 Rust 無關)
+
+```llvm
+; for i in 0..1000000(旋轉後、LFTR 的 eq 退出): if let Some(v) = i.checked_mul(i) { use(v) }
+define void @f() {
+entry:
+  br label %loop
+loop:
+  %iv = phi i64 [ 0, %entry ], [ %iv.next, %latch ]
+  %r = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %iv, i64 %iv)
+  %ov = extractvalue { i64, i1 } %r, 1
+  br i1 %ov, label %latch, label %some
+some:
+  %v = extractvalue { i64, i1 } %r, 0
+  call void @use(i64 %v)
+  br label %latch
+latch:
+  %iv.next = add nuw nsw i64 %iv, 1
+  %done = icmp eq i64 %iv.next, 1000000
+  br i1 %done, label %exit, label %loop
+exit:
+  ret void
+}
+```
+
+| 變體 | `default<O3>` 後保留的 overflow intrinsic |
+|---|---|
+| `smul.with.overflow(iv, iv)`,eq 退出 | **1** |
+| `umul.with.overflow(iv, iv)`,eq 退出 | **1** |
+| `sadd.with.overflow(iv, iv)`,eq 退出 | 0 |
+| `smul`,退出改為 `slt` 形 | 0 |
+
+`print<scalar-evolution>` 給出 `%iv --> {0,+,1}<nuw><nsw> U: [0,1000000) S: [0,1000000)`——SCEV 知道範圍;同一迴圈的 add 版會被消除,mul 版不會。推測(未讀 LLVM 源碼確認):SCEV 驅動的 overflow intrinsic 消除對 mul 缺少基於 ConstantRange 的回退(`[0,10⁶) × [0,10⁶) ⊂ [0,10¹²)`),符號比較 `sext(a*b) == sext(a)*sext(b)` 對二次 addrec 不成立。
+
+## 修正前文
+
+`iter::bench_enumerate_chain_ref_sum` 章判斷 2「`bench_sums!` 的 value/ref 對照**全系**失效」——**不完全成立**:`bench_filter_map_sum` / `_ref_sum` 有 51% 差距。但差距並非宏註釋所說的「ref 無法優化 fold」(兩者熱迴圈結構相同、`try_fold` 轉發零殘留),而是 ref 形狀讓常數界晚於迴圈旋轉才可見,錯過了 InstCombine 消除 `checked_mul` 的時機。對不含溢出檢查的閉包,value ≡ ref 的結論仍成立。
+
+## 判斷
+
+1. **std 無病灶**:Chain、FilterMap、`&mut I` 轉發在 fold/try_fold 消費下都零成本;差距是 LLVM 對 `{s,u}mul.with.overflow` 的相位順序/分析缺口。
+2. 正確修法在 LLVM:讓 SCEV 驅動的 overflow 消除對 mul 使用操作數範圍(上表最小重現可直接附入 issue)。Rust 側在 `Range::fold` 加 `assert_unchecked` 之類的繞法侵入性高、收益只限此類閉包,不建議。
+3. 影響面:任何「有界整數 Range(界在記憶體或經 `&mut`/Chain 傳遞)+ 閉包內 `checked_mul`/`overflowing_mul`」的迴圈都會多 3 條指令/元素;本 bench 上為 +50%。
+
+```text
+# 復現:/tmp/btree_bench/fm_chain/{r.rs(四形狀獨立重現), min_smul.ll, min_sadd.ll, min_smul_slt.ll}
+# pre-IR:rustc -O -C no-prepopulate-passes --emit=llvm-ir r.rs;opt -passes='default<O3>' -print-after-all -filter-print-funcs=<mangled>
+# harness A/B:臨時 bench_tmp_fm_{,chain_}wrap{,_ref}_sum(已移除)
+```
+
+# `btree::map::first_and_last_10k_stable`:比 nightly 慢 48% 不是導航成本,是 `iter()` 第一步內聯了用不到的上溯迴圈——快路徑必須跳過它,這個佈局讓預測器每千指令失誤 4 次;在 `LazyLeafRange` 的 Root 狀態直接取首/尾 KV 後 −38%,並消掉 `next_unchecked` 原型的 `0_stable` +121% 退化
+
+- 日期:2026-10-10
+- 分析對象:`library/alloctests/benches/btree/map.rs:301`(`bench_first_and_last_stable`:`10 × { black_box(map.iter().next()); black_box(map.iter().next_back()) }`,對照 `_nightly` 的 `first_key_value`/`last_key_value`)
+- 接口:`Iter::next` → `LazyLeafRange<Immut>::next_unchecked` → `init_front`(Root → `first_leaf_edge`)→ `Handle::next_unchecked` → `next_kv`(上溯迴圈)+ `next_leaf_edge`
+- 平臺:本機 HiSilicon aarch64,stage1,rustflags 為空
+- 前置:工作樹的 `navigate.rs` 帶著先前 session 的未提交原型(`Handle::next_unchecked` 葉內快路徑,`iteration_1000` 1837 → 1111 ns),本文件未曾記錄;本章同時量了 HEAD 版與原型版
+
+## 基線(min of 3)
+
+| bench | HEAD `navigate.rs` | 工作樹原型 |
+|---|---|---|
+| 0_nightly / 0_stable | 3.72 / 3.74 | 3.72 / **8.28(+121%)** |
+| 100_nightly / 100_stable | 15.30 / 19.27 | 15.29 / **24.24(+26%)** |
+| 10k_nightly / 10k_stable | 34.52 / 50.95 | 34.51 / 50.71 |
+
+nightly 對照組在兩版中不動,原型的兩項退化可以排除佈局效應;它在先前 session 中只量過 `iteration_*`,從未量過 `first_and_last_*`。
+
+## 機理
+
+**彙編**(實際計時的是 `Bencher::iter` 內聯副本,perf 99.9%;`ns_iter_inner` 只在校準時跑):root/height 在兩版中都在暫存器裡(先前「`&map` 每次重讀」的猜測在內聯副本上不成立)。兩版下降鏈逐條相同,stable 每個 op 只多三條:
+
+```asm
+; stable front 段:葉子 len==0 → 上溯迴圈(length>0 時不可能發生)
+ldrh w12, [x11, #98]
+cbz  w12, ascend_loop      ; 多出:不跳
+mov  w13, wzr
+b    compute_kv            ; 多出:每次都跳,越過內聯的上溯迴圈
+ascend_loop: ...
+; nightly 同一位置:csel x12, xzr, x13, eq(無分支)
+```
+
+**計數器**(perf stat,每千條指令):
+
+| 變體 | IPC | branch-miss/千指令 |
+|---|---|---|
+| nightly(展開) | 4.24 | 0.011 |
+| nightly_rolled(`0..black_box(10)`) | 4.35 | 0.002 |
+| stable | 3.35 | **4.004** |
+| stable_rolled | 3.41 | **3.976** |
+| stable_unrolled(手寫 10 份) | 4.13 | 0.014 |
+
+nightly_rolled 同樣是「外層迴圈套兩段下降迴圈」,卻沒有失誤——所以「巢狀迴圈不可預測」不成立,失誤專屬 stable 的佈局。手動展開讓失誤消失(43.4 ns),但不展開時單 op 仍貴 2.1 cycle。嘗試用 ARM SPE 精確定位失誤分支,本機 SPE 只產生極少記錄,未能使用;因果改由下面的 A/B 建立。
+
+## A/B
+
+**C1:`next_kv`/`next_back_kv` 的上溯分支加 `cold_path()`** —— `10k_stable` 50.95 → 35.97(−29%),確認失誤來自「快路徑必須跳過上溯迴圈」的佈局;但 `iteration_mut_1000` +33.7%、`iteration_mut_100000` +12.4%。遍歷時每 ~12 個元素就上溯一次,那條路並不冷。**否決**。
+
+**C2:在 `LazyLeafRange<Immut>::next_unchecked` / `next_back_unchecked` 處理 Root 狀態** —— front 仍是 Root 時,下降到最左葉後直接回傳其第 0 個 KV、front 設為邊 1;back 對稱取最後一個 KV。不經過 `next_kv`。依據:呼叫端已保證還有下一個 KV,而非空樹的最左/最右葉必非空——`first_key_value`(`first_leaf_edge().right_kv().ok()?`)早已依賴同一事實。back 已先移動過時,front 的「下一個」仍是第一個元素,結論不變。
+
+```rust
+if let Some(LazyLeafHandle::Root(root)) = &self.front {
+    let leaf = unsafe { ptr::read(root) }.first_leaf_edge().into_node();
+    debug_assert!(leaf.len() > 0);
+    self.front = Some(LazyLeafHandle::Edge(unsafe { Handle::new_edge(leaf, 1) }));
+    return unsafe { Handle::new_kv(leaf, 0) }.into_kv();
+}
+unsafe { self.init_front().unwrap().next_unchecked() }
+```
+
+| bench | HEAD | C2 | 原型 | 原型 + C2 |
+|---|---|---|---|---|
+| first_and_last_0_stable | 3.74 | 3.74 | 8.28 | **3.74** |
+| first_and_last_100_stable | 19.27 | 11.78 | 24.24 | **11.69(−39.3%)** |
+| first_and_last_10k_stable | 50.95 | 31.42 | 50.71 | **33.10(−35.0%)** |
+| iteration_1000 | 1855.6 | 1697.4 | 1110.3 | **953.7(−48.6%)** |
+| iteration_20 | 24.50 | 25.42 | 22.28 | **18.64(−23.9%)** |
+| iteration_mut_1000 | 1781.0 | 1861.3 | 1075.4 | 1071.3(−39.8%) |
+| iteration_mut_20 | 25.75 | 24.49 | 20.02 | 19.71(−23.5%) |
+| iteration_fold_* / iteration_mut_fold_* | — | ±6% | ±5% | ±3% |
+
+**佈局包絡**:HEAD 與 C2 各重建、各量兩輪,同一建置內兩輪差 <1%;但 C2 完全未碰的路徑在換建置後有確定性偏移(`nightly_rolled` +8.6%、`iteration_mut_1000` +4.2%、`iteration_mut_20` −4.9%)。故 ±9% 內的變動不歸因;first/last 的 −35…−39% 與原型 + C2 的 iteration 收益都遠在包絡外。
+
+原型 + C2 中,原型的 iteration 收益完整保留且 `Iter` 的 `for` 迴圈更快(每次 `next()` 的 Root 判斷有了直接出口),原型對 `0_stable`/`100_stable` 的退化同時消失。原型為何讓 `0_stable`(長度 0、在 `length` 檢查即返回)變慢,未逐條拆解。
+
+## 正確性
+
+- 新增 `map/tests.rs::test_iter_first_step_from_root`:批量建、升/降序插入、兩端刪到半空、6 個切點的 `split_off`+`append`、`retain` 稀疏化,共 10 種大小;每種樹形先 `map.check()` 驗不變量,再比對 `iter().next()`/`next_back()`、`keys()`/`values()` 與 `first_key_value`/`last_key_value`,並以「先消耗 back 再走 front」(4 個切點)與嚴格交替兩種順序對照 Vec 參考。
+- btree 測試:原型 + C2 下 174 + 113 項全過;開 `debug-assertions-std = true` 再跑一次亦全過(耗時 77 → 106 ms,顯示斷言已編入;未另以探針確認 `cfg(debug_assertions)`)。
+
+## 判斷
+
+1. 10k_stable 比 nightly 慢 48% 的主因是 `iter()` 第一步內聯了在 `length > 0` 時不可能走到的上溯迴圈,快路徑要用一條必跳的 `b` 越過它,這個佈局在本機讓預測器每千指令失誤 4 次;一半由失誤、一半由每 op 多出的指令構成。
+2. **可落地**:C2 只在 Root 狀態加一個直接出口,不改變 Edge 狀態(遍歷熱路徑)的程式碼,也不需要分支提示;與 `next_unchecked` 原型可直接疊加,並修掉原型的兩項退化——若原型要送 PR,C2 應一起帶上,否則 reviewer 跑 btree bench 會看到 `first_and_last_0_stable` +121%。
+3. `ValMut`(`iter_mut().next()`)有同形的 Root 路徑,本章未改未量。
+
+```text
+# 二進位:/tmp/btree_bench/fl/{bin_headnav,bin_ctrl}
+# navigate.rs 版本:/tmp/btree_bench/fl/navigate.rs.{proto,c1,c2,proto_c2,final}
+# 量測腳本與結果:/tmp/btree_bench/fl/run.sh;res_{head,head2,c1_cold,c2_root,c2b,proto,proto_c2}.txt
+# 臨時 bench(已移除):tmp_fl_10k_{nightly_rolled,stable_rolled,stable_unrolled}
+# 工作樹:已還原為原型(未含 C2、未含 test_iter_first_step_from_root);C2 版本見 navigate.rs.proto_c2
+```
+
+# `iter::bench_filter_map_ref_sum`:ref 版 +51% 的逐 pass 證據——`Range` 經指標進 `try_fold`,界在 callee 內是 load;std 側用 `assert_unchecked` 補救不可行,assume 在內聯前就被 EarlyCSE 當冗餘刪除
+
+- 日期:2026-10-10
+- 分析對象:`library/coretests/benches/iter.rs:257`(`(0i64..1M).filter_map(|x| x.checked_mul(x)).map(black_box).by_ref().sum()`)
+- 前置:`iter::bench_filter_map_chain_ref_sum` 章已給出差距全部來自倖存的 `checked_mul` 溢出檢查(`wrapping_mul` 對照:ref 540,809 ≡ value 540,701),並對 ref 形狀僅寫「同 chain 機理」;本章補逐 pass 證據,並評估 std 側補救
+- 平臺:本機 HiSilicon aarch64,stage1,rustflags 為空;LLVM 23.1.0-rust-1.99.0-nightly
+
+## 基線(min of 3,與前章一致)
+
+```text
+bench_filter_map_sum        540,456 ns
+bench_filter_map_ref_sum    817,409 ns   (+51%)
+```
+
+## 逐 pass 證據(ref 形狀)
+
+`rustc -C no-prepopulate-passes` 產 pre-IR,沿 `r_plain` 的呼叫鏈走,迴圈在 `Range<i64>::try_fold` 的一個 internal 實例裡:
+
+```llvm
+; r_plain:Range 放在 alloca,以指標傳入
+%_1 = alloca [16 x i8]
+store i64 0, ptr %_1
+store i64 1000000, ptr %0
+%_2 = call i64 @try_fold(ptr noalias ... dereferenceable(16) %_1, i64 0, ...)
+```
+
+該 callee 的函式級 dump(只列變化點):
+
+| 之後 | smul | icmp | i64 load |
+|---|---|---|---|
+| 初始 | 0 | — | 8 |
+| InlinerPass(閉包、`next` 內聯) | **1** | `slt` | 3 |
+| SROAPass | 1 | `ne`, `slt` | 3 |
+| InstCombinePass | 1 | `eq`, `slt` | 3 |
+
+`start`/`end` 在 callee 內一直是 load,`smul` 被 `icmp slt x, %end_loaded` 支配,推不出上界;迴圈旋轉 + LFTR 把出口改為 `eq`。內聯回 `r_plain`、SROA 把 load 變成常數 10⁶ 時,支配 `smul` 的只剩 `≠`。`try_fold` 取 `&mut self` 並寫回 `start`,ArgumentPromotion 無法把指標拆成值;IPSCCP 也不跨記憶體傳播。value 形狀的對照(前章):`Range::fold` 以值接收 `(0, 1000000)`,IPSCCP 最早期就把常數送進 callee,InstCombine 趁比較仍是 `slt` 時消掉檢查。
+
+## std 側補救:`spec_next` 加 `assert_unchecked(old < self.end)`——不可行
+
+想法:LFTR 只改寫出口比較,`llvm.assume` 留在迴圈體內;界成為常數後 InstCombine 仍有 `<` 可用。
+
+- core 原型(`RangeIteratorImpl for ops::Range<T: TrustedStep>::spec_next`)+ 全 `iter::` 套件:目標 bench 不動(ref_sum 814,051、chain_ref_sum 1,628,464),bench 二進位仍有 4 份 `smulh`。
+- 原因:pre-IR 中 assume 存在(4 個),但 **`spec_next` 自身的 EarlyCSE 就把它刪了**——它被完全相同的分支條件支配,判為冗餘;這發生在任何內聯之前,最終 IR 中 assume 為 0。
+- 變體「遞增後 `assert_unchecked(self.start <= self.end)`」同樣在全部形狀被刪除(可由 `start < end` 與 `nuw/nsw` 遞增推出)。
+
+LLVM 會主動刪除「能由支配條件推出」的 assume,而這裡需要保留的恰是這份資訊,故 std 側以 assume 補救的路線關閉。修法仍在 LLVM(前章最小重現:SCEV 已知 `%iv ∈ [0,10⁶)`,`sadd.with.overflow` 會被消除而 `smul`/`umul` 不會)。
+
+## 方法論勘誤:MergeFunctions 造成的假陽性
+
+第一版獨立探針(自製 `R<const A: bool>` 仿 `Range`)以「函式體內 `smulh` 計數」判定,得出 assume 版 3 種形狀全部消除——**錯誤**。assume 被刪後 `_1` 與 `_0` 系列程式碼相同,MergeFunctions 把它們合併為別名(`r_plain_1 = r_plain_0`),函式體為空,計數自然為 0。以 `opt -print-after-all` 追蹤時 `r_plain_1` 的 `smul` 自始至終保留,與組合語言矛盾才發現。之後的同類探針一律加 `-Z merge-functions=disabled`,並直接檢查 IR 中各函式的 `define` 體。
+
+## 判斷
+
+1. 本 bench 與 value 版的差距完全由 `checked_mul` 溢出檢查的去留決定;ref 形狀錯過消除時機的路徑已由逐 pass 追蹤證實(指標傳遞 → callee 內界未知 → 旋轉後只剩 `eq`)。
+2. std 側無可落地的修法:`assert_unchecked` 在內聯前即被刪除;`Range::fold`/`try_fold` 的形狀改寫同樣在 callee 內拿不到常數界。
+3. LLVM 側修法與前章相同,本章的逐 pass 表可作為該 issue 的補充證據(說明為何 value 形狀「碰巧」能消除)。
+
+```text
+# 探針:/tmp/btree_bench/fm_ref/{p.rs(第一版,受 MergeFunctions 影響), p2.rs(三種 assume 變體,merge 關閉)}
+# core 原型:/tmp/btree_bench/fm_ref/range.rs.assume(已還原,range.rs 與 HEAD 相同)
+# 全 iter:: 量測:/tmp/btree_bench/fm_ref/res_assume.txt
+```
+
+# `slice::sort_unstable_large_random`:126.6 µs = 10k 隨機 u64 × 36.7 cycles;比較次數 13.8/元素(1.04·log₂n,接近理論),時間 75% 在 partition 迴圈的兩條 store;每 pass 2.1 cycles/元素是這個無分支形態的機器地板;兩個改法(寄存器攜帶 `left` 值、葉子 ≤20 改插入排序)實測皆回退
+
+- 日期:2026-10-12
+- 分析對象:`library/alloctests/benches/slice.rs:310`(`sort!(sort_unstable, sort_unstable_large_random, gen_random, 10000)`:`v.clone().sort_unstable()`,10 000 個均勻隨機 u64)
+- 實現:ipnsort(`unstable/mod.rs`)→ `quicksort`(遞迴左、迴圈右)→ `partition_lomuto_branchless_cyclic`(u64 ≤ 96 B 走無分支 Lomuto + 循環置換,`UNROLL_LEN = 2`)+ `choose_pivot`(len ≥ 64 用 27 點遞迴 pseudo-median)+ `small_sort_network`(len ≤ 32)
+- 平臺:本機 HiSilicon aarch64,stage1,rustflags 為空
+
+## 基線(min of 3)
+
+```text
+sort_unstable_large_random        126,361 ns  = 12.6 ns/元素 = 36.7 cycles/元素
+sort_unstable_large_mostly_asc    130,174         (隨機交換 √n 對後,與 random 同級)
+sort_large_random (stable)        138,256         (+9%)
+sort_unstable_large_big           644,497         (元素 128 B,走 branchy Hoare)
+```
+
+harness 含 `v.clone()`(80 KB memcpy,perf 中 `__memcpy_generic` 1.7%)。perf:`quicksort` 75.4%、`small_sort_network` 19.2%、`median3_rec` 3.6%。IPC 2.79,branch-miss 0.23%(每元素 0.013 次),L1 miss 0.06%——無分支化目標達成,**瓶頸不在預測也不在快取**。
+
+## 工作量分解(獨立探針,同 RNG)
+
+- 比較次數(`sort_unstable_by` 計數):10.3/13.8/17.3 per elem @ n=1k/10k/100k = **1.04·log₂n**。
+- partition 處理的元素總數(重現 std 的 pivot 與遞迴形):**9.33 n**(≈ log₂(10000/32)+… ,pivot 品質近乎理想);葉子平均 19.3 個元素,35% 的葉子元素落在 len ≤ 20。
+- 單次 partition pass(獨立函式,與 std 彙編逐條同形,64 份不同資料輪流):**2.1 cycles/元素**(n ≤ 1k);n=4095 時 2.6。對 lt-模式不敏感(全真/全假/交錯/隨機 10–50% 皆 2.5–2.6 @ n=4096)。
+- 地板:同一迴圈拿掉比較依賴、固定位址的 2 load + 2 store = 1.19 cycles/元素;1 load + 1 store = 0.52;只比較計數 0.47。
+
+**partition 迴圈的 2.1 cycles 中 ~1.2 是純粹的 4 次記憶體操作吞吐**,其餘 ~0.9 來自 `cinc` 決定的位址依賴(`ldr x16,[x9,x13,lsl #3]` 的 `x13` 由上一個比較的 `cinc` 產生)。perf annotate 把 90% 的樣本歸到兩條 store(`stur [x12,#-8]`、`str [x12],#16`)上,skid 下它們代表「等待前一步 load/位址」的停頓點。
+
+## 預算(cycles/元素,10k)
+
+| 項 | 估算 | 依據 |
+|---|---|---|
+| partition:9.33 pass × 2.1–2.6 | 20–24 | 獨立 pass 成本 × 總元素 |
+| small_sort(len ≤ 32,平均 19) | ~7 | 19.2% × 36.7 |
+| pivot 27 點取樣 | ~1.3 | 3.6% |
+| clone + 呼叫開銷 | ~1 | 1.7% + 餘 |
+| **實測** | **36.7** | |
+
+partition 在 sort 內部的實際單價是 (36.7 − 7 − 1.3 − 1)/9.33 ≈ **2.9 cycles/pass/元素**,比獨立 2.1–2.6 高 ~0.5。其中可量化的部分是 pivot 取樣(見下段 27 點 vs 3 點對照);其餘差額的原因**未量測**(推測與子陣列短、每次 pass 的啟動成本有關,未驗證)。stall_backend 計數 std 15.3/元素,自製 driver(同 partition、3 點 pivot)7.1/元素;driver 換成 std 的 27 點 pivot 後 stall 升到 10.7/元素、cyc 從 27.7 → 30.3——**27 點 pivot 的取樣 load 是一個可量化的 stall 來源(≈3 cycles/元素,8%)**,但它換來的 pivot 品質把 partition 總元素從 10.50 n 壓到 9.33 n(−11%),兩者相抵,net 持平(n=576 時 P 比 3 點慢 15%,n=10k 時 driver P512「≥512 才用 27 點」在兩個 seed 上一正一負)。
+
+## 嘗試過的改法(皆已還原)
+
+1. **寄存器攜帶 `left` 值**(避免 `ldr [base+num_lt]` 重讀上一步剛 store 的位置):每元素多一次 `ptr::read(left+1)` + select;harness 外的獨立 sort **+5…+9%**(n=64…131k 全部回退)。多出的 load 比省掉的 store-to-load 轉發更貴。否決。
+2. **葉子 ≤ 20 改插入排序**(`sort` 入口對整體輸入已用此門檻;隨機葉子平均 19):harness `sort_unstable_large_random` **+1.9%**、`large_big` +11.8%、`medium_random` +5.8%、`large_strings` +3.7%;只有 `large_expensive` −3.1%。`small_sort_network` 的 sort9/sort13 網路對 9–20 的隨機葉子仍勝插入排序。否決。
+
+## 量測注意
+
+- n 掃描中 576 → 640 出現 +26% 的階躍(18.4 → 23.3 cycles/元素),曾疑為結構性門檻。**實為資料敏感**:同 n 換 seed,576 的 8 個 seed 落在 18.8–25.6、640 落在 18.3–24.0,雙峰分佈(~19 或 ~24,無中間值),對應 stall_backend 5.5 vs 10.6;與陣列位址 mod 4 KB 無關(off 掃描 8 個偏移全同)。10k 時 8 個 seed 全落在 37.4–37.8,無雙峰——大 n 下兩種狀態在遞迴中平均掉了。小 n 的單 seed 數字不可作結論。
+- 獨立 partition 探針若對同一份資料反覆跑(k=1)與輪流 64 份不同資料(k=64)結果相同(2.07 vs 2.09),記憶體依賴預測器沒有「學會」固定資料。
+
+## 判斷
+
+1. **無 std 病灶**:比較次數 1.04·log₂n、partition 總量 9.33 n、無分支 partition 已在 4 次記憶體操作 + 一條位址依賴鏈的吞吐上,小排序與 pivot 的佔比合理。
+2. 剩餘可想的方向都是結構性的(非本章可落地):SIMD 壓縮式 partition(AVX-512 `vpcompressq` / SVE `COMPACT`,見 `optimizable-interfaces.md` 的 SVE 章——與 `VecDeque::retain` 同一把 kernel,但 partition 需雙向輸出且 pivot 比較的 lt 掩碼來自向量比較,`is_less` 泛型閉包無法向量化,只能對 `T: Ord` 整數原生型別特化)、或 BlockQuicksort 式先算 64 個 lt 位元再搬運(減少位址依賴,但 ipnsort 作者的實測是 Lomuto cyclic 在 x86/Arm 上更快,本機探針 unroll=4 也不比 2 好)。
+3. 10k u64 隨機排序 12.6 ns/元素(未與 ipnsort 公開數字逐項核對);driver 自製版 3 點 pivot 27.7 cycles/元素比 std 快 25%,**但這不是改進線索**:它的 partition 總量多 12%,只是省了 27 點取樣的 stall,在 n=576 時反而慢;且未實作 ancestor_pivot 去重與 heapsort 保底。
+
+```text
+# 探針:/tmp/btree_bench/sortu/probe/{part.rs(partition 單價 + 地板), cnt.rs(比較計數), slope.rs/fine.rs/one.rs(n 掃描/perf), off.rs(位址偏移), scan.rs/pat.rs/kbuf.rs/par.rs(partition 對 n/模式/工作集/偏移), sel.rs(select_nth 對照), drv.rs/drvone.rs(自製 driver:遞迴方向、pivot 形態、葉子策略), leaf.rs(葉子分佈)}
+# 原型(已還原):/tmp/btree_bench/sortu/quicksort.rs.{regleft,leaf20};harness 結果 res_{base,leaf20}.txt
+# 二進位:/tmp/btree_bench/sortu/bin_base
+```
+
+# `iter::bench_range_step_by_fold_usize`:已是 NEON 4 累加器向量迴圈、無 load;比 `loop_u32` 慢一倍純粹是 u64 只有 2 lanes(每迭代週期數相同);開 SVE 只快 11%——本機 256-bit SVE 指令吞吐恰為 NEON 的一半,向量資料路徑仍是 128-bit
+
+- 日期:2026-10-12
+- 分析對象:`library/coretests/benches/iter.rs:106`(`(0..65535usize).step_by(64).map(|x| x ^ x.wrapping_sub(1)).fold(0, wrapping_add)`,1024 個元素)
+- 平臺:本機 HiSilicon aarch64,stage1,rustflags 為空;SVE VL = 256
+
+## 基線(min of 3)
+
+```text
+bench_range_step_by_fold_usize   261.55 ns  0.255 ns/元素  0.74 cyc/元素
+bench_range_step_by_loop_u32     130.77 ns  0.128          0.37   (for 迴圈、u32,同運算)
+bench_range_step_by_fold_u16      92.56 ns  0.090          0.26
+bench_range_step_by_sum_reducible  1.34 ns                       (被常數摺疊)
+```
+
+## 彙編
+
+`fold_usize` 與 `loop_u32` 的主迴圈**逐條同形**,只差 lane 寬度:
+
+```asm
+; 17 條向量指令 + 迴圈控制;4 組累加器;無任何 load
+add  v21.2d, v19.2d, v1.2d   ; x   = base + 常數偏移(4 個向量並行從 v19 派生)
+add  v24.2d, v19.2d, v5.2d   ; x-1 = base + (偏移-1)
+eor  v21.16b, v24.16b, v21.16b
+add  v16.2d, v21.2d, v16.2d  ; 累加
+...
+add  v19.2d, v19.2d, v20.2d  ; 唯一的歸納更新
+```
+
+usize 每迭代 8 個元素、u32 每迭代 16 個;換算 0.74×8 = **5.9 cycles/迭代** 與 0.37×16 = **5.9 cycles/迭代** 相同。17 條指令已接近下界(每向量「x、x−1、eor、累加」4 條 ×4 + 1 條歸納)。`StepBy<Range>` 的 fold 特化把它變成純算術計數迴圈,128 迭代 × 5.9 ≈ 755 cycles ≈ 260 ns,與實測吻合,呼叫開銷可忽略。
+
+## SVE:只快 11%,原因是硬體
+
+獨立探針(同閉包,stage1 rustc):
+
+| 編譯 | usize | u32 | u16 |
+|---|---|---|---|
+| 預設(NEON) | 250.3 ns | 129.5 | 91.0 |
+| `+sve` | 221.6(−11%) | 116.8 | 69.2 |
+| `+sve` + `-aarch64-sve-vector-bits-min=256` | 215.9 | 123.9 | 59.3 |
+
+SVE 迴圈每迭代 16 個元素(4 向量 × 4 lanes),但要 10.25 cycles。LLVM 生成的 SVE 迴圈把 4 個向量的起點寫成**串行鏈**(`z6=z5+z4; z7=z6+z4; z16=z7+z4; z5=z16+z4`),曾懷疑為瓶頸;手寫改成並行歸納後 10.45 cycles/迭代,**無改善,假設推翻**。
+
+直接量 `add` 吞吐(8 條獨立鏈):
+
+| | add/cycle | bit/cycle | 單條延遲 |
+|---|---|---|---|
+| NEON `add v.2d` | 3.58 | **459** | ~2.1 |
+| SVE `add z.d`(VL 256) | 1.79 | **458** | ~2.2 |
+
+**本機 256-bit SVE 指令吞吐恰為 NEON 的一半,每週期處理的位元數完全相同**——向量資料路徑是 128-bit,SVE 指令拆成兩個 µop 執行。SVE 那 11% 只來自迴圈控制指令變少。
+
+## 判斷
+
+1. **無 std 病灶**:迴圈無 load、4 累加器、指令數接近下界,向量 ALU 使用率 ~81%(17 條 / 5.9 cycles vs 峰值 3.58/cycle)。usize 對 u32 的 2× 是 lane 數,不是程式碼問題。
+2. **對整個 SVE 方向的含義**:在本機,SVE 對純算術向量迴圈沒有寬度紅利;SVE 的價值只來自 NEON 沒有的指令(`COMPACT`、述詞化載入/儲存、`whilelo` 尾端處理,例如 `VecDeque::retain` 章的 2–10×)。核對 `optimizable-interfaces.md`:多數 SVE 候選的收益本就來自這類指令,且 §(make_ascii_uppercase 0.48–0.78×)、帶寬封頂條目已記「無寬度優勢」。**缺口**:§20(寬整數切片比較 3.3–3.7×)與 §21(浮點切片相等 4.5–6.1×)的倍數是對 std 現有路徑量的,**未與手寫 NEON 版對照**;依本章,其中「一次比較更多 lane」的部分在本機不會比 NEON 多,真正 SVE 獨有的只有 `brkb`+`cntp` 取索引與 `whilelo` 尾塊——兩條的 SVE 專屬增益需補 NEON 對照才能確定。
+3. `fold_u16` 的 0.26 cycles/元素未達 8 lanes 的理論值(LLVM 只用 2 組累加器、64 迭代),本章未再細拆。
+
+```text
+# 探針:/tmp/btree_bench/stepby/{p.rs(NEON vs SVE 編譯對照), asm.rs(手寫 SVE 串行/並行歸納), thr.rs(NEON/SVE add 吞吐與延遲)}
+# 二進位:/tmp/btree_bench/stepby/bin
 ```
