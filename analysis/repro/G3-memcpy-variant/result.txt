@@ -1,0 +1,38 @@
+### aarch64 遠程:CORE=50 ./run.sh
+# 2026-11-03T15:02:02+08:00 aarch64 unknown | ldd (GNU libc) 2.38
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+libc 64              cycles:u 7.00  instructions:u 32.00  branch-misses:u -0.000
+hand 64              cycles:u 5.99  instructions:u 26.00  branch-misses:u -0.000
+libc 256             cycles:u 15.15  instructions:u 64.00  branch-misses:u -0.000
+hand 256             cycles:u 11.00  instructions:u 53.00  branch-misses:u -0.000
+libc 1024            cycles:u 45.62  instructions:u 184.00  branch-misses:u 0.000
+hand 1024            cycles:u 43.51  instructions:u 161.00  branch-misses:u -0.000
+libc 8192            cycles:u 364.05  instructions:u 1304.00  branch-misses:u 0.914
+hand 8192            cycles:u 330.85  instructions:u 1169.00  branch-misses:u -0.000
+libc 1024 16         cycles:u 45.47  instructions:u 184.00  branch-misses:u -0.000
+hand 1024 16         cycles:u 45.71  instructions:u 161.00  branch-misses:u -0.000
+libc 8192 16         cycles:u 347.97  instructions:u 1304.00  branch-misses:u 0.000
+hand 8192 16         cycles:u 426.17  instructions:u 1169.00  branch-misses:u 0.000
+libc 1024 4032       cycles:u 45.66  instructions:u 184.00  branch-misses:u -0.000
+hand 1024 4032       cycles:u 43.46  instructions:u 161.00  branch-misses:u 0.000
+libc 8192 4032       cycles:u 354.24  instructions:u 1304.00  branch-misses:u -0.216
+hand 8192 4032       cycles:u 327.47  instructions:u 1169.00  branch-misses:u 0.000
+### x86_64 本機:CORE=10 ./run.sh
+# 2026-11-03T15:23:53+08:00 x86_64 12th Gen Intel(R) Core(TM) i7-12700 | ldd (GNU libc) 2.42
+gcc (GCC) 15.3.0
+libc 64              cpu_core/cycles/u 4.42  cpu_core/instructions/u 25.00  cpu_core/branch-misses/u 0.000
+hand 64              cpu_core/cycles/u 5.97  cpu_core/instructions/u 40.00  cpu_core/branch-misses/u 0.000
+libc 256             cpu_core/cycles/u 7.39  cpu_core/instructions/u 43.00  cpu_core/branch-misses/u -0.000
+hand 256             cpu_core/cycles/u 12.00  cpu_core/instructions/u 76.00  cpu_core/branch-misses/u 0.000
+libc 1024            cpu_core/cycles/u 23.92  cpu_core/instructions/u 136.00  cpu_core/branch-misses/u -0.000
+hand 1024            cpu_core/cycles/u 35.56  cpu_core/instructions/u 220.00  cpu_core/branch-misses/u 0.000
+libc 8192            cpu_core/cycles/u 136.16  cpu_core/instructions/u 45.00  cpu_core/branch-misses/u -0.000
+hand 8192            cpu_core/cycles/u 287.80  cpu_core/instructions/u 1564.00  cpu_core/branch-misses/u 1.000
+libc 1024 16         cpu_core/cycles/u 25.90  cpu_core/instructions/u 138.00  cpu_core/branch-misses/u -0.000
+hand 1024 16         cpu_core/cycles/u 35.49  cpu_core/instructions/u 220.00  cpu_core/branch-misses/u -0.000
+libc 8192 16         cpu_core/cycles/u 204.39  cpu_core/instructions/u 45.00  cpu_core/branch-misses/u 0.000
+hand 8192 16         cpu_core/cycles/u 287.58  cpu_core/instructions/u 1564.00  cpu_core/branch-misses/u 1.000
+libc 1024 4032       cpu_core/cycles/u 24.14  cpu_core/instructions/u 136.00  cpu_core/branch-misses/u 0.000
+hand 1024 4032       cpu_core/cycles/u 39.49  cpu_core/instructions/u 220.00  cpu_core/branch-misses/u 0.000
+libc 8192 4032       cpu_core/cycles/u 155.34  cpu_core/instructions/u 45.00  cpu_core/branch-misses/u -0.000
+hand 8192 4032       cpu_core/cycles/u 316.90  cpu_core/instructions/u 1564.00  cpu_core/branch-misses/u 1.000

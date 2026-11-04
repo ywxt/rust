@@ -1,0 +1,15 @@
+{
+ "id": "F4",
+ "slug": "taken-throughput",
+ "kind": "c",
+ "tags": [
+  "F4"
+ ],
+ "chapters": [
+  "c19",
+  "c79"
+ ],
+ "status": "reproduced",
+ "summary": "32 條必跳分支的小迴圈(間距 ≥16B):aarch64 1.00 cyc/條,x86 條件分支 0.50、無條件 0.33 cyc/條,即 1 vs 2(–3)條/cycle;128 條以上兩邊都約 2 cyc/條;x86 間距 8B 的密集分支反慢至 1.8 cyc/條",
+ "doc_mismatch": "文檔的 1 vs 2 條/cycle 只在小代碼足跡(約 32 條分支以內)成立;足跡大時兩邊相同約 0.5 條/cycle"
+}

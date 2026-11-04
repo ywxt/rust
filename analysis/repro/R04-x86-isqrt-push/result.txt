@@ -1,0 +1,59 @@
+### x86_64 本機 i7-12700(CORE=4)
+== 2026-11-03T15:55:43+08:00 x86_64 LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: X86
+PASS: A64
+PASS: NOBYPASS
+rustc 1.101.0-dev LLVM version: 23.1.4 
+== bench.rs(opt-level=3,N=20000000,每次呼叫,輸入 ≤ 255)
+u128            cycles/單位=8.054  instructions/單位=48.021
+u64             cycles/單位=4.524  instructions/單位=29.021
+u128-solo       cycles/單位=6.524  instructions/單位=40.021
+== bench:sq128 入口(反組譯前 8 條)
+   15a60:	push   %r15
+   15a62:	push   %r14
+   15a64:	push   %r12
+   15a66:	push   %rbx
+   15a67:	push   %rax
+   15a68:	test   %rsi,%rsi
+   15a6b:	jne    15a7c <_RNvCsd5yJ1q83zSI_5bench5sq128+0x1c>
+   15a6d:	call   15cf0 <_RNvNtNtNtCs6knCYbIatyh_4core3num3imp8int_sqrt3u64>
+== solo:sq128 入口(反組譯前 8 條)
+   15990:	push   %r15
+   15992:	push   %r14
+   15994:	push   %r12
+   15996:	push   %rbx
+   15997:	push   %rax
+   15998:	mov    %rdi,%rbx
+   1599b:	test   %rsi,%rsi
+   1599e:	jne    159d8 <_RNvCsd5yJ1q83zSI_5bench5sq128+0x48>
+
+### aarch64 univpn-work-1(CORE=44)
+
+
+== 2026-11-03T15:33:51+08:00 aarch64 LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: X86
+PASS: A64
+PASS: NOBYPASS
+rustc 1.101.0-dev LLVM version: 23.1.4 
+== bench.rs(opt-level=3,N=20000000,每次呼叫,輸入 ≤ 255)
+u128            cycles/單位=7.254  instructions/單位=33.053
+u64             cycles/單位=4.421  instructions/單位=23.052
+u128-solo       cycles/單位=4.553  instructions/單位=23.053
+== bench:sq128 入口(反組譯前 8 條)
+    9ea0:	stp	x29, x30, [sp, #-48]!
+    9ea4:	stp	x22, x21, [sp, #16]
+    9ea8:	stp	x20, x19, [sp, #32]
+    9eac:	mov	x29, sp
+    9eb0:	cbnz	x1, 9ecc <_RNvCsd5yJ1q83zSI_5bench5sq128+0x2c>
+    9eb4:	bl	a090 <_RNvNtNtNtCs5eKY5gNNvwM_4core3num3imp8int_sqrt3u64>
+    9eb8:	mov	x1, xzr
+    9ebc:	ldp	x20, x19, [sp, #32]
+== solo:sq128 入口(反組譯前 8 條)
+    9e44:	cbnz	x1, 9e78 <_RNvCsd5yJ1q83zSI_5bench5sq128+0x34>
+    9e48:	lsr	x8, x0, #32
+    9e4c:	cbnz	x8, a04c <_RNvCsd5yJ1q83zSI_5bench5sq128+0x208>
+    9e50:	cmp	x0, #0x10, lsl #12
+    9e54:	b.cs	a13c <_RNvCsd5yJ1q83zSI_5bench5sq128+0x2f8>  // b.hs, b.nlast
+    9e58:	cmp	x0, #0x100
+    9e5c:	b.cs	a1e8 <_RNvCsd5yJ1q83zSI_5bench5sq128+0x3a4>  // b.hs, b.nlast
+    9e60:	lsl	x8, x0, #1

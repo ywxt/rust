@@ -1,0 +1,18 @@
+{
+ "id": "B4",
+ "slug": "mispredict-cost",
+ "kind": "c",
+ "tags": [
+  "B4"
+ ],
+ "chapters": [
+  "c34",
+  "c47",
+  "c54",
+  "c35",
+  "c08"
+ ],
+ "status": "reproduced",
+ "summary": "同一條依 L1 load 的隨機條件分支(對照組為 0101 交替):每次誤預測淨代價 aarch64 17.1 cyc、x86 25.6 cyc,吻合文檔 18 vs 26;換算成時間兩邊約同為 5.7–5.9 ns,cycle 差主要來自主頻",
+ "doc_mismatch": "BinaryHeap 章的「每多一次失誤淨 11 cyc」低於乾淨的單次代價 17 cyc,說明該數字含有與其他工作的重疊,不是誤預測代價本身"
+}

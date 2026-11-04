@@ -1,0 +1,5 @@
+{"id":"R09","slug":"x86-memmove-erms-l1","kind":"c","tags":["N2"],
+ "chapters":["c25"],
+ "status":"reproduced",
+ "summary":"repro.c 照 write_all_vectored 依序拷 8 段(共 32 640 B)進同一目的緩衝:x86 glibc memcpy 2 481 cycles/輪(13.2 B/cycle,L1 未命中 470/輪),aarch64 1 893(17.2 B/cycle,未命中 ≈0);總量 16 256 B 時 x86 472(34 B/cycle)反比 aarch64 964(17 B/cycle)快 2×",
+ "doc_mismatch":"文檔推測 x86 慢在 ERMS 大段拷貝與 realloc 後目的地 cache miss。復現中目的緩衝每輪重用、無 realloc,仍出現同樣的 13 對 17 B/cycle;手寫 16 B 迴圈同樣退化(1 094 → 3 329 cycles,未命中 377/輪),rep movsb 與 glibc 相當(2 573),故不是 ERMS 特有。成因是工作集(來源 32 KiB + 目的 32 KiB)超過 x86 P 核 48 KiB L1D,而 aarch64 L1D 為 64 KiB;文檔的「每千指令 L1 miss 320」也是此容量效應"}

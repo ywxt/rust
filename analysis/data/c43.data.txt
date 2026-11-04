@@ -1,0 +1,18 @@
+# c43 07e526db9df re-measurement; aarch64 core 58 (univpn-work-1), x86 core 12 via flock; raw harness/perf output
+## aarch64 group runs
+## corebenches any::bench_downcast_ref
+run1 test any::bench_downcast_ref ... bench:           3.34 ns/iter (+/- 0.64)
+run2 test any::bench_downcast_ref ... bench:           3.79 ns/iter (+/- 0.10)
+run3 test any::bench_downcast_ref ... bench:           3.33 ns/iter (+/- 0.63)
+### c43 --exact runs
+run1 test any::bench_downcast_ref ... bench:           3.81 ns/iter (+/- 0.58)
+run2 test any::bench_downcast_ref ... bench:           3.82 ns/iter (+/- 0.08)
+run3 test any::bench_downcast_ref ... bench:           3.76 ns/iter (+/- 0.56)
+run4 test any::bench_downcast_ref ... bench:           3.28 ns/iter (+/- 0.56)
+run5 test any::bench_downcast_ref ... bench:           3.75 ns/iter (+/- 0.60)
+## x86 runs
+## corebenches any::bench_downcast_ref
+run1 test any::bench_downcast_ref ... bench:           1.28 ns/iter (+/- 0.04)
+run2 test any::bench_downcast_ref ... bench:           1.31 ns/iter (+/- 0.16)
+run3 test any::bench_downcast_ref ... bench:           1.27 ns/iter (+/- 0.12)
+### derived (python, from the min values above)

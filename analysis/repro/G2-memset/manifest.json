@@ -1,0 +1,14 @@
+{
+ "id": "G2",
+ "slug": "memset",
+ "kind": "c",
+ "tags": [
+  "G2"
+ ],
+ "chapters": [
+  "c41"
+ ],
+ "status": "partial",
+ "summary": "L1 內 1000 B memset:aarch64 非零 41.1、零 62.0(64 B 對齊)/25.0(偏 16)、同寬手寫 16 B store 66.0;x86 21.0 / 21.0 / 手寫 37.0 cycles/次。",
+ "doc_mismatch": "文檔 72.5 vs 26.2(2.77×)未復現:本復現 41.1 vs 21.0(1.96×),指標經 volatile 來回也只有 49.3;章節探針 perf 有 32% 樣本在 Rust 主迴圈,72.5 含探針開銷。文檔推測『非零不能用 dc zva 而低 IPC』不成立:非零(24 B/cycle)快於同寬手寫 store 迴圈(66,1 store/cycle),反而 64 B 對齊的零值(dc zva)更慢;差距主要是 store 吞吐(手寫 66 vs 37)。"
+}

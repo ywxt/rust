@@ -1,0 +1,87 @@
+# c54 raw data on 07e526db9df; a64 = univpn-work-1 core 52 (taskset -c 52), x86 = local core 12 (flock core12.lock taskset -c 12)
+# bench runner: /tmp/xdiff/work/upb/run.sh (3 interleaved runs); perf: prof.sh / ann.sh / fs.sh (remote copies in /tmp/xdiff/work/upb/)
+##### file: f_a.txt
+run1 a64 test btree::map::find_seq_10_000 ... bench:          46.28 ns/iter (+/- 0.10)
+run1 a64 test btree::map::find_rand_10_000 ... bench:          67.57 ns/iter (+/- 0.28)
+run2 a64 test btree::map::find_seq_10_000 ... bench:          41.51 ns/iter (+/- 0.10)
+run2 a64 test btree::map::find_rand_10_000 ... bench:          60.60 ns/iter (+/- 0.22)
+run3 a64 test btree::map::find_seq_10_000 ... bench:          41.50 ns/iter (+/- 0.09)
+run3 a64 test btree::map::find_rand_10_000 ... bench:          60.70 ns/iter (+/- 0.29)
+##### file: f_x.txt
+run1 x86 test btree::map::find_seq_10_000 ... bench:          30.69 ns/iter (+/- 1.88)
+run1 x86 test btree::map::find_rand_10_000 ... bench:          43.06 ns/iter (+/- 2.05)
+run2 x86 test btree::map::find_seq_10_000 ... bench:          30.11 ns/iter (+/- 1.89)
+run2 x86 test btree::map::find_rand_10_000 ... bench:          41.39 ns/iter (+/- 1.69)
+run3 x86 test btree::map::find_seq_10_000 ... bench:          30.54 ns/iter (+/- 1.77)
+run3 x86 test btree::map::find_rand_10_000 ... bench:          42.99 ns/iter (+/- 2.52)
+##### file: a64_fs.txt
+
+fs insert run1
+     5,965,403,178      cycles                                                                
+    11,224,171,980      instructions                     #    1.88  insn per cycle            
+       151,277,855      branch-misses                                                         
+fs collect run1
+     6,056,190,938      cycles                                                                
+    13,284,971,022      instructions                     #    2.19  insn per cycle            
+       131,919,979      branch-misses                                                         
+fs insert run2
+     5,965,871,756      cycles                                                                
+    11,224,276,550      instructions                     #    1.88  insn per cycle            
+       151,285,752      branch-misses                                                         
+fs collect run2
+     6,069,094,509      cycles                                                                
+    13,284,879,061      instructions                     #    2.19  insn per cycle            
+       132,581,887      branch-misses                                                         
+fs insert run3
+     5,967,387,776      cycles                                                                
+    11,224,203,092      instructions                     #    1.88  insn per cycle            
+       151,395,022      branch-misses                                                         
+fs collect run3
+     6,058,909,624      cycles                                                                
+    13,284,968,012      instructions                     #    2.19  insn per cycle            
+       132,019,182      branch-misses                                                         
+=== annotate find_seq_10_000
+  100.00 :   46160:  adrp    x16, 13e000 <core::unicode::unicode_data::conversions::UPPERCASE_LUT+0x168>
+   24.33 :   113cec: subs    x15, x15, #0x8
+   11.99 :   113d00: cbz     w16, 113d30 <<allocbenches::btree::map::find_seq_10_000::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x314>
+    8.65 :   113cb8: ldr     x11, [sp, #24]
+    6.39 :   113cd0: ldur    x16, [x12, #-88]
+    5.64 :   113d04: cbnz    x11, 113d14 <<allocbenches::btree::map::find_seq_10_000::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2f8>
+    5.50 :   113d38: add     x9, x9, #0x1
+    5.46 :   113d30: ldr     x10, [sp, #40]
+    4.95 :   113b98: subs    x15, x15, #0x8
+    4.36 :   113cc4: lsl     x15, x14, #3
+##### file: x86_fs.txt
+fs insert run1
+     6,367,121,366      cpu_core/cycles/u                                                     
+    11,904,107,879      cpu_core/instructions/u                                               
+       121,404,540      cpu_core/branch-misses/u                                              
+fs collect run1
+     6,377,194,119      cpu_core/cycles/u                                                     
+    13,873,206,025      cpu_core/instructions/u                                               
+       107,540,481      cpu_core/branch-misses/u                                              
+fs insert run2
+     6,382,954,350      cpu_core/cycles/u                                                     
+    11,904,106,590      cpu_core/instructions/u                                               
+       121,713,093      cpu_core/branch-misses/u                                              
+fs collect run2
+     6,382,643,285      cpu_core/cycles/u                                                       (99.97%)
+    13,877,540,740      cpu_core/instructions/u                                                 (99.97%)
+       107,390,936      cpu_core/branch-misses/u                                                (99.97%)
+fs insert run3
+     6,390,145,533      cpu_core/cycles/u                                                     
+    11,904,108,943      cpu_core/instructions/u                                               
+       121,913,677      cpu_core/branch-misses/u                                              
+fs collect run3
+     6,388,393,328      cpu_core/cycles/u                                                       (99.95%)
+    13,879,164,049      cpu_core/instructions/u                                                 (99.95%)
+       107,632,213      cpu_core/branch-misses/u                                                (99.95%)
+##### file: f_d.txt
+# derived by derive.py from a64_bench.txt / x86_bench.txt (min of 3)
+min btree::map::find_seq_10_000: a64 41.50 ns, x86 30.11 ns, a64 cycles(x2.9) 120.3
+min btree::map::find_rand_10_000: a64 60.60 ns, x86 41.39 ns, a64 cycles(x2.9) 175.7
+a64 fs insert: cyc/get 119.3, instr/get 224, miss/get 3.03
+a64 fs collect: cyc/get 121.1, instr/get 266, miss/get 2.64
+x86 fs insert: cyc/get 127.3, instr/get 238, miss/get 2.43
+x86 fs collect: cyc/get 127.5, instr/get 277, miss/get 2.15
+# old = body baseline numbers (88f7399-era build), new = a64 min above

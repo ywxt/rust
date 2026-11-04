@@ -1,0 +1,5 @@
+{"id":"L11","slug":"movemask","kind":"llvm-ir","tags":["S1"],
+ "chapters":["c13","c80","c36","c72","c55"],
+ "status":"reproduced",
+ "summary":"bitcast <16 x i1> → i16:x86 一條 pmovmskb;AArch64(含 +sve)cmlt + 載入位權常數 + and + 3×addp + umov,共 7 條;只判非零時 AArch64 改走 addp d + fmov。僅 IR 形態,效能見 S2。",
+ "doc_mismatch":""}

@@ -1,0 +1,24 @@
+### x86_64 本機 i7-12700(CORE=4)
+== 2026-11-03T15:27:40+08:00 x86_64 LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: X86
+PASS: X86
+PASS: A64
+PASS: FORCE
+rustc 1.101.0-dev commit-hash: unknown LLVM version: 23.1.4 
+== bench.rs(opt-level=3,REPS=3000,每字節)
+default         cycles/單位=1.288  instructions/單位=4.753
+vf16            cycles/單位=0.690  instructions/單位=2.378
+x86-64-v2       cycles/單位=0.918  instructions/單位=3.752
+
+### aarch64 univpn-work-1(CORE=44)
+
+
+== 2026-11-03T15:05:50+08:00 aarch64 LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: X86
+PASS: X86
+PASS: A64
+PASS: FORCE
+rustc 1.101.0-dev commit-hash: unknown LLVM version: 23.1.4 
+== bench.rs(opt-level=3,REPS=3000,每字節)
+default         cycles/單位=0.659  instructions/單位=2.065
+vf16            cycles/單位=0.650  instructions/單位=2.065

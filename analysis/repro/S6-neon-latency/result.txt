@@ -1,0 +1,14 @@
+### aarch64 遠程:CORE=50 ./run.sh
+# 2026-11-03T14:43:54+08:00 aarch64 unknown | ldd (GNU libc) 2.38
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+shl                  cycles:u 2.00  instructions:u 1.25  branch-misses:u 0.000
+eor                  cycles:u 1.92  instructions:u 1.25  branch-misses:u -0.000
+step                 cycles:u 3.87  instructions:u 2.25  branch-misses:u -0.000
+gpr                  cycles:u 1.00  instructions:u 1.25  branch-misses:u -0.000
+### x86_64 本機:CORE=10 ./run.sh
+# 2026-11-03T14:56:10+08:00 x86_64 12th Gen Intel(R) Core(TM) i7-12700 | ldd (GNU libc) 2.42
+gcc (GCC) 15.3.0
+shl                  cpu_core/cycles/u 1.00  cpu_core/instructions/u 1.25  cpu_core/branch-misses/u -0.000
+eor                  cpu_core/cycles/u 1.00  cpu_core/instructions/u 1.25  cpu_core/branch-misses/u -0.000
+step                 cpu_core/cycles/u 2.00  cpu_core/instructions/u 3.25  cpu_core/branch-misses/u -0.000
+gpr                  cpu_core/cycles/u 1.00  cpu_core/instructions/u 1.25  cpu_core/branch-misses/u -0.000

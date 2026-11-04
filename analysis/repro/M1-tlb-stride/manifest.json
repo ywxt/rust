@@ -1,0 +1,15 @@
+{
+ "id": "M1",
+ "slug": "tlb-stride",
+ "kind": "c",
+ "tags": [
+  "M1"
+ ],
+ "chapters": [
+  "c03",
+  "c14"
+ ],
+ "status": "partial",
+ "summary": "4 KB 頁下同樣 4096 行、只差每行一頁(spread)或連續(pack):aarch64 35.8 vs 13.4、x86 41.8 vs 15.0 cycles/次,每次換頁多付 22 vs 27 cycles,dTLB 未命中現象成立。",
+ "doc_mismatch": "dTLB 懲罰不是 aarch64 特有,x86 每次反而多 27 cycles(aarch64 22);跨平臺差只能來自 THP 設定(aarch64 always、x86 madvise,見 c14),本復現為固定頁數已在兩邊關 THP,未量 2 MB 頁對照(x86 本機記憶體碎片化,MADV_HUGEPAGE 只取得部分大頁)。"
+}

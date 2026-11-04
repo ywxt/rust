@@ -1,0 +1,39 @@
+# baseline refs: old chapter baseline 88f7399cb49 ; measured commit 07e526db9df
+### harness (from c15 run): aarch64 core 54
+run1 test vec::bench_in_place_zip_iter_mut ... bench:           5.93 ns/iter (+/- 0.02)
+run1 test vec::bench_in_place_zip_recycle ... bench:          31.15 ns/iter (+/- 0.05)
+run2 test vec::bench_in_place_zip_iter_mut ... bench:           5.81 ns/iter (+/- 0.02)
+run2 test vec::bench_in_place_zip_recycle ... bench:          31.08 ns/iter (+/- 0.07)
+run3 test vec::bench_in_place_zip_iter_mut ... bench:           5.74 ns/iter (+/- 0.01)
+run3 test vec::bench_in_place_zip_recycle ... bench:          31.10 ns/iter (+/- 0.08)
+### x86 core 12
+run1 test vec::bench_in_place_zip_iter_mut ... bench:           3.12 ns/iter (+/- 0.08)
+run1 test vec::bench_in_place_zip_recycle ... bench:          18.14 ns/iter (+/- 0.99)
+run2 test vec::bench_in_place_zip_iter_mut ... bench:           3.01 ns/iter (+/- 0.07)
+run2 test vec::bench_in_place_zip_recycle ... bench:          18.20 ns/iter (+/- 2.79)
+run3 test vec::bench_in_place_zip_iter_mut ... bench:           3.12 ns/iter (+/- 0.13)
+run3 test vec::bench_in_place_zip_recycle ... bench:          18.21 ns/iter (+/- 1.54)
+### aarch64 perf report + annotate (>=0.5%) vec::bench_in_place_zip_recycle
+
+    99.70%  allocbenches-b4  allocbenches-b48d0ecb0c6d7898  [.] _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches3vec26bench_in_pl
+## annotate: _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches3vec26bench_in_place_zip_recycle0INtNtNtCs5eKY5gNNvwM_4core3ops8func
+    0.96 :   ad638:  ldp     q2, q1, [x12, #-16]
+    4.05 :   ad640:  ldp     q3, q4, [x13, #-16]
+   10.49 :   ad650:  add     v0.16b, v0.16b, v6.16b
+    1.17 :   ad7c0:  ldur    x25, [x29, #-48]
+    5.12 :   ad834:  ldp     q2, q1, [x12, #-16]
+   23.34 :   ad83c:  ldp     q3, q4, [x13, #-16]
+   46.93 :   ad84c:  add     v0.16b, v0.16b, v6.16b
+    1.28 :   ad894:  ldr     d2, [x12], #8
+    1.28 :   ad8a4:  eor     v1.8b, v1.8b, v2.8b
+    0.96 :   ad638:  ldp     q2, q1, [x12, #-16]
+    4.05 :   ad640:  ldp     q3, q4, [x13, #-16]
+   10.49 :   ad650:  add     v0.16b, v0.16b, v6.16b
+    1.17 :   ad7c0:  ldur    x25, [x29, #-48]
+    0.53 :   ad7c8:  cmp     x25, #0x3e8
+    0.75 :   ad7f0:  add     x10, x19, x9
+    5.12 :   ad834:  ldp     q2, q1, [x12, #-16]
+   23.34 :   ad83c:  ldp     q3, q4, [x13, #-16]
+   46.93 :   ad84c:  add     v0.16b, v0.16b, v6.16b
+    1.28 :   ad894:  ldr     d2, [x12], #8
+    1.28 :   ad8a4:  eor     v1.8b, v1.8b, v2.8b

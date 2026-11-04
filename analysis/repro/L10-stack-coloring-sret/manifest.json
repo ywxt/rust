@@ -1,0 +1,15 @@
+{
+ "id": "L10",
+ "slug": "stack-coloring-sret",
+ "kind": "llvm-ir",
+ "tags": [
+  "B1",
+  "N4"
+ ],
+ "chapters": [
+  "c43"
+ ],
+ "status": "reproduced",
+ "summary": "同一 IR(rustc 兩 target 的 v0 只差 bool alloca 的 align)經棧著色在兩個 target 都讓 1 B、8 B 與 16 B sret 共用同一槽,AArch64 以 ldp 讀回、x86 以 movdqa 讀回;-no-stack-coloring 拆成三槽。downcast_ref 迴圈 cycles/iter:a64 20.05 → 4.89(−76%),x86 4.99 → 5.01(不敏感);讀回端的 +15 cyc 屬微架構 store→load 情形,成因為推測。",
+ "doc_mismatch": "無數字衝突(c43:v0 20.03 vs 4.70,x86 4.94–6.12)。注意:預設版與 -no-stack-coloring 版同時差兩處:sret 槽是否與 sturb / stur 共用,以及 y 讀回 ldp 的來源(預設 stp 上半 + str,拆槽後 stp + stp),本 bench 無法分開這兩項,c43 歸給 split 的 20 cyc 也可能部分來自同槽多 store。c39(stp 寫回後 ldp 完整讀回,非多 store 共槽)形態不同,本復現未涵蓋。"
+}

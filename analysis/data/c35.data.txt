@@ -1,0 +1,122 @@
+# c35 raw data on 07e526db9df; a64 = univpn-work-1 core 52 (taskset -c 52), x86 = local core 12 (flock core12.lock taskset -c 12)
+# bench runner: /tmp/xdiff/work/upb/run.sh (3 interleaved runs); perf: prof.sh / ann.sh / fs.sh (remote copies in /tmp/xdiff/work/upb/)
+##### file: cs_a.txt
+run1 a64 test btree::map::clone_slim_10k ... bench:      53,379.50 ns/iter (+/- 166.38)
+run1 a64 test btree::map::clone_slim_10k_and_clear ... bench:      58,725.33 ns/iter (+/- 284.06)
+run1 a64 test btree::map::clone_slim_10k_and_remove_half ... bench:     348,811.00 ns/iter (+/- 912.25)
+run1 a64 test btree::map::clone_slim_10k_and_remove_all ... bench:     408,158.50 ns/iter (+/- 4,352.70)
+run1 a64 test btree::map::clone_slim_10k_and_pop_all ... bench:     406,438.00 ns/iter (+/- 14,012.05)
+run1 a64 test btree::map::clone_slim_10k_and_drain_half ... bench:     131,181.40 ns/iter (+/- 481.88)
+run1 a64 test btree::map::clone_slim_10k_and_drain_all ... bench:     343,754.00 ns/iter (+/- 934.45)
+run1 a64 test btree::map::clone_slim_10k_and_into_iter ... bench:      77,043.88 ns/iter (+/- 133.05)
+run2 a64 test btree::map::clone_slim_10k ... bench:      53,433.50 ns/iter (+/- 149.03)
+run2 a64 test btree::map::clone_slim_10k_and_clear ... bench:      52,708.07 ns/iter (+/- 140.82)
+run2 a64 test btree::map::clone_slim_10k_and_remove_half ... bench:     312,581.00 ns/iter (+/- 1,085.90)
+run2 a64 test btree::map::clone_slim_10k_and_remove_all ... bench:     366,465.00 ns/iter (+/- 2,521.75)
+run2 a64 test btree::map::clone_slim_10k_and_pop_all ... bench:     364,450.50 ns/iter (+/- 985.45)
+run2 a64 test btree::map::clone_slim_10k_and_drain_half ... bench:     117,477.83 ns/iter (+/- 296.32)
+run2 a64 test btree::map::clone_slim_10k_and_drain_all ... bench:     310,896.50 ns/iter (+/- 735.20)
+run2 a64 test btree::map::clone_slim_10k_and_into_iter ... bench:      68,978.83 ns/iter (+/- 66.91)
+run3 a64 test btree::map::clone_slim_10k ... bench:      53,381.50 ns/iter (+/- 159.35)
+run3 a64 test btree::map::clone_slim_10k_and_clear ... bench:      52,687.14 ns/iter (+/- 27.16)
+run3 a64 test btree::map::clone_slim_10k_and_remove_half ... bench:     312,821.00 ns/iter (+/- 990.00)
+run3 a64 test btree::map::clone_slim_10k_and_remove_all ... bench:     365,811.50 ns/iter (+/- 3,435.05)
+run3 a64 test btree::map::clone_slim_10k_and_pop_all ... bench:     365,444.50 ns/iter (+/- 767.35)
+run3 a64 test btree::map::clone_slim_10k_and_drain_half ... bench:     117,465.17 ns/iter (+/- 243.92)
+run3 a64 test btree::map::clone_slim_10k_and_drain_all ... bench:     307,757.50 ns/iter (+/- 1,029.55)
+run3 a64 test btree::map::clone_slim_10k_and_into_iter ... bench:      68,953.75 ns/iter (+/- 70.00)
+##### file: cs_x.txt
+run1 x86 test btree::map::clone_slim_10k ... bench:      27,775.38 ns/iter (+/- 1,309.67)
+run1 x86 test btree::map::clone_slim_10k_and_clear ... bench:      27,407.85 ns/iter (+/- 1,222.95)
+run1 x86 test btree::map::clone_slim_10k_and_remove_half ... bench:     212,672.25 ns/iter (+/- 8,483.84)
+run1 x86 test btree::map::clone_slim_10k_and_remove_all ... bench:     188,586.64 ns/iter (+/- 14,744.45)
+run1 x86 test btree::map::clone_slim_10k_and_pop_all ... bench:     162,884.65 ns/iter (+/- 8,615.38)
+run1 x86 test btree::map::clone_slim_10k_and_drain_half ... bench:      87,087.17 ns/iter (+/- 5,402.63)
+run1 x86 test btree::map::clone_slim_10k_and_drain_all ... bench:     193,499.28 ns/iter (+/- 11,777.01)
+run1 x86 test btree::map::clone_slim_10k_and_into_iter ... bench:      39,009.00 ns/iter (+/- 2,203.11)
+run2 x86 test btree::map::clone_slim_10k ... bench:      28,349.17 ns/iter (+/- 1,790.38)
+run2 x86 test btree::map::clone_slim_10k_and_clear ... bench:      27,916.16 ns/iter (+/- 1,127.04)
+run2 x86 test btree::map::clone_slim_10k_and_remove_half ... bench:     216,585.93 ns/iter (+/- 8,158.78)
+run2 x86 test btree::map::clone_slim_10k_and_remove_all ... bench:     191,066.22 ns/iter (+/- 5,704.86)
+run2 x86 test btree::map::clone_slim_10k_and_pop_all ... bench:     167,975.74 ns/iter (+/- 7,375.21)
+run2 x86 test btree::map::clone_slim_10k_and_drain_half ... bench:      89,200.12 ns/iter (+/- 3,836.24)
+run2 x86 test btree::map::clone_slim_10k_and_drain_all ... bench:     193,338.20 ns/iter (+/- 10,145.32)
+run2 x86 test btree::map::clone_slim_10k_and_into_iter ... bench:      37,881.71 ns/iter (+/- 2,347.11)
+run3 x86 test btree::map::clone_slim_10k ... bench:      27,745.97 ns/iter (+/- 1,247.54)
+run3 x86 test btree::map::clone_slim_10k_and_clear ... bench:      27,405.24 ns/iter (+/- 1,695.35)
+run3 x86 test btree::map::clone_slim_10k_and_remove_half ... bench:     212,233.80 ns/iter (+/- 9,845.90)
+run3 x86 test btree::map::clone_slim_10k_and_remove_all ... bench:     187,399.97 ns/iter (+/- 11,964.51)
+run3 x86 test btree::map::clone_slim_10k_and_pop_all ... bench:     167,630.67 ns/iter (+/- 6,184.31)
+run3 x86 test btree::map::clone_slim_10k_and_drain_half ... bench:      88,875.59 ns/iter (+/- 3,838.81)
+run3 x86 test btree::map::clone_slim_10k_and_drain_all ... bench:     202,188.10 ns/iter (+/- 12,497.12)
+run3 x86 test btree::map::clone_slim_10k_and_into_iter ... bench:      38,321.99 ns/iter (+/- 2,314.37)
+##### file: cs_p.txt
+=== perf stat btree::map::clone_slim_10k_and_remove_half
+test btree::map::clone_slim_10k_and_remove_half ... bench:     311,510.50 ns/iter (+/- 1,409.55)
+       548,204,312      cycles                                                                
+     1,365,372,043      instructions                     #    2.49  insn per cycle            
+       273,941,726      branches                                                              
+         9,917,030      branch-misses                    #    3.62% of all branches           
+=== perf stat btree::map::clone_slim_10k
+test btree::map::clone_slim_10k ... bench:      53,411.80 ns/iter (+/- 128.65)
+       468,984,356      cycles                                                                
+     1,691,008,339      instructions                     #    3.61  insn per cycle            
+       337,760,827      branches                                                              
+         1,269,697      branch-misses                    #    0.38% of all branches           
+##### file: cs_r.txt
+=== perf report btree::map::clone_slim_10k_and_remove_half
+    63.12%  [.] _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerINtNtNtNtCshDmNPlWY1OA_5alloc11collections5btree3map8BTreeMapjjENCNvNtNtCs3CKgq1o0DAf_12allocbenches5btree3maps_30clone_slim_10k_and_remove_half0EB1R_
+     9.03%  [.] _RINvNvXs0_NtNtNtCshDmNPlWY1OA_5alloc11collections5btree3mapINtB8_8BTreeMappppENtNtCs5eKY5gNNvwM_4core5clone5Clone5clone13clone_subtreejjNtNtBe_5alloc6GlobalECs3CKgq1o0DAf_12allocbenches
+     5.90%  [.] __memcpy_generic
+     5.35%  [.] _RINvMs_NtNtNtCshDmNPlWY1OA_5alloc11collections5btree6removeINtNtB7_4node6HandleINtBY_7NodeRefNtNtBY_6marker3MutjjNtB1v_4LeafENtB1v_2KVE14remove_leaf_kvNCNvMs5_NtNtB7_3map5entryINtB2x_13OccupiedEntryjjE9remove_kv0NtNtBb_5alloc6GlobalECs3CKgq1o0DAf_12allocbenches
+     4.09%  [.] _RNvMs5_NtNtNtNtCshDmNPlWY1OA_5alloc11collections5btree3map5entryINtB5_13OccupiedEntryjjE9remove_kvCs3CKgq1o0DAf_12allocbenches
+     2.90%  [.] __memmove_generic
+     1.84%  [.] memmove@plt
+     1.47%  [.] _int_free_create_chunk
+     1.45%  [.] _int_malloc
+     1.10%  [.] unlink_chunk.constprop.0
+     1.06%  [.] _int_free_merge_chunk
+     0.79%  [.] _int_free
+##### file: cs_d.txt
+# derived by derive.py from a64_bench.txt / x86_bench.txt (min of 3)
+min btree::map::clone_slim_10k: a64 53379.50 ns, x86 27745.97 ns, a64 cycles(x2.9) 154800.5
+min btree::map::clone_slim_10k_and_clear: a64 52687.14 ns, x86 27405.24 ns, a64 cycles(x2.9) 152792.7
+min btree::map::clone_slim_10k_and_remove_half: a64 312581.00 ns, x86 212233.80 ns, a64 cycles(x2.9) 906484.9
+min btree::map::clone_slim_10k_and_remove_all: a64 365811.50 ns, x86 187399.97 ns, a64 cycles(x2.9) 1060853.3
+min btree::map::clone_slim_10k_and_pop_all: a64 364450.50 ns, x86 162884.65 ns, a64 cycles(x2.9) 1056906.4
+min btree::map::clone_slim_10k_and_drain_half: a64 117465.17 ns, x86 87087.17 ns, a64 cycles(x2.9) 340649.0
+min btree::map::clone_slim_10k_and_drain_all: a64 307757.50 ns, x86 193338.20 ns, a64 cycles(x2.9) 892496.8
+min btree::map::clone_slim_10k_and_into_iter: a64 68953.75 ns, x86 37881.71 ns, a64 cycles(x2.9) 199965.9
+a64 net remove_half: (312581.0 - 53379.5)/5000 = 51.84 ns/elem
+a64 net remove_all: (365811.5 - 53379.5)/10000 = 31.24 ns/elem
+a64 net pop_all: (364450.5 - 53379.5)/10000 = 31.11 ns/elem
+a64 net drain_half: (117465.2 - 53379.5)/5000 = 12.82 ns/elem
+a64 net drain_all: (307757.5 - 53379.5)/10000 = 25.44 ns/elem
+a64 net into_iter: (68953.8 - 53379.5)/10000 = 1.56 ns/elem
+a64 net clear: (52687.1 - 53379.5)/10000 = -0.07 ns/elem
+x86 net remove_half: (212233.8 - 27746.0)/5000 = 36.90 ns/elem
+x86 net remove_all: (187400.0 - 27746.0)/10000 = 15.97 ns/elem
+x86 net pop_all: (162884.6 - 27746.0)/10000 = 13.51 ns/elem
+x86 net drain_half: (87087.2 - 27746.0)/5000 = 11.87 ns/elem
+x86 net drain_all: (193338.2 - 27746.0)/10000 = 16.56 ns/elem
+x86 net into_iter: (37881.7 - 27746.0)/10000 = 1.01 ns/elem
+x86 net clear: (27405.2 - 27746.0)/10000 = -0.03 ns/elem
+a64 perf btree::map::clone_slim_10k_and_remove_half: 311510.5 ns, IPC 2.49, instr/iter 2249417
+a64 perf btree::map::clone_slim_10k: 53411.8 ns, IPC 3.61, instr/iter 559168
+# old = body baseline numbers (88f7399-era build), new = a64 min above
+old->new btree::map::clone_slim_10k: 125032 -> 53379.50 (-57.3%)
+old->new btree::map::clone_slim_10k_and_clear: 124306 -> 52687.14 (-57.6%)
+old->new btree::map::clone_slim_10k_and_remove_half: 349061 -> 312581.00 (-10.5%)
+old->new btree::map::clone_slim_10k_and_drain_half: 141687 -> 117465.17 (-17.1%)
+old->new btree::map::clone_slim_10k_and_remove_all: 379296 -> 365811.50 (-3.6%)
+old->new btree::map::clone_slim_10k_and_pop_all: 334332 -> 364450.50 (+9.0%)
+old->new btree::map::clone_slim_10k_and_drain_all: 331873 -> 307757.50 (-7.3%)
+old->new btree::map::clone_slim_10k_and_into_iter: 123464 -> 68953.75 (-44.2%)
+proto(c35 body) vs new btree::map::clone_slim_10k: proto 53945 / new 53379.50 = new is -1.0% vs proto
+proto(c35 body) vs new btree::map::clone_slim_10k_and_clear: proto 54165 / new 52687.14 = new is -2.7% vs proto
+proto(c35 body) vs new btree::map::clone_slim_10k_and_remove_half: proto 222307 / new 312581.00 = new is +40.6% vs proto
+proto(c35 body) vs new btree::map::clone_slim_10k_and_drain_half: proto 125336 / new 117465.17 = new is -6.3% vs proto
+proto(c35 body) vs new btree::map::clone_slim_10k_and_remove_all: proto 377041 / new 365811.50 = new is -3.0% vs proto
+proto(c35 body) vs new btree::map::clone_slim_10k_and_pop_all: proto 344903 / new 364450.50 = new is +5.7% vs proto
+proto(c35 body) vs new btree::map::clone_slim_10k_and_drain_all: proto 338996 / new 307757.50 = new is -9.2% vs proto
+proto(c35 body) vs new btree::map::clone_slim_10k_and_into_iter: proto 129001 / new 68953.75 = new is -46.5% vs proto

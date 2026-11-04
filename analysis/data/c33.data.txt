@@ -1,0 +1,63 @@
+# c33 07e526db9df re-measurement; aarch64 core 58 (univpn-work-1), x86 core 12 via flock; raw harness/perf output
+## aarch64 fmt::write_u (3 runs)
+## corebenches fmt::write_u
+run1 test fmt::write_u128_max ... bench:          63.33 ns/iter (+/- 0.61)
+run1 test fmt::write_u128_min ... bench:          57.56 ns/iter (+/- 1.15)
+run1 test fmt::write_u64_max  ... bench:          52.02 ns/iter (+/- 1.16)
+run1 test fmt::write_u64_min  ... bench:          55.75 ns/iter (+/- 1.37)
+run1 test fmt::write_u8_max   ... bench:          52.57 ns/iter (+/- 1.22)
+run1 test fmt::write_u8_min   ... bench:          54.37 ns/iter (+/- 0.68)
+run2 test fmt::write_u128_max ... bench:          63.54 ns/iter (+/- 0.55)
+run2 test fmt::write_u128_min ... bench:          57.53 ns/iter (+/- 0.84)
+run2 test fmt::write_u64_max  ... bench:          52.24 ns/iter (+/- 1.20)
+run2 test fmt::write_u64_min  ... bench:          55.86 ns/iter (+/- 1.98)
+run2 test fmt::write_u8_max   ... bench:          52.80 ns/iter (+/- 1.14)
+run2 test fmt::write_u8_min   ... bench:          54.20 ns/iter (+/- 0.56)
+run3 test fmt::write_u128_max ... bench:          64.18 ns/iter (+/- 1.30)
+run3 test fmt::write_u128_min ... bench:          57.61 ns/iter (+/- 1.22)
+run3 test fmt::write_u64_max  ... bench:          52.27 ns/iter (+/- 0.97)
+run3 test fmt::write_u64_min  ... bench:          55.37 ns/iter (+/- 1.20)
+run3 test fmt::write_u8_max   ... bench:          52.55 ns/iter (+/- 1.02)
+run3 test fmt::write_u8_min   ... bench:          54.25 ns/iter (+/- 0.76)
+## x86 fmt::write_u (3 runs)
+## corebenches fmt::write_u
+run1 test fmt::write_u128_max ... bench:          29.39 ns/iter (+/- 1.29)
+run1 test fmt::write_u128_min ... bench:          21.16 ns/iter (+/- 1.41)
+run1 test fmt::write_u64_max  ... bench:          22.92 ns/iter (+/- 1.21)
+run1 test fmt::write_u64_min  ... bench:          20.75 ns/iter (+/- 1.36)
+run1 test fmt::write_u8_max   ... bench:          20.33 ns/iter (+/- 1.29)
+run1 test fmt::write_u8_min   ... bench:          20.25 ns/iter (+/- 1.59)
+run2 test fmt::write_u128_max ... bench:          29.27 ns/iter (+/- 1.71)
+run2 test fmt::write_u128_min ... bench:          21.09 ns/iter (+/- 1.20)
+run2 test fmt::write_u64_max  ... bench:          23.18 ns/iter (+/- 0.83)
+run2 test fmt::write_u64_min  ... bench:          21.49 ns/iter (+/- 1.33)
+run2 test fmt::write_u8_max   ... bench:          20.83 ns/iter (+/- 1.15)
+run2 test fmt::write_u8_min   ... bench:          20.01 ns/iter (+/- 1.10)
+run3 test fmt::write_u128_max ... bench:          28.85 ns/iter (+/- 0.92)
+run3 test fmt::write_u128_min ... bench:          20.64 ns/iter (+/- 1.28)
+run3 test fmt::write_u64_max  ... bench:          22.73 ns/iter (+/- 1.37)
+run3 test fmt::write_u64_min  ... bench:          20.44 ns/iter (+/- 1.38)
+run3 test fmt::write_u8_max   ... bench:          20.33 ns/iter (+/- 1.25)
+run3 test fmt::write_u8_min   ... bench:          20.29 ns/iter (+/- 1.42)
+### c33/c46/c62 perf stat (stall_frontend), 3 runs each
+bench:          54.26 ns/iter write_u8_min ipc=3.06 fe_stall_share=28.0%
+bench:          55.01 ns/iter write_u8_min ipc=3.04 fe_stall_share=28.2%
+bench:          54.41 ns/iter write_u8_min ipc=3.06 fe_stall_share=28.0%
+bench:          52.39 ns/iter write_u8_max ipc=3.22 fe_stall_share=26.1%
+bench:          52.52 ns/iter write_u8_max ipc=3.21 fe_stall_share=26.1%
+bench:          52.79 ns/iter write_u8_max ipc=3.22 fe_stall_share=26.0%
+bench:          55.34 ns/iter write_u64_min ipc=3.00 fe_stall_share=29.0%
+bench:          56.12 ns/iter write_u64_min ipc=2.99 fe_stall_share=29.4%
+bench:          56.95 ns/iter write_u64_min ipc=2.96 fe_stall_share=29.6%
+bench:          52.12 ns/iter write_u64_max ipc=3.79 fe_stall_share=15.2%
+bench:          51.83 ns/iter write_u64_max ipc=3.81 fe_stall_share=14.9%
+bench:          52.33 ns/iter write_u64_max ipc=3.77 fe_stall_share=15.3%
+bench:          57.12 ns/iter write_u128_min ipc=2.99 fe_stall_share=28.8%
+bench:          58.46 ns/iter write_u128_min ipc=2.93 fe_stall_share=30.2%
+bench:          57.38 ns/iter write_u128_min ipc=2.97 fe_stall_share=29.3%
+bench:          63.86 ns/iter write_u128_max ipc=3.76 fe_stall_share=13.8%
+bench:          64.25 ns/iter write_u128_max ipc=3.75 fe_stall_share=14.1%
+bench:          64.21 ns/iter write_u128_max ipc=3.74 fe_stall_share=14.1%
+### derived (python, from the min values above)
+u64 min/max = 1.064 : up 6.4 %
+u8 min/max = 1.031 : up 3.1 %

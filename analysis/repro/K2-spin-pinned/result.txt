@@ -1,0 +1,16 @@
+### aarch64 遠程:CORE=50 ./run.sh
+# 2026-11-03T14:44:11+08:00 aarch64 unknown | ldd (GNU libc) 2.38
+6.6.0-132.0.0.111.oe2403sp3.aarch64 #1 SMP Mon Dec 29 23:09:17 CST 2025
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+spin                 cycles 11585539.82  cycles:u 2022999.47  instructions 25177666.795
+spin 對端佔 CPU 100.0%
+yield                cycles 11863.63  cycles:u 820.87  instructions 22801.591
+yield 對端佔 CPU 64.0%
+### x86_64 本機:CORE=10 ./run.sh
+# 2026-11-03T14:56:19+08:00 x86_64 12th Gen Intel(R) Core(TM) i7-12700 | ldd (GNU libc) 2.42
+7.2.8 #1-NixOS SMP PREEMPT_DYNAMIC Fri Sep 25 14:37:14 UTC 2026
+gcc (GCC) 15.3.0
+spin                 cpu_core/cycles/ 11583.88  cpu_core/cycles/u 1599.79  cpu_core/instructions/ 21076.829
+spin 對端佔 CPU 66.6%
+yield                cpu_core/cycles/ 8851.43  cpu_core/cycles/u 880.72  cpu_core/instructions/ 16101.191
+yield 對端佔 CPU 58.2%

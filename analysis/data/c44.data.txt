@@ -1,0 +1,97 @@
+# baseline refs: old chapter baseline 88f7399cb49 ; measured commit 07e526db9df
+### aarch64 core 54 harness + perf (next_chunk family)
+
+# host=localhost.localdomain arch=aarch64 core=54 bin=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d
+run1 test iter::bench_next_chunk_filter_even ... bench:          61.89 ns/iter (+/- 0.09)
+run1 test iter::bench_next_chunk_filter_map_even ... bench:          48.66 ns/iter (+/- 0.26)
+run1 test iter::bench_next_chunk_filter_mostly_false ... bench:         604.94 ns/iter (+/- 1.07)
+run1 test iter::bench_next_chunk_filter_map_mostly_false ... bench:         584.52 ns/iter (+/- 9.09)
+run1 test iter::bench_next_chunk_filter_predictably_true ... bench:          33.39 ns/iter (+/- 0.04)
+run1 test iter::bench_next_chunk_filter_map_predictably_true ... bench:          28.12 ns/iter (+/- 0.33)
+run1 test iter::bench_next_chunk_copied ... bench:          33.29 ns/iter (+/- 0.03)
+run1 test iter::bench_next_chunk_trusted_random_access ... bench:          98.68 ns/iter (+/- 0.22)
+run2 test iter::bench_next_chunk_filter_even ... bench:          61.91 ns/iter (+/- 0.06)
+run2 test iter::bench_next_chunk_filter_map_even ... bench:          48.71 ns/iter (+/- 0.15)
+run2 test iter::bench_next_chunk_filter_mostly_false ... bench:         591.78 ns/iter (+/- 0.91)
+run2 test iter::bench_next_chunk_filter_map_mostly_false ... bench:         586.66 ns/iter (+/- 0.42)
+run2 test iter::bench_next_chunk_filter_predictably_true ... bench:          33.31 ns/iter (+/- 0.03)
+run2 test iter::bench_next_chunk_filter_map_predictably_true ... bench:          27.13 ns/iter (+/- 0.61)
+run2 test iter::bench_next_chunk_copied ... bench:          33.29 ns/iter (+/- 0.04)
+run2 test iter::bench_next_chunk_trusted_random_access ... bench:          98.66 ns/iter (+/- 0.22)
+run3 test iter::bench_next_chunk_filter_even ... bench:          61.97 ns/iter (+/- 0.19)
+run3 test iter::bench_next_chunk_filter_map_even ... bench:          48.68 ns/iter (+/- 0.08)
+run3 test iter::bench_next_chunk_filter_mostly_false ... bench:         594.35 ns/iter (+/- 0.60)
+run3 test iter::bench_next_chunk_filter_map_mostly_false ... bench:         582.61 ns/iter (+/- 6.23)
+run3 test iter::bench_next_chunk_filter_predictably_true ... bench:          33.46 ns/iter (+/- 0.13)
+run3 test iter::bench_next_chunk_filter_map_predictably_true ... bench:          27.97 ns/iter (+/- 0.11)
+run3 test iter::bench_next_chunk_copied ... bench:          33.29 ns/iter (+/- 0.07)
+run3 test iter::bench_next_chunk_trusted_random_access ... bench:          98.72 ns/iter (+/- 0.23)
+    99.87%  corebenches-c88  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter36bench_next_chunk_filter_mostly_false0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCsp
+## annotate: _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter36bench_next_chunk_filter_mostly_false0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+    0.82 :   76df4:  ldr     w12, [x10]
+   14.44 :   76e08:  b.cs    76d04 <<corebenches::iter::bench_next_chunk_filter_mostly_false::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x560>  // b.hs, b.nl
+    1.11 :   76e0c:  subs    x11, x11, #0x4
+    3.49 :   77058:  ldr     w12, [x10]
+   74.43 :   7706c:  b.cs    76f68 <<corebenches::iter::bench_next_chunk_filter_mostly_false::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x7c4>  // b.hs, b.nl
+    3.18 :   77070:  subs    x11, x11, #0x4
+    99.97%  corebenches-c88  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter32bench_next_chunk_filter_map_even0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWl
+## annotate: _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter32bench_next_chunk_filter_map_even0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+    6.22 :   75354:  ldur    w9, [x29, #-160]
+    7.85 :   75398:  str     w12, [sp, #8488]
+    2.27 :   75400:  str     w13, [x28, x10, lsl #2]
+   59.85 :   75410:  cmp     x10, #0x20
+    2.96 :   75418:  add     x11, x11, #0x4
+    0.97 :   754c8:  ldur    w9, [x29, #-160]
+    1.53 :   7550c:  str     w12, [sp, #8488]
+    0.87 :   75574:  str     w13, [x28, x10, lsl #2]
+    1.80 :   75578:  mvn     w14, w13
+   10.11 :   75584:  cmp     x10, #0x20
+    1.42 :   7558c:  add     x11, x11, #0x4
+### x86 core 12 harness
+# host=ywxt-work arch=x86_64 core=12 bin=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/coretests/d6382d1542e5d229/out/corebenches-d6382d1542e5d229 date=2026-11-03T15:54:52+08:00
+run1 test iter::bench_next_chunk_filter_even ... bench:          28.76 ns/iter (+/- 0.46)
+run1 test iter::bench_next_chunk_filter_map_even ... bench:          22.02 ns/iter (+/- 1.39)
+run1 test iter::bench_next_chunk_filter_mostly_false ... bench:         276.34 ns/iter (+/- 17.31)
+run1 test iter::bench_next_chunk_filter_map_mostly_false ... bench:         291.98 ns/iter (+/- 23.55)
+run1 test iter::bench_next_chunk_filter_predictably_true ... bench:          16.53 ns/iter (+/- 0.76)
+run1 test iter::bench_next_chunk_filter_map_predictably_true ... bench:          15.99 ns/iter (+/- 0.95)
+run1 test iter::bench_next_chunk_copied ... bench:          24.87 ns/iter (+/- 1.29)
+run1 test iter::bench_next_chunk_trusted_random_access ... bench:          56.29 ns/iter (+/- 2.40)
+run2 test iter::bench_next_chunk_filter_even ... bench:          27.70 ns/iter (+/- 1.64)
+run2 test iter::bench_next_chunk_filter_map_even ... bench:          22.13 ns/iter (+/- 1.72)
+run2 test iter::bench_next_chunk_filter_mostly_false ... bench:         282.05 ns/iter (+/- 13.59)
+run2 test iter::bench_next_chunk_filter_map_mostly_false ... bench:         285.36 ns/iter (+/- 13.32)
+run2 test iter::bench_next_chunk_filter_predictably_true ... bench:          16.74 ns/iter (+/- 1.06)
+run2 test iter::bench_next_chunk_filter_map_predictably_true ... bench:          15.78 ns/iter (+/- 0.92)
+run2 test iter::bench_next_chunk_copied ... bench:          24.48 ns/iter (+/- 1.54)
+run2 test iter::bench_next_chunk_trusted_random_access ... bench:          56.29 ns/iter (+/- 2.87)
+run3 test iter::bench_next_chunk_filter_even ... bench:          27.71 ns/iter (+/- 1.24)
+run3 test iter::bench_next_chunk_filter_map_even ... bench:          22.85 ns/iter (+/- 1.61)
+run3 test iter::bench_next_chunk_filter_mostly_false ... bench:         284.71 ns/iter (+/- 11.97)
+run3 test iter::bench_next_chunk_filter_map_mostly_false ... bench:         293.25 ns/iter (+/- 39.19)
+run3 test iter::bench_next_chunk_filter_predictably_true ... bench:          17.37 ns/iter (+/- 0.66)
+run3 test iter::bench_next_chunk_filter_map_predictably_true ... bench:          21.61 ns/iter (+/- 0.33)
+run3 test iter::bench_next_chunk_copied ... bench:          25.40 ns/iter (+/- 0.80)
+run3 test iter::bench_next_chunk_trusted_random_access ... bench:          58.87 ns/iter (+/- 2.26)
+### aarch64 objdump hot loops: filter_mostly_false @0x77058, filter_map_even @0x753f8
+
+   77058:	ldr	w12, [x10]
+   7705c:	str	x10, [x26, x9, lsl #3]
+   77060:	cmp	w12, #0x384
+   77064:	cinc	x9, x9, gt
+   77068:	cmp	x9, #0x20
+   7706c:	b.cs	76f68 <_RNvYNCNvNtCslrxolIbw58w_11corebenches4iter36ben
+   77070:	subs	x11, x11, #0x4
+   77074:	add	x10, x10, #0x4
+   77078:	b.ne	77058 <_RNvYNCNvNtCslrxolIbw58w_11corebenches4iter36ben
+
+   753f8:	ldr	w13, [x12, x11]
+   753fc:	mov	x15, x10
+   75400:	str	w13, [x28, x10, lsl #2]
+   75404:	mvn	w14, w13
+   75408:	and	x10, x14, #0x1
+   7540c:	add	x10, x15, x10
+   75410:	cmp	x10, #0x20
+   75414:	b.cs	75344 <_RNvYNCNvNtCslrxolIbw58w_11corebenches4iter32ben
+   75418:	add	x11, x11, #0x4
+   7541c:	cmp	x11, #0x1, lsl #12

@@ -1,0 +1,13 @@
+# c29 07e526db9df re-measurement; aarch64 core 58 (univpn-work-1), x86 core 12 via flock; raw harness/perf output
+### c29 socket_pipe pinned core 58, 3 runs, user/sys
+test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:     124,996.41 ns/iter (+/- 25,175.48) = 1048 MB/s
+user=0.38 sys=1.78
+test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:     125,003.94 ns/iter (+/- 25,290.41) = 1048 MB/s
+user=0.43 sys=1.76
+test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:     128,177.18 ns/iter (+/- 21,361.92) = 1022 MB/s
+user=0.63 sys=3.18
+## x86 core 12 pinned, TMPDIR=/dev/shm (3 runs)
+run1 test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:      22,729.06 ns/iter (+/- 3,370.82) = 5766 MB/s
+run2 test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:      27,570.90 ns/iter (+/- 3,729.41) = 4754 MB/s
+run3 test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:      28,382.74 ns/iter (+/- 5,559.95) = 4618 MB/s
+### derived (python, from the min values above)

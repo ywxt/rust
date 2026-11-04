@@ -1,0 +1,141 @@
+# c27:07e526db9df 上重新量測的原始輸出(腳本 /tmp/xdiff/work/up56/{run.sh,perf.sh,tools/mk.py} 彙整,未經手改)
+## bench 原始輸出(aarch64 core56,07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 allocbenches|test str::to_lowercase::short_pile_of_poo ... bench:         332.93 ns/iter (+/- 1.02)
+run2 allocbenches|test str::to_lowercase::short_pile_of_poo ... bench:         310.17 ns/iter (+/- 4.39)
+run3 allocbenches|test str::to_lowercase::short_pile_of_poo ... bench:         310.78 ns/iter (+/- 2.06)
+run1 allocbenches|test str::to_lowercase::short_mixed ... bench:         339.48 ns/iter (+/- 2.46)
+run2 allocbenches|test str::to_lowercase::short_mixed ... bench:         338.40 ns/iter (+/- 2.20)
+run3 allocbenches|test str::to_lowercase::short_mixed ... bench:         338.11 ns/iter (+/- 2.32)
+run1 allocbenches|test str::to_lowercase::short_ascii ... bench:          17.99 ns/iter (+/- 0.12)
+run2 allocbenches|test str::to_lowercase::short_ascii ... bench:          18.00 ns/iter (+/- 0.05)
+run3 allocbenches|test str::to_lowercase::short_ascii ... bench:          18.01 ns/iter (+/- 0.04)
+## 3 次最小值(aarch64 core56;腳本計算)
+min str::to_lowercase::short_pile_of_poo 310.17 ns/iter
+min str::to_lowercase::short_mixed 338.11 ns/iter
+min str::to_lowercase::short_ascii 17.99 ns/iter
+## bench 原始輸出(x86 core12 (flock),07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 allocbenches|test str::to_lowercase::short_pile_of_poo ... bench:         162.79 ns/iter (+/- 11.13)
+run2 allocbenches|test str::to_lowercase::short_pile_of_poo ... bench:         163.74 ns/iter (+/- 11.15)
+run3 allocbenches|test str::to_lowercase::short_pile_of_poo ... bench:         163.51 ns/iter (+/- 8.61)
+run1 allocbenches|test str::to_lowercase::short_mixed ... bench:         194.84 ns/iter (+/- 7.98)
+run2 allocbenches|test str::to_lowercase::short_mixed ... bench:         192.00 ns/iter (+/- 10.54)
+run3 allocbenches|test str::to_lowercase::short_mixed ... bench:         196.67 ns/iter (+/- 6.53)
+run1 allocbenches|test str::to_lowercase::short_ascii ... bench:           9.75 ns/iter (+/- 0.40)
+run2 allocbenches|test str::to_lowercase::short_ascii ... bench:           9.80 ns/iter (+/- 0.50)
+run3 allocbenches|test str::to_lowercase::short_ascii ... bench:           9.52 ns/iter (+/- 0.48)
+## 3 次最小值(x86 core12 (flock);腳本計算)
+min str::to_lowercase::short_pile_of_poo 162.79 ns/iter
+min str::to_lowercase::short_mixed 192.0 ns/iter
+min str::to_lowercase::short_ascii 9.52 ns/iter
+## perf record/report/annotate(aarch64 core56)=== c27 str::to_lowercase::short_pile_of_poo
+    81.85%  libstd-582c472e6e6781a0.so  [.] _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data11conversions6lookup
+     7.04%  libstd-582c472e6e6781a0.so  [.] _RNvMs3_NtCshDmNPlWY1OA_5alloc3stre12to_lowercase
+     5.08%  libstd-582c472e6e6781a0.so  [.] _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data11conversions8to_lower
+     2.30%  libc.so.6                   [.] malloc
+     1.79%  libc.so.6                   [.] _int_free
+     0.98%  libc.so.6                   [.] cfree@GLIBC_2.17
+--- annotate top: _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data11conversions6lookup
+   64.19 :   db91c:  b.hi    db8fc <core::unicode::unicode_data::conversions::lookup+0x34>  // b.pmore
+   19.80 :   db930:  ldrb    w11, [x9, #2]
+   11.50 :   db958:  ldr     x10, [x8, #24]
+    1.51 :   db8fc:  lsr     x12, x10, #1
+    1.40 :   db908:  add     x14, x13, x13, lsl #1
+    1.00 :   db940:  ccmp    w10, w12, #0x2, cs      // cs = hs, nlast
+    0.30 :   db8e4:  ldr     x9, [x8]
+    0.20 :   db8f8:  mov     x11, xzr
+    0.10 :   db8dc:  ldr     x10, [x8, #8]
+    0.00 :   dbae4:  ret
+    0.00 :   dbae0:  str     x8, [x0]
+    0.00 :   dbadc:  str     w9, [x0, #8]
+    0.00 :   dbad8:  ldur    x8, [x8, #4]
+    0.00 :   dbad4:  ldr     w9, [x8, #12]
+## perf record/report/annotate(x86 core12 (flock, -e cpu_core/cycles/u))=== c27 str::to_lowercase::short_pile_of_poo
+    66.19%  libstd-3f1ea972a24311e5.so     [.] core::unicode::unicode_data::conversions::lookup
+    21.80%  libstd-3f1ea972a24311e5.so     [.] <str>::to_lowercase
+     8.33%  libstd-3f1ea972a24311e5.so     [.] core::unicode::unicode_data::conversions::to_lower
+     1.89%  libc.so.6                      [.] malloc
+     1.01%  libc.so.6                      [.] cfree@GLIBC_2.2.5
+     0.24%  allocbenches-b18a163da23bc6bf  [.] <allocbenches::str::to_lowercase::short_pile_of_poo::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+--- annotate top: core::unicode::unicode_data::conversions::lookup
+   27.34 :   11d4c4: cmova  %r10,%r9
+   19.58 :   11d4da: cmp    %si,%r8w
+   12.00 :   11d4c8: sub    %r11,%r8
+    8.17 :   11d4c0: cmp    %si,(%rcx,%rbx,2)
+    5.97 :   11d4d5: movzwl (%rcx,%r9,2),%r8d
+    5.38 :   11d4bc: lea    (%r9,%r9,2),%rbx
+    3.83 :   11d4e0: movzbl 0x2(%rcx,%r9,2),%r10d
+    3.56 :   11d508: add    %rax,%rdx
+    3.47 :   11d480: push   %rbx
+    3.17 :   11d4a3: mov    (%rdx,%rax,1),%rcx
+    2.63 :   11d4b6: shr    $1,%r11
+    2.62 :   11d4cb: cmp    $0x1,%r8
+    1.31 :   11d4b3: mov    %r8,%r11
+    0.45 :   11d49e: test   %r8,%r8
+## 附加原始輸出:/tmp/xdiff/work/c27/up_rounds_a64.txt
+
+# aarch64 core56 ./up_rounds t12 10000000 run1
+12 entries, comparator calls per miss = 5
+3153253694,,cycles,1087345430,100.00,,
+9133120471,,instructions,1087345430,100.00,2.90,insn per cycle
+# aarch64 core56 ./up_rounds t12 10000000 run2
+12 entries, comparator calls per miss = 5
+3416299210,,cycles,1178044180,100.00,,
+9133167079,,instructions,1178044180,100.00,2.67,insn per cycle
+# aarch64 core56 ./up_rounds t12 10000000 run3
+12 entries, comparator calls per miss = 5
+3382190548,,cycles,1166284560,100.00,,
+9133328698,,instructions,1166284560,100.00,2.70,insn per cycle
+# aarch64 core56 ./up_rounds t18 10000000 run1
+18 entries, comparator calls per miss = 6
+3891412651,,cycles,1341883850,100.00,,
+10573393343,,instructions,1341883850,100.00,2.72,insn per cycle
+# aarch64 core56 ./up_rounds t18 10000000 run2
+18 entries, comparator calls per miss = 6
+4134937770,,cycles,1425850710,100.00,,
+10573548081,,instructions,1425850710,100.00,2.56,insn per cycle
+# aarch64 core56 ./up_rounds t18 10000000 run3
+18 entries, comparator calls per miss = 6
+4134485876,,cycles,1425696060,100.00,,
+10573517597,,instructions,1425696060,100.00,2.56,insn per cycle
+## 附加原始輸出:/tmp/xdiff/work/c27/up_rounds_x86.txt
+# x86 core12 ./up_rounds t12 10000000 run1
+12 entries, comparator calls per miss = 5
+2340649108,,cpu_core/cycles/u,511652910,100.00,,
+10260695283,,cpu_core/instructions/u,511652910,100.00,,
+# x86 core12 ./up_rounds t12 10000000 run2
+12 entries, comparator calls per miss = 5
+2342342746,,cpu_core/cycles/u,510805960,99.00,,
+10270690239,,cpu_core/instructions/u,510805960,99.00,,
+# x86 core12 ./up_rounds t12 10000000 run3
+12 entries, comparator calls per miss = 5
+2343824190,,cpu_core/cycles/u,506327603,99.00,,
+10271629728,,cpu_core/instructions/u,506327603,99.00,,
+# x86 core12 ./up_rounds t18 10000000 run1
+18 entries, comparator calls per miss = 6
+2977840818,,cpu_core/cycles/u,640890788,99.00,,
+11871948372,,cpu_core/instructions/u,640890788,99.00,,
+# x86 core12 ./up_rounds t18 10000000 run2
+18 entries, comparator calls per miss = 6
+2971591827,,cpu_core/cycles/u,633858172,100.00,,
+11860695058,,cpu_core/instructions/u,633858172,100.00,,
+# x86 core12 ./up_rounds t18 10000000 run3
+18 entries, comparator calls per miss = 6
+2981888786,,cpu_core/cycles/u,636816768,99.00,,
+11870625308,,cpu_core/instructions/u,636816768,99.00,,
+## 附加原始輸出:/tmp/xdiff/work/up56/c27_derived.txt
+# 腳本計算:up_rounds 三次最小 cycles / 1e7 iter(每 iter 16 次查找)
+a64 t12 cycles/iter 315.3 cycles/lookup 19.7
+a64 t18 cycles/iter 389.1 cycles/lookup 24.3
+a64 t18/t12 = 1.23
+x86 t12 cycles/iter 234.1 cycles/lookup 14.6
+x86 t18 cycles/iter 297.2 cycles/lookup 18.6
+x86 t18/t12 = 1.27
+## 附加原始輸出:/tmp/xdiff/work/up56/lut_sizes.txt
+88f7399cb49 unicode_data.rs LOWERCASE_LUT plane 0 singles 172
+88f7399cb49 unicode_data.rs LOWERCASE_LUT plane 1 singles 12
+88f7399cb49 unicode_data.rs UPPERCASE_LUT plane 0 singles 185
+88f7399cb49 unicode_data.rs UPPERCASE_LUT plane 1 singles 12
+07e526db9df unicode_data.rs LOWERCASE_LUT plane 0 singles 175
+07e526db9df unicode_data.rs LOWERCASE_LUT plane 1 singles 18
+07e526db9df unicode_data.rs UPPERCASE_LUT plane 0 singles 188
+07e526db9df unicode_data.rs UPPERCASE_LUT plane 1 singles 18

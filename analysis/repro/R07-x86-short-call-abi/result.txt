@@ -1,0 +1,21 @@
+### x86_64 本機 i7-12700(CORE=4)
+== 2026-11-03T16:01:48+08:00 x86_64
+gcc (GCC) 15.3.0
+== repro.c(gcc -O2,N=100000000,cycles/呼叫)
+inline          cycles/單位=1.007  instructions/單位=3.002
+call0           cycles/單位=1.208  instructions/單位=7.002
+call2           cycles/單位=2.027  instructions/單位=12.002
+icall0          cycles/單位=4.010  instructions/單位=7.002
+icall2          cycles/單位=4.653  instructions/單位=12.002
+
+### aarch64 univpn-work-1(CORE=44)
+
+
+== 2026-11-03T15:39:57+08:00 aarch64
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+== repro.c(gcc -O2,N=100000000,cycles/呼叫)
+inline          cycles/單位=1.008  instructions/單位=3.006
+call0           cycles/單位=3.010  instructions/單位=7.007
+call2           cycles/單位=7.011  instructions/單位=10.009
+icall0          cycles/單位=3.010  instructions/單位=7.007
+icall2          cycles/單位=7.011  instructions/單位=10.009

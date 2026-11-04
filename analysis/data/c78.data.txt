@@ -1,0 +1,193 @@
+# c78 07e526db9df re-measurement; aarch64 core 58 (univpn-work-1), x86 core 12 via flock; raw harness/perf output
+## aarch64 corebenches flt2dec::strategy (3 runs)
+## corebenches flt2dec::strategy
+run1 test num::flt2dec::strategy::dragon::bench_big_exact_12           ... bench:       1,081.34 ns/iter (+/- 4.03)
+run1 test num::flt2dec::strategy::dragon::bench_big_exact_3            ... bench:         591.29 ns/iter (+/- 27.81)
+run1 test num::flt2dec::strategy::dragon::bench_big_exact_inf          ... bench:      22,040.73 ns/iter (+/- 166.20)
+run1 test num::flt2dec::strategy::dragon::bench_big_shortest           ... bench:       1,993.79 ns/iter (+/- 11.92)
+run1 test num::flt2dec::strategy::dragon::bench_small_exact_12         ... bench:         142.13 ns/iter (+/- 1.89)
+run1 test num::flt2dec::strategy::dragon::bench_small_exact_3          ... bench:          71.36 ns/iter (+/- 0.35)
+run1 test num::flt2dec::strategy::dragon::bench_small_exact_inf        ... bench:       1,058.76 ns/iter (+/- 2.95)
+run1 test num::flt2dec::strategy::dragon::bench_small_shortest         ... bench:         155.86 ns/iter (+/- 0.44)
+run1 test num::flt2dec::strategy::grisu::bench_big_exact_12            ... bench:          52.35 ns/iter (+/- 0.43)
+run1 test num::flt2dec::strategy::grisu::bench_big_exact_3             ... bench:          25.03 ns/iter (+/- 0.19)
+run1 test num::flt2dec::strategy::grisu::bench_big_exact_inf           ... bench:      21,947.95 ns/iter (+/- 117.90)
+run1 test num::flt2dec::strategy::grisu::bench_big_shortest            ... bench:          69.46 ns/iter (+/- 0.30)
+run1 test num::flt2dec::strategy::grisu::bench_halfway_point_exact_inf ... bench:         680.62 ns/iter (+/- 1.58)
+run1 test num::flt2dec::strategy::grisu::bench_one_exact_inf           ... bench:         680.47 ns/iter (+/- 1.12)
+run1 test num::flt2dec::strategy::grisu::bench_small_exact_12          ... bench:          38.98 ns/iter (+/- 0.15)
+run1 test num::flt2dec::strategy::grisu::bench_small_exact_3           ... bench:          22.87 ns/iter (+/- 0.22)
+run1 test num::flt2dec::strategy::grisu::bench_small_exact_inf         ... bench:       1,128.36 ns/iter (+/- 3.25)
+run1 test num::flt2dec::strategy::grisu::bench_small_shortest          ... bench:          33.43 ns/iter (+/- 0.39)
+run1 test num::flt2dec::strategy::grisu::bench_trailing_zero_exact_inf ... bench:         691.52 ns/iter (+/- 2.71)
+run2 test num::flt2dec::strategy::dragon::bench_big_exact_12           ... bench:       1,080.08 ns/iter (+/- 2.81)
+run2 test num::flt2dec::strategy::dragon::bench_big_exact_3            ... bench:         591.65 ns/iter (+/- 2.48)
+run2 test num::flt2dec::strategy::dragon::bench_big_exact_inf          ... bench:      21,986.82 ns/iter (+/- 73.62)
+run2 test num::flt2dec::strategy::dragon::bench_big_shortest           ... bench:       1,785.69 ns/iter (+/- 7.68)
+run2 test num::flt2dec::strategy::dragon::bench_small_exact_12         ... bench:         142.78 ns/iter (+/- 1.68)
+run2 test num::flt2dec::strategy::dragon::bench_small_exact_3          ... bench:          71.47 ns/iter (+/- 0.16)
+run2 test num::flt2dec::strategy::dragon::bench_small_exact_inf        ... bench:       1,049.18 ns/iter (+/- 2.88)
+run2 test num::flt2dec::strategy::dragon::bench_small_shortest         ... bench:         152.00 ns/iter (+/- 0.75)
+run2 test num::flt2dec::strategy::grisu::bench_big_exact_12            ... bench:          52.31 ns/iter (+/- 0.42)
+run2 test num::flt2dec::strategy::grisu::bench_big_exact_3             ... bench:          25.01 ns/iter (+/- 0.17)
+run2 test num::flt2dec::strategy::grisu::bench_big_exact_inf           ... bench:      22,124.89 ns/iter (+/- 70.86)
+run2 test num::flt2dec::strategy::grisu::bench_big_shortest            ... bench:          69.56 ns/iter (+/- 0.35)
+run2 test num::flt2dec::strategy::grisu::bench_halfway_point_exact_inf ... bench:         681.49 ns/iter (+/- 1.37)
+run2 test num::flt2dec::strategy::grisu::bench_one_exact_inf           ... bench:         681.20 ns/iter (+/- 0.73)
+run2 test num::flt2dec::strategy::grisu::bench_small_exact_12          ... bench:          39.02 ns/iter (+/- 0.08)
+run2 test num::flt2dec::strategy::grisu::bench_small_exact_3           ... bench:          23.03 ns/iter (+/- 0.43)
+run2 test num::flt2dec::strategy::grisu::bench_small_exact_inf         ... bench:       1,119.87 ns/iter (+/- 4.82)
+run2 test num::flt2dec::strategy::grisu::bench_small_shortest          ... bench:          33.10 ns/iter (+/- 0.08)
+run2 test num::flt2dec::strategy::grisu::bench_trailing_zero_exact_inf ... bench:         691.73 ns/iter (+/- 0.98)
+run3 test num::flt2dec::strategy::dragon::bench_big_exact_12           ... bench:       1,089.32 ns/iter (+/- 2.32)
+run3 test num::flt2dec::strategy::dragon::bench_big_exact_3            ... bench:         592.21 ns/iter (+/- 2.56)
+run3 test num::flt2dec::strategy::dragon::bench_big_exact_inf          ... bench:      21,938.94 ns/iter (+/- 89.52)
+run3 test num::flt2dec::strategy::dragon::bench_big_shortest           ... bench:       1,752.13 ns/iter (+/- 7.01)
+run3 test num::flt2dec::strategy::dragon::bench_small_exact_12         ... bench:         141.46 ns/iter (+/- 2.88)
+run3 test num::flt2dec::strategy::dragon::bench_small_exact_3          ... bench:          71.72 ns/iter (+/- 0.22)
+run3 test num::flt2dec::strategy::dragon::bench_small_exact_inf        ... bench:       1,060.38 ns/iter (+/- 3.91)
+run3 test num::flt2dec::strategy::dragon::bench_small_shortest         ... bench:         151.87 ns/iter (+/- 0.37)
+run3 test num::flt2dec::strategy::grisu::bench_big_exact_12            ... bench:          52.42 ns/iter (+/- 0.33)
+run3 test num::flt2dec::strategy::grisu::bench_big_exact_3             ... bench:          25.01 ns/iter (+/- 0.07)
+run3 test num::flt2dec::strategy::grisu::bench_big_exact_inf           ... bench:      22,010.74 ns/iter (+/- 110.59)
+run3 test num::flt2dec::strategy::grisu::bench_big_shortest            ... bench:          69.60 ns/iter (+/- 0.32)
+run3 test num::flt2dec::strategy::grisu::bench_halfway_point_exact_inf ... bench:         680.72 ns/iter (+/- 1.68)
+run3 test num::flt2dec::strategy::grisu::bench_one_exact_inf           ... bench:         680.37 ns/iter (+/- 0.76)
+run3 test num::flt2dec::strategy::grisu::bench_small_exact_12          ... bench:          39.02 ns/iter (+/- 0.10)
+run3 test num::flt2dec::strategy::grisu::bench_small_exact_3           ... bench:          23.10 ns/iter (+/- 0.32)
+run3 test num::flt2dec::strategy::grisu::bench_small_exact_inf         ... bench:       1,117.16 ns/iter (+/- 3.58)
+run3 test num::flt2dec::strategy::grisu::bench_small_shortest          ... bench:          33.15 ns/iter (+/- 0.08)
+run3 test num::flt2dec::strategy::grisu::bench_trailing_zero_exact_inf ... bench:         691.27 ns/iter (+/- 2.00)
+## x86 corebenches flt2dec::strategy (3 runs)
+## corebenches flt2dec::strategy
+run1 test num::flt2dec::strategy::dragon::bench_big_exact_12           ... bench:         517.37 ns/iter (+/- 33.41)
+run1 test num::flt2dec::strategy::dragon::bench_big_exact_3            ... bench:         264.13 ns/iter (+/- 9.86)
+run1 test num::flt2dec::strategy::dragon::bench_big_exact_inf          ... bench:      10,485.91 ns/iter (+/- 235.10)
+run1 test num::flt2dec::strategy::dragon::bench_big_shortest           ... bench:         876.29 ns/iter (+/- 18.65)
+run1 test num::flt2dec::strategy::dragon::bench_small_exact_12         ... bench:          87.94 ns/iter (+/- 5.15)
+run1 test num::flt2dec::strategy::dragon::bench_small_exact_3          ... bench:          42.38 ns/iter (+/- 3.09)
+run1 test num::flt2dec::strategy::dragon::bench_small_exact_inf        ... bench:         717.15 ns/iter (+/- 32.85)
+run1 test num::flt2dec::strategy::dragon::bench_small_shortest         ... bench:         109.96 ns/iter (+/- 7.59)
+run1 test num::flt2dec::strategy::grisu::bench_big_exact_12            ... bench:          29.35 ns/iter (+/- 1.18)
+run1 test num::flt2dec::strategy::grisu::bench_big_exact_3             ... bench:          13.75 ns/iter (+/- 0.69)
+run1 test num::flt2dec::strategy::grisu::bench_big_exact_inf           ... bench:      10,383.85 ns/iter (+/- 239.21)
+run1 test num::flt2dec::strategy::grisu::bench_big_shortest            ... bench:          36.57 ns/iter (+/- 2.51)
+run1 test num::flt2dec::strategy::grisu::bench_halfway_point_exact_inf ... bench:         504.73 ns/iter (+/- 29.36)
+run1 test num::flt2dec::strategy::grisu::bench_one_exact_inf           ... bench:         502.75 ns/iter (+/- 41.55)
+run1 test num::flt2dec::strategy::grisu::bench_small_exact_12          ... bench:          22.27 ns/iter (+/- 0.94)
+run1 test num::flt2dec::strategy::grisu::bench_small_exact_3           ... bench:          12.26 ns/iter (+/- 0.81)
+run1 test num::flt2dec::strategy::grisu::bench_small_exact_inf         ... bench:         745.44 ns/iter (+/- 27.99)
+run1 test num::flt2dec::strategy::grisu::bench_small_shortest          ... bench:          19.26 ns/iter (+/- 1.02)
+run1 test num::flt2dec::strategy::grisu::bench_trailing_zero_exact_inf ... bench:         496.07 ns/iter (+/- 33.81)
+run2 test num::flt2dec::strategy::dragon::bench_big_exact_12           ... bench:         534.43 ns/iter (+/- 15.98)
+run2 test num::flt2dec::strategy::dragon::bench_big_exact_3            ... bench:         278.71 ns/iter (+/- 16.80)
+run2 test num::flt2dec::strategy::dragon::bench_big_exact_inf          ... bench:      10,735.81 ns/iter (+/- 490.85)
+run2 test num::flt2dec::strategy::dragon::bench_big_shortest           ... bench:         953.40 ns/iter (+/- 30.13)
+run2 test num::flt2dec::strategy::dragon::bench_small_exact_12         ... bench:          91.52 ns/iter (+/- 3.88)
+run2 test num::flt2dec::strategy::dragon::bench_small_exact_3          ... bench:          49.62 ns/iter (+/- 1.16)
+run2 test num::flt2dec::strategy::dragon::bench_small_exact_inf        ... bench:         749.17 ns/iter (+/- 6.05)
+run2 test num::flt2dec::strategy::dragon::bench_small_shortest         ... bench:         119.42 ns/iter (+/- 0.76)
+run2 test num::flt2dec::strategy::grisu::bench_big_exact_12            ... bench:          30.50 ns/iter (+/- 0.60)
+run2 test num::flt2dec::strategy::grisu::bench_big_exact_3             ... bench:          14.43 ns/iter (+/- 0.63)
+run2 test num::flt2dec::strategy::grisu::bench_big_exact_inf           ... bench:      10,762.76 ns/iter (+/- 709.61)
+run2 test num::flt2dec::strategy::grisu::bench_big_shortest            ... bench:          37.00 ns/iter (+/- 1.81)
+run2 test num::flt2dec::strategy::grisu::bench_halfway_point_exact_inf ... bench:         515.60 ns/iter (+/- 10.85)
+run2 test num::flt2dec::strategy::grisu::bench_one_exact_inf           ... bench:         507.72 ns/iter (+/- 20.83)
+run2 test num::flt2dec::strategy::grisu::bench_small_exact_12          ... bench:          22.56 ns/iter (+/- 0.48)
+run2 test num::flt2dec::strategy::grisu::bench_small_exact_3           ... bench:          12.50 ns/iter (+/- 0.80)
+run2 test num::flt2dec::strategy::grisu::bench_small_exact_inf         ... bench:         761.47 ns/iter (+/- 19.76)
+run2 test num::flt2dec::strategy::grisu::bench_small_shortest          ... bench:          19.39 ns/iter (+/- 0.82)
+run2 test num::flt2dec::strategy::grisu::bench_trailing_zero_exact_inf ... bench:         496.23 ns/iter (+/- 12.81)
+run3 test num::flt2dec::strategy::dragon::bench_big_exact_12           ... bench:         517.71 ns/iter (+/- 27.06)
+run3 test num::flt2dec::strategy::dragon::bench_big_exact_3            ... bench:         268.94 ns/iter (+/- 19.10)
+run3 test num::flt2dec::strategy::dragon::bench_big_exact_inf          ... bench:      10,574.55 ns/iter (+/- 637.15)
+run3 test num::flt2dec::strategy::dragon::bench_big_shortest           ... bench:         914.88 ns/iter (+/- 58.92)
+run3 test num::flt2dec::strategy::dragon::bench_small_exact_12         ... bench:          91.69 ns/iter (+/- 5.20)
+run3 test num::flt2dec::strategy::dragon::bench_small_exact_3          ... bench:          43.32 ns/iter (+/- 2.61)
+run3 test num::flt2dec::strategy::dragon::bench_small_exact_inf        ... bench:         716.31 ns/iter (+/- 47.56)
+run3 test num::flt2dec::strategy::dragon::bench_small_shortest         ... bench:         113.36 ns/iter (+/- 5.31)
+run3 test num::flt2dec::strategy::grisu::bench_big_exact_12            ... bench:          29.23 ns/iter (+/- 1.54)
+run3 test num::flt2dec::strategy::grisu::bench_big_exact_3             ... bench:          13.93 ns/iter (+/- 0.81)
+run3 test num::flt2dec::strategy::grisu::bench_big_exact_inf           ... bench:      10,598.29 ns/iter (+/- 633.54)
+run3 test num::flt2dec::strategy::grisu::bench_big_shortest            ... bench:          36.43 ns/iter (+/- 2.31)
+run3 test num::flt2dec::strategy::grisu::bench_halfway_point_exact_inf ... bench:         504.43 ns/iter (+/- 47.10)
+run3 test num::flt2dec::strategy::grisu::bench_one_exact_inf           ... bench:         508.42 ns/iter (+/- 22.02)
+run3 test num::flt2dec::strategy::grisu::bench_small_exact_12          ... bench:          22.17 ns/iter (+/- 0.73)
+run3 test num::flt2dec::strategy::grisu::bench_small_exact_3           ... bench:          12.34 ns/iter (+/- 0.51)
+run3 test num::flt2dec::strategy::grisu::bench_small_exact_inf         ... bench:         776.46 ns/iter (+/- 27.17)
+run3 test num::flt2dec::strategy::grisu::bench_small_shortest          ... bench:          19.35 ns/iter (+/- 0.79)
+run3 test num::flt2dec::strategy::grisu::bench_trailing_zero_exact_inf ... bench:         513.66 ns/iter (+/- 12.38)
+## aarch64 perf
+### c21/c78 perf record (cycles, core 58)
+## report dragon::bench_big_exact_inf
+    99.08%  [.] _RNvNtNtNtNtNtCs5eKY5gNNvwM_4core3num3imp7flt2dec8strategy6dragon12format_exact
+## annotate format_exact dragon::bench_big_exact_inf: share of div 10^9 loop 0xddbdc-0xddc28 within format_exact
+loop 0.0% of format_exact samples (total annotated 0.0)
+## report dragon::bench_big_exact_3
+    38.45%  [.] _RNvNtNtNtNtNtCs5eKY5gNNvwM_4core3num3imp7flt2dec8strategy6dragon12format_exact
+    30.49%  [.] _RNvNtNtCseXQECTt8W5h_17compiler_builtins3int4udiv9___udivti3
+    10.51%  [.] _RNvNtNtCseXQECTt8W5h_17compiler_builtins3int19specialized_div_rem12u128_div_rem
+     9.80%  [.] _RNvMs2_NtNtNtCs5eKY5gNNvwM_4core3num3imp6bignumNtB5_8Big64x208mul_pow2
+     8.82%  [.] _RNvMs2_NtNtNtCs5eKY5gNNvwM_4core3num3imp6bignumNtB5_8Big64x2010mul_digits
+## annotate format_exact dragon::bench_big_exact_3: share of div 10^9 loop 0xddbdc-0xddc28 within format_exact
+loop 0.0% of format_exact samples (total annotated 0.0)
+## report grisu::bench_one_exact_inf
+    93.07%  [.] _RNvNtNtNtNtNtCs5eKY5gNNvwM_4core3num3imp7flt2dec8strategy6dragon12format_exact
+     2.62%  [.] _RNvMs2_NtNtNtCs5eKY5gNNvwM_4core3num3imp6bignumNtB5_8Big64x208mul_pow2
+     1.37%  [.] _RNvNtNtNtNtNtCs5eKY5gNNvwM_4core3num3imp7flt2dec8strategy5grisu16format_exact_opt
+     1.12%  [.] __memset_sve_zva64
+## annotate format_exact grisu::bench_one_exact_inf: share of div 10^9 loop 0xddbdc-0xddc28 within format_exact
+loop 0.0% of format_exact samples (total annotated 0.0)
+## aarch64 annotate (ann.py)
+## dragon::bench_big_exact_inf
+range ddbdc-ddc28: 25.9% of 100.0% annotated (677 insns)
+   17.15 ddbdc ldr     x15, [x10, x13]
+    8.49 ddbec umulh   x16, x15, x9
+    7.25 ddff0 orr     w3, w3, #0x4
+    6.84 de100 add     w3, w3, #0x1
+    4.24 de138 str     x3, [x1], #8
+    4.24 de078 add     w3, w3, #0x2
+    4.05 de0e8 adcs    x6, x7, x6
+    3.80 ddfd8 adcs    x7, x21, x7
+    3.52 de060 adcs    x7, x21, x7
+    3.38 de128 ldr     x3, [x1]
+    3.13 ddf68 mov     w3, #0x8                        // #8
+    2.36 de15c cmp     x16, x23
+## dragon::bench_big_exact_3
+range ddbdc-ddc28: 0.0% of 100.1% annotated (677 insns)
+   11.99 de100 add     w3, w3, #0x1
+    6.70 ddf68 mov     w3, #0x8                        // #8
+    6.48 ddff0 orr     w3, w3, #0x4
+    5.40 de0e8 adcs    x6, x7, x6
+    4.95 ddce4 cmp     x1, #0x14
+    3.89 de138 str     x3, [x1], #8
+    3.89 de0d8 ldr     x7, [x4]
+    3.03 de128 ldr     x3, [x1]
+    3.02 ddedc add     x8, x8, #0x8
+    2.81 ddf50 adcs    x6, x7, x6
+    2.80 de078 add     w3, w3, #0x2
+    2.62 de060 adcs    x7, x21, x7
+## grisu::bench_one_exact_inf
+range ddbdc-ddc28: 90.8% of 100.0% annotated (677 insns)
+   90.78 ddbec umulh   x16, x15, x9
+    6.31 ddbc4 ldur    x1, [x29, #-32]
+    0.67 ddc78 bl      ebce8 <__udivti3>
+    0.56 ddb64 ldp     q1, q0, [x28, #96]
+    0.34 ddedc add     x8, x8, #0x8
+    0.27 ddf08 ldur    x3, [x3, #-8]
+    0.13 de15c cmp     x16, x23
+    0.13 ddec0 mov     x0, x16
+    0.13 dde38 ldp     q2, q0, [x28, #32]
+    0.13 ddcfc ldr     x27, [sp, #344]
+    0.13 ddc80 str     x0, [x26, x21]
+    0.13 ddc68 ldr     x24, [x26, x21]
+### derived (python, from the min values above)
+prototype skips div-10^9 loop; share-based estimate (speculative): big_exact_inf at most 25.9 % ; one_exact_inf at most 90.8 %
+HEAD(local §6) 12844 vs 07e526db9df 21938.94 : ratio 1.71
+dragon big_exact_inf: old 41967 -> new 21938.94 : ratio 1.91 , down 47.7 %
+dragon big_exact_3: old 828.5 -> new 591.29 : ratio 1.4 , down 28.6 %
+dragon big_exact_12: old 1826 -> new 1080.08 : ratio 1.69 , down 40.8 %
+dragon big_shortest: old 3461 -> new 1752.13 : ratio 1.98 , down 49.4 %
+dragon small_exact_inf: old 1010 -> new 1049.18 : ratio 0.96 , up 3.9 %
+big_exact_3 libcall share a64 = 41.0
+big_exact_inf outside div loop share = 74.1

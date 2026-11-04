@@ -1,0 +1,22 @@
+### aarch64 遠程:CORE=50 ./run.sh
+# 2026-11-03T14:43:33+08:00 aarch64 unknown | ldd (GNU libc) 2.38
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+4k 8                 cycles:u 82.30  instructions:u 4.00  branch-misses:u 0.000
+4k 16                cycles:u 105.48  instructions:u 4.00  branch-misses:u 0.000
+4k 33                cycles:u 127.03  instructions:u 4.00  branch-misses:u 0.000
+4k 64                cycles:u 174.79  instructions:u 4.00  branch-misses:u 0.000
+2m 8                 cycles:u 70.62  instructions:u 4.00  branch-misses:u -0.000
+2m 16                cycles:u 78.24  instructions:u 4.00  branch-misses:u -0.000
+2m 33                cycles:u 105.61  instructions:u 4.00  branch-misses:u 0.000
+2m 64                cycles:u 187.31  instructions:u 4.00  branch-misses:u -0.000
+### x86_64 本機:CORE=10 ./run.sh
+# 2026-11-03T14:55:57+08:00 x86_64 12th Gen Intel(R) Core(TM) i7-12700 | ldd (GNU libc) 2.42
+gcc (GCC) 15.3.0
+4k 8                 cpu_core/cycles/u 70.26  cpu_core/instructions/u 2.50  cpu_core/branch-misses/u 0.000
+4k 16                cpu_core/cycles/u 100.82  cpu_core/instructions/u 2.50  cpu_core/branch-misses/u -0.000
+4k 33                cpu_core/cycles/u 326.37  cpu_core/instructions/u 2.50  cpu_core/branch-misses/u -0.000
+4k 64                cpu_core/cycles/u 432.70  cpu_core/instructions/u 2.50  cpu_core/branch-misses/u 0.000
+2m 8                 cpu_core/cycles/u 63.82  cpu_core/instructions/u 2.50  cpu_core/branch-misses/u -0.000
+2m 16                cpu_core/cycles/u 111.86  cpu_core/instructions/u 2.50  cpu_core/branch-misses/u 0.000
+2m 33                cpu_core/cycles/u 349.78  cpu_core/instructions/u 2.50  cpu_core/branch-misses/u 0.000
+2m 64                cpu_core/cycles/u 421.35  cpu_core/instructions/u 2.50  cpu_core/branch-misses/u -0.001

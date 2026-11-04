@@ -1,0 +1,5 @@
+{"id":"R04","slug":"x86-isqrt-push","kind":"llvm-ir","tags":["NEW:x86 u128::isqrt 入口先壓暫存器再分派"],
+ "chapters":["c63"],
+ "status":"reproduced",
+ "summary":"repro.ll 證實快/慢路徑在 phi 匯合時 x86 於分派前 push rbx、aarch64 shrink-wrap;bench.rs(輸入 ≤ 255,每次呼叫):x86 u128 8.03 cycles/48 指令、u64 4.53/29,aarch64 u128 7.25/33、u64 4.42/23;int_sqrt::u64 被內聯時 aarch64 u128 降到 4.55/23(無 spill),x86 仍 6.54/40(入口 push 5 個)",
+ "doc_mismatch":"文檔把差異寫成「x86 入口先 push 5 個再分派,aarch64 只 stp 3 對」。實測 harness 的內聯形態(u128 快路徑呼叫 int_sqrt::u64)下 aarch64 同樣在分派前 stp 3 對,兩邊都沒 shrink-wrap,差別只在指令數(x86 u128 比 u64 多 19 條,aarch64 多 10 條);只有 u64 被內聯時才是 aarch64 shrink-wrap、x86 不行。指令差 +45%(48 對 33),文檔 +59%(65 對 41),量測迴圈不同。repro.ll 用 -mattr=-idivq-to-divl 可消除,但完整 isqrt 函數關掉後仍 push 5 個,最小 IR 只覆蓋現象,完整函數的觸發條件未完全拆清"}

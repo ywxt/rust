@@ -1,0 +1,33 @@
+##### x86_64 (local) #####
+Tue Nov  3 02:35:38 PM CST 2026
+x86_64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: llc -O3 -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=A64
+PASS: llc -O3 -mtriple=aarch64-linux-gnu -aarch64-enable-early-ifcvt=false < %s | FileCheck %s --check-prefix=A64-NOIFC
+PASS: llc -O3 -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=X86
+default    en       cycles/char 1.010
+default    ru       cycles/char 2.345
+default    zh       cycles/char 8.019
+default    emoji    cycles/char 8.037
+
+##### aarch64 (univpn-work-1) #####
+
+Tue Nov  3 02:13:49 PM CST 2026
+aarch64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: llc -O3 -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=A64
+PASS: llc -O3 -mtriple=aarch64-linux-gnu -aarch64-enable-early-ifcvt=false < %s | FileCheck %s --check-prefix=A64-NOIFC
+PASS: llc -O3 -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=X86
+default    en       cycles/char 1.173
+default    ru       cycles/char 8.159
+default    zh       cycles/char 10.029
+default    emoji    cycles/char 10.169
+noifcvt    en       cycles/char 1.172
+noifcvt    ru       cycles/char 1.804
+noifcvt    zh       cycles/char 9.903
+noifcvt    emoji    cycles/char 10.132
+default    chain8   cycles/link 9.059
+default    chain9   cycles/link 10.076
+default    chain10  cycles/link 11.076

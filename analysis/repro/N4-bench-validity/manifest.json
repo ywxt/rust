@@ -1,0 +1,19 @@
+{
+ "id": "N4",
+ "slug": "bench-validity",
+ "kind": "shell",
+ "tags": [
+  "N4"
+ ],
+ "chapters": [
+  "c36",
+  "c20",
+  "c26",
+  "c51",
+  "c12",
+  "c14"
+ ],
+ "status": "reproduced",
+ "summary": "ascii LONG 6990 B 首個非 ASCII(–)在偏移 366,is_ascii 只掃 5.2%;peek_mut_deref_mut 外層每次 aarch64 1.98 / x86 2.98 cycles(10/12 條指令,內層 100 萬次被消除;black_box 對照 1.01 M / 0.71 M);1 億次 push:x86 核心佔 58%、缺頁 97 766(THP madvise),aarch64 10.3%、4 763(THP always)。",
+ "doc_mismatch": "push 的 x86 核心佔比 58% 低於文檔 harness 的 80%:本復現固定 1 億次(400 MB),harness 的 vec 長得更大。"
+}

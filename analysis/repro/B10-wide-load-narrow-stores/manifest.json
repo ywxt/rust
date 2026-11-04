@@ -1,0 +1,15 @@
+{
+ "id": "B10",
+ "slug": "wide-load-narrow-stores",
+ "kind": "rust",
+ "tags": [
+  "B10"
+ ],
+ "chapters": [
+  "c43",
+  "c76"
+ ],
+ "status": "partial",
+ "summary": "兩個 8 B store 後以 16 B load 讀回的相依鏈:aarch64 15.0 對只讀 8 B 10.0(+5.0),x86 22.0 對 8.0(+14,轉發失敗);aarch64 ldp 兩半各來自一個 store 13.0(低半來自跨 16 B 的 stp 時 14.0)對兩條 ldr 8.6(+4.4/+5.4),x86 兩條 mov 1.2/1.5",
+ "doc_mismatch": "c76 稱 x86 無懲罰(兩形態皆 3.0):形成真依賴後 x86 窄寫寬讀 +14 cycles,比本機 +5.0 更重(c76 自己懷疑的『探針未形成真依賴』成立);本機 +5.0 少於文檔 +6.8;c43 的 ldp 跨兩 store 20 vs 4.7(+15)在相依鏈中只得 +4.4–5.4,文檔數字來自含間接呼叫的吞吐迴圈,推測等 store 提交的代價隨 store 積壓變大,未隔離"
+}

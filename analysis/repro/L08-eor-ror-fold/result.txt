@@ -1,0 +1,30 @@
+=== x86_64 (i7-12700, local)
+date: 2026-11-03T14:47:50+08:00  host: x86_64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+RUN 1 PASS
+RUN 2 PASS
+RUN 3 PASS
+lat:xor          cycles=800793299  cyc/unit=1.001
+lat:rolxor       cycles=1600900203  cyc/unit=2.001
+lat:rolxor_u     cycles=800721946  cyc/unit=1.001
+sip              cycles=497935397  cyc/unit=24.897
+diff             cycles=496882410  cyc/unit=248.441
+
+=== aarch64 (univpn-work-1)
+
+date: 2026-11-03T14:26:02+08:00  host: aarch64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+RUN 1 PASS
+RUN 2 PASS
+RUN 3 PASS
+lat:eor          cycles=801698868  cyc/unit=1.002
+lat:fold         cycles=1602224966  cyc/unit=2.003
+lat:split        cycles=1602414258  cyc/unit=2.003
+lat:fold_u       cycles=1602244106  cyc/unit=2.003
+lat:split_u      cycles=801746474  cyc/unit=1.002
+sip              cycles=581592200  cyc/unit=29.080
+sip_asm          cycles=421465388  cyc/unit=21.073
+diff             cycles=554549190  cyc/unit=277.275
+diff_asm         cycles=645936720  cyc/unit=322.968

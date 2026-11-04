@@ -1,0 +1,16 @@
+{
+ "id": "S4",
+ "slug": "load-width",
+ "kind": "rust",
+ "tags": [
+  "S4"
+ ],
+ "chapters": [
+  "c59",
+  "c17",
+  "c42"
+ ],
+ "status": "reproduced",
+ "summary": "L1 內 8 條獨立 128 位載入:aarch64 0.50 vs x86 0.34 cycles/條(32 vs 47 B/cycle);64 位 GPR 載入對照同為 0.50 vs 0.32。",
+ "doc_mismatch": "差異是每 cycle 載入條數(2 vs 3),與向量寬度無關:GPR 64 位載入同樣 2 vs 3 條/cycle。"
+}

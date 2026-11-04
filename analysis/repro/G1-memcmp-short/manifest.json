@@ -1,0 +1,16 @@
+{
+ "id": "G1",
+ "slug": "memcmp-short",
+ "kind": "c",
+ "tags": [
+  "G1"
+ ],
+ "chapters": [
+  "c56",
+  "c85",
+  "c17"
+ ],
+ "status": "reproduced",
+ "summary": "glibc memcmp,62 字母表隨機內容:長度 1–20 隨機時 aarch64 15.4 vs x86 10.1 cycles/次、誤預測 0.39 vs 0.05;長度固定 10 時 8.0 vs 7.6、誤預測 0,差距來自隨機長度。",
+ "doc_mismatch": "絕對值小於文檔(39.4 vs 17.2、誤預測 0.8 vs 0):本復現是獨立呼叫的吞吐迴圈,不在排序中;比值 1.52 低於文檔 2.29。"
+}

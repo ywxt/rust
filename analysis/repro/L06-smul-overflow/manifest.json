@@ -1,0 +1,16 @@
+{
+ "id": "L06",
+ "slug": "smul-overflow",
+ "kind": "llvm-ir",
+ "tags": [
+  "N1"
+ ],
+ "chapters": [
+  "c66",
+  "c68",
+  "c58"
+ ],
+ "status": "reproduced",
+ "summary": "64 位乘法溢出檢查:AArch64 為 mul + smulh + cmp asr(無號為 umulh + cmp xzr),x86 為 imul/mul 後直接跳 OF;asm 迴圈 cycles/元素:a64 2.347,換單條比較 1.974(檢查值 0.37),x86 1.342 / 1.345。",
+ "doc_mismatch": "數字與 c66/c68 相符(2.361 / 1.975 / 1.338)。c58 的 umulh 只驗證了靜態形狀,未量效能。IR 中分支折疊後 AArch64 為 csel、x86 為 jno,與 bench 的 b.ne / jo 僅極性與折疊不同;斷言以此為準。"
+}

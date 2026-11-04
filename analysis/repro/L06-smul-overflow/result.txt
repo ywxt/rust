@@ -1,0 +1,20 @@
+##### x86_64 (local) #####
+Tue Nov  3 02:49:02 PM CST 2026
+x86_64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: llc -O3 -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=A64
+PASS: llc -O3 -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=X86
+fm    cycles/elem 1.342  instructions/elem 9.00
+base  cycles/elem 1.345  instructions/elem 10.00
+
+##### aarch64 (univpn-work-1) #####
+
+Tue Nov  3 02:27:11 PM CST 2026
+aarch64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: llc -O3 -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=A64
+PASS: llc -O3 -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=X86
+fm    cycles/elem 2.347  instructions/elem 11.01
+base  cycles/elem 1.974  instructions/elem 10.01

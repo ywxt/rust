@@ -1,0 +1,21 @@
+### x86_64 本機 i7-12700(CORE=4)
+== 2026-11-03T14:59:09+08:00 x86_64 LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: X86
+PASS: A64
+PASS: SLOW
+== bench.c(gcc -O2,N=100000000,cycles/迭代)
+split           cycles/單位=19.007  instructions/單位=6.002  ld_blocks.store_forward/單位=1.000
+whole           cycles/單位=1.003  instructions/單位=5.002  ld_blocks.store_forward/單位=0.000
+narrow          cycles/單位=2.382  instructions/單位=8.002  ld_blocks.store_forward/單位=0.000
+
+### aarch64 univpn-work-1(CORE=44)
+
+
+== 2026-11-03T14:37:19+08:00 aarch64 LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: X86
+PASS: A64
+PASS: SLOW
+== bench.c(gcc -O2,N=100000000,cycles/迭代)
+split           cycles/單位=14.017  instructions/單位=6.013
+whole           cycles/單位=1.548  instructions/單位=5.006
+narrow          cycles/單位=14.014  instructions/單位=6.012

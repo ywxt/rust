@@ -1,0 +1,14 @@
+### aarch64 遠程:CORE=50 ./run.sh
+# 2026-11-03T14:44:06+08:00 aarch64 unknown | ldd (GNU libc) 2.38
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+malloc 800           cycles:u 31.36  instructions:u 155.00  branch-misses:u 0.000
+calloc 800           cycles:u 87.20  instructions:u 472.00  branch-misses:u 0.001
+malloc 8000          cycles:u 70.11  instructions:u 385.00  branch-misses:u 0.000
+calloc 8000          cycles:u 204.35  instructions:u 929.00  branch-misses:u 0.004
+### x86_64 本機:CORE=10 ./run.sh
+# 2026-11-03T14:56:16+08:00 x86_64 12th Gen Intel(R) Core(TM) i7-12700 | ldd (GNU libc) 2.42
+gcc (GCC) 15.3.0
+malloc 800           cpu_core/cycles/u 17.72  cpu_core/instructions/u 97.00  cpu_core/branch-misses/u 0.007
+calloc 800           cpu_core/cycles/u 82.05  cpu_core/instructions/u 118.00  cpu_core/branch-misses/u 0.000
+malloc 8000          cpu_core/cycles/u 70.40  cpu_core/instructions/u 365.00  cpu_core/branch-misses/u 0.000
+calloc 8000          cpu_core/cycles/u 205.23  cpu_core/instructions/u 419.00  cpu_core/branch-misses/u 0.000

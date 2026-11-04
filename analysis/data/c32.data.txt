@@ -1,0 +1,51 @@
+# baseline refs: old chapter baseline 88f7399cb49 ; measured commit 07e526db9df
+### base.tsv pairs _ref_sum vs _sum: (a64_ns,x86_ns) ref, (a64_ns,x86_ns) value, a64 ratio, x86 ratio
+bench_cycle_skip_take_ref_sum (1046369.0, 459151.72) (1046066.0, 459126.9) 1.0 1.0
+bench_cycle_take_ref_sum (1107585.0, 486178.6) (1106742.0, 482899.65) 1.001 1.007
+bench_cycle_take_skip_ref_sum (933868.0, 412463.6) (933656.0, 412019.15) 1.0 1.001
+bench_enumerate_chain_ref_sum (1172479.0, 601595.65) (1172708.0, 601482.98) 1.0 1.0
+bench_enumerate_ref_sum (690315.0, 229330.73) (540804.0, 272986.34) 1.276 0.84
+bench_filter_chain_ref_sum (1413984.88, 700986.45) (1426153.0, 735788.79) 0.991 0.953
+bench_filter_map_chain_ref_sum (1627816.0, 592031.2) (1624482.0, 593230.95) 1.002 0.998
+bench_filter_map_ref_sum (812745.0, 295512.85) (540744.0, 277311.12) 1.503 1.066
+bench_filter_ref_sum (734730.0, 366648.06) (734712.0, 344858.7) 1.0 1.063
+bench_flat_map_chain_ref_sum (694450.0, 440723.75) (693746.0, 447840.4) 1.001 0.984
+bench_flat_map_ref_sum (568076.81, 229387.5) (561496.0, 224313.7) 1.012 1.023
+bench_fuse_chain_ref_sum (707475.0, 440534.12) (706911.0, 441176.5) 1.001 0.999
+bench_fuse_ref_sum (353101.5, 222046.88) (353245.5, 219882.51) 1.0 1.01
+bench_inspect_chain_ref_sum (707110.0, 441526.06) (707011.0, 439804.72) 1.0 1.004
+bench_inspect_ref_sum (353450.0, 223303.2) (353252.5, 220603.72) 1.001 1.012
+bench_peekable_chain_ref_sum (707022.0, 438968.31) (707106.0, 443295.35) 1.0 0.99
+bench_peekable_ref_sum (353082.5, 220168.05) (353437.0, 220716.12) 0.999 0.998
+bench_skip_chain_ref_sum (994856.0, 437878.9) (994493.0, 440869.1) 1.0 0.993
+bench_skip_cycle_skip_zip_add_ref_sum (3531791.0, 2085486.1) (3453433.0, 2081541.2) 1.023 1.002
+bench_skip_ref_sum (641415.0, 228311.84) (641266.0, 220421.5) 1.0 1.036
+bench_skip_while_chain_ref_sum (994715.0, 480410.35) (995282.0, 461104.45) 0.999 1.042
+bench_skip_while_ref_sum (641408.0, 223928.52) (641403.0, 226008.9) 1.0 0.991
+bench_take_while_chain_ref_sum (393788.0, 259904.25) (392837.0, 260549.67) 1.002 0.998
+pairs 23 a64 within 2.3%: 21
+### harness (from c48 run, 07e526db9df)
+run1 test iter::bench_enumerate_sum ... bench:     540,816.00 ns/iter (+/- 1,619.40)
+run1 test iter::bench_enumerate_ref_sum ... bench:     690,496.00 ns/iter (+/- 4,620.10)
+run1 test iter::bench_enumerate_chain_sum ... bench:   1,172,929.00 ns/iter (+/- 7,364.80)
+run1 test iter::bench_enumerate_chain_ref_sum ... bench:   1,172,987.00 ns/iter (+/- 2,109.70)
+run2 test iter::bench_enumerate_sum ... bench:     541,063.00 ns/iter (+/- 1,559.80)
+run2 test iter::bench_enumerate_ref_sum ... bench:     690,471.00 ns/iter (+/- 2,235.10)
+run2 test iter::bench_enumerate_chain_sum ... bench:   1,173,487.00 ns/iter (+/- 8,081.20)
+run2 test iter::bench_enumerate_chain_ref_sum ... bench:   1,173,926.00 ns/iter (+/- 8,468.30)
+run3 test iter::bench_enumerate_sum ... bench:     541,097.00 ns/iter (+/- 1,800.90)
+run3 test iter::bench_enumerate_ref_sum ... bench:     690,657.00 ns/iter (+/- 2,536.60)
+run3 test iter::bench_enumerate_chain_sum ... bench:   1,173,001.00 ns/iter (+/- 7,413.20)
+run3 test iter::bench_enumerate_chain_ref_sum ... bench:   1,172,870.00 ns/iter (+/- 7,295.20)
+run1 test iter::bench_enumerate_sum ... bench:     259,241.29 ns/iter (+/- 19,398.02)
+run1 test iter::bench_enumerate_ref_sum ... bench:     238,789.41 ns/iter (+/- 21,842.46)
+run1 test iter::bench_enumerate_chain_sum ... bench:     577,202.29 ns/iter (+/- 31,720.16)
+run1 test iter::bench_enumerate_chain_ref_sum ... bench:     583,605.57 ns/iter (+/- 45,283.27)
+run2 test iter::bench_enumerate_sum ... bench:     261,350.05 ns/iter (+/- 15,138.45)
+run2 test iter::bench_enumerate_ref_sum ... bench:     232,363.41 ns/iter (+/- 33,354.37)
+run2 test iter::bench_enumerate_chain_sum ... bench:     579,269.46 ns/iter (+/- 35,124.13)
+run2 test iter::bench_enumerate_chain_ref_sum ... bench:     613,130.40 ns/iter (+/- 65,799.41)
+run3 test iter::bench_enumerate_sum ... bench:     264,333.38 ns/iter (+/- 18,297.96)
+run3 test iter::bench_enumerate_ref_sum ... bench:     231,594.84 ns/iter (+/- 33,236.61)
+run3 test iter::bench_enumerate_chain_sum ... bench:     578,885.77 ns/iter (+/- 34,979.37)
+run3 test iter::bench_enumerate_chain_ref_sum ... bench:     584,125.80 ns/iter (+/- 71,238.25)

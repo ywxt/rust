@@ -1,0 +1,40 @@
+# baseline refs: old chapter baseline 88f7399cb49 ; measured commit 07e526db9df
+### aarch64 core 54: probe zl.rs (asm loops over 1024 zeroed u64 x2, 200000 passes; perf stat cycles; min of 3) then harness + perf
+
+z9 cycles/elem 2.269
+nohi cycles/elem 2.025
+nolsr cycles/elem 2.04
+csel cycles/elem 2.044
+acc2 cycles/elem 2.285
+nt2 cycles/elem 2.052
+ld2 cycles/elem 1.04
+nohi2 cycles/elem 1.739
+noload cycles/elem 2.017
+idx2 cycles/elem 1.79
+nop7 cycles/elem 1.536
+nop10 cycles/elem 2.036
+# host=localhost.localdomain arch=aarch64 core=54 bin=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d
+run1 test iter::bench_zip_then_skip ... bench:          77.03 ns/iter (+/- 0.14)
+run1 test iter::bench_skip_then_zip ... bench:          77.07 ns/iter (+/- 0.19)
+run2 test iter::bench_zip_then_skip ... bench:          77.05 ns/iter (+/- 0.08)
+run2 test iter::bench_skip_then_zip ... bench:          77.08 ns/iter (+/- 0.09)
+run3 test iter::bench_zip_then_skip ... bench:          77.06 ns/iter (+/- 0.37)
+run3 test iter::bench_skip_then_zip ... bench:          77.07 ns/iter (+/- 0.07)
+    99.43%  corebenches-c88  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter19bench_zip_then_skip0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5b
+## annotate: _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter19bench_zip_then_skip0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+   15.64 :   66ac4:  ldr     x14, [x12], #8
+    3.33 :   66ba8:  ldr     x13, [x10], #8
+   74.95 :   66bb8:  ldr     x14, [x12], #8
+    4.05 :   66bc8:  b.ne    66ba8 <<corebenches::iter::bench_zip_then_skip::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x374>  // b.any
+### x86 core 12 harness
+# host=ywxt-work arch=x86_64 core=12 bin=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/coretests/d6382d1542e5d229/out/corebenches-d6382d1542e5d229 date=2026-11-03T15:49:32+08:00
+run1 test iter::bench_zip_then_skip ... bench:          30.32 ns/iter (+/- 1.55)
+run1 test iter::bench_skip_then_zip ... bench:          30.09 ns/iter (+/- 0.88)
+run2 test iter::bench_zip_then_skip ... bench:          31.05 ns/iter (+/- 1.28)
+run2 test iter::bench_skip_then_zip ... bench:          30.42 ns/iter (+/- 2.11)
+run3 test iter::bench_zip_then_skip ... bench:          31.22 ns/iter (+/- 1.52)
+run3 test iter::bench_skip_then_zip ... bench:          30.28 ns/iter (+/- 1.13)
+### probe variants (see zl.rs): z9 = verbatim bench loop 9 insns; nohi = drop lsr/cmp/b.hi (6 insns); nolsr = cmp vs register; csel = b.hi replaced by csel; acc2 = z9 with 2 accumulators; nt2 = 2 not-taken branches; ld2 = 2 post-index ldr + subs + b.ne; nohi2 = nohi with 2 accumulators; noload = 2-add chain + subs + b.ne (no loads); idx2 = register-offset loads, 2 accumulators; nop7/nop10 = k nops + subs + b.ne (9 / 12 insns)
+br1 cycles/elem 1.042
+br1n2 cycles/elem 1.043
+br2 cycles/elem 2.044

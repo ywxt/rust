@@ -1,0 +1,14 @@
+{
+ "id": "K2",
+ "slug": "spin-pinned",
+ "kind": "c",
+ "tags": [
+  "K2"
+ ],
+ "chapters": [
+  "c29"
+ ],
+ "status": "partial",
+ "summary": "同核 pipe ping-pong,對端非阻塞自旋:aarch64 每來回 1.16e7 cycles(約 4 ms,即 HZ=250 的一個 tick),對端佔 CPU 100%;x86 11 584 cycles、66.6%。改 sched_yield 後 11 864 vs 8 851 cycles(1.34)。",
+ "doc_mismatch": "文檔為對端佔 86%、yield 比值 0.92;本復現 spin 時 aarch64 對端佔 100%,yield 比值 1.34 而非 0.92(本復現為 pipe 單位元組來回,文檔為 socket+splice 的 128 KB 拷貝)。核心版本與組態(6.6 PREEMPT_NONE/HZ=250 vs 7.2 PREEMPT_DYNAMIC/HZ=1000)同時不同,無法分開。"
+}

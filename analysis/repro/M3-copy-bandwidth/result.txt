@@ -1,0 +1,26 @@
+### aarch64 遠程:CORE=50 ./run.sh
+# 2026-11-03T15:02:08+08:00 aarch64 unknown | ldd (GNU libc) 2.38
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+libc 8000            cycles:u 362.82  instructions:u 1274.00  branch-misses:u 0.971
+hand 8000            cycles:u 325.61  instructions:u 1142.00  branch-misses:u -0.185
+libc 8000 16         cycles:u 364.78  instructions:u 1274.00  branch-misses:u 0.000
+hand 8000 16         cycles:u 408.46  instructions:u 1142.00  branch-misses:u 0.000
+libc 8000 4032       cycles:u 341.28  instructions:u 1274.00  branch-misses:u 0.000
+hand 8000 4032       cycles:u 323.21  instructions:u 1142.00  branch-misses:u -0.179
+libc 8000 2048       cycles:u 373.69  instructions:u 1274.00  branch-misses:u 1.165
+hand 8000 2048       cycles:u 324.69  instructions:u 1142.00  branch-misses:u -0.000
+### x86_64 本機:CORE=10 ./run.sh
+# 2026-11-03T15:23:56+08:00 x86_64 12th Gen Intel(R) Core(TM) i7-12700 | ldd (GNU libc) 2.42
+gcc (GCC) 15.3.0
+libc 8000            cpu_core/cycles/u 134.07  cpu_core/instructions/u 45.00  cpu_core/branch-misses/u 0.000
+hand 8000            cpu_core/cycles/u 282.02  cpu_core/instructions/u 1528.00  cpu_core/branch-misses/u 1.000
+movsb 8000           cpu_core/cycles/u 150.22  cpu_core/instructions/u 14.00  cpu_core/branch-misses/u -0.000
+libc 8000 16         cpu_core/cycles/u 202.94  cpu_core/instructions/u 45.00  cpu_core/branch-misses/u 0.000
+hand 8000 16         cpu_core/cycles/u 281.95  cpu_core/instructions/u 1528.00  cpu_core/branch-misses/u 1.000
+movsb 8000 16        cpu_core/cycles/u 240.13  cpu_core/instructions/u 14.00  cpu_core/branch-misses/u -0.000
+libc 8000 4032       cpu_core/cycles/u 154.19  cpu_core/instructions/u 45.00  cpu_core/branch-misses/u 0.000
+hand 8000 4032       cpu_core/cycles/u 313.66  cpu_core/instructions/u 1528.00  cpu_core/branch-misses/u 1.000
+movsb 8000 4032      cpu_core/cycles/u 184.90  cpu_core/instructions/u 14.00  cpu_core/branch-misses/u 0.000
+libc 8000 2048       cpu_core/cycles/u 134.11  cpu_core/instructions/u 45.00  cpu_core/branch-misses/u -0.000
+hand 8000 2048       cpu_core/cycles/u 281.59  cpu_core/instructions/u 1528.00  cpu_core/branch-misses/u 1.000
+movsb 8000 2048      cpu_core/cycles/u 148.58  cpu_core/instructions/u 14.00  cpu_core/branch-misses/u -0.000

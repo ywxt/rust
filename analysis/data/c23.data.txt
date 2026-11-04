@@ -1,0 +1,117 @@
+# c23:07e526db9df 上重新量測的原始輸出(腳本 /tmp/xdiff/work/up56/{run.sh,perf.sh,tools/mk.py} 彙整,未經手改)
+## bench 原始輸出(aarch64 core56,07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 allocbenches|test string::bench_push_char_one_byte ... bench:      26,783.16 ns/iter (+/- 142.31) = 373 MB/s
+run2 allocbenches|test string::bench_push_char_one_byte ... bench:      26,777.31 ns/iter (+/- 33.47) = 373 MB/s
+run3 allocbenches|test string::bench_push_char_one_byte ... bench:      26,789.42 ns/iter (+/- 44.99) = 373 MB/s
+run1 allocbenches|test string::bench_push_char_two_bytes ... bench:      26,492.30 ns/iter (+/- 199.07) = 754 MB/s
+run2 allocbenches|test string::bench_push_char_two_bytes ... bench:      26,484.00 ns/iter (+/- 23.49) = 755 MB/s
+run3 allocbenches|test string::bench_push_char_two_bytes ... bench:      26,498.83 ns/iter (+/- 23.23) = 754 MB/s
+run1 allocbenches|test string::bench_push_str_one_byte ... bench:      34,989.68 ns/iter (+/- 3,924.16) = 285 MB/s
+run2 allocbenches|test string::bench_push_str_one_byte ... bench:      34,986.28 ns/iter (+/- 164.96) = 285 MB/s
+run3 allocbenches|test string::bench_push_str_one_byte ... bench:      34,994.52 ns/iter (+/- 41.86) = 285 MB/s
+## 3 次最小值(aarch64 core56;腳本計算)
+min string::bench_push_char_one_byte 26777.31 ns/iter
+min string::bench_push_char_two_bytes 26484.0 ns/iter
+min string::bench_push_str_one_byte 34986.28 ns/iter
+## bench 原始輸出(x86 core12 (flock),07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 allocbenches|test string::bench_push_char_one_byte ... bench:       7,506.46 ns/iter (+/- 454.43) = 1332 MB/s
+run2 allocbenches|test string::bench_push_char_one_byte ... bench:       7,461.20 ns/iter (+/- 476.43) = 1340 MB/s
+run3 allocbenches|test string::bench_push_char_one_byte ... bench:       7,505.54 ns/iter (+/- 351.43) = 1332 MB/s
+run1 allocbenches|test string::bench_push_char_two_bytes ... bench:      10,964.85 ns/iter (+/- 463.92) = 1824 MB/s
+run2 allocbenches|test string::bench_push_char_two_bytes ... bench:      11,242.44 ns/iter (+/- 581.40) = 1779 MB/s
+run3 allocbenches|test string::bench_push_char_two_bytes ... bench:      11,579.98 ns/iter (+/- 682.22) = 1727 MB/s
+run1 allocbenches|test string::bench_push_str_one_byte ... bench:      22,760.60 ns/iter (+/- 1,181.17) = 439 MB/s
+run2 allocbenches|test string::bench_push_str_one_byte ... bench:      22,173.54 ns/iter (+/- 1,263.37) = 450 MB/s
+run3 allocbenches|test string::bench_push_str_one_byte ... bench:      21,800.16 ns/iter (+/- 1,422.42) = 458 MB/s
+## 3 次最小值(x86 core12 (flock);腳本計算)
+min string::bench_push_char_one_byte 7461.2 ns/iter
+min string::bench_push_char_two_bytes 10964.85 ns/iter
+min string::bench_push_str_one_byte 21800.16 ns/iter
+## perf record/report/annotate(aarch64 core56)=== c23a string::bench_push_char_one_byte
+    97.94%  allocbenches-b48d0ecb0c6d7898  [.] _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerNtNtCshDmNPlWY1OA_5alloc6string6StringNCNvNtCs3CKgq1o0DAf_12allocbenches6strings_24bench_push_char_one_byte0EB1p_
+     0.42%  ld-linux-aarch64.so.1          [.] _dl_relocate_object_no_relro
+     0.33%  libc.so.6                      [.] realloc
+     0.22%  libc.so.6                      [.] _int_realloc
+     0.22%  libstd-582c472e6e6781a0.so     [.] _RNvCsbOwsw4zHH1Z_7___rustc13___rdl_realloc
+     0.22%  libc.so.6                      [.] malloc_consolidate
+--- annotate top: _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerNtNtCshDmNPlWY1OA_5alloc6string6StringNCNvNtCs3CKgq1o0DAf_12allocbenches6strings_24bench_push_char_one_byte0EB1p_
+   59.14 :   2a9e0:  str     x8, [x20, #16]
+   20.97 :   2aa54:  ldr     x8, [x20, #8]
+   19.33 :   2aa04:  mov     w22, #0x1                       // #1
+    0.11 :   2aaf8:  str     q0, [sp, #32]
+    0.11 :   2aad4:  mov     x0, x20
+    0.11 :   2aa60:  b.cc    2a9d4 <test::bench::ns_iter_inner::<alloc::string::String, allocbenches::string::bench_push_char_one_byte::{closure#0}>+0x80>  // b.lo, b.ul, b.last
+    0.11 :   2aa58:  cmp     w23, #0x80
+    0.11 :   2a9d4:  strb    w23, [x8]
+    0.00 :   2ab6c:  bl      19240 <_Unwind_Resume@plt>
+    0.00 :   2ab68:  mov     x0, x19
+    0.00 :   2ab64:  bl      18a00 <__rustc::__rust_dealloc@plt>
+    0.00 :   2ab60:  mov     w2, #0x1                        // #1
+    0.00 :   2ab5c:  ldur    x0, [x29, #-24]
+    0.00 :   2ab58:  cbz     x1, 2ab68 <test::bench::ns_iter_inner::<alloc::string::String, allocbenches::string::bench_push_char_one_byte::{closure#0}>+0x214>
+## perf record/report/annotate(aarch64 core56)=== c23b string::bench_push_char_two_bytes
+    98.67%  allocbenches-b48d0ecb0c6d7898  [.] _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerNtNtCshDmNPlWY1OA_5alloc6string6StringNCNvNtCs3CKgq1o0DAf_12allocbenches6strings_25bench_push_char_two_bytes0EB1p_
+     0.56%  [kernel.kallsyms]              [k] next_uptodate_folio
+     0.21%  allocbenches-b48d0ecb0c6d7898  [.] _RNvMs8_NtCshDmNPlWY1OA_5alloc7raw_vecNtB5_11RawVecInner11finish_growCs3CKgq1o0DAf_12allocbenches
+     0.21%  libc.so.6                      [.] realloc
+     0.11%  [kernel.kallsyms]              [k] rcu_nocb_unlock_irqrestore
+     0.11%  libc.so.6                      [.] malloc_consolidate
+--- annotate top: _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerNtNtCshDmNPlWY1OA_5alloc6string6StringNCNvNtCs3CKgq1o0DAf_12allocbenches6strings_25bench_push_char_two_bytes0EB1p_
+   61.08 :   2ac9c:  strb    w10, [x8]
+   13.38 :   2ac70:  ldr     x8, [x20, #8]
+    7.70 :   2ac14:  ldr     x21, [x20, #16]
+    7.06 :   2abf4:  add     x8, x22, x21
+    4.46 :   2ac10:  ldur    w23, [x29, #-4]
+    3.81 :   2ac90:  lsr     w10, w23, #6
+    2.07 :   2ac38:  cmp     w23, #0x800
+    0.22 :   2ac80:  mov     w9, #0xffffff80                 // #-128
+    0.11 :   2acf0:  mov     x0, x20
+    0.11 :   2ac54:  b       2acf0 <test::bench::ns_iter_inner::<alloc::string::String, allocbenches::string::bench_push_char_two_bytes::{closure#0}>+0x180>
+    0.00 :   2ad88:  bl      19240 <_Unwind_Resume@plt>
+    0.00 :   2ad84:  mov     x0, x19
+    0.00 :   2ad80:  bl      18a00 <__rustc::__rust_dealloc@plt>
+    0.00 :   2ad7c:  mov     w2, #0x1                        // #1
+## perf record/report/annotate(x86 core12 (flock, -e cpu_core/cycles/u))=== c23a string::bench_push_char_one_byte
+    96.41%  allocbenches-b18a163da23bc6bf  [.] test::bench::ns_iter_inner::<alloc::string::String, allocbenches::string::bench_push_char_one_byte::{closure#0}>
+     0.77%  libc.so.6                      [.] malloc_consolidate
+     0.55%  libc.so.6                      [.] _int_malloc
+     0.50%  libc.so.6                      [.] _int_realloc
+     0.34%  allocbenches-b18a163da23bc6bf  [.] <alloc::raw_vec::RawVecInner>::finish_grow
+     0.30%  allocbenches-b18a163da23bc6bf  [.] <alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>
+--- annotate top: test::bench::ns_iter_inner::<alloc::string::String, allocbenches::string::bench_push_char_one_byte::{closure#0}>
+   20.33 :   5a30f:  mov    -0x2c(%rbp),%r13d
+   17.26 :   5a359:  cmp    $0x80,%r13d
+   13.11 :   5a300:  movl   $0x61,-0x2c(%rbp)
+   12.97 :   5a2e0:  mov    %r13b,(%rax,%r15,1)
+    9.64 :   5a307:  lea    -0x2c(%rbp),%rax
+    6.06 :   5a2e4:  add    %r15,%r12
+    5.67 :   5a30b:  mov    -0x50(%rbp),%r14
+    5.29 :   5a346:  mov    (%r14),%rax
+    3.86 :   5a313:  mov    0x10(%r14),%r15
+    3.59 :   5a317:  mov    $0x1,%r12d
+    0.48 :   5a34c:  cmp    %rax,%r12
+    0.46 :   5a2f8:  mov    %rax,-0x50(%rbp)
+    0.27 :   5a2eb:  dec    %rbx
+    0.24 :   5a2f4:  lea    -0x68(%rbp),%rax
+## perf record/report/annotate(x86 core12 (flock, -e cpu_core/cycles/u))=== c23b string::bench_push_char_two_bytes
+    97.33%  allocbenches-b18a163da23bc6bf  [.] test::bench::ns_iter_inner::<alloc::string::String, allocbenches::string::bench_push_char_two_bytes::{closure#0}>
+     0.61%  libc.so.6                      [.] malloc_consolidate
+     0.34%  libc.so.6                      [.] _int_realloc
+     0.34%  libc.so.6                      [.] realloc
+     0.33%  allocbenches-b18a163da23bc6bf  [.] <alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>
+     0.28%  libc.so.6                      [.] _int_malloc
+--- annotate top: test::bench::ns_iter_inner::<alloc::string::String, allocbenches::string::bench_push_char_two_bytes::{closure#0}>
+   27.10 :   5a5b5:  mov    %cl,0x1(%rax,%r15,1)
+   19.07 :   5a530:  movl   $0xe2,-0x2c(%rbp)
+   18.17 :   5a59c:  or     $0x80,%cl
+   17.21 :   5a55c:  cmp    $0x800,%r13d
+    8.37 :   5a5a5:  cmp    $0x800,%r13d
+    4.66 :   5a5b1:  mov    %dl,(%rax,%r15,1)
+    1.26 :   5a556:  mov    $0x2,%r12d
+    1.08 :   5a596:  mov    %r13d,%ecx
+    0.57 :   5a547:  mov    $0x1,%r12d
+    0.51 :   5a5ae:  or     $0xc0,%dl
+    0.23 :   5a57c:  cmp    %rax,%r12
+    0.23 :   5a543:  mov    0x10(%r14),%r15
+    0.23 :   5a514:  add    %r15,%r12
+    0.17 :   5a53b:  mov    -0x50(%rbp),%r14

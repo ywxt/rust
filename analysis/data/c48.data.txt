@@ -1,0 +1,69 @@
+# baseline refs: old chapter baseline 88f7399cb49 ; measured commit 07e526db9df
+### harness aarch64 core 54 + perf
+
+# host=localhost.localdomain arch=aarch64 core=54 bin=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d
+run1 test iter::bench_enumerate_sum ... bench:     540,816.00 ns/iter (+/- 1,619.40)
+run1 test iter::bench_enumerate_ref_sum ... bench:     690,496.00 ns/iter (+/- 4,620.10)
+run1 test iter::bench_enumerate_chain_sum ... bench:   1,172,929.00 ns/iter (+/- 7,364.80)
+run1 test iter::bench_enumerate_chain_ref_sum ... bench:   1,172,987.00 ns/iter (+/- 2,109.70)
+run2 test iter::bench_enumerate_sum ... bench:     541,063.00 ns/iter (+/- 1,559.80)
+run2 test iter::bench_enumerate_ref_sum ... bench:     690,471.00 ns/iter (+/- 2,235.10)
+run2 test iter::bench_enumerate_chain_sum ... bench:   1,173,487.00 ns/iter (+/- 8,081.20)
+run2 test iter::bench_enumerate_chain_ref_sum ... bench:   1,173,926.00 ns/iter (+/- 8,468.30)
+run3 test iter::bench_enumerate_sum ... bench:     541,097.00 ns/iter (+/- 1,800.90)
+run3 test iter::bench_enumerate_ref_sum ... bench:     690,657.00 ns/iter (+/- 2,536.60)
+run3 test iter::bench_enumerate_chain_sum ... bench:   1,173,001.00 ns/iter (+/- 7,413.20)
+run3 test iter::bench_enumerate_chain_ref_sum ... bench:   1,172,870.00 ns/iter (+/- 7,295.20)
+    99.38%  corebenches-c88  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter23bench_enumerate_ref_sum0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4te
+## annotate: _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter23bench_enumerate_ref_sum0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+   13.81 :   69ef0:  mul     x11, x10, x10
+   86.19 :   69ffc:  mul     x11, x10, x10
+    99.34%  corebenches-c88  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter19bench_enumerate_sum0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5b
+## annotate: _RNvYNCNvNtCslrxolIbw58w_11corebenches4iter19bench_enumerate_sum0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+   16.47 :   65624:  mul     x11, x10, x10
+   83.02 :   65730:  mul     x11, x10, x10
+### harness x86 core 12
+# host=ywxt-work arch=x86_64 core=12 bin=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/coretests/d6382d1542e5d229/out/corebenches-d6382d1542e5d229 date=2026-11-03T15:22:33+08:00
+run1 test iter::bench_enumerate_sum ... bench:     259,241.29 ns/iter (+/- 19,398.02)
+run1 test iter::bench_enumerate_ref_sum ... bench:     238,789.41 ns/iter (+/- 21,842.46)
+run1 test iter::bench_enumerate_chain_sum ... bench:     577,202.29 ns/iter (+/- 31,720.16)
+run1 test iter::bench_enumerate_chain_ref_sum ... bench:     583,605.57 ns/iter (+/- 45,283.27)
+run2 test iter::bench_enumerate_sum ... bench:     261,350.05 ns/iter (+/- 15,138.45)
+run2 test iter::bench_enumerate_ref_sum ... bench:     232,363.41 ns/iter (+/- 33,354.37)
+run2 test iter::bench_enumerate_chain_sum ... bench:     579,269.46 ns/iter (+/- 35,124.13)
+run2 test iter::bench_enumerate_chain_ref_sum ... bench:     613,130.40 ns/iter (+/- 65,799.41)
+run3 test iter::bench_enumerate_sum ... bench:     264,333.38 ns/iter (+/- 18,297.96)
+run3 test iter::bench_enumerate_ref_sum ... bench:     231,594.84 ns/iter (+/- 33,236.61)
+run3 test iter::bench_enumerate_chain_sum ... bench:     578,885.77 ns/iter (+/- 34,979.37)
+run3 test iter::bench_enumerate_chain_ref_sum ... bench:     584,125.80 ns/iter (+/- 71,238.25)
+### objdump hot loops (aarch64 corebenches): ref @0x69ffc, value @0x65730
+
+   69ffc:	mul	x11, x10, x10
+   6a000:	add	x10, x10, #0x1
+   6a004:	cmp	x21, x10
+   6a008:	stur	x11, [x29, #-32]
+   6a00c:	ldur	x11, [x29, #-32]
+   6a010:	add	x9, x11, x9
+   6a014:	b.ne	69ffc <_RNvYNCNvNtCslrxolIbw58w_11corebenches
+
+   65730:	mul	x11, x10, x10
+   65734:	add	x10, x10, #0x1
+   65738:	cmp	x21, x10
+   6573c:	stur	x11, [x29, #-32]
+   65740:	ldur	x11, [x29, #-32]
+   65744:	add	x9, x11, x9
+   65748:	b.ne	65730 <_RNvYNCNvNtCslrxolIbw58w_11corebenches
+### probe pg.rs: same 7-insn loop at offset .skip K after .balign 4096 (loop = 28 B), perf stat cycles / 2e8 iterations, min of 3, core 54
+o0 cycles/elem 1.585
+o4032 cycles/elem 1.584
+o2044 cycles/elem 1.584
+o4060 cycles/elem 1.584
+o4068 cycles/elem 1.584
+o4076 cycles/elem 2.018
+o4084 cycles/elem 2.018
+o4088 cycles/elem 2.017
+o4092 cycles/elem 2.017
+### probe loop addresses (mul at b7fc = page offset 4092; c000 = offset 0)
+    b7fc:	mul	x12, x8, x8
+    b814:	b.ne	b7fc <_RNvCsbkO1EAaQcoj_2pg4main+0x17fc>  // 
+    c000:	mul	x12, x8, x8

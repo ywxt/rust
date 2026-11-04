@@ -1,0 +1,18 @@
+{
+ "id": "O1",
+ "slug": "overlap",
+ "kind": "c",
+ "tags": [
+  "O1"
+ ],
+ "chapters": [
+  "c11",
+  "c60",
+  "c84",
+  "c27",
+  "c73"
+ ],
+ "status": "not-reproduced",
+ "summary": "16 步相依 L1 load 鏈、輪間獨立:每輪 cycles 兩邊幾乎相同(F=0 時 13.2 vs 12.9,F=128 時 25.5 vs 25.6),單步延遲 4 vs 5 cyc;兩條 DRAM 鏈夾 N 個 nop 測 ROB,兩邊拐點都在 N=480–512(aarch64 222→261、x86 523→872 cyc),aarch64 窗口不比 x86 小;文檔 2.3 vs 3.4 的成因仍為推測",
+ "doc_mismatch": "c27 粗估 aarch64 窗口 150–175 vs x86 260–280 條,本探針兩邊 ROB 都約 480–512;在受控鏈上重疊度沒有 aarch64 劣勢,窗口容量不足以解釋 c11/c60/c84 的差距"
+}

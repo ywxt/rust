@@ -1,0 +1,44 @@
+# c12 raw data on 07e526db9df; a64 = univpn-work-1 core 52 (taskset -c 52), x86 = local core 12 (flock core12.lock taskset -c 12)
+# bench runner: /tmp/xdiff/work/upb/run.sh (3 interleaved runs); perf: prof.sh / ann.sh / fs.sh (remote copies in /tmp/xdiff/work/upb/)
+##### file: p_a.txt
+run1 a64 test binary_heap::bench_peek_mut_deref_mut ... bench:           0.38 ns/iter (+/- 0.00)
+run2 a64 test binary_heap::bench_peek_mut_deref_mut ... bench:           0.35 ns/iter (+/- 0.00)
+run3 a64 test binary_heap::bench_peek_mut_deref_mut ... bench:           0.35 ns/iter (+/- 0.00)
+##### file: p_x.txt
+run1 x86 test binary_heap::bench_peek_mut_deref_mut ... bench:           0.21 ns/iter (+/- 0.01)
+run2 x86 test binary_heap::bench_peek_mut_deref_mut ... bench:           0.21 ns/iter (+/- 0.01)
+run3 x86 test binary_heap::bench_peek_mut_deref_mut ... bench:           0.22 ns/iter (+/- 0.01)
+##### file: p_p.txt
+=== perf stat binary_heap::bench_peek_mut_deref_mut
+test binary_heap::bench_peek_mut_deref_mut ... bench:           0.35 ns/iter (+/- 0.00)
+     1,103,896,274      cycles                                                                
+     3,296,352,995      instructions                     #    2.99  insn per cycle            
+     1,097,515,688      branches                                                              
+            45,009      branch-misses                    #    0.00% of all branches           
+##### file: p_r.txt
+=== perf report binary_heap::bench_peek_mut_deref_mut
+    99.00%  [.] _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches11binary_heap24bench_peek_mut_deref_mut0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+     0.35%  [k] next_uptodate_folio
+     0.30%  [k] prep_new_page
+     0.09%  [k] perf_event_enable_on_exec
+     0.09%  [.] _RINvNtNtNtNtCs60nHaxeZLXj_3std3sys12thread_local6native5eager7destroyINtNtCs5eKY5gNNvwM_4core4cell4CellINtNtB1a_6option6OptionINtNtNtCshDmNPlWY1OA_5alloc3rcs3arc3ArcINtNtNtNtBa_4sync6poison5mutex5MutexINtNtB27_3vec3VechEEEEEEBa_
+     0.09%  [k] folio_remove_rmap_ptes
+     0.07%  [k] do_open
+     0.00%  [k] __pte_offset_map
+     0.00%  [k] perf_event_remove_on_exec
+     0.00%  [k] wait_for_common
+     0.00%  [k] finish_task_switch.isra.0
+##### file: p_ann.txt
+=== peek_mut annotate
+  100.00 :   5c5c0:  mov     x29, sp
+   83.05 :   7c288:  stur    x22, [x29, #-40]
+   16.95 :   7c1d8:  stur    x22, [x29, #-56]
+    0.00 :   7c458:  bl      19240 <_Unwind_Resume@plt>
+    0.00 :   7c454:  mov     x0, x19
+    0.00 :   7c450:  bl      18a00 <__rustc::__rust_dealloc@plt>
+##### file: p_d.txt
+# derived by derive.py from a64_bench.txt / x86_bench.txt (min of 3)
+min binary_heap::bench_peek_mut_deref_mut: a64 0.35 ns, x86 0.21 ns, a64 cycles(x2.9) 1.0
+a64 perf binary_heap::bench_peek_mut_deref_mut: 0.35 ns, IPC 2.99, instr/iter 3
+# old = body baseline numbers (88f7399-era build), new = a64 min above
+old->new binary_heap::bench_peek_mut_deref_mut: 347723 -> 0.35 (-100.0%)

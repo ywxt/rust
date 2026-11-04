@@ -1,0 +1,5 @@
+{"id":"L07","slug":"aos-ld1-lane","kind":"llvm-ir","tags":["N1"],
+ "chapters":["c88"],
+ "status":"reproduced",
+ "summary":"AArch64 的 VectorCombine 把 <8 x i32> 解交錯載入縮成 <7 x i32>,後端因此出 ldr q + 2×ld1 lane + mov v.s[1],v.s[2](與 bench 熱點同形),x86 不縮、出一條 shufps;-disable-vector-combine 時 AArch64 出 ld2。探針每元素 a64 0.476 / x86 0.483 cycles(同形每 cycle 相等),關 VectorCombine 0.447(−6%),手寫 ld2 0.340(−29%)、uzp2 0.258(−46%);bench 本身 x86 每 cycle 快 1.27–1.37× 的部分此探針仍解釋不了。",
+ "doc_mismatch":"章節寫「LLVM IR / 中端:相同」、歸為 AArch64 後端問題;實測中端 IR 不同:VectorCombine(依 AArch64 成本)把載入縮成 <7 x i32>,後端是被這個 IR 卡住,原 <8 x i32> 形態 AArch64 後端會正確出 ld2。手寫變體提升與循環寫法有關:章節探針 ld2 −20%、uzp2 −29%(本機重跑同數),本 bench 寫法為 −29% / −46%;LLVM 自己出 ld2 只快 6%。"}

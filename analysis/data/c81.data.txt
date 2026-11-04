@@ -1,0 +1,161 @@
+# c81 07e526db9df re-measurement; aarch64 core 58 (univpn-work-1), x86 core 12 via flock; raw harness/perf output
+## aarch64 up_dd.rs (dedup vs dedup_by, u32, 3 runs)
+
+run1 test all_100000::dedup       ... bench:      50,583.00 ns/iter (+/- 84.80)
+run1 test all_100000::dedup_by    ... bench:      50,033.26 ns/iter (+/- 114.51)
+run1 test all_1000::dedup         ... bench:         518.10 ns/iter (+/- 1.39)
+run1 test all_1000::dedup_by      ... bench:         506.87 ns/iter (+/- 2.61)
+run1 test none_100000::dedup      ... bench:      12,006.35 ns/iter (+/- 18.99)
+run1 test none_100000::dedup_by   ... bench:      59,989.62 ns/iter (+/- 645.42)
+run1 test none_1000::dedup        ... bench:         123.56 ns/iter (+/- 9.91)
+run1 test none_1000::dedup_by     ... bench:         604.54 ns/iter (+/- 1.84)
+run1 test random_100000::dedup    ... bench:     358,045.00 ns/iter (+/- 1,097.50)
+run1 test random_100000::dedup_by ... bench:     344,063.00 ns/iter (+/- 1,418.70)
+run1 test random_1000::dedup      ... bench:         807.22 ns/iter (+/- 3.67)
+run1 test random_1000::dedup_by   ... bench:         805.45 ns/iter (+/- 2.92)
+run2 test all_100000::dedup       ... bench:      50,588.25 ns/iter (+/- 160.44)
+run2 test all_100000::dedup_by    ... bench:      49,975.05 ns/iter (+/- 111.29)
+run2 test all_1000::dedup         ... bench:         517.62 ns/iter (+/- 1.10)
+run2 test all_1000::dedup_by      ... bench:         506.77 ns/iter (+/- 2.60)
+run2 test none_100000::dedup      ... bench:      12,007.09 ns/iter (+/- 27.38)
+run2 test none_100000::dedup_by   ... bench:      59,535.69 ns/iter (+/- 337.18)
+run2 test none_1000::dedup        ... bench:         117.01 ns/iter (+/- 7.75)
+run2 test none_1000::dedup_by     ... bench:         604.13 ns/iter (+/- 2.13)
+run2 test random_100000::dedup    ... bench:     357,821.00 ns/iter (+/- 5,409.55)
+run2 test random_100000::dedup_by ... bench:     343,965.50 ns/iter (+/- 5,651.00)
+run2 test random_1000::dedup      ... bench:         807.28 ns/iter (+/- 11.15)
+run2 test random_1000::dedup_by   ... bench:         798.00 ns/iter (+/- 3.04)
+run3 test all_100000::dedup       ... bench:      50,624.63 ns/iter (+/- 450.49)
+run3 test all_100000::dedup_by    ... bench:      50,038.58 ns/iter (+/- 166.85)
+run3 test all_1000::dedup         ... bench:         517.68 ns/iter (+/- 2.17)
+run3 test all_1000::dedup_by      ... bench:         506.81 ns/iter (+/- 3.59)
+run3 test none_100000::dedup      ... bench:      12,009.56 ns/iter (+/- 101.46)
+run3 test none_100000::dedup_by   ... bench:      59,491.56 ns/iter (+/- 479.84)
+run3 test none_1000::dedup        ... bench:         126.78 ns/iter (+/- 5.77)
+run3 test none_1000::dedup_by     ... bench:         604.44 ns/iter (+/- 1.47)
+run3 test random_100000::dedup    ... bench:     357,619.00 ns/iter (+/- 737.80)
+run3 test random_100000::dedup_by ... bench:     343,739.00 ns/iter (+/- 3,965.15)
+run3 test random_1000::dedup      ... bench:         807.62 ns/iter (+/- 2.43)
+run3 test random_1000::dedup_by   ... bench:         804.51 ns/iter (+/- 4.62)
+ALLDONE
+## x86 up_dd.rs
+run1 test all_100000::dedup       ... bench:      24,030.77 ns/iter (+/- 1,892.71)
+run1 test all_100000::dedup_by    ... bench:      23,832.43 ns/iter (+/- 811.17)
+run1 test all_1000::dedup         ... bench:         210.51 ns/iter (+/- 15.16)
+run1 test all_1000::dedup_by      ... bench:         195.59 ns/iter (+/- 4.49)
+run1 test none_100000::dedup      ... bench:       7,020.56 ns/iter (+/- 302.30)
+run1 test none_100000::dedup_by   ... bench:      21,009.02 ns/iter (+/- 525.83)
+run1 test none_1000::dedup        ... bench:          59.35 ns/iter (+/- 3.97)
+run1 test none_1000::dedup_by     ... bench:         222.29 ns/iter (+/- 11.74)
+run1 test random_100000::dedup    ... bench:     240,371.53 ns/iter (+/- 16,465.52)
+run1 test random_100000::dedup_by ... bench:     241,000.97 ns/iter (+/- 15,625.32)
+run1 test random_1000::dedup      ... bench:         503.22 ns/iter (+/- 36.16)
+run1 test random_1000::dedup_by   ... bench:         400.63 ns/iter (+/- 24.03)
+run2 test all_100000::dedup       ... bench:      23,990.93 ns/iter (+/- 1,587.99)
+run2 test all_100000::dedup_by    ... bench:      24,387.21 ns/iter (+/- 755.47)
+run2 test all_1000::dedup         ... bench:         209.90 ns/iter (+/- 11.70)
+run2 test all_1000::dedup_by      ... bench:         198.79 ns/iter (+/- 11.92)
+run2 test none_100000::dedup      ... bench:       7,095.14 ns/iter (+/- 415.76)
+run2 test none_100000::dedup_by   ... bench:      21,455.57 ns/iter (+/- 1,272.94)
+run2 test none_1000::dedup        ... bench:          62.14 ns/iter (+/- 3.17)
+run2 test none_1000::dedup_by     ... bench:         226.03 ns/iter (+/- 93.76)
+run2 test random_100000::dedup    ... bench:     240,618.42 ns/iter (+/- 12,724.89)
+run2 test random_100000::dedup_by ... bench:     241,882.89 ns/iter (+/- 20,162.89)
+run2 test random_1000::dedup      ... bench:         492.91 ns/iter (+/- 13.17)
+run2 test random_1000::dedup_by   ... bench:         395.78 ns/iter (+/- 10.48)
+run3 test all_100000::dedup       ... bench:      23,738.44 ns/iter (+/- 1,001.44)
+run3 test all_100000::dedup_by    ... bench:      24,559.96 ns/iter (+/- 1,598.57)
+run3 test all_1000::dedup         ... bench:         213.37 ns/iter (+/- 15.78)
+run3 test all_1000::dedup_by      ... bench:         203.04 ns/iter (+/- 8.69)
+run3 test none_100000::dedup      ... bench:       7,147.93 ns/iter (+/- 331.32)
+run3 test none_100000::dedup_by   ... bench:      22,118.53 ns/iter (+/- 1,397.87)
+run3 test none_1000::dedup        ... bench:          61.26 ns/iter (+/- 3.07)
+run3 test none_1000::dedup_by     ... bench:         221.40 ns/iter (+/- 10.95)
+run3 test random_100000::dedup    ... bench:     240,299.88 ns/iter (+/- 13,526.68)
+run3 test random_100000::dedup_by ... bench:     240,967.99 ns/iter (+/- 13,457.57)
+run3 test random_1000::dedup      ... bench:         494.66 ns/iter (+/- 28.97)
+run3 test random_1000::dedup_by   ... bench:         417.44 ns/iter (+/- 33.43)
+## aarch64 official dedup benches (3 runs)
+run1 test vec::bench_dedup_none_100    ... bench:          14.34 ns/iter (+/- 0.09) = 28571 MB/s
+run1 test vec::bench_dedup_none_1000   ... bench:         117.06 ns/iter (+/- 0.32) = 34188 MB/s
+run1 test vec::bench_dedup_none_10000  ... bench:       1,108.17 ns/iter (+/- 2.17) = 36101 MB/s
+run1 test vec::bench_dedup_none_100000 ... bench:      12,010.58 ns/iter (+/- 20.56) = 33305 MB/s
+run2 test vec::bench_dedup_none_100    ... bench:          14.30 ns/iter (+/- 0.02) = 28571 MB/s
+run2 test vec::bench_dedup_none_1000   ... bench:         116.44 ns/iter (+/- 0.40) = 34482 MB/s
+run2 test vec::bench_dedup_none_10000  ... bench:       1,109.95 ns/iter (+/- 1.95) = 36068 MB/s
+run2 test vec::bench_dedup_none_100000 ... bench:      12,013.83 ns/iter (+/- 29.01) = 33297 MB/s
+run3 test vec::bench_dedup_none_100    ... bench:          14.52 ns/iter (+/- 0.02) = 28571 MB/s
+run3 test vec::bench_dedup_none_1000   ... bench:         116.85 ns/iter (+/- 0.54) = 34482 MB/s
+run3 test vec::bench_dedup_none_10000  ... bench:       1,110.96 ns/iter (+/- 2.28) = 36036 MB/s
+run3 test vec::bench_dedup_none_100000 ... bench:      11,985.10 ns/iter (+/- 26.25) = 33375 MB/s
+run1 test vec::bench_dedup_all_100    ... bench:          67.66 ns/iter (+/- 1.08) = 5970 MB/s
+run1 test vec::bench_dedup_all_1000   ... bench:         518.49 ns/iter (+/- 2.13) = 7722 MB/s
+run1 test vec::bench_dedup_all_10000  ... bench:       4,971.16 ns/iter (+/- 9.77) = 8046 MB/s
+run1 test vec::bench_dedup_all_100000 ... bench:      49,098.00 ns/iter (+/- 123.12) = 8146 MB/s
+run2 test vec::bench_dedup_all_100    ... bench:          68.04 ns/iter (+/- 0.55) = 5882 MB/s
+run2 test vec::bench_dedup_all_1000   ... bench:         518.61 ns/iter (+/- 2.21) = 7722 MB/s
+run2 test vec::bench_dedup_all_10000  ... bench:       4,971.92 ns/iter (+/- 8.64) = 8046 MB/s
+run2 test vec::bench_dedup_all_100000 ... bench:      49,068.05 ns/iter (+/- 207.58) = 8151 MB/s
+run3 test vec::bench_dedup_all_100    ... bench:          67.59 ns/iter (+/- 2.35) = 5970 MB/s
+run3 test vec::bench_dedup_all_1000   ... bench:         518.57 ns/iter (+/- 1.56) = 7722 MB/s
+run3 test vec::bench_dedup_all_10000  ... bench:       4,971.52 ns/iter (+/- 11.07) = 8046 MB/s
+run3 test vec::bench_dedup_all_100000 ... bench:      49,104.70 ns/iter (+/- 148.95) = 8145 MB/s
+run1 test vec::bench_dedup_random_100    ... bench:          85.05 ns/iter (+/- 0.13) = 4705 MB/s
+run1 test vec::bench_dedup_random_1000   ... bench:         620.20 ns/iter (+/- 2.11) = 6451 MB/s
+run1 test vec::bench_dedup_random_10000  ... bench:       7,214.43 ns/iter (+/- 22.98) = 5544 MB/s
+run1 test vec::bench_dedup_random_100000 ... bench:     368,317.00 ns/iter (+/- 1,760.60) = 1086 MB/s
+run2 test vec::bench_dedup_random_100    ... bench:          85.05 ns/iter (+/- 0.17) = 4705 MB/s
+run2 test vec::bench_dedup_random_1000   ... bench:         620.92 ns/iter (+/- 1.25) = 6451 MB/s
+run2 test vec::bench_dedup_random_10000  ... bench:       7,217.80 ns/iter (+/- 10.91) = 5542 MB/s
+run2 test vec::bench_dedup_random_100000 ... bench:     367,639.00 ns/iter (+/- 1,142.25) = 1088 MB/s
+run3 test vec::bench_dedup_random_100    ... bench:          85.13 ns/iter (+/- 0.37) = 4705 MB/s
+run3 test vec::bench_dedup_random_1000   ... bench:         620.50 ns/iter (+/- 1.09) = 6451 MB/s
+run3 test vec::bench_dedup_random_10000  ... bench:       7,177.21 ns/iter (+/- 15.94) = 5573 MB/s
+run3 test vec::bench_dedup_random_100000 ... bench:     368,270.00 ns/iter (+/- 4,306.55) = 1086 MB/s
+## x86 official dedup benches
+run1 test vec::bench_dedup_none_100    ... bench:           6.47 ns/iter (+/- 0.30) = 66666 MB/s
+run1 test vec::bench_dedup_none_1000   ... bench:          61.41 ns/iter (+/- 2.86) = 65573 MB/s
+run1 test vec::bench_dedup_none_10000  ... bench:         559.77 ns/iter (+/- 24.37) = 71556 MB/s
+run1 test vec::bench_dedup_none_100000 ... bench:       7,266.70 ns/iter (+/- 261.08) = 55050 MB/s
+run2 test vec::bench_dedup_none_100    ... bench:           6.20 ns/iter (+/- 0.40) = 66666 MB/s
+run2 test vec::bench_dedup_none_1000   ... bench:          60.48 ns/iter (+/- 3.54) = 66666 MB/s
+run2 test vec::bench_dedup_none_10000  ... bench:         539.30 ns/iter (+/- 28.68) = 74211 MB/s
+run2 test vec::bench_dedup_none_100000 ... bench:       7,043.02 ns/iter (+/- 458.50) = 56793 MB/s
+run3 test vec::bench_dedup_none_100    ... bench:           6.15 ns/iter (+/- 0.37) = 66666 MB/s
+run3 test vec::bench_dedup_none_1000   ... bench:          60.34 ns/iter (+/- 3.55) = 66666 MB/s
+run3 test vec::bench_dedup_none_10000  ... bench:         535.37 ns/iter (+/- 34.86) = 74766 MB/s
+run3 test vec::bench_dedup_none_100000 ... bench:       7,015.65 ns/iter (+/- 338.43) = 57020 MB/s
+run1 test vec::bench_dedup_all_100    ... bench:          37.38 ns/iter (+/- 1.90) = 10810 MB/s
+run1 test vec::bench_dedup_all_1000   ... bench:         220.65 ns/iter (+/- 7.29) = 18181 MB/s
+run1 test vec::bench_dedup_all_10000  ... bench:       2,396.65 ns/iter (+/- 140.84) = 16694 MB/s
+run1 test vec::bench_dedup_all_100000 ... bench:      25,817.41 ns/iter (+/- 1,553.75) = 15493 MB/s
+run2 test vec::bench_dedup_all_100    ... bench:          37.42 ns/iter (+/- 0.75) = 10810 MB/s
+run2 test vec::bench_dedup_all_1000   ... bench:         211.87 ns/iter (+/- 13.37) = 18957 MB/s
+run2 test vec::bench_dedup_all_10000  ... bench:       2,393.81 ns/iter (+/- 139.80) = 16715 MB/s
+run2 test vec::bench_dedup_all_100000 ... bench:      25,034.44 ns/iter (+/- 1,566.15) = 15978 MB/s
+run3 test vec::bench_dedup_all_100    ... bench:          37.57 ns/iter (+/- 1.41) = 10810 MB/s
+run3 test vec::bench_dedup_all_1000   ... bench:         216.29 ns/iter (+/- 7.69) = 18518 MB/s
+run3 test vec::bench_dedup_all_10000  ... bench:       2,367.03 ns/iter (+/- 148.73) = 16899 MB/s
+run3 test vec::bench_dedup_all_100000 ... bench:      25,569.22 ns/iter (+/- 982.63) = 15643 MB/s
+run1 test vec::bench_dedup_random_100    ... bench:          33.91 ns/iter (+/- 2.61) = 12121 MB/s
+run1 test vec::bench_dedup_random_1000   ... bench:         339.83 ns/iter (+/- 17.73) = 11799 MB/s
+run1 test vec::bench_dedup_random_10000  ... bench:       4,435.21 ns/iter (+/- 209.92) = 9019 MB/s
+run1 test vec::bench_dedup_random_100000 ... bench:     264,647.33 ns/iter (+/- 13,692.52) = 1511 MB/s
+run2 test vec::bench_dedup_random_100    ... bench:          33.76 ns/iter (+/- 3.14) = 12121 MB/s
+run2 test vec::bench_dedup_random_1000   ... bench:         336.22 ns/iter (+/- 13.92) = 11904 MB/s
+run2 test vec::bench_dedup_random_10000  ... bench:       4,219.18 ns/iter (+/- 148.33) = 9480 MB/s
+run2 test vec::bench_dedup_random_100000 ... bench:     267,732.25 ns/iter (+/- 16,665.64) = 1494 MB/s
+run3 test vec::bench_dedup_random_100    ... bench:          33.82 ns/iter (+/- 2.69) = 12121 MB/s
+run3 test vec::bench_dedup_random_1000   ... bench:         338.08 ns/iter (+/- 20.85) = 11834 MB/s
+run3 test vec::bench_dedup_random_10000  ... bench:       4,243.19 ns/iter (+/- 147.50) = 9427 MB/s
+run3 test vec::bench_dedup_random_100000 ... bench:     262,995.18 ns/iter (+/- 12,487.68) = 1520 MB/s
+### derived (python, from the min values above)
+a64 none_1000: dedup_by/dedup = 5.16
+a64 none_100000: dedup_by/dedup = 4.96
+a64 all_1000: dedup_by/dedup = 0.98
+a64 all_100000: dedup_by/dedup = 0.99
+a64 random_1000: dedup_by/dedup = 0.99
+a64 random_100000: dedup_by/dedup = 0.96
+x86 none_1000: dedup_by/dedup = 3.73
+x86 none_100000: dedup_by/dedup = 2.99
+old local find_underscore_str 1830 vs 07e526db9df 239.99: ratio 7.6

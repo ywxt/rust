@@ -1,0 +1,15 @@
+{
+ "id": "L04",
+ "slug": "lsr-cmp-imm",
+ "kind": "llvm-ir",
+ "tags": [
+  "N1"
+ ],
+ "chapters": [
+  "c31",
+  "c38"
+ ],
+ "status": "reproduced",
+ "summary": "同函式兩份迴圈時,LSR 的 icmp eq (iv + -998999), 1001 被 ConstantHoisting 固定,AArch64 每輪多一條 add;cycles/元素:a64 兩份 1.873、單份 1.035、兩份關 hoisting 1.036,x86 兩種皆 1.006。",
+ "doc_mismatch": "c31/c38 歸因不完整:最小觸發不需 bench harness,而是同函式有兩個使用同一編不進 cmp 之常量的迴圈(bench 中為 iter 內聯兩份 ns_iter_inner)。LSR 單獨不產生這條 add,須再加 ConstantHoisting;-disable-lsr 或 -disable-constant-hoisting 任一皆消除;單一迴圈或常量 4095 皆不觸發。這解釋了獨立探針為何是 cmp x, reg。數字與文檔相符(1.873 / 1.036)。"
+}

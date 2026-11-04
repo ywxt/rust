@@ -1,0 +1,5 @@
+{"id":"L08","slug":"eor-ror-fold","kind":"llvm-ir","tags":["N1","NEW"],
+ "chapters":["c28","c45","c61"],
+ "status":"reproduced",
+ "summary":"llc 對 fshl+xor 在 AArch64 出一條 eor x0,x1,x0,ror #51(含 -mcpu=tsv110,無開關可關),x86 出 rolq+xorq;本機帶 ror 的 eor 延遲 2 cyc,鏈走未移位運算元時拆開的 ror(不在鏈上)+eor 只要 1 cyc,x86 同情形 1 cyc;SipHash-1-3 鏈 a64 29.08 / 不摺疊 21.07 / x86 24.90 cyc/雜湊,difference 不摺疊反慢 16.5%(277.3→323.0,x86 248.4)。",
+ "doc_mismatch":"章節表中「ror + eor(兩條)合計 1.00」不成立:同一鏈上 ror a;eor a 為 2.00 cyc/對,與摺疊的 eor…ror 相同;摺疊吃虧的只是依賴走未移位運算元、旋轉本可提前算的情形(2.00 vs 1.00)。difference:章節 320.9 → 357.2(+11%),本次 277.3 → 323.0(+16.5%),x86 章節 242.2、本次 248.4。"}

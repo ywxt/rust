@@ -1,0 +1,50 @@
+00000000000529f0 <test::bench::ns_iter_inner::<alloc::vec::Vec<u32>, allocbenches::vec::bench_map_fast::{closure#0}>>:
+   52a60:	41 0f 10 44 ce a0    	movups -0x60(%r14,%rcx,8),%xmm0
+   52a66:	41 0f 10 4c ce b0    	movups -0x50(%r14,%rcx,8),%xmm1
+   52a6c:	0f c6 c1 88          	shufps $0x88,%xmm1,%xmm0
+   52a70:	41 0f 10 4c ce c0    	movups -0x40(%r14,%rcx,8),%xmm1
+   52a76:	41 0f 10 54 ce d0    	movups -0x30(%r14,%rcx,8),%xmm2
+   52a7c:	0f c6 ca 88          	shufps $0x88,%xmm2,%xmm1
+   52a80:	0f 11 44 88 d0       	movups %xmm0,-0x30(%rax,%rcx,4)
+   52a85:	0f 11 4c 88 e0       	movups %xmm1,-0x20(%rax,%rcx,4)
+   52a93:	41 0f 10 44 ce e0    	movups -0x20(%r14,%rcx,8),%xmm0
+   52a99:	41 0f 10 4c ce f0    	movups -0x10(%r14,%rcx,8),%xmm1
+   52a9f:	0f c6 c1 88          	shufps $0x88,%xmm1,%xmm0
+   52aa3:	41 0f 10 0c ce       	movups (%r14,%rcx,8),%xmm1
+   52aa8:	41 0f 10 54 ce 10    	movups 0x10(%r14,%rcx,8),%xmm2
+   52aae:	0f c6 ca 88          	shufps $0x88,%xmm2,%xmm1
+   52ab2:	0f 11 44 88 f0       	movups %xmm0,-0x10(%rax,%rcx,4)
+   52ab7:	0f 11 0c 88          	movups %xmm1,(%rax,%rcx,4)
+000000000007a330 <test::bench::iter::<alloc::vec::Vec<u32>, allocbenches::vec::bench_map_regular::{closure#0}>>:
+   7a510:	0f 10 44 cb a4       	movups -0x5c(%rbx,%rcx,8),%xmm0
+   7a515:	0f 10 4c cb b4       	movups -0x4c(%rbx,%rcx,8),%xmm1
+   7a51a:	0f c6 c1 88          	shufps $0x88,%xmm1,%xmm0
+   7a51e:	0f 10 4c cb c4       	movups -0x3c(%rbx,%rcx,8),%xmm1
+   7a523:	0f 10 54 cb d4       	movups -0x2c(%rbx,%rcx,8),%xmm2
+   7a528:	0f c6 ca 88          	shufps $0x88,%xmm2,%xmm1
+   7a52c:	0f 11 44 88 d0       	movups %xmm0,-0x30(%rax,%rcx,4)
+   7a531:	0f 11 4c 88 e0       	movups %xmm1,-0x20(%rax,%rcx,4)
+   7a53f:	0f 10 44 cb e4       	movups -0x1c(%rbx,%rcx,8),%xmm0
+   7a544:	0f 10 4c cb f4       	movups -0xc(%rbx,%rcx,8),%xmm1
+   7a549:	0f c6 c1 88          	shufps $0x88,%xmm1,%xmm0
+   7a54d:	0f 10 4c cb 04       	movups 0x4(%rbx,%rcx,8),%xmm1
+   7a552:	0f 10 54 cb 14       	movups 0x14(%rbx,%rcx,8),%xmm2
+   7a557:	0f c6 ca 88          	shufps $0x88,%xmm2,%xmm1
+   7a55b:	0f 11 44 88 f0       	movups %xmm0,-0x10(%rax,%rcx,4)
+   7a560:	0f 11 0c 88          	movups %xmm1,(%rax,%rcx,4)
+   7a7d0:	0f 10 44 cb a4       	movups -0x5c(%rbx,%rcx,8),%xmm0
+   7a7d5:	0f 10 4c cb b4       	movups -0x4c(%rbx,%rcx,8),%xmm1
+   7a7da:	0f c6 c1 88          	shufps $0x88,%xmm1,%xmm0
+   7a7de:	0f 10 4c cb c4       	movups -0x3c(%rbx,%rcx,8),%xmm1
+   7a7e3:	0f 10 54 cb d4       	movups -0x2c(%rbx,%rcx,8),%xmm2
+   7a7e8:	0f c6 ca 88          	shufps $0x88,%xmm2,%xmm1
+   7a7ec:	0f 11 44 88 d0       	movups %xmm0,-0x30(%rax,%rcx,4)
+   7a7f1:	0f 11 4c 88 e0       	movups %xmm1,-0x20(%rax,%rcx,4)
+   7a7ff:	0f 10 44 cb e4       	movups -0x1c(%rbx,%rcx,8),%xmm0
+   7a804:	0f 10 4c cb f4       	movups -0xc(%rbx,%rcx,8),%xmm1
+   7a809:	0f c6 c1 88          	shufps $0x88,%xmm1,%xmm0
+   7a80d:	0f 10 4c cb 04       	movups 0x4(%rbx,%rcx,8),%xmm1
+   7a812:	0f 10 54 cb 14       	movups 0x14(%rbx,%rcx,8),%xmm2
+   7a817:	0f c6 ca 88          	shufps $0x88,%xmm2,%xmm1
+   7a81b:	0f 11 44 88 f0       	movups %xmm0,-0x10(%rax,%rcx,4)
+   7a820:	0f 11 0c 88          	movups %xmm1,(%rax,%rcx,4)

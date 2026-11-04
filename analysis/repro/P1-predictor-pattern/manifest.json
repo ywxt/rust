@@ -1,0 +1,18 @@
+{
+ "id": "P1",
+ "slug": "predictor-pattern",
+ "kind": "c",
+ "tags": [
+  "P1"
+ ],
+ "chapters": [
+  "c07",
+  "c24",
+  "c54",
+  "c21",
+  "c78"
+ ],
+ "status": "reproduced",
+ "summary": "序列長 L × 每元素必跳分支 T:T=0 時 aarch64 背得住 4096 隨機序列(0.002 miss/元素)與 ≥256 次迴圈出口(x86 約 64 次);T≥2 起 aarch64 迅速失準(T=4、L=64 已 0.06,L=1024 為 0.30),x86 到 L=1024 仍 ≈0;矛盾可調和:aarch64 只在迴圈體無其他必跳分支時佔優,div_2pow10 digit 迴圈屬後者情況(digit 迴圈本身未直接測)",
+ "doc_mismatch": "文檔稱 x86 對 4 KB 隨機序列 0.5 miss/元素,本探針 T=0 時 x86 僅 0.0004(T=4 時 0.20);迴圈出口在 T=0 時 aarch64 ≥256、x86 約 64 次,均比文檔的 96 vs 32 長"
+}

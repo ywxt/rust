@@ -1,0 +1,157 @@
+# c49 07e526db9df re-measurement; aarch64 core 58 (univpn-work-1), x86 core 12 via flock; raw harness/perf output
+## aarch64 int_bits::u16 group run (3 runs)
+## corebenches int_bits::u16
+run1 test num::int_bits::u16::constant::deposit_bits  ... bench:         131.38 ns/iter (+/- 0.34)
+run1 test num::int_bits::u16::constant::extract_bits  ... bench:         157.17 ns/iter (+/- 0.20)
+run1 test num::int_bits::u16::invariant::deposit_bits ... bench:         180.83 ns/iter (+/- 2.47)
+run1 test num::int_bits::u16::invariant::extract_bits ... bench:         176.58 ns/iter (+/- 0.43)
+run1 test num::int_bits::u16::variable::deposit_bits  ... bench:         821.35 ns/iter (+/- 5.69)
+run1 test num::int_bits::u16::variable::extract_bits  ... bench:         692.09 ns/iter (+/- 2.55)
+run2 test num::int_bits::u16::constant::deposit_bits  ... bench:         131.40 ns/iter (+/- 0.41)
+run2 test num::int_bits::u16::constant::extract_bits  ... bench:         157.19 ns/iter (+/- 0.97)
+run2 test num::int_bits::u16::invariant::deposit_bits ... bench:         179.86 ns/iter (+/- 2.56)
+run2 test num::int_bits::u16::invariant::extract_bits ... bench:         176.50 ns/iter (+/- 0.39)
+run2 test num::int_bits::u16::variable::deposit_bits  ... bench:         822.31 ns/iter (+/- 5.48)
+run2 test num::int_bits::u16::variable::extract_bits  ... bench:         692.05 ns/iter (+/- 2.30)
+run3 test num::int_bits::u16::constant::deposit_bits  ... bench:         131.44 ns/iter (+/- 0.57)
+run3 test num::int_bits::u16::constant::extract_bits  ... bench:         157.15 ns/iter (+/- 0.13)
+run3 test num::int_bits::u16::invariant::deposit_bits ... bench:         180.62 ns/iter (+/- 2.42)
+run3 test num::int_bits::u16::invariant::extract_bits ... bench:         176.54 ns/iter (+/- 0.62)
+run3 test num::int_bits::u16::variable::deposit_bits  ... bench:         823.39 ns/iter (+/- 4.46)
+run3 test num::int_bits::u16::variable::extract_bits  ... bench:         692.24 ns/iter (+/- 2.72)
+## x86 int_bits::u16 group run (3 runs)
+## corebenches int_bits::u16
+run1 test num::int_bits::u16::constant::deposit_bits  ... bench:          65.24 ns/iter (+/- 3.51)
+run1 test num::int_bits::u16::constant::extract_bits  ... bench:          85.67 ns/iter (+/- 4.32)
+run1 test num::int_bits::u16::invariant::deposit_bits ... bench:          87.56 ns/iter (+/- 5.42)
+run1 test num::int_bits::u16::invariant::extract_bits ... bench:          83.46 ns/iter (+/- 3.40)
+run1 test num::int_bits::u16::variable::deposit_bits  ... bench:         289.34 ns/iter (+/- 9.07)
+run1 test num::int_bits::u16::variable::extract_bits  ... bench:         269.86 ns/iter (+/- 17.50)
+run2 test num::int_bits::u16::constant::deposit_bits  ... bench:          65.19 ns/iter (+/- 3.49)
+run2 test num::int_bits::u16::constant::extract_bits  ... bench:          84.87 ns/iter (+/- 5.92)
+run2 test num::int_bits::u16::invariant::deposit_bits ... bench:          87.43 ns/iter (+/- 2.67)
+run2 test num::int_bits::u16::invariant::extract_bits ... bench:          83.95 ns/iter (+/- 5.12)
+run2 test num::int_bits::u16::variable::deposit_bits  ... bench:         293.58 ns/iter (+/- 21.42)
+run2 test num::int_bits::u16::variable::extract_bits  ... bench:         267.19 ns/iter (+/- 17.71)
+run3 test num::int_bits::u16::constant::deposit_bits  ... bench:          65.03 ns/iter (+/- 2.76)
+run3 test num::int_bits::u16::constant::extract_bits  ... bench:          82.88 ns/iter (+/- 3.85)
+run3 test num::int_bits::u16::invariant::deposit_bits ... bench:          86.46 ns/iter (+/- 4.91)
+run3 test num::int_bits::u16::invariant::extract_bits ... bench:          83.26 ns/iter (+/- 4.69)
+run3 test num::int_bits::u16::variable::deposit_bits  ... bench:         293.39 ns/iter (+/- 14.87)
+run3 test num::int_bits::u16::variable::extract_bits  ... bench:         270.42 ns/iter (+/- 10.50)
+### c49 --exact runs (each its own process)
+run1 test num::int_bits::u16::constant::deposit_bits ... bench:         114.58 ns/iter (+/- 0.32)
+run1 test num::int_bits::u16::constant::extract_bits ... bench:         158.03 ns/iter (+/- 0.63)
+run1 test num::int_bits::u16::invariant::deposit_bits ... bench:         180.60 ns/iter (+/- 2.42)
+run1 test num::int_bits::u16::variable::deposit_bits ... bench:         819.10 ns/iter (+/- 5.85)
+run2 test num::int_bits::u16::constant::deposit_bits ... bench:         114.56 ns/iter (+/- 0.30)
+run2 test num::int_bits::u16::constant::extract_bits ... bench:         158.01 ns/iter (+/- 0.33)
+run2 test num::int_bits::u16::invariant::deposit_bits ... bench:         179.97 ns/iter (+/- 2.76)
+run2 test num::int_bits::u16::variable::deposit_bits ... bench:         820.18 ns/iter (+/- 5.31)
+run3 test num::int_bits::u16::constant::deposit_bits ... bench:         114.49 ns/iter (+/- 0.42)
+run3 test num::int_bits::u16::constant::extract_bits ... bench:         157.95 ns/iter (+/- 0.61)
+run3 test num::int_bits::u16::invariant::deposit_bits ... bench:         180.14 ns/iter (+/- 2.79)
+run3 test num::int_bits::u16::variable::deposit_bits ... bench:         819.00 ns/iter (+/- 3.03)
+### c49 objdump u16 constant deposit vectored
+43
+vector insns: 34
+   4f0a8:	movi	v0.8h, #0xf0
+   4f0ac:	mov	w8, #0xc3c                 	// #3132
+   4f0b0:	movi	v1.16b, #0x66
+   4f0b4:	movi	v2.16b, #0x55
+   4f0b8:	dup	v3.8h, w8
+   4f0bc:	add	x8, x0, #0x10
+   4f0c0:	add	x9, x1, #0x10
+   4f0c4:	mov	w10, #0x200                 	// #512
+   4f0c8:	ldp	q4, q5, [x9, #-16]
+   4f0cc:	subs	x10, x10, #0x10
+   4f0d0:	add	x9, x9, #0x20
+   4f0d4:	and	v6.16b, v4.16b, v0.16b
+   4f0d8:	and	v7.16b, v5.16b, v0.16b
+   4f0dc:	bic	v4.8h, #0xff, lsl #8
+   4f0e0:	bic	v5.8h, #0xff, lsl #8
+   4f0e4:	shl	v16.8h, v6.8h, #4
+   4f0e8:	shl	v17.8h, v7.8h, #4
+   4f0ec:	orr	v4.16b, v4.16b, v16.16b
+   4f0f0:	orr	v5.16b, v5.16b, v17.16b
+   4f0f4:	eor	v4.16b, v4.16b, v6.16b
+   4f0f8:	eor	v5.16b, v5.16b, v7.16b
+   4f0fc:	and	v6.16b, v4.16b, v3.16b
+   4f100:	and	v7.16b, v5.16b, v3.16b
+   4f104:	shl	v16.8h, v6.8h, #2
+   4f108:	eor	v4.16b, v4.16b, v6.16b
+   4f10c:	shl	v6.8h, v7.8h, #2
+   4f110:	eor	v5.16b, v5.16b, v7.16b
+   4f114:	eor	v4.16b, v4.16b, v16.16b
+   4f118:	eor	v5.16b, v5.16b, v6.16b
+   4f11c:	and	v6.16b, v4.16b, v1.16b
+   4f120:	and	v7.16b, v5.16b, v1.16b
+   4f124:	add	v16.8h, v6.8h, v6.8h
+   4f128:	eor	v4.16b, v4.16b, v6.16b
+   4f12c:	add	v6.8h, v7.8h, v7.8h
+   4f130:	eor	v5.16b, v5.16b, v7.16b
+   4f134:	eor	v4.16b, v4.16b, v16.16b
+   4f138:	eor	v5.16b, v5.16b, v6.16b
+   4f13c:	and	v4.16b, v4.16b, v2.16b
+   4f140:	and	v5.16b, v5.16b, v2.16b
+   4f144:	stp	q4, q5, [x8, #-16]
+   4f148:	add	x8, x8, #0x20
+   4f14c:	b.ne	4f0c8 <_RNvNvNtNtNtNtCslrxolIbw58w_11corebenches3num8int_bits3u168constants_12deposit_bits8vectored+0x20>  // b.any
+   4f150:	ret
+### c49 perf annotate u16 constant deposit
+    99.33%  [.] _RNvNvNtNtNtNtCslrxolIbw58w_11corebenches3num8int_bits3u168constants_12deposit_bits8vectored
+test num::int_bits::u16::constant::deposit_bits ... bench:         114.56 ns/iter (+/- 0.18)
+628985174,,cycles,216904470,100.00,,
+2074653171,,instructions,216904470,100.00,3.30,insn per cycle
+### c21/c78 perf record (cycles, core 58)
+## report dragon::bench_big_exact_inf
+    99.08%  [.] _RNvNtNtNtNtNtCs5eKY5gNNvwM_4core3num3imp7flt2dec8strategy6dragon12format_exact
+## annotate format_exact dragon::bench_big_exact_inf: share of div 10^9 loop 0xddbdc-0xddc28 within format_exact
+loop 0.0% of format_exact samples (total annotated 0.0)
+## report dragon::bench_big_exact_3
+    38.45%  [.] _RNvNtNtNtNtNtCs5eKY5gNNvwM_4core3num3imp7flt2dec8strategy6dragon12format_exact
+    30.49%  [.] _RNvNtNtCseXQECTt8W5h_17compiler_builtins3int4udiv9___udivti3
+    10.51%  [.] _RNvNtNtCseXQECTt8W5h_17compiler_builtins3int19specialized_div_rem12u128_div_rem
+     9.80%  [.] _RNvMs2_NtNtNtCs5eKY5gNNvwM_4core3num3imp6bignumNtB5_8Big64x208mul_pow2
+     8.82%  [.] _RNvMs2_NtNtNtCs5eKY5gNNvwM_4core3num3imp6bignumNtB5_8Big64x2010mul_digits
+## annotate format_exact dragon::bench_big_exact_3: share of div 10^9 loop 0xddbdc-0xddc28 within format_exact
+loop 0.0% of format_exact samples (total annotated 0.0)
+## report grisu::bench_one_exact_inf
+    93.07%  [.] _RNvNtNtNtNtNtCs5eKY5gNNvwM_4core3num3imp7flt2dec8strategy6dragon12format_exact
+     2.62%  [.] _RNvMs2_NtNtNtCs5eKY5gNNvwM_4core3num3imp6bignumNtB5_8Big64x208mul_pow2
+     1.37%  [.] _RNvNtNtNtNtNtCs5eKY5gNNvwM_4core3num3imp7flt2dec8strategy5grisu16format_exact_opt
+     1.12%  [.] __memset_sve_zva64
+## annotate format_exact grisu::bench_one_exact_inf: share of div 10^9 loop 0xddbdc-0xddc28 within format_exact
+loop 0.0% of format_exact samples (total annotated 0.0)
+### c33/c46/c62 perf stat (stall_frontend), 3 runs each
+bench:          54.26 ns/iter write_u8_min ipc=3.06 fe_stall_share=28.0%
+bench:          55.01 ns/iter write_u8_min ipc=3.04 fe_stall_share=28.2%
+bench:          54.41 ns/iter write_u8_min ipc=3.06 fe_stall_share=28.0%
+bench:          52.39 ns/iter write_u8_max ipc=3.22 fe_stall_share=26.1%
+bench:          52.52 ns/iter write_u8_max ipc=3.21 fe_stall_share=26.1%
+bench:          52.79 ns/iter write_u8_max ipc=3.22 fe_stall_share=26.0%
+bench:          55.34 ns/iter write_u64_min ipc=3.00 fe_stall_share=29.0%
+bench:          56.12 ns/iter write_u64_min ipc=2.99 fe_stall_share=29.4%
+bench:          56.95 ns/iter write_u64_min ipc=2.96 fe_stall_share=29.6%
+bench:          52.12 ns/iter write_u64_max ipc=3.79 fe_stall_share=15.2%
+bench:          51.83 ns/iter write_u64_max ipc=3.81 fe_stall_share=14.9%
+bench:          52.33 ns/iter write_u64_max ipc=3.77 fe_stall_share=15.3%
+bench:          57.12 ns/iter write_u128_min ipc=2.99 fe_stall_share=28.8%
+bench:          58.46 ns/iter write_u128_min ipc=2.93 fe_stall_share=30.2%
+bench:          57.38 ns/iter write_u128_min ipc=2.97 fe_stall_share=29.3%
+bench:          63.86 ns/iter write_u128_max ipc=3.76 fe_stall_share=13.8%
+bench:          64.25 ns/iter write_u128_max ipc=3.75 fe_stall_share=14.1%
+bench:          64.21 ns/iter write_u128_max ipc=3.74 fe_stall_share=14.1%
+### c29 socket_pipe pinned core 58, 3 runs, user/sys
+test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:     124,996.41 ns/iter (+/- 25,175.48) = 1048 MB/s
+user=0.38 sys=1.78
+test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:     125,003.94 ns/iter (+/- 25,290.41) = 1048 MB/s
+user=0.43 sys=1.76
+test sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy ... bench:     128,177.18 ns/iter (+/- 21,361.92) = 1022 MB/s
+user=0.63 sys=3.18
+00000000002d9940 d corebenches::num::int_bits::u16::constant::deposit_bits
+000000000004f0a8 t corebenches::num::int_bits::u16::constant::deposit_bits::vectored
+00000000000fe57c t <corebenches::num::int_bits::u16::constant::deposit_bits::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+### derived (python, from the min values above)
+ns/elem 0.224 cyc/elem 0.65 cyc/16elem 10.4 vec ALU ops/cycle 2.7
+group-run vs exact 1.15 times

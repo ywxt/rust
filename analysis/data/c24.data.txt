@@ -1,0 +1,94 @@
+# c24:07e526db9df 上重新量測的原始輸出(腳本 /tmp/xdiff/work/up56/{run.sh,perf.sh,tools/mk.py} 彙整,未經手改)
+## bench 原始輸出(aarch64 core56,07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 allocbenches|test str::char_iterator ... bench:          10.59 ns/iter (+/- 0.31)
+run2 allocbenches|test str::char_iterator ... bench:          10.64 ns/iter (+/- 0.32)
+run3 allocbenches|test str::char_iterator ... bench:          10.66 ns/iter (+/- 0.25)
+run1 allocbenches|test str::char_iterator_for ... bench:          30.58 ns/iter (+/- 0.81)
+run2 allocbenches|test str::char_iterator_for ... bench:          30.60 ns/iter (+/- 0.18)
+run3 allocbenches|test str::char_iterator_for ... bench:          30.60 ns/iter (+/- 0.60)
+run1 allocbenches|test str::char_iterator_rev ... bench:          47.93 ns/iter (+/- 0.11)
+run2 allocbenches|test str::char_iterator_rev ... bench:          47.98 ns/iter (+/- 0.07)
+run3 allocbenches|test str::char_iterator_rev ... bench:          48.01 ns/iter (+/- 0.13)
+run1 allocbenches|test str::char_iterator_rev_for ... bench:          38.72 ns/iter (+/- 0.15)
+run2 allocbenches|test str::char_iterator_rev_for ... bench:          38.70 ns/iter (+/- 0.17)
+run3 allocbenches|test str::char_iterator_rev_for ... bench:          38.72 ns/iter (+/- 0.15)
+## 3 次最小值(aarch64 core56;腳本計算)
+min str::char_iterator 10.59 ns/iter
+min str::char_iterator_for 30.58 ns/iter
+min str::char_iterator_rev 47.93 ns/iter
+min str::char_iterator_rev_for 38.7 ns/iter
+## bench 原始輸出(x86 core12 (flock),07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 allocbenches|test str::char_iterator ... bench:           6.85 ns/iter (+/- 0.31)
+run2 allocbenches|test str::char_iterator ... bench:           6.78 ns/iter (+/- 0.38)
+run3 allocbenches|test str::char_iterator ... bench:           6.69 ns/iter (+/- 0.33)
+run1 allocbenches|test str::char_iterator_for ... bench:          20.28 ns/iter (+/- 1.88)
+run2 allocbenches|test str::char_iterator_for ... bench:          17.87 ns/iter (+/- 6.21)
+run3 allocbenches|test str::char_iterator_for ... bench:          20.03 ns/iter (+/- 2.40)
+run1 allocbenches|test str::char_iterator_rev ... bench:          14.69 ns/iter (+/- 3.34)
+run2 allocbenches|test str::char_iterator_rev ... bench:          14.81 ns/iter (+/- 0.86)
+run3 allocbenches|test str::char_iterator_rev ... bench:          14.74 ns/iter (+/- 0.96)
+run1 allocbenches|test str::char_iterator_rev_for ... bench:          21.02 ns/iter (+/- 5.32)
+run2 allocbenches|test str::char_iterator_rev_for ... bench:          20.90 ns/iter (+/- 4.04)
+run3 allocbenches|test str::char_iterator_rev_for ... bench:          19.49 ns/iter (+/- 6.46)
+## 3 次最小值(x86 core12 (flock);腳本計算)
+min str::char_iterator 6.69 ns/iter
+min str::char_iterator_for 17.87 ns/iter
+min str::char_iterator_rev 14.69 ns/iter
+min str::char_iterator_rev_for 19.49 ns/iter
+## perf record/report/annotate(aarch64 core56)=== c24 str::char_iterator_for
+    99.97%  allocbenches-b48d0ecb0c6d7898  [.] _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches3str17char_iterator_for0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+     0.02%  ld-linux-aarch64.so.1          [.] _dl_lookup_symbol_x
+     0.00%  [kernel.kallsyms]              [k] perf_event_enable_on_exec
+     0.00%  [kernel.kallsyms]              [k] next_uptodate_folio
+     0.00%  [kernel.kallsyms]              [k] xas_load
+     0.00%  [kernel.kallsyms]              [k] perf_event_remove_on_exec
+--- annotate top: _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches3str17char_iterator_for0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+   42.90 :   83914:  stur    w9, [x29, #-28]
+   18.74 :   83924:  ldrsb   w12, [x21, x10]
+    9.03 :   839c4:  stur    w9, [x29, #-48]
+    8.53 :   838f8:  ldrb    w11, [x21, x11]
+    7.42 :   83934:  ldrb    w12, [x21, x11]
+    3.48 :   839d4:  ldrsb   w12, [x21, x10]
+    3.40 :   83944:  b.cs    838f8 <<allocbenches::str::char_iterator_for::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x294>  // b.hs, b.nlast
+    1.60 :   839a8:  ldrb    w11, [x21, x11]
+    1.48 :   839e4:  ldrb    w12, [x21, x11]
+    0.98 :   83908:  orr     w11, w11, w12, lsl #6
+    0.59 :   838e4:  add     x8, x8, #0x1
+    0.57 :   839f4:  b.cs    839a8 <<allocbenches::str::char_iterator_for::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x344>  // b.hs, b.nlast
+    0.56 :   839b8:  orr     w11, w11, w12, lsl #6
+    0.46 :   838f0:  mov     x10, xzr
+## perf record/report/annotate(x86 core12 (flock, -e cpu_core/cycles/u))=== c24 str::char_iterator_for
+    99.98%  allocbenches-b18a163da23bc6bf  [.] <allocbenches::str::char_iterator_for::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+     0.01%  allocbenches-b18a163da23bc6bf  [.] <[f64] as test::stats::Stats>::sum
+     0.01%  libstd-3f1ea972a24311e5.so     [.] <std::time::Instant>::now
+     0.00%  ld-linux-x86-64.so.2           [.] do_lookup_x
+     0.00%  ld-linux-x86-64.so.2           [.] do_lookup_x
+     0.00%  ld-linux-x86-64.so.2           [.] strcmp
+--- annotate top: <allocbenches::str::char_iterator_for::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+   25.64 :   d9560:  inc    %rcx
+   18.88 :   d9566:  cmp    $0x41,%rcx
+    7.51 :   d9470:  inc    %rcx
+    6.93 :   d9476:  cmp    $0x41,%rcx
+    4.29 :   d9589:  movzbl 0x2(%rcx,%r13,1),%edi
+    3.88 :   d956c:  movzbl (%rcx,%r13,1),%edx
+    3.79 :   d9563:  mov    %edx,-0x3c(%rbp)
+    3.74 :   d9553:  cmp    %r12,%rax
+    3.55 :   d9571:  test   %dl,%dl
+    2.54 :   d95a0:  jmp    d9563 <<allocbenches::str::char_iterator_for::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x463>
+    2.46 :   d9550:  inc    %rax
+    2.26 :   d959b:  shl    $0xc,%edx
+    1.57 :   d9575:  mov    %edx,%edi
+    1.27 :   d9596:  and    $0x3f,%edi
+## 附加原始輸出:/tmp/xdiff/work/up56/c24_derived.txt
+# 腳本計算:65 B / 51 char 串;aarch64 3 次最小 30.58 ns/iter;base.tsv a64_cyc 86.448
+ns/char 0.60 GB/s 2.13 cycles/char(base) 1.70 char_iterator_for/char_iterator 2.9x
+## 附加原始輸出:/tmp/xdiff/rw/c04.data.txt
+# 由 /tmp/xdiff/base.tsv 的 a64_ns 欄(07e526db9df,本機 aarch64)與 x86 小節的語料位元組數換算;以下為 python3 腳本原始輸出
+en case00=15.7GB/s case01=4.1GB/s case02=1.6GB/s case03=2.4GB/s
+zh case00=15.7GB/s case01=4.1GB/s case02=0.9GB/s case03=0.9GB/s
+ru case00=15.7GB/s case01=4.1GB/s case02=2.1GB/s case03=0.7GB/s
+emoji case00=15.7GB/s case01=4.1GB/s case02=1.1GB/s case03=1.1GB/s
+en case00/case01 = 3.8x case03/case00 = 7x
+zh case00/case01 = 3.8x case03/case00 = 18x
+ru case00/case01 = 3.8x case03/case00 = 24x
+emoji case00/case01 = 3.8x case03/case00 = 14x

@@ -1,0 +1,22 @@
+### aarch64 遠程:CORE=50 ./run.sh
+# 2026-11-03T14:47:47+08:00 aarch64 unknown | ldd (GNU libc) 2.38
+rustc 1.101.0-dev
+== ascii
+LONG 6990 B,首個非 ASCII 位元組偏移 366('–'),is_ascii 只掃 5.2%
+== peek_mut_deref_mut:每單位 = 一次外層迭代(內層 100 萬元素)
+bench                cycles:u 1.98  instructions:u 10.00  branch-misses:u 0.000
+keep                 cycles:u 1014906.09  instructions:u 4000009.44  branch-misses:u 2.690
+== slice::push:單次 1 億次 push(400 MB),總計數;核心佔比 = 1 - cycles:u / cycles
+THP [always]
+cycles 785130086  cycles:u 703957531  核心佔比 10.3%  page-faults 4763
+### x86_64 本機:CORE=10 ./run.sh
+# 2026-11-03T14:56:20+08:00 x86_64 12th Gen Intel(R) Core(TM) i7-12700 | ldd (GNU libc) 2.42
+rustc 1.101.0-dev
+== ascii
+LONG 6990 B,首個非 ASCII 位元組偏移 366('–'),is_ascii 只掃 5.2%
+== peek_mut_deref_mut:每單位 = 一次外層迭代(內層 100 萬元素)
+bench                cpu_core/cycles/u 2.98  cpu_core/instructions/u 12.00  cpu_core/branch-misses/u -0.000
+keep                 cpu_core/cycles/u 710099.70  cpu_core/instructions/u 5000024.96  cpu_core/branch-misses/u 1.520
+== slice::push:單次 1 億次 push(400 MB),總計數;核心佔比 = 1 - cycles:u / cycles
+THP [madvise]
+cycles 724965298  cycles:u 304380685  核心佔比 58.0%  page-faults 97766

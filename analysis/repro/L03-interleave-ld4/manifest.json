@@ -1,0 +1,14 @@
+{
+ "id": "L03",
+ "slug": "interleave-ld4",
+ "kind": "llvm-ir",
+ "tags": [
+  "N1"
+ ],
+ "chapters": [
+  "c04"
+ ],
+ "status": "reproduced",
+ "summary": "4 個對稱 i64 lane 在 AArch64 的 LV 選出 4 條 ld4 且迴圈內棧往返,-enable-interleaved-mem-accesses=false 後兩者皆無,x86 無交錯載入;cycles/B:a64 0.1862 → 0.1486,x86 0.1499。",
+ "doc_mismatch": "打平成立,但絕對值 0.149 而非文檔 0.157(縮減 bench 去掉 head/tail 與 general 路徑);a64 預設 0.186 與文檔 0.185 相符。"
+}

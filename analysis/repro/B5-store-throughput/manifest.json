@@ -1,0 +1,19 @@
+{
+ "id": "B5",
+ "slug": "store-throughput",
+ "kind": "rust",
+ "tags": [
+  "B5"
+ ],
+ "chapters": [
+  "c01",
+  "c15",
+  "c42",
+  "c52",
+  "c83",
+  "c57"
+ ],
+ "status": "partial",
+ "summary": "L1 內 8000 B 16 B 向量拷貝:x86 movdqu 0.561 cycles/16 B(28.5 B/cycle);aarch64 ldr/str q 0.602(26.6)、LLVM 生成的 ldp/stp q 0.661(24.2)、ldp/stp q 且只 16 B 對齊 0.729(21.9);純 16 B store 兩邊同為約 0.52–0.55(約 1.85 個/cycle)",
+ "doc_mismatch": "文檔 20.7 vs 31.2 B/cycle(1.51×)未重現:64 B 對齊、迴圈內無棧存取時只差 1.07×(ldr/str q)–1.18×(ldp/stp q),只 16 B 對齊的 ldp/stp q 為 1.29×;純 store 吞吐兩邊相同,『本機每 cycle 1 個 store、store 端口窄』被推翻,差距來自 ldp/stp q 配對、對齊與 load/store 混合;另外 x86 外層迴圈有棧存取時(4K 別名)本機量到 ±10% 波動,文檔探針可能受此影響"
+}

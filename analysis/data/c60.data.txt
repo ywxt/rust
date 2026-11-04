@@ -1,0 +1,330 @@
+# c60:07e526db9df 上重新量測的原始輸出(/tmp/xdiff/work/up56/{run2.sh,perf2.sh,lk_c60.sh},未經手改)
+## harness aarch64 core56(每項 3 次,--bench --exact)
+run1 corebenches|test str::debug::mostly_unicode ... bench:       1,756.32 ns/iter (+/- 2.73)
+run2 corebenches|test str::debug::mostly_unicode ... bench:       1,745.78 ns/iter (+/- 4.14)
+run3 corebenches|test str::debug::mostly_unicode ... bench:       1,744.81 ns/iter (+/- 11.09)
+run1 corebenches|test str::debug::mixed ... bench:       1,469.32 ns/iter (+/- 4.28)
+run2 corebenches|test str::debug::mixed ... bench:       1,467.04 ns/iter (+/- 3.50)
+run3 corebenches|test str::debug::mixed ... bench:       1,467.62 ns/iter (+/- 5.49)
+run1 corebenches|test str::debug::some_unicode ... bench:         273.58 ns/iter (+/- 2.61)
+run2 corebenches|test str::debug::some_unicode ... bench:         272.02 ns/iter (+/- 2.04)
+run3 corebenches|test str::debug::some_unicode ... bench:         272.47 ns/iter (+/- 2.26)
+run1 corebenches|test str::debug::ascii_only ... bench:         159.06 ns/iter (+/- 1.88)
+run2 corebenches|test str::debug::ascii_only ... bench:         159.57 ns/iter (+/- 0.97)
+run3 corebenches|test str::debug::ascii_only ... bench:         160.05 ns/iter (+/- 1.79)
+run1 corebenches|test str::debug::ascii_escapes ... bench:         260.77 ns/iter (+/- 3.34)
+run2 corebenches|test str::debug::ascii_escapes ... bench:         261.47 ns/iter (+/- 3.01)
+run3 corebenches|test str::debug::ascii_escapes ... bench:         260.81 ns/iter (+/- 3.64)
+run1 corebenches|test fmt::write_str_macro_debug ... bench:      82,123.00 ns/iter (+/- 286.20)
+run2 corebenches|test fmt::write_str_macro_debug ... bench:      81,505.45 ns/iter (+/- 298.36)
+run3 corebenches|test fmt::write_str_macro_debug ... bench:      82,012.91 ns/iter (+/- 349.22)
+run1 corebenches|test fmt::write_vec_macro_debug ... bench:      85,656.10 ns/iter (+/- 253.98)
+run2 corebenches|test fmt::write_vec_macro_debug ... bench:      85,772.30 ns/iter (+/- 287.11)
+run3 corebenches|test fmt::write_vec_macro_debug ... bench:      86,155.40 ns/iter (+/- 306.93)
+## harness x86 core12(flock)
+run1 corebenches|test str::debug::mostly_unicode ... bench:         743.50 ns/iter (+/- 45.98)
+run2 corebenches|test str::debug::mostly_unicode ... bench:         746.81 ns/iter (+/- 20.17)
+run3 corebenches|test str::debug::mostly_unicode ... bench:         747.87 ns/iter (+/- 32.43)
+run1 corebenches|test str::debug::mixed ... bench:         586.93 ns/iter (+/- 30.55)
+run2 corebenches|test str::debug::mixed ... bench:         581.73 ns/iter (+/- 36.53)
+run3 corebenches|test str::debug::mixed ... bench:         582.60 ns/iter (+/- 26.77)
+run1 corebenches|test str::debug::some_unicode ... bench:         134.60 ns/iter (+/- 11.53)
+run2 corebenches|test str::debug::some_unicode ... bench:         131.61 ns/iter (+/- 12.76)
+run3 corebenches|test str::debug::some_unicode ... bench:         131.54 ns/iter (+/- 6.59)
+run1 corebenches|test str::debug::ascii_only ... bench:         106.80 ns/iter (+/- 5.41)
+run2 corebenches|test str::debug::ascii_only ... bench:         106.50 ns/iter (+/- 6.32)
+run3 corebenches|test str::debug::ascii_only ... bench:         107.18 ns/iter (+/- 6.75)
+run1 corebenches|test str::debug::ascii_escapes ... bench:         168.50 ns/iter (+/- 7.40)
+run2 corebenches|test str::debug::ascii_escapes ... bench:         167.27 ns/iter (+/- 8.37)
+run3 corebenches|test str::debug::ascii_escapes ... bench:         168.01 ns/iter (+/- 9.39)
+run1 corebenches|test fmt::write_str_macro_debug ... bench:      33,106.00 ns/iter (+/- 1,690.43)
+run2 corebenches|test fmt::write_str_macro_debug ... bench:      33,449.78 ns/iter (+/- 1,601.50)
+run3 corebenches|test fmt::write_str_macro_debug ... bench:      32,995.78 ns/iter (+/- 1,475.37)
+run1 corebenches|test fmt::write_vec_macro_debug ... bench:      35,798.20 ns/iter (+/- 1,757.57)
+run2 corebenches|test fmt::write_vec_macro_debug ... bench:      36,005.13 ns/iter (+/- 1,468.10)
+run3 corebenches|test fmt::write_vec_macro_debug ... bench:      35,171.09 ns/iter (+/- 1,487.19)
+## perf aarch64 core56
+=== c60 str::debug::mostly_unicode
+    35.41%  libstd-582c472e6e6781a0.so    [.] _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data13cn_planes_0_311lookup_slow
+    33.16%  libstd-582c472e6e6781a0.so    [.] _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data15grapheme_extend11lookup_slow
+    13.85%  libstd-582c472e6e6781a0.so    [.] _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data2cf11lookup_slow
+     2.95%  libstd-582c472e6e6781a0.so    [.] _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data28default_ignorable_code_point11lookup_slow
+     2.82%  libstd-582c472e6e6781a0.so    [.] _RNvMNtNtCs5eKY5gNNvwM_4core4char7methodsc16escape_debug_ext
+     2.56%  libstd-582c472e6e6781a0.so    [.] _RINvNvMs5_NtCshDmNPlWY1OA_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalEBa_
+--- annotate top: _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data13cn_planes_0_311lookup_slow
+   28.22 :   dbf08:  add     x8, x8, #0x1
+   19.91 :   dbeb0:  ldr     w9, [x10, #4]
+   14.87 :   dbe84:  ldr     w9, [x10, x8, lsl #2]
+   13.79 :   dbe94:  cinc    x9, x9, cc      // cc = lo, ul, last
+   13.26 :   dbe70:  add     x9, x8, #0x1
+    3.27 :   dbee4:  mov     w10, wzr
+    3.05 :   dbe5c:  add     x9, x8, #0x2
+    1.70 :   dbe34:  add     x9, x8, #0x7
+    0.87 :   dbee0:  b.eq    dbf14 <core::unicode::unicode_data::cn_planes_0_3::lookup_slow+0x110>  // b.none
+    0.75 :   dbed0:  ldur    w10, [x10, #-4]
+    0.10 :   dbe48:  add     x9, x8, #0x4
+    0.10 :   dbe24:  ldr     w11, [x10, x9, lsl #2]
+    0.06 :   dbef8:  ldrb    w13, [x12, x8]
+    0.06 :   dbe60:  ldr     w11, [x10, x9, lsl #2]
+## perf x86 core12(flock,-e cpu_core/cycles/u)
+=== c60 str::debug::mostly_unicode
+    35.40%  libstd-3f1ea972a24311e5.so    [.] core::unicode::unicode_data::grapheme_extend::lookup_slow
+    22.63%  libstd-3f1ea972a24311e5.so    [.] core::unicode::unicode_data::cn_planes_0_3::lookup_slow
+     9.78%  libstd-3f1ea972a24311e5.so    [.] <char>::escape_debug_ext
+     7.04%  libstd-3f1ea972a24311e5.so    [.] core::unicode::unicode_data::default_ignorable_code_point::lookup_slow
+     6.98%  libstd-3f1ea972a24311e5.so    [.] core::unicode::unicode_data::cf::lookup_slow
+     5.89%  libstd-3f1ea972a24311e5.so    [.] <str as core::fmt::Debug>::fmt
+--- annotate top: core::unicode::unicode_data::grapheme_extend::lookup_slow
+   13.14 :   11db03: shl    $0xb,%esi
+   10.22 :   11daf5: and    %ecx,%r8d
+    9.18 :   11db16: shr    $0x15,%eax
+    7.74 :   11dae2: and    %ecx,%r9d
+    6.57 :   11db57: add    %r8d,%edx
+    4.38 :   11db19: mov    $0x30b,%esi
+    4.38 :   11dacf: and    %ecx,%r9d
+    3.02 :   11db12: mov    (%rdx,%r8,4),%eax
+    3.02 :   11da9f: mov    $0x1fffff,%ecx
+    2.88 :   11dafb: cmovb  %rsi,%r9
+    2.88 :   11daec: lea    0x1(%rsi),%r9
+    2.73 :   11db0f: adc    %r9,%r8
+    2.46 :   11da80: xor    %esi,%esi
+    2.20 :   11daff: mov    (%rdx,%r9,4),%esi
+## lk 探針 aarch64(/tmp/xdiff/work/c60/lk,mostly 的 30 個非 ASCII 字元)
+# ./lk ge mostly 1000000 run1
+926755984,,cycles,319582050,100.00,,
+2203175684,,instructions,319582050,100.00,2.38,insn per cycle
+# ./lk ge mostly 1000000 run2
+926550660,,cycles,319509760,100.00,,
+2203127164,,instructions,319509760,100.00,2.38,insn per cycle
+# ./lk ge mostly 1000000 run3
+925795372,,cycles,319249420,100.00,,
+2203127860,,instructions,319249420,100.00,2.38,insn per cycle
+# ./lk gedep mostly 1000000 run1
+2159859058,,cycles,744788780,100.00,,
+2414687068,,instructions,744788780,100.00,1.12,insn per cycle
+# ./lk gedep mostly 1000000 run2
+2160489798,,cycles,745006270,100.00,,
+2414815812,,instructions,745006270,100.00,1.12,insn per cycle
+# ./lk gedep mostly 1000000 run3
+2159552530,,cycles,744682680,100.00,,
+2414641284,,instructions,744682680,100.00,1.12,insn per cycle
+# ./lk cn mostly 1000000 run1
+1624557454,,cycles,560200900,100.00,,
+3883378114,,instructions,560200900,100.00,2.39,insn per cycle
+# ./lk cn mostly 1000000 run2
+1624153688,,cycles,560060300,100.00,,
+3883408983,,instructions,560060300,100.00,2.39,insn per cycle
+# ./lk cn mostly 1000000 run3
+1624184246,,cycles,560073110,100.00,,
+3883387148,,instructions,560073110,100.00,2.39,insn per cycle
+# ./lk cndep mostly 1000000 run1
+2567616850,,cycles,885395700,100.00,,
+4094900362,,instructions,885395700,100.00,1.59,insn per cycle
+# ./lk cndep mostly 1000000 run2
+2566716846,,cycles,885085140,100.00,,
+4094887211,,instructions,885085140,100.00,1.60,insn per cycle
+# ./lk cndep mostly 1000000 run3
+2566692034,,cycles,885077150,100.00,,
+4094847120,,instructions,885077150,100.00,1.60,insn per cycle
+# ./lk cf mostly 1000000 run1
+726649987,,cycles,250581700,100.00,,
+2053018277,,instructions,250581700,100.00,2.83,insn per cycle
+# ./lk cf mostly 1000000 run2
+726512636,,cycles,250527460,100.00,,
+2053015946,,instructions,250527460,100.00,2.83,insn per cycle
+# ./lk cf mostly 1000000 run3
+727385354,,cycles,250829300,100.00,,
+2053051569,,instructions,250829300,100.00,2.82,insn per cycle
+# ./lk di mostly 1000000 run1
+672625512,,cycles,231948090,100.00,,
+1872996423,,instructions,231948090,100.00,2.78,insn per cycle
+# ./lk di mostly 1000000 run2
+673003128,,cycles,232077440,100.00,,
+1872984458,,instructions,232077440,100.00,2.78,insn per cycle
+# ./lk di mostly 1000000 run3
+673034918,,cycles,232089450,100.00,,
+1872996914,,instructions,232089450,100.00,2.78,insn per cycle
+# ./lk esc mostly 1000000 run1
+4152570012,,cycles,1431934310,100.00,,
+10874611449,,instructions,1431934310,100.00,2.62,insn per cycle
+# ./lk esc mostly 1000000 run2
+4145252368,,cycles,1429412870,100.00,,
+10874736491,,instructions,1429412870,100.00,2.62,insn per cycle
+# ./lk esc mostly 1000000 run3
+4146113456,,cycles,1429706560,100.00,,
+10874625273,,instructions,1429706560,100.00,2.62,insn per cycle
+## lk 探針 x86
+# ./lk ge mostly 1000000 run1
+566383635,,cpu_core/cycles/u,125304319,100.00,,
+2326698162,,cpu_core/instructions/u,125304319,100.00,,
+# ./lk ge mostly 1000000 run2
+566550935,,cpu_core/cycles/u,123599543,100.00,,
+2326698374,,cpu_core/instructions/u,123599543,100.00,,
+# ./lk ge mostly 1000000 run3
+567203221,,cpu_core/cycles/u,123446971,100.00,,
+2326697973,,cpu_core/instructions/u,123446971,100.00,,
+# ./lk gedep mostly 1000000 run1
+1897550949,,cpu_core/cycles/u,421255920,99.00,,
+2509349690,,cpu_core/instructions/u,421255920,99.00,,
+# ./lk gedep mostly 1000000 run2
+1897812342,,cpu_core/cycles/u,414663147,99.00,,
+2509826212,,cpu_core/instructions/u,414663147,99.00,,
+# ./lk gedep mostly 1000000 run3
+1895668176,,cpu_core/cycles/u,409735024,100.00,,
+2506698644,,cpu_core/instructions/u,409735024,100.00,,
+# ./lk cn mostly 1000000 run1
+1253110759,,cpu_core/cycles/u,273452589,99.00,,
+4284055295,,cpu_core/instructions/u,273452589,99.00,,
+# ./lk cn mostly 1000000 run2
+1248129181,,cpu_core/cycles/u,267366231,100.00,,
+4276698882,,cpu_core/instructions/u,267366231,100.00,,
+# ./lk cn mostly 1000000 run3
+1248252197,,cpu_core/cycles/u,265790200,100.00,,
+4276699178,,cpu_core/instructions/u,265790200,100.00,,
+# ./lk cndep mostly 1000000 run1
+2058453822,,cpu_core/cycles/u,436245342,100.00,,
+4456699251,,cpu_core/instructions/u,436245342,100.00,,
+# ./lk cndep mostly 1000000 run2
+2060550563,,cpu_core/cycles/u,443028576,99.00,,
+4461490322,,cpu_core/instructions/u,443028576,99.00,,
+# ./lk cndep mostly 1000000 run3
+2059523289,,cpu_core/cycles/u,438420987,100.00,,
+4456698818,,cpu_core/instructions/u,438420987,100.00,,
+# ./lk cf mostly 1000000 run1
+486827280,,cpu_core/cycles/u,104537936,100.00,,
+2296698084,,cpu_core/instructions/u,104537936,100.00,,
+# ./lk cf mostly 1000000 run2
+487465890,,cpu_core/cycles/u,105229585,100.00,,
+2296698214,,cpu_core/instructions/u,105229585,100.00,,
+# ./lk cf mostly 1000000 run3
+488547682,,cpu_core/cycles/u,105989942,99.00,,
+2300540138,,cpu_core/instructions/u,105989942,99.00,,
+# ./lk di mostly 1000000 run1
+423553593,,cpu_core/cycles/u,90989097,100.00,,
+2056698179,,cpu_core/instructions/u,90989097,100.00,,
+# ./lk di mostly 1000000 run2
+425442141,,cpu_core/cycles/u,89578255,99.00,,
+2068261487,,cpu_core/instructions/u,89578255,99.00,,
+# ./lk di mostly 1000000 run3
+423565187,,cpu_core/cycles/u,91367236,100.00,,
+2056698386,,cpu_core/instructions/u,91367236,100.00,,
+# ./lk esc mostly 1000000 run1
+2802665445,,cpu_core/cycles/u,598527811,100.00,,
+12049698586,,cpu_core/instructions/u,598527811,100.00,,
+# ./lk esc mostly 1000000 run2
+2802880393,,cpu_core/cycles/u,605780582,100.00,,
+12049698574,,cpu_core/instructions/u,605780582,100.00,,
+# ./lk esc mostly 1000000 run3
+2801997374,,cpu_core/cycles/u,596892685,100.00,,
+12049699313,,cpu_core/instructions/u,596892685,100.00,,
+## 腳本彙總
+# 腳本計算:lk 探針三次最小 cycles / (1e6 輪 × 30 字元)
+a64 ge cycles/char 30.9 ins/char 73
+a64 gedep cycles/char 72.0 ins/char 80
+a64 cn cycles/char 54.1 ins/char 129
+a64 cndep cycles/char 85.6 ins/char 136
+a64 cf cycles/char 24.2 ins/char 68
+a64 di cycles/char 22.4 ins/char 62
+a64 esc cycles/char 138.2 ins/char 362
+a64 ge serial/indep 2.33 cn serial/indep 1.58
+x86 ge cycles/char 18.9 ins/char 78
+x86 gedep cycles/char 63.2 ins/char 84
+x86 cn cycles/char 41.6 ins/char 143
+x86 cndep cycles/char 68.6 ins/char 149
+x86 cf cycles/char 16.2 ins/char 77
+x86 di cycles/char 14.1 ins/char 69
+x86 esc cycles/char 93.4 ins/char 402
+x86 ge serial/indep 3.35 cn serial/indep 1.65
+a64 perf 四表合計 85.37% x86 perf 四表合計 72.05%
+lk ge IPC a64 2.36 x86 4.13 ge indep a64/x86 1.63 serial 1.14; cn indep 1.30 serial 1.25
+## 07e526db9df 源碼摘錄:char/methods.rs escape_debug_ext 與各謂詞
+    pub(crate) fn escape_debug_ext(self, args: EscapeDebugExtArgs) -> EscapeDebug {
+        match self {
+            // Special escapes
+            '\"' if args.escape_double_quote => EscapeDebug::backslash(ascii::Char::QuotationMark),
+            '\'' if args.escape_single_quote => EscapeDebug::backslash(ascii::Char::Apostrophe),
+            '\\' => EscapeDebug::backslash(ascii::Char::ReverseSolidus),
+            '\n' => EscapeDebug::backslash(ascii::Char::SmallN),
+            '\t' => EscapeDebug::backslash(ascii::Char::SmallT),
+            '\r' => EscapeDebug::backslash(ascii::Char::SmallR),
+            '\0' => EscapeDebug::backslash(ascii::Char::Digit0),
+
+            // ASCII fast path,
+            // plus U+FF9E HALFWIDTH KATAKANA VOICED SOUND MARK
+            // and U+FF9F HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
+            // which should not be escaped despite being grapheme extenders.
+            '\x20'..='\x7E' | '\u{FF9E}' | '\u{FF9F}' => EscapeDebug::printable(self),
+
+            _ if self.is_control()
+                || self.is_private_use()
+                || self.is_whitespace()
+                || self.is_grapheme_extender()
+                || self.is_default_ignorable()
+                || self.is_format_control()
+                || !self.is_assigned() =>
+            {
+                EscapeDebug::unicode(self)
+            }
+
+            _ => EscapeDebug::printable(self),
+        }
+    }
+1088:    pub const fn is_whitespace(self) -> bool {
+1089-        match self {
+1090-            ' ' | '\x09'..='\x0d' => true,
+1091-            '\0'..='\u{84}' => false,
+--
+1180:    fn is_format_control(self) -> bool {
+1181-        self > '\u{AC}' && unicode::Cf(self)
+1182-    }
+1183-
+--
+1222:    pub fn is_assigned(self) -> bool {
+1223-        match self {
+1224-            '\0'..='\u{377}' => true,
+1225-            '\u{378}'..='\u{3FFFD}' => !unicode::Cn_planes_0_3(self),
+--
+1267:    pub fn is_default_ignorable(self) -> bool {
+1268-        self > '\u{AC}' && unicode::Default_Ignorable_Code_Point(self)
+1269-    }
+1270-
+--
+1281:    fn is_grapheme_extender(self) -> bool {
+1282-        self > '\u{02FF}' && unicode::Grapheme_Extend(self)
+1283-    }
+1284-
+## 07e526db9df 源碼摘錄:fmt/mod.rs Debug for str 的 escape_debug_ext 呼叫
+2942-            if let Some(c) = chars.next() {
+2943:                let esc = c.escape_debug_ext(EscapeDebugExtArgs {
+2944-                    escape_single_quote: false,
+2945-                    escape_double_quote: true,
+2946-                });
+--
+2973-        f.write_char('\'')?;
+2974:        let esc = self.escape_debug_ext(EscapeDebugExtArgs {
+2975-            escape_single_quote: true,
+2976-            escape_double_quote: false,
+2977-        });
+## unicode_data.rs 稀疏表大小與 lookup 門檻(兩 commit)
+88f7399cb49 unicode_data.rs cf SHORT_OFFSET_RUNS=11 OFFSETS=43
+88f7399cb49 unicode_data.rs cn_planes_0_3 SHORT_OFFSET_RUNS=54 OFFSETS=1461
+88f7399cb49 unicode_data.rs default_ignorable_code_point SHORT_OFFSET_RUNS=12 OFFSETS=35
+88f7399cb49 unicode_data.rs grapheme_extend SHORT_OFFSET_RUNS=33 OFFSETS=767
+07e526db9df unicode_data.rs cf SHORT_OFFSET_RUNS=11 OFFSETS=43
+07e526db9df unicode_data.rs cn_planes_0_3 SHORT_OFFSET_RUNS=60 OFFSETS=1461
+07e526db9df unicode_data.rs default_ignorable_code_point SHORT_OFFSET_RUNS=12 OFFSETS=35
+07e526db9df unicode_data.rs grapheme_extend SHORT_OFFSET_RUNS=33 OFFSETS=779
+245:        (c as u32) >= 0xaa && lookup_slow(c)
+327:        (c as u32) >= 0xa8 && lookup_slow(c)
+365:        (c as u32) >= 0xad && lookup_slow(c)
+479:        (c as u32) >= 0x378 && lookup_slow(c)
+517:        (c as u32) >= 0xad && lookup_slow(c)
+592:        (c as u32) >= 0x300 && lookup_slow(c)
+714:        (c as u32) >= 0xaa &&
+739:        (c as u32) >= 0x1c5 && lookup_slow(c)
+804:        (c as u32) >= 0xb2 && lookup_slow(c)
+909:        (c as u32) >= 0xc0 &&
+## bench 輸入
+fn mostly_unicode(b: &mut Bencher) {
+    let s = "предложение из кириллических букв.";
+    assert_fmt(s, r#""предложение из кириллических букв.""#, 3);

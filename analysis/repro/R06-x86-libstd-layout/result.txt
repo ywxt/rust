@@ -1,0 +1,75 @@
+### x86_64 本機 i7-12700(CORE=4)
+== 2026-11-03T16:09:18+08:00 x86_64
+gcc (GCC) 15.3.0
+== repro.c(gcc -O2,N=1000000 次呼叫 × 139 B,每字節)
+static PAD=0    cycles/單位=1.758  instructions/單位=10.865
+shared PAD=0    cycles/單位=1.840  instructions/單位=10.872
+static PAD=4    cycles/單位=1.765  instructions/單位=10.865
+shared PAD=4    cycles/單位=1.774  instructions/單位=10.872
+static PAD=8    cycles/單位=1.787  instructions/單位=10.865
+shared PAD=8    cycles/單位=1.845  instructions/單位=10.872
+static PAD=12   cycles/單位=1.834  instructions/單位=10.865
+shared PAD=12   cycles/單位=1.806  instructions/單位=10.872
+static PAD=16   cycles/單位=2.604  instructions/單位=10.865
+shared PAD=16   cycles/單位=2.701  instructions/單位=10.872
+static PAD=20   cycles/單位=2.787  instructions/單位=10.865
+shared PAD=20   cycles/單位=2.790  instructions/單位=10.872
+static PAD=24   cycles/單位=2.875  instructions/單位=10.865
+shared PAD=24   cycles/單位=2.878  instructions/單位=10.872
+static PAD=28   cycles/單位=2.806  instructions/單位=10.865
+shared PAD=28   cycles/單位=2.808  instructions/單位=10.872
+static PAD=32   cycles/單位=2.592  instructions/單位=10.865
+shared PAD=32   cycles/單位=2.620  instructions/單位=10.872
+static PAD=36   cycles/單位=2.660  instructions/單位=10.865
+shared PAD=36   cycles/單位=2.793  instructions/單位=10.872
+static PAD=40   cycles/單位=2.860  instructions/單位=10.865
+shared PAD=40   cycles/單位=2.888  instructions/單位=10.872
+static PAD=44   cycles/單位=2.486  instructions/單位=10.865
+shared PAD=44   cycles/單位=2.611  instructions/單位=10.872
+static PAD=48   cycles/單位=1.777  instructions/單位=10.865
+shared PAD=48   cycles/單位=1.870  instructions/單位=10.872
+static PAD=52   cycles/單位=1.758  instructions/單位=10.865
+shared PAD=52   cycles/單位=1.777  instructions/單位=10.872
+static PAD=56   cycles/單位=1.780  instructions/單位=10.865
+shared PAD=56   cycles/單位=1.845  instructions/單位=10.872
+static PAD=60   cycles/單位=1.768  instructions/單位=10.865
+shared PAD=60   cycles/單位=1.800  instructions/單位=10.872
+
+### aarch64 univpn-work-1(CORE=44)
+
+
+== 2026-11-03T15:47:40+08:00 aarch64
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+== repro.c(gcc -O2,N=1000000 次呼叫 × 139 B,每字節)
+static PAD=0    cycles/單位=2.304  instructions/單位=10.869
+shared PAD=0    cycles/單位=2.240  instructions/單位=10.898
+static PAD=4    cycles/單位=2.712  instructions/單位=10.869
+shared PAD=4    cycles/單位=2.735  instructions/單位=10.898
+static PAD=8    cycles/單位=2.253  instructions/單位=10.869
+shared PAD=8    cycles/單位=2.304  instructions/單位=10.898
+static PAD=12   cycles/單位=2.300  instructions/單位=10.868
+shared PAD=12   cycles/單位=2.303  instructions/單位=10.898
+static PAD=16   cycles/單位=2.253  instructions/單位=10.869
+shared PAD=16   cycles/單位=2.281  instructions/單位=10.898
+static PAD=20   cycles/單位=2.280  instructions/單位=10.869
+shared PAD=20   cycles/單位=2.288  instructions/單位=10.898
+static PAD=24   cycles/單位=2.283  instructions/單位=10.869
+shared PAD=24   cycles/單位=2.310  instructions/單位=10.898
+static PAD=28   cycles/單位=2.297  instructions/單位=10.868
+shared PAD=28   cycles/單位=2.241  instructions/單位=10.898
+static PAD=32   cycles/單位=2.298  instructions/單位=10.869
+shared PAD=32   cycles/單位=2.239  instructions/單位=10.898
+static PAD=36   cycles/單位=2.712  instructions/單位=10.869
+shared PAD=36   cycles/單位=2.734  instructions/單位=10.898
+static PAD=40   cycles/單位=2.300  instructions/單位=10.869
+shared PAD=40   cycles/單位=2.303  instructions/單位=10.898
+static PAD=44   cycles/單位=2.270  instructions/單位=10.869
+shared PAD=44   cycles/單位=2.303  instructions/單位=10.898
+static PAD=48   cycles/單位=2.252  instructions/單位=10.869
+shared PAD=48   cycles/單位=2.303  instructions/單位=10.898
+static PAD=52   cycles/單位=2.299  instructions/單位=10.869
+shared PAD=52   cycles/單位=2.304  instructions/單位=10.898
+static PAD=56   cycles/單位=2.252  instructions/單位=10.869
+shared PAD=56   cycles/單位=2.301  instructions/單位=10.898
+static PAD=60   cycles/單位=2.297  instructions/單位=10.869
+shared PAD=60   cycles/單位=2.239  instructions/單位=10.898

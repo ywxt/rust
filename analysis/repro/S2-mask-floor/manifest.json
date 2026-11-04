@@ -1,0 +1,17 @@
+{
+ "id": "S2",
+ "slug": "mask-floor",
+ "kind": "c",
+ "tags": [
+  "S2"
+ ],
+ "chapters": [
+  "c72",
+  "c55",
+  "c71",
+  "c13"
+ ],
+ "status": "partial",
+ "summary": "同寬 16 B memchr 形 find 的密集命中鏈:aarch64(cmeq→shrn→fmov→ctz)27.0 vs x86(pcmpeqb→pmovmskb→tzcnt)16.6 cycles/呼叫(1.63×),地板差成立。",
+ "doc_mismatch": "長串無命中本復現 aarch64 218.1 vs x86 277.2 cycles(0.78×,aarch64 較快),不是文檔的 1.12×:本復現為不展開的單 16 B 迴圈,x86 每 16 B 1.74 cycles 且每呼叫 1 次退出誤預測;文檔數字來自 crate 的 64 B 展開迴圈,兩者不可直接比。密集鏈 1.63× 略高於文檔 1.50×。"
+}

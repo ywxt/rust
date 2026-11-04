@@ -1,0 +1,21 @@
+=== x86_64 (i7-12700, local)
+date: 2026-11-03T15:32:16+08:00  host: x86_64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+RUN 1 PASS
+RUN 2 PASS
+RUN 3 PASS
+inline           cycles=1401085869  cyc/unit=14.011
+libc             cycles=1601263875  cyc/unit=16.013
++avx:inline      cycles=733565048  cyc/unit=7.336
+
+=== aarch64 (univpn-work-1)
+
+date: 2026-11-03T15:10:29+08:00  host: aarch64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+RUN 1 PASS
+RUN 2 PASS
+RUN 3 PASS
+inline           cycles=1716561466  cyc/unit=17.166
+libc             cycles=2021739248  cyc/unit=20.217

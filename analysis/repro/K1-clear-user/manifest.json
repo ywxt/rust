@@ -1,0 +1,14 @@
+{
+ "id": "K1",
+ "slug": "clear-user",
+ "kind": "shell",
+ "tags": [
+  "K1"
+ ],
+ "chapters": [
+  "c29"
+ ],
+ "status": "reproduced",
+ "summary": "dd bs=256K 讀 /dev/zero:含核心的全部 cycles 下 aarch64 7.30 vs x86 14.65 B/cycle(只計核心 7.33 vs 14.90),核心指令/8 B 4.17 vs 0.086,對應 aarch64 逐 8 B 迴圈與 x86 rep stos(後者為推測)。",
+ "doc_mismatch": ""
+}

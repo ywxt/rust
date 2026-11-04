@@ -1,0 +1,120 @@
+# c20:07e526db9df 上重新量測的原始輸出(腳本 /tmp/xdiff/work/up56/{run.sh,perf.sh,tools/mk.py} 彙整,未經手改)
+## bench 原始輸出(aarch64 core56,07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 corebenches|test ascii::long::is_ascii ... bench:         292.24 ns/iter (+/- 0.68) = 23938 MB/s
+run2 corebenches|test ascii::long::is_ascii ... bench:         292.31 ns/iter (+/- 0.95) = 23938 MB/s
+run3 corebenches|test ascii::long::is_ascii ... bench:         292.14 ns/iter (+/- 0.57) = 23938 MB/s
+run1 corebenches|test ascii::long::case00_alloc_only ... bench:         168.50 ns/iter (+/- 0.49) = 41607 MB/s
+run2 corebenches|test ascii::long::case00_alloc_only ... bench:         168.26 ns/iter (+/- 0.42) = 41607 MB/s
+run3 corebenches|test ascii::long::case00_alloc_only ... bench:         168.70 ns/iter (+/- 0.38) = 41607 MB/s
+run1 corebenches|test ascii::long::is_ascii_whitespace ... bench:         169.16 ns/iter (+/- 0.42) = 41360 MB/s
+run2 corebenches|test ascii::long::is_ascii_whitespace ... bench:         168.67 ns/iter (+/- 0.50) = 41607 MB/s
+run3 corebenches|test ascii::long::is_ascii_whitespace ... bench:         169.07 ns/iter (+/- 0.34) = 41360 MB/s
+## 3 次最小值(aarch64 core56;腳本計算)
+min ascii::long::is_ascii 292.14 ns/iter
+min ascii::long::case00_alloc_only 168.26 ns/iter
+min ascii::long::is_ascii_whitespace 168.67 ns/iter
+## bench 原始輸出(x86 core12 (flock),07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 corebenches|test ascii::long::is_ascii ... bench:         144.31 ns/iter (+/- 8.65) = 48541 MB/s
+run2 corebenches|test ascii::long::is_ascii ... bench:         141.10 ns/iter (+/- 5.50) = 49574 MB/s
+run3 corebenches|test ascii::long::is_ascii ... bench:         141.25 ns/iter (+/- 8.39) = 49574 MB/s
+run1 corebenches|test ascii::long::case00_alloc_only ... bench:          55.37 ns/iter (+/- 2.47) = 127090 MB/s
+run2 corebenches|test ascii::long::case00_alloc_only ... bench:          55.43 ns/iter (+/- 1.67) = 127090 MB/s
+run3 corebenches|test ascii::long::case00_alloc_only ... bench:          54.46 ns/iter (+/- 1.72) = 129444 MB/s
+run1 corebenches|test ascii::long::is_ascii_whitespace ... bench:          55.35 ns/iter (+/- 1.52) = 127090 MB/s
+run2 corebenches|test ascii::long::is_ascii_whitespace ... bench:          55.52 ns/iter (+/- 3.88) = 127090 MB/s
+run3 corebenches|test ascii::long::is_ascii_whitespace ... bench:          50.79 ns/iter (+/- 3.24) = 139800 MB/s
+## 3 次最小值(x86 core12 (flock);腳本計算)
+min ascii::long::is_ascii 141.1 ns/iter
+min ascii::long::case00_alloc_only 54.46 ns/iter
+min ascii::long::is_ascii_whitespace 50.79 ns/iter
+## perf record/report/annotate(aarch64 core56)=== c36a ascii::long::is_ascii
+    48.52%  libc.so.6                     [.] __memcpy_generic
+    42.95%  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtNtCslrxolIbw58w_11corebenches5ascii4long8is_ascii0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceBa_
+     2.37%  libc.so.6                     [.] _int_malloc
+     1.56%  libc.so.6                     [.] _int_free_maybe_consolidate.part.0
+     1.10%  libc.so.6                     [.] _int_free
+     1.01%  libc.so.6                     [.] _int_free_merge_chunk
+--- annotate top: __memcpy_generic
+   35.40 :   99c08:  stp     x12, x13, [x3, #64]!
+   20.00 :   99bf8:  stp     x8, x9, [x3, #32]
+   13.36 :   99c00:  stp     x10, x11, [x3, #48]
+   12.93 :   99bf0:  stp     x6, x7, [x3, #16]
+    6.62 :   99c0c:  ldp     x12, x13, [x1, #64]!
+    3.27 :   99bfc:  ldp     x8, x9, [x1, #32]
+    2.41 :   99c04:  ldp     x10, x11, [x1, #48]
+    2.29 :   99bf4:  ldp     x6, x7, [x1, #16]
+    1.68 :   99bd8:  stp     x12, x13, [x0]
+    0.52 :   99ac0:  nop
+    0.26 :   99be4:  ldp     x12, x13, [x1, #64]!
+    0.22 :   99c40:  stp     x8, x9, [x5, #-32]
+    0.19 :   99c30:  ldp     x10, x11, [x4, #-16]
+    0.19 :   99c20:  ldp     x6, x7, [x4, #-48]
+## perf record/report/annotate(x86 core12 (flock, -e cpu_core/cycles/u))=== c36a ascii::long::is_ascii
+    57.52%  corebenches-d6382d1542e5d229  [.] <corebenches::ascii::long::is_ascii::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+    30.58%  libc.so.6                     [.] __memmove_avx_unaligned_erms
+     4.38%  libc.so.6                     [.] _int_malloc
+     1.39%  libc.so.6                     [.] _int_free_chunk
+     1.37%  libc.so.6                     [.] _int_free_maybe_consolidate.part.0
+     1.00%  libc.so.6                     [.] cfree@GLIBC_2.2.5
+--- annotate top: <corebenches::ascii::long::is_ascii::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+   39.94 :   2673b8: cmp    $0x1b4d,%rcx
+   30.21 :   2673b0: movzbl (%rbx,%rcx,1),%eax
+    7.93 :   267178: cmp    $0x1b4d,%rcx
+    6.06 :   267170: movzbl (%rbx,%rcx,1),%eax
+    2.30 :   2673b4: test   %al,%al
+    2.24 :   2673c3: jne    2673b0 <<corebenches::ascii::long::is_ascii::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x400>
+    2.19 :   2673bf: lea    0x1(%rcx),%rcx
+    1.90 :   2673c5: not    %al
+    1.18 :   2673e5: test   %rsi,%rsi
+    1.16 :   2673c7: shr    $0x7,%al
+    0.69 :   2673cd: movq   $0x1b4e,-0x50(%rbp)
+    0.51 :   267183: jne    267170 <<corebenches::ascii::long::is_ascii::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1c0>
+    0.48 :   267174: test   %al,%al
+    0.38 :   2673ca: mov    %al,-0x50(%rbp)
+## perf record/report/annotate(aarch64 core56)=== c20 ascii::long::is_ascii_whitespace
+    82.57%  libc.so.6                     [.] __memcpy_generic
+     4.58%  libc.so.6                     [.] _int_free_maybe_consolidate.part.0
+     3.79%  libc.so.6                     [.] _int_malloc
+     1.94%  libc.so.6                     [.] cfree@GLIBC_2.17
+     1.88%  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtNtCslrxolIbw58w_11corebenches5ascii4long19is_ascii_whitespace0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceBa_
+     1.47%  libc.so.6                     [.] malloc
+--- annotate top: __memcpy_generic
+   38.36 :   99c08:  stp     x12, x13, [x3, #64]!
+   20.88 :   99bf8:  stp     x8, x9, [x3, #32]
+   14.05 :   99c00:  stp     x10, x11, [x3, #48]
+   12.21 :   99bf0:  stp     x6, x7, [x3, #16]
+    5.53 :   99c0c:  ldp     x12, x13, [x1, #64]!
+    2.21 :   99bfc:  ldp     x8, x9, [x1, #32]
+    1.96 :   99c04:  ldp     x10, x11, [x1, #48]
+    1.73 :   99bf4:  ldp     x6, x7, [x1, #16]
+    0.57 :   99c30:  ldp     x10, x11, [x4, #-16]
+    0.49 :   99c40:  stp     x8, x9, [x5, #-32]
+    0.49 :   99bd8:  stp     x12, x13, [x0]
+    0.49 :   99ac0:  nop
+    0.32 :   99c3c:  stp     x6, x7, [x5, #-48]
+    0.32 :   99be0:  ldp     x10, x11, [x1, #48]
+## perf record/report/annotate(x86 core12 (flock, -e cpu_core/cycles/u))=== c20 ascii::long::is_ascii_whitespace
+    66.95%  libc.so.6                     [.] __memmove_avx_unaligned_erms
+    12.17%  libc.so.6                     [.] _int_free_merge_chunk
+     5.41%  libc.so.6                     [.] _int_malloc
+     3.93%  corebenches-d6382d1542e5d229  [.] <corebenches::ascii::long::is_ascii_whitespace::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+     2.49%  libc.so.6                     [.] _int_free_chunk
+     2.19%  libc.so.6                     [.] cfree@GLIBC_2.2.5
+--- annotate top: __memmove_avx_unaligned_erms
+   94.29 :   17f3c7: rep movsb (%rsi),(%rdi)
+    3.31 :   17f3c9: vmovdqu %ymm0,(%r8)
+    0.77 :   17f3a2: je     17f340 <__memcpy_avx_unaligned_erms+0x280>
+    0.65 :   17f0c0: endbr64
+    0.55 :   17f3c1: add    %rdi,%rsi
+    0.33 :   17f380: mov    %rdi,%rcx
+    0.11 :   17f3d7: ret
+    0.00 :   17f79d: ret
+    0.00 :   17f79a: vzeroupper
+    0.00 :   17f794: vmovdqu %ymm3,-0x20(%rdi,%rdx,1)
+    0.00 :   17f78e: vmovdqu %ymm2,-0x40(%rdi,%rdx,1)
+    0.00 :   17f788: vmovdqu %ymm1,-0x60(%rdi,%rdx,1)
+    0.00 :   17f782: vmovdqu %ymm0,-0x80(%rdi,%rdx,1)
+    0.00 :   17f77c: vmovdqu -0x20(%rsi,%rdx,1),%ymm3
+## 附加原始輸出:/tmp/xdiff/work/up56/long_07e.txt
+07e526db9df library/coretests/benches/ascii.rs: LONG = repeat!(r#"..."#) = 6990 B, first non-ASCII byte at index 366 (e2 80 93), non-ASCII bytes 30, scanned fraction 5.2%, first non-whitespace byte at index 5
+88f7399cb49 library/coretests/benches/ascii.rs: LONG = repeat!(r#"..."#) = 6990 B, first non-ASCII byte at index 366 (e2 80 93), non-ASCII bytes 30, scanned fraction 5.2%, first non-whitespace byte at index 5

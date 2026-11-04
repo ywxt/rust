@@ -1,0 +1,24 @@
+=== x86_64 (i7-12700, local)
+date: 2026-11-03T14:58:56+08:00  host: x86_64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+RUN 1 PASS
+RUN 2 PASS
+RUN 3 PASS
+bench:ascii      cycles=83369196  cyc/unit=1.018
+bench:mix        cycles=804984747  cyc/unit=1.578
+bench_tsp:ascii  cycles=83151214  cyc/unit=1.015
+bench_tsp:mix    cycles=698045762  cyc/unit=1.369
+
+=== aarch64 (univpn-work-1)
+
+date: 2026-11-03T14:37:07+08:00  host: aarch64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+RUN 1 PASS
+RUN 2 PASS
+RUN 3 PASS
+bench:ascii      cycles=165729962  cyc/unit=2.023
+bench:mix        cycles=1391805694  cyc/unit=2.729
+bench_tsp:ascii  cycles=149512292  cyc/unit=1.825
+bench_tsp:mix    cycles=1040165080  cyc/unit=2.040

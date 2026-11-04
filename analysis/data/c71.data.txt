@@ -1,0 +1,65 @@
+# c71:07e526db9df 上重新量測的原始輸出(腳本 /tmp/xdiff/work/up56/{run.sh,perf.sh,tools/mk.py} 彙整,未經手改)
+## bench 原始輸出(aarch64 core56,07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 allocbenches|test str::find_zzz_char::long_lorem_ipsum ... bench:         231.22 ns/iter (+/- 2.89)
+run2 allocbenches|test str::find_zzz_char::long_lorem_ipsum ... bench:         231.29 ns/iter (+/- 4.34)
+run3 allocbenches|test str::find_zzz_char::long_lorem_ipsum ... bench:         231.59 ns/iter (+/- 3.91)
+run1 allocbenches|test str::rfind_zzz_char::long_lorem_ipsum ... bench:         244.29 ns/iter (+/- 0.84)
+run2 allocbenches|test str::rfind_zzz_char::long_lorem_ipsum ... bench:         244.22 ns/iter (+/- 0.70)
+run3 allocbenches|test str::rfind_zzz_char::long_lorem_ipsum ... bench:         244.15 ns/iter (+/- 0.53)
+## 3 次最小值(aarch64 core56;腳本計算)
+min str::find_zzz_char::long_lorem_ipsum 231.22 ns/iter
+min str::rfind_zzz_char::long_lorem_ipsum 244.15 ns/iter
+## bench 原始輸出(x86 core12 (flock),07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 allocbenches|test str::find_zzz_char::long_lorem_ipsum ... bench:          98.28 ns/iter (+/- 6.23)
+run2 allocbenches|test str::find_zzz_char::long_lorem_ipsum ... bench:         102.56 ns/iter (+/- 13.92)
+run3 allocbenches|test str::find_zzz_char::long_lorem_ipsum ... bench:          99.28 ns/iter (+/- 5.15)
+run1 allocbenches|test str::rfind_zzz_char::long_lorem_ipsum ... bench:         105.83 ns/iter (+/- 5.47)
+run2 allocbenches|test str::rfind_zzz_char::long_lorem_ipsum ... bench:         106.26 ns/iter (+/- 5.14)
+run3 allocbenches|test str::rfind_zzz_char::long_lorem_ipsum ... bench:         103.62 ns/iter (+/- 6.53)
+## 3 次最小值(x86 core12 (flock);腳本計算)
+min str::find_zzz_char::long_lorem_ipsum 98.28 ns/iter
+min str::rfind_zzz_char::long_lorem_ipsum 103.62 ns/iter
+## perf record/report/annotate(aarch64 core56)=== c71 str::find_zzz_char::long_lorem_ipsum
+    99.58%  libstd-582c472e6e6781a0.so     [.] _RNvNtNtCs5eKY5gNNvwM_4core5slice6memchr14memchr_aligned
+     0.29%  allocbenches-b48d0ecb0c6d7898  [.] _RNvYNCNvNtNtCs3CKgq1o0DAf_12allocbenches3str13find_zzz_char16long_lorem_ipsum0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceBa_
+     0.10%  allocbenches-b48d0ecb0c6d7898  [.] _RNvNtNtCs5eKY5gNNvwM_4core5slice6memchr14memchr_aligned@plt
+     0.02%  [kernel.kallsyms]              [k] next_uptodate_folio
+     0.00%  [kernel.kallsyms]              [k] perf_event_enable_on_exec
+     0.00%  libc.so.6                      [.] __memcpy_generic
+--- annotate top: _RNvNtNtCs5eKY5gNNvwM_4core5slice6memchr14memchr_aligned
+   70.73 :   dab80:  add     x8, x8, #0x10
+   22.59 :   dab68:  sub     x17, x13, x10
+    5.75 :   dab54:  add     x10, x1, x8
+    0.34 :   dab20:  add     x8, x8, #0x1
+    0.17 :   dab14:  ldrb    w11, [x1, x8]
+    0.10 :   daae0:  add     x8, x1, #0x7
+    0.08 :   dab58:  ldp     x15, x10, [x10]
+    0.06 :   dab94:  mov     w0, #0x1                        // #1
+    0.05 :   daba4:  add     x8, x8, #0x1
+    0.05 :   dab10:  mov     w0, #0x1                        // #1
+    0.03 :   dab2c:  sub     x11, x2, #0x10
+    0.02 :   dab3c:  mov     x8, #0x101010101010101          // #72340172838076673
+    0.01 :   dab0c:  mov     x8, xzr
+    0.00 :   dabb8:  ret
+## perf record/report/annotate(x86 core12 (flock, 預設事件))=== c71 str::find_zzz_char::long_lorem_ipsum
+    98.91%  libstd-3f1ea972a24311e5.so     [.] core::slice::memchr::memchr_aligned
+     0.83%  allocbenches-b18a163da23bc6bf  [.] <allocbenches::str::find_zzz_char::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+     0.02%  [unknown]                      [k] 0xffffffffb65a15b7
+     0.01%  [unknown]                      [k] 0xffffffffb664f4a5
+     0.01%  [unknown]                      [k] 0xffffffffb664424b
+     0.01%  [unknown]                      [k] 0xffffffffb7363927
+--- annotate top: core::slice::memchr::memchr_aligned
+   31.49 :   11c2ca: sub    %r11,%rbx
+   29.70 :   11c2e4: and    %r14,%rbx
+   23.25 :   11c2f3: jbe    11c2c0 <core::slice::memchr::memchr_aligned+0x70>
+   12.99 :   11c2d8: mov    %r9,%r14
+    0.60 :   11c290: jne    11c280 <core::slice::memchr::memchr_aligned+0x30>
+    0.30 :   11c256: lea    0x7(%rsi),%rdx
+    0.26 :   11c2f5: xor    %eax,%eax
+    0.25 :   11c309: cmp    %rdx,%rcx
+    0.22 :   11c2db: sub    %r11,%r14
+    0.17 :   11c292: lea    -0x10(%rcx),%rax
+    0.13 :   11c277: xor    %r8d,%r8d
+    0.12 :   11c2f7: cmp    %rdx,%rcx
+    0.12 :   11c2c0: mov    (%rsi,%rdx,1),%r11
+    0.11 :   11c2e7: cmp    %r8,%rbx

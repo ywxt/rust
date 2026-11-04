@@ -1,0 +1,17 @@
+{
+ "id": "B3a",
+ "slug": "mul-div",
+ "kind": "rust",
+ "tags": [
+  "B3"
+ ],
+ "chapters": [
+  "c05",
+  "c63",
+  "c78",
+  "c87"
+ ],
+ "status": "reproduced",
+ "summary": "32 位乘法鏈 aarch64 mul 2.01 對 x86 imul 3.02 cycles;udiv 延遲 aarch64 隨商位數 7(8 位)/9(16 位)/13(32 位)/約 20(64 位,22.0 扣鏈基線 2.0),x86 div 固定 11(32 位)/15(64 位,64 位商 16.0−2.0=14)",
+ "doc_mismatch": "aarch64 udiv 量到 7–20(文檔 8–21),x86 32 位 div 11(文檔 12);差 1 cycle,疑為鏈形狀不同(本復現經除數串接)"
+}

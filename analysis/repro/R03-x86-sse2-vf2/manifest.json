@@ -1,0 +1,5 @@
+{"id":"R03","slug":"x86-sse2-vf2","kind":"llvm-ir","tags":["NEW:x86 baseline SSE2 加寬向量化更差"],
+ "chapters":["c04"],
+ "status":"reproduced",
+ "summary":"repro.ll 證實 loop-vectorize 對 i8 比較→i64 計數歸約在 x86-64(及 x86-64-v2)選 VF 2×IC 2,aarch64 選 VF 16×IC 2;bench.rs:x86 預設 1.29 cycles/B、4.75 指令/B,aarch64 0.66、2.07;x86 強制 -force-vector-width=16 後 0.69 cycles/B、2.38 指令/B,與 aarch64 打平",
+ "doc_mismatch":"數字與文檔一致(x86 1.322/4.75,v2 0.918/3.75)。補充並修正歸因:文檔稱「SSE2 無 pmovzx,加寬成本高,cost model 只選 VF 2」,但強制 VF 16 在 SSE2 基線上合法且快 1.87×,說明是 x86 cost model 高估寬 VF 成本而選錯,不是 SSE2 指令集做不到"}

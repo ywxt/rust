@@ -1,0 +1,5 @@
+{"id":"L13","slug":"memcpy-256-inline","kind":"llvm-ir","tags":["N2"],
+ "chapters":["c53","c64"],
+ "status":"reproduced",
+ "summary":"定長 256 B llvm.memcpy:AArch64 內聯成 8 對 ldp/stp q,x86-64 基線(SSE2)只內聯到 128 B、256 B 呼叫 memcpy,加 -mattr=+avx 才內聯(8×32 B)。熱迴圈拷貝 cycles/次:x86 memcpy 呼叫 14.0、強制 libc 16.0、+avx 內聯 7.3;a64 內聯 17.2、強制 libc 20.2。",
+ "doc_mismatch":"章節寫「256 B 陣列 x86 呼叫 memcpy、aarch64 內聯」成立;門檻在 x86 是 128 B(SSE2 基線),AArch64 是 256 B(512 B 也呼叫)。章節的 memmove 誤預測(約 0.9 次/iter)在孤立的定長熱迴圈中未出現,本 bench 只量到呼叫本身約 2× 於 AVX 內聯;x86 沒有 SSE 內聯 256 B 的對照,+avx 同時改了寬度。數字對棧佈局敏感:同源碼較早一版 x86 memcpy 為 7.5、a64 內聯為 28.3 cyc。"}

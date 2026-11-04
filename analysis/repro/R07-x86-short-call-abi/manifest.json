@@ -1,0 +1,5 @@
+{"id":"R07","slug":"x86-short-call-abi","kind":"c","tags":["N3"],
+ "chapters":["c55"],
+ "status":"partial",
+ "summary":"repro.c 相依鏈每次呼叫:x86 直接呼叫 1.21、加保存 2 個暫存器 2.03、經指標間接 4.01、間接+保存 4.65 cycles;aarch64 直接 3.01、加保存 7.01、間接 3.01;以兩邊 harness 的實際形態(x86 call *GOT + push 2,aarch64 無保存)比,x86 每次呼叫只多約 1.6 cycles,其中保存暫存器約 0.6–0.8、間接呼叫約 2.8(相對 x86 直接呼叫);成因部分為推測",
+ "doc_mismatch":"文檔把 x86 短 memchr 較慢主要歸於 SysV 保存兩個暫存器(N3)。實測保存兩個暫存器在 x86 只加 0.6–0.8 cycles,比 aarch64 保存同樣兩個(+4.0)便宜得多;x86 較貴的是經 GOT 的間接呼叫(+2.8)。兩者合計約 1.6 cycles/呼叫,只能解釋 c55 探針每次呼叫差距(3 B 4.0、24 B 10.9 cycles)的一部分,其餘(SWAR 主體每輪多的 mov、閉包等返回值)未在此隔離"}

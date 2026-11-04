@@ -1,0 +1,16 @@
+{
+ "id": "M3",
+ "slug": "copy-bandwidth",
+ "kind": "c",
+ "tags": [
+  "M3"
+ ],
+ "chapters": [
+  "c20",
+  "c90",
+  "c03"
+ ],
+ "status": "reproduced",
+ "summary": "L1 內 8000 B 拷貝:aarch64 glibc 341–374 cycles(21–23 B/cycle),手寫 NEON 323–408 不更快;x86 glibc 134–203(39–60 B/cycle)、rep movsb 149–240(33–54 B/cycle)。",
+ "doc_mismatch": "同寬手寫 16 B 迴圈 x86 也只有 25–28 B/cycle(282–314 cycles),對 aarch64 323–408 只差 1.0–1.4×;x86 的 34–58 B/cycle 靠 rep movsb / AVX2 32 B,不全是同寬微架構差。源偏移 16 時 aarch64 手寫 NEON 慢 25%(408 vs 326)。"
+}

@@ -1,0 +1,14 @@
+{
+ "id": "L02",
+ "slug": "ifconv-csel",
+ "kind": "llvm-ir",
+ "tags": [
+  "N1"
+ ],
+ "chapters": [
+  "c02"
+ ],
+ "status": "reproduced",
+ "summary": "AArch64 early-ifcvt 把 2 字節路徑併成 csel(ldrsb 後另有 and #0xff),關掉後回到分支,x86 本來就是分支;ru 短句 cycles/char:a64 8.16 → 1.80,x86 2.35;zh a64 10.03 → 9.90,x86 8.02;asm 鏈 9.06 / 10.08 / 11.08(基線 / 加 and / 再加 csel)。",
+ "doc_mismatch": "語料改為短句重複,不是 ru_huge:a64 8.16 vs 文檔 7.62,關 ifcvt 1.80 vs branchy 1.74。x86 ru 2.35 vs 文檔 1.72,使 a64 關 ifcvt/x86 為 0.77 而非 1.01;只改 main 重編後同語料 x86 為 1.82,ru_huge 為 1.76,故屬佈局敏感,2.35 不宜當 x86 基準。asm 鏈因環回多一條 and,絕對值比文檔 8/9/10 各多 1。關 ifcvt 對 zh 僅省 0.13 cycle/char,csel 單獨不解釋 zh/emoji 的 1.25 倍(c02 已記多出 1 cycle 未拆)。"
+}

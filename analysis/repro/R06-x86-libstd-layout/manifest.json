@@ -1,0 +1,15 @@
+{
+ "id": "R06",
+ "slug": "x86-libstd-layout",
+ "kind": "c",
+ "tags": [
+  "NEW:x86 libstd.so 迴圈佈局前端受限"
+ ],
+ "chapters": [
+  "c30",
+  "c91"
+ ],
+ "status": "reproduced",
+ "summary": "repro.c 把 c30 的逐字節掃描迴圈(x86 指令照抄)平移 PAD 位元組:x86 PAD 0–12、48–60 為 1.76–1.87 cycles/B,PAD 16–44 為 2.49–2.89(+40–60%);同一 PAD 下靜態與 .so 相差 ≤ 0.14;aarch64 多數 2.24–2.31,僅 PAD 4、36 為 2.71–2.74(+18%)",
+ "doc_mismatch": "文檔把 +34–50% 歸為「libstd.so 中的佈局」。復現顯示與動態連結本身無關:同一偏移下靜態與 .so 只差 ≤ 0.14 cycles/B(PLT 呼叫),差異只取決於迴圈相對 64 B 的起點;harness 恰好落在壞偏移。aarch64 也有較小的對齊敏感(週期 32 B,+18%),不是完全沒有。未以 topdown 驗證本復現的 fe-bound 來源"
+}

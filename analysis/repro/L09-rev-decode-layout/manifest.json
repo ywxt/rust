@@ -1,0 +1,5 @@
+{"id":"L09","slug":"rev-decode-layout","kind":"llvm-ir","tags":["N1","F2"],
+ "chapters":["c50","c79"],
+ "status":"reproduced",
+ "summary":"chars().rev().count() 的 IR 兩 target 相同(僅符號名不同);縮減後 llc 在 AArch64 把 ASCII 尾端放到迴圈外,每個 ASCII 字元 tbz+b.ne 兩個 taken,x86 已旋轉只 1 個 taken,AArch64 另有 pre-index 回寫 + 兩條 mov 的指針鏈;-enable-ext-tsp-block-placement 可使 AArch64 只剩 1 個 taken。cycles/字元:4096 B ASCII a64 2.02 → 1.83(ext-tsp),x86 1.02;bench 串 a64 2.73 → 2.04,x86 1.58 → 1.37。",
+ "doc_mismatch":"章節(c50)寫「LLVM IR / 中端:未比對,推測相同」:已確認相同。佈局修正後 ASCII 仍為 1.83 vs x86 1.02 cyc/字元,剩餘差距歸指針鏈(pre-index 回寫 + mov)與 x86 立即數摺疊,本復現未用 asm 隔離。ext-tsp 也讓 x86 的 bench 串變快(1.58→1.37),該佈局差異不全是 AArch64 獨有。"}

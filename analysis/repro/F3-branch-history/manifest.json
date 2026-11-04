@@ -1,0 +1,15 @@
+{
+ "id": "F3",
+ "slug": "branch-history",
+ "kind": "c",
+ "tags": [
+  "F3"
+ ],
+ "chapters": [
+  "c67",
+  "c35"
+ ],
+ "status": "reproduced",
+ "summary": "10 次內層迴圈,每輪 K 條必跳分支:aarch64 K≤4 出口無失誤、K≥5 每次出口 1 次失誤;x86 到 K=20 仍無失誤、K=24 失誤 1 次(K=6–8 有 0.35–0.46 次的局部失誤)",
+ "doc_mismatch": "文檔寫 aarch64 ≥4 條即失誤,本探針門檻為 ≥5 條(K=4 仍為 0);x86 在 K=6–8 有部分失誤,非單調"
+}

@@ -1,0 +1,20 @@
+### aarch64 遠程:CORE=50 ./run.sh
+# 2026-11-03T14:57:17+08:00 aarch64 unknown | ldd (GNU libc) 2.38
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+set1                 cycles:u 41.13  instructions:u 112.00  branch-misses:u 0.000
+set0                 cycles:u 62.00  instructions:u 100.00  branch-misses:u 0.000
+hand                 cycles:u 66.00  instructions:u 204.00  branch-misses:u 0.000
+bb1                  cycles:u 49.32  instructions:u 114.00  branch-misses:u -0.000
+set1 16              cycles:u 41.14  instructions:u 112.00  branch-misses:u -0.000
+set0 16              cycles:u 25.00  instructions:u 100.00  branch-misses:u 0.000
+hand 16              cycles:u 66.00  instructions:u 204.00  branch-misses:u 0.000
+### x86_64 本機:CORE=10 ./run.sh
+# 2026-11-03T15:19:06+08:00 x86_64 12th Gen Intel(R) Core(TM) i7-12700 | ldd (GNU libc) 2.42
+gcc (GCC) 15.3.0
+set1                 cpu_core/cycles/u 21.01  cpu_core/instructions/u 85.00  cpu_core/branch-misses/u 0.000
+set0                 cpu_core/cycles/u 21.01  cpu_core/instructions/u 85.00  cpu_core/branch-misses/u 0.000
+hand                 cpu_core/cycles/u 37.05  cpu_core/instructions/u 175.00  cpu_core/branch-misses/u 0.000
+bb1                  cpu_core/cycles/u 21.99  cpu_core/instructions/u 85.00  cpu_core/branch-misses/u 0.000
+set1 16              cpu_core/cycles/u 25.01  cpu_core/instructions/u 85.00  cpu_core/branch-misses/u 0.000
+set0 16              cpu_core/cycles/u 25.09  cpu_core/instructions/u 85.00  cpu_core/branch-misses/u 0.000
+hand 16              cpu_core/cycles/u 37.02  cpu_core/instructions/u 175.00  cpu_core/branch-misses/u 0.001

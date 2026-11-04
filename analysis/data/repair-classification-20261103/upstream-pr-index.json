@@ -1,0 +1,152 @@
+{
+  "checked_on": "2026-11-03",
+  "source": "Public GitHub REST API, rust-lang/rust pull requests and files",
+  "purpose": "References for the three repair categories; no issue, PR or comment was created or edited.",
+  "pull_requests": [
+    {
+      "number": 160143,
+      "url": "https://github.com/rust-lang/rust/pull/160143",
+      "title": "Add NEON support for is_ascii and eq_ignore_ascii_case",
+      "author": "ywxt",
+      "state": "closed",
+      "merged_at": "2026-08-03T05:35:00Z",
+      "head_sha": "ccbf7c658dd59dbffbba74920720f9d78ae92748",
+      "changed_files": [
+        "library/core/src/slice/ascii.rs",
+        "library/coretests/benches/str/eq_ignore_ascii_case.rs"
+      ]
+    },
+    {
+      "number": 161387,
+      "url": "https://github.com/rust-lang/rust/pull/161387",
+      "title": "Optimize memchr with NEON",
+      "author": "ywxt",
+      "state": "closed",
+      "merged_at": null,
+      "head_sha": "875501b6a26743c54165c91ee7dffcd06e30316a",
+      "changed_files": [
+        "library/core/src/slice/memchr.rs",
+        "library/coretests/benches/lib.rs",
+        "library/coretests/benches/slice.rs",
+        "library/coretests/tests/slice.rs"
+      ]
+    },
+    {
+      "number": 162810,
+      "url": "https://github.com/rust-lang/rust/pull/162810",
+      "title": "vectorized vec::dedup  pre-scan",
+      "author": "ywxt",
+      "state": "closed",
+      "merged_at": "2026-10-12T07:18:04Z",
+      "head_sha": "2ad82113f8c529a3207e990763e39675900fcdf2",
+      "changed_files": [
+        "library/alloc/src/vec/mod.rs",
+        "library/alloctests/benches/vec.rs",
+        "library/alloctests/tests/vec.rs"
+      ]
+    },
+    {
+      "number": 162754,
+      "url": "https://github.com/rust-lang/rust/pull/162754",
+      "title": "optimize large elements for slice rotating",
+      "author": "ywxt",
+      "state": "closed",
+      "merged_at": "2026-10-31T16:42:03Z",
+      "head_sha": "e0b4b6200436d41cfde9ad1287d5eb04394c42b7",
+      "changed_files": [
+        "library/core/src/slice/rotate.rs"
+      ]
+    },
+    {
+      "number": 162931,
+      "url": "https://github.com/rust-lang/rust/pull/162931",
+      "title": "directly deallocates the nodes instead of traversing every element when BTreemap dropping",
+      "author": "ywxt",
+      "state": "closed",
+      "merged_at": "2026-10-12T07:18:03Z",
+      "head_sha": "926a9d0873b5b2a1412a7eb224274ceed90674cc",
+      "changed_files": [
+        "library/alloc/src/collections/btree/map.rs",
+        "library/alloc/src/collections/btree/map/tests.rs",
+        "library/alloc/src/collections/btree/navigate.rs",
+        "library/alloc/src/collections/btree/node.rs"
+      ]
+    },
+    {
+      "number": 163521,
+      "url": "https://github.com/rust-lang/rust/pull/163521",
+      "title": "fast path for BTreeMap::Iter::next",
+      "author": "ywxt",
+      "state": "closed",
+      "merged_at": "2026-10-11T20:06:28Z",
+      "head_sha": "cc65a07704647a26edc71e83f23a6394bbbc99fb",
+      "changed_files": [
+        "library/alloc/src/collections/btree/navigate.rs",
+        "library/alloctests/benches/btree/map.rs"
+      ]
+    },
+    {
+      "number": 164611,
+      "url": "https://github.com/rust-lang/rust/pull/164611",
+      "title": "Improve bit permutation codegen",
+      "author": "ywxt",
+      "state": "closed",
+      "merged_at": "2026-10-21T07:31:58Z",
+      "head_sha": "8735b14a347b534fea24bbababd5107fd0cd76cc",
+      "changed_files": [
+        "library/core/src/num/imp/int_bits.rs"
+      ]
+    },
+    {
+      "number": 165027,
+      "url": "https://github.com/rust-lang/rust/pull/165027",
+      "title": "Optimize utf16 decoding",
+      "author": "ywxt",
+      "state": "open",
+      "merged_at": null,
+      "head_sha": "c28698a4b4dec931f419e609fd3c39d372342290",
+      "changed_files": [
+        "library/alloc/src/lib.rs",
+        "library/alloc/src/string.rs",
+        "library/alloc/src/utf16_decode.rs",
+        "library/alloc/src/wtf8/mod.rs",
+        "library/alloc/src/wtf8/tests.rs",
+        "library/alloctests/benches/lib.rs",
+        "library/alloctests/benches/string.rs",
+        "library/alloctests/lib.rs",
+        "library/alloctests/tests/string.rs"
+      ]
+    },
+    {
+      "number": 165180,
+      "url": "https://github.com/rust-lang/rust/pull/165180",
+      "title": "AArch64 SIMD UTF-8 validation",
+      "author": "ywxt",
+      "state": "open",
+      "merged_at": null,
+      "head_sha": "ca7634cec9f8ae60aee11eeb722de7ee74ea598f",
+      "changed_files": [
+        "library/alloctests/benches/str.rs",
+        "library/alloctests/benches/str/utf8_validation.rs",
+        "library/alloctests/tests/str.rs",
+        "library/core/src/str/validations.rs",
+        "library/core/src/str/validations/neon.rs"
+      ]
+    },
+    {
+      "number": 162750,
+      "url": "https://github.com/rust-lang/rust/pull/162750",
+      "title": "add case mapping fast paths for Latin-1",
+      "author": "ywxt",
+      "state": "closed",
+      "merged_at": "2026-09-21T11:24:10Z",
+      "head_sha": "a451894bab5c27e8a30175e3a49070f4712ddbb4",
+      "changed_files": [
+        "library/core/src/unicode/unicode_data.rs",
+        "library/coretests/benches/char/methods.rs",
+        "src/tools/unicode-table-generator/src/case_mapping.rs",
+        "src/tools/unicode-table-generator/src/main.rs"
+      ]
+    }
+  ]
+}

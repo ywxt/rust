@@ -1,0 +1,17 @@
+{
+ "id": "B6",
+ "slug": "unaligned",
+ "kind": "rust",
+ "tags": [
+  "B6"
+ ],
+ "chapters": [
+  "c92",
+  "c13",
+  "c83",
+  "c90"
+ ],
+ "status": "reproduced",
+ "summary": "未對齊(+8 B)16 B load aarch64 0.503→0.800 cycles/條(+0.30,每 ldp 約 +0.6),x86 0.528→0.565;源 +8 的 16 B 拷貝 aarch64 0.618→0.832,x86 0.516→0.589;SVE 32 B store 對齊 1.20 對 +8 為 2.23(1.86×,與文檔 17–22 vs 37–40 比例相符)",
+ "doc_mismatch": "『x86 近零』只對 load 成立:x86 未對齊 store 同樣約 2×(16 B 0.561→1.092,AVX2 32 B 0.693→1.684),本機 16 B store 0.537→1.077 與 x86 相同;文檔 x86 數字來自 glibc 對齊目的端的 memmove,未觸發未對齊 store"
+}

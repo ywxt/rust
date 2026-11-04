@@ -1,0 +1,20 @@
+# baseline refs: old chapter baseline 88f7399cb49 ; measured commit 07e526db9df toolchain
+### probe mo.rs: libc memcpy via copy_nonoverlapping, 4 KiB-aligned src/dst buffers, offsets src_off/dst_off, 2000000 copies, perf stat cycles, min of 3
+### aarch64 core 54 (glibc 2.38 __memcpy_generic)
+
+bytes 8000 src_off 0 dst_off 0 cycles/copy 332.7 B/cycle 24.0
+bytes 8000 src_off 0 dst_off 8 cycles/copy 436.1 B/cycle 18.3
+bytes 8000 src_off 8 dst_off 8 cycles/copy 332.2 B/cycle 24.1
+bytes 8000 src_off 8 dst_off 0 cycles/copy 436.2 B/cycle 18.3
+bytes 8000 src_off 0 dst_off 16 cycles/copy 332.8 B/cycle 24.0
+bytes 8000 src_off 4 dst_off 4 cycles/copy 332.0 B/cycle 24.1
+bytes 512 src_off 0 dst_off 0 cycles/copy 33.2 B/cycle 15.4
+bytes 512 src_off 0 dst_off 8 cycles/copy 40.2 B/cycle 12.7
+bytes 512 src_off 8 dst_off 8 cycles/copy 34.3 B/cycle 14.9
+### x86 core 12 (cycles:u, glibc 2.42)
+bytes 8000 src_off 0 dst_off 0 cycles/copy 137.3 B/cycle 58.3
+bytes 8000 src_off 0 dst_off 8 cycles/copy 210.1 B/cycle 38.1
+bytes 8000 src_off 8 dst_off 8 cycles/copy 139.2 B/cycle 57.5
+bytes 512 src_off 0 dst_off 0 cycles/copy 16.0 B/cycle 32.0
+bytes 512 src_off 0 dst_off 8 cycles/copy 19.1 B/cycle 26.8
+bytes 512 src_off 8 dst_off 8 cycles/copy 18.0 B/cycle 28.5

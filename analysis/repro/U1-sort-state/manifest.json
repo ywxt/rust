@@ -1,0 +1,15 @@
+{
+ "id": "U1",
+ "slug": "sort-state",
+ "kind": "rust",
+ "tags": [
+  "U1"
+ ],
+ "chapters": [
+  "c69",
+  "c89"
+ ],
+ "status": "partial",
+ "summary": "整體 sort_unstable(10k u64)重現比值 1.17(aarch64 359k vs x86 307k cyc);32 元素 small sort 單獨 aarch64 快(344 vs 406);但 small sort 與 std select_nth_unstable 交替時交互代價僅 −1.1%/+0.6%,沒有組合狀態效應;std 的 select_nth_unstable(1024)本身 aarch64 已慢 1.31×(7177 vs 5479),而章節手寫 partition 複製品 aarch64 快(1988 vs 2492);機制未隔離",
+ "doc_mismatch": "文檔稱 partition 單獨量時 aarch64 較快,但用 std 實際 partition 路徑(select_nth_unstable)量時 aarch64 慢 1.31×;慢的部分不需要組合狀態即可出現,「組合狀態」歸因未獲支持"
+}

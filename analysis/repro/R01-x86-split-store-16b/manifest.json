@@ -1,0 +1,5 @@
+{"id":"R01","slug":"x86-split-store-16b","kind":"llvm-ir","tags":["B1"],
+ "chapters":["c75"],
+ "status":"reproduced",
+ "summary":"repro.ll 證實 x86 後端把 Vec{cap=0,ptr=8} 寫成兩條 8 B movq 再以 16 B movups 讀回,aarch64 合成一條 stp 後 ldr q;bench.c 量得 x86 此形狀 19.0 cycles/迭代(每迭代 1 次 ld_blocks.store_forward)對單筆 16 B store 1.0,aarch64 stp 形狀 1.55;-mattr=+slow-unaligned-mem-16 改為兩次 8 B 載入後 x86 為 2.4",
+ "doc_mismatch":"無實質不符(文檔每次失敗約 +20 cycles,本復現 +18)。補充:aarch64 若同樣兩筆 str 再 ldr q 也會轉發失敗(14.0 cycles),其優勢完全來自後端合成 stp;另 llc 不帶 -mcpu 時 x86 會改用 8 B 載入而不出現此形狀,需 -mcpu=x86-64(rustc 預設)"}

@@ -1,0 +1,17 @@
+{
+ "id": "L01",
+ "slug": "select-opt",
+ "kind": "llvm-ir",
+ "tags": [
+  "N1"
+ ],
+ "chapters": [
+  "c08",
+  "c09",
+  "c12",
+  "c18"
+ ],
+ "status": "reproduced",
+ "summary": "AArch64 select-optimize 把堆 child 選擇轉成 b.hi,關掉後為 cinc,x86 為 sbb;隨機 BinaryHeap::from 每迭代 a64 1 830 893 → 1 160 030 cycles,x86 1 197 668(現狀比值 1.53,關 pass 後 0.97);升序輸入分支版較快(410 963 vs 467 572)。",
+ "doc_mismatch": "c08 的 a64 現狀 1 771 653、關 pass/x86 1.010;本復現 1 830 893(+3.3%)、0.969。誤預測 89 849 vs 文檔 79 612。方向與歸因相符。IR 觸發不需要 hole 的 store。效應只量了 from_vec(c08),c09/c12/c18 僅共用機理。"
+}

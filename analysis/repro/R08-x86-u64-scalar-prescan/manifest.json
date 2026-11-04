@@ -1,0 +1,5 @@
+{"id":"R08","slug":"x86-u64-scalar-prescan","kind":"llvm-ir","tags":["NEW:std 依 target feature 選路徑"],
+ "chapters":["c13"],
+ "status":"reproduced",
+ "summary":"原始碼:library/alloc/src/vec/mod.rs 的 dedup_simd_chunk_size(cfg_select!,x86 僅 sse4.1 時 8 B 元素啟用分塊);repro.ll 證實 find_duplicate 展開後的 4×i64 比較在 x86-64(SSE2)與 +sse4.1 都不被 SLP 向量化(cost 2),+sse4.2 與 aarch64 向量化為 icmp eq <4 x i64>;<2 x i64> 相等 SSE2 為 pcmpeqd+pshufd+pand,SSE4.1 為 pcmpeqq,aarch64 為 cmeq .2d(靜態檢查,無量測)",
+ "doc_mismatch":"文檔與 std 註解稱「SSE2 沒有 64 位相等比較」:SSE2 可用 pcmpeqd+pshufd+pand 三條模擬,是成本問題而非做不到。另發現:std 以 sse4.1 為啟用門檻,但分塊路徑靠 SLP 自動向量化,只有 sse4.1 時 SLP 仍判定不划算而保持標量,要到 sse4.2(x86-64-v2)才出 pcmpeqq;以 -C target-feature=+sse4.1 / +sse4.2 編譯 find_first_duplicate 副本確認(pcmpeqq 0 / 4 條)。此項只能在本地重建 std 時觀察,預編 std 的 x86 基線一律標量"}

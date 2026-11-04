@@ -1,0 +1,5 @@
+{"id":"R02","slug":"x86-char3-sret","kind":"llvm-ir","tags":["B1"],
+ "chapters":["c16"],
+ "status":"reproduced",
+ "summary":"repro.ll 證實 x86 把 [c,0,0] 寫成 movl c,(r) + movq $0,4(r),呼叫端 movq 8 B@0 重載跨兩筆 store;aarch64 為 str wzr,[x8,#8] + stp w,wzr,[x8]。bench.c:x86 跨 store 18.0(相依)/16.0(獨立)cycles 對單筆 1.1/1.15,每迭代 1 次 ld_blocks.store_forward;aarch64 跨 store 13.0/13.6、單筆 6.2/1.37",
+ "doc_mismatch":"章節寫「LLVM IR / 中端:無差異跡象」不成立:core 的 to_upper IR 兩邊不同,aarch64 的 SLP 把兩個 0 合成 store <2 x i32>,x86 保持三筆 i32(SLPX/SLPA 斷言)。x86 的壞形狀不依賴此差異(餵 aarch64 的 IR 給 x86 仍得 movq $0,4)。aarch64 的 stp w,wzr 是偶然:同樣 IR 若只有一條返回路徑(@one),aarch64 也寫成 str w@0 + stp wzr,wzr@4,跨 store。x86 whole_ind 1.15 與文檔 1.84 略有出入"}

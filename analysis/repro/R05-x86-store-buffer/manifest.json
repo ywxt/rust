@@ -1,0 +1,5 @@
+{"id":"R05","slug":"x86-store-buffer","kind":"c","tags":["NEW:x86 交錯寫不同 cache line 時 store buffer 滿"],
+ "chapters":["c65"],
+ "status":"partial",
+ "summary":"repro.c 證實機制存在:x86 每輪 2 個 store 寫同一 line 1.00 cycles、寫兩條 line 2.00 cycles(resource_stalls.sb 1.33/迭代),aarch64 兩者皆 1.16;但照搬 collect_droppable 熱迴圈形態(2 個棧槽 + dst[i])時 x86 2.00、aarch64 2.05 cycles/元素,兩邊相同,Drop 迴圈兩邊皆 1.00;成因為推測,本復現不足以解釋 bench 的 0.78",
+ "doc_mismatch":"文檔推測 0.78 來自 x86 交錯寫不同 cache line 時退回每 cycle 1 個 store。現象可復現(line2 對 line1 慢 2×,且只在 x86),但在 bench 形態的迴圈上 x86 並不比 aarch64 慢(2.00 對 2.05),只是失去把 3 個 store 放同一 line 時的 1.60;故此機制不能單獨解釋 4 042 對 3 170 cycles。另見:未固定迴圈對齊時同一 x86 迴圈 drop 1.55、mix 2.0(對齊後 1.00 / 2.00),bench 的落差可能另有迴圈對齊或 clone/配置器成分,未拆"}

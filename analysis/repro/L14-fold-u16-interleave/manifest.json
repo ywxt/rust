@@ -1,0 +1,5 @@
+{"id":"L14","slug":"fold-u16-interleave","kind":"llvm-ir","tags":["S3","N1"],
+ "chapters":["c70"],
+ "status":"reproduced",
+ "summary":"IR 層 i16 迴圈兩 target 同為 VF 8、IC 2(無 target 特有形態;i64 才有差:AArch64 IC 4、x86 IC 2);AArch64 generic 對 i16 的 IC 上限 2 低於 i32/i64 的 4(neoverse-v2 為 4)。fold_u16 cycles/元素:a64 0.254 → IC 4 0.182(−28%,低於 x86 0.198),x86 IC 4 0.200 不變;延遲受限的主因交給微架構(S3),IC 2 是放大器。",
+ "doc_mismatch":"c70 未做的 -force-vector-interleave=4 驗證:a64 從 0.254 降到 0.182,追過 x86。c70「兩 target 的 IR 沒有 diff」:已確認 i16 的向量化決策相同;另發現 AArch64 generic 對 i16 選 IC 2 而 i32 / i64 選 4,屬 target 成本模型(推測與元素寬度相關的 IC 上限,未定位)。"}

@@ -1,0 +1,62 @@
+# baseline refs: old chapter baseline 88f7399cb49 ; measured commit 07e526db9df
+### aarch64 core 54 harness + perf annotate (lines >=0.8%), then count of ldrb/strb in annotated function, then first ldp/stp/b.ne lines
+
+# host=localhost.localdomain arch=aarch64 core=54 bin=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/alloctests/
+run1 test vec::bench_in_place_zip_iter_mut ... bench:           5.93 ns/iter (+/- 0.02)
+run1 test vec::bench_in_place_zip_recycle ... bench:          31.15 ns/iter (+/- 0.05)
+run2 test vec::bench_in_place_zip_iter_mut ... bench:           5.81 ns/iter (+/- 0.02)
+run2 test vec::bench_in_place_zip_recycle ... bench:          31.08 ns/iter (+/- 0.07)
+run3 test vec::bench_in_place_zip_iter_mut ... bench:           5.74 ns/iter (+/- 0.01)
+run3 test vec::bench_in_place_zip_recycle ... bench:          31.10 ns/iter (+/- 0.08)
+    99.81%  allocbenches-b4  allocbenches-b48d0ecb0c6d7898  [.] _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches3vec27bench_in_place_zip_iter_mut0INtNtNtCs5eKY5gNNvwM_4c
+## annotate: _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches3vec27bench_in_place_zip_iter_mut0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5ben
+    1.32 :   b53e4:  ldp     q2, q3, [x19, #32]
+    1.32 :   b53e8:  ldp     q4, q5, [x20]
+    1.12 :   b53f8:  add     v3.16b, v3.16b, v19.16b
+    1.22 :   b540c:  ldp     q4, q5, [x19, #64]
+    1.42 :   b5414:  stp     q0, q1, [x19]
+    0.81 :   b5420:  stp     q2, q3, [x19, #32]
+    1.42 :   b5430:  ldp     q5, q7, [x19, #128]
+    1.89 :   b546c:  stp     q0, q2, [x19, #128]
+    1.12 :   b5478:  ldp     q0, q4, [x20, #160]
+    0.89 :   b5494:  ldp     q6, q4, [x20, #192]
+    0.91 :   b54a4:  eor     v4.16b, v5.16b, v4.16b
+    0.85 :   b54ac:  stp     q0, q1, [x19, #160]
+    1.22 :   b5588:  ldp     q0, q1, [x19]
+    8.79 :   b5590:  ldp     q2, q3, [x19, #32]
+    7.10 :   b5594:  ldp     q4, q5, [x20]
+    6.93 :   b55a4:  add     v3.16b, v3.16b, v19.16b
+    3.45 :   b55b8:  ldp     q4, q5, [x19, #64]
+    6.30 :   b55c0:  stp     q0, q1, [x19]
+    4.60 :   b55cc:  stp     q2, q3, [x19, #32]
+    5.86 :   b55dc:  ldp     q5, q7, [x19, #128]
+    3.17 :   b55ec:  ldp     q6, q4, [x20, #96]
+    1.24 :   b55f4:  stp     q0, q2, [x19, #64]
+    6.19 :   b5608:  stp     q1, q3, [x19, #96]
+    6.72 :   b5618:  stp     q0, q2, [x19, #128]
+    6.00 :   b5624:  ldp     q0, q4, [x20, #160]
+    2.15 :   b5634:  eor     v0.16b, v3.16b, v0.16b
+    3.25 :   b5640:  ldp     q6, q4, [x20, #192]
+    4.98 :   b5650:  eor     v4.16b, v5.16b, v4.16b
+    2.55 :   b5658:  stp     q0, q1, [x19, #160]
+1
+    0.00 :   b4f2c:  stp     d9, d8, [sp, #-112]!
+    0.00 :   b4f30:  stp     x29, x30, [sp, #16]
+    0.00 :   b4f34:  stp     x28, x27, [sp, #32]
+    0.00 :   b4f38:  stp     x26, x25, [sp, #48]
+    0.00 :   b4f3c:  stp     x24, x23, [sp, #64]
+    0.00 :   b4f40:  stp     x22, x21, [sp, #80]
+    0.00 :   b4f44:  stp     x20, x19, [sp, #96]
+    0.00 :   b4ffc:  b.ne    b4fb8 <<allocbenches::vec::bench_in_place_zip_iter_mut::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::
+    0.00 :   b5010:  ldp     q0, q1, [x19]
+    0.00 :   b502c:  ldp     q3, q4, [x20]
+    0.00 :   b5034:  ldp     q2, q6, [x19, #32]
+    0.00 :   b5050:  ldp     q5, q16, [x20, #32]
+### x86 core 12 harness
+# host=ywxt-work arch=x86_64 core=12 bin=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/alloctests/b18a163da23bc6bf/out/allocbenches-b18a163da23bc6bf date=2026-11-03T16:06:25+08:00
+run1 test vec::bench_in_place_zip_iter_mut ... bench:           3.12 ns/iter (+/- 0.08)
+run1 test vec::bench_in_place_zip_recycle ... bench:          18.14 ns/iter (+/- 0.99)
+run2 test vec::bench_in_place_zip_iter_mut ... bench:           3.01 ns/iter (+/- 0.07)
+run2 test vec::bench_in_place_zip_recycle ... bench:          18.20 ns/iter (+/- 2.79)
+run3 test vec::bench_in_place_zip_iter_mut ... bench:           3.12 ns/iter (+/- 0.13)
+run3 test vec::bench_in_place_zip_recycle ... bench:          18.21 ns/iter (+/- 1.54)

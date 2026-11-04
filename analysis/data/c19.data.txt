@@ -1,0 +1,82 @@
+# c19 raw data on 07e526db9df; a64 = univpn-work-1 core 52 (taskset -c 52), x86 = local core 12 (flock core12.lock taskset -c 12)
+# bench runner: /tmp/xdiff/work/upb/run.sh (3 interleaved runs); perf: prof.sh / ann.sh / fs.sh (remote copies in /tmp/xdiff/work/upb/)
+##### file: c19_a.txt
+run1 a64 test btree::map::iteration_mut_1000 ... bench:         895.64 ns/iter (+/- 1.99)
+run1 a64 test btree::map::iteration_1000 ... bench:       1,001.29 ns/iter (+/- 3.92)
+run2 a64 test btree::map::iteration_mut_1000 ... bench:         999.12 ns/iter (+/- 2.40)
+run2 a64 test btree::map::iteration_1000 ... bench:       1,001.22 ns/iter (+/- 5.34)
+run3 a64 test btree::map::iteration_mut_1000 ... bench:         896.24 ns/iter (+/- 7.83)
+run3 a64 test btree::map::iteration_1000 ... bench:       1,001.14 ns/iter (+/- 4.03)
+##### file: c19_x.txt
+run1 x86 test btree::map::iteration_mut_1000 ... bench:         617.68 ns/iter (+/- 32.94)
+run1 x86 test btree::map::iteration_1000 ... bench:         598.74 ns/iter (+/- 36.27)
+run2 x86 test btree::map::iteration_mut_1000 ... bench:         626.00 ns/iter (+/- 44.61)
+run2 x86 test btree::map::iteration_1000 ... bench:         597.66 ns/iter (+/- 38.39)
+run3 x86 test btree::map::iteration_mut_1000 ... bench:         614.49 ns/iter (+/- 29.83)
+run3 x86 test btree::map::iteration_1000 ... bench:         595.78 ns/iter (+/- 37.32)
+##### file: c19_p.txt
+=== perf stat btree::map::iteration_mut_1000
+test btree::map::iteration_mut_1000 ... bench:         895.34 ns/iter (+/- 2.26)
+     9,936,427,392      cycles                                                                
+    54,053,170,960      instructions                     #    5.44  insn per cycle            
+    17,335,999,061      branches                                                              
+         5,091,899      branch-misses                    #    0.03% of all branches           
+=== perf stat btree::map::iteration_1000
+test btree::map::iteration_1000 ... bench:       1,000.08 ns/iter (+/- 4.98)
+    11,323,582,168      cycles                                                                
+    66,636,413,095      instructions                     #    5.88  insn per cycle            
+    18,105,605,327      branches                                                              
+         5,566,731      branch-misses                    #    0.03% of all branches           
+##### file: c19_r.txt
+=== perf report btree::map::iteration_mut_1000
+    99.98%  [.] _RNvNtNtCs3CKgq1o0DAf_12allocbenches5btree3map19bench_iteration_mut
+     0.01%  [.] _RNvXs_NtCspchWlblWlP_4test5statsSdNtB4_5Stats9quartiles
+     0.01%  [k] perf_event_enable_on_exec
+     0.00%  [k] avc_lookup
+     0.00%  [k] syscall_trace_exit
+     0.00%  [k] perf_event_remove_on_exec
+     0.00%  [k] pgd_free
+     0.00%  [k] finish_task_switch.isra.0
+##### file: c19_ann.txt
+=== annotate btree__map__iteration_mut_1000.data
+  100.00 :   167f80: b.cs    168060 <<[f64] as test::stats::Stats>::quartiles+0x1bc>  // b.hs, b.nlast
+   37.03 :   741c0:  b       74194 <allocbenches::btree::map::bench_iteration_mut+0x36c>
+   15.62 :   741b0:  cbz     x10, 741c4 <allocbenches::btree::map::bench_iteration_mut+0x39c>
+    7.61 :   7400c:  b       73fe0 <allocbenches::btree::map::bench_iteration_mut+0x1b8>
+    7.35 :   74224:  mov     x12, xzr
+    6.42 :   741b4:  ldrh    w13, [x10, #98]
+    5.12 :   741e8:  ldr     x13, [x10]
+    3.32 :   74208:  cbz     x11, 7422c <allocbenches::btree::map::bench_iteration_mut+0x404>
+    3.05 :   73ffc:  cbz     x10, 74010 <allocbenches::btree::map::bench_iteration_mut+0x1e8>
+    2.26 :   74214:  ldr     x10, [x12]
+    1.80 :   74194:  add     x14, x10, x12, lsl #2
+    1.73 :   74070:  mov     x12, xzr
+    1.16 :   74000:  ldrh    w13, [x10, #98]
+    0.88 :   74034:  ldr     x13, [x10]
+--- loop instr count (lines with addr) of hot symbol
+=== annotate it.data
+   35.24 :   73aa8:  b       73a70 <allocbenches::btree::map::bench_iteration+0x368>
+   12.31 :   73a98:  cbz     x10, 73aac <allocbenches::btree::map::bench_iteration+0x3a4>
+   10.40 :   73b0c:  mov     x14, xzr
+    7.19 :   738f8:  b       738c0 <allocbenches::btree::map::bench_iteration+0x1b8>
+    6.27 :   73af0:  cbz     x12, 73b14 <allocbenches::btree::map::bench_iteration+0x40c>
+    5.80 :   73a9c:  ldrh    w13, [x10, #98]
+    4.64 :   73aec:  b.cs    73ad0 <allocbenches::btree::map::bench_iteration+0x3c8>  // b.hs, b.nlast
+    4.21 :   73ad0:  ldr     x13, [x10]
+    2.74 :   738e8:  cbz     x10, 738fc <allocbenches::btree::map::bench_iteration+0x1f4>
+    2.16 :   7395c:  mov     x14, xzr
+    1.58 :   73afc:  ldr     x10, [x14]
+    1.17 :   73940:  cbz     x12, 73964 <allocbenches::btree::map::bench_iteration+0x25c>
+    1.10 :   7393c:  b.cs    73920 <allocbenches::btree::map::bench_iteration+0x218>  // b.hs, b.nlast
+    1.04 :   738ec:  ldrh    w13, [x10, #98]
+--- loop instr count (lines with addr) of hot symbol
+##### file: c19_d.txt
+# derived by derive.py from a64_bench.txt / x86_bench.txt (min of 3)
+min btree::map::iteration_mut_1000: a64 895.64 ns, x86 614.49 ns, a64 cycles(x2.9) 2597.4
+min btree::map::iteration_1000: a64 1001.14 ns, x86 595.78 ns, a64 cycles(x2.9) 2903.3
+a64 iteration_mut_1000 0.896 ns/elem; iteration_1000 1.001 ns/elem; iter/iter_mut 1.118
+a64 perf btree::map::iteration_mut_1000: 895.34 ns, IPC 5.44, instr/iter 14125
+a64 perf btree::map::iteration_1000: 1000.08 ns, IPC 5.88, instr/iter 17053
+# old = body baseline numbers (88f7399-era build), new = a64 min above
+old->new btree::map::iteration_mut_1000: 1865 -> 895.64 (-52.0%)
+old->new btree::map::iteration_1000: 1773 -> 1001.14 (-43.5%)

@@ -1,0 +1,5 @@
+{"id":"L12","slug":"ascii-all-unroll","kind":"llvm-ir","tags":["N1"],
+ "chapters":["c26","c36"],
+ "status":"reproduced",
+ "summary":"同一個兩出口單字節迴圈只跑 loop-unroll:AArch64 TTI 做多出口 runtime unroll 4×(5 個 load i8),x86 不展開;AArch64 加 -unroll-runtime-multi-exit=false 即不展開,x86 加 -unroll-runtime -unroll-runtime-multi-exit -unroll-count=4 即展開。7000 B cycles/B:a64 0.633 → 1.676(關展開),x86 1.507 → 0.633(開展開),兩邊同形態時每 cycle 相同,差距全由展開決定。",
+ "doc_mismatch":"無數字衝突(c26:a64 0.63、x86 1.51)。c26「4× 展開由哪個 TTI 設定觸發未定位」:已定位到 AArch64 TTI 對多出口迴圈的 runtime unroll(RuntimeUnrollMultiExit),開關為 -unroll-runtime-multi-exit。補充:不展開時 a64 1.676 比 x86 1.507 慢 11%,章節的「兩邊同 1.51 地板」在本次 a64 側不成立。"}

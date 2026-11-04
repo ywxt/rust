@@ -1,0 +1,84 @@
+# baseline refs: old chapter baseline 88f7399cb49 ; measured commit 07e526db9df
+### aarch64 perf report (vec::bench_dedup_none_100)
+
+    99.78%  allocbenches-b4  allocbenches-b48d0ecb0c6d7898  [.] _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches3vec20bench_dedup_none_1000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+### aarch64 core 54, 07e526db9df allocbenches
+
+# host=localhost.localdomain arch=aarch64 core=54 bin=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/alloctests/b48d0ecb0c6d7898/out/allocbenches-b48d0ecb0c6d7898 date=2026-11-03T14:25:57+08:00
+run1 test vec::bench_dedup_none_100 ... bench:          14.32 ns/iter (+/- 0.05) = 28571 MB/s
+run1 test vec::bench_dedup_none_1000 ... bench:         116.23 ns/iter (+/- 0.21) = 34482 MB/s
+run1 test vec::bench_dedup_none_10000 ... bench:       1,106.13 ns/iter (+/- 1.44) = 36166 MB/s
+run1 test vec::bench_dedup_all_100 ... bench:          68.72 ns/iter (+/- 3.33) = 5882 MB/s
+run1 test vec::bench_dedup_random_100 ... bench:          85.12 ns/iter (+/- 0.28) = 4705 MB/s
+run2 test vec::bench_dedup_none_100 ... bench:          14.48 ns/iter (+/- 0.27) = 28571 MB/s
+run2 test vec::bench_dedup_none_1000 ... bench:         116.57 ns/iter (+/- 0.58) = 34482 MB/s
+run2 test vec::bench_dedup_none_10000 ... bench:       1,107.37 ns/iter (+/- 2.44) = 36133 MB/s
+run2 test vec::bench_dedup_all_100 ... bench:          70.58 ns/iter (+/- 0.74) = 5714 MB/s
+run2 test vec::bench_dedup_random_100 ... bench:          84.95 ns/iter (+/- 0.24) = 4761 MB/s
+run3 test vec::bench_dedup_none_100 ... bench:          14.54 ns/iter (+/- 0.02) = 28571 MB/s
+run3 test vec::bench_dedup_none_1000 ... bench:         116.38 ns/iter (+/- 0.25) = 34482 MB/s
+run3 test vec::bench_dedup_none_10000 ... bench:       1,107.68 ns/iter (+/- 5.98) = 36133 MB/s
+run3 test vec::bench_dedup_all_100 ... bench:          69.40 ns/iter (+/- 1.90) = 5797 MB/s
+run3 test vec::bench_dedup_random_100 ... bench:          84.94 ns/iter (+/- 0.25) = 4761 MB/s
+### x86 core 12
+# host=ywxt-work arch=x86_64 core=12 bin=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/alloctests/b18a163da23bc6bf/out/allocbenches-b18a163da23bc6bf date=2026-11-03T14:49:02+08:00
+run1 test vec::bench_dedup_none_100 ... bench:           6.38 ns/iter (+/- 0.24) = 66666 MB/s
+run1 test vec::bench_dedup_none_1000 ... bench:          61.59 ns/iter (+/- 2.01) = 65573 MB/s
+run1 test vec::bench_dedup_none_10000 ... bench:         560.06 ns/iter (+/- 21.04) = 71428 MB/s
+run1 test vec::bench_dedup_all_100 ... bench:          37.51 ns/iter (+/- 1.63) = 10810 MB/s
+run1 test vec::bench_dedup_random_100 ... bench:          38.07 ns/iter (+/- 2.69) = 10526 MB/s
+run2 test vec::bench_dedup_none_100 ... bench:           6.23 ns/iter (+/- 0.37) = 66666 MB/s
+run2 test vec::bench_dedup_none_1000 ... bench:          60.28 ns/iter (+/- 3.46) = 66666 MB/s
+run2 test vec::bench_dedup_none_10000 ... bench:         541.68 ns/iter (+/- 27.59) = 73937 MB/s
+run2 test vec::bench_dedup_all_100 ... bench:          38.25 ns/iter (+/- 1.67) = 10526 MB/s
+run2 test vec::bench_dedup_random_100 ... bench:          33.64 ns/iter (+/- 2.02) = 12121 MB/s
+run3 test vec::bench_dedup_none_100 ... bench:           6.21 ns/iter (+/- 0.38) = 66666 MB/s
+run3 test vec::bench_dedup_none_1000 ... bench:          59.94 ns/iter (+/- 3.91) = 67796 MB/s
+run3 test vec::bench_dedup_none_10000 ... bench:         537.44 ns/iter (+/- 33.81) = 74487 MB/s
+run3 test vec::bench_dedup_all_100 ... bench:          37.02 ns/iter (+/- 2.13) = 10810 MB/s
+run3 test vec::bench_dedup_random_100 ... bench:          36.37 ns/iter (+/- 2.16) = 11111 MB/s
+### aarch64 perf annotate vec::bench_dedup_none_100 (excerpt, hot loop)
+    0.00 :   8b5f4:  mov     x11, #0xfffffffffffffff9        // #-7
+   66.64 :   8b5f8:  add     x13, x11, #0x10
+    0.00 :   8b5fc:  cmp     x13, x10
+    0.00 :   8b600:  b.hi    8b650 <<allocbenches::vec::bench_dedup_none_100::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x63c>  // b.pmore
+    2.22 :   8b604:  ldur    q0, [x12, #-4]
+    0.34 :   8b608:  ldur    q1, [x12, #12]
+    0.00 :   8b60c:  add     x11, x11, #0x8
+    0.38 :   8b610:  ldp     q2, q3, [x12], #32
+    0.00 :   8b614:  cmeq    v1.4s, v3.4s, v1.4s
+    0.00 :   8b618:  cmeq    v0.4s, v2.4s, v0.4s
+    0.00 :   8b61c:  uzp1    v0.8h, v0.8h, v1.8h
+    4.07 :   8b620:  xtn     v1.8b, v0.8h
+    0.00 :   8b624:  fmov    x13, d1
+    0.00 :   8b628:  cbz     x13, 8b5f8 <<allocbenches::vec::bench_dedup_none_100::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x5e4>
+    0.00 :   8b62c:  ldr     q1, [sp, #48]
+    0.00 :   8b630:  and     v0.16b, v0.16b, v1.16b
+    0.00 :   8b634:  addv    h0, v0.8h
+### x86 perf annotate excerpt
+    0.00 :   e4fda:  cmp    %r8d,0x1c(%rdx)
+    0.00 :   e4fde:  je     e5054 <<allocbenches::vec::bench_dedup_none_100::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x884>
+    0.00 :   e4fe0:  jmp    e5152 <<allocbenches::vec::bench_dedup_none_100::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x982>
+    0.00 :   e4fe5:  data16 cs nopw 0x0(%rax,%rax,1)
+    0.01 :   e4ff0:  mov    $0x1,%edi
+    0.01 :   e4ff5:  data16 cs nopw 0x0(%rax,%rax,1)
+   22.09 :   e5000:  lea    0x8(%rdi),%rsi
+    2.88 :   e5004:  cmp    %rcx,%rsi
+    0.00 :   e5007:  ja     e50db <<allocbenches::vec::bench_dedup_none_100::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x90b>
+    0.74 :   e500d:  movdqu -0x4(%rdx,%rdi,4),%xmm1
+    0.01 :   e5013:  movdqu (%rdx,%rdi,4),%xmm0
+   10.21 :   e5018:  pcmpeqd %xmm1,%xmm0
+    4.76 :   e501c:  movdqu 0xc(%rdx,%rdi,4),%xmm1
+    1.10 :   e5022:  movdqu 0x10(%rdx,%rdi,4),%xmm2
+    0.00 :   e5028:  pcmpeqd %xmm1,%xmm2
+   18.34 :   e502c:  packssdw %xmm2,%xmm0
+    2.29 :   e5030:  pmovmskb %xmm0,%r8d
+    8.33 :   e5035:  mov    %rsi,%rdi
+    0.00 :   e5038:  test   %r8d,%r8d
+    0.00 :   e503b:  je     e5000 <<allocbenches::vec::bench_dedup_none_100::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x830>
+    0.00 :   e503d:  packsswb %xmm0,%xmm0
+    0.00 :   e5041:  pmovmskb %xmm0,%edi
+    0.00 :   e5045:  movzbl %dil,%edi
+    0.00 :   e5049:  tzcnt  %edi,%edi
+    0.00 :   e504d:  add    %rdi,%rsi
+    0.00 :   e5050:  add    $0xfffffffffffffff8,%rsi

@@ -1,0 +1,26 @@
+### x86_64 本機 i7-12700(CORE=4)
+== 2026-11-03T16:11:53+08:00 x86_64 ldd (GNU libc) 2.42
+gcc (GCC) 15.3.0
+== repro.c(gcc -O2,IT=100000,每輪 = 拷一次全部段)
+libc 8064B      cycles/單位=245.909  instructions/單位=583.885  L1-dcache-load-misses/單位=0.014
+libc 16256B     cycles/單位=471.852  instructions/單位=626.891  L1-dcache-load-misses/單位=0.025
+libc 32640B     cycles/單位=2480.805  instructions/單位=669.896  L1-dcache-load-misses/單位=470.169
+loop 8064B      cycles/單位=534.921  instructions/單位=2116.885  L1-dcache-load-misses/單位=0.015
+loop 16256B     cycles/單位=1094.017  instructions/單位=4179.891  L1-dcache-load-misses/單位=0.030
+loop 32640B     cycles/單位=3329.431  instructions/單位=8290.897  L1-dcache-load-misses/單位=377.442
+erms 8064B      cycles/單位=373.632  instructions/單位=118.885  L1-dcache-load-misses/單位=0.018
+erms 16256B     cycles/單位=645.026  instructions/單位=136.891  L1-dcache-load-misses/單位=0.038
+erms 32640B     cycles/單位=2572.962  instructions/單位=154.897  L1-dcache-load-misses/單位=489.726
+
+### aarch64 univpn-work-1(CORE=44)
+
+
+== 2026-11-03T15:50:02+08:00 aarch64 ldd (GNU libc) 2.38
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+== repro.c(gcc -O2,IT=100000,每輪 = 拷一次全部段)
+libc 8064B      cycles/單位=497.661  instructions/單位=1430.783  L1-dcache-load-misses/單位=0.065
+libc 16256B     cycles/單位=964.115  instructions/單位=2738.128  L1-dcache-load-misses/單位=0.073
+libc 32640B     cycles/單位=1892.622  instructions/單位=5326.140  L1-dcache-load-misses/單位=0.090
+loop 8064B      cycles/單位=535.910  instructions/單位=1102.607  L1-dcache-load-misses/單位=0.065
+loop 16256B     cycles/單位=1097.207  instructions/單位=2141.437  L1-dcache-load-misses/單位=0.076
+loop 32640B     cycles/單位=2218.205  instructions/單位=4204.252  L1-dcache-load-misses/單位=0.547

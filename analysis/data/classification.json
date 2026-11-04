@@ -1,0 +1,4148 @@
+[
+ {
+  "id": "c01",
+  "title": "`bench_read_slice` x86_64 / aarch64 彙編對比與性能熱點分析",
+  "interfaces": [
+   "<&[u8] as Read>::read",
+   "copy_from_slice"
+  ],
+  "benches": [
+   {
+    "name": "io::bench_read_slice",
+    "a64_cyc": 48.5,
+    "x86_cyc": 40.6,
+    "ratio": 1.19
+   }
+  ],
+  "tags": [
+   "B5",
+   "S4"
+  ],
+  "primary": "B5",
+  "x86_cause": "同寬拷貝本機每 cycle 慢 1.19×;純 store 吞吐兩邊相同,差距來自 `ldp/stp q` 配對、對齊與 load/store 混合,本 bench 上的份額未拆。",
+  "confidence": "medium",
+  "repro": [
+   "B5-store-throughput"
+  ]
+ },
+ {
+  "id": "c02",
+  "title": "`case03_manual_char_len` aarch64 vs x86_64 對比與熱點分析",
+  "interfaces": [
+   "manual_char_len(手寫 UTF-8 首字節跳躍)"
+  ],
+  "benches": [
+   {
+    "name": "str::char_count::ru_huge::case03_manual_char_len",
+    "a64_cyc": 1424986,
+    "x86_cyc": 315197,
+    "ratio": 4.52
+   },
+   {
+    "name": "str::char_count::zh_huge::case03_manual_char_len",
+    "a64_cyc": 989117,
+    "x86_cyc": 792676,
+    "ratio": 1.25
+   },
+   {
+    "name": "str::char_count::emoji_huge::case03_manual_char_len",
+    "a64_cyc": 944388,
+    "x86_cyc": 749661,
+    "ratio": 1.26
+   },
+   {
+    "name": "str::char_count::en_huge::case03_manual_char_len",
+    "a64_cyc": 416520,
+    "x86_cyc": 393045,
+    "ratio": 1.06
+   }
+  ],
+  "tags": [
+   "N1",
+   "B2"
+  ],
+  "primary": "N1",
+  "x86_cause": "AArch64 `early-ifcvt` 把可預測的 2 字節分支併成 `csel`,ru 的地址鏈穿過載入值;zh/emoji 的 1.25× 鏈上多 `and`、`csel` 兩環,`csel` 單獨不解釋,其餘未拆。",
+  "confidence": "high",
+  "repro": [
+   "B2-load-latency",
+   "L02-ifconv-csel"
+  ]
+ },
+ {
+  "id": "c03",
+  "title": "`rotate_huge_by*` 系列分析：算法選擇與訪存模式主導，`gcd` 路徑是明確熱點",
+  "interfaces": [
+   "<[T]>::rotate_left",
+   "ptr_rotate",
+   "ptr_rotate_memmove",
+   "ptr_rotate_swap",
+   "ptr_rotate_gcd"
+  ],
+  "benches": [
+   {
+    "name": "slice::rotate_huge_by1",
+    "a64_cyc": 10104183,
+    "x86_cyc": 7829870,
+    "ratio": 1.29
+   },
+   {
+    "name": "slice::rotate_huge_half",
+    "a64_cyc": 9251853,
+    "x86_cyc": 7430604,
+    "ratio": 1.25
+   },
+   {
+    "name": "slice::rotate_huge_by9199_u64",
+    "a64_cyc": 13751565,
+    "x86_cyc": 11159786,
+    "ratio": 1.23
+   },
+   {
+    "name": "slice::rotate_huge_by9199_big",
+    "a64_cyc": 23818967,
+    "x86_cyc": 43999318,
+    "ratio": 0.54
+   }
+  ],
+  "tags": [
+   "M3",
+   "N2",
+   "M5",
+   "N4"
+  ],
+  "primary": "M3",
+  "x86_cause": "memmove/swap 路徑 x86 大塊拷貝較寬(`rep movsb`/AVX2)且用 AVX2 glibc 變體;gcd 路徑 40 MiB 工作集在 x86 超出 L3 而 aarch64 佔優;base 底數受干擾。",
+  "confidence": "medium",
+  "repro": [
+   "M1-tlb-stride",
+   "M3-copy-bandwidth",
+   "M5-l3-capacity"
+  ]
+ },
+ {
+  "id": "c04",
+  "title": "`char_count` benchmark 系列：按接口分類的全量分析與優化空間",
+  "interfaces": [
+   "str::chars().count (count_chars)",
+   "slice::Iter::filter().count",
+   "Chars::next"
+  ],
+  "benches": [
+   {
+    "name": "str::char_count::en_huge::case00_libcore",
+    "a64_cyc": 63512,
+    "x86_cyc": 51053,
+    "ratio": 1.24
+   },
+   {
+    "name": "str::char_count::en_huge::case01_filter_count_cont_bytes",
+    "a64_cyc": 242142,
+    "x86_cyc": 440102,
+    "ratio": 0.55
+   },
+   {
+    "name": "str::char_count::en_huge::case02_iter_increment",
+    "a64_cyc": 627702,
+    "x86_cyc": 387919,
+    "ratio": 1.62
+   },
+   {
+    "name": "str::char_count::ru_huge::case02_iter_increment",
+    "a64_cyc": 453595,
+    "x86_cyc": 427047,
+    "ratio": 1.06
+   },
+   {
+    "name": "str::char_count::zh_huge::case02_iter_increment",
+    "a64_cyc": 962153,
+    "x86_cyc": 686236,
+    "ratio": 1.4
+   }
+  ],
+  "tags": [
+   "N1",
+   "B8",
+   "R1"
+  ],
+  "primary": "N1",
+  "x86_cause": "case00 是 AArch64 向量化選 ld4 加棧往返(關掉即打平);case02 是 x86 在 rename 階段消除相依立即數加法而本機不消除;case01 反向,x86 cost model 只選 VF 2。",
+  "confidence": "high",
+  "repro": [
+   "B8-rename-elim",
+   "L03-interleave-ld4",
+   "R03-x86-sse2-vf2"
+  ]
+ },
+ {
+  "id": "c05",
+  "title": "`int_log` benchmark 系列：接口、熱點與優化空間評估",
+  "interfaces": [
+   "uN::ilog10",
+   "uN::ilog",
+   "uN::checked_ilog"
+  ],
+  "benches": [
+   {
+    "name": "num::int_log::u16_log_random",
+    "a64_cyc": 404602.1,
+    "x86_cyc": 559443.1,
+    "ratio": 0.72
+   },
+   {
+    "name": "num::int_log::u16_log_geometric",
+    "a64_cyc": 669.0,
+    "x86_cyc": 862.3,
+    "ratio": 0.78
+   },
+   {
+    "name": "num::int_log::u64_log_random",
+    "a64_cyc": 1036585.8,
+    "x86_cyc": 1122871.1,
+    "ratio": 0.92
+   },
+   {
+    "name": "num::int_log::u32_log_random",
+    "a64_cyc": 816574.8,
+    "x86_cyc": 708108.3,
+    "ratio": 1.15
+   },
+   {
+    "name": "num::int_log::u128_log_random_small",
+    "a64_cyc": 833884.7,
+    "x86_cyc": 1074087.7,
+    "ratio": 0.78
+   },
+   {
+    "name": "num::int_log::u16_log10_random",
+    "a64_cyc": 940.6,
+    "x86_cyc": 719.9,
+    "ratio": 1.31
+   },
+   {
+    "name": "num::int_log::u8_log10_random",
+    "a64_cyc": 668.1,
+    "x86_cyc": 538.7,
+    "ratio": 1.24
+   },
+   {
+    "name": "num::int_log::u64_log10_random",
+    "a64_cyc": 1791.2,
+    "x86_cyc": 1548.6,
+    "ratio": 1.16
+   }
+  ],
+  "tags": [
+   "B3",
+   "B4",
+   "B7"
+  ],
+  "primary": "B3",
+  "x86_cause": "`ilog(b)` 上 x86 `imul` 3 cycles 且 `div` 不隨商位數早停,aarch64 每 cycle 較快;`ilog10` u8/u16 的純吞吐碼 x86 IPC 較高(推測為整數吞吐)。",
+  "confidence": "high",
+  "repro": [
+   "B3a-mul-div"
+  ]
+ },
+ {
+  "id": "c06",
+  "title": "`hash::map::new_drop`：benchmark 實測的是 TLS 計數器 RMW，x86/aarch64 差異在同址 store→load 轉發延遲",
+  "interfaces": [
+   "HashMap::new",
+   "RandomState::new"
+  ],
+  "benches": [
+   {
+    "name": "hash::map::new_drop",
+    "a64_cyc": 7.02,
+    "x86_cyc": 1.01,
+    "ratio": 6.93
+   }
+  ],
+  "tags": [
+   "B1"
+  ],
+  "primary": "B1",
+  "x86_cause": "計時迴圈只剩 TLS 計數器的同址 RMW 鏈,本機 store→load 轉發約 7 cycles,x86 每輪 1.00 cycle 已是迴圈吞吐地板。",
+  "confidence": "high",
+  "repro": [
+   "B1-store-load"
+  ]
+ },
+ {
+  "id": "c07",
+  "title": "`str::trim_ascii_char`：通用字符 predicate 的逐字符掃描，而不是 ASCII 空白裁剪",
+  "interfaces": [
+   "str::trim_matches(FnMut(char))",
+   "CharPredicateSearcher",
+   "char::is_ascii"
+  ],
+  "benches": [
+   {
+    "name": "str::trim_ascii_char::long_lorem_ipsum",
+    "a64_cyc": 3084,
+    "x86_cyc": 2590,
+    "ratio": 1.19
+   },
+   {
+    "name": "str::trim_ascii_char::short_ascii",
+    "a64_cyc": 78.9,
+    "x86_cyc": 127.4,
+    "ratio": 0.62
+   },
+   {
+    "name": "str::trim_ascii_char::short_mixed",
+    "a64_cyc": 110.1,
+    "x86_cyc": 52.5,
+    "ratio": 2.1
+   },
+   {
+    "name": "str::trim_ascii_char::short_pile_of_poo",
+    "a64_cyc": 12.0,
+    "x86_cyc": 10.9,
+    "ratio": 1.1
+   }
+  ],
+  "tags": [
+   "B4",
+   "N4",
+   "B8"
+  ],
+  "primary": "B4",
+  "x86_cause": "短輸入的比值由分支預測器能否背住固定 bench 字串的迴圈出口決定(short_ascii x86 失準、short_mixed 本機失準);反向位址鏈另有 x86 rename 消除立即數加法與 mov。",
+  "confidence": "medium",
+  "repro": [
+   "B8-rename-elim",
+   "P1-predictor-pattern"
+  ]
+ },
+ {
+  "id": "c08",
+  "title": "`binary_heap::bench_from_vec`：aarch64 隨機輸入受 child-choice 分支失誤限制",
+  "interfaces": [
+   "BinaryHeap::from(Vec)",
+   "BinaryHeap::rebuild",
+   "sift_down_range"
+  ],
+  "benches": [
+   {
+    "name": "binary_heap::bench_from_vec",
+    "a64_cyc": 1767938.9,
+    "x86_cyc": 1144283.1,
+    "ratio": 1.545
+   }
+  ],
+  "tags": [
+   "N1"
+  ],
+  "primary": "N1",
+  "x86_cause": "AArch64 `select-optimize` 把 child 選擇轉成 `b.hi`,x86 為無分支 `sbb`;關 pass 後比值 0.97–1.01",
+  "confidence": "high",
+  "repro": [
+   "B4-mispredict-cost",
+   "L01-select-opt"
+  ]
+ },
+ {
+  "id": "c09",
+  "title": "`BinaryHeap` sift_down：aarch64 child-choice 分支的 LLVM 來源定位",
+  "interfaces": [
+   "sift_down_range",
+   "sift_down_to_bottom",
+   "BinaryHeap::from",
+   "BinaryHeap::pop",
+   "PeekMut::drop"
+  ],
+  "benches": [
+   {
+    "name": "binary_heap::bench_from_vec",
+    "a64_cyc": 1767938.9,
+    "x86_cyc": 1144283.1,
+    "ratio": 1.545
+   },
+   {
+    "name": "binary_heap::bench_find_smallest_1000",
+    "a64_cyc": 772722.8,
+    "x86_cyc": 441711.1,
+    "ratio": 1.749
+   },
+   {
+    "name": "binary_heap::bench_pop",
+    "a64_cyc": 1304466.7,
+    "x86_cyc": 1092611.9,
+    "ratio": 1.194
+   }
+  ],
+  "tags": [
+   "N1",
+   "B2"
+  ],
+  "primary": "N1",
+  "x86_cause": "AArch64 後端的 select-optimize 把 child 選擇改成分支,隨機堆上誤預測多;關掉後與 x86 cycles 相當。同形態下 L1 載入延遲本機不慢。",
+  "confidence": "high",
+  "repro": [
+   "B2-load-latency",
+   "B9-complex-operand",
+   "L01-select-opt"
+  ]
+ },
+ {
+  "id": "c10",
+  "title": "`Iterator::max_by_key`：CGU 改變 IR 形狀，觸發 LLVM argmax 識別缺口",
+  "interfaces": [
+   "Iterator::max_by_key",
+   "Enumerate"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_max_by_key2",
+    "a64_cyc": 3757.2,
+    "x86_cyc": 3818.1,
+    "ratio": 0.984
+   },
+   {
+    "name": "iter::bench_max_by_key",
+    "a64_cyc": 428.3,
+    "x86_cyc": 434.1,
+    "ratio": 0.987
+   }
+  ],
+  "tags": [
+   "X"
+  ],
+  "primary": "X",
+  "x86_cause": "兩邊都是標量 argmax,卡在 cmp→條件選擇的迴圈攜帶鏈,每 cycle 打平;ns 差距是主頻,LLVM argmax 識別缺口兩平臺共有。",
+  "confidence": "high",
+  "repro": []
+ },
+ {
+  "id": "c11",
+  "title": "`slice::binary_search_l1_worst_case`：`csel` 依賴鏈 vs 可預測分支的取捨已是正確選擇",
+  "interfaces": [
+   "[T]::binary_search",
+   "binary_search_by"
+  ],
+  "benches": [
+   {
+    "name": "slice::binary_search_l1",
+    "a64_cyc": 37.03,
+    "x86_cyc": 37.66,
+    "ratio": 0.983
+   },
+   {
+    "name": "slice::binary_search_l1_with_dups",
+    "a64_cyc": 35.44,
+    "x86_cyc": 39.83,
+    "ratio": 0.89
+   },
+   {
+    "name": "slice::binary_search_l1_worst_case",
+    "a64_cyc": 31.32,
+    "x86_cyc": 25.66,
+    "ratio": 1.22
+   },
+   {
+    "name": "slice::binary_search_l2",
+    "a64_cyc": 60.52,
+    "x86_cyc": 62.71,
+    "ratio": 0.965
+   },
+   {
+    "name": "slice::binary_search_l2_with_dups",
+    "a64_cyc": 58.83,
+    "x86_cyc": 63.54,
+    "ratio": 0.926
+   },
+   {
+    "name": "slice::binary_search_l2_worst_case",
+    "a64_cyc": 48.37,
+    "x86_cyc": 40.76,
+    "ratio": 1.187
+   },
+   {
+    "name": "slice::binary_search_l3_worst_case",
+    "a64_cyc": 83.2,
+    "x86_cyc": 68.45,
+    "ratio": 1.215
+   }
+  ],
+  "tags": [
+   "O1",
+   "N4"
+  ],
+  "primary": "O1",
+  "x86_cause": "單鏈延遲相同,x86 跨查詢重疊多 16–22%;成因未知,窗口容量已由 `O1-overlap` 排除為充分解釋,且未能以最小程式復現",
+  "confidence": "low",
+  "repro": [
+   "O1-overlap"
+  ]
+ },
+ {
+  "id": "c12",
+  "title": "`binary_heap::bench_peek_mut_deref_mut` 與 `bench_find_smallest_1000`:前者在 `07e526db9df` 上賦值迴圈已被消除(0.35 ns/iter,只剩 `black_box` 的一條 store),不再測到接口;後者複現 child-choice 分支瓶頸",
+  "interfaces": [
+   "BinaryHeap::peek_mut",
+   "PeekMut::deref_mut",
+   "PeekMut::drop",
+   "sift_down"
+  ],
+  "benches": [
+   {
+    "name": "binary_heap::bench_peek_mut_deref_mut",
+    "a64_cyc": 1.015,
+    "x86_cyc": 1.021,
+    "ratio": 0.994
+   },
+   {
+    "name": "binary_heap::bench_find_smallest_1000",
+    "a64_cyc": 772722.8,
+    "x86_cyc": 441711.1,
+    "ratio": 1.749
+   }
+  ],
+  "tags": [
+   "N1",
+   "N4"
+  ],
+  "primary": "N1",
+  "x86_cause": "`find_smallest`:AArch64 `select-optimize` 出 `b.hi`,x86 無分支,關 pass 後 1.048;`peek_mut`:bench 已失效,兩邊只剩 `black_box` 的一條 store",
+  "confidence": "high",
+  "repro": [
+   "L01-select-opt",
+   "N4-bench-validity"
+  ]
+ },
+ {
+  "id": "c13",
+  "title": "`vec::bench_dedup_none_100`:現 std(#162810)的 prescan 已是 NEON 分組比較,14.32 ns/iter、0.42 cycles/元素;`88f7399` 基線的純 scalar prescan 為 59.16 ns,本地原型 NEON 分塊約 3×",
+  "interfaces": [
+   "Vec::dedup",
+   "find_first_duplicate",
+   "Vec::dedup_by"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_dedup_none_100",
+    "a64_cyc": 41.5,
+    "x86_cyc": 29.4,
+    "ratio": 1.41
+   },
+   {
+    "name": "vec::bench_dedup_none_1000",
+    "a64_cyc": 336.3,
+    "x86_cyc": 278.7,
+    "ratio": 1.21
+   },
+   {
+    "name": "vec::bench_dedup_none_10000",
+    "a64_cyc": 3208.4,
+    "x86_cyc": 2516.6,
+    "ratio": 1.27
+   },
+   {
+    "name": "vec::bench_dedup_u8_none_1000",
+    "a64_cyc": 175.2,
+    "x86_cyc": 96.3,
+    "ratio": 1.82
+   },
+   {
+    "name": "vec::bench_dedup_u64_none_1000",
+    "a64_cyc": 657.7,
+    "x86_cyc": 1063.2,
+    "ratio": 0.62
+   }
+  ],
+  "tags": [
+   "S1",
+   "S2",
+   "B6",
+   "R1"
+  ],
+  "primary": "S1",
+  "x86_cause": "u32/u8 差距來自 NEON 遮罩歸約(無 `movemask`、搬到 GPR)與未對齊載入(推測,份額未拆);u64 因 std 以 `sse4.1` 為門檻,x86-64 基線走標量,本機每 cycle 較快。",
+  "confidence": "medium",
+  "repro": [
+   "B6-unaligned",
+   "L11-movemask",
+   "R08-x86-u64-scalar-prescan",
+   "S2-mask-floor"
+  ]
+ },
+ {
+  "id": "c14",
+  "title": "`slice::push`:測的是 store→load 轉發鏈上的 Vec 三欄位往返,不是 push 本身的算術",
+  "interfaces": [
+   "Vec::push"
+  ],
+  "benches": [
+   {
+    "name": "slice::push",
+    "a64_cyc": 7.2,
+    "x86_cyc": 46.0,
+    "ratio": 0.16
+   },
+   {
+    "name": "probe push pre (loop only, no page faults)",
+    "a64_cyc": 7.1,
+    "x86_cyc": 3.6,
+    "ratio": 1.97
+   }
+  ],
+  "tags": [
+   "B1",
+   "M1",
+   "N4"
+  ],
+  "primary": "B1",
+  "x86_cause": "迴圈本體 aarch64 受 len 往返的轉發延遲限制(7.1),x86 轉發 ≤1、受元素寫流限制(2.00–3.6);harness 比值 0.16 是 x86 4 KB 頁缺頁(THP madvise)",
+  "confidence": "high",
+  "repro": [
+   "B1-store-load",
+   "M1-tlb-stride",
+   "N4-bench-validity"
+  ]
+ },
+ {
+  "id": "c15",
+  "title": "`vec::bench_in_place_zip_iter_mut`:名不符實的 indexed 迴圈;本構建長度 256 內聯可見,整段展開成 NEON 直線碼,5.74 ns、無標量 epilogue;`88f7399` 基線(24.56 ns,長度不透明)2/3 時間花在被強制保留的標量 epilogue",
+  "interfaces": [
+   "slice::iter_mut().enumerate().for_each",
+   "slice indexing"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_in_place_zip_iter_mut",
+    "a64_cyc": 16.6,
+    "x86_cyc": 14.0,
+    "ratio": 1.19
+   }
+  ],
+  "tags": [
+   "B5"
+  ],
+  "primary": "B5",
+  "x86_cause": "256 B 展開的同寬拷貝本機每 cycle 慢 1.19×;純 store 吞吐兩邊相同,差距來自 `ldp/stp q` 配對、對齊與 load/store 混合,本 bench 上的份額未拆。",
+  "confidence": "medium",
+  "repro": [
+   "B5-store-throughput"
+  ]
+ },
+ {
+  "id": "c16",
+  "title": "`char::methods::bench_non_ascii_char_to_uppercase`:`07e526db9df` 上 Latin-1 輸入全走 `to_upper` 的凍結區 match,55.3 µs 測的是呼叫與 `black_box` 往返;`88f7399` 基線上 34% 的輸入「無映射」卻付出最貴的雙重 binary search",
+  "interfaces": [
+   "char::to_uppercase",
+   "conversions::to_upper",
+   "conversions::lookup"
+  ],
+  "benches": [
+   {
+    "name": "char::methods::bench_non_ascii_char_to_uppercase",
+    "a64_cyc": 160425,
+    "x86_cyc": 207050,
+    "ratio": 0.78
+   },
+   {
+    "name": "char::methods::bench_non_ascii_char_to_lowercase",
+    "a64_cyc": 160562,
+    "x86_cyc": 206683,
+    "ratio": 0.78
+   },
+   {
+    "name": "char::methods::bench_non_latin1_char_to_uppercase",
+    "a64_cyc": 945396,
+    "x86_cyc": 718342,
+    "ratio": 1.32
+   }
+  ],
+  "tags": [
+   "B10",
+   "N1",
+   "R1",
+   "B1",
+   "N4",
+   "O1"
+  ],
+  "primary": "B10",
+  "x86_cause": "x86 後端把 `[char;3]` sret 拆成 4 B + 8 B@+4 兩筆 store,呼叫端 8 B 重載轉發失敗,每字符約 16 cycles;aarch64 的 `stp` 形態只是偶然避開。",
+  "confidence": "high",
+  "repro": [
+   "R02-x86-char3-sret"
+  ]
+ },
+ {
+  "id": "c17",
+  "title": "`slice::starts_with_diff_one_element_at_end`:一次 memcmp 調用,96% 時間在 glibc 向量迴圈,無划算的 std 修改",
+  "interfaces": [
+   "<[T]>::starts_with",
+   "PartialEq for [T] (BytewiseEq)",
+   "memcmp / __memcmpeq"
+  ],
+  "benches": [
+   {
+    "name": "slice::starts_with_diff_one_element_at_end",
+    "a64_cyc": 29.4,
+    "x86_cyc": 19.2,
+    "ratio": 1.53
+   },
+   {
+    "name": "slice::starts_with_same_vector",
+    "a64_cyc": 1.0,
+    "x86_cyc": 0.98,
+    "ratio": 1.04
+   },
+   {
+    "name": "slice::starts_with_single_element",
+    "a64_cyc": 1.0,
+    "x86_cyc": 0.98,
+    "ratio": 1.04
+   }
+  ],
+  "tags": [
+   "N2",
+   "S4",
+   "S1",
+   "S2"
+  ],
+  "primary": "N2",
+  "x86_cause": "x86 glibc 用 AVX2 32 B、本機 glibc 2.38 只有 NEON 16 B;同寬手寫 4 000 B 差 1.03,400 B 固定成本差距推測來自遮罩歸約。",
+  "confidence": "medium",
+  "repro": [
+   "G1-memcmp-short",
+   "S4-load-width"
+  ]
+ },
+ {
+  "id": "c18",
+  "title": "`binary_heap::bench_pop`:child-choice 分支病灶第三現場,`select_unpredictable` 原型 -34%",
+  "interfaces": [
+   "BinaryHeap::pop",
+   "sift_down_to_bottom",
+   "sift_up"
+  ],
+  "benches": [
+   {
+    "name": "binary_heap::bench_pop",
+    "a64_cyc": 1304466.7,
+    "x86_cyc": 1092611.9,
+    "ratio": 1.194
+   }
+  ],
+  "tags": [
+   "N1",
+   "B4",
+   "R1"
+  ],
+  "primary": "N1",
+  "x86_cause": "AArch64 select-optimize 把 child 選擇改成分支,本機多付誤預測;同形態(cinc vs setle)下反而 x86 每 cycle 慢約 16%,機制未定。",
+  "confidence": "medium",
+  "repro": [
+   "L01-select-opt"
+  ]
+ },
+ {
+  "id": "c19",
+  "title": "`btree::map::iteration_mut_1000`:`07e526db9df` 上 895.64 ns(葉內快路徑 #163521 已合入),成本在結構不在事件;本機 `iter`(1,001.14 ns)反比 `iter_mut` 慢",
+  "interfaces": [
+   "BTreeMap::iter_mut",
+   "btree::navigate::next_kv"
+  ],
+  "benches": [
+   {
+    "name": "btree::map::iteration_mut_1000",
+    "a64_cyc": 2596.8,
+    "x86_cyc": 2870.0,
+    "ratio": 0.9
+   },
+   {
+    "name": "btree::map::iteration_mut_100000",
+    "a64_cyc": 983576,
+    "x86_cyc": 1018436,
+    "ratio": 0.97
+   }
+  ],
+  "tags": [
+   "X",
+   "F4"
+  ],
+  "primary": "X",
+  "x86_cause": "本機每 cycle 較快(指令少 24%),ns 差距是主頻;小足跡下本機必跳分支 1 條/cycle,x86 2–3,壓低本機 IPC",
+  "confidence": "high",
+  "repro": [
+   "F4-taken-throughput"
+  ]
+ },
+ {
+  "id": "c20",
+  "title": "`ascii::long::is_ascii_whitespace`:謂詞在第 6 字節就假,168.67 ns 全是 memcpy——benchmark 沒測到目標",
+  "interfaces": [
+   "u8::is_ascii_whitespace",
+   "<[u8]>::to_vec"
+  ],
+  "benches": [
+   {
+    "name": "ascii::long::is_ascii_whitespace",
+    "a64_cyc": 491.2,
+    "x86_cyc": 294.8,
+    "ratio": 1.666
+   },
+   {
+    "name": "ascii::long::case00_alloc_only",
+    "a64_cyc": 487.4,
+    "x86_cyc": 293.2,
+    "ratio": 1.662
+   },
+   {
+    "name": "ascii::long::is_ascii_digit",
+    "a64_cyc": 488.0,
+    "x86_cyc": 261.4,
+    "ratio": 1.867
+   },
+   {
+    "name": "ascii::long::is_ascii_control",
+    "a64_cyc": 487.7,
+    "x86_cyc": 302.7,
+    "ratio": 1.611
+   },
+   {
+    "name": "ascii::long::is_ascii_punctuation",
+    "a64_cyc": 489.2,
+    "x86_cyc": 305.4,
+    "ratio": 1.602
+   }
+  ],
+  "tags": [
+   "M3",
+   "N4"
+  ],
+  "primary": "M3",
+  "x86_cause": "bench 實際測 `to_vec` 的 7 000 B 拷貝,x86 用 `rep movsb` / AVX2 較寬的拷貝,同寬手寫只差 1.0–1.4×。",
+  "confidence": "high",
+  "repro": [
+   "M3-copy-bandwidth",
+   "N4-bench-validity"
+  ]
+ },
+ {
+  "id": "c21",
+  "title": "`num::flt2dec::strategy::*`:Grisu 快路徑健康;`exact_inf` 全部落入 Dragon 的 bignum 逐位除法(07e526db9df 已是 `Big64x20`,`dragon::big_exact_inf` 21 938.94 ns;本章基線為 32-bit limb)",
+  "interfaces": [
+   "grisu::format_shortest",
+   "grisu::format_exact",
+   "dragon::format_shortest",
+   "dragon::format_exact",
+   "Big64x20::div_rem_small",
+   "__udivti3"
+  ],
+  "benches": [
+   {
+    "name": "num::flt2dec::strategy::dragon::bench_big_exact_3",
+    "a64_cyc": 1765.8,
+    "x86_cyc": 1253.8,
+    "ratio": 1.41
+   },
+   {
+    "name": "num::flt2dec::strategy::dragon::bench_big_exact_12",
+    "a64_cyc": 3215.4,
+    "x86_cyc": 2349.7,
+    "ratio": 1.37
+   },
+   {
+    "name": "num::flt2dec::strategy::dragon::bench_big_exact_inf",
+    "a64_cyc": 63668.6,
+    "x86_cyc": 49747.1,
+    "ratio": 1.28
+   },
+   {
+    "name": "num::flt2dec::strategy::grisu::bench_big_shortest",
+    "a64_cyc": 202.0,
+    "x86_cyc": 169.3,
+    "ratio": 1.19
+   },
+   {
+    "name": "num::flt2dec::strategy::grisu::bench_small_shortest",
+    "a64_cyc": 96.0,
+    "x86_cyc": 88.6,
+    "ratio": 1.08
+   },
+   {
+    "name": "num::flt2dec::strategy::grisu::bench_one_exact_inf",
+    "a64_cyc": 1972.3,
+    "x86_cyc": 2296.8,
+    "ratio": 0.86
+   },
+   {
+    "name": "num::flt2dec::strategy::dragon::bench_small_exact_3",
+    "a64_cyc": 206.8,
+    "x86_cyc": 267.4,
+    "ratio": 0.77
+   }
+  ],
+  "tags": [
+   "B3",
+   "B4",
+   "F3",
+   "N1"
+  ],
+  "primary": "B3",
+  "x86_cause": "big_exact 的執行期除數 u128÷u64 在 x86 是硬體 div、本機是 compiler_builtins 軟體除法;digit 迴圈的重複分支序列 x86 記得住、本機記不住(推測與迴圈體必跳分支多有關)。",
+  "confidence": "high",
+  "repro": [
+   "B3b-u128-div",
+   "P1-predictor-pattern"
+  ]
+ },
+ {
+  "id": "c22",
+  "title": "`vec::bench_in_place_zip_recycle`:in-place collect 生效,無 alloc;剩餘差距是移動所有權的簿記稅",
+  "interfaces": [
+   "vec::IntoIter + Zip + Enumerate + Map collect (in-place)"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_in_place_zip_recycle",
+    "a64_cyc": 90.1,
+    "x86_cyc": 82.8,
+    "ratio": 1.09
+   }
+  ],
+  "tags": [
+   "X",
+   "B5"
+  ],
+  "primary": "X",
+  "x86_cause": "每 cycle 只差 9%,ns 差距主要是主頻;小幅差距與 store 吞吐同向,未拆",
+  "confidence": "high",
+  "repro": []
+ },
+ {
+  "id": "c23",
+  "title": "`string::bench_push_char_two_bytes`:與 `Vec::push` 同一塊 store-forward 地板,UTF-8 編碼幾乎免費",
+  "interfaces": [
+   "String::push"
+  ],
+  "benches": [
+   {
+    "name": "string::bench_push_char_two_bytes",
+    "a64_cyc": 76792.1,
+    "x86_cyc": 51714.1,
+    "ratio": 1.485
+   },
+   {
+    "name": "string::bench_push_char_one_byte",
+    "a64_cyc": 77621.7,
+    "x86_cyc": 34619.1,
+    "ratio": 2.242
+   },
+   {
+    "name": "probe:asm load-add-store chain (cyc/iter)",
+    "a64_cyc": 7.1,
+    "x86_cyc": 1.0,
+    "ratio": 7.1
+   }
+  ],
+  "tags": [
+   "B1"
+  ],
+  "primary": "B1",
+  "x86_cause": "本機每 push 付一次 7 cycles 的 store→load 轉發;x86 轉發延遲 ≤1,不是瓶頸,push 迴圈由吞吐決定。",
+  "confidence": "high",
+  "repro": [
+   "B1-store-load"
+  ]
+ },
+ {
+  "id": "c24",
+  "title": "`str::char_iterator_for`:完整 UTF-8 解碼 @ 完美預測,0.60 ns/char(30.58 ns / 51 char)已是該串行形狀的上限",
+  "interfaces": [
+   "str::chars",
+   "Chars::next",
+   "next_code_point"
+  ],
+  "benches": [
+   {
+    "name": "str::char_iterator_for",
+    "a64_cyc": 86.4,
+    "x86_cyc": 87.8,
+    "ratio": 0.98
+   }
+  ],
+  "tags": [
+   "X",
+   "B4",
+   "U1"
+  ],
+  "primary": "X",
+  "x86_cause": "每 cycle 兩邊打平(0.98),ns 差距是主頻;x86 每 iter 約 0.54 次誤預測被較高吞吐抵銷,誤預測機制未隔離。",
+  "confidence": "medium",
+  "repro": [
+   "P1-predictor-pattern"
+  ]
+ },
+ {
+  "id": "c25",
+  "title": "`io::cursor::bench_write_vec`:69.09 ns(07e526db9df;本章基線 77 ns)裏 write 本體只佔一半,另一半是 harness 的 to_vec + realloc",
+  "interfaces": [
+   "Cursor<&mut Vec<u8>>::write_all",
+   "vec_write_all",
+   "Cursor::write_all_vectored"
+  ],
+  "benches": [
+   {
+    "name": "io::cursor::bench_write_vec",
+    "a64_cyc": 200.4,
+    "x86_cyc": 161.1,
+    "ratio": 1.24,
+    "note": "replica of tests target"
+   },
+   {
+    "name": "io::cursor::bench_write_vec_vectored",
+    "a64_cyc": 2060,
+    "x86_cyc": 2843,
+    "ratio": 0.72
+   }
+  ],
+  "tags": [
+   "N2",
+   "N4",
+   "B2",
+   "R1"
+  ],
+  "primary": "N2",
+  "x86_cause": "`bench_write_vec` 主要量 glibc malloc,兩邊 glibc 版本與 malloc 路徑不同,差在 malloc 碼的 IPC;`vectored` 的 64 KiB 工作集超出 x86 48 KiB L1D,x86 每 cycle 較慢。",
+  "confidence": "medium",
+  "repro": [
+   "G4-malloc",
+   "R09-x86-memmove-erms-l1"
+  ]
+ },
+ {
+  "id": "c26",
+  "title": "`ascii::long::is_ascii_*` 全家 + x86 對比:兩平臺同樣拒絕向量化,標量形狀逐條同構,本地 NEON 原型 17×",
+  "interfaces": [
+   "u8::is_ascii_whitespace",
+   "u8::is_ascii_digit",
+   "u8::is_ascii_alphanumeric",
+   "u8::is_ascii_punctuation",
+   "u8::is_ascii_control",
+   "u8::is_ascii",
+   "Iterator::all"
+  ],
+  "benches": [
+   {
+    "name": "ascii::long::is_ascii_digit",
+    "a64_cyc": 488.0,
+    "x86_cyc": 261.4,
+    "ratio": 1.867
+   },
+   {
+    "name": "ascii::long::is_ascii_punctuation",
+    "a64_cyc": 489.2,
+    "x86_cyc": 305.4,
+    "ratio": 1.602
+   },
+   {
+    "name": "probe:all(is_ascii_whitespace) 7000B cyc/B",
+    "a64_cyc": 1.51,
+    "x86_cyc": 1.51,
+    "ratio": 1.0
+   },
+   {
+    "name": "probe:all(is_ascii_digit) 7000B cyc/B",
+    "a64_cyc": 1.9,
+    "x86_cyc": 1.51,
+    "ratio": 1.26
+   },
+   {
+    "name": "probe:all(is_ascii_punctuation) 7000B cyc/B",
+    "a64_cyc": 4.96,
+    "x86_cyc": 4.51,
+    "ratio": 1.1
+   },
+   {
+    "name": "probe:all(u8::is_ascii) 7000B cyc/B",
+    "a64_cyc": 0.63,
+    "x86_cyc": 1.51,
+    "ratio": 0.42
+   },
+   {
+    "name": "probe:fold(digit) 7000B cyc/B",
+    "a64_cyc": 0.082,
+    "x86_cyc": 0.088,
+    "ratio": 0.93
+   }
+  ],
+  "tags": [
+   "X",
+   "N1",
+   "U1"
+  ],
+  "primary": "X",
+  "x86_cause": "謂詞族同構,每 cycle 差 0–26%;`iter().all(u8::is_ascii)` 本機因 AArch64 TTI 多出口 runtime unroll 快 2.4×;`ccmp` 融合慢 26% 未拆",
+  "confidence": "medium",
+  "repro": [
+   "L12-ascii-all-unroll",
+   "N4-bench-validity"
+  ]
+ },
+ {
+  "id": "c27",
+  "title": "`str::to_lowercase::short_pile_of_poo`:16 個 emoji 各付一次 5 輪 binary search(Unicode 18 表;`88f7399` 基線為 4 輪)只為確認「無映射」;本地 astral fast-reject 原型 -67%(`88f7399` 基線,未在 `07e526db9df` 上重測)",
+  "interfaces": [
+   "str::to_lowercase",
+   "conversions::to_lower",
+   "conversions::lookup"
+  ],
+  "benches": [
+   {
+    "name": "str::to_lowercase::short_pile_of_poo",
+    "a64_cyc": 900.9,
+    "x86_cyc": 737.1,
+    "ratio": 1.22
+   },
+   {
+    "name": "str::to_lowercase::short_mixed",
+    "a64_cyc": 983.0,
+    "x86_cyc": 903.8,
+    "ratio": 1.09
+   }
+  ],
+  "tags": [
+   "O1",
+   "B2"
+  ],
+  "primary": "O1",
+  "x86_cause": "binary search 單輪延遲兩邊同為 11 cycles,x86 能重疊更多相鄰字符的獨立搜尋鏈;成因未知,ROB 容量兩邊相近已排除。",
+  "confidence": "low",
+  "repro": [
+   "O1-overlap"
+  ]
+ },
+ {
+  "id": "c28",
+  "title": "`hash::set_ops::set_union`:106 ns 裏 92% 是 difference 側的 10 次 SipHash+probe;SipHash 佔 2/3",
+  "interfaces": [
+   "HashSet::union",
+   "HashSet::contains",
+   "RandomState(SipHash-1-3)"
+  ],
+  "benches": [
+   {
+    "name": "hash::set_ops::set_union",
+    "a64_cyc": 277.5,
+    "x86_cyc": 255.3,
+    "ratio": 1.087
+   }
+  ],
+  "tags": [
+   "X",
+   "B9",
+   "N1"
+  ],
+  "primary": "X",
+  "x86_cause": "bench 層面每 cycle 接近打平,ns 差距是主頻;本機 `eor …, ror` 延遲 2 cycles 使單條雜湊鏈慢,但指令少 30% 且查找可重疊,兩者抵消。",
+  "confidence": "high",
+  "repro": [
+   "B9-complex-operand",
+   "L08-eor-ror-fold"
+  ]
+ },
+ {
+  "id": "c29",
+  "title": "`sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy`:「慢」在每 iter ~4.4 次 syscall 的內核往返,splice 零拷貝本身工作正常(本章基線,推測未綁核);07e526db9df 綁單核時 124 996.41 ns,主要是自旋執行緒的排程",
+  "interfaces": [
+   "io::copy (kernel_copy splice)",
+   "io::copy (copy_file_range/sendfile)",
+   "BufReader+io::copy /dev/zero"
+  ],
+  "benches": [
+   {
+    "name": "kernel_copy::bench_socket_pipe_socket_copy",
+    "a64_cyc": 371216,
+    "x86_cyc": 119508,
+    "ratio": 3.11,
+    "note": "base.tsv 82.3x is :u artifact; yield replica ratio 0.92"
+   },
+   {
+    "name": "kernel_copy::bench_file_to_socket_copy",
+    "a64_cyc": 105769,
+    "x86_cyc": 154766,
+    "ratio": 0.68
+   },
+   {
+    "name": "kernel_copy::bench_file_to_uds_copy",
+    "a64_cyc": 101975,
+    "x86_cyc": 141620,
+    "ratio": 0.72
+   },
+   {
+    "name": "kernel_copy::bench_file_to_file_copy",
+    "a64_cyc": 31303,
+    "x86_cyc": 25804,
+    "ratio": 1.21,
+    "note": "x86 on tmpfs; btrfs 15873"
+   },
+   {
+    "name": "io::bench_copy_buf_reader",
+    "a64_cyc": 143298,
+    "x86_cyc": 73055,
+    "ratio": 1.96
+   }
+  ],
+  "tags": [
+   "N4",
+   "N5",
+   "B5"
+  ],
+  "primary": "N4",
+  "x86_cause": "綁單核時 bench 測到 remote 自旋執行緒的排程(aarch64 6.6 PREEMPT_NONE/HZ=250 下每 iter 等一次時間片,推測);章節 26.5 µs 是 4 核綁定的數字;`copy_buf_reader` 另有核心 `clear_user` 逐 8 B store 對 x86 `rep stos`。",
+  "confidence": "medium",
+  "repro": [
+   "K1-clear-user",
+   "K2-spin-pinned"
+  ]
+ },
+ {
+  "id": "c30",
+  "title": "`ascii::bench_ascii_escape_display_no_escape`:fast path 本身是逐字節標量掃描,本地 NEON 原型 4.6×;自動向量化這次連分塊都救不了",
+  "interfaces": [
+   "<[u8]>::escape_ascii",
+   "<EscapeAscii as Display>::fmt"
+  ],
+  "benches": [
+   {
+    "name": "ascii::bench_ascii_escape_display_no_escape",
+    "a64_cyc": 340.9,
+    "x86_cyc": 419.6,
+    "ratio": 0.812
+   },
+   {
+    "name": "probe:disp (static std, same Display)",
+    "a64_cyc": 353.1,
+    "x86_cyc": 290.6,
+    "ratio": 1.215
+   },
+   {
+    "name": "probe:scan lower4k cyc/B",
+    "a64_cyc": 2.06,
+    "x86_cyc": 1.51,
+    "ratio": 1.36
+   },
+   {
+    "name": "probe:scan rand4k cyc/B",
+    "a64_cyc": 2.53,
+    "x86_cyc": 2.69,
+    "ratio": 0.94
+   }
+  ],
+  "tags": [
+   "X",
+   "F2",
+   "R1",
+   "U1"
+  ],
+  "primary": "X",
+  "x86_cause": "codegen 同構,本機每 cycle 慢約 1.2×;harness 的 0.81 是 x86 迴圈落在壞的 64 B 起點(與動態連結無關);同指令數 IPC 4.9 vs 6.6 推測來自 x86 宏融合",
+  "confidence": "high",
+  "repro": [
+   "R06-x86-libstd-layout"
+  ]
+ },
+ {
+  "id": "c31",
+  "title": "`iter::bench_skip_while_sum`:skip_while 被完全優化掉,測的是 `map(black_box)` 的每元素棧屏障(約 1.04 cycles/元素)加 aarch64 迴圈出口多出的一條 `add`(約 0.84 cycles/元素);兩 ISA 棧往返同構",
+  "interfaces": [
+   "SkipWhile::fold",
+   "SkipWhile::try_fold",
+   "core::hint::black_box"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_skip_while_sum",
+    "a64_cyc": 1859996.4,
+    "x86_cyc": 1007169.4,
+    "ratio": 1.847
+   },
+   {
+    "name": "iter::bench_skip_while_chain_sum",
+    "a64_cyc": 2886219.7,
+    "x86_cyc": 2077348.2,
+    "ratio": 1.389
+   }
+  ],
+  "tags": [
+   "N1",
+   "B7"
+  ],
+  "primary": "N1",
+  "x86_cause": "1 000 000 編不進 AArch64 `cmp` 立即數,同函式兩份迴圈時 LSR + ConstantHoisting 讓出口每元素多一條 `add`(1.873 對 1.036),再疊上整數 ALU 吞吐較低。",
+  "confidence": "high",
+  "repro": [
+   "L04-lsr-cmp-imm"
+  ]
+ },
+ {
+  "id": "c32",
+  "title": "`iter::bench_enumerate_chain_ref_sum`:ref 版與 value 版同樣被迴圈分裂、時間相等,Chain 狀態機零殘留;宏註釋「ref 不能優化 fold」對本對 bench 不成立",
+  "interfaces": [
+   "Chain::try_fold",
+   "Enumerate::try_fold",
+   "&mut I as Iterator::try_fold",
+   "core::hint::black_box"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_enumerate_chain_ref_sum",
+    "a64_cyc": 3400076.2,
+    "x86_cyc": 2719135.9,
+    "ratio": 1.25
+   },
+   {
+    "name": "iter::bench_enumerate_chain_sum",
+    "a64_cyc": 3400661.6,
+    "x86_cyc": 2720908.0,
+    "ratio": 1.25
+   }
+  ],
+  "tags": [
+   "B7",
+   "N1"
+  ],
+  "primary": "B7",
+  "x86_cause": "同形整數迴圈 aarch64 每 cycle 發射較少(1.58 vs 1.01–1.09 cycle/元素,成因推測);後段 x86 用 `lea` imm32 少一條指令。",
+  "confidence": "medium",
+  "repro": [
+   "B7-alu-throughput"
+  ]
+ },
+ {
+  "id": "c33",
+  "title": "`fmt::write_u64_min`:07e526db9df 上格式化 \"0\"(55.37 ns)比 20 位 MAX(52.02 ns)慢 6.4%,差額是前端停頓;本章基線(2026-08-21)為慢 19%——短輸出把 format! 機制固定成本放大到 87%",
+  "interfaces": [
+   "format!",
+   "<u64 as Display>::fmt",
+   "alloc::fmt::format_inner",
+   "malloc/free"
+  ],
+  "benches": [
+   {
+    "name": "fmt::write_u64_min",
+    "a64_cyc": 162.5,
+    "x86_cyc": 92.2,
+    "ratio": 1.76
+   },
+   {
+    "name": "fmt::write_u64_max",
+    "a64_cyc": 151.9,
+    "x86_cyc": 105.0,
+    "ratio": 1.45
+   },
+   {
+    "name": "fmt::write_u8_min",
+    "a64_cyc": 155.9,
+    "x86_cyc": 92.3,
+    "ratio": 1.69
+   },
+   {
+    "name": "fmt::write_u128_min",
+    "a64_cyc": 168.0,
+    "x86_cyc": 97.7,
+    "ratio": 1.72
+   },
+   {
+    "name": "fmt::write_u128_max",
+    "a64_cyc": 183.2,
+    "x86_cyc": 133.6,
+    "ratio": 1.37
+   }
+  ],
+  "tags": [
+   "F1",
+   "N2",
+   "N4"
+  ],
+  "primary": "F1",
+  "x86_cause": "aarch64 `format!` 動態鏈接鏈有依佈局 / 調用深度變化的前端停頓(成因未知,返回棧容量已排除),使 min 比 max 慢;x86 無此停頓,另有 glibc malloc 地板差。",
+  "confidence": "medium",
+  "repro": [
+   "F1-return-stack"
+  ]
+ },
+ {
+  "id": "c34",
+  "title": "`btree::map::clone_slim_10k_and_remove_half`:每次 remove 的 ~86% 是根到葉搜索,節點內 early-exit 線性掃描每層貢獻約一次分支失誤",
+  "interfaces": [
+   "BTreeMap::remove",
+   "BTreeMap::clone"
+  ],
+  "benches": [
+   {
+    "name": "btree::map::clone_slim_10k_and_remove_half",
+    "a64_cyc": 907384.4,
+    "x86_cyc": 988040.2,
+    "ratio": 0.92
+   }
+  ],
+  "tags": [
+   "B4"
+  ],
+  "primary": "B4",
+  "x86_cause": "兩邊同為 early-exit 節點搜索,每層退出失誤;本機失誤多約 20%,但每次代價以 cycles 計較小(17 vs 26,換算成 ns 相近),比值低於 1。",
+  "confidence": "high",
+  "repro": [
+   "B4-mispredict-cost"
+  ]
+ },
+ {
+  "id": "c35",
+  "title": "`btree::map::clone_slim_10k` 系列:`07e526db9df` 已含節點級 drop(#162931,53,379.50 ns,與本地 #11 原型同級);本地 #10 整數鍵搜索特化與 #11 合計在舊基線上 remove_half −36%、clone 基線 −57%,find/insert 持平——以及三個失敗形態的教訓",
+  "interfaces": [
+   "BTreeMap::remove",
+   "BTreeMap::clone",
+   "BTreeMap::pop_first",
+   "BTreeMap::get",
+   "BTreeMap::insert"
+  ],
+  "benches": [
+   {
+    "name": "btree::map::clone_slim_10k",
+    "a64_cyc": 154977.0,
+    "x86_cyc": 127677.5,
+    "ratio": 1.21
+   },
+   {
+    "name": "btree::map::clone_slim_10k_and_remove_half",
+    "a64_cyc": 907384.4,
+    "x86_cyc": 988040.2,
+    "ratio": 0.92
+   },
+   {
+    "name": "btree::map::clone_slim_10k_and_drain_half",
+    "a64_cyc": 340584.2,
+    "x86_cyc": 407701.8,
+    "ratio": 0.84
+   },
+   {
+    "name": "btree::map::clone_slim_10k_and_remove_all",
+    "a64_cyc": 1060927.1,
+    "x86_cyc": 874370.7,
+    "ratio": 1.21
+   },
+   {
+    "name": "btree::map::clone_slim_10k_and_pop_all",
+    "a64_cyc": 1060329.5,
+    "x86_cyc": 773396.0,
+    "ratio": 1.37
+   },
+   {
+    "name": "btree::map::find_seq_10_000",
+    "a64_cyc": 120.3,
+    "x86_cyc": 140.3,
+    "ratio": 0.86
+   },
+   {
+    "name": "btree::map::insert_rand_10_000",
+    "a64_cyc": 39.7,
+    "x86_cyc": 36.0,
+    "ratio": 1.1
+   }
+  ],
+  "tags": [
+   "B4",
+   "F3",
+   "N2"
+  ],
+  "primary": "B4",
+  "x86_cause": "搜索群本機每次失誤 cycles 較少而每 cycle 較快;clone/逐個刪除群本機失誤多 3.6–4.8×,推測為分支歷史(未在本 bench 驗證),pop_all/remove_all 另有小 memmove。",
+  "confidence": "medium",
+  "repro": [
+   "B4-mispredict-cost",
+   "F3-branch-history"
+  ]
+ },
+ {
+  "id": "c36",
+  "title": "`ascii::long::is_ascii`:失效的 benchmark——to_vec 佔六成,`LONG` 第 366 字節是非 ASCII、掃描在此早退(只掃 5.2%);`ascii::is_ascii::*` 的計時迴圈仍在,報數是早退掃描",
+  "interfaces": [
+   "<[u8]>::is_ascii",
+   "u8::is_ascii",
+   "Iterator::all"
+  ],
+  "benches": [
+   {
+    "name": "ascii::long::is_ascii",
+    "a64_cyc": 851.5,
+    "x86_cyc": 664.0,
+    "ratio": 1.282
+   },
+   {
+    "name": "ascii::is_ascii::long::case00_libcore",
+    "a64_cyc": 18.8,
+    "x86_cyc": 13.9,
+    "ratio": 1.353
+   },
+   {
+    "name": "ascii::is_ascii::long::case01_iter_all",
+    "a64_cyc": 233.2,
+    "x86_cyc": 416.2,
+    "ratio": 0.56
+   },
+   {
+    "name": "ascii::is_ascii::long::case04_while_loop",
+    "a64_cyc": 62.9,
+    "x86_cyc": 28.7,
+    "ratio": 2.195
+   },
+   {
+    "name": "ascii::is_ascii::unaligned_both_long::case04_while_loop",
+    "a64_cyc": 67.6,
+    "x86_cyc": 15.8,
+    "ratio": 4.27
+   },
+   {
+    "name": "probe:case00 full 6990B",
+    "a64_cyc": 278.8,
+    "x86_cyc": 284.4,
+    "ratio": 0.98
+   },
+   {
+    "name": "probe:case04 full 6990B",
+    "a64_cyc": 828.7,
+    "x86_cyc": 389.0,
+    "ratio": 2.13
+   }
+  ],
+  "tags": [
+   "N4",
+   "S1",
+   "S2",
+   "N1",
+   "M3"
+  ],
+  "primary": "N4",
+  "x86_cause": "bench 在 `LONG` 第 366 字節早退且含 `to_vec`;`case04` 比值來自無 `movemask` 的模擬,`iter().all` 因 AArch64 多出口 unroll 反而本機快 2.4×。",
+  "confidence": "high",
+  "repro": [
+   "L11-movemask",
+   "L12-ascii-all-unroll",
+   "N4-bench-validity"
+  ]
+ },
+ {
+  "id": "c37",
+  "title": "`slice::binary_search_l3_with_dups`:跨查詢 MLP 的吞吐基準——prefetch 只救延遲體制,官方形態下現實現已是最優",
+  "interfaces": [
+   "[T]::binary_search",
+   "binary_search_by"
+  ],
+  "benches": [
+   {
+    "name": "slice::binary_search_l3",
+    "a64_cyc": 249.43,
+    "x86_cyc": 237.5,
+    "ratio": 1.05
+   },
+   {
+    "name": "slice::binary_search_l3_with_dups",
+    "a64_cyc": 246.82,
+    "x86_cyc": 232.24,
+    "ratio": 1.063
+   }
+  ],
+  "tags": [
+   "M2",
+   "X"
+  ],
+  "primary": "M2",
+  "x86_cause": "8 MB 延遲接近(比值 1.06),跨查詢重疊略低;比值低於中位數,絕對差距主要是主頻",
+  "confidence": "medium",
+  "repro": [
+   "M5-l3-capacity"
+  ]
+ },
+ {
+  "id": "c38",
+  "title": "`iter::bench_skip_while_ref_sum`:與 value 版逐條同碼;Range 內層下謂詞被 SCEV 閉式求解,任何輸入都測不到 skip_while",
+  "interfaces": [
+   "SkipWhile::try_fold",
+   "&mut I as Iterator::try_fold",
+   "core::hint::black_box"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_skip_while_ref_sum",
+    "a64_cyc": 1859927.1,
+    "x86_cyc": 998514.4,
+    "ratio": 1.863
+   },
+   {
+    "name": "iter::bench_skip_while_chain_ref_sum",
+    "a64_cyc": 2884591.9,
+    "x86_cyc": 2148126.9,
+    "ratio": 1.343
+   }
+  ],
+  "tags": [
+   "N1",
+   "B7"
+  ],
+  "primary": "N1",
+  "x86_cause": "與 value 版同碼:同函式兩份迴圈時 LSR + ConstantHoisting 讓出口每元素多一條 `add`(1.873 對 1.036),再疊上整數 ALU 吞吐較低。",
+  "confidence": "high",
+  "repro": [
+   "L04-lsr-cmp-imm"
+  ]
+ },
+ {
+  "id": "c39",
+  "title": "`io::bench_write_slice`:`min(data.len(), self.len())` 令 128B 拷貝退化為 `memcpy@plt` 調用——但只在 harness 的 `black_box(&wr)` 形態下發生,真實形態零收益",
+  "interfaces": [
+   "<&mut [u8] as Write>::write_all",
+   "<&[u8] as Read>::read_exact"
+  ],
+  "benches": [
+   {
+    "name": "io::bench_write_slice",
+    "a64_cyc": 85.8,
+    "x86_cyc": 68.7,
+    "ratio": 1.25
+   },
+   {
+    "name": "io::bench_write_vec",
+    "a64_cyc": 63.8,
+    "x86_cyc": 64.4,
+    "ratio": 0.99
+   },
+   {
+    "name": "io::bench_read_slice",
+    "a64_cyc": 48.4,
+    "x86_cyc": 40.6,
+    "ratio": 1.19
+   },
+   {
+    "name": "io::bench_read_vec",
+    "a64_cyc": 47.9,
+    "x86_cyc": 39.4,
+    "ratio": 1.22
+   }
+  ],
+  "tags": [
+   "B1",
+   "N3",
+   "N4",
+   "S4"
+  ],
+  "primary": "B1",
+  "x86_cause": "推測:每次 `write_all` 之間 `wr` 經棧 store→load 串接,aarch64 轉發約 7 cycles、x86 約 1;另有 aarch64 PLT 一跳,read 兩項推測為每 cycle 載入數。",
+  "confidence": "low",
+  "repro": [
+   "B1-store-load"
+  ]
+ },
+ {
+  "id": "c40",
+  "title": "`vec_deque::bench_iter_1000` / `bench_mut_iter_1000`:`Iter::next` 內聯的 `mem::swap(i1, i2)` 把 `for` 迴圈變成雙狀態機,每元素 4 條 `mov` 暫存器輪轉(舊基線為 6 條)——本地原型外聯 swap 即 −31%",
+  "interfaces": [
+   "VecDeque::iter",
+   "VecDeque::iter_mut",
+   "vec_deque::Iter::next"
+  ],
+  "benches": [
+   {
+    "name": "vec_deque::bench_iter_1000",
+    "a64_cyc": 2007.7,
+    "x86_cyc": 1245.4,
+    "ratio": 1.61
+   },
+   {
+    "name": "vec_deque::bench_mut_iter_1000",
+    "a64_cyc": 2007.7,
+    "x86_cyc": 1244.2,
+    "ratio": 1.61
+   }
+  ],
+  "tags": [
+   "B8"
+  ],
+  "primary": "B8",
+  "x86_cause": "兩邊同為每元素 4 條輪轉 mov 在指針遞增鏈上;x86 在 rename 階段消除相依 mov,本機每條仍約 0.8 cycle。",
+  "confidence": "high",
+  "repro": [
+   "B8-rename-elim"
+  ]
+ },
+ {
+  "id": "c41",
+  "title": "`vec::bench_in_place_xxu8_1000_i1`:一半是 malloc/memset/free,另一半是已達 NEON 吞吐的 in-place 迴圈;`_i0` 現構建只慢約 4%(3 次中位數 63.78 vs 61.15 ns),`88f7399` 基線慢 83%——差異都在 glibc(`calloc` 繞過 tcache 對非零 `memset`),與 in-place collect 無關",
+  "interfaces": [
+   "in-place collect (from_iter_in_place)",
+   "vec![x; n]",
+   "alloc_zeroed / calloc"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_in_place_xxu8_1000_i1",
+    "a64_cyc": 177.2,
+    "x86_cyc": 117.1,
+    "ratio": 1.51
+   },
+   {
+    "name": "vec::bench_in_place_xxu8_1000_i0",
+    "a64_cyc": 184.9,
+    "x86_cyc": 162.5,
+    "ratio": 1.14
+   },
+   {
+    "name": "vec::bench_in_place_xxu8_0010_i1",
+    "a64_cyc": 43.9,
+    "x86_cyc": 39.5,
+    "ratio": 1.11
+   },
+   {
+    "name": "vec::bench_in_place_xxu8_0010_i0",
+    "a64_cyc": 62.7,
+    "x86_cyc": 42.7,
+    "ratio": 1.47
+   }
+  ],
+  "tags": [
+   "N2",
+   "B5"
+  ],
+  "primary": "N2",
+  "x86_cause": "`_i1` 差距主體是 1000 B 非零 memset(隔離 41.1 vs 21.0),落在 glibc;同寬手寫 store 迴圈同向(66 vs 37),但兩邊純 store 吞吐相同,store 吞吐歸因未驗證;其餘為 tcache malloc/free(30.4 vs 18.7)。`_i0` 兩邊都慢,機理不同",
+  "confidence": "low",
+  "repro": [
+   "G2-memset"
+  ]
+ },
+ {
+  "id": "c42",
+  "title": "`vec_deque::bench_extend_bytes`:一次 512 B `memcpy` 佔 77%,VecDeque 簿記 ≈ 2 ns,已貼 `Vec::extend_from_slice` 與裸 memcpy 底線",
+  "interfaces": [
+   "VecDeque::extend(&[T])",
+   "ptr::copy_nonoverlapping"
+  ],
+  "benches": [
+   {
+    "name": "vec_deque::bench_extend_bytes",
+    "a64_cyc": 38.7,
+    "x86_cyc": 19.2,
+    "ratio": 2.02
+   }
+  ],
+  "tags": [
+   "N2",
+   "B5",
+   "S4"
+  ],
+  "primary": "N2",
+  "x86_cause": "512 B memcpy 上 aarch64 `__memcpy_generic` 比同寬手寫慢、x86 AVX 變體比手寫快(約 1.47×,依對齊而變);同寬手寫迴圈另有差距,最小程式只復現 1.07–1.29×,來自 `ldp/stp q` 配對、對齊與每 cycle 載入 2 對 3 條。",
+  "confidence": "medium",
+  "repro": [
+   "B5-store-throughput",
+   "G3-memcpy-variant",
+   "S4-load-width"
+  ]
+ },
+ {
+  "id": "c43",
+  "title": "`any::bench_downcast_ref`:3.2 ns = 一次不可去虛化的 vtable 調用 + 128-bit 比較 + 兩個 black_box 的棧往返;唯一頭寸是 `TypeId` 陣列佈局導致的 sret 回傳(≈0.2 ns)",
+  "interfaces": [
+   "<dyn Any>::downcast_ref",
+   "<dyn Any>::is",
+   "TypeId"
+  ],
+  "benches": [
+   {
+    "name": "any::bench_downcast_ref",
+    "a64_cyc": 10.9,
+    "x86_cyc": 6.08,
+    "ratio": 1.79
+   }
+  ],
+  "tags": [
+   "B1",
+   "B10",
+   "N4"
+  ],
+  "primary": "B1",
+  "x86_cause": "棧著色讓 1 B、8 B 與 16 B sret 共用同一槽(兩 target 相同),aarch64 以 `ldp` 讀回時多等約 5 cycles(LLVM 生成的跨 store 形態可到 +15),x86 不敏感;機制推測。",
+  "confidence": "medium",
+  "repro": [
+   "B10-wide-load-narrow-stores",
+   "L10-stack-coloring-sret"
+  ]
+ },
+ {
+  "id": "c44",
+  "title": "`iter::bench_next_chunk_filter_map_even`:無分支壓縮迴圈,每掃過元素 2.21 cycles,但每個掃過元素都無條件 store,不是掃描地板(本地原型條件式 store 見 `bench_next_chunk_*` 章);手寫 SIMD 掩碼上限僅 −10%",
+  "interfaces": [
+   "FilterMap::next_chunk"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_next_chunk_filter_map_even",
+    "a64_cyc": 141.4,
+    "x86_cyc": 102.9,
+    "ratio": 1.374
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_map_predictably_true",
+    "a64_cyc": 81.1,
+    "x86_cyc": 73.4,
+    "ratio": 1.105
+   }
+  ],
+  "tags": [
+   "B7",
+   "N1"
+  ],
+  "primary": "B7",
+  "x86_cause": "同形壓縮迴圈本機每 cycle 慢 1.37–1.45×,整數 ALU 指令多時吞吐較低(3.9 對 5.7 條/cycle,成因推測);x86 另展開 2 次。",
+  "confidence": "medium",
+  "repro": [
+   "B7-alu-throughput",
+   "S3-sve-throughput"
+  ]
+ },
+ {
+  "id": "c45",
+  "title": "`hash::set_ops::set_difference`:91 ns = 10 次 `large.contains`,每次 SipHash-1-3 ≈ 5.9 ns + hashbrown probe ≈ 3.7 ns;算法與 probe 已最優,2/3 是 HashDoS 防護的有意代價",
+  "interfaces": [
+   "HashSet::difference",
+   "HashSet::contains",
+   "RandomState(SipHash-1-3)"
+  ],
+  "benches": [
+   {
+    "name": "hash::set_ops::set_difference",
+    "a64_cyc": 262.9,
+    "x86_cyc": 246.6,
+    "ratio": 1.066
+   }
+  ],
+  "tags": [
+   "X",
+   "B9",
+   "N1"
+  ],
+  "primary": "X",
+  "x86_cause": "bench 層面每 cycle 接近打平;SipHash 依賴鏈上本機較慢,來自 LLVM 把旋轉摺進 eor…ror 而本機此形態延遲 2 cycles,多次查找重疊後被指令較少抵消。",
+  "confidence": "high",
+  "repro": [
+   "B9-complex-operand",
+   "L08-eor-ror-fold"
+  ]
+ },
+ {
+  "id": "c46",
+  "title": "`fmt::write_u8_min`:54 ns 中 ~26 ns 是 AArch64 前端停頓——`format!` 的空 String 首次寫入走 `grow` 把調用鏈加深到觸發前端停頓(成因未知,返回棧容量已由 `F1-return-stack` 排除);`estimated_capacity()=8` 令本項 −47%,但把 stall 原封不動搬到 `u64_max`/`u128_max`(+48%/+34%),不可落地",
+  "interfaces": [
+   "format!",
+   "alloc::fmt::format_inner",
+   "core::fmt::write",
+   "<u8 as Display>::fmt",
+   "RawVec::finish_grow",
+   "malloc/free"
+  ],
+  "benches": [
+   {
+    "name": "fmt::write_u8_min",
+    "a64_cyc": 155.9,
+    "x86_cyc": 92.3,
+    "ratio": 1.69
+   },
+   {
+    "name": "fmt::write_u8_max",
+    "a64_cyc": 153.1,
+    "x86_cyc": 91.4,
+    "ratio": 1.67
+   },
+   {
+    "name": "fmt::write_u64_min",
+    "a64_cyc": 162.5,
+    "x86_cyc": 92.2,
+    "ratio": 1.76
+   },
+   {
+    "name": "fmt::write_u64_max",
+    "a64_cyc": 151.9,
+    "x86_cyc": 105.0,
+    "ratio": 1.45
+   },
+   {
+    "name": "fmt::write_u128_min",
+    "a64_cyc": 168.0,
+    "x86_cyc": 97.7,
+    "ratio": 1.72
+   },
+   {
+    "name": "fmt::write_u128_max",
+    "a64_cyc": 183.2,
+    "x86_cyc": 133.6,
+    "ratio": 1.37
+   }
+  ],
+  "tags": [
+   "F1",
+   "N2",
+   "N4"
+  ],
+  "primary": "F1",
+  "x86_cause": "aarch64 在 `-Cprefer-dynamic` 的 `format!` grow 鏈上有 26–29% cycles 前端停頓(成因未知,返回棧容量已排除),x86 只有 1–4%;另有 glibc 2.38 malloc/free 地板較高。",
+  "confidence": "medium",
+  "repro": [
+   "F1-return-stack"
+  ]
+ },
+ {
+  "id": "c47",
+  "title": "`btree::map::from_iter_rand_10_000`:218 µs 中 ~140 µs(65%)是 `sort_by` 排序,`bulk_build` 55 µs;排序是通用 driftsort,13.3 次比較/元素已是比較排序的形態,無 std 病灶",
+  "interfaces": [
+   "BTreeMap::from_iter",
+   "slice::sort_by"
+  ],
+  "benches": [
+   {
+    "name": "btree::map::from_iter_rand_10_000",
+    "a64_cyc": 616111.6,
+    "x86_cyc": 658279.5,
+    "ratio": 0.94
+   }
+  ],
+  "tags": [
+   "B4",
+   "X"
+  ],
+  "primary": "B4",
+  "x86_cause": "隨機鍵排序的比較失誤兩邊都無法避免;本機失誤多約 25%,但每次代價以 cycles 計較小(17 vs 26,換算成 ns 相近),非失誤部分每 cycle 相同。",
+  "confidence": "high",
+  "repro": [
+   "B4-mispredict-cost"
+  ]
+ },
+ {
+  "id": "c48",
+  "title": "`iter::bench_enumerate_ref_sum`:Enumerate 計數器已融進歸納變量(`mul x10,x10`),ref 與 value 逐條同碼;本構建 ref 版慢 27%,是熱迴圈跨 4 KiB 邊界(探針 2.017 vs 1.584 cycles/元素);無 std 病灶",
+  "interfaces": [
+   "Enumerate::try_fold",
+   "Map::try_fold",
+   "&mut I as Iterator::try_fold",
+   "core::hint::black_box"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_enumerate_ref_sum",
+    "a64_cyc": 2001791.9,
+    "x86_cyc": 1038214.0,
+    "ratio": 1.928
+   },
+   {
+    "name": "iter::bench_enumerate_sum",
+    "a64_cyc": 1568190.0,
+    "x86_cyc": 1234097.4,
+    "ratio": 1.271
+   }
+  ],
+  "tags": [
+   "B7",
+   "F2"
+  ],
+  "primary": "B7",
+  "x86_cause": "同碼整數迴圈 aarch64 1.58 vs x86 1.01–1.09,成因推測為整數 ALU/分支埠,部分可能是佈局;ref +27% 是熱迴圈跨 4 KiB 邊界",
+  "confidence": "medium",
+  "repro": [
+   "B7-alu-throughput",
+   "F2-layout"
+  ]
+ },
+ {
+  "id": "c49",
+  "title": "`num::int_bits::u16::constant::deposit_bits`(原名 `scatter_bits`):常量掩碼下 `prepare()` 已被完全常量摺疊,熱迴圈 28 條 NEON 位運算 / 16 元素,0.224 ns/元素(07e526db9df;本章基線 0.245);掩碼特化的 morton 形態能省 22%,但那是掩碼結構特化而非通用改進",
+  "interfaces": [
+   "u16::deposit_bits",
+   "uN::deposit_bits"
+  ],
+  "benches": [
+   {
+    "name": "num::int_bits::u16::constant::deposit_bits",
+    "a64_cyc": 332.3,
+    "x86_cyc": 301.7,
+    "ratio": 1.1
+   },
+   {
+    "name": "num::int_bits::u8::constant::deposit_bits",
+    "a64_cyc": 221.9,
+    "x86_cyc": 213.4,
+    "ratio": 1.04
+   },
+   {
+    "name": "num::int_bits::u32::constant::deposit_bits",
+    "a64_cyc": 537.4,
+    "x86_cyc": 407.0,
+    "ratio": 1.32
+   },
+   {
+    "name": "num::int_bits::u64::constant::deposit_bits",
+    "a64_cyc": 706.6,
+    "x86_cyc": 515.2,
+    "ratio": 1.37
+   },
+   {
+    "name": "num::int_bits::u128::constant::deposit_bits",
+    "a64_cyc": 729.0,
+    "x86_cyc": 850.8,
+    "ratio": 0.86
+   },
+   {
+    "name": "num::int_bits::u16::invariant::deposit_bits",
+    "a64_cyc": 522.5,
+    "x86_cyc": 403.6,
+    "ratio": 1.29
+   }
+  ],
+  "tags": [
+   "X",
+   "S6"
+  ],
+  "primary": "X",
+  "x86_cause": "本章 u16 constant 兩邊都向量化且吞吐受限,每 cycle 同速;同族 u32/u64 每向量 lane 少、暴露 NEON 整數 2 cycles 延遲(推測)。",
+  "confidence": "high",
+  "repro": [
+   "S6-neon-latency"
+  ]
+ },
+ {
+  "id": "c50",
+  "title": "`str::char_indicesator`:11 ns 即 SWAR `count_chars`,無事;但 `_rev` 姊妹項 35 ns 是因為 `Rev::count` 走逐字符 `next_back`——本地原型對 `Rev` 轉發 `count` 到內層即 −68%(4 KB 串 9×)",
+  "interfaces": [
+   "CharIndices::count",
+   "Rev::count",
+   "Chars::rfold",
+   "next_code_point_reverse"
+  ],
+  "benches": [
+   {
+    "name": "str::char_indicesator",
+    "a64_cyc": 30.7,
+    "x86_cyc": 31.4,
+    "ratio": 0.98
+   },
+   {
+    "name": "str::char_indicesator_rev",
+    "a64_cyc": 97.3,
+    "x86_cyc": 84.3,
+    "ratio": 1.15
+   },
+   {
+    "name": "str::char_iterator_rev",
+    "a64_cyc": 139.1,
+    "x86_cyc": 68.5,
+    "ratio": 2.03
+   },
+   {
+    "name": "str::char_iterator_rev_for",
+    "a64_cyc": 112.2,
+    "x86_cyc": 94.3,
+    "ratio": 1.19
+   }
+  ],
+  "tags": [
+   "N1",
+   "B8",
+   "B4"
+  ],
+  "primary": "N1",
+  "x86_cause": "IR 相同,AArch64 後端的反向解碼選 pre-index 回寫加 mov 搬指針且 ASCII 尾端多一個 taken;x86 指針鏈只有在 rename 被消除的立即數加法,另有固定串上預測器差異。",
+  "confidence": "high",
+  "repro": [
+   "B8-rename-elim",
+   "L09-rev-decode-layout"
+  ]
+ },
+ {
+  "id": "c51",
+  "title": "`ascii::medium::case07_fake_simd_u32`:這不是 std 接口而是 bench 內的手寫 SWAR 對照組——它比 libcore 慢 32%、且對 `\\xFF` 相鄰字節算錯(源碼自帶 FIXME);medium 檔 76% 是 `to_vec` 分配",
+  "interfaces": [
+   "<[u8]>::make_ascii_uppercase",
+   "<[u8]>::align_to_mut",
+   "<[u8]>::to_vec"
+  ],
+  "benches": [
+   {
+    "name": "ascii::medium::case07_fake_simd_u32",
+    "a64_cyc": 46.1,
+    "x86_cyc": 35.4,
+    "ratio": 1.304
+   },
+   {
+    "name": "ascii::medium::case00_alloc_only",
+    "a64_cyc": 35.8,
+    "x86_cyc": 29.0,
+    "ratio": 1.232
+   },
+   {
+    "name": "ascii::medium::case06_libcore",
+    "a64_cyc": 35.5,
+    "x86_cyc": 31.0,
+    "ratio": 1.143
+   },
+   {
+    "name": "ascii::long::case07_fake_simd_u32",
+    "a64_cyc": 1399.8,
+    "x86_cyc": 1171.8,
+    "ratio": 1.195
+   },
+   {
+    "name": "probe:case07 body 6990B",
+    "a64_cyc": 960,
+    "x86_cyc": 900,
+    "ratio": 1.07
+   },
+   {
+    "name": "probe:case06 body 6990B",
+    "a64_cyc": 644,
+    "x86_cyc": 766,
+    "ratio": 0.84
+   }
+  ],
+  "tags": [
+   "N4",
+   "N2",
+   "X"
+  ],
+  "primary": "N4",
+  "x86_cause": "medium 檔 66–76% 是 harness 的 `to_vec` 配置且 case07 不是 std 接口;操作本體兩邊同構,本機 `free` 路徑較長(版本與 CPU 未分開)。",
+  "confidence": "high",
+  "repro": [
+   "G4-malloc",
+   "N4-bench-validity"
+  ]
+ },
+ {
+  "id": "c52",
+  "title": "`vec::bench_in_place_u128_0100_i0`:75.45 ns(`88f7399` 基線 102 ns)= 1600 B `calloc`+`free` 走 `_int_malloc` 慢路徑(約一半)+ 100 個 16 B 元素的標量 xor 迴圈(store-bound);與 u8 章同一結論,無 std 病灶",
+  "interfaces": [
+   "in-place collect (from_iter_in_place)",
+   "alloc_zeroed / calloc"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_in_place_u128_0100_i0",
+    "a64_cyc": 218.9,
+    "x86_cyc": 220.8,
+    "ratio": 0.99
+   },
+   {
+    "name": "vec::bench_in_place_u128_0100_i1",
+    "a64_cyc": 261.6,
+    "x86_cyc": 248.6,
+    "ratio": 1.05
+   },
+   {
+    "name": "vec::bench_in_place_u128_0010_i0",
+    "a64_cyc": 113.5,
+    "x86_cyc": 78.3,
+    "ratio": 1.45
+   }
+  ],
+  "tags": [
+   "U1",
+   "B5",
+   "N2"
+  ],
+  "primary": "U1",
+  "x86_cause": "標量 xor 讀改寫迴圈 x86 每元素較省,機制未隔離(兩邊純 store 吞吐相同);bench 內 x86 的 glibc 配置器反而較貴,兩者抵消成 0.99。",
+  "confidence": "low",
+  "repro": [
+   "B5-store-throughput",
+   "G4-malloc"
+  ]
+ },
+ {
+  "id": "c53",
+  "title": "`iter::bench_next_chunk_filter_even`:比 `filter_map_even` 慢 27%(`88f7399` 基線 17%);元素寬度(`Filter` 產出 `&i32` 8 B、`FilterMap` 產出 `i32` 4 B)是一部分,兩者共有的無條件 store 是另一部分——本地原型改條件式 store 後差距幾乎消失;閉包捕獲形態的猜想被證偽",
+  "interfaces": [
+   "Filter::next_chunk_dropless",
+   "array_assume_init"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_next_chunk_filter_even",
+    "a64_cyc": 179.5,
+    "x86_cyc": 128.7,
+    "ratio": 1.395
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_map_even",
+    "a64_cyc": 141.4,
+    "x86_cyc": 102.9,
+    "ratio": 1.374
+   }
+  ],
+  "tags": [
+   "B7",
+   "N2",
+   "R1"
+  ],
+  "primary": "B7",
+  "x86_cause": "掃描迴圈同形,本機整數 ALU 吞吐較低(成因推測);x86 側 256 B 拷貝超過 SSE2 內聯門檻而呼叫 glibc memmove,反向縮小差距。",
+  "confidence": "medium",
+  "repro": [
+   "B7-alu-throughput",
+   "L13-memcpy-256-inline"
+  ]
+ },
+ {
+  "id": "c54",
+  "title": "`btree::map::find_seq_10_000`:`07e526db9df` 上 41.50 ns,病灶是節點內 early-exit 掃描每次 get 約 3 次分支失誤,不是樹形——升序 `insert` 樹每節點僅 6 鍵,裝填率 100% 的 `collect` 樹同樣 121.1 cycles/get(`insert` 樹 119.3);「`collect` 樹 20 ns」只在帶本地 §10 原型(滿節點無分支掃描)時成立",
+  "interfaces": [
+   "BTreeMap::get",
+   "BTreeMap::insert"
+  ],
+  "benches": [
+   {
+    "name": "btree::map::find_seq_10_000",
+    "a64_cyc": 120.3,
+    "x86_cyc": 140.3,
+    "ratio": 0.86
+   },
+   {
+    "name": "btree::map::find_rand_10_000",
+    "a64_cyc": 175.8,
+    "x86_cyc": 195.6,
+    "ratio": 0.9
+   }
+  ],
+  "tags": [
+   "B4"
+  ],
+  "primary": "B4",
+  "x86_cause": "失誤次數相近(2.4–3.0/get),每次失誤本機 18、x86 26 cycles,本機每 cycle 快 7–14%;換成 ns 兩邊相同,ns 差距來自主頻",
+  "confidence": "high",
+  "repro": [
+   "B4-mispredict-cost",
+   "P1-predictor-pattern"
+  ]
+ },
+ {
+  "id": "c55",
+  "title": "`str::split_unicode_ascii`:28 ns = 3 次 `core::slice::memchr`(78%),半數樣本在 SWAR 前後的**逐字節前綴/尾巴**迴圈;NEON/無對齊字前綴的替代在短段與長段上勝負互異,無單一形態全贏",
+  "interfaces": [
+   "str::split(char)",
+   "CharSearcher::next_match",
+   "core::slice::memchr::memchr_aligned"
+  ],
+  "benches": [
+   {
+    "name": "str::split_unicode_ascii",
+    "a64_cyc": 81.4,
+    "x86_cyc": 99.7,
+    "ratio": 0.82
+   },
+   {
+    "name": "str::split_ascii",
+    "a64_cyc": 132.1,
+    "x86_cyc": 160.1,
+    "ratio": 0.82
+   },
+   {
+    "name": "str::split_closure",
+    "a64_cyc": 73.5,
+    "x86_cyc": 84.1,
+    "ratio": 0.87
+   }
+  ],
+  "tags": [
+   "R1",
+   "N3",
+   "S1",
+   "S2"
+  ],
+  "primary": "R1",
+  "x86_cause": "本 bench 本機每 cycle 較快(0.82);x86 經 GOT 間接呼叫與保存暫存器每次呼叫只多約 1.6 cycles,只解釋探針差距的一部分,其餘未隔離。",
+  "confidence": "low",
+  "repro": [
+   "L11-movemask",
+   "R07-x86-short-call-abi",
+   "S2-mask-floor"
+  ]
+ },
+ {
+  "id": "c56",
+  "title": "`slice::sort_unstable_large_strings`:1.0 ms = 13.7 次比較/元素 × 7.5 ns,其中 64% 在 libc `memcmp` 的入口分派——平均只需看 1 個字節就分出勝負;內聯前綴比較在各輸入分佈上互有勝負,無單一形態全贏",
+  "interfaces": [
+   "<[&str]>::sort_unstable",
+   "<[u8] as Ord>::cmp",
+   "compare_bytes",
+   "libc memcmp"
+  ],
+  "benches": [
+   {
+    "name": "slice::sort_unstable_large_strings",
+    "a64_cyc": 2911759.2,
+    "x86_cyc": 2329396.6,
+    "ratio": 1.25
+   }
+  ],
+  "tags": [
+   "N2",
+   "B4"
+  ],
+  "primary": "N2",
+  "x86_cause": "glibc 2.38 aarch64 `memcmp` 對隨機短長度有誤預測的分派,x86 AVX2 版幾乎沒有;換同一內聯比較器後比值 0.911",
+  "confidence": "high",
+  "repro": [
+   "G1-memcmp-short"
+  ]
+ },
+ {
+  "id": "c57",
+  "title": "`vec::bench_from_slice_0100`:27 ns = malloc+free 12 ns + 800 B memcpy 12 ns + 2.6 ns 簿記;`to_vec` 的 `T: Copy` 特化已是「with_capacity + copy_nonoverlapping + set_len」,無事",
+  "interfaces": [
+   "<[T]>::to_vec",
+   "Vec::with_capacity",
+   "ptr::copy_nonoverlapping"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_from_slice_0010",
+    "a64_cyc": 43.1,
+    "x86_cyc": 37.4,
+    "ratio": 1.15
+   },
+   {
+    "name": "vec::bench_from_slice_0100",
+    "a64_cyc": 79.4,
+    "x86_cyc": 48.0,
+    "ratio": 1.65
+   },
+   {
+    "name": "vec::bench_from_slice_1000",
+    "a64_cyc": 396.0,
+    "x86_cyc": 328.1,
+    "ratio": 1.21
+   }
+  ],
+  "tags": [
+   "N2",
+   "B5"
+  ],
+  "primary": "N2",
+  "x86_cause": "800 B 時 aarch64 `__memcpy_generic` 比同寬手寫慢、x86 AVX2 變體比手寫快(對齊時約 1.75×),tcache malloc/free 指令數 150 對 93;同寬拷貝另差約 1.34×。",
+  "confidence": "medium",
+  "repro": [
+   "B5-store-throughput",
+   "G3-memcpy-variant",
+   "G4-malloc"
+  ]
+ },
+ {
+  "id": "c58",
+  "title": "`num::bench_*_from_str[_radix_*]`(40 項):測的是 19 個固定短串(平均 2.8 位、半數解析失敗)的混合;每位一次串行 `mul+add`(~1.3 ns/位)是成本模型;8 位 SWAR 十進制快路徑(本地原型)對 ≥8 位串 −57…−75%,但在官方混合上被 ±25% 的佈局噪聲淹沒",
+  "interfaces": [
+   "uN::from_str_radix",
+   "iN::from_str_radix",
+   "FromStr for integers"
+  ],
+  "benches": [
+   {
+    "name": "num::bench_u64_from_str_radix_10",
+    "a64_cyc": 69236.4,
+    "x86_cyc": 56973.8,
+    "ratio": 1.22
+   },
+   {
+    "name": "num::bench_u32_from_str_radix_10",
+    "a64_cyc": 64254.7,
+    "x86_cyc": 58580.1,
+    "ratio": 1.1
+   },
+   {
+    "name": "num::bench_u8_from_str_radix_10",
+    "a64_cyc": 46895.1,
+    "x86_cyc": 45448.4,
+    "ratio": 1.03
+   },
+   {
+    "name": "num::bench_i16_from_str_radix_16",
+    "a64_cyc": 108524.7,
+    "x86_cyc": 87319.7,
+    "ratio": 1.24
+   },
+   {
+    "name": "num::bench_i8_from_str_radix_16",
+    "a64_cyc": 59686.1,
+    "x86_cyc": 44821.3,
+    "ratio": 1.33
+   },
+   {
+    "name": "num::bench_i8_from_str_radix_2",
+    "a64_cyc": 35954.4,
+    "x86_cyc": 47611.6,
+    "ratio": 0.76
+   },
+   {
+    "name": "num::bench_u64_from_str_radix_36",
+    "a64_cyc": 138642.1,
+    "x86_cyc": 131490.6,
+    "ratio": 1.05
+   }
+  ],
+  "tags": [
+   "X",
+   "F2",
+   "B3"
+  ],
+  "primary": "X",
+  "x86_cause": "中位比值 1.14 約等於全體中位數,差距是主頻與一般 IPC;個別項 ±25% 推測為佈局,長串 checked 段每位差約 1 cycle,其中溢位檢查份額未拆。",
+  "confidence": "medium",
+  "repro": [
+   "F2-layout",
+   "L06-smul-overflow"
+  ]
+ },
+ {
+  "id": "c59",
+  "title": "`vec_deque::bench_try_fold`:`Some(a+b)` 永不短路,LLVM 把 `try_fold` 摺成普通歸約並向量化(64 B/迭代 NEON,0.046 ns/元素),與 `fold`/`sum` 同碼;24% 樣本是 `black_box(Option<i32>)` 的返回值落棧",
+  "interfaces": [
+   "vec_deque::Iter::try_fold"
+  ],
+  "benches": [
+   {
+    "name": "vec_deque::bench_try_fold",
+    "a64_cyc": 135.3,
+    "x86_cyc": 108.8,
+    "ratio": 1.24
+   }
+  ],
+  "tags": [
+   "S4"
+  ],
+  "primary": "S4",
+  "x86_cause": "兩邊都貼各自 L1 載入上限:本機每 cycle 2 條、x86 3 條,與向量寬度無關,迴圈比值被固定收攏開銷稀釋成 1.24。",
+  "confidence": "high",
+  "repro": [
+   "S4-load-width"
+  ]
+ },
+ {
+  "id": "c60",
+  "title": "`str::debug::mostly_unicode`:`07e526db9df` 上 1744.81 ns,30 個西里爾字元各付 4 次稀疏表查找(`cn_planes_0_3`/`grapheme_extend`/`cf`/`default_ignorable_code_point` 的 `lookup_slow`)佔 85.37%;本地原型 BMP 64 碼點塊位圖(舊表建置,未在 `07e526db9df` 上重驗)令 `mostly_unicode` −87%、`fmt::write_{str,vec}_macro_debug` −71…−75%",
+  "interfaces": [
+   "<str as Debug>::fmt",
+   "char::escape_debug_ext",
+   "unicode_data::*::lookup_slow"
+  ],
+  "benches": [
+   {
+    "name": "str::debug::mostly_unicode",
+    "a64_cyc": 5066.0,
+    "x86_cyc": 3502.7,
+    "ratio": 1.446
+   },
+   {
+    "name": "fmt::write_str_macro_debug",
+    "a64_cyc": 236470.7,
+    "x86_cyc": 156766.8,
+    "ratio": 1.508
+   },
+   {
+    "name": "fmt::write_vec_macro_debug",
+    "a64_cyc": 248291.1,
+    "x86_cyc": 163069.2,
+    "ratio": 1.523
+   },
+   {
+    "name": "probe:grapheme_extend lookup independent (cyc/char)",
+    "a64_cyc": 30.8,
+    "x86_cyc": 18.8,
+    "ratio": 1.64
+   },
+   {
+    "name": "probe:grapheme_extend lookup serialized (cyc/char)",
+    "a64_cyc": 72.0,
+    "x86_cyc": 63.2,
+    "ratio": 1.14
+   }
+  ],
+  "tags": [
+   "O1",
+   "B2"
+  ],
+  "primary": "O1",
+  "x86_cause": "代碼同構、單次查找延遲相近,但 x86 同時在途的獨立查找約 3.4 個、本機約 2.3 個;成因未知,ROB 容量已排除。",
+  "confidence": "medium",
+  "repro": [
+   "O1-overlap"
+  ]
+ },
+ {
+  "id": "c61",
+  "title": "`hash::set_ops::set_symmetric_difference`:892 ns = `|A|+|B|` = 110 次 hash+probe(不是 10 次);兩個 `difference` 串接,`large.difference(&small)` 一側佔 91%",
+  "interfaces": [
+   "HashSet::symmetric_difference",
+   "HashSet::contains",
+   "RandomState(SipHash-1-3)"
+  ],
+  "benches": [
+   {
+    "name": "hash::set_ops::set_symmetric_difference",
+    "a64_cyc": 2622.8,
+    "x86_cyc": 2604.5,
+    "ratio": 1.007
+   }
+  ],
+  "tags": [
+   "X",
+   "B9",
+   "N1"
+  ],
+  "primary": "X",
+  "x86_cause": "bench 層面每 cycle 打平:本機指令少 30%、IPC 低 29%;LLVM 把旋轉摺進 2 cycle 的 `eor …, ror #n`,只在依賴走未移位運算元的單鏈上吃虧",
+  "confidence": "high",
+  "repro": [
+   "B9-complex-operand",
+   "L08-eor-ror-fold"
+  ]
+ },
+ {
+  "id": "c62",
+  "title": "`fmt::write_u8_max`:52 ns 全是 `format!` 機制(alloc + grow + free + dispatch),轉換本體不隨位數或型別變;先前「u64::MAX 快 8 ns」只存在於 2026-09-15 的舊 libstd,現版兩者同為 ~52 ns",
+  "interfaces": [
+   "format!",
+   "<u8 as Display>::fmt",
+   "alloc::fmt::format_inner",
+   "String::write_str",
+   "malloc/free"
+  ],
+  "benches": [
+   {
+    "name": "fmt::write_u8_max",
+    "a64_cyc": 153.1,
+    "x86_cyc": 91.4,
+    "ratio": 1.67
+   },
+   {
+    "name": "fmt::write_u8_min",
+    "a64_cyc": 155.9,
+    "x86_cyc": 92.3,
+    "ratio": 1.69
+   },
+   {
+    "name": "fmt::write_u64_max",
+    "a64_cyc": 151.9,
+    "x86_cyc": 105.0,
+    "ratio": 1.45
+   },
+   {
+    "name": "fmt::write_u64_min",
+    "a64_cyc": 162.5,
+    "x86_cyc": 92.2,
+    "ratio": 1.76
+   },
+   {
+    "name": "fmt::write_u128_max",
+    "a64_cyc": 183.2,
+    "x86_cyc": 133.6,
+    "ratio": 1.37
+   },
+   {
+    "name": "fmt::write_u128_min",
+    "a64_cyc": 168.0,
+    "x86_cyc": 97.7,
+    "ratio": 1.72
+   }
+  ],
+  "tags": [
+   "F1",
+   "F2",
+   "N2"
+  ],
+  "primary": "F1",
+  "x86_cause": "aarch64 `format!` 動態鏈接鏈有 26% cycles 前端停頓(成因未知,返回棧容量已排除),停頓量隨 libstd 佈局變化;x86 0-uop 週期約 1%,fmt 本體每 cycle 相同。",
+  "confidence": "medium",
+  "repro": [
+   "F1-return-stack",
+   "F2-layout"
+  ]
+ },
+ {
+  "id": "c63",
+  "title": "`num::int_sqrt::u128_sqrt_*`(20 項):`u128::isqrt` 的 Karatsuba 末端除法是 **128 位軟體除法**,佔 87% 時間(07e526db9df:`u128_div_rem` 74.0% + `__udivti3` 10.6%);本地原型把 `numerator / (2s)` 改寫為 `(numerator >> 1) / s` 使其落進原生 `udiv`——u128 各檔 −18…−27%",
+  "interfaces": [
+   "u128::isqrt",
+   "u64::isqrt",
+   "u32::isqrt",
+   "u16::isqrt",
+   "u8::isqrt",
+   "__udivti3"
+  ],
+  "benches": [
+   {
+    "name": "num::int_sqrt::u128_sqrt_uniform",
+    "a64_cyc": 25426.2,
+    "x86_cyc": 17820.1,
+    "ratio": 1.43
+   },
+   {
+    "name": "num::int_sqrt::u128_sqrt_random",
+    "a64_cyc": 13874.2,
+    "x86_cyc": 12329.0,
+    "ratio": 1.12
+   },
+   {
+    "name": "num::int_sqrt::u128_sqrt_predictable",
+    "a64_cyc": 94007.9,
+    "x86_cyc": 85718.0,
+    "ratio": 1.1
+   },
+   {
+    "name": "num::int_sqrt::u128_sqrt_random_small",
+    "a64_cyc": 1095.7,
+    "x86_cyc": 1704.7,
+    "ratio": 0.64
+   },
+   {
+    "name": "num::int_sqrt::u64_sqrt_uniform",
+    "a64_cyc": 7697.7,
+    "x86_cyc": 9136.7,
+    "ratio": 0.84
+   },
+   {
+    "name": "num::int_sqrt::u64_sqrt_predictable",
+    "a64_cyc": 16783.0,
+    "x86_cyc": 20891.3,
+    "ratio": 0.8
+   },
+   {
+    "name": "num::int_sqrt::u32_sqrt_uniform",
+    "a64_cyc": 5047.3,
+    "x86_cyc": 5937.6,
+    "ratio": 0.85
+   },
+   {
+    "name": "num::int_sqrt::u16_sqrt_uniform",
+    "a64_cyc": 2701.3,
+    "x86_cyc": 3232.3,
+    "ratio": 0.84
+   },
+   {
+    "name": "num::int_sqrt::u8_sqrt_random",
+    "a64_cyc": 631.8,
+    "x86_cyc": 509.9,
+    "ratio": 1.24
+   }
+  ],
+  "tags": [
+   "B3",
+   "N1",
+   "R1"
+  ],
+  "primary": "B3",
+  "x86_cause": "u128 末端執行期除數在本機走 compiler_builtins 軟體除法、x86 用 div;u16–u64 反向,本機 udiv 隨商位數早停;u128 小輸入 x86 指令數較多而反勝。",
+  "confidence": "high",
+  "repro": [
+   "B3a-mul-div",
+   "B3b-u128-div",
+   "R04-x86-isqrt-push"
+  ]
+ },
+ {
+  "id": "c64",
+  "title": "`iter::bench_next_chunk_*`(9 項,另新增 3 項):上游 `Filter`/`FilterMap` 的 `next_chunk` 壓縮迴圈對每個掃過元素「無條件 store」,稀疏謂詞下是純浪費;本地原型改為條件式 store 後 `mostly_false` −38%/−41%、`filter_even` −15%(`88f7399` 基線);「已貼近掃描地板」的說法不成立",
+  "interfaces": [
+   "Filter::next_chunk_dropless",
+   "FilterMap::next_chunk",
+   "Copied::next_chunk",
+   "ArrayChunks SpecFold (TRA)"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_next_chunk_copied",
+    "a64_cyc": 96.7,
+    "x86_cyc": 112.8,
+    "ratio": 0.857
+   },
+   {
+    "name": "iter::bench_next_chunk_trusted_random_access",
+    "a64_cyc": 286.3,
+    "x86_cyc": 260.7,
+    "ratio": 1.098
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_predictably_true",
+    "a64_cyc": 96.7,
+    "x86_cyc": 101.3,
+    "ratio": 0.955
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_map_predictably_true",
+    "a64_cyc": 81.1,
+    "x86_cyc": 73.4,
+    "ratio": 1.105
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_even",
+    "a64_cyc": 179.5,
+    "x86_cyc": 128.7,
+    "ratio": 1.395
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_map_even",
+    "a64_cyc": 141.4,
+    "x86_cyc": 102.9,
+    "ratio": 1.374
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_mostly_false",
+    "a64_cyc": 1724.4,
+    "x86_cyc": 1275.6,
+    "ratio": 1.352
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_map_mostly_false",
+    "a64_cyc": 1672.6,
+    "x86_cyc": 1340.9,
+    "ratio": 1.247
+   }
+  ],
+  "tags": [
+   "B7",
+   "N2",
+   "N1",
+   "X"
+  ],
+  "primary": "B7",
+  "x86_cause": "掃描群同碼壓縮迴圈本機每 cycle 慢 1.45×(整數 ALU 吞吐,成因推測);拷貝群 x86 因 256 B 不內聯而走 `memmove`,比值 <1。",
+  "confidence": "medium",
+  "repro": [
+   "B7-alu-throughput",
+   "L13-memcpy-256-inline"
+  ]
+ },
+ {
+  "id": "c65",
+  "title": "`vec::bench_in_place_*`(22 項全覽):18 項數值格的 i0/i1 符號由「分配位元組數是否超過 tcache」決定,in-place collect 本身在每一格都生效;但 `bench_in_place_recycle` 因 `.fuse()` 自 2021 年起**並未 in-place**(每輪 1 次分配)——為 `Fuse` 補回 `InPlaceIterable` 後 1 → 0 次分配",
+  "interfaces": [
+   "in-place collect (from_iter_in_place)",
+   "alloc_zeroed / calloc",
+   "vec![x; n]",
+   "Fuse InPlaceIterable"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_in_place_xxu8_0010_i0",
+    "a64_cyc": 62.7,
+    "x86_cyc": 42.7,
+    "ratio": 1.47
+   },
+   {
+    "name": "vec::bench_in_place_xxu8_0010_i1",
+    "a64_cyc": 43.9,
+    "x86_cyc": 39.5,
+    "ratio": 1.11
+   },
+   {
+    "name": "vec::bench_in_place_xxu8_0100_i0",
+    "a64_cyc": 72.5,
+    "x86_cyc": 81.5,
+    "ratio": 0.89
+   },
+   {
+    "name": "vec::bench_in_place_xxu8_0100_i1",
+    "a64_cyc": 50.1,
+    "x86_cyc": 42.3,
+    "ratio": 1.19
+   },
+   {
+    "name": "vec::bench_in_place_xxu8_1000_i0",
+    "a64_cyc": 184.9,
+    "x86_cyc": 162.5,
+    "ratio": 1.14
+   },
+   {
+    "name": "vec::bench_in_place_xxu8_1000_i1",
+    "a64_cyc": 177.2,
+    "x86_cyc": 117.1,
+    "ratio": 1.51
+   },
+   {
+    "name": "vec::bench_in_place_xu32_0010_i0",
+    "a64_cyc": 66.0,
+    "x86_cyc": 41.5,
+    "ratio": 1.59
+   },
+   {
+    "name": "vec::bench_in_place_xu32_0010_i1",
+    "a64_cyc": 43.8,
+    "x86_cyc": 38.6,
+    "ratio": 1.14
+   },
+   {
+    "name": "vec::bench_in_place_xu32_0100_i0",
+    "a64_cyc": 134.7,
+    "x86_cyc": 120.8,
+    "ratio": 1.12
+   },
+   {
+    "name": "vec::bench_in_place_xu32_0100_i1",
+    "a64_cyc": 81.1,
+    "x86_cyc": 67.9,
+    "ratio": 1.19
+   },
+   {
+    "name": "vec::bench_in_place_xu32_1000_i0",
+    "a64_cyc": 480.6,
+    "x86_cyc": 437.2,
+    "ratio": 1.1
+   },
+   {
+    "name": "vec::bench_in_place_xu32_1000_i1",
+    "a64_cyc": 560.9,
+    "x86_cyc": 433.7,
+    "ratio": 1.29
+   },
+   {
+    "name": "vec::bench_in_place_u128_0010_i0",
+    "a64_cyc": 113.5,
+    "x86_cyc": 78.3,
+    "ratio": 1.45
+   },
+   {
+    "name": "vec::bench_in_place_u128_0010_i1",
+    "a64_cyc": 50.5,
+    "x86_cyc": 42.8,
+    "ratio": 1.18
+   },
+   {
+    "name": "vec::bench_in_place_u128_0100_i0",
+    "a64_cyc": 218.9,
+    "x86_cyc": 220.8,
+    "ratio": 0.99
+   },
+   {
+    "name": "vec::bench_in_place_u128_0100_i1",
+    "a64_cyc": 261.6,
+    "x86_cyc": 248.6,
+    "ratio": 1.05
+   },
+   {
+    "name": "vec::bench_in_place_u128_1000_i0",
+    "a64_cyc": 1460.6,
+    "x86_cyc": 1055.1,
+    "ratio": 1.38
+   },
+   {
+    "name": "vec::bench_in_place_u128_1000_i1",
+    "a64_cyc": 2030.8,
+    "x86_cyc": 1977.4,
+    "ratio": 1.03
+   },
+   {
+    "name": "vec::bench_in_place_recycle",
+    "a64_cyc": 815.0,
+    "x86_cyc": 611.4,
+    "ratio": 1.33
+   },
+   {
+    "name": "vec::bench_in_place_collect_droppable",
+    "a64_cyc": 3170.5,
+    "x86_cyc": 4041.8,
+    "ratio": 0.78
+   },
+   {
+    "name": "vec::bench_in_place_zip_recycle",
+    "a64_cyc": 90.1,
+    "x86_cyc": 82.8,
+    "ratio": 1.09
+   },
+   {
+    "name": "vec::bench_in_place_zip_iter_mut",
+    "a64_cyc": 16.6,
+    "x86_cyc": 14.0,
+    "ratio": 1.19
+   }
+  ],
+  "tags": [
+   "N2",
+   "B5",
+   "R1",
+   "U1"
+  ],
+  "primary": "N2",
+  "x86_cause": "tcache 內 i0 慢兩邊同號但機理不同(本機 glibc 2.38 `calloc` 不走 tcache,x86 2.42 走 tcache 但 `rep stos` 清零);`collect_droppable` x86 較慢,伴隨 store buffer 滿,機制未隔離。",
+  "confidence": "medium",
+  "repro": [
+   "G4-malloc",
+   "R05-x86-store-buffer"
+  ]
+ },
+ {
+  "id": "c66",
+  "title": "`iter::bench_filter_map_chain_ref_sum`:多出的 50% 全是 `checked_mul` 倖存的溢出檢查——LLVM 只在界「先於迴圈旋轉」變成常數時才消得掉;Chain 與 `&mut I` 轉發均零成本",
+  "interfaces": [
+   "FilterMap::try_fold",
+   "Chain::try_fold",
+   "Range<i64>::try_fold",
+   "i64::checked_mul"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_filter_map_chain_ref_sum",
+    "a64_cyc": 4720494.9,
+    "x86_cyc": 2654411.8,
+    "ratio": 1.778
+   },
+   {
+    "name": "iter::bench_filter_map_chain_sum",
+    "a64_cyc": 4710796.2,
+    "x86_cyc": 2665731.3,
+    "ratio": 1.767
+   }
+  ],
+  "tags": [
+   "N1",
+   "B7"
+  ],
+  "primary": "N1",
+  "x86_cause": "兩邊的 checked_mul 檢查都倖存,但 AArch64 要 smulh 加 cmp asr(約 0.37–0.39 cycle/元素),x86 只是 imul 後一條不跳的 jo;去掉檢查後的餘差屬整數 ALU 吞吐(推測)。",
+  "confidence": "high",
+  "repro": [
+   "B7-alu-throughput",
+   "L06-smul-overflow"
+  ]
+ },
+ {
+  "id": "c67",
+  "title": "`btree::map::first_and_last_10k_stable`:`07e526db9df` 上比 nightly 慢 1.45×,不是導航成本,是 `iter()` 第一步內聯了用不到的上溯迴圈——快路徑必須跳過它,這個佈局在本機讓預測器每千指令失誤 4 次(x86 每輪必跳分支容量較大,不受影響);本地原型 C2(`LazyLeafRange` 的 Root 狀態直接取首/尾 KV)在舊基線上 −38%,並消掉本地 `next_unchecked` 原型的 `0_stable` +121% 退化(上游 #163521 版無此退化)",
+  "interfaces": [
+   "BTreeMap::iter().next",
+   "BTreeMap::iter().next_back",
+   "BTreeMap::first_key_value",
+   "BTreeMap::last_key_value"
+  ],
+  "benches": [
+   {
+    "name": "btree::map::first_and_last_10k_stable",
+    "a64_cyc": 147.8,
+    "x86_cyc": 143.2,
+    "ratio": 1.03
+   },
+   {
+    "name": "btree::map::first_and_last_10k_nightly",
+    "a64_cyc": 102.1,
+    "x86_cyc": 129.8,
+    "ratio": 0.79
+   },
+   {
+    "name": "btree::map::first_and_last_100_stable",
+    "a64_cyc": 54.4,
+    "x86_cyc": 76.8,
+    "ratio": 0.71
+   },
+   {
+    "name": "btree::map::first_and_last_100_nightly",
+    "a64_cyc": 42.6,
+    "x86_cyc": 71.8,
+    "ratio": 0.59
+   }
+  ],
+  "tags": [
+   "F3",
+   "B4"
+  ],
+  "primary": "F3",
+  "x86_cause": "stable 版的 10 次迴圈每輪含多條必跳分支,本機分支歷史在每輪約 5 條以上就猜錯迴圈出口,x86 撐到約 20 條。",
+  "confidence": "high",
+  "repro": [
+   "F3-branch-history"
+  ]
+ },
+ {
+  "id": "c68",
+  "title": "`iter::bench_filter_map_ref_sum`:ref 版 +51% 的逐 pass 證據——`Range` 經指標進 `try_fold`,界在 callee 內是 load;std 側用 `assert_unchecked` 補救不可行,assume 在內聯前就被 EarlyCSE 當冗餘刪除",
+  "interfaces": [
+   "FilterMap::try_fold",
+   "Range<i64>::try_fold",
+   "i64::checked_mul"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_filter_map_ref_sum",
+    "a64_cyc": 2356763.2,
+    "x86_cyc": 1320500.6,
+    "ratio": 1.785
+   },
+   {
+    "name": "iter::bench_filter_map_sum",
+    "a64_cyc": 1568058.3,
+    "x86_cyc": 1256670.0,
+    "ratio": 1.248
+   }
+  ],
+  "tags": [
+   "N1",
+   "B7"
+  ],
+  "primary": "N1",
+  "x86_cause": "x86 `imul` 帶 OF,AArch64 溢出檢查需 `smulh` + `cmp asr`(0.37–0.39 cycle/元素),ref 懲罰幾乎是 aarch64 專屬;去掉檢查後仍 1.48× 屬整數 ALU 吞吐(成因推測)",
+  "confidence": "high",
+  "repro": [
+   "B7-alu-throughput",
+   "L06-smul-overflow"
+  ]
+ },
+ {
+  "id": "c69",
+  "title": "`slice::sort_unstable_large_random`:126.6 µs = 10k 隨機 u64 × 36.7 cycles;比較次數 13.8/元素(1.04·log₂n,接近理論),時間 75% 在 partition 迴圈的兩條 store;單次 partition pass 獨立量 2.1 cycles/元素,其中 4 次記憶體操作約 1.2、其餘約 0.9 是 `cinc` 位址依賴(不是機器上限:同形 x86 為 2.52);兩個改法(寄存器攜帶 `left` 值、葉子 ≤20 改插入排序)實測皆回退",
+  "interfaces": [
+   "<[T]>::sort_unstable",
+   "ipnsort",
+   "partition_lomuto_branchless_cyclic",
+   "small_sort_network"
+  ],
+  "benches": [
+   {
+    "name": "slice::sort_unstable_large_random",
+    "a64_cyc": 362466.5,
+    "x86_cyc": 310414.3,
+    "ratio": 1.168
+   }
+  ],
+  "tags": [
+   "U1",
+   "B1"
+  ],
+  "primary": "U1",
+  "x86_cause": "手寫的 partition 與 small sort 單獨量時本機較快,但 std 實際的 partition 路徑本身本機已慢約 1.3×;機制未隔離,store→load 轉發的角色屬推測。",
+  "confidence": "low",
+  "repro": [
+   "B1-store-load",
+   "U1-sort-state"
+  ]
+ },
+ {
+  "id": "c70",
+  "title": "`iter::bench_range_step_by_fold_usize`:已是 NEON 4 累加器向量迴圈、無 load;比 `loop_u32` 慢一倍純粹是 u64 只有 2 lanes(每迭代週期數相同);開 SVE 只快 11%——本機 256-bit SVE 指令吞吐恰為 NEON 的一半,向量資料路徑仍是 128-bit",
+  "interfaces": [
+   "StepBy<Range>::fold",
+   "Map::fold"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_range_step_by_fold_usize",
+    "a64_cyc": 757.2,
+    "x86_cyc": 786.3,
+    "ratio": 0.963
+   },
+   {
+    "name": "iter::bench_range_step_by_loop_u32",
+    "a64_cyc": 378.1,
+    "x86_cyc": 382.9,
+    "ratio": 0.987
+   },
+   {
+    "name": "iter::bench_range_step_by_fold_u16",
+    "a64_cyc": 265.5,
+    "x86_cyc": 208.4,
+    "ratio": 1.274
+   },
+   {
+    "name": "iter::bench_range_step_by_sum_reducible",
+    "a64_cyc": 4.03,
+    "x86_cyc": 3.68,
+    "ratio": 1.094
+   }
+  ],
+  "tags": [
+   "S6",
+   "N1",
+   "X"
+  ],
+  "primary": "S6",
+  "x86_cause": "`fold_u16` 受 NEON 整數延遲 2 cycles(SSE 1)限制,AArch64 generic 對 i16 只選 IC 2 放大,改 IC 4 後追過 x86;`fold_usize` / `loop_u32` 每元素打平。",
+  "confidence": "high",
+  "repro": [
+   "L14-fold-u16-interleave",
+   "S6-neon-latency"
+  ]
+ },
+ {
+  "id": "c71",
+  "title": "`str::find_zzz_char::*` / `rfind_zzz_char::*`(8 項):時間幾乎全在 core 的 SWAR `memchr`(16 B/輪,每輪約 4.2 cycles,0.26 cyc/B);本地 NEON 原型 −65…−74%(相對 2026-10-12 基線,未在 `07e526db9df` 上重測),並帶動 `contains`/`find_underscore`/`splitn` 等 35 項;但密集命中的 `split(' ')` 在 harness 上回退——已證實是 bench 重複同一文字讓分支預測器背誦所致,在不可背誦輸入上 NEON v3 反而 −22%;取捨待決,原型已還原",
+  "interfaces": [
+   "str::find(char)",
+   "str::rfind(char)",
+   "CharSearcher",
+   "core::slice::memchr::memchr_aligned",
+   "memrchr",
+   "str::split(char)"
+  ],
+  "benches": [
+   {
+    "name": "str::find_zzz_char::long_lorem_ipsum",
+    "a64_cyc": 669.9,
+    "x86_cyc": 457.9,
+    "ratio": 1.46
+   },
+   {
+    "name": "str::rfind_zzz_char::long_lorem_ipsum",
+    "a64_cyc": 705.6,
+    "x86_cyc": 480.0,
+    "ratio": 1.47
+   },
+   {
+    "name": "str::find_zzz_char::short_ascii",
+    "a64_cyc": 36.5,
+    "x86_cyc": 36.4,
+    "ratio": 1.0
+   },
+   {
+    "name": "str::split_space_char::long_lorem_ipsum",
+    "a64_cyc": 7402,
+    "x86_cyc": 8980,
+    "ratio": 0.82
+   },
+   {
+    "name": "str::split_space_char::short_ascii",
+    "a64_cyc": 206.2,
+    "x86_cyc": 277.1,
+    "ratio": 0.74
+   }
+  ],
+  "tags": [
+   "B7",
+   "S1",
+   "S2",
+   "N2",
+   "N3"
+  ],
+  "primary": "B7",
+  "x86_cause": "長串 SWAR 迴圈 aarch64 每 cycle 整數 ALU 吞吐較低(約 4 vs 5 + 宏融合,成因推測);密集命中時 x86 反而因 SysV 保存暫存器吃虧;向量化版本 aarch64 另有無 `movemask` 的地板。",
+  "confidence": "medium",
+  "repro": [
+   "B7-alu-throughput",
+   "S2-mask-floor"
+  ]
+ },
+ {
+  "id": "c72",
+  "title": "`str::find_zzz_char` 續:`07e526db9df` 仍是 core 的 SWAR `memchr`;本地原型改用 `memchr` crate 2.8.3 的 aarch64 NEON 搜尋(`arch::generic::memchr::One` 移植進 core)——無命中 −53…−80%,不可背誦的密集長文 −37%;但 crate 的做法對「每 3–12 B 一次命中」有 ~26 cycles/呼叫的固定地板,短文密集分割(64 B)在任何輸入上都回退 ~45%",
+  "interfaces": [
+   "core::slice::memchr",
+   "memchr::arch::aarch64::neon::memchr::One",
+   "memchr::arch::x86_64::sse2::memchr::One",
+   "str::split(char)"
+  ],
+  "benches": [
+   {
+    "name": "str::find_zzz_char::long_lorem_ipsum",
+    "a64_cyc": 669.9,
+    "x86_cyc": 457.9,
+    "ratio": 1.46
+   },
+   {
+    "name": "str::split_space_char::short_ascii",
+    "a64_cyc": 206.2,
+    "x86_cyc": 277.1,
+    "ratio": 0.74
+   },
+   {
+    "name": "probe: crate One 16B, hit every 6 B (cyc/call)",
+    "a64_cyc": 26.8,
+    "x86_cyc": 18.0,
+    "ratio": 1.49
+   },
+   {
+    "name": "probe: crate One 16B, 2551 B no match (cyc/call)",
+    "a64_cyc": 160.0,
+    "x86_cyc": 143.4,
+    "ratio": 1.12
+   }
+  ],
+  "tags": [
+   "S1",
+   "S2",
+   "N2"
+  ],
+  "primary": "S1",
+  "x86_cause": "同寬同算法下,本機沒有 movemask,命中後向量→位遮罩→GPR 要多條指令且延遲較長,短距離命中每次呼叫多約 9 cycles;長串差距主要是 x86 AVX2 向量較寬。",
+  "confidence": "medium",
+  "repro": [
+   "L11-movemask",
+   "S2-mask-floor"
+  ]
+ },
+ {
+  "id": "c73",
+  "title": "`iter::bench_zip_then_skip` / `bench_skip_then_zip`:77 ns = 6 cycles 固定 + 100 元素 × 2.0 cycles;`skip` 經 `Zip<TRA>::nth` 為 O(1)(skip 10/10k/90k 同價),兩個 bench 同碼;每元素 2 cycles 不是發射寬度地板(本機 nop 探針約 6 條/cycle),是 2 條相依 `add` 的累加鏈與整數指令吞吐兩個限制疊在一起;上方 1.75× 的頭寸需向量化「早退 + 歸約」迴圈,LLVM 23 的 early-exit 向量化不支援活出歸約",
+  "interfaces": [
+   "Zip<TRA>::nth",
+   "Skip::try_fold",
+   "TakeWhile::try_fold"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_zip_then_skip",
+    "a64_cyc": 223.3,
+    "x86_cyc": 142.6,
+    "ratio": 1.566
+   },
+   {
+    "name": "iter::bench_skip_then_zip",
+    "a64_cyc": 223.6,
+    "x86_cyc": 141.0,
+    "ratio": 1.586
+   }
+  ],
+  "tags": [
+   "O1",
+   "N1",
+   "B7"
+  ],
+  "primary": "O1",
+  "x86_cause": "串行時只差 1.15×,bench 的 1.57× 多來自 x86 相鄰呼叫重疊較多;成因未知,窗口容量已由 `O1-overlap` 排除為充分解釋,且未能以最小程式復現",
+  "confidence": "low",
+  "repro": [
+   "O1-overlap"
+  ]
+ },
+ {
+  "id": "c74",
+  "title": "`iter::bench_next_chunk_filter_mostly_false` 續:上游仍是無條件 store(每掃過元素 1.85 cycles);本地原型條件式 store(`88f7399` 基線 −37.7%,重現)後熱迴圈只剩 6 條指令、每元素一條必跳回邊,1.24 cycles/掃過元素,taken 分支地板是 1.0;再往下的兩條路——4 元素一組跳過(對謂詞形狀不穩健,−21%…+325%)、SIMD(需已知謂詞,6×)——std 都不能用",
+  "interfaces": [
+   "Filter::next_chunk_dropless",
+   "FilterMap::next_chunk"
+  ],
+  "benches": [
+   {
+    "name": "iter::bench_next_chunk_filter_mostly_false",
+    "a64_cyc": 1724.4,
+    "x86_cyc": 1275.6,
+    "ratio": 1.352
+   },
+   {
+    "name": "iter::bench_next_chunk_filter_map_mostly_false",
+    "a64_cyc": 1672.6,
+    "x86_cyc": 1340.9,
+    "ratio": 1.247
+   }
+  ],
+  "tags": [
+   "B7",
+   "N1"
+  ],
+  "primary": "B7",
+  "x86_cause": "同碼壓縮迴圈本機 1.92 vs x86 1.32,ALU 類指令多時吞吐掉落(`B7` 3.9 vs 5.7/cycle,成因推測);x86 另展開 ×2 並合併 load+cmp",
+  "confidence": "medium",
+  "repro": [
+   "B7-alu-throughput"
+  ]
+ },
+ {
+  "id": "c75",
+  "title": "`vec::bench_extend_*`(15 項):`bench_extend_recycle` 量的最佳化已於 2020 年移除,bench 卻留著(`07e526db9df` 仍如此);本地原型把「空 Vec 接收 `IntoIter` 緩衝區」放回 `SpecExtend<T, IntoIter>` 專用路徑內(不碰其他 extend 路徑)後 recycle −90%、空目標 `extend(src.clone())` −51…−53%;另 `extend(clone)` 的額外成本隨 dst 長度改變是 glibc `realloc` 被相鄰配置擋住原地成長,非 std 問題",
+  "interfaces": [
+   "Vec::extend",
+   "Vec::extend_from_slice",
+   "SpecExtend<T, IntoIter<T>>",
+   "Vec::clone"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_extend_0000_0000",
+    "a64_cyc": 3.9,
+    "x86_cyc": 24.1,
+    "ratio": 0.16
+   },
+   {
+    "name": "vec::bench_extend_from_slice_0000_0000",
+    "a64_cyc": 4.2,
+    "x86_cyc": 23.1,
+    "ratio": 0.18
+   },
+   {
+    "name": "vec::bench_extend_0000_0010",
+    "a64_cyc": 95.8,
+    "x86_cyc": 91.0,
+    "ratio": 1.05
+   },
+   {
+    "name": "vec::bench_extend_0000_0100",
+    "a64_cyc": 172.9,
+    "x86_cyc": 113.8,
+    "ratio": 1.52
+   },
+   {
+    "name": "vec::bench_extend_0000_1000",
+    "a64_cyc": 835.4,
+    "x86_cyc": 570.6,
+    "ratio": 1.46
+   },
+   {
+    "name": "vec::bench_extend_0010_0010",
+    "a64_cyc": 266.4,
+    "x86_cyc": 235.7,
+    "ratio": 1.13
+   },
+   {
+    "name": "vec::bench_extend_0100_0100",
+    "a64_cyc": 335.5,
+    "x86_cyc": 292.4,
+    "ratio": 1.15
+   },
+   {
+    "name": "vec::bench_extend_1000_1000",
+    "a64_cyc": 1577.2,
+    "x86_cyc": 1150.9,
+    "ratio": 1.37
+   },
+   {
+    "name": "vec::bench_extend_from_slice_0000_0010",
+    "a64_cyc": 60.5,
+    "x86_cyc": 64.6,
+    "ratio": 0.94
+   },
+   {
+    "name": "vec::bench_extend_from_slice_0000_0100",
+    "a64_cyc": 106.1,
+    "x86_cyc": 67.1,
+    "ratio": 1.58
+   },
+   {
+    "name": "vec::bench_extend_from_slice_0000_1000",
+    "a64_cyc": 425.8,
+    "x86_cyc": 293.6,
+    "ratio": 1.45
+   },
+   {
+    "name": "vec::bench_extend_from_slice_0010_0010",
+    "a64_cyc": 230.9,
+    "x86_cyc": 201.3,
+    "ratio": 1.15
+   },
+   {
+    "name": "vec::bench_extend_from_slice_0100_0100",
+    "a64_cyc": 262.6,
+    "x86_cyc": 272.4,
+    "ratio": 0.96
+   },
+   {
+    "name": "vec::bench_extend_from_slice_1000_1000",
+    "a64_cyc": 794.6,
+    "x86_cyc": 552.7,
+    "ratio": 1.44
+   },
+   {
+    "name": "vec::bench_extend_recycle",
+    "a64_cyc": 263.1,
+    "x86_cyc": 196.3,
+    "ratio": 1.34
+   }
+  ],
+  "tags": [
+   "N2",
+   "B5",
+   "B10",
+   "R1",
+   "N4"
+  ],
+  "primary": "N2",
+  "x86_cause": "非 0/0 檔位來自 glibc(tcache malloc 與 memcpy 變體,版本與 CPU 無法分開)及大尺寸拷貝;0/0 的倒掛是 x86 後端拆 store 後 16 B 載入轉發失敗",
+  "confidence": "medium",
+  "repro": [
+   "G4-malloc",
+   "R01-x86-split-store-16b"
+  ]
+ },
+ {
+  "id": "c76",
+  "title": "`num::flt2dec::bench_{small,big}_shortest`(頂層 2 項,`write!(\"{}\", f64)`):Grisu 佔 56%,逐段寫出佔 21%,fmt 管線佔 19%;拼接寫出的原型因每段一次 `memcpy` 反而 +10…+15 ns,已否決;perf 取樣比例在此不可信(同 bench 46–77%),改用逐層確定性計數",
+  "interfaces": [
+   "<f64 as Display>::fmt",
+   "float_to_decimal_common_shortest",
+   "grisu::format_shortest",
+   "Formatter::write_formatted_parts"
+  ],
+  "benches": [
+   {
+    "name": "num::flt2dec::bench_small_shortest",
+    "a64_cyc": 200.7,
+    "x86_cyc": 228.6,
+    "ratio": 0.88
+   },
+   {
+    "name": "num::flt2dec::bench_big_shortest",
+    "a64_cyc": 311.7,
+    "x86_cyc": 321.5,
+    "ratio": 0.97
+   }
+  ],
+  "tags": [
+   "X",
+   "R1",
+   "U1",
+   "B10"
+  ],
+  "primary": "X",
+  "x86_cause": "整體每 cycle 接近,本機略快;Grisu 本體 x86 快 1.25×,fmt 管線本機快 1.57×(x86 側成因未隔離,窄寫寬讀 +14 是候選,未驗證)",
+  "confidence": "medium",
+  "repro": [
+   "B10-wide-load-narrow-stores",
+   "F2-layout"
+  ]
+ },
+ {
+  "id": "c77",
+  "title": "`num::int_bits::*`(30 項)續:以 NEON `pmull`(無進位乘法)實作 `prepare()` 的前綴 XOR——數學正確(u8/u16 窮舉、其餘 200 萬組隨機),但只在 u64 快 1.3–1.5×,其餘型別慢 1.4–10×;且 `aes` 不在預設 target,core 無法執行期偵測——維持排除",
+  "interfaces": [
+   "uN::deposit_bits",
+   "uN::extract_bits",
+   "int_bits::prepare"
+  ],
+  "benches": [
+   {
+    "name": "num::int_bits::u64::variable::deposit_bits",
+    "a64_cyc": 5229.5,
+    "x86_cyc": 2795.1,
+    "ratio": 1.87
+   },
+   {
+    "name": "num::int_bits::u32::variable::deposit_bits",
+    "a64_cyc": 3726.9,
+    "x86_cyc": 1978.8,
+    "ratio": 1.88
+   },
+   {
+    "name": "num::int_bits::u16::variable::deposit_bits",
+    "a64_cyc": 2375.1,
+    "x86_cyc": 1376.8,
+    "ratio": 1.73
+   },
+   {
+    "name": "num::int_bits::u8::variable::deposit_bits",
+    "a64_cyc": 1389.8,
+    "x86_cyc": 1117.0,
+    "ratio": 1.24
+   },
+   {
+    "name": "num::int_bits::u64::variable::extract_bits",
+    "a64_cyc": 4244.1,
+    "x86_cyc": 2511.0,
+    "ratio": 1.69
+   },
+   {
+    "name": "num::int_bits::u128::variable::deposit_bits",
+    "a64_cyc": 5333.2,
+    "x86_cyc": 7322.0,
+    "ratio": 0.73
+   },
+   {
+    "name": "num::int_bits::u128::variable::extract_bits",
+    "a64_cyc": 4320.4,
+    "x86_cyc": 6213.4,
+    "ratio": 0.69
+   }
+  ],
+  "tags": [
+   "S6",
+   "N1"
+  ],
+  "primary": "S6",
+  "x86_cause": "`prepare()` 的前綴異或鏈向量化後延遲受限,NEON `shl`/`eor` 各 2 cycles、SSE2 各 1,u16–u64 慢約 2×;u128 純量上 x86 需 `shld`/`shrd`,反而 aarch64 佔優。",
+  "confidence": "high",
+  "repro": [
+   "S6-neon-latency"
+  ]
+ },
+ {
+  "id": "c78",
+  "title": "Dragon 還能優化嗎:`format_exact` 開頭的 `floor(plus)` 檢查在長緩衝區上對已歸零的 `scale` 反覆除以 10⁹,07e526db9df 上佔 `big_exact_inf` 25.9%(本地 §6 原型之後佔 77%)——以位元長度判定商為 0 即跳過(本地原型),輸出逐位相同,§6 基線上 `_exact_inf` 系列 −67…−87%、真實 `{:.N}`(`1e300 {:.0}`、`f64::MAX {:.0}`)−53…−54%",
+  "interfaces": [
+   "dragon::format_exact",
+   "dragon::div_2pow10",
+   "Big64x20::div_rem_small"
+  ],
+  "benches": [
+   {
+    "name": "num::flt2dec::strategy::dragon::bench_big_exact_inf",
+    "a64_cyc": 63668.6,
+    "x86_cyc": 49747.1,
+    "ratio": 1.28
+   },
+   {
+    "name": "num::flt2dec::strategy::grisu::bench_big_exact_inf",
+    "a64_cyc": 63965.4,
+    "x86_cyc": 49143.1,
+    "ratio": 1.3
+   },
+   {
+    "name": "num::flt2dec::strategy::dragon::bench_small_exact_inf",
+    "a64_cyc": 3070.0,
+    "x86_cyc": 3368.1,
+    "ratio": 0.91
+   },
+   {
+    "name": "num::flt2dec::strategy::grisu::bench_one_exact_inf",
+    "a64_cyc": 1972.3,
+    "x86_cyc": 2296.8,
+    "ratio": 0.86
+   },
+   {
+    "name": "num::flt2dec::strategy::grisu::bench_halfway_point_exact_inf",
+    "a64_cyc": 1974.4,
+    "x86_cyc": 2286.6,
+    "ratio": 0.86
+   },
+   {
+    "name": "num::flt2dec::strategy::grisu::bench_trailing_zero_exact_inf",
+    "a64_cyc": 2012.5,
+    "x86_cyc": 2298.7,
+    "ratio": 0.88
+   }
+  ],
+  "tags": [
+   "B3",
+   "F3"
+  ],
+  "primary": "B3",
+  "x86_cause": "÷10⁹ 迴圈本機乘法高半延遲短,比值 0.86–0.88(本機每 cycle 較快);`big_exact_inf` 1.28–1.30 超出部分在 digit 迴圈的誤預測,推測為分支歷史,未直接測。",
+  "confidence": "medium",
+  "repro": [
+   "B3a-mul-div",
+   "P1-predictor-pattern"
+  ]
+ },
+ {
+  "id": "c79",
+  "title": "aarch64 專用實作掃描・第一輪(2026-10-15):判準是「可以寫成獨立的 aarch64 路徑(NEON/SVE),落地時不必連帶修改或驗證 x86」;`str::rfind`/`find` 13×、`trim` 4–13×、`split_whitespace` 7–17×、`escape_ascii` 4×、`compare_components` 5×、`[[u8;3]]::reverse` 4.2×;`Path::components`、`rposition` 否決",
+  "interfaces": [
+   "str::rfind",
+   "str::find",
+   "str::trim*",
+   "split_whitespace",
+   "escape_ascii",
+   "compare_components",
+   "[[u8;3]]::reverse",
+   "Hash for Path",
+   "chars().rev()",
+   "Path::components"
+  ],
+  "benches": [
+   {
+    "name": "pattern::rfind_str_worst_case",
+    "a64_cyc": 68220,
+    "x86_cyc": 94620,
+    "ratio": 0.72
+   },
+   {
+    "name": "pattern::find_str",
+    "a64_cyc": 20166,
+    "x86_cyc": 15403,
+    "ratio": 1.31
+   },
+   {
+    "name": "str::trim_end_ascii_char::long_lorem_ipsum",
+    "a64_cyc": 5165,
+    "x86_cyc": 2587,
+    "ratio": 2.0
+   },
+   {
+    "name": "ascii::bench_ascii_escape_display_no_escape",
+    "a64_cyc": 340.9,
+    "x86_cyc": 419.6,
+    "ratio": 0.81
+   },
+   {
+    "name": "path::bench_path_cmp_fast_path_long",
+    "a64_cyc": 5045,
+    "x86_cyc": 4962,
+    "ratio": 1.02
+   },
+   {
+    "name": "slice::reverse_u8x3",
+    "a64_cyc": 494617,
+    "x86_cyc": 731361,
+    "ratio": 0.68
+   },
+   {
+    "name": "path::bench_hash_path_long",
+    "a64_cyc": 235.2,
+    "x86_cyc": 286.3,
+    "ratio": 0.82
+   },
+   {
+    "name": "str::char_iterator_rev",
+    "a64_cyc": 139.0,
+    "x86_cyc": 68.0,
+    "ratio": 2.04
+   },
+   {
+    "name": "path::bench_path_components_iter",
+    "a64_cyc": 244.9,
+    "x86_cyc": 392.5,
+    "ratio": 0.62
+   }
+  ],
+  "tags": [
+   "N1",
+   "F4",
+   "B4",
+   "F2",
+   "X"
+  ],
+  "primary": "N1",
+  "x86_cause": "`chars().rev()` 上 AArch64 區塊放置讓每 ASCII 字元多 1 個 taken 分支,疊加本機小迴圈必跳分支吞吐 1 條/cycle 與較多誤預測;ext-tsp 佈局修正後仍有指針鏈差距(未隔離)。其餘候選多為同構或 aarch64 較好。",
+  "confidence": "medium",
+  "repro": [
+   "F4-taken-throughput",
+   "L09-rev-decode-layout"
+  ]
+ },
+ {
+  "id": "c80",
+  "title": "aarch64 專用實作掃描・第二輪(2026-10-15):以全部 1 101 個 std benchmark 驅動——`str::from_utf8` 非 ASCII 驗證(NEON `tbl`)4.2–5.4×、`Vec::dedup()` 整數(SVE `compact`)2–14×(對本章基線;前掃部分已由 #162810 入上游)、`str::contains` 去掉 `to_bitmask` 模擬 1.13–1.30×、`Ipv4Addr` 解析(`tbl`)1.60×",
+  "interfaces": [
+   "str::from_utf8",
+   "Vec::dedup",
+   "str::contains",
+   "Ipv4Addr::from_str"
+  ],
+  "benches": [
+   {
+    "name": "str::str_validate_emoji",
+    "a64_cyc": 11445,
+    "x86_cyc": 8821,
+    "ratio": 1.3
+   },
+   {
+    "name": "vec::bench_dedup_u8_none_10000",
+    "a64_cyc": 1584,
+    "x86_cyc": 832,
+    "ratio": 1.9
+   },
+   {
+    "name": "vec::bench_dedup_u64_none_10000",
+    "a64_cyc": 6893,
+    "x86_cyc": 10439,
+    "ratio": 0.66
+   },
+   {
+    "name": "str::bench_contains_short_long",
+    "a64_cyc": 489.7,
+    "x86_cyc": 259.3,
+    "ratio": 1.89
+   },
+   {
+    "name": "net::addr_parser::bench_parse_ipv4",
+    "a64_cyc": 357.8,
+    "x86_cyc": 325.6,
+    "ratio": 1.1
+   }
+  ],
+  "tags": [
+   "S1",
+   "S2",
+   "X"
+  ],
+  "primary": "S1",
+  "x86_cause": "contains 與 u8/u16 dedup 前掃的向量比較結果在 x86 一條 pmovmskb 取遮罩,本機無 movemask 要多條 addp 模擬再 umov 到 GPR;其餘差距為一般 IPC 差(推測)。",
+  "confidence": "medium",
+  "repro": [
+   "L11-movemask"
+  ]
+ },
+ {
+  "id": "c81",
+  "title": "aarch64 專用實作掃描・第三輪(2026-10-15):按最終判準重新評估第二輪被排除的項目,4 個 agent 補做 NEON/SVE 三方探針——整數 `{:b}`/`{:x}`/`{:o}` 格式化(i128 `{:b}` 2.95×)、`eq_ignore_ascii_case` 4–15 B(2.6–7.3×)、`str` Debug 掃描(−21…−25%)、`swap_with_slice` 短尾(−23%)、`slice::contains`(SVE 15–60%)成立;`dec2flt` NEON 輸給可移植 SWAR",
+  "interfaces": [
+   "{:b}/{:x}/{:o}",
+   "eq_ignore_ascii_case",
+   "<str as Debug>::fmt",
+   "swap_with_slice",
+   "slice::contains",
+   "u64::from_str_radix",
+   "dec2flt"
+  ],
+  "benches": [
+   {
+    "name": "fmt::write_i128_bin",
+    "a64_cyc": 525.8,
+    "x86_cyc": 829.1,
+    "ratio": 0.63
+   },
+   {
+    "name": "str::eq_ignore_ascii_case::bench_str_of_8_bytes_eq",
+    "a64_cyc": 26.3,
+    "x86_cyc": 25.1,
+    "ratio": 1.05
+   },
+   {
+    "name": "str::debug::mixed",
+    "a64_cyc": 4223,
+    "x86_cyc": 2730,
+    "ratio": 1.55
+   },
+   {
+    "name": "fmt::write_str_macro_debug",
+    "a64_cyc": 236460,
+    "x86_cyc": 150145,
+    "ratio": 1.57
+   },
+   {
+    "name": "slice::swap_with_slice_usize_3000",
+    "a64_cyc": 107387,
+    "x86_cyc": 77847,
+    "ratio": 1.38
+   },
+   {
+    "name": "slice::contains_last_element",
+    "a64_cyc": 19.8,
+    "x86_cyc": 17.9,
+    "ratio": 1.11
+   },
+   {
+    "name": "num::bench_u64_from_str_radix_10",
+    "a64_cyc": 69236,
+    "x86_cyc": 56974,
+    "ratio": 1.22
+   }
+  ],
+  "tags": [
+   "U1",
+   "B4",
+   "N2",
+   "R1",
+   "X"
+  ],
+  "primary": "U1",
+  "x86_cause": "掃描章:多數候選同構或本機較好;`str::debug` 1.45–1.55 在 Unicode 查表,IPC 3.07 vs 4.84,L1 載入延遲本機不慢,成因未隔離",
+  "confidence": "low",
+  "repro": [
+   "B2-load-latency"
+  ]
+ },
+ {
+  "id": "c82",
+  "title": "`num::int_bits::*::extract_bits`(2026-10-15):上游 07e526db9df 每階段為 `x ^= q; x ^= q >> n`(`u64::invariant::extract_bits` 289.710 ns);本地原型改成 `x = (x & !m) + (q >> n)`——LLVM 在 aarch64 把它融合成 `bic` + `usra`,本地樹內 A/B 對 u8–u64 的 `constant`/`invariant` 快 1.30–2.08×;`deposit_bits` 與 u128 無變化",
+  "interfaces": [
+   "uN::extract_bits",
+   "int_bits::extract_impl"
+  ],
+  "benches": [
+   {
+    "name": "num::int_bits::u64::invariant::extract_bits",
+    "a64_cyc": 840.0,
+    "x86_cyc": 625.1,
+    "ratio": 1.34
+   },
+   {
+    "name": "num::int_bits::u64::constant::extract_bits",
+    "a64_cyc": 786.7,
+    "x86_cyc": 557.7,
+    "ratio": 1.41
+   },
+   {
+    "name": "num::int_bits::u32::constant::extract_bits",
+    "a64_cyc": 611.3,
+    "x86_cyc": 494.4,
+    "ratio": 1.24
+   },
+   {
+    "name": "num::int_bits::u16::constant::extract_bits",
+    "a64_cyc": 458.0,
+    "x86_cyc": 386.4,
+    "ratio": 1.19
+   },
+   {
+    "name": "num::int_bits::u8::constant::extract_bits",
+    "a64_cyc": 297.6,
+    "x86_cyc": 283.2,
+    "ratio": 1.05
+   },
+   {
+    "name": "num::int_bits::u8::invariant::extract_bits",
+    "a64_cyc": 313.7,
+    "x86_cyc": 364.3,
+    "ratio": 0.86
+   },
+   {
+    "name": "num::int_bits::u64::variable::extract_bits",
+    "a64_cyc": 4244.1,
+    "x86_cyc": 2511.0,
+    "ratio": 1.69
+   },
+   {
+    "name": "num::int_bits::u128::variable::extract_bits",
+    "a64_cyc": 4320.4,
+    "x86_cyc": 6213.4,
+    "ratio": 0.69
+   }
+  ],
+  "tags": [
+   "S6",
+   "N1"
+  ],
+  "primary": "S6",
+  "x86_cause": "u16–u64 每階段鏈暴露 NEON 整數延遲 2 cycles(每步 4 對 2);aarch64 預設目標無 `eor3`,add 形式用 `usra` 縮短鏈後 `invariant` 打平。",
+  "confidence": "high",
+  "repro": [
+   "S6-neon-latency"
+  ]
+ },
+ {
+  "id": "c83",
+  "title": "`vec::bench_extend_*` 續(ARM 專項):拷貝全部落在 glibc `__memcpy_generic`,8 KB 時 24.0 B/cycle 貼 `bw.rs` 量的純 store 地板(23.4);`bw.rs` 的手寫 NEON 64 B/輪與 SVE 4×VL 皆 ≤ memcpy(21.0 / 21.3 B/cycle,src/dst 同步位移 8 B 時 15 vs 24;只有 dst 錯位時 memcpy 也掉到 18.3);glibc 自帶的 `__memcpy_sve` 反而慢 13%;小尺寸 90% 在 malloc/realloc/free——aarch64 專屬路徑在此族未驗證出頭寸",
+  "interfaces": [
+   "Vec::extend_from_slice",
+   "ptr::copy_nonoverlapping",
+   "memcpy"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_extend_from_slice_0000_0100",
+    "a64_cyc": 106.1,
+    "x86_cyc": 67.1,
+    "ratio": 1.58
+   },
+   {
+    "name": "vec::bench_extend_from_slice_0000_1000",
+    "a64_cyc": 425.8,
+    "x86_cyc": 293.6,
+    "ratio": 1.45
+   },
+   {
+    "name": "vec::bench_extend_from_slice_1000_1000",
+    "a64_cyc": 794.6,
+    "x86_cyc": 552.7,
+    "ratio": 1.44
+   },
+   {
+    "name": "vec::bench_extend_1000_1000",
+    "a64_cyc": 1577.2,
+    "x86_cyc": 1150.9,
+    "ratio": 1.37
+   }
+  ],
+  "tags": [
+   "M3",
+   "B5",
+   "N2",
+   "B6"
+  ],
+  "primary": "M3",
+  "x86_cause": "x86 libc 在 8 KB 用 `rep movsb` 較寬(對齊 58–60 B/cycle,本機 24,但 x86 對相對錯位也敏感),≤1 KB 另有 glibc 變體差;同寬手寫只差 1.07–1.29×,純 store 兩邊相同",
+  "confidence": "medium",
+  "repro": [
+   "B5-store-throughput",
+   "B6-unaligned",
+   "G3-memcpy-variant"
+  ]
+ },
+ {
+  "id": "c84",
+  "title": "`str::debug::mixed`(及同族 5 項):66–82% 在 `escape_debug_ext` 的 4 張 Unicode 稀疏表;對 `mixed` 而言槓桿是 portable 的區塊位圖(§17,本地原型,探針 −82%),本地原型 aarch64 NEON 16 B 分類 + 2 位元組區塊 `TBL` 只再多 6%;NEON 的大收益在純 ASCII / 西里爾等「長串可直接印出」的輸入(4–100×),但對中文需另行處理",
+  "interfaces": [
+   "<str as Debug>::fmt",
+   "char::escape_debug_ext",
+   "unicode_data::*::lookup_slow"
+  ],
+  "benches": [
+   {
+    "name": "str::debug::mixed",
+    "a64_cyc": 4252.8,
+    "x86_cyc": 2736.7,
+    "ratio": 1.554
+   },
+   {
+    "name": "str::debug::some_unicode",
+    "a64_cyc": 791.9,
+    "x86_cyc": 620.1,
+    "ratio": 1.277
+   },
+   {
+    "name": "str::debug::ascii_escapes",
+    "a64_cyc": 754.4,
+    "x86_cyc": 761.0,
+    "ratio": 0.991
+   },
+   {
+    "name": "str::debug::ascii_only",
+    "a64_cyc": 464.9,
+    "x86_cyc": 496.9,
+    "ratio": 0.936
+   },
+   {
+    "name": "probe:mixed write! preallocated",
+    "a64_cyc": 3429.2,
+    "x86_cyc": 2417.7,
+    "ratio": 1.42
+   }
+  ],
+  "tags": [
+   "O1",
+   "N2",
+   "B4"
+  ],
+  "primary": "O1",
+  "x86_cause": "查表路徑每 cycle 慢 1.38–1.66×,現象是獨立查找重疊較少,成因未知(未能以最小程式復現,窗口容量不足以解釋);`format!` 擴容的配置器再加 0.13。",
+  "confidence": "low",
+  "repro": [
+   "O1-overlap"
+  ]
+ },
+ {
+  "id": "c85",
+  "title": "`slice::sort_large_strings`(stable)與 `sort_unstable_large_strings`:比較函式(memcmp + PLT)佔 55%;aarch64 SVE 述詞化比較(`whilelo` + `ld1b` + `cmpne` + `brka`/`lastb`,不越界、無尺寸分派)在 bench 分佈上 −38% / −43%,6 種分佈中只有「32 B 共同前綴」stable +3%——遠比 portable 內聯前綴探測(各有 5–44% 回退)穩健",
+  "interfaces": [
+   "<[&str]>::sort",
+   "<[&str]>::sort_unstable",
+   "<[u8] as Ord>::cmp",
+   "libc memcmp"
+  ],
+  "benches": [
+   {
+    "name": "slice::sort_large_strings",
+    "a64_cyc": 3266850.0,
+    "x86_cyc": 2653733.0,
+    "ratio": 1.231
+   },
+   {
+    "name": "slice::sort_unstable_large_strings",
+    "a64_cyc": 2911759.2,
+    "x86_cyc": 2329396.6,
+    "ratio": 1.25
+   }
+  ],
+  "tags": [
+   "N2",
+   "B4",
+   "N3"
+  ],
+  "primary": "N2",
+  "x86_cause": "aarch64 glibc `memcmp` 對隨機短長度的分派有較多誤預測,單次成本較高;換成內聯比較器後 aarch64 反而較快。",
+  "confidence": "high",
+  "repro": [
+   "G1-memcmp-short"
+  ]
+ },
+ {
+  "id": "c86",
+  "title": "`linked_list::bench_collect_into`:1 162 ns = 64 次節點配置 + 64 次釋放,84% 在 glibc malloc/free;只調 glibc `tcache_count`(7 → 64)即 −26%;Rust 側 ~7%,無 std 病灶,亦無 aarch64 專屬空間",
+  "interfaces": [
+   "LinkedList::from_iter",
+   "LinkedList::drop"
+  ],
+  "benches": [
+   {
+    "name": "linked_list::bench_collect_into",
+    "a64_cyc": 3372.5,
+    "x86_cyc": 2898.9,
+    "ratio": 1.16
+   }
+  ],
+  "tags": [
+   "N2"
+  ],
+  "primary": "N2",
+  "x86_cause": "約 90% 時間在 glibc malloc/free,aarch64 側同樣工作多 19–23% 指令(glibc 版本與 ISA 同時不同,份額未分)。",
+  "confidence": "medium",
+  "repro": [
+   "G4-malloc"
+  ]
+ },
+ {
+  "id": "c87",
+  "title": "`fmt::write_i128_exp`:`exp_u128` 全程以 u128 取位(`% 100`、`/ 100` 展開為串行 64 位乘法鏈,IPC 3.49);裝得進 u64 就交給 `exp_u64`、更寬且無精度時以 3 段 10¹⁹ 轉換——本地 **portable** 原型(未入上游) harness −33.5%,40 萬行 × 30 種格式逐位一致",
+  "interfaces": [
+   "<i128 as LowerExp>::fmt",
+   "core::fmt::num::exp_u128"
+  ],
+  "benches": [
+   {
+    "name": "fmt::write_i128_exp",
+    "a64_cyc": 464.2,
+    "x86_cyc": 443.9,
+    "ratio": 1.05
+   }
+  ],
+  "tags": [
+   "X",
+   "B3"
+  ],
+  "primary": "X",
+  "x86_cause": "u128 常數除法兩邊都展開成串行乘法鏈,本機乘法延遲不慢、x86 多出的指令被更高 IPC 抵消,每 cycle 同速,ns 差距是主頻。",
+  "confidence": "high",
+  "repro": [
+   "B3a-mul-div"
+  ]
+ },
+ {
+  "id": "c88",
+  "title": "`vec::bench_map_fast`:比 `bench_map_regular` 快 14.9%,但現有 benchmark 不等價;兩路均已 NEON 向量化,候選空間在 `extend_trusted` 內聯與 AArch64 interleaved load",
+  "interfaces": [
+   "Iterator::map + collect (Vec::extend_trusted)",
+   "Vec::with_capacity + set_len"
+  ],
+  "benches": [
+   {
+    "name": "vec::bench_map_fast",
+    "a64_cyc": 8341.8,
+    "x86_cyc": 6082.1,
+    "ratio": 1.37
+   },
+   {
+    "name": "vec::bench_map_regular",
+    "a64_cyc": 9818.3,
+    "x86_cyc": 7737.1,
+    "ratio": 1.27
+   }
+  ],
+  "tags": [
+   "N1"
+  ],
+  "primary": "N1",
+  "x86_cause": "AArch64 VectorCombine 縮小解交錯載入,後端出 lane 插入,x86 一條 `shufps`;同形探針每 cycle 相等,bench 的 1.27–1.37× 仍未解釋",
+  "confidence": "medium",
+  "repro": [
+   "L07-aos-ld1-lane"
+  ]
+ },
+ {
+  "id": "c89",
+  "title": "`slice::sort_unstable_large_mostly_descending`:10 000 個遞減元素僅 101 次隨機交換(99% 有序),ipnsort 仍當作隨機資料處理——比較 14.8/元素、130.6 µs ≈ 隨機的 13.8/元素、126.9 µs;設計上只偵測「整段為單一 run」,無 std 病灶,亦無 aarch64 專屬空間。附:穩定版 `mostly_*` 比隨機慢 53–60%,因走 driftsort 的 run 合併(IPC 2.23)",
+  "interfaces": [
+   "<[T]>::sort_unstable",
+   "ipnsort",
+   "find_existing_run"
+  ],
+  "benches": [
+   {
+    "name": "slice::sort_unstable_large_mostly_descending",
+    "a64_cyc": 375770.8,
+    "x86_cyc": 325291.9,
+    "ratio": 1.155
+   }
+  ],
+  "tags": [
+   "U1"
+  ],
+  "primary": "U1",
+  "x86_cause": "整體 sort 本機每 cycle 慢約 1.15,std partition 路徑單獨量已慢 1.31×,沒有組合狀態效應,機制未隔離。",
+  "confidence": "low",
+  "repro": [
+   "U1-sort-state"
+  ]
+ },
+ {
+  "id": "c90",
+  "title": "`vec_deque::bench_from_array_1000`:`07e526db9df` 上 137.13 ns,與 `Vec::from_slice_1000`、`Vec::clone_1000` 同價(136.84 / 136.67);`From<[T; N]>` 已是「精確容量配置 + 一次 memcpy」,計時迴圈每輪只有這一次 8000 B 拷貝,無 std 病灶;本機 memcpy 約 24 B/cycle,glibc 2.38 無更快變體,無 aarch64 專屬空間",
+  "interfaces": [
+   "VecDeque::from([T; N])"
+  ],
+  "benches": [
+   {
+    "name": "vec_deque::bench_from_array_1000",
+    "a64_cyc": 397.4,
+    "x86_cyc": 220.5,
+    "ratio": 1.8
+   }
+  ],
+  "tags": [
+   "M3",
+   "B5",
+   "N2",
+   "B6"
+  ],
+  "primary": "M3",
+  "x86_cause": "計時迴圈只有一次 8000 B memcpy;x86 glibc 走 rep movsb / AVX2,本機 glibc 與手寫 NEON 都約 21–24 B/cycle,同寬 16 B 手寫拷貝兩邊只差 1.0–1.4×,純 store 吞吐兩邊相同。",
+  "confidence": "medium",
+  "repro": [
+   "B6-unaligned",
+   "M3-copy-bandwidth"
+  ]
+ },
+ {
+  "id": "c91",
+  "title": "`ascii::bench_ascii_escape_display_mixed`:主成本不是掃描,而是每個跳脫字元經 `escape_default` 的 `Display`(~6 ns/個);本地原型「≥16 B 一次分派到獨立快路徑(先純量 16 B、再以可自動向量化的純 Rust 16 B 分塊掃描)+ `\"`/`\\`/`'` 直接 `write_str`」——樹內 harness `mixed` −23.2%、`no_escape` −47.8%,`ascii::` 125 項零回退,36 萬行輸出逐行一致",
+  "interfaces": [
+   "<EscapeAscii as Display>::fmt",
+   "core::ascii::escape_default",
+   "<EscapeDefault as Display>::fmt"
+  ],
+  "benches": [
+   {
+    "name": "ascii::bench_ascii_escape_display_mixed",
+    "a64_cyc": 15029.1,
+    "x86_cyc": 17339.1,
+    "ratio": 0.867
+   },
+   {
+    "name": "probe:std Display static-linked (mixed)",
+    "a64_cyc": 16381,
+    "x86_cyc": 12849,
+    "ratio": 1.275
+   },
+   {
+    "name": "probe:V0 per escape (all quotes)",
+    "a64_cyc": 44.8,
+    "x86_cyc": 29.5,
+    "ratio": 1.52
+   },
+   {
+    "name": "probe:V3 per escape (direct write_str)",
+    "a64_cyc": 16.0,
+    "x86_cyc": 16.2,
+    "ratio": 0.99
+   },
+   {
+    "name": "probe:V5 g17",
+    "a64_cyc": 14190.8,
+    "x86_cyc": 13734,
+    "ratio": 1.033
+   }
+  ],
+  "tags": [
+   "B1",
+   "F2"
+  ],
+  "primary": "B1",
+  "x86_cause": "跳脫路徑本機每個跳脫多付 15 cycles 量級的 store→load 轉發(7.07 vs ≤1);harness 0.87 是迴圈起點造成,非動態連結",
+  "confidence": "high",
+  "repro": [
+   "B1-store-load",
+   "R06-x86-libstd-layout"
+  ]
+ },
+ {
+  "id": "c92",
+  "title": "`slice::random_inserts`:07e526db9df 上 2 559 ns,約 14% 是 LLVM LSR 把 `% (l+1)` 重新展開成第二條 `udiv`(兩個 target 皆然);其餘 memmove 以 glibc 尺寸分派的誤預測為主——本地原型 SVE `whilelo` 單迴圈 −13.5%,手寫 NEON +11%;glibc 切 `a64fx` 變體即 −9.5%",
+  "interfaces": [
+   "Vec::insert"
+  ],
+  "benches": [
+   {
+    "name": "slice::random_inserts",
+    "a64_cyc": 7420,
+    "x86_cyc": 6820,
+    "ratio": 1.09
+   }
+  ],
+  "tags": [
+   "B3",
+   "N1",
+   "B6",
+   "R1",
+   "N2"
+  ],
+  "primary": "B3",
+  "x86_cause": "LSR 重複除法兩邊皆有、代價相近(10.5 vs 9.7 cycles/insert);搬移部分本機付未對齊載入、x86 付重疊後移的轉發懲罰,兩者抵消;每 cycle 本機慢 9–12%,其餘是主頻",
+  "confidence": "high",
+  "repro": [
+   "L05-lsr-dup-udiv",
+   "B6-unaligned"
+  ]
+ }
+]

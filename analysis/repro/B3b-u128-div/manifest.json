@@ -1,0 +1,15 @@
+{
+ "id": "B3b",
+ "slug": "u128-div",
+ "kind": "rust",
+ "tags": [
+  "B3"
+ ],
+ "chapters": [
+  "c21",
+  "c63"
+ ],
+ "status": "reproduced",
+ "summary": "執行期除數 u128 65 位÷33 位相依鏈:x86 19.05 對 aarch64 37.19 cycles/次(x86 __udivti3 內用 div,aarch64 走 compiler_builtins 軟體除法);同鏈改 u64(兩邊硬體除法)16.04 對 14.02",
+ "doc_mismatch": "x86 19.0 高於文檔 15:本值含 __udivti3 呼叫與鏈上 shrd/shr/xor(x86 shrd 3 cycles);aarch64 37.2 與文檔 36 相近"
+}

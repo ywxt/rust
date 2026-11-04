@@ -1,0 +1,61 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 1K of event 'cycles:u'
+# Event count (approx.): 731388753
+#
+# Overhead  Symbol                                                                                                                                                                                                                                         IPC   [IPC Coverage]
+# ........  .............................................................................................................................................................................................................................................  ....................
+#
+    89.50%  [.] _RNvCsiDLecpkGMYg_5repro4main                                                                                                                                                                                                              -      -            
+     5.82%  [.] _RINvNtNtNtNtCs5eKY5gNNvwM_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsiDLecpkGMYg_5repro                                                                                                                  -      -            
+     4.44%  [.] __memcpy_generic                                                                                                                                                                                                                           -      -            
+
+
+#
+# (Tip: Create an archive with symtabs to analyse on other machine: perf archive)
+#
+
+    0.00 :   bbdc:   sub     x14, x11, #0x8
+    0.00 :   bbe0:   ldr     x10, [x26]
+         : 971  core::slice::sort::unstable::quicksort::partition_lomuto_branchless_cyclic::<u64, <u64 as core::cmp::PartialOrd>::lt>:
+         : 308  while state.right < unroll_end {
+    0.00 :   bbe4:   cmp     x12, x14
+    0.00 :   bbe8:   b.cs    bc38 <repro::main+0x530>  // b.hs, b.nlast
+    0.55 :   bbec:   mov     x13, xzr
+         : 312  core::slice::sort::unstable::quicksort::partition_lomuto_branchless_cyclic::<u64, <u64 as core::cmp::PartialOrd>::lt>::{closure#0}:
+         : 277  let right_is_lt = is_less(&*state.right, pivot);
+    0.22 :   bbf0:   ldr     x15, [x12]
+         : 279  core::ptr::copy::<u64>:
+         : 661  crate::intrinsics::copy(src, dst, count)
+   11.83 :   bbf4:   ldr     x16, [x8, x13, lsl #3]
+         : 663  <u64 as core::cmp::PartialOrd>::lt:
+    0.00 :   bbf8:   cmp     x15, x10
+         : 2216 core::ptr::copy::<u64>:
+   35.16 :   bbfc:   stur    x16, [x12, #-8]
+         : 662  core::ptr::copy_nonoverlapping::<u64>:
+         : 570  unsafe { crate::intrinsics::copy_nonoverlapping(src, dst, count) }
+    0.00 :   bc00:   str     x15, [x8, x13, lsl #3]
+         : 572  core::slice::sort::unstable::quicksort::partition_lomuto_branchless_cyclic::<u64, <u64 as core::cmp::PartialOrd>::lt>::{closure#0}:
+         : 284  state.num_lt += right_is_lt as usize;
+    0.00 :   bc04:   cinc    x15, x13, cc    // cc = lo, ul, last
+         : 277  let right_is_lt = is_less(&*state.right, pivot);
+    1.10 :   bc08:   ldr     x16, [x12, #8]
+         : 279  core::ptr::copy::<u64>:
+         : 661  crate::intrinsics::copy(src, dst, count)
+    0.22 :   bc0c:   ldr     x13, [x8, x15, lsl #3]
+         : 663  <u64 as core::cmp::PartialOrd>::lt:
+    0.00 :   bc10:   cmp     x16, x10
+         : 2216 core::ptr::copy::<u64>:
+   47.83 :   bc14:   str     x13, [x12], #16
+         : 662  core::slice::sort::unstable::quicksort::partition_lomuto_branchless_cyclic::<u64, <u64 as core::cmp::PartialOrd>::lt>::{closure#0}:
+         : 284  state.num_lt += right_is_lt as usize;
+    0.00 :   bc18:   cinc    x13, x15, cc    // cc = lo, ul, last
+         : 286  core::slice::sort::unstable::quicksort::partition_lomuto_branchless_cyclic::<u64, <u64 as core::cmp::PartialOrd>::lt>:
+         : 308  while state.right < unroll_end {
+    0.00 :   bc1c:   cmp     x12, x14
+         : 310  core::ptr::copy_nonoverlapping::<u64>:
+         : 570  unsafe { crate::intrinsics::copy_nonoverlapping(src, dst, count) }
+    0.00 :   bc20:   str     x16, [x8, x15, lsl #3]

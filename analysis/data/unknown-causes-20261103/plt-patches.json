@@ -1,0 +1,74 @@
+[
+  {
+    "variant": "allreg15",
+    "changed": [
+      "memcpy@plt",
+      "__libc_start_main@plt",
+      "core::panicking::panic_bounds_check@plt",
+      "__cxa_finalize@plt",
+      "std::io::stdio::_print@plt",
+      "<core::fmt::Formatter>::debug_struct_field1_finish@plt",
+      "std::rt::lang_start_internal@plt",
+      "__rustc::__rust_alloc@plt",
+      "<core::fmt::Formatter>::write_str@plt",
+      "__rustc::__rust_no_alloc_shim_is_unstable_v2@plt",
+      "__rustc::__rust_realloc@plt",
+      "__gmon_start__@plt",
+      "__rustc::__rust_dealloc@plt",
+      "abort@plt",
+      "std::panicking::begin_panic::<&str>@plt",
+      "alloc::raw_vec::handle_error@plt",
+      "__rustc::rust_eh_personality@plt",
+      "std::env::args@plt",
+      "core::fmt::write@plt",
+      "core::result::unwrap_failed::unwrap_failed_inner@plt",
+      "alloc::fmt::format::format_inner@plt",
+      "<std::env::Args as core::iter::traits::iterator::Iterator>::next@plt",
+      "_Unwind_Resume@plt"
+    ],
+    "byte_changes": 69
+  },
+  {
+    "variant": "fmtreg15",
+    "changed": [
+      "alloc::fmt::format::format_inner@plt"
+    ],
+    "byte_changes": 3
+  },
+  {
+    "variant": "allnopadd",
+    "changed": [
+      "memcpy@plt",
+      "__libc_start_main@plt",
+      "core::panicking::panic_bounds_check@plt",
+      "__cxa_finalize@plt",
+      "std::io::stdio::_print@plt",
+      "<core::fmt::Formatter>::debug_struct_field1_finish@plt",
+      "std::rt::lang_start_internal@plt",
+      "__rustc::__rust_alloc@plt",
+      "<core::fmt::Formatter>::write_str@plt",
+      "__rustc::__rust_no_alloc_shim_is_unstable_v2@plt",
+      "__rustc::__rust_realloc@plt",
+      "__gmon_start__@plt",
+      "__rustc::__rust_dealloc@plt",
+      "abort@plt",
+      "std::panicking::begin_panic::<&str>@plt",
+      "alloc::raw_vec::handle_error@plt",
+      "__rustc::rust_eh_personality@plt",
+      "std::env::args@plt",
+      "core::fmt::write@plt",
+      "core::result::unwrap_failed::unwrap_failed_inner@plt",
+      "alloc::fmt::format::format_inner@plt",
+      "<std::env::Args as core::iter::traits::iterator::Iterator>::next@plt",
+      "_Unwind_Resume@plt"
+    ],
+    "byte_changes": 92
+  },
+  {
+    "variant": "fmtnopadd",
+    "changed": [
+      "alloc::fmt::format::format_inner@plt"
+    ],
+    "byte_changes": 4
+  }
+]

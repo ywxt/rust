@@ -1,0 +1,21 @@
+### x86_64 本機 i7-12700(CORE=4)
+== 2026-11-03T16:07:10+08:00 x86_64
+gcc (GCC) 15.3.0
+== repro.c(gcc -O2,N=100000000,每迭代)
+line1           cycles/單位=1.003  instructions/單位=5.002  resource_stalls.sb/單位=0.319
+line2           cycles/單位=2.004  instructions/單位=5.002  resource_stalls.sb/單位=1.334
+mix             cycles/單位=2.003  instructions/單位=10.002  resource_stalls.sb/單位=0.400
+same            cycles/單位=1.604  instructions/單位=10.002  resource_stalls.sb/單位=0.000
+drop            cycles/單位=1.003  instructions/單位=4.002  resource_stalls.sb/單位=0.001
+
+### aarch64 univpn-work-1(CORE=44)
+
+
+== 2026-11-03T15:45:19+08:00 aarch64
+gcc (GCC) 12.3.1 (openEuler 12.3.1-105.oe2403sp3)
+== repro.c(gcc -O2,N=100000000,每迭代)
+line1           cycles/單位=1.160  instructions/單位=5.006
+line2           cycles/單位=1.160  instructions/單位=5.006
+mix             cycles/單位=2.059  instructions/單位=9.007
+same            cycles/單位=2.304  instructions/單位=9.007
+drop            cycles/單位=1.008  instructions/單位=4.006

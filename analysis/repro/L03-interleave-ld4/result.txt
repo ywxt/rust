@@ -1,0 +1,21 @@
+##### x86_64 (local) #####
+Tue Nov  3 02:35:21 PM CST 2026
+x86_64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: opt -S -passes=loop-vectorize -mtriple=aarch64-linux-gnu < %s | llc -O3 -mtriple=aarch64-linux-gnu | FileCheck %s --check-prefix=A64
+PASS: opt -S -passes=loop-vectorize -mtriple=aarch64-linux-gnu -enable-interleaved-mem-accesses=false < %s | llc -O3 -mtriple=aarch64-linux-gnu | FileCheck %s --check-prefix=A64-NOIL
+PASS: opt -S -passes=loop-vectorize -mtriple=x86_64-linux-gnu < %s | llc -O3 -mtriple=x86_64-linux-gnu | FileCheck %s --check-prefix=X86
+default    cycles/B 0.1499  instructions/B 0.675
+
+##### aarch64 (univpn-work-1) #####
+
+Tue Nov  3 02:13:29 PM CST 2026
+aarch64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: opt -S -passes=loop-vectorize -mtriple=aarch64-linux-gnu < %s | llc -O3 -mtriple=aarch64-linux-gnu | FileCheck %s --check-prefix=A64
+PASS: opt -S -passes=loop-vectorize -mtriple=aarch64-linux-gnu -enable-interleaved-mem-accesses=false < %s | llc -O3 -mtriple=aarch64-linux-gnu | FileCheck %s --check-prefix=A64-NOIL
+PASS: opt -S -passes=loop-vectorize -mtriple=x86_64-linux-gnu < %s | llc -O3 -mtriple=x86_64-linux-gnu | FileCheck %s --check-prefix=X86
+default    cycles/B 0.1862  instructions/B 0.493
+nointerleave cycles/B 0.1486  instructions/B 0.567

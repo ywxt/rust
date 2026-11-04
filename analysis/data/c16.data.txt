@@ -1,0 +1,98 @@
+# c16:07e526db9df 上重新量測的原始輸出(腳本 /tmp/xdiff/work/up56/{run.sh,perf.sh,tools/mk.py} 彙整,未經手改)
+## bench 原始輸出(aarch64 core56,07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 corebenches|test char::methods::bench_non_ascii_char_to_uppercase ... bench:      55,310.59 ns/iter (+/- 35.75)
+run2 corebenches|test char::methods::bench_non_ascii_char_to_uppercase ... bench:      55,328.47 ns/iter (+/- 424.03)
+run3 corebenches|test char::methods::bench_non_ascii_char_to_uppercase ... bench:      55,309.44 ns/iter (+/- 37.52)
+run1 corebenches|test char::methods::bench_non_ascii_char_to_lowercase ... bench:      55,356.24 ns/iter (+/- 54.82)
+run2 corebenches|test char::methods::bench_non_ascii_char_to_lowercase ... bench:      55,352.00 ns/iter (+/- 116.42)
+run3 corebenches|test char::methods::bench_non_ascii_char_to_lowercase ... bench:      55,350.88 ns/iter (+/- 60.39)
+run1 corebenches|test char::methods::bench_ascii_char_to_uppercase ... bench:      55,289.29 ns/iter (+/- 30.96)
+run2 corebenches|test char::methods::bench_ascii_char_to_uppercase ... bench:      55,299.35 ns/iter (+/- 44.57)
+run3 corebenches|test char::methods::bench_ascii_char_to_uppercase ... bench:      55,297.71 ns/iter (+/- 324.12)
+run1 corebenches|test char::methods::bench_non_latin1_char_to_uppercase ... bench:     329,058.67 ns/iter (+/- 657.70)
+run2 corebenches|test char::methods::bench_non_latin1_char_to_uppercase ... bench:     329,131.17 ns/iter (+/- 4,902.62)
+run3 corebenches|test char::methods::bench_non_latin1_char_to_uppercase ... bench:     328,520.33 ns/iter (+/- 1,642.33)
+run1 corebenches|test char::methods::bench_non_latin1_char_to_lowercase ... bench:     258,861.50 ns/iter (+/- 1,396.58)
+run2 corebenches|test char::methods::bench_non_latin1_char_to_lowercase ... bench:     259,720.00 ns/iter (+/- 2,208.40)
+run3 corebenches|test char::methods::bench_non_latin1_char_to_lowercase ... bench:     261,328.33 ns/iter (+/- 1,104.23)
+## 3 次最小值(aarch64 core56;腳本計算)
+min char::methods::bench_non_ascii_char_to_uppercase 55309.44 ns/iter
+min char::methods::bench_non_ascii_char_to_lowercase 55350.88 ns/iter
+min char::methods::bench_ascii_char_to_uppercase 55289.29 ns/iter
+min char::methods::bench_non_latin1_char_to_uppercase 328520.33 ns/iter
+min char::methods::bench_non_latin1_char_to_lowercase 258861.5 ns/iter
+## bench 原始輸出(x86 core12 (flock),07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 corebenches|test char::methods::bench_non_ascii_char_to_uppercase ... bench:      45,710.10 ns/iter (+/- 2,239.29)
+run2 corebenches|test char::methods::bench_non_ascii_char_to_uppercase ... bench:      45,847.90 ns/iter (+/- 3,108.48)
+run3 corebenches|test char::methods::bench_non_ascii_char_to_uppercase ... bench:      44,499.52 ns/iter (+/- 2,210.05)
+run1 corebenches|test char::methods::bench_non_ascii_char_to_lowercase ... bench:      43,714.55 ns/iter (+/- 2,605.43)
+run2 corebenches|test char::methods::bench_non_ascii_char_to_lowercase ... bench:      43,371.13 ns/iter (+/- 1,188.63)
+run3 corebenches|test char::methods::bench_non_ascii_char_to_lowercase ... bench:      43,577.46 ns/iter (+/- 2,111.64)
+run1 corebenches|test char::methods::bench_ascii_char_to_uppercase ... bench:      45,235.76 ns/iter (+/- 2,922.41)
+run2 corebenches|test char::methods::bench_ascii_char_to_uppercase ... bench:      45,162.19 ns/iter (+/- 2,913.58)
+run3 corebenches|test char::methods::bench_ascii_char_to_uppercase ... bench:      45,329.57 ns/iter (+/- 2,890.50)
+run1 corebenches|test char::methods::bench_non_latin1_char_to_uppercase ... bench:     154,305.10 ns/iter (+/- 6,096.34)
+run2 corebenches|test char::methods::bench_non_latin1_char_to_uppercase ... bench:     152,581.81 ns/iter (+/- 6,213.85)
+run3 corebenches|test char::methods::bench_non_latin1_char_to_uppercase ... bench:     152,094.70 ns/iter (+/- 4,610.30)
+run1 corebenches|test char::methods::bench_non_latin1_char_to_lowercase ... bench:     114,829.08 ns/iter (+/- 5,978.13)
+run2 corebenches|test char::methods::bench_non_latin1_char_to_lowercase ... bench:     115,745.71 ns/iter (+/- 8,439.40)
+run3 corebenches|test char::methods::bench_non_latin1_char_to_lowercase ... bench:     115,024.81 ns/iter (+/- 6,968.32)
+## 3 次最小值(x86 core12 (flock);腳本計算)
+min char::methods::bench_non_ascii_char_to_uppercase 44499.52 ns/iter
+min char::methods::bench_non_ascii_char_to_lowercase 43371.13 ns/iter
+min char::methods::bench_ascii_char_to_uppercase 45162.19 ns/iter
+min char::methods::bench_non_latin1_char_to_uppercase 152094.7 ns/iter
+min char::methods::bench_non_latin1_char_to_lowercase 114829.08 ns/iter
+## perf record/report/annotate(aarch64 core56)=== c16 char::methods::bench_non_ascii_char_to_uppercase
+    92.22%  corebenches-c8805e1d516f63c4  [.] _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerjNCNvNtNtCslrxolIbw58w_11corebenches4char7methodss_33bench_non_ascii_char_to_uppercase0EBQ_
+     7.14%  libstd-582c472e6e6781a0.so    [.] _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data11conversions8to_upper
+     0.43%  ld-linux-aarch64.so.1         [.] check_match
+     0.09%  corebenches-c8805e1d516f63c4  [.] _RNvNtNtNtCs5eKY5gNNvwM_4core7unicode12unicode_data11conversions8to_upper@plt
+     0.07%  ld-linux-aarch64.so.1         [.] init_tls
+     0.04%  [kernel.kallsyms]             [k] check_and_switch_context
+--- annotate top: _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerjNCNvNtNtCslrxolIbw58w_11corebenches4char7methodss_33bench_non_ascii_char_to_uppercase0EBQ_
+   60.69 :   424f4:  ldur    x10, [x29, #-16]
+   28.58 :   42500:  stur    x10, [x21, #16]
+    4.27 :   424e0:  stur    w8, [x29, #-20]
+    1.99 :   424e8:  ldur    w0, [x29, #-20]
+    1.61 :   424f0:  ldp     w8, w9, [x29, #-12]
+    1.14 :   42468:  ldur    x10, [x29, #-16]
+    0.66 :   42470:  stur    x10, [x21, #16]
+    0.47 :   42544:  ldur    x10, [x29, #-16]
+    0.38 :   423f0:  ldur    x10, [x29, #-16]
+    0.19 :   423f8:  stur    x10, [x21, #16]
+    0.00 :   425d0:  ret
+    0.00 :   425cc:  add     sp, sp, #0xb0
+    0.00 :   425c8:  ldp     x29, x30, [sp, #80]
+    0.00 :   425c4:  ldp     x28, x27, [sp, #96]
+## perf record/report/annotate(x86 core12 (flock, 預設事件))=== c16 char::methods::bench_non_ascii_char_to_uppercase
+    84.94%  corebenches-d6382d1542e5d229  [.] test::bench::ns_iter_inner::<usize, corebenches::char::methods::bench_non_ascii_char_to_uppercase::{closure#0}>
+    14.52%  libstd-3f1ea972a24311e5.so    [.] core::unicode::unicode_data::conversions::to_upper
+     0.06%  corebenches-d6382d1542e5d229  [.] <test::stats::Summary>::new
+     0.06%  [unknown]                     [k] 0xffffffffb65a154d
+     0.04%  ld-linux-x86-64.so.2          [.] do_lookup_x
+     0.03%  corebenches-d6382d1542e5d229  [.] test::filter_tests
+--- annotate top: test::bench::ns_iter_inner::<usize, corebenches::char::methods::bench_non_ascii_char_to_uppercase::{closure#0}>
+   64.73 :   1bd21b: mov    -0x38(%rbp),%rax
+    8.99 :   1bd21f: mov    %rax,(%rdx)
+    5.40 :   1bd228: jne    1bd1d0 <test::bench::ns_iter_inner::<usize, corebenches::char::methods::bench_non_ascii_char_to_uppercase::{closure#0}>+0x1d0>
+    5.39 :   1bd1ea: call   *%r12
+    4.83 :   1bd1fa: mov    -0x30(%rbp),%ecx
+    4.77 :   1bd208: movq   $0x0,-0x58(%rbp)
+    3.17 :   1bd1e0: lea    -0x2c(%rbp),%rax
+    0.82 :   1bd0a4: mov    -0x38(%rbp),%rax
+    0.58 :   1bd151: mov    -0x38(%rbp),%rax
+    0.22 :   1bd239: mov    %rax,-0x78(%rbp)
+    0.22 :   1bd08e: movq   $0x0,-0x58(%rbp)
+    0.14 :   1bd2a0: jne    1bd1c0 <test::bench::ns_iter_inner::<usize, corebenches::char::methods::bench_non_ascii_char_to_uppercase::{closure#0}>+0x1c0>
+    0.14 :   1bd24b: mov    -0x2c(%rbp),%esi
+    0.14 :   1bd11c: lea    -0x38(%rbp),%rdi
+## 附加原始輸出:/tmp/xdiff/work/up56/lut_sizes.txt
+88f7399cb49 unicode_data.rs LOWERCASE_LUT plane 0 singles 172
+88f7399cb49 unicode_data.rs LOWERCASE_LUT plane 1 singles 12
+88f7399cb49 unicode_data.rs UPPERCASE_LUT plane 0 singles 185
+88f7399cb49 unicode_data.rs UPPERCASE_LUT plane 1 singles 12
+07e526db9df unicode_data.rs LOWERCASE_LUT plane 0 singles 175
+07e526db9df unicode_data.rs LOWERCASE_LUT plane 1 singles 18
+07e526db9df unicode_data.rs UPPERCASE_LUT plane 0 singles 188
+07e526db9df unicode_data.rs UPPERCASE_LUT plane 1 singles 18

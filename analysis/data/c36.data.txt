@@ -1,0 +1,177 @@
+# c36:07e526db9df 上重新量測的原始輸出(腳本 /tmp/xdiff/work/up56/{run.sh,perf.sh,tools/mk.py} 彙整,未經手改)
+## bench 原始輸出(aarch64 core56,07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 corebenches|test ascii::long::is_ascii ... bench:         292.24 ns/iter (+/- 0.68) = 23938 MB/s
+run2 corebenches|test ascii::long::is_ascii ... bench:         292.31 ns/iter (+/- 0.95) = 23938 MB/s
+run3 corebenches|test ascii::long::is_ascii ... bench:         292.14 ns/iter (+/- 0.57) = 23938 MB/s
+run1 corebenches|test ascii::long::case00_alloc_only ... bench:         168.50 ns/iter (+/- 0.49) = 41607 MB/s
+run2 corebenches|test ascii::long::case00_alloc_only ... bench:         168.26 ns/iter (+/- 0.42) = 41607 MB/s
+run3 corebenches|test ascii::long::case00_alloc_only ... bench:         168.70 ns/iter (+/- 0.38) = 41607 MB/s
+run1 corebenches|test ascii::is_ascii::long::case00_libcore ... bench:           6.40 ns/iter (+/- 0.06) = 1165000 MB/s
+run2 corebenches|test ascii::is_ascii::long::case00_libcore ... bench:           6.44 ns/iter (+/- 0.03) = 1165000 MB/s
+run3 corebenches|test ascii::is_ascii::long::case00_libcore ... bench:           6.48 ns/iter (+/- 0.03) = 1165000 MB/s
+run1 corebenches|test ascii::is_ascii::long::case01_iter_all ... bench:          84.60 ns/iter (+/- 4.29) = 83214 MB/s
+run2 corebenches|test ascii::is_ascii::long::case01_iter_all ... bench:          80.66 ns/iter (+/- 2.29) = 87375 MB/s
+run3 corebenches|test ascii::is_ascii::long::case01_iter_all ... bench:          81.36 ns/iter (+/- 1.07) = 86296 MB/s
+## 3 次最小值(aarch64 core56;腳本計算)
+min ascii::long::is_ascii 292.14 ns/iter
+min ascii::long::case00_alloc_only 168.26 ns/iter
+min ascii::is_ascii::long::case00_libcore 6.4 ns/iter
+min ascii::is_ascii::long::case01_iter_all 80.66 ns/iter
+## bench 原始輸出(x86 core12 (flock),07e526db9df bench 二進位,每項 3 次,--bench --exact)
+run1 corebenches|test ascii::long::is_ascii ... bench:         144.31 ns/iter (+/- 8.65) = 48541 MB/s
+run2 corebenches|test ascii::long::is_ascii ... bench:         141.10 ns/iter (+/- 5.50) = 49574 MB/s
+run3 corebenches|test ascii::long::is_ascii ... bench:         141.25 ns/iter (+/- 8.39) = 49574 MB/s
+run1 corebenches|test ascii::long::case00_alloc_only ... bench:          55.37 ns/iter (+/- 2.47) = 127090 MB/s
+run2 corebenches|test ascii::long::case00_alloc_only ... bench:          55.43 ns/iter (+/- 1.67) = 127090 MB/s
+run3 corebenches|test ascii::long::case00_alloc_only ... bench:          54.46 ns/iter (+/- 1.72) = 129444 MB/s
+run1 corebenches|test ascii::is_ascii::long::case00_libcore ... bench:           3.00 ns/iter (+/- 0.19) = 3495000 MB/s
+run2 corebenches|test ascii::is_ascii::long::case00_libcore ... bench:           2.96 ns/iter (+/- 0.26) = 3495000 MB/s
+run3 corebenches|test ascii::is_ascii::long::case00_libcore ... bench:           3.07 ns/iter (+/- 0.43) = 2330000 MB/s
+run1 corebenches|test ascii::is_ascii::long::case01_iter_all ... bench:          90.88 ns/iter (+/- 7.69) = 77666 MB/s
+run2 corebenches|test ascii::is_ascii::long::case01_iter_all ... bench:          92.68 ns/iter (+/- 7.52) = 75978 MB/s
+run3 corebenches|test ascii::is_ascii::long::case01_iter_all ... bench:          92.34 ns/iter (+/- 7.17) = 75978 MB/s
+## 3 次最小值(x86 core12 (flock);腳本計算)
+min ascii::long::is_ascii 141.1 ns/iter
+min ascii::long::case00_alloc_only 54.46 ns/iter
+min ascii::is_ascii::long::case00_libcore 2.96 ns/iter
+min ascii::is_ascii::long::case01_iter_all 90.88 ns/iter
+## perf record/report/annotate(aarch64 core56)=== c36a ascii::long::is_ascii
+    48.52%  libc.so.6                     [.] __memcpy_generic
+    42.95%  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtNtCslrxolIbw58w_11corebenches5ascii4long8is_ascii0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceBa_
+     2.37%  libc.so.6                     [.] _int_malloc
+     1.56%  libc.so.6                     [.] _int_free_maybe_consolidate.part.0
+     1.10%  libc.so.6                     [.] _int_free
+     1.01%  libc.so.6                     [.] _int_free_merge_chunk
+--- annotate top: __memcpy_generic
+   35.40 :   99c08:  stp     x12, x13, [x3, #64]!
+   20.00 :   99bf8:  stp     x8, x9, [x3, #32]
+   13.36 :   99c00:  stp     x10, x11, [x3, #48]
+   12.93 :   99bf0:  stp     x6, x7, [x3, #16]
+    6.62 :   99c0c:  ldp     x12, x13, [x1, #64]!
+    3.27 :   99bfc:  ldp     x8, x9, [x1, #32]
+    2.41 :   99c04:  ldp     x10, x11, [x1, #48]
+    2.29 :   99bf4:  ldp     x6, x7, [x1, #16]
+    1.68 :   99bd8:  stp     x12, x13, [x0]
+    0.52 :   99ac0:  nop
+    0.26 :   99be4:  ldp     x12, x13, [x1, #64]!
+    0.22 :   99c40:  stp     x8, x9, [x5, #-32]
+    0.19 :   99c30:  ldp     x10, x11, [x4, #-16]
+    0.19 :   99c20:  ldp     x6, x7, [x4, #-48]
+## perf record/report/annotate(aarch64 core56)=== c36b ascii::is_ascii::long::case00_libcore
+    99.47%  corebenches-c8805e1d516f63c4  [.] _RNvYNCNvNtNtNtCslrxolIbw58w_11corebenches5ascii8is_ascii4long14case00_libcore0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceBc_
+     0.37%  [kernel.kallsyms]             [k] __d_lookup_rcu
+     0.08%  [kernel.kallsyms]             [k] up_write
+     0.07%  [kernel.kallsyms]             [k] folio_remove_rmap_ptes
+     0.00%  taskset                       [.] 0x0000000000002ee4
+     0.00%  [kernel.kallsyms]             [k] perf_event_remove_on_exec
+--- annotate top: _RNvYNCNvNtNtNtCslrxolIbw58w_11corebenches5ascii8is_ascii4long14case00_libcore0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceBc_
+   64.34 :   f210c:  add     x10, x10, #0x40
+   12.95 :   f1ef8:  add     x10, x10, #0x40
+    8.19 :   f2010:  mov     w9, wzr
+    4.12 :   f2038:  ldp     x10, x9, [x10, #8]
+    2.32 :   f20f0:  ldp     q2, q3, [x10, #32]
+    2.03 :   f1dfc:  mov     w9, wzr
+    1.22 :   f20ec:  ldp     q0, q1, [x10]
+    0.88 :   f2100:  umaxv   b0, v0.16b
+    0.88 :   f1e24:  ldp     x10, x9, [x10, #8]
+    0.79 :   f20e0:  and     x11, x9, #0x7fffffffffffffc0
+    0.77 :   f2030:  stur    x22, [x29, #-40]
+    0.73 :   f1edc:  ldp     q2, q3, [x10, #32]
+    0.44 :   f2024:  ldurb   w9, [x29, #-44]
+    0.11 :   f1eec:  umaxv   b0, v0.16b
+## perf record/report/annotate(x86 core12 (flock, -e cpu_core/cycles/u))=== c36a ascii::long::is_ascii
+    57.52%  corebenches-d6382d1542e5d229  [.] <corebenches::ascii::long::is_ascii::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+    30.58%  libc.so.6                     [.] __memmove_avx_unaligned_erms
+     4.38%  libc.so.6                     [.] _int_malloc
+     1.39%  libc.so.6                     [.] _int_free_chunk
+     1.37%  libc.so.6                     [.] _int_free_maybe_consolidate.part.0
+     1.00%  libc.so.6                     [.] cfree@GLIBC_2.2.5
+--- annotate top: <corebenches::ascii::long::is_ascii::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+   39.94 :   2673b8: cmp    $0x1b4d,%rcx
+   30.21 :   2673b0: movzbl (%rbx,%rcx,1),%eax
+    7.93 :   267178: cmp    $0x1b4d,%rcx
+    6.06 :   267170: movzbl (%rbx,%rcx,1),%eax
+    2.30 :   2673b4: test   %al,%al
+    2.24 :   2673c3: jne    2673b0 <<corebenches::ascii::long::is_ascii::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x400>
+    2.19 :   2673bf: lea    0x1(%rcx),%rcx
+    1.90 :   2673c5: not    %al
+    1.18 :   2673e5: test   %rsi,%rsi
+    1.16 :   2673c7: shr    $0x7,%al
+    0.69 :   2673cd: movq   $0x1b4e,-0x50(%rbp)
+    0.51 :   267183: jne    267170 <<corebenches::ascii::long::is_ascii::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1c0>
+    0.48 :   267174: test   %al,%al
+    0.38 :   2673ca: mov    %al,-0x50(%rbp)
+## perf record/report/annotate(x86 core12 (flock, -e cpu_core/cycles/u))=== c36b ascii::is_ascii::long::case00_libcore
+    99.83%  corebenches-d6382d1542e5d229  [.] <corebenches::ascii::is_ascii::long::case00_libcore::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+     0.04%  [unknown]                     [k] 0xffffffffb6201280
+     0.03%  ld-linux-x86-64.so.2          [.] _dl_relocate_object_no_relro
+     0.02%  corebenches-d6382d1542e5d229  [.] test::test_main_inner
+     0.02%  ld-linux-x86-64.so.2          [.] do_lookup_x
+     0.02%  libc.so.6                     [.] _nl_intern_locale_data
+--- annotate top: <corebenches::ascii::is_ascii::long::case00_libcore::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+   13.95 :   2a820f: pmovmskb %xmm2,%ecx
+   13.19 :   2a820b: por    %xmm1,%xmm2
+   11.94 :   2a81fd: movdqu 0x20(%rsi),%xmm0
+    9.14 :   2a821b: add    $0x40,%rsi
+    8.73 :   2a8202: movdqu 0x30(%rsi),%xmm2
+    3.59 :   2a8213: test   %ecx,%ecx
+    3.29 :   2a7f2d: movdqu 0x20(%rsi),%xmm0
+    3.11 :   2a8207: por    %xmm0,%xmm2
+    2.77 :   2a7f3b: por    %xmm1,%xmm2
+    2.56 :   2a81f0: movdqu (%rsi),%xmm0
+    2.53 :   2a81f9: por    %xmm0,%xmm1
+    2.43 :   2a7f4b: add    $0x40,%rsi
+    2.17 :   2a7f3f: pmovmskb %xmm2,%ecx
+    2.07 :   2a81f4: movdqu 0x10(%rsi),%xmm1
+## 附加原始輸出:/tmp/xdiff/work/up56/c36_objdump_a64.txt
+
+# objdump -d /tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4,case00_libcore 閉包(0xf1c84 起)中的計時迴圈與掃描迴圈分支
+   f1dd0:	bl	19450
+   f1de8:	bl	19450
+   f1dfc:	mov	w9, wzr
+   f1e00:	and	w9, w9, #0x1
+   f1e18:	b.eq	f1f60   // b.none
+   f1ef4:	tbnz	w13, #7, f1dfc
+   f1ef8:	add	x10, x10, #0x40
+   f1f00:	b.ne	f1ed8   // b.any
+   f1f64:	bl	18df0
+   f1f88:	b.ne	f1de8   // b.any
+# objdump -d,ascii::long::is_ascii 閉包的掃描迴圈
+
+/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+00000000000b918c :
+   b918c:	bl	19120
+   b9190:	mov	w0, #0x1b4e                	// #6990
+   b9194:	mov	w1, #0x1                   	// #1
+   b9198:	bl	18f00
+   b919c:	cbz	x0, b936c
+   b91a0:	mov	x1, x21
+   b91a4:	mov	w2, #0x1b4e                	// #6990
+   b91a8:	mov	x22, x0
+   b91ac:	add	x28, x28, #0x1
+   b91b0:	bl	18c70 <memcpy@plt>
+   b91b4:	mov	x8, xzr
+   b91b8:	ldrsb	w9, [x22, x8]
+   b91bc:	tbnz	w9, #31, b91cc
+   b91c0:	cmp	x8, x20
+   b91c4:	add	x8, x8, #0x1
+   b91c8:	b.ne	b91b8   // b.any
+   b91cc:	mvn	w8, w9
+## 附加原始輸出:/tmp/xdiff/work/up56/c36a_sym2.txt
+
+=== c36a 第二符號 annotate: _RNvYNCNvNtNtCslrxolIbw58w_11corebenches5ascii4long8is_ascii0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceBa_
+   42.25 :   b91c0:  cmp     x8, x20
+   39.22 :   b91b8:  ldrsb   w9, [x22, x8]
+    8.17 :   b908c:  cmp     x8, x20
+    7.96 :   b9084:  ldrsb   w9, [x22, x8]
+    0.39 :   b91e8:  ldur    x0, [x29, #-40]
+    0.25 :   b91d8:  stp     x25, x22, [x29, #-48]
+    0.22 :   b9190:  mov     w0, #0x1b4e                     // #6990
+    0.22 :   b90a4:  stp     x25, x22, [x29, #-176]
+## 附加原始輸出:/tmp/xdiff/work/up56/long_07e.txt
+07e526db9df library/coretests/benches/ascii.rs: LONG = repeat!(r#"..."#) = 6990 B, first non-ASCII byte at index 366 (e2 80 93), non-ASCII bytes 30, scanned fraction 5.2%, first non-whitespace byte at index 5
+88f7399cb49 library/coretests/benches/ascii.rs: LONG = repeat!(r#"..."#) = 6990 B, first non-ASCII byte at index 366 (e2 80 93), non-ASCII bytes 30, scanned fraction 5.2%, first non-whitespace byte at index 5

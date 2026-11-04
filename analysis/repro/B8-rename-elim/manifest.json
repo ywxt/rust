@@ -1,0 +1,17 @@
+{
+ "id": "B8",
+ "slug": "rename-elim",
+ "kind": "rust",
+ "tags": [
+  "B8"
+ ],
+ "chapters": [
+  "c40",
+  "c04",
+  "c07",
+  "c50"
+ ],
+ "status": "reproduced",
+ "summary": "相依 mov 鏈 aarch64 0.813 對 x86 0.188 cycles/條(x86 與無相依基線 0.188 相同,被消除);相依立即數 add 鏈 aarch64 1.000 對 x86 0.197(改暫存器運算元的基線兩邊 1.00)",
+ "doc_mismatch": "x86 立即數 add 鏈 0.197(文檔 0.25);此值與 alu8 同為前端/發射吞吐地板,真實鏈延遲可能更低"
+}

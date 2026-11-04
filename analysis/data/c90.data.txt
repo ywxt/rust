@@ -1,0 +1,116 @@
+# c90 raw data on 07e526db9df; a64 = univpn-work-1 core 52 (taskset -c 52), x86 = local core 12 (flock core12.lock taskset -c 12)
+# bench runner: /tmp/xdiff/work/upb/run.sh (3 interleaved runs); perf: prof.sh / ann.sh / fs.sh (remote copies in /tmp/xdiff/work/upb/)
+##### file: v_a.txt
+run1 a64 test vec_deque::bench_from_array_1000 ... bench:         152.73 ns/iter (+/- 0.33)
+run1 a64 test vec::bench_from_slice_1000 ... bench:         152.60 ns/iter (+/- 0.33) = 6578 MB/s
+run1 a64 test vec::bench_clone_1000 ... bench:         152.61 ns/iter (+/- 0.47) = 6578 MB/s
+run2 a64 test vec_deque::bench_from_array_1000 ... bench:         137.13 ns/iter (+/- 0.28)
+run2 a64 test vec::bench_from_slice_1000 ... bench:         136.84 ns/iter (+/- 0.40) = 7352 MB/s
+run2 a64 test vec::bench_clone_1000 ... bench:         136.98 ns/iter (+/- 0.36) = 7352 MB/s
+run3 a64 test vec_deque::bench_from_array_1000 ... bench:         137.29 ns/iter (+/- 0.33)
+run3 a64 test vec::bench_from_slice_1000 ... bench:         137.07 ns/iter (+/- 0.31) = 7299 MB/s
+run3 a64 test vec::bench_clone_1000 ... bench:         136.67 ns/iter (+/- 0.28) = 7352 MB/s
+##### file: v_x.txt
+run1 x86 test vec_deque::bench_from_array_1000 ... bench:          43.43 ns/iter (+/- 2.31)
+run1 x86 test vec::bench_from_slice_1000 ... bench:          58.44 ns/iter (+/- 4.51) = 17241 MB/s
+run1 x86 test vec::bench_clone_1000 ... bench:          68.50 ns/iter (+/- 3.52) = 14705 MB/s
+run2 x86 test vec_deque::bench_from_array_1000 ... bench:          42.63 ns/iter (+/- 1.62)
+run2 x86 test vec::bench_from_slice_1000 ... bench:          59.17 ns/iter (+/- 3.43) = 16949 MB/s
+run2 x86 test vec::bench_clone_1000 ... bench:          58.40 ns/iter (+/- 3.58) = 17241 MB/s
+run3 x86 test vec_deque::bench_from_array_1000 ... bench:          43.91 ns/iter (+/- 2.28)
+run3 x86 test vec::bench_from_slice_1000 ... bench:          59.86 ns/iter (+/- 3.38) = 16949 MB/s
+run3 x86 test vec::bench_clone_1000 ... bench:          58.54 ns/iter (+/- 3.72) = 17241 MB/s
+##### file: v_p.txt
+=== perf stat vec_deque::bench_from_array_1000
+test vec_deque::bench_from_array_1000 ... bench:         137.36 ns/iter (+/- 0.40)
+       753,080,612      cycles                                                                
+     3,110,135,069      instructions                     #    4.13  insn per cycle            
+       393,537,785      branches                                                              
+            78,367      branch-misses                    #    0.02% of all branches           
+##### file: v_r.txt
+=== perf report vec_deque::bench_from_array_1000
+    83.47%  [.] __memcpy_generic
+     3.97%  [.] _int_free_maybe_consolidate.part.0
+     3.88%  [.] _int_malloc
+     1.66%  [.] _int_free
+     1.66%  [.] _RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+     1.57%  [.] cfree@GLIBC_2.17
+     1.29%  [.] _int_free_merge_chunk
+     0.83%  [.] malloc
+     0.31%  [k] seq_read_iter
+     0.30%  [.] _int_free_create_chunk
+     0.28%  [.] alloc_perturb
+     0.28%  [.] malloc@plt
+##### file: v_dis.txt
+=== from_array closure disasm
+_RINvNtCspchWlblWlP_4test5bench13ns_iter_inneruNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deques_21bench_from_array_10000EBO_
+_RNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_1000
+_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+0000000000039ad0 <_RINvNtCspchWlblWlP_4test5bench13ns_iter_inneruNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deques_21bench_from_array_10000EBO_>:
+   39afc:	bl	18a90 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant3now@plt>
+   39b08:	cbz	x19, 39b88 <_RINvNtCspchWlblWlP_4test5bench13ns_iter_inneruNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deques_21bench_from_array_10000EBO_+0xb8>
+   39b28:	b.eq	39b88 <_RINvNtCspchWlblWlP_4test5bench13ns_iter_inneruNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deques_21bench_from_array_10000EBO_+0xb8>  // b.none
+   39b38:	bl	18b00 <memcpy@plt>
+   39b3c:	bl	192f0 <_RNvCsbOwsw4zHH1Z_7___rustc35___rust_no_alloc_shim_is_unstable_v2@plt>
+   39b48:	bl	19120 <_RNvCsbOwsw4zHH1Z_7___rustc12___rust_alloc@plt>
+   39b4c:	cbz	x0, 39bbc <_RINvNtCspchWlblWlP_4test5bench13ns_iter_inneruNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deques_21bench_from_array_10000EBO_+0xec>
+   39b5c:	bl	18b00 <memcpy@plt>
+   39b70:	cbz	x8, 39b24 <_RINvNtCspchWlblWlP_4test5bench13ns_iter_inneruNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deques_21bench_from_array_10000EBO_+0x54>
+   39b80:	bl	18a00 <_RNvCsbOwsw4zHH1Z_7___rustc14___rust_dealloc@plt>
+   39b8c:	bl	19020 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant7elapsed@plt>
+   39bb8:	ret
+   39bc4:	bl	18dd0 <_RNvNtCshDmNPlWY1OA_5alloc7raw_vec12handle_error@plt>
+00000000000ee51c <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_>:
+   ee568:	bl	192e0 <memset@plt>
+   ee5a0:	b.ne	ee588 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x6c>  // b.any
+   ee5b4:	bl	39ad0 <_RINvNtCspchWlblWlP_4test5bench13ns_iter_inneruNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deques_21bench_from_array_10000EBO_>
+   ee5d0:	bl	39ad0 <_RINvNtCspchWlblWlP_4test5bench13ns_iter_inneruNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deques_21bench_from_array_10000EBO_>
+   ee684:	bl	18a90 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant3now@plt>
+   ee698:	cbnz	x23, ee7cc <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x2b0>
+   ee6a4:	bl	18a90 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant3now@plt>
+   ee6b4:	bl	19020 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant7elapsed@plt>
+   ee6d0:	b.ne	ee69c <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x180>  // b.any
+   ee6e4:	bl	15e890 <_RNvNtCspchWlblWlP_4test5stats9winsorize>
+   ee6f8:	bl	15233c <_RNvMNtCspchWlblWlP_4test5statsNtB2_7Summary3new>
+   ee714:	bl	19020 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant7elapsed@plt>
+   ee734:	b.eq	ee838 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x31c>  // b.none
+   ee738:	bl	18a90 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant3now@plt>
+   ee744:	cbz	x23, ee70c <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x1f0>
+   ee754:	b.eq	ee70c <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x1f0>  // b.none
+   ee758:	bl	192f0 <_RNvCsbOwsw4zHH1Z_7___rustc35___rust_no_alloc_shim_is_unstable_v2@plt>
+   ee764:	bl	19120 <_RNvCsbOwsw4zHH1Z_7___rustc12___rust_alloc@plt>
+   ee768:	cbz	x0, ee9e4 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x4c8>
+   ee778:	bl	18b00 <memcpy@plt>
+   ee78c:	cbz	x8, ee750 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x234>
+   ee79c:	bl	18a00 <_RNvCsbOwsw4zHH1Z_7___rustc14___rust_dealloc@plt>
+   ee7a8:	bl	19020 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant7elapsed@plt>
+   ee7c8:	b.eq	ee6d4 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x1b8>  // b.none
+   ee7d0:	bl	18a90 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant3now@plt>
+   ee7e8:	b.eq	ee7a4 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x288>  // b.none
+   ee7ec:	bl	192f0 <_RNvCsbOwsw4zHH1Z_7___rustc35___rust_no_alloc_shim_is_unstable_v2@plt>
+   ee7f8:	bl	19120 <_RNvCsbOwsw4zHH1Z_7___rustc12___rust_alloc@plt>
+   ee7fc:	cbz	x0, ee9e4 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x4c8>
+   ee80c:	bl	18b00 <memcpy@plt>
+   ee820:	cbz	x8, ee7e4 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x2c8>
+   ee830:	bl	18a00 <_RNvCsbOwsw4zHH1Z_7___rustc14___rust_dealloc@plt>
+   ee848:	bl	15e890 <_RNvNtCspchWlblWlP_4test5stats9winsorize>
+   ee860:	bl	15233c <_RNvMNtCspchWlblWlP_4test5statsNtB2_7Summary3new>
+   ee868:	bl	19020 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant7elapsed@plt>
+   ee890:	cbz	w8, ee8b8 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x39c>
+   ee89c:	b.pl	ee8b8 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x39c>  // b.nfrst
+   ee8b4:	b.mi	ee938 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x41c>  // b.first
+   ee8bc:	b.cs	ee9f0 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x4d4>  // b.hs, b.nlast
+   ee8cc:	b.ls	ee8e8 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x3cc>  // b.plast
+   ee8d4:	b.eq	ee9f0 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x4d4>  // b.none
+   ee90c:	b.hi	ee938 <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x41c>  // b.pmore
+   ee91c:	bl	18a90 <_RNvMNtCs60nHaxeZLXj_3std4timeNtB2_7Instant3now@plt>
+   ee930:	cbnz	x23, ee7cc <_RNvYNCNvNtCs3CKgq1o0DAf_12allocbenches9vec_deque21bench_from_array_10000INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_+0x2b0>
+   ee9e0:	ret
+##### file: v_d.txt
+# derived by derive.py from a64_bench.txt / x86_bench.txt (min of 3)
+min vec_deque::bench_from_array_1000: a64 137.13 ns, x86 42.63 ns, a64 cycles(x2.9) 397.7
+min vec::bench_from_slice_1000: a64 136.84 ns, x86 58.44 ns, a64 cycles(x2.9) 396.8
+min vec::bench_clone_1000: a64 136.67 ns, x86 58.40 ns, a64 cycles(x2.9) 396.3
+a64 perf vec_deque::bench_from_array_1000: 137.36 ns, IPC 4.13, instr/iter 1645
+# old = body baseline numbers (88f7399-era build), new = a64 min above
+old->new vec_deque::bench_from_array_1000: 177.03 -> 137.13 (-22.5%)

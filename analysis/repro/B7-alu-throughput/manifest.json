@@ -1,0 +1,22 @@
+{
+ "id": "B7",
+ "slug": "alu-throughput",
+ "kind": "rust",
+ "tags": [
+  "B7"
+ ],
+ "chapters": [
+  "c32",
+  "c44",
+  "c48",
+  "c53",
+  "c64",
+  "c66",
+  "c68",
+  "c71",
+  "c74"
+ ],
+ "status": "reproduced",
+ "summary": "8 條獨立 add+計數+分支 aarch64 2.335 對 x86 1.587 cycles/輪(連 subs 9 條 ALU:3.9 對 5.7 條/cycle);12 nop+計數+分支兩邊約 6 條/cycle(2.335 對 2.199);4 ALU+ld+st+分支的迴圈 aarch64 1.862、只去掉一條 add 後 1.007(x86 同形兩者 1.004);c48 同形 7 條乘法+棧往返迴圈 1.569 對 1.042;成因(整數 ALU/分支埠少)為推測",
+ "doc_mismatch": ""
+}

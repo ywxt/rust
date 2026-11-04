@@ -1,0 +1,14 @@
+{
+ "id": "L05",
+ "slug": "lsr-dup-udiv",
+ "kind": "llvm-ir",
+ "tags": [
+  "N1"
+ ],
+ "chapters": [
+  "c92"
+ ],
+ "status": "reproduced",
+ "summary": "LSR 把 len - index 重新展開成第二條 urem,opt -passes=loop-reduce 即可見,兩個 target 皆然,-disable-lsr 後剩一條;cycles/insert:a64 79.3 → 65.1,x86 67.7 → 62.2。",
+ "doc_mismatch": "c92 稱 x86 代價較大(15.1 vs a64 10.6),未復現:本 bench 為 x86 5.5、a64 14.2;原探針重跑 a64 74.9 → 64.4(10.5,相符),x86 多數 67.5 → 58(約 9.5),6 次中僅 1 次接近文檔的 73.1(72.6)。上下文方面,IR 層不需要 ns_iter_inner 形狀,但迴圈起點敏感:起點 0 兩邊都重複;起點 30 的變體 a64 只有一條 udiv、x86 仍兩條。"
+}

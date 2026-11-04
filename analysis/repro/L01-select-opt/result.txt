@@ -1,0 +1,24 @@
+##### x86_64 (local) #####
+Tue Nov  3 02:33:15 PM CST 2026
+x86_64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: llc -O3 -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=A64
+PASS: llc -O3 -mtriple=aarch64-linux-gnu -aarch64-select-opt=false < %s | FileCheck %s --check-prefix=A64-NOSEL
+PASS: llc -O3 -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=X86
+default    rand  cycles/iter 1197668  branch-misses/iter 19617
+default    asc   cycles/iter 424912  branch-misses/iter 44
+
+##### aarch64 (univpn-work-1) #####
+
+Tue Nov  3 02:11:24 PM CST 2026
+aarch64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: llc -O3 -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=A64
+PASS: llc -O3 -mtriple=aarch64-linux-gnu -aarch64-select-opt=false < %s | FileCheck %s --check-prefix=A64-NOSEL
+PASS: llc -O3 -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=X86
+default    rand  cycles/iter 1830893  branch-misses/iter 89849
+default    asc   cycles/iter 410963  branch-misses/iter 54
+nosel      rand  cycles/iter 1160030  branch-misses/iter 22696
+nosel      asc   cycles/iter 467572  branch-misses/iter 45

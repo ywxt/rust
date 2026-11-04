@@ -1,0 +1,28 @@
+##### x86_64 (local) #####
+Tue Nov  3 02:46:48 PM CST 2026
+x86_64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: opt -S -passes=loop-simplify,loop-reduce -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=LSR
+PASS: opt -S -passes=loop-simplify,loop-reduce -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=LSR
+PASS: llc -O3 -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=A64
+PASS: llc -O3 -mtriple=aarch64-linux-gnu -disable-lsr < %s | FileCheck %s --check-prefix=A64-NOLSR
+PASS: llc -O3 -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=X86
+PASS: llc -O3 -mtriple=x86_64-linux-gnu -disable-lsr < %s | FileCheck %s --check-prefix=X86-NOLSR
+default    cycles/insert 67.7  instructions/insert 122  divides-in-iter 2
+nolsr      cycles/insert 62.2  instructions/insert 108  divides-in-iter 1
+
+##### aarch64 (univpn-work-1) #####
+
+Tue Nov  3 02:24:59 PM CST 2026
+aarch64
+rustc 1.101.0-dev
+  LLVM version 23.1.4-rust-1.101.0-nightly
+PASS: opt -S -passes=loop-simplify,loop-reduce -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=LSR
+PASS: opt -S -passes=loop-simplify,loop-reduce -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=LSR
+PASS: llc -O3 -mtriple=aarch64-linux-gnu < %s | FileCheck %s --check-prefix=A64
+PASS: llc -O3 -mtriple=aarch64-linux-gnu -disable-lsr < %s | FileCheck %s --check-prefix=A64-NOLSR
+PASS: llc -O3 -mtriple=x86_64-linux-gnu < %s | FileCheck %s --check-prefix=X86
+PASS: llc -O3 -mtriple=x86_64-linux-gnu -disable-lsr < %s | FileCheck %s --check-prefix=X86-NOLSR
+default    cycles/insert 79.3  instructions/insert 119  divides-in-iter 2
+nolsr      cycles/insert 65.1  instructions/insert 113  divides-in-iter 1

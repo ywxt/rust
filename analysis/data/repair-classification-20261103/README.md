@@ -1,0 +1,1 @@
+本目錄保存2026-11-03修法分類使用的公開上游PR索引。author、state、merged_at與head_sha由GitHub REST API的rust-lang/rust/pulls/<number>取得，changed_files由同一PR的files端點取得；本次同時閱讀實際diff後才作算法參考。僅更新遠端分析報告，沒有提交、修改或評論任何上游PR／issue。PR的舊量測不是本輪新量測；已在07e526db9df內的方案只作設計先例。
