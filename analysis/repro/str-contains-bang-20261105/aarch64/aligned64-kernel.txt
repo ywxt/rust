@@ -1,0 +1,75 @@
+<bang_probe_v5::aligned64>:
+    3f5c:	f102003f 	cmp	x1, #0x80
+    3f60:	54000082 	b.cs	3f70 <bang_probe_v5::aligned64+0x14>  // b.hs, b.nlast
+    3f64:	f101003f 	cmp	x1, #0x40
+    3f68:	54000682 	b.cs	4038 <bang_probe_v5::aligned64+0xdc>  // b.hs, b.nlast
+    3f6c:	17ffff08 	b	3b8c <bang_probe_v5::fold16>
+    3f70:	91003c08 	add	x8, x0, #0xf
+    3f74:	927ced08 	and	x8, x8, #0xfffffffffffffff0
+    3f78:	eb000109 	subs	x9, x8, x0
+    3f7c:	540000e0 	b.eq	3f98 <bang_probe_v5::aligned64+0x3c>  // b.none
+    3f80:	4f01e420 	movi	v0.16b, #0x21
+    3f84:	3dc00001 	ldr	q1, [x0]
+    3f88:	6e208c20 	cmeq	v0.16b, v1.16b, v0.16b
+    3f8c:	5ef1b800 	addp	d0, v0.2d
+    3f90:	9e660008 	fmov	x8, d0
+    3f94:	b50006c8 	cbnz	x8, 406c <bang_probe_v5::aligned64+0x110>
+    3f98:	cb090028 	sub	x8, x1, x9
+    3f9c:	f27ae51f 	tst	x8, #0xffffffffffffffc0
+    3fa0:	54000280 	b.eq	3ff0 <bang_probe_v5::aligned64+0x94>  // b.none
+    3fa4:	4f01e420 	movi	v0.16b, #0x21
+    3fa8:	927ae50a 	and	x10, x8, #0xffffffffffffffc0
+    3fac:	8b090009 	add	x9, x0, x9
+    3fb0:	cb0a03ea 	neg	x10, x10
+    3fb4:	ad400921 	ldp	q1, q2, [x9]
+    3fb8:	ad411123 	ldp	q3, q4, [x9, #32]
+    3fbc:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    3fc0:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    3fc4:	6e208c63 	cmeq	v3.16b, v3.16b, v0.16b
+    3fc8:	6e208c84 	cmeq	v4.16b, v4.16b, v0.16b
+    3fcc:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    3fd0:	4ea41c62 	orr	v2.16b, v3.16b, v4.16b
+    3fd4:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    3fd8:	5ef1b821 	addp	d1, v1.2d
+    3fdc:	9e66002b 	fmov	x11, d1
+    3fe0:	b500046b 	cbnz	x11, 406c <bang_probe_v5::aligned64+0x110>
+    3fe4:	b101014a 	adds	x10, x10, #0x40
+    3fe8:	91010129 	add	x9, x9, #0x40
+    3fec:	54fffe41 	b.ne	3fb4 <bang_probe_v5::aligned64+0x58>  // b.any
+    3ff0:	92401508 	and	x8, x8, #0x3f
+    3ff4:	b4000448 	cbz	x8, 407c <bang_probe_v5::aligned64+0x120>
+    3ff8:	4f01e420 	movi	v0.16b, #0x21
+    3ffc:	8b010008 	add	x8, x0, x1
+    4000:	ad7e0901 	ldp	q1, q2, [x8, #-64]
+    4004:	ad7f1103 	ldp	q3, q4, [x8, #-32]
+    4008:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    400c:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    4010:	6e208c63 	cmeq	v3.16b, v3.16b, v0.16b
+    4014:	6e208c80 	cmeq	v0.16b, v4.16b, v0.16b
+    4018:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    401c:	4ea01c60 	orr	v0.16b, v3.16b, v0.16b
+    4020:	4ea01c20 	orr	v0.16b, v1.16b, v0.16b
+    4024:	5ef1b800 	addp	d0, v0.2d
+    4028:	9e660008 	fmov	x8, d0
+    402c:	f100011f 	cmp	x8, #0x0
+    4030:	1a9f07e0 	cset	w0, ne	// ne = any
+    4034:	d65f03c0 	ret
+    4038:	4f01e420 	movi	v0.16b, #0x21
+    403c:	ad400801 	ldp	q1, q2, [x0]
+    4040:	ad411003 	ldp	q3, q4, [x0, #32]
+    4044:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    4048:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    404c:	6e208c63 	cmeq	v3.16b, v3.16b, v0.16b
+    4050:	6e208c80 	cmeq	v0.16b, v4.16b, v0.16b
+    4054:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    4058:	4ea01c60 	orr	v0.16b, v3.16b, v0.16b
+    405c:	4ea01c20 	orr	v0.16b, v1.16b, v0.16b
+    4060:	5ef1b800 	addp	d0, v0.2d
+    4064:	9e660008 	fmov	x8, d0
+    4068:	b4000068 	cbz	x8, 4074 <bang_probe_v5::aligned64+0x118>
+    406c:	52800020 	mov	w0, #0x1                   	// #1
+    4070:	d65f03c0 	ret
+    4074:	f240143f 	tst	x1, #0x3f
+    4078:	54fffc01 	b.ne	3ff8 <bang_probe_v5::aligned64+0x9c>  // b.any
+    407c:	2a1f03e0 	mov	w0, wzr
+    4080:	d65f03c0 	ret

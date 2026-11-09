@@ -723,14 +723,12 @@ impl String {
     pub fn from_utf16(v: &[u16]) -> Result<String, FromUtf16Error> {
         // This isn't done via collect::<Result<_, _>>() for performance reasons.
         // FIXME: the function can be simplified again when #48994 is closed.
-        let mut ret = String::with_capacity(v.len());
-        for c in char::decode_utf16(v.iter().cloned()) {
-            let Ok(c) = c else {
-                return Err(FromUtf16Error { kind: FromUtf16ErrorKind::LoneSurrogate });
-            };
-            ret.push(c);
+        let mut bytes = Vec::with_capacity(v.len());
+        match crate::utf16_decode::decode_utf16_into(v, &mut bytes, |_| Err(())) {
+            // SAFETY: without unpaired surrogates the decoder writes only valid UTF-8.
+            Ok(()) => Ok(unsafe { String::from_utf8_unchecked(bytes) }),
+            Err(()) => Err(FromUtf16Error { kind: FromUtf16ErrorKind::LoneSurrogate }),
         }
-        Ok(ret)
     }
 
     /// Decode a native endian UTF-16–encoded slice `v` into a `String`,
@@ -760,9 +758,12 @@ impl String {
     #[inline]
     #[stable(feature = "rust1", since = "1.0.0")]
     pub fn from_utf16_lossy(v: &[u16]) -> String {
-        char::decode_utf16(v.iter().cloned())
-            .map(|r| r.unwrap_or(char::REPLACEMENT_CHARACTER))
-            .collect()
+        let mut bytes = Vec::with_capacity(v.len());
+        let _ = crate::utf16_decode::decode_utf16_into(v, &mut bytes, |_| {
+            Ok(char::REPLACEMENT_CHARACTER as u16)
+        });
+        // SAFETY: every unpaired surrogate was replaced, so the bytes are valid UTF-8.
+        unsafe { String::from_utf8_unchecked(bytes) }
     }
 
     /// Decode a UTF-16LE–encoded vector `v` into a `String`,

@@ -1,0 +1,109 @@
+define dso_local { i64, i64 } @original(ptr noalias nofree noundef align 8 captures(none) dereferenceable(240) %x, ptr noalias nofree noundef align 8 captures(none) dereferenceable(240) %y, ptr noalias nofree noundef align 8 captures(none) dereferenceable(8) %skip) unnamed_addr #4 !guid !1012 {
+start:
+  %_20.i = alloca [8 x i8], align 8
+  %_0.i = alloca [16 x i8], align 8
+  tail call void @llvm.experimental.noalias.scope.decl(metadata !1013)
+  tail call void @llvm.experimental.noalias.scope.decl(metadata !1016)
+  tail call void @llvm.experimental.noalias.scope.decl(metadata !1018)
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i)
+  %skip.promoted = load i64, ptr %skip, align 8, !alias.scope !1018, !noalias !1020
+  br label %bb18.i
+
+bb18.i:                                           ; preds = %start, %_RNvMNtCs5eKY5gNNvwM_4core5sliceSj15swap_with_sliceCsjQ8WedNVfna_5probe.exit
+  %iter.sroa.0.0.i1 = phi i32 [ 0, %start ], [ %_37.0.i, %_RNvMNtCs5eKY5gNNvwM_4core5sliceSj15swap_with_sliceCsjQ8WedNVfna_5probe.exit ]
+  %0 = phi i64 [ %skip.promoted, %start ], [ %7, %_RNvMNtCs5eKY5gNNvwM_4core5sliceSj15swap_with_sliceCsjQ8WedNVfna_5probe.exit ]
+  %_37.0.i = add nuw nsw i32 %iter.sroa.0.0.i1, 1
+  %_39.i = icmp ugt i64 %0, 30
+  br i1 %_39.i, label %bb23.i, label %bb5.i, !prof !476
+
+bb23.i:                                           ; preds = %bb18.i
+; call core::slice::index::slice_index_fail
+  call void @_RNvNtNtCs5eKY5gNNvwM_4core5slice5index16slice_index_fail(i64 noundef %0, i64 noundef 30, i64 noundef 30, ptr noalias nofree noundef readonly align 8 captures(address, read_provenance) dereferenceable(24) @alloc_13c7bf5ed5aee99331ff0c8edb4d619b) #20, !noalias !1018
+  unreachable
+
+bb5.i:                                            ; preds = %bb18.i
+  %_8.i = sub nuw nsw i64 30, %0
+  %_46.i = getelementptr inbounds nuw [8 x i8], ptr %x, i64 %0
+  call void @llvm.experimental.noalias.scope.decl(metadata !1021)
+  call void @llvm.experimental.noalias.scope.decl(metadata !1024)
+  %.not.i = icmp eq i64 %0, 30
+  br i1 %.not.i, label %_RNvMNtCs5eKY5gNNvwM_4core5sliceSj15swap_with_sliceCsjQ8WedNVfna_5probe.exit, label %bb3.i.i.i.preheader
+
+bb3.i.i.i.preheader:                              ; preds = %bb5.i
+  %min.iters.check = icmp ugt i64 %0, 26
+  br i1 %min.iters.check, label %bb3.i.i.i.preheader8, label %vector.ph
+
+vector.ph:                                        ; preds = %bb3.i.i.i.preheader
+  %n.vec = and i64 %_8.i, 28
+  br label %vector.body
+
+vector.body:                                      ; preds = %vector.body, %vector.ph
+  %index = phi i64 [ 0, %vector.ph ], [ %index.next, %vector.body ]
+  %1 = getelementptr inbounds nuw [8 x i8], ptr %_46.i, i64 %index
+  %2 = getelementptr inbounds nuw [8 x i8], ptr %y, i64 %index
+  call void @llvm.experimental.noalias.scope.decl(metadata !1026), !noalias !1018
+  call void @llvm.experimental.noalias.scope.decl(metadata !1029), !noalias !1018
+  %3 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %wide.load = load <2 x i64>, ptr %1, align 8, !alias.scope !1031, !noalias !1032
+  %wide.load5 = load <2 x i64>, ptr %3, align 8, !alias.scope !1031, !noalias !1032
+  %4 = getelementptr inbounds nuw i8, ptr %2, i64 16
+  %wide.load6 = load <2 x i64>, ptr %2, align 8, !alias.scope !1034, !noalias !1035
+  %wide.load7 = load <2 x i64>, ptr %4, align 8, !alias.scope !1034, !noalias !1035
+  store <2 x i64> %wide.load6, ptr %1, align 8, !alias.scope !1031, !noalias !1032
+  store <2 x i64> %wide.load7, ptr %3, align 8, !alias.scope !1031, !noalias !1032
+  store <2 x i64> %wide.load, ptr %2, align 8, !alias.scope !1034, !noalias !1035
+  store <2 x i64> %wide.load5, ptr %4, align 8, !alias.scope !1034, !noalias !1035
+  %index.next = add nuw i64 %index, 4
+  %5 = icmp eq i64 %index.next, %n.vec
+  br i1 %5, label %middle.block, label %vector.body, !llvm.loop !1036
+
+middle.block:                                     ; preds = %vector.body
+  %cmp.n = icmp eq i64 %_8.i, %n.vec
+  br i1 %cmp.n, label %_RNvMNtCs5eKY5gNNvwM_4core5sliceSj15swap_with_sliceCsjQ8WedNVfna_5probe.exit, label %bb3.i.i.i.preheader8
+
+bb3.i.i.i.preheader8:                             ; preds = %bb3.i.i.i.preheader, %middle.block
+  %iter.sroa.0.02.i.i.i.ph = phi i64 [ 0, %bb3.i.i.i.preheader ], [ %n.vec, %middle.block ]
+  br label %bb3.i.i.i
+
+bb3.i.i.i:                                        ; preds = %bb3.i.i.i.preheader8, %bb3.i.i.i
+  %iter.sroa.0.02.i.i.i = phi i64 [ %_18.i.i.i, %bb3.i.i.i ], [ %iter.sroa.0.02.i.i.i.ph, %bb3.i.i.i.preheader8 ]
+  %_18.i.i.i = add nuw nsw i64 %iter.sroa.0.02.i.i.i, 1
+  %_11.i.i.i = getelementptr inbounds nuw [8 x i8], ptr %_46.i, i64 %iter.sroa.0.02.i.i.i
+  %_13.i.i.i = getelementptr inbounds nuw [8 x i8], ptr %y, i64 %iter.sroa.0.02.i.i.i
+  call void @llvm.experimental.noalias.scope.decl(metadata !1026), !noalias !1018
+  call void @llvm.experimental.noalias.scope.decl(metadata !1029), !noalias !1018
+  %_3.sroa.0.0.copyload.i.i.i.i = load i64, ptr %_11.i.i.i, align 8, !alias.scope !1031, !noalias !1032
+  %_4.sroa.0.0.copyload.i.i.i.i = load i64, ptr %_13.i.i.i, align 8, !alias.scope !1034, !noalias !1035
+  store i64 %_4.sroa.0.0.copyload.i.i.i.i, ptr %_11.i.i.i, align 8, !alias.scope !1031, !noalias !1032
+  store i64 %_3.sroa.0.0.copyload.i.i.i.i, ptr %_13.i.i.i, align 8, !alias.scope !1034, !noalias !1035
+  %exitcond.not.i.i.i = icmp eq i64 %_18.i.i.i, %_8.i
+  br i1 %exitcond.not.i.i.i, label %_RNvMNtCs5eKY5gNNvwM_4core5sliceSj15swap_with_sliceCsjQ8WedNVfna_5probe.exit, label %bb3.i.i.i, !llvm.loop !1037
+
+_RNvMNtCs5eKY5gNNvwM_4core5sliceSj15swap_with_sliceCsjQ8WedNVfna_5probe.exit: ; preds = %bb3.i.i.i, %middle.block, %bb5.i
+  call void @llvm.lifetime.start.p0(ptr nonnull %_20.i), !noalias !1038
+  %_21.i = add nuw nsw i64 %0, 1
+  store i64 %_21.i, ptr %_20.i, align 8, !noalias !1038
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_20.i) #19, !noalias !1018, !srcloc !79
+  %6 = load i64, ptr %_20.i, align 8, !noalias !1038, !noundef !51
+  %7 = and i64 %6, 7
+  call void @llvm.lifetime.end.p0(ptr nonnull %_20.i), !noalias !1038
+  store i64 %7, ptr %skip, align 8, !alias.scope !1018, !noalias !1020
+  %exitcond.not = icmp eq i32 %_37.0.i, 32
+  br i1 %exitcond.not, label %_RINvCsjQ8WedNVfna_5probe5batchKh0_EB2_.exit, label %bb18.i
+
+_RINvCsjQ8WedNVfna_5probe5batchKh0_EB2_.exit:     ; preds = %_RNvMNtCs5eKY5gNNvwM_4core5sliceSj15swap_with_sliceCsjQ8WedNVfna_5probe.exit
+  %8 = getelementptr inbounds nuw i8, ptr %x, i64 80
+  %_24.i = load i64, ptr %8, align 8, !alias.scope !1013, !noalias !1039, !noundef !51
+  %9 = getelementptr inbounds nuw i8, ptr %y, i64 160
+  %_28.i = load i64, ptr %9, align 8, !alias.scope !1016, !noalias !1040, !noundef !51
+  store i64 %_24.i, ptr %_0.i, align 8, !noalias !1038
+  %10 = getelementptr inbounds nuw i8, ptr %_0.i, i64 8
+  store i64 %_28.i, ptr %10, align 8, !noalias !1038
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i) #19, !noalias !1018, !srcloc !79
+  %11 = load i64, ptr %_0.i, align 8, !noalias !1038, !noundef !51
+  %12 = load i64, ptr %10, align 8, !noalias !1038, !noundef !51
+  %13 = insertvalue { i64, i64 } poison, i64 %11, 0
+  %14 = insertvalue { i64, i64 } %13, i64 %12, 1
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i)
+  ret { i64, i64 } %14
+}

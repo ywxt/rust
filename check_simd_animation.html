@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>check_simd：16 個 lane 的 UTF-8 驗證</title>
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781; --grid: #e1e0d9;
+  --focus: #0b0b0b; --accent: #2a78d6;
+  --lead-bg: #dbe9fb; --cont-bg: #d4f0e4; --ascii-bg: #f0efec;
+  --ok: #0ca30c; --bad: #d03b3b; --bad-bg: #fbe3e3; --m23-bg: #fff1cc;
+  --f1: #2a78d6; --f2: #eb6834; --f3: #1baf7a; --f4: #eda100; --f5: #e87ba4; --f6: #008300; --f7: #6250d6; --f8: #e34948;
+  --cell: 52px; --gap: 3px;
+}
+:root.dark {
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781; --grid: #2c2c2a;
+  --focus: #f0efec; --accent: #3987e5;
+  --lead-bg: #17345a; --cont-bg: #12392b; --ascii-bg: #262624;
+  --ok: #0ca30c; --bad: #e66767; --bad-bg: #3d1c1c; --m23-bg: #3a2f10;
+  --f1: #3987e5; --f2: #d95926; --f3: #199e70; --f4: #c98500; --f5: #d55181; --f6: #008300; --f7: #9085e9; --f8: #e66767;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.5 -apple-system, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 20px 16px 40px; }
+h1 { font-size: 20px; margin: 0 0 4px; }
+.lede { color: var(--ink2); margin: 0 0 14px; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+button, select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--grid); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+button:hover, select:hover { border-color: var(--muted); }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+button.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.steps { display: flex; gap: 4px; flex-wrap: wrap; margin: 0 0 12px; }
+.steps button { padding: 3px 9px; font-size: 13px; color: var(--ink2); }
+.steps button.on { color: var(--surface); background: var(--ink); border-color: var(--ink); }
+.caption { background: var(--surface); border: 1px solid var(--grid); border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; min-height: 132px; }
+.caption h2 { font-size: 16px; margin: 0 0 6px; }
+.caption p { margin: 0 0 8px; }
+.code { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 12.5px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: var(--ink2); }
+.code span b { color: var(--ink); font-weight: 600; }
+.stage-wrap { background: var(--surface); border: 1px solid var(--grid); border-radius: 8px; padding: 12px 12px 16px; overflow-x: auto; position: relative; }
+.stage { position: relative; min-width: calc(200px + 16 * var(--cell) + 15 * var(--gap)); }
+svg.links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 3; }
+.row { display: grid; grid-template-columns: 200px repeat(16, var(--cell)); column-gap: var(--gap); align-items: stretch;
+       max-height: 0; opacity: 0; overflow: visible; transition: max-height .45s ease, opacity .45s ease, margin .45s ease; margin: 0; }
+.row.show { max-height: 90px; opacity: 1; margin: 0 0 6px; }
+.row.dim { opacity: .38; }
+.row.lanes { max-height: 40px; opacity: 1; margin-bottom: 4px; }
+.label { align-self: center; padding-right: 10px; text-align: right; line-height: 1.25; }
+.label .n { font: 600 13px ui-monospace, Menlo, Consolas, monospace; }
+.label .s { display: block; font-size: 12px; color: var(--ink2); }
+.lane-no { text-align: center; font: 11px ui-monospace, Menlo, monospace; color: var(--muted); align-self: end; }
+.cell { position: relative; border: 1px solid var(--grid); border-radius: 4px; background: var(--surface); text-align: center;
+        font: 600 14px ui-monospace, Menlo, Consolas, monospace; padding: 3px 0 2px; min-height: 40px;
+        transition: transform .9s cubic-bezier(.3,.7,.2,1), background .3s, border-color .3s, opacity .4s; }
+.cell .t { display: block; font: 400 11px/1.2 -apple-system, "PingFang TC", "Noto Sans CJK TC", sans-serif; color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cell.ascii { background: var(--ascii-bg); } .cell.lead { background: var(--lead-bg); } .cell.cont { background: var(--cont-bg); }
+.cell.carry { border-style: dashed; border-color: var(--ink2); }
+.cell.carry::after { content: "↩"; position: absolute; top: -1px; right: 2px; font-size: 10px; color: var(--ink2); }
+.cell.zero { color: var(--muted); font-weight: 400; }
+.cell.m23on { background: var(--m23-bg); }
+.cell.bad { background: var(--bad-bg); border-color: var(--bad); }
+.cell.bad .t { color: var(--bad); font-weight: 600; }
+.cell.good .t { color: var(--ok); }
+.cell.tbl { border-style: dotted; }
+.cell.used { border-color: var(--ink2); border-style: solid; }
+.cell .uses { position: absolute; top: -7px; left: -5px; min-width: 15px; height: 15px; border-radius: 8px; background: var(--ink); color: var(--surface); font: 600 9.5px/15px ui-monospace, monospace; padding: 0 3px; }
+.cell.hl { outline: 2px solid var(--focus); outline-offset: 1px; z-index: 2; }
+.cell.idx { font-weight: 400; color: var(--muted); }
+.dots { display: grid; grid-template-columns: repeat(4, 8px); gap: 2px 3px; justify-content: center; margin-top: 3px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--grid); background: transparent; transition: background .35s, border-color .35s, transform .35s; }
+.dot.on { border-color: transparent; }
+.dot.fade { transform: scale(.4); opacity: .4; }
+.reduce { grid-column: 2 / span 16; border: 1px solid var(--grid); border-radius: 6px; padding: 10px 14px; font: 600 15px ui-monospace, Menlo, monospace; display: flex; gap: 14px; align-items: center; }
+.reduce .verdict { font-family: -apple-system, "PingFang TC", "Noto Sans CJK TC", sans-serif; }
+.reduce.bad { border-color: var(--bad); background: var(--bad-bg); }
+.reduce.good { border-color: var(--ok); }
+.notes { grid-column: 2 / span 16; font-size: 13px; color: var(--ink2); }
+.notes .e { color: var(--bad); font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--ink2); margin-top: 12px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.legend .sw { display: inline-block; width: 16px; height: 12px; border: 1px solid var(--grid); border-radius: 3px; margin-right: 5px; vertical-align: -2px; }
+.tip { position: fixed; z-index: 10; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--grid); border-radius: 6px;
+       padding: 8px 10px; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; box-shadow: 0 4px 16px rgba(0,0,0,.15); max-width: 380px; display: none; }
+.tip b { font-family: -apple-system, "PingFang TC", "Noto Sans CJK TC", sans-serif; }
+details { margin-top: 14px; }
+table.data { border-collapse: collapse; font: 12px ui-monospace, Menlo, Consolas, monospace; margin-top: 8px; }
+table.data th, table.data td { border: 1px solid var(--grid); padding: 2px 6px; text-align: center; }
+table.data th { color: var(--ink2); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><code>check_simd</code>：一次驗證 16 個位元組</h1>
+  <p class="lede">每一行是一個 16-lane 的向量暫存器，16 個 lane 同時做同一條指令。所有數值都由真實的 <code>check_simd</code> 計算後匯出。滑鼠移到任一格，可看該 lane 的完整數值。</p>
+
+  <div class="bar">
+    <select id="ex" aria-label="選擇例子"></select>
+    <button id="prev" aria-label="上一步">◀ 上一步</button>
+    <button id="play" class="primary" aria-label="播放或暫停">▶ 播放</button>
+    <button id="next" aria-label="下一步">下一步 ▶</button>
+    <button id="theme" aria-label="切換深淺色">深色</button>
+  </div>
+  <div class="steps" id="steps"></div>
+  <div class="caption" id="caption" aria-live="polite"></div>
+
+  <div class="stage-wrap">
+    <div class="stage" id="stage"><svg class="links" id="links"></svg></div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <details>
+    <summary>數據表（目前例子的全部向量）</summary>
+    <div style="overflow-x:auto"><table class="data" id="table"></table></div>
+  </details>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const DATA = {"tables":{"T1H":[2,2,2,2,2,2,2,2,128,128,128,128,33,1,21,73],"T1L":[231,163,131,131,139,203,203,203,203,203,203,203,203,219,203,203],"T2H":[1,1,1,1,1,1,1,1,230,174,186,186,1,1,1,1]},"examples":[{"name":"valid","title":"合法:UTF8:中文 OK😀é!b(😀 跨越兩塊)","std_ok":true,"reduce":0,"prev":[85,84,70,56,58,228,184,173,230,150,135,32,79,75,240,159],"input":[152,128,195,169,33,98,32,32,32,32,32,32,32,32,32,32],"prev1":[159,152,128,195,169,33,98,32,32,32,32,32,32,32,32,32],"prev2":[240,159,152,128,195,169,33,98,32,32,32,32,32,32,32,32],"prev3":[75,240,159,152,128,195,169,33,98,32,32,32,32,32,32,32],"hi1":[9,9,8,12,10,2,6,2,2,2,2,2,2,2,2,2],"lo1":[15,8,0,3,9,1,2,0,0,0,0,0,0,0,0,0],"hi2":[9,8,12,10,2,6,2,2,2,2,2,2,2,2,2,2],"l1h":[128,128,128,33,128,2,2,2,2,2,2,2,2,2,2,2],"l1l":[203,203,231,131,203,163,131,231,231,231,231,231,231,231,231,231],"l2h":[174,230,1,186,1,1,1,1,1,1,1,1,1,1,1,1],"sc":[128,128,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"s2":[144,63,56,32,99,73,0,2,0,0,0,0,0,0,0,0],"s3":[0,128,47,40,16,83,57,0,0,0,0,0,0,0,0,0],"m23":[128,128,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"out":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"name":"invalid","title":"非法:同一個上一塊 + 4 種錯誤","std_ok":false,"reduce":128,"prev":[85,84,70,56,58,228,184,173,230,150,135,32,79,75,240,159],"input":[152,128,228,184,65,192,128,237,160,128,65,128,32,32,32,32],"prev1":[159,152,128,228,184,65,192,128,237,160,128,65,128,32,32,32],"prev2":[240,159,152,128,228,184,65,192,128,237,160,128,65,128,32,32],"prev3":[75,240,159,152,128,228,184,65,192,128,237,160,128,65,128,32],"hi1":[9,9,8,14,11,4,12,8,14,10,8,4,8,2,2,2],"lo1":[15,8,0,4,8,1,0,0,13,0,0,1,0,0,0,0],"hi2":[9,8,14,11,4,12,8,14,10,8,4,8,2,2,2,2],"l1h":[128,128,128,21,128,2,33,128,21,128,128,2,128,2,2,2],"l1l":[203,203,231,139,203,163,231,231,219,231,231,163,231,231,231,231],"l2h":[174,230,1,186,1,1,230,1,186,230,1,230,1,1,1,1],"sc":[128,128,0,0,0,0,32,0,16,128,0,2,0,0,0,0],"s2":[144,63,56,32,132,88,0,96,32,141,64,32,0,32,0,0],"s3":[0,128,47,40,16,116,72,0,80,16,125,48,16,0,16,0],"m23":[128,128,0,0,128,0,0,0,0,128,0,0,0,0,0,0],"out":[0,0,0,0,128,0,32,0,16,0,0,2,0,0,0,0]}]};
+
+const FLAGS = [
+  { bit: 1,   name: "TOO_SHORT",  zh: "開頭後面缺續位元組" },
+  { bit: 2,   name: "TOO_LONG",   zh: "續位元組前面沒有開頭" },
+  { bit: 4,   name: "OVERLONG_3", zh: "E0 過長編碼" },
+  { bit: 8,   name: "TOO_LARGE",  zh: "超過 U+10FFFF" },
+  { bit: 16,  name: "SURROGATE",  zh: "代理區 U+D800–DFFF" },
+  { bit: 32,  name: "OVERLONG_2", zh: "C0/C1 過長編碼" },
+  { bit: 64,  name: "OVERLONG_4 / TOO_LARGE_1000", zh: "F0 過長編碼，或 F5–FF" },
+  { bit: 128, name: "TWO_CONTS",  zh: "連續兩個續位元組" },
+];
+const FLAG_VAR = ["--f1", "--f2", "--f3", "--f4", "--f5", "--f6", "--f7", "--f8"];
+
+const STEPS = [
+  { t: "1. 載入兩個向量",
+    p: "從記憶體一次讀 16 個位元組到一個向量暫存器（input）。上一輪讀到的 16 個位元組（prev）還保留著，因為一個字元可能跨在兩塊之間：合法例子裡 😀 的 F0 9F 在 prev 的最後，98 80 在 input 的開頭。底色表示每個位元組的角色，只看高 4 位就知道。",
+    code: [["Rust", "u8x16::from_slice(&c[16..32])"], ["NEON", "ldr q, [x]"]] },
+  { t: "2. ext：拼出「前 1、2、3 位」",
+    p: "每個位元組都要和它前面 1–3 個位元組一起判斷。把 prev 和 input 看成接起來的 32 位元組，從第 15、14、13 位起各取連續 16 位，就是 prev1、prev2、prev3：第 i 個 lane 正好是 input[i] 往前 1、2、3 位。虛線框（↩）的 lane 來自上一塊，其餘是 input 整體右移。",
+    code: [["Rust", "simd_swizzle!(prev, input, [15, 16, …, 30])"], ["NEON", "ext v.16b, prev.16b, input.16b, #15 / #14 / #13"]] },
+  { t: "3. 取出 4 位元的索引",
+    p: "查表要用 0–15 的索引。把 prev1（前一位，下文稱 A）拆成高 4 位和低 4 位，input（當前位，稱 B）取高 4 位。高 4 位代表角色：0–7 是 ASCII，8–B 是續位元組，C–F 是開頭。低 4 位用來分辨 E0、ED、F0、F4 這些需要特別檢查的開頭。",
+    code: [["Rust", "prev1 >> 4,   prev1 & u8x16::splat(15),   input >> 4"], ["NEON", "ushr v.16b, #4  ·  and v.16b"]] },
+  { t: "4. tbl：16 個 lane 同時查表",
+    p: "三張 16 項的表各放在一個暫存器裡。tbl 讓 16 個 lane 同時用自己的索引查表，每個 lane 拿到一個 8 位元的旗標。每一位代表一種錯誤（圓點顏色見圖例），意思是「只看這 4 位，這些錯誤有可能發生」。表格上的數字是有幾個 lane 用到這一項；連線輪流畫出每個 lane 的查表路徑。",
+    code: [["Rust", "t1h.swizzle_dyn(prev1 >> 4)  ·  t1l.swizzle_dyn(prev1 & 15)  ·  t2h.swizzle_dyn(input >> 4)"], ["NEON", "tbl v.16b, {t.16b}, idx.16b  ×3"]] },
+  { t: "5. 三個結果相 AND",
+    p: "只有三個條件同時成立的錯誤，對應的那一位才會留下。大部分 lane 變成 0。連續兩個續位元組的地方會留下 TWO_CONTS，但這不一定是錯：3、4 位元組字元的後段本來就是這樣，下一步修正。",
+    code: [["Rust", "l1h & l1l & l2h"], ["NEON", "and v.16b ×2"]] },
+  { t: "6. must23：這裡必須是連續的續位元組嗎",
+    p: "3 位元組字元的第 3 位、4 位元組字元的第 3 和第 4 位，前一位一定也是續位元組。判斷條件是往前 2 位 ≥ E0，或往前 3 位 ≥ F0。用飽和減法實作：prev2 − 0x60 只有在 prev2 ≥ E0 時最高位才是 1（不夠減則截成 0）；prev3 − 0x70 對應 ≥ F0。兩者 OR 起來只留最高位，結果不是 0x80 就是 0。",
+    code: [["Rust", "(prev2.saturating_sub(0x60) | prev3.saturating_sub(0x70)) & 0x80"], ["NEON", "uqsub ×2  ·  orr  ·  and"]] },
+  { t: "7. XOR：得到每個 lane 的錯誤",
+    p: "must23 只有最高位，正好對應 TWO_CONTS。XOR 之後：該連續、也確實連續 → 抵消成 0；該連續卻沒有 → 字元缺了位元組；不該連續卻連續 → 多了續位元組。其他錯誤位不受影響。out 不是 0 的 lane 就是出錯的位置。",
+    code: [["Rust", "must23 ^ and_result"], ["NEON", "eor v.16b"]] },
+  { t: "8. umaxv：把 16 個 lane 歸約成一個答案",
+    p: "真實代碼把每塊的 out 累積 OR 到 err，每 64 位元組用一次 umaxv 求 16 個 lane 的最大值：0 表示到目前為止全部合法，非 0 表示有錯（需要錯誤位置時再交給 std 重算）。這裡只看這一塊。",
+    code: [["Rust", "err.reduce_max() == 0"], ["NEON", "umaxv b, v.16b"]] },
+];
+
+// rows in their fixed vertical order; `steps` lists where each row is visible, `focus` where it is the step's output
+const ROWS = [
+  { key: "lanes", kind: "lanes", steps: [1, 2, 3, 4, 5, 6, 7, 8] },
+  { key: "prev",  kind: "byte", n: "prev",  s: "上一塊 16 B", steps: [1, 2], focus: [1] },
+  { key: "input", kind: "byte", n: "input", s: "當前塊 16 B（B）", steps: [1, 2, 3], focus: [1] },
+  { key: "prev1", kind: "byte", n: "prev1", s: "往前 1 位（A）", steps: [2, 3], focus: [2], shift: 1 },
+  { key: "prev2", kind: "byte", n: "prev2", s: "往前 2 位", steps: [2, 6], focus: [2], shift: 2 },
+  { key: "prev3", kind: "byte", n: "prev3", s: "往前 3 位", steps: [2, 6], focus: [2], shift: 3 },
+  { key: "hi1", kind: "nib", n: "prev1 >> 4", s: "A 的高 4 位", steps: [3, 4], focus: [3] },
+  { key: "lo1", kind: "nib", n: "prev1 & 15", s: "A 的低 4 位", steps: [3, 4], focus: [3] },
+  { key: "hi2", kind: "nib", n: "input >> 4", s: "B 的高 4 位", steps: [3, 4], focus: [3] },
+  { key: "T1H", kind: "table", n: "表 T1H", s: "索引 0–F（不是 lane）", steps: [4], idx: "hi1", res: "l1h" },
+  { key: "T1L", kind: "table", n: "表 T1L", s: "索引 0–F（不是 lane）", steps: [4], idx: "lo1", res: "l1l" },
+  { key: "T2H", kind: "table", n: "表 T2H", s: "索引 0–F（不是 lane）", steps: [4], idx: "hi2", res: "l2h" },
+  { key: "l1h", kind: "flags", n: "T1H[A 高 4 位]", s: "查表結果 1", steps: [4, 5], focus: [4] },
+  { key: "l1l", kind: "flags", n: "T1L[A 低 4 位]", s: "查表結果 2", steps: [4, 5], focus: [4] },
+  { key: "l2h", kind: "flags", n: "T2H[B 高 4 位]", s: "查表結果 3", steps: [4, 5], focus: [4] },
+  { key: "sc",  kind: "flags", n: "三表 AND", s: "確定的錯誤", steps: [5, 7], focus: [5] },
+  { key: "s2",  kind: "hex", n: "prev2 −sat 0x60", s: "≥ 0x80 ⇔ prev2 ≥ E0", steps: [6], focus: [6] },
+  { key: "s3",  kind: "hex", n: "prev3 −sat 0x70", s: "≥ 0x80 ⇔ prev3 ≥ F0", steps: [6], focus: [6] },
+  { key: "m23", kind: "m23", n: "must23", s: "0x80 = 必須連續", steps: [6, 7], focus: [6] },
+  { key: "out", kind: "out", n: "out", s: "must23 ^ AND", steps: [7, 8], focus: [7] },
+  { key: "notes", kind: "notes", steps: [7] },
+  { key: "reduce", kind: "reduce", n: "umaxv", s: "16 lane 取最大值", steps: [8], focus: [8] },
+];
+
+const $ = (id) => document.getElementById(id);
+const hex = (b) => b.toString(16).toUpperCase().padStart(2, "0");
+const role = (b) => (b < 0x80 ? "ascii" : b < 0xc0 ? "cont" : "lead");
+const flagNames = (v) => FLAGS.filter((f) => v & f.bit).map((f) => f.name);
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+let ex = 0, step = 1, timer = null, laneCycle = null;
+let cells = {};      // key -> array of 16 elements
+let tableCells = {}; // key -> array of 16 elements
+
+function charLabels(e) {
+  const all = e.prev.concat(e.input), out = [];
+  const dec = new TextDecoder("utf-8", { fatal: true });
+  for (let k = 0; k < 32; k++) {
+    const b = all[k];
+    if (b < 0x80) out.push(b === 0x20 ? "空格" : String.fromCharCode(b));
+    else if (b < 0xc0) out.push("續");
+    else {
+      const len = b >= 0xf0 ? 4 : b >= 0xe0 ? 3 : 2;
+      let s = "?";
+      try { s = dec.decode(new Uint8Array(all.slice(k, k + len))); if ([...s].length !== 1) s = "?"; } catch (_) { s = "開頭?"; }
+      out.push(s === "?" ? "開頭" + len : s);
+    }
+  }
+  return out;
+}
+
+function makeDots(v) {
+  const d = document.createElement("div");
+  d.className = "dots";
+  FLAGS.forEach((f, i) => {
+    const dot = document.createElement("span");
+    dot.className = "dot" + (v & f.bit ? " on" : "");
+    if (v & f.bit) dot.style.background = css(FLAG_VAR[i]);
+    d.appendChild(dot);
+  });
+  return d;
+}
+
+function laneCell(row, lane, e, labels) {
+  const c = document.createElement("div");
+  c.className = "cell";
+  c.dataset.lane = lane;
+  c.dataset.row = row.key;
+  const v = e[row.key];
+  if (row.kind === "byte") {
+    const b = v[lane];
+    const src = row.shift ? lane - row.shift : 0;
+    c.classList.add(role(b));
+    const lab = row.key === "prev" ? labels[lane] : row.key === "input" ? labels[16 + lane] : labels[16 + src];
+    c.innerHTML = hex(b) + '<span class="t">' + lab + "</span>";
+    if (row.shift && src < 0) c.classList.add("carry");
+  } else if (row.kind === "nib") {
+    c.innerHTML = v[lane].toString(16).toUpperCase() + '<span class="t">' + (row.key === "lo1" ? "低 4 位" : ["ASCII", "ASCII", "ASCII", "ASCII", "ASCII", "ASCII", "ASCII", "ASCII", "續", "續", "續", "續", "開頭2", "開頭2", "開頭3", "開頭4"][v[lane]]) + "</span>";
+  } else if (row.kind === "flags" || row.kind === "out") {
+    c.innerHTML = hex(v[lane]);
+    c.appendChild(makeDots(v[lane]));
+    if (v[lane] === 0) c.classList.add("zero");
+    if (row.kind === "out") {
+      const t = document.createElement("span");
+      t.className = "t";
+      t.textContent = v[lane] ? "✕ 錯" : "✓";
+      c.appendChild(t);
+      c.classList.add(v[lane] ? "bad" : "good");
+    }
+  } else if (row.kind === "hex") {
+    c.innerHTML = hex(v[lane]) + '<span class="t">' + (v[lane] >= 0x80 ? "最高位 1" : "最高位 0") + "</span>";
+    if (v[lane] < 0x80) c.classList.add("zero");
+  } else if (row.kind === "m23") {
+    c.innerHTML = hex(v[lane]) + '<span class="t">' + (v[lane] ? "必須連續" : "") + "</span>";
+    if (v[lane]) c.classList.add("m23on"); else c.classList.add("zero");
+  }
+  c.addEventListener("mouseenter", (ev) => focusLane(lane, ev));
+  c.addEventListener("mousemove", moveTip);
+  c.addEventListener("mouseleave", () => focusLane(null));
+  return c;
+}
+
+function build() {
+  const e = DATA.examples[ex], labels = charLabels(e);
+  const stage = $("stage");
+  stage.querySelectorAll(".row").forEach((r) => r.remove());
+  cells = {}; tableCells = {};
+  for (const row of ROWS) {
+    const r = document.createElement("div");
+    r.className = "row" + (row.kind === "lanes" ? " lanes" : "");
+    r.dataset.key = row.key;
+    if (row.kind === "lanes") {
+      r.appendChild(Object.assign(document.createElement("div"), { className: "label", innerHTML: '<span class="s">lane</span>' }));
+      for (let i = 0; i < 16; i++) r.appendChild(Object.assign(document.createElement("div"), { className: "lane-no", textContent: i }));
+    } else if (row.kind === "reduce") {
+      r.appendChild(Object.assign(document.createElement("div"), { className: "label", innerHTML: '<span class="n">' + row.n + '</span><span class="s">' + row.s + "</span>" }));
+      const bad = e.reduce !== 0, box = document.createElement("div");
+      box.className = "reduce " + (bad ? "bad" : "good");
+      box.innerHTML = "max(out[0..16]) = 0x" + hex(e.reduce) + ' <span class="verdict">' + (bad ? "✕ 這一塊有錯" : "✓ 這一塊合法") + "</span>" +
+        ' <span class="verdict" style="font-weight:400;color:var(--ink2)">（std::str::from_utf8 對這 32 位元組也回傳 ' + (e.std_ok ? "Ok" : "Err") + "）</span>";
+      r.appendChild(box);
+    } else if (row.kind === "notes") {
+      r.appendChild(document.createElement("div"));
+      const n = document.createElement("div");
+      n.className = "notes";
+      const errs = e.out.map((v, i) => [v, i]).filter(([v]) => v);
+      const nameOf = (v, i) => FLAGS.filter((f) => v & f.bit).map((f) => (f.bit === 128 ? (e.m23[i] && !e.sc[i] ? "最高位（來自 must23）" : "最高位（TWO_CONTS 未被抵消）") : f.name)).join(" | ");
+      n.innerHTML = errs.length ? errs.map(([v, i]) => '<span class="e">✕ lane ' + i + "</span>：0x" + hex(v) + " " + nameOf(v, i) +
+        "（" + FLAGS.filter((f) => v & f.bit).map((f) => (f.bit === 128 && e.m23[i] && !e.sc[i] ? "該連續卻沒有：字元缺了位元組" : f.bit === 128 ? "多了續位元組" : f.zh)).join("；") + "）").join("<br>")
+        : "✓ 16 個 lane 全部是 0，沒有錯誤。";
+      r.appendChild(n);
+    } else {
+      r.appendChild(Object.assign(document.createElement("div"), { className: "label", innerHTML: '<span class="n">' + row.n + '</span><span class="s">' + row.s + "</span>" }));
+      if (row.kind === "table") {
+        const tab = DATA.tables[row.key], uses = new Array(16).fill(0);
+        e[row.idx].forEach((ix) => uses[ix]++);
+        tableCells[row.key] = [];
+        for (let i = 0; i < 16; i++) {
+          const c = document.createElement("div");
+          c.className = "cell tbl" + (uses[i] ? " used" : "") + (tab[i] ? "" : " zero");
+          c.innerHTML = '<span class="t idx">[' + i.toString(16).toUpperCase() + "]</span>" + hex(tab[i]);
+          c.appendChild(makeDots(tab[i]));
+          if (uses[i]) c.appendChild(Object.assign(document.createElement("span"), { className: "uses", textContent: "×" + uses[i] }));
+          c.title = row.key + "[" + i.toString(16).toUpperCase() + "] = 0x" + hex(tab[i]) + "：" + (flagNames(tab[i]).join(" | ") || "無");
+          tableCells[row.key].push(c);
+          r.appendChild(c);
+        }
+      } else {
+        cells[row.key] = [];
+        for (let i = 0; i < 16; i++) { const c = laneCell(row, i, e, labels); cells[row.key].push(c); r.appendChild(c); }
+      }
+    }
+    stage.appendChild(r);
+  }
+  buildLegend(); buildTable(e);
+}
+
+function buildLegend() {
+  const L = $("legend");
+  L.innerHTML = '<span><span class="sw" style="background:var(--ascii-bg)"></span>ASCII（高 4 位 0–7）</span>' +
+    '<span><span class="sw" style="background:var(--lead-bg)"></span>開頭（C–F）</span>' +
+    '<span><span class="sw" style="background:var(--cont-bg)"></span>續位元組（8–B）</span>' +
+    '<span><span class="sw" style="border-style:dashed;border-color:var(--ink2)"></span>↩ 來自上一塊</span>' +
+    FLAGS.map((f, i) => '<span><i style="background:' + css(FLAG_VAR[i]) + '"></i>' + f.name + "（0x" + hex(f.bit) + "）" + f.zh + "</span>").join("");
+}
+
+function buildTable(e) {
+  const keys = ["prev", "input", "prev1", "prev2", "prev3", "hi1", "lo1", "hi2", "l1h", "l1l", "l2h", "sc", "s2", "s3", "m23", "out"];
+  let h = "<tr><th>向量</th>" + Array.from({ length: 16 }, (_, i) => "<th>" + i + "</th>").join("") + "</tr>";
+  for (const k of keys) h += "<tr><th>" + k + "</th>" + e[k].map((v) => "<td>" + (["hi1", "lo1", "hi2"].includes(k) ? v.toString(16).toUpperCase() : hex(v)) + "</td>").join("") + "</tr>";
+  $("table").innerHTML = h;
+}
+
+function render(animate) {
+  const prevShown = new Set([...document.querySelectorAll(".row.show")].map((r) => r.dataset.key));
+  document.querySelectorAll(".row").forEach((r) => {
+    const row = ROWS.find((x) => x.key === r.dataset.key);
+    if (row.kind === "lanes") return;
+    const show = row.steps.includes(step);
+    r.classList.toggle("show", show);
+    r.classList.toggle("dim", show && row.focus !== undefined && !row.focus.includes(step) && step !== 1);
+  });
+  [...$("steps").children].forEach((b, i) => b.classList.toggle("on", i + 1 === step));
+  const s = STEPS[step - 1];
+  $("caption").innerHTML = "<h2>" + s.t + "</h2><p>" + s.p + '</p><div class="code">' + s.code.map(([k, v]) => "<span>" + k + "：<b>" + v + "</b></span>").join("") + "</div>";
+  clearLinks();
+  if (laneCycle) { clearInterval(laneCycle); laneCycle = null; }
+  if (!animate) return;
+  if (step === 2) {
+    // hide the shifted rows' cells until their rows have finished expanding, then fly them in
+    for (const key of ["prev1", "prev2", "prev3"]) cells[key].forEach((c) => { c.style.transition = "none"; c.style.opacity = "0"; });
+    setTimeout(flyShift, 500);
+  }
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (step === 4) startLaneCycle();
+    if (step === 5) fadeAnd();
+  }));
+}
+
+// step 2: each prev1/prev2/prev3 cell flies in from the byte it copies (input shifted right, carry from prev)
+function flyShift() {
+  if (step !== 2) return;
+  for (const key of ["prev1", "prev2", "prev3"]) {
+    const shift = ROWS.find((r) => r.key === key).shift;
+    cells[key].forEach((c, lane) => {
+      const k = lane - shift;
+      const src = k < 0 ? cells.prev[16 + k] : cells.input[k];
+      const a = src.getBoundingClientRect(), b = c.getBoundingClientRect();
+      c.style.transition = "none";
+      c.style.transform = "translate(" + (a.left - b.left) + "px," + (a.top - b.top) + "px)";
+      c.style.opacity = "0.2";
+      c.offsetWidth; // flush
+      c.style.transition = "";
+      c.style.transitionDelay = (shift - 1) * 0.35 + "s";
+      c.style.transform = "";
+      c.style.opacity = "";
+    });
+  }
+}
+
+// step 5: dots that do not survive the AND shrink in the three lookup rows
+function fadeAnd() {
+  const e = DATA.examples[ex];
+  for (const key of ["l1h", "l1l", "l2h"]) cells[key].forEach((c, lane) => {
+    c.querySelectorAll(".dot").forEach((d, i) => d.classList.toggle("fade", !!(e[key][lane] & FLAGS[i].bit) && !(e.sc[lane] & FLAGS[i].bit)));
+  });
+}
+
+function startLaneCycle() {
+  let lane = 0;
+  const draw = () => { drawLinks(lane); lane = (lane + 1) % 16; };
+  draw();
+  laneCycle = setInterval(draw, 450);
+}
+
+function clearLinks() { $("links").innerHTML = ""; document.querySelectorAll(".cell.hl").forEach((c) => c.classList.remove("hl")); }
+
+function drawLinks(lane) {
+  clearLinks();
+  const e = DATA.examples[ex], svg = $("links"), base = $("stage").getBoundingClientRect();
+  const pt = (el, side) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2 - base.left, (side === "top" ? r.top : r.bottom) - base.top]; };
+  ["T1H", "T1L", "T2H"].forEach((t, k) => {
+    const row = ROWS.find((r) => r.key === t), ix = e[row.idx][lane];
+    const from = cells[row.idx][lane], mid = tableCells[t][ix], to = cells[row.res][lane];
+    [from, mid, to].forEach((c) => c.classList.add("hl"));
+    const [x1, y1] = pt(from, "bottom"), [x2, y2] = pt(mid, "top"), [x3, y3] = pt(mid, "bottom"), [x4, y4] = pt(to, "top");
+    const col = css("--ink2");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M" + x1 + "," + y1 + " C" + x1 + "," + (y1 + 30) + " " + x2 + "," + (y2 - 30) + " " + x2 + "," + y2 + " M" + x3 + "," + y3 + " C" + x3 + "," + (y3 + 30) + " " + x4 + "," + (y4 - 30) + " " + x4 + "," + y4);
+    path.setAttribute("fill", "none"); path.setAttribute("stroke", col); path.setAttribute("stroke-width", "2"); path.setAttribute("stroke-dasharray", k === 1 ? "5 3" : k === 2 ? "1 3" : "");
+    svg.appendChild(path);
+  });
+}
+
+function focusLane(lane, ev) {
+  const tip = $("tip");
+  document.querySelectorAll(".cell.hl").forEach((c) => c.classList.remove("hl"));
+  if (lane === null) { tip.style.display = "none"; if (step === 4 && !laneCycle) startLaneCycle(); return; }
+  if (step === 4) { if (laneCycle) { clearInterval(laneCycle); laneCycle = null; } drawLinks(lane); }
+  else Object.values(cells).forEach((arr) => arr[lane] && arr[lane].classList.add("hl"));
+  const e = DATA.examples[ex], f = (v) => "0x" + hex(v) + (v ? "  " + flagNames(v).join(" | ") : "");
+  tip.innerHTML = "<b>lane " + lane + "</b><br>" +
+    "B = input[" + lane + "] = 0x" + hex(e.input[lane]) + "<br>" +
+    "A = prev1 = 0x" + hex(e.prev1[lane]) + "，prev2 = 0x" + hex(e.prev2[lane]) + "，prev3 = 0x" + hex(e.prev3[lane]) + "<br>" +
+    "T1H[" + e.hi1[lane].toString(16).toUpperCase() + "] = " + f(e.l1h[lane]) + "<br>" +
+    "T1L[" + e.lo1[lane].toString(16).toUpperCase() + "] = " + f(e.l1l[lane]) + "<br>" +
+    "T2H[" + e.hi2[lane].toString(16).toUpperCase() + "] = " + f(e.l2h[lane]) + "<br>" +
+    "AND = " + f(e.sc[lane]) + "<br>" +
+    "must23 = 0x" + hex(e.m23[lane]) + "<br>" +
+    "<b>out = " + f(e.out[lane]) + "</b>";
+  tip.style.display = "block";
+  moveTip(ev);
+}
+function moveTip(ev) { if (!ev) return; const t = $("tip"); t.style.left = Math.min(ev.clientX + 14, innerWidth - 400) + "px"; t.style.top = ev.clientY + 14 + "px"; }
+
+function go(s) { step = Math.max(1, Math.min(STEPS.length, s)); render(true); }
+function stop() { if (timer) { clearInterval(timer); timer = null; } $("play").textContent = "▶ 播放"; }
+function play() {
+  if (timer) { stop(); return; }
+  if (step === STEPS.length) go(1);
+  $("play").textContent = "⏸ 暫停";
+  timer = setInterval(() => { if (step >= STEPS.length) { stop(); return; } go(step + 1); }, 7000);
+}
+
+function init() {
+  DATA.examples.forEach((e, i) => $("ex").appendChild(Object.assign(document.createElement("option"), { value: i, textContent: e.title })));
+  STEPS.forEach((s, i) => {
+    const b = document.createElement("button");
+    b.textContent = s.t.split("：")[0];
+    b.addEventListener("click", () => { stop(); go(i + 1); });
+    $("steps").appendChild(b);
+  });
+  $("ex").addEventListener("change", () => { ex = +$("ex").value; build(); render(true); });
+  $("prev").addEventListener("click", () => { stop(); go(step - 1); });
+  $("next").addEventListener("click", () => { stop(); go(step + 1); });
+  $("play").addEventListener("click", play);
+  $("theme").addEventListener("click", () => {
+    const dark = document.documentElement.classList.toggle("dark");
+    $("theme").textContent = dark ? "淺色" : "深色";
+    build(); render(false);
+  });
+  document.addEventListener("keydown", (k) => {
+    if (k.key === "ArrowRight") { stop(); go(step + 1); }
+    if (k.key === "ArrowLeft") { stop(); go(step - 1); }
+    if (k.key === " ") { k.preventDefault(); play(); }
+  });
+  if (matchMedia("(prefers-color-scheme: dark)").matches) { document.documentElement.classList.add("dark"); $("theme").textContent = "淺色"; }
+  build(); render(true);
+}
+init();
+</script>
+</body>
+</html>

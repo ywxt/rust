@@ -1,0 +1,49 @@
+
+/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/alloctests/b18a163da23bc6bf/out/allocbenches-b18a163da23bc6bf:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000196730 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once>:
+  196730:	55                   	push   %rbp
+  196731:	48 89 e5             	mov    %rsp,%rbp
+  196734:	41 57                	push   %r15
+  196736:	41 56                	push   %r14
+  196738:	41 55                	push   %r13
+  19673a:	41 54                	push   %r12
+  19673c:	53                   	push   %rbx
+  19673d:	48 81 ec e8 02 00 00 	sub    $0x2e8,%rsp
+  196744:	49 89 fe             	mov    %rdi,%r14
+  196747:	48 8d 05 64 74 e9 ff 	lea    -0x168b9c(%rip),%rax        # 2dbb2 <GCC_except_table3+0x7b36>
+  19674e:	48 89 45 90          	mov    %rax,-0x70(%rbp)
+  196752:	48 c7 45 98 f7 09 00 	movq   $0x9f7,-0x68(%rbp)
+  196759:	00 
+  19675a:	48 8d 45 90          	lea    -0x70(%rbp),%rax
+  19675e:	48 89 85 f0 fc ff ff 	mov    %rax,-0x310(%rbp)
+  196765:	48 8d 85 f0 fc ff ff 	lea    -0x310(%rbp),%rax
+  19676c:	4c 8b 7d 90          	mov    -0x70(%rbp),%r15
+  196770:	4c 8b 65 98          	mov    -0x68(%rbp),%r12
+  196774:	80 be 80 00 00 00 00 	cmpb   $0x0,0x80(%rsi)
+  19677b:	74 15                	je     196792 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x62>
+  19677d:	ba 01 00 00 00       	mov    $0x1,%edx
+  196782:	4c 89 ff             	mov    %r15,%rdi
+  196785:	4c 89 e6             	mov    %r12,%rsi
+  196788:	e8 93 ca ed ff       	call   73220 <test::bench::ns_iter_inner::<(), allocbenches::str::contains_bang_str::short_ascii::{closure#0}>>
+  19678d:	e9 3e 06 00 00       	jmp    196dd0 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x6a0>
+  196792:	48 89 75 88          	mov    %rsi,-0x78(%rbp)
+  196796:	ba 01 00 00 00       	mov    $0x1,%edx
+  19679b:	4c 89 ff             	mov    %r15,%rdi
+  19679e:	4c 89 e6             	mov    %r12,%rsi
+  1967a1:	e8 7a ca ed ff       	call   73220 <test::bench::ns_iter_inner::<(), allocbenches::str::contains_bang_str::short_ascii::{closure#0}>>
+  1967a6:	48 89 c3             	mov    %rax,%rbx
+  1967a9:	48 8d bd f0 fc ff ff 	lea    -0x310(%rbp),%rdi
+  1967b0:	48 c7 45 a0 00 00 00 	movq   $0x0,-0x60(%rbp)
+  1967b7:	00 
+  1967b8:	ba 90 01 00 00       	mov    $0x190,%edx
+  1967bd:	31 f6                	xor    %esi,%esi
+  1967bf:	ff 15 13 09 0d 00    	call   *0xd0913(%rip)        # 2670d8 <memset@GLIBC_2.2.5>
+  1967c5:	48 83 fb 01          	cmp    $0x1,%rbx
+  1967c9:	48 83 d3 00          	adc    $0x0,%rbx
+  1967cd:	48                   	rex.W
+  1967ce:	81                   	.byte 0x81
+  1967cf:	fb                   	sti

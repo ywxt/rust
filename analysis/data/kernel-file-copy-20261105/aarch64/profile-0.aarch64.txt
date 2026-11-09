@@ -1,0 +1,815 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cycles'
+# Event count (approx.): 6723218326
+#
+# Overhead  Command  Shared Object      Symbol                                                                                                    
+# ........  .......  .................  ..........................................................................................................
+#
+    20.66%  probe    [kernel.kallsyms]  [k] memmove
+            |
+            ---memmove
+               copy_page_from_iter_atomic
+               generic_perform_write
+               shmem_file_write_iter
+               iter_file_splice_write
+               direct_splice_actor
+               splice_direct_to_actor
+               do_splice_direct
+               vfs_copy_file_range
+               __se_sys_copy_file_range
+               __arm64_sys_copy_file_range
+               invoke_syscall
+               el0_svc_common.constprop.0
+               do_el0_svc
+               el0_svc
+               el0t_64_sync_handler
+               el0t_64_sync
+               copy_file_range
+               _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               _RNvCsjQ8WedNVfna_5probe4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    10.33%  probe    [kernel.kallsyms]  [k] filemap_get_entry
+            |
+            ---filemap_get_entry
+               |          
+                --9.94%--shmem_get_folio_gfp
+                          |          
+                          |--5.01%--shmem_write_begin
+                          |          generic_perform_write
+                          |          shmem_file_write_iter
+                          |          iter_file_splice_write
+                          |          direct_splice_actor
+                          |          splice_direct_to_actor
+                          |          do_splice_direct
+                          |          vfs_copy_file_range
+                          |          __se_sys_copy_file_range
+                          |          __arm64_sys_copy_file_range
+                          |          invoke_syscall
+                          |          el0_svc_common.constprop.0
+                          |          do_el0_svc
+                          |          el0_svc
+                          |          el0t_64_sync_handler
+                          |          el0t_64_sync
+                          |          copy_file_range
+                          |          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          |          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          |          _RNvCsjQ8WedNVfna_5probe4main
+                          |          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          |          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          |          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          |          main
+                          |          __libc_start_call_main
+                          |          __libc_start_main@@GLIBC_2.34
+                          |          _start
+                          |          
+                           --4.93%--shmem_file_splice_read
+                                     do_splice_read
+                                     splice_direct_to_actor
+                                     do_splice_direct
+                                     vfs_copy_file_range
+                                     __se_sys_copy_file_range
+                                     __arm64_sys_copy_file_range
+                                     invoke_syscall
+                                     el0_svc_common.constprop.0
+                                     do_el0_svc
+                                     el0_svc
+                                     el0t_64_sync_handler
+                                     el0t_64_sync
+                                     copy_file_range
+                                     _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                                     _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                                     _RNvCsjQ8WedNVfna_5probe4main
+                                     _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                                     _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                                     _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                                     main
+                                     __libc_start_call_main
+                                     __libc_start_main@@GLIBC_2.34
+                                     _start
+
+     7.43%  probe    [kernel.kallsyms]  [k] shmem_write_end
+            |
+            ---shmem_write_end
+               |          
+                --7.34%--generic_perform_write
+                          shmem_file_write_iter
+                          iter_file_splice_write
+                          direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     7.13%  probe    [kernel.kallsyms]  [k] shmem_get_folio_gfp
+            |
+            ---shmem_get_folio_gfp
+               |          
+               |--3.59%--shmem_file_splice_read
+               |          do_splice_read
+               |          splice_direct_to_actor
+               |          do_splice_direct
+               |          vfs_copy_file_range
+               |          __se_sys_copy_file_range
+               |          __arm64_sys_copy_file_range
+               |          invoke_syscall
+               |          el0_svc_common.constprop.0
+               |          do_el0_svc
+               |          el0_svc
+               |          el0t_64_sync_handler
+               |          el0t_64_sync
+               |          copy_file_range
+               |          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               |          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               |          _RNvCsjQ8WedNVfna_5probe4main
+               |          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               |          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               |          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               |          main
+               |          __libc_start_call_main
+               |          __libc_start_main@@GLIBC_2.34
+               |          _start
+               |          
+                --3.37%--shmem_write_begin
+                          generic_perform_write
+                          shmem_file_write_iter
+                          iter_file_splice_write
+                          direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     6.26%  probe    [kernel.kallsyms]  [k] workingset_age_nonresident
+            |
+            ---workingset_age_nonresident
+               folio_mark_accessed
+               |          
+               |--5.53%--shmem_file_splice_read
+               |          do_splice_read
+               |          splice_direct_to_actor
+               |          do_splice_direct
+               |          vfs_copy_file_range
+               |          __se_sys_copy_file_range
+               |          __arm64_sys_copy_file_range
+               |          invoke_syscall
+               |          el0_svc_common.constprop.0
+               |          do_el0_svc
+               |          el0_svc
+               |          el0t_64_sync_handler
+               |          el0t_64_sync
+               |          copy_file_range
+               |          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               |          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               |          _RNvCsjQ8WedNVfna_5probe4main
+               |          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               |          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               |          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               |          main
+               |          __libc_start_call_main
+               |          __libc_start_main@@GLIBC_2.34
+               |          _start
+               |          
+                --0.73%--shmem_get_folio_gfp
+                          shmem_write_begin
+                          generic_perform_write
+                          shmem_file_write_iter
+                          iter_file_splice_write
+                          direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     4.84%  probe    [kernel.kallsyms]  [k] folio_unlock
+            |
+            ---folio_unlock
+               |          
+               |--2.50%--generic_perform_write
+               |          shmem_file_write_iter
+               |          iter_file_splice_write
+               |          direct_splice_actor
+               |          splice_direct_to_actor
+               |          do_splice_direct
+               |          vfs_copy_file_range
+               |          __se_sys_copy_file_range
+               |          __arm64_sys_copy_file_range
+               |          invoke_syscall
+               |          el0_svc_common.constprop.0
+               |          do_el0_svc
+               |          el0_svc
+               |          el0t_64_sync_handler
+               |          el0t_64_sync
+               |          copy_file_range
+               |          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               |          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               |          _RNvCsjQ8WedNVfna_5probe4main
+               |          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               |          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               |          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               |          main
+               |          __libc_start_call_main
+               |          __libc_start_main@@GLIBC_2.34
+               |          _start
+               |          
+                --2.33%--do_splice_read
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     4.30%  probe    [kernel.kallsyms]  [k] shmem_file_splice_read
+            |
+            ---shmem_file_splice_read
+               do_splice_read
+               splice_direct_to_actor
+               do_splice_direct
+               vfs_copy_file_range
+               __se_sys_copy_file_range
+               __arm64_sys_copy_file_range
+               invoke_syscall
+               el0_svc_common.constprop.0
+               do_el0_svc
+               el0_svc
+               el0t_64_sync_handler
+               el0t_64_sync
+               copy_file_range
+               _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               _RNvCsjQ8WedNVfna_5probe4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     4.28%  probe    [kernel.kallsyms]  [k] page_cache_pipe_buf_release
+            |
+            ---page_cache_pipe_buf_release
+               |          
+                --3.81%--iter_file_splice_write
+                          direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     3.49%  probe    [kernel.kallsyms]  [k] splice_folio_into_pipe
+            |
+            ---splice_folio_into_pipe
+               do_splice_read
+               splice_direct_to_actor
+               do_splice_direct
+               vfs_copy_file_range
+               __se_sys_copy_file_range
+               __arm64_sys_copy_file_range
+               invoke_syscall
+               el0_svc_common.constprop.0
+               do_el0_svc
+               el0_svc
+               el0t_64_sync_handler
+               el0t_64_sync
+               copy_file_range
+               _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               _RNvCsjQ8WedNVfna_5probe4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     3.37%  probe    [kernel.kallsyms]  [k] folio_mark_accessed
+            |
+            ---folio_mark_accessed
+               |          
+               |--2.29%--shmem_file_splice_read
+               |          do_splice_read
+               |          splice_direct_to_actor
+               |          do_splice_direct
+               |          vfs_copy_file_range
+               |          __se_sys_copy_file_range
+               |          __arm64_sys_copy_file_range
+               |          invoke_syscall
+               |          el0_svc_common.constprop.0
+               |          do_el0_svc
+               |          el0_svc
+               |          el0t_64_sync_handler
+               |          el0t_64_sync
+               |          copy_file_range
+               |          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               |          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               |          _RNvCsjQ8WedNVfna_5probe4main
+               |          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               |          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               |          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               |          main
+               |          __libc_start_call_main
+               |          __libc_start_main@@GLIBC_2.34
+               |          _start
+               |          
+                --1.04%--shmem_get_folio_gfp
+                          shmem_write_begin
+                          generic_perform_write
+                          shmem_file_write_iter
+                          iter_file_splice_write
+                          direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     2.50%  probe    [kernel.kallsyms]  [k] el0_svc
+            |
+            ---el0_svc
+               el0t_64_sync_handler
+               el0t_64_sync
+               |          
+               |--0.99%--copy_file_range
+               |          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               |          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               |          _RNvCsjQ8WedNVfna_5probe4main
+               |          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               |          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               |          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               |          main
+               |          __libc_start_call_main
+               |          __libc_start_main@@GLIBC_2.34
+               |          _start
+               |          
+               |--0.78%--llseek@GLIBC_2.17
+               |          _RNvXsc_NtCs60nHaxeZLXj_3std2fsNtB5_4FileNtNtNtCs5eKY5gNNvwM_4core2io4seek4Seek4seek
+               |          _RNvCsjQ8WedNVfna_5probe4main
+               |          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               |          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               |          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               |          main
+               |          __libc_start_call_main
+               |          __libc_start_main@@GLIBC_2.34
+               |          _start
+               |          
+                --0.73%--statx
+                          _RNvNtNtNtCs60nHaxeZLXj_3std3sys2fs4unix9try_statx
+                          _RINvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux10fd_to_metaNtNtBa_2fs4FileEBa_
+                          _RNvXsh_NtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linuxNtNtBd_2fs4FileNtB5_9CopyWrite10properties
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     2.03%  probe    [kernel.kallsyms]  [k] page_cache_pipe_buf_confirm
+            |
+            ---page_cache_pipe_buf_confirm
+               |          
+                --1.99%--iter_file_splice_write
+                          direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     1.69%  probe    [kernel.kallsyms]  [k] xas_load
+            |
+            ---xas_load
+               |          
+                --1.64%--filemap_get_entry
+                          shmem_get_folio_gfp
+                          |          
+                           --1.21%--shmem_write_begin
+                                     generic_perform_write
+                                     shmem_file_write_iter
+                                     iter_file_splice_write
+                                     direct_splice_actor
+                                     splice_direct_to_actor
+                                     do_splice_direct
+                                     vfs_copy_file_range
+                                     __se_sys_copy_file_range
+                                     __arm64_sys_copy_file_range
+                                     invoke_syscall
+                                     el0_svc_common.constprop.0
+                                     do_el0_svc
+                                     el0_svc
+                                     el0t_64_sync_handler
+                                     el0t_64_sync
+                                     copy_file_range
+                                     _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                                     _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                                     _RNvCsjQ8WedNVfna_5probe4main
+                                     _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                                     _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                                     _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                                     main
+                                     __libc_start_call_main
+                                     __libc_start_main@@GLIBC_2.34
+                                     _start
+
+     1.43%  probe    [kernel.kallsyms]  [k] copy_page_from_iter_atomic
+            |
+            ---copy_page_from_iter_atomic
+               |          
+                --1.25%--generic_perform_write
+                          shmem_file_write_iter
+                          iter_file_splice_write
+                          direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     1.34%  probe    [kernel.kallsyms]  [k] xas_start
+            |
+            ---xas_start
+               filemap_get_entry
+               shmem_get_folio_gfp
+               |          
+                --1.25%--shmem_write_begin
+                          generic_perform_write
+                          shmem_file_write_iter
+                          iter_file_splice_write
+                          direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     1.25%  probe    [kernel.kallsyms]  [k] ktime_get_coarse_real_ts64
+            |
+            ---ktime_get_coarse_real_ts64
+               |          
+                --0.82%--syscall_trace_enter
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+
+     0.95%  probe    [kernel.kallsyms]  [k] workingset_activation
+            |
+            ---workingset_activation
+               |          
+                --0.86%--folio_mark_accessed
+                          |          
+                           --0.82%--shmem_file_splice_read
+                                     do_splice_read
+                                     splice_direct_to_actor
+                                     do_splice_direct
+                                     vfs_copy_file_range
+                                     __se_sys_copy_file_range
+                                     __arm64_sys_copy_file_range
+                                     invoke_syscall
+                                     el0_svc_common.constprop.0
+                                     do_el0_svc
+                                     el0_svc
+                                     el0t_64_sync_handler
+                                     el0t_64_sync
+                                     copy_file_range
+                                     _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                                     _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                                     _RNvCsjQ8WedNVfna_5probe4main
+                                     _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                                     _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                                     _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                                     main
+                                     __libc_start_call_main
+                                     __libc_start_main@@GLIBC_2.34
+                                     _start
+
+     0.95%  probe    [kernel.kallsyms]  [k] iter_file_splice_write
+            |
+            ---iter_file_splice_write
+               |          
+                --0.91%--direct_splice_actor
+                          splice_direct_to_actor
+                          do_splice_direct
+                          vfs_copy_file_range
+                          __se_sys_copy_file_range
+                          __arm64_sys_copy_file_range
+                          invoke_syscall
+                          el0_svc_common.constprop.0
+                          do_el0_svc
+                          el0_svc
+                          el0t_64_sync_handler
+                          el0t_64_sync
+                          copy_file_range
+                          _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+                          _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+                          _RNvCsjQ8WedNVfna_5probe4main
+                          _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+                          _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+                          _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     0.83%  probe    [kernel.kallsyms]  [k] direct_splice_actor
+            |
+            ---direct_splice_actor
+               splice_direct_to_actor
+               do_splice_direct
+               vfs_copy_file_range
+               __se_sys_copy_file_range
+               __arm64_sys_copy_file_range
+               invoke_syscall
+               el0_svc_common.constprop.0
+               do_el0_svc
+               el0_svc
+               el0t_64_sync_handler
+               el0t_64_sync
+               copy_file_range
+               _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               _RNvCsjQ8WedNVfna_5probe4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.73%  probe    [kernel.kallsyms]  [k] balance_dirty_pages_ratelimited_flags
+            |
+            ---balance_dirty_pages_ratelimited_flags
+               balance_dirty_pages_ratelimited
+               generic_perform_write
+               shmem_file_write_iter
+               iter_file_splice_write
+               direct_splice_actor
+               splice_direct_to_actor
+               do_splice_direct
+               vfs_copy_file_range
+               __se_sys_copy_file_range
+               __arm64_sys_copy_file_range
+               invoke_syscall
+               el0_svc_common.constprop.0
+               do_el0_svc
+               el0_svc
+               el0t_64_sync_handler
+               el0t_64_sync
+               copy_file_range
+               _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               _RNvCsjQ8WedNVfna_5probe4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.69%  probe    [kernel.kallsyms]  [k] __kmem_cache_free
+            |
+            ---__kmem_cache_free
+               kfree
+               iter_file_splice_write
+               direct_splice_actor
+               splice_direct_to_actor
+               do_splice_direct
+               vfs_copy_file_range
+               __se_sys_copy_file_range
+               __arm64_sys_copy_file_range
+               invoke_syscall
+               el0_svc_common.constprop.0
+               do_el0_svc
+               el0_svc
+               el0t_64_sync_handler
+               el0t_64_sync
+               copy_file_range
+               _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               _RNvCsjQ8WedNVfna_5probe4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.65%  probe    [kernel.kallsyms]  [k] memset
+            |
+            ---memset
+               |          
+                --0.52%--shmem_get_folio_gfp
+
+     0.65%  probe    [kernel.kallsyms]  [k] map_id_up
+            |
+            ---map_id_up
+
+     0.52%  probe    libc.so.6          [.] copy_file_range
+            |
+            ---copy_file_range
+               _RNvNtNtNtNtCs60nHaxeZLXj_3std3sys2io11kernel_copy5linux18copy_regular_files
+               _RINvNtNtCshDmNPlWY1OA_5alloc2io4copy4copyNtNtCs60nHaxeZLXj_3std2fs4FileBD_ECsjQ8WedNVfna_5probe
+               _RNvCsjQ8WedNVfna_5probe4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.52%  probe    libc.so.6          [.] llseek@GLIBC_2.17
+            |
+            ---llseek@GLIBC_2.17
+               _RNvXsc_NtCs60nHaxeZLXj_3std2fsNtB5_4FileNtNtNtCs5eKY5gNNvwM_4core2io4seek4Seek4seek
+               _RNvCsjQ8WedNVfna_5probe4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECsjQ8WedNVfna_5probe
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startINtNtCs5eKY5gNNvwM_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0CsjQ8WedNVfna_5probe
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: For memory address profiling, try: perf mem record / perf mem report)
+#
+

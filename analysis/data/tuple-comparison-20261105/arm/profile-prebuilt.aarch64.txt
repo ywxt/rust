@@ -1,0 +1,70 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 416  of event 'cycles:u'
+# Event count (approx.): 581434019
+#
+# Overhead  Command          Shared Object                 Symbol                                                                                                                       
+# ........  ...............  ............................  .............................................................................................................................
+#
+    59.74%  corebenches-c88  corebenches-c8805e1d516f63c4  [.] _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerAbj4_NCNvNtCslrxolIbw58w_11corebenches5tuples_22bench_tuple_comparison0EBS_
+            |
+            ---_RINvNtCspchWlblWlP_4test5bench13ns_iter_innerAbj4_NCNvNtCslrxolIbw58w_11corebenches5tuples_22bench_tuple_comparison0EBS_
+               _RNvYNCNvNtCslrxolIbw58w_11corebenches5tuple22bench_tuple_comparison0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+               _RNvCspchWlblWlP_4test8run_test
+               _RNvNtCspchWlblWlP_4test7console17run_tests_console
+               _RNvCspchWlblWlP_4test15test_main_inner
+               _RNvCspchWlblWlP_4test18test_main_env_args
+               _RNvCslrxolIbw58w_11corebenches4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFENtNtB6_7process8ExitCodeB19_ECslrxolIbw58w_11corebenches
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startNtNtB6_7process8ExitCodeE0CslrxolIbw58w_11corebenches
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    33.77%  corebenches-c88  libc.so.6                     [.] memcmp
+            |
+            ---memcmp
+               _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerAbj4_NCNvNtCslrxolIbw58w_11corebenches5tuples_22bench_tuple_comparison0EBS_
+               _RNvYNCNvNtCslrxolIbw58w_11corebenches5tuple22bench_tuple_comparison0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+               _RNvCspchWlblWlP_4test8run_test
+               _RNvNtCspchWlblWlP_4test7console17run_tests_console
+               _RNvCspchWlblWlP_4test15test_main_inner
+               _RNvCspchWlblWlP_4test18test_main_env_args
+               _RNvCslrxolIbw58w_11corebenches4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFENtNtB6_7process8ExitCodeB19_ECslrxolIbw58w_11corebenches
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startNtNtB6_7process8ExitCodeE0CslrxolIbw58w_11corebenches
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     6.45%  corebenches-c88  corebenches-c8805e1d516f63c4  [.] memcmp@plt
+            |
+            ---memcmp@plt
+               _RINvNtCspchWlblWlP_4test5bench13ns_iter_innerAbj4_NCNvNtCslrxolIbw58w_11corebenches5tuples_22bench_tuple_comparison0EBS_
+               _RNvYNCNvNtCslrxolIbw58w_11corebenches5tuple22bench_tuple_comparison0INtNtNtCs5eKY5gNNvwM_4core3ops8function6FnOnceTQNtNtCspchWlblWlP_4test5bench7BencherEE9call_onceB8_
+               _RNvCspchWlblWlP_4test8run_test
+               _RNvNtCspchWlblWlP_4test7console17run_tests_console
+               _RNvCspchWlblWlP_4test15test_main_inner
+               _RNvCspchWlblWlP_4test18test_main_env_args
+               _RNvCslrxolIbw58w_11corebenches4main
+               _RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFENtNtB6_7process8ExitCodeB19_ECslrxolIbw58w_11corebenches
+               _RNCINvNtCs60nHaxeZLXj_3std2rt10lang_startNtNtB6_7process8ExitCodeE0CslrxolIbw58w_11corebenches
+               _RNvNtCs60nHaxeZLXj_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: To show context switches in perf report sample context add --switch-events to perf record.)
+#
+

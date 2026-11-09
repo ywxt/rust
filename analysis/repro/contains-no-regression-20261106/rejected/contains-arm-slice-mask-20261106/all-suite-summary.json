@@ -1,0 +1,2725 @@
+{
+  "counted": {
+    "rows": 168,
+    "cases_complete": 28,
+    "cases": [
+      {
+        "case": "str::bench_contains_short_short",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 30.4778459,
+          "optimized": 30.4988859,
+          "change_pct": 0.06903375018378899,
+          "range": {
+            "baseline": [
+              30.4232944,
+              30.5207233
+            ],
+            "optimized": [
+              30.470467,
+              30.5191635
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 155.1133742,
+          "optimized": 155.1134441,
+          "change_pct": 4.5063812437184936e-05,
+          "range": {
+            "baseline": [
+              155.1133738,
+              155.1133742
+            ],
+            "optimized": [
+              155.1134422,
+              155.1134445
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 33.0239117,
+          "optimized": 33.0239195,
+          "change_pct": 2.3619249200912407e-05,
+          "range": {
+            "baseline": [
+              33.0239116,
+              33.0239117
+            ],
+            "optimized": [
+              33.0239191,
+              33.0239196
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014223,
+          "optimized": 0.0014316,
+          "change_pct": 0.6538704914575089,
+          "range": {
+            "baseline": [
+              0.0014028,
+              0.0014354
+            ],
+            "optimized": [
+              0.0014141,
+              0.0014358
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 10.607,
+          "optimized": 10.62,
+          "change_pct": 0.12256057320636504,
+          "range": {
+            "baseline": [
+              10.588,
+              10.621
+            ],
+            "optimized": [
+              10.607,
+              10.638
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::bench_contains_2b_repeated_long",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 473.6334155,
+          "optimized": 476.2202415,
+          "change_pct": 0.5461662786754973,
+          "range": {
+            "baseline": [
+              473.190172,
+              473.8612715
+            ],
+            "optimized": [
+              474.671423,
+              476.4881015
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2030.566829,
+          "optimized": 2030.567188,
+          "change_pct": 1.7679792407854222e-05,
+          "range": {
+            "baseline": [
+              2030.566827,
+              2030.5668345
+            ],
+            "optimized": [
+              2030.5671765,
+              2030.567188
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 255.119536,
+          "optimized": 255.119577,
+          "change_pct": 1.6070897834730147e-05,
+          "range": {
+            "baseline": [
+              255.119536,
+              255.119537
+            ],
+            "optimized": [
+              255.1195745,
+              255.119577
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.00725,
+          "optimized": 0.0340035,
+          "change_pct": 369.0137931034482,
+          "range": {
+            "baseline": [
+              0.0071,
+              0.00764
+            ],
+            "optimized": [
+              0.007459,
+              0.056914
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 163.915,
+          "optimized": 164.795,
+          "change_pct": 0.5368636183387787,
+          "range": {
+            "baseline": [
+              163.75,
+              164.065
+            ],
+            "optimized": [
+              164.275,
+              164.885
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::bench_contains_short_long",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 520.5807515,
+          "optimized": 520.6423315,
+          "change_pct": 0.011829096604598632,
+          "range": {
+            "baseline": [
+              520.2796925,
+              520.6773215
+            ],
+            "optimized": [
+              520.6144605,
+              520.771456
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2038.566855,
+          "optimized": 2038.5672065,
+          "change_pct": 1.7242505401249275e-05,
+          "range": {
+            "baseline": [
+              2038.5668455,
+              2038.566857
+            ],
+            "optimized": [
+              2038.567197,
+              2038.5672065
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 257.1195535,
+          "optimized": 257.119593,
+          "change_pct": 1.5362503358318236e-05,
+          "range": {
+            "baseline": [
+              257.1195515,
+              257.119554
+            ],
+            "optimized": [
+              257.119591,
+              257.119593
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0074135,
+          "optimized": 0.0109155,
+          "change_pct": 47.23814662440142,
+          "range": {
+            "baseline": [
+              0.0071525,
+              0.0103845
+            ],
+            "optimized": [
+              0.007164,
+              0.0127365
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 180.115,
+          "optimized": 180.145,
+          "change_pct": 0.016656025317152157,
+          "range": {
+            "baseline": [
+              180.01,
+              180.155
+            ],
+            "optimized": [
+              180.115,
+              180.175
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::bench_contains_16b_in_long",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 523.0809305,
+          "optimized": 523.1453435,
+          "change_pct": 0.012314155658166293,
+          "range": {
+            "baseline": [
+              522.9804855,
+              523.159889
+            ],
+            "optimized": [
+              522.947754,
+              523.1585775
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2114.566846,
+          "optimized": 2114.5671995,
+          "change_pct": 1.6717371709162876e-05,
+          "range": {
+            "baseline": [
+              2114.5668385,
+              2114.566846
+            ],
+            "optimized": [
+              2114.567188,
+              2114.5671995
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 275.1195515,
+          "optimized": 275.1195915,
+          "change_pct": 1.4539133919022618e-05,
+          "range": {
+            "baseline": [
+              275.11955,
+              275.1195515
+            ],
+            "optimized": [
+              275.119589,
+              275.1195915
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.007265,
+          "optimized": 0.0084095,
+          "change_pct": 15.75361321403992,
+          "range": {
+            "baseline": [
+              0.007212,
+              0.0076865
+            ],
+            "optimized": [
+              0.007136,
+              0.020419
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 180.995,
+          "optimized": 180.985,
+          "change_pct": -0.0055250145031604525,
+          "range": {
+            "baseline": [
+              180.98,
+              181.01
+            ],
+            "optimized": [
+              180.955,
+              180.99
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::bench_contains_32b_in_long",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 515.2916145,
+          "optimized": 515.122003,
+          "change_pct": -0.03291563363876371,
+          "range": {
+            "baseline": [
+              515.132648,
+              515.636478
+            ],
+            "optimized": [
+              515.1116655,
+              515.58943
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2018.5668545,
+          "optimized": 2018.567206,
+          "change_pct": 1.741334447746823e-05,
+          "range": {
+            "baseline": [
+              2018.5668525,
+              2018.5668545
+            ],
+            "optimized": [
+              2018.5671945,
+              2018.567206
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 254.119553,
+          "optimized": 254.1195925,
+          "change_pct": 1.5543864906319982e-05,
+          "range": {
+            "baseline": [
+              254.1195525,
+              254.119553
+            ],
+            "optimized": [
+              254.11959,
+              254.1195925
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0099355,
+          "optimized": 0.0074075,
+          "change_pct": -25.444114538775096,
+          "range": {
+            "baseline": [
+              0.0072165,
+              0.012696
+            ],
+            "optimized": [
+              0.0073265,
+              0.0121525
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 178.325,
+          "optimized": 178.225,
+          "change_pct": -0.05607738679377361,
+          "range": {
+            "baseline": [
+              178.255,
+              178.4
+            ],
+            "optimized": [
+              178.2,
+              178.39
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::bench_contains_bad_naive",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 24.3164667,
+          "optimized": 24.299844,
+          "change_pct": -0.06835984933616368,
+          "range": {
+            "baseline": [
+              24.279954,
+              24.3519679
+            ],
+            "optimized": [
+              24.2577592,
+              24.5257457
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 132.1133734,
+          "optimized": 132.1134433,
+          "change_pct": 5.29091023881989e-05,
+          "range": {
+            "baseline": [
+              132.1133711,
+              132.1133734
+            ],
+            "optimized": [
+              132.1134433,
+              132.1134437
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 21.0239111,
+          "optimized": 21.0239189,
+          "change_pct": 3.7100613514695624e-05,
+          "range": {
+            "baseline": [
+              21.0239106,
+              21.0239111
+            ],
+            "optimized": [
+              21.0239189,
+              21.023919
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014044,
+          "optimized": 0.0014103,
+          "change_pct": 0.4201082312731419,
+          "range": {
+            "baseline": [
+              0.0014014,
+              0.0014155
+            ],
+            "optimized": [
+              0.0014038,
+              0.001432
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 8.481,
+          "optimized": 8.474,
+          "change_pct": -0.08253743662303137,
+          "range": {
+            "baseline": [
+              8.467,
+              8.49
+            ],
+            "optimized": [
+              8.46,
+              8.554
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::bench_contains_bad_simd",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 289.8407585,
+          "optimized": 293.30477,
+          "change_pct": 1.195142987455311,
+          "range": {
+            "baseline": [
+              289.8370585,
+              289.858646
+            ],
+            "optimized": [
+              292.265965,
+              293.7444315
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 1283.5668865,
+          "optimized": 1283.567238,
+          "change_pct": 2.738462667739583e-05,
+          "range": {
+            "baseline": [
+              1283.566879,
+              1283.5668885
+            ],
+            "optimized": [
+              1283.567238,
+              1283.56724
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 323.119551,
+          "optimized": 323.1195905,
+          "change_pct": 1.2224577528030522e-05,
+          "range": {
+            "baseline": [
+              323.1195495,
+              323.1195515
+            ],
+            "optimized": [
+              323.1195905,
+              323.119591
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 2.0071335,
+          "optimized": 2.2525305,
+          "change_pct": 12.226242051164004,
+          "range": {
+            "baseline": [
+              2.007037,
+              2.007175
+            ],
+            "optimized": [
+              2.240328,
+              2.3023655
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 100.495,
+          "optimized": 101.715,
+          "change_pct": 1.2139907458082577,
+          "range": {
+            "baseline": [
+              100.475,
+              100.545
+            ],
+            "optimized": [
+              101.32,
+              101.81
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::bench_contains_equal",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 16.1017308,
+          "optimized": 16.1041799,
+          "change_pct": 0.015210166102153089,
+          "range": {
+            "baseline": [
+              16.0955329,
+              16.1035241
+            ],
+            "optimized": [
+              16.0954022,
+              16.1455167
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 83.1133694,
+          "optimized": 83.1134397,
+          "change_pct": 8.458326321569842e-05,
+          "range": {
+            "baseline": [
+              83.1133694,
+              83.1133698
+            ],
+            "optimized": [
+              83.1134397,
+              83.1134401
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 19.0239106,
+          "optimized": 19.0239185,
+          "change_pct": 4.152668799939363e-05,
+          "range": {
+            "baseline": [
+              19.0239106,
+              19.0239107
+            ],
+            "optimized": [
+              19.0239185,
+              19.0239186
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014223,
+          "optimized": 0.0014192,
+          "change_pct": -0.2179568304858326,
+          "range": {
+            "baseline": [
+              0.0014111,
+              0.0014289
+            ],
+            "optimized": [
+              0.0014146,
+              0.0014444
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 5.644,
+          "optimized": 5.644,
+          "change_pct": 0.0,
+          "range": {
+            "baseline": [
+              5.641,
+              5.646
+            ],
+            "optimized": [
+              5.641,
+              5.659
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::contains_bang_str_short_ascii",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 42.0487095,
+          "optimized": 15.1916379,
+          "change_pct": -63.871333792063226,
+          "range": {
+            "baseline": [
+              42.0053991,
+              42.0579779
+            ],
+            "optimized": [
+              15.1851166,
+              15.5268945
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 204.113362,
+          "optimized": 70.1134319,
+          "change_pct": -65.64975893150984,
+          "range": {
+            "baseline": [
+              204.1133616,
+              204.113362
+            ],
+            "optimized": [
+              70.1134319,
+              70.1134323
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 52.0239055,
+          "optimized": 15.0239133,
+          "change_pct": -71.12113526347999,
+          "range": {
+            "baseline": [
+              52.0239054,
+              52.0239055
+            ],
+            "optimized": [
+              15.0239133,
+              15.0239134
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014204,
+          "optimized": 0.0014199,
+          "change_pct": -0.03520135173190608,
+          "range": {
+            "baseline": [
+              0.0013973,
+              0.001442
+            ],
+            "optimized": [
+              0.0014095,
+              0.0014239
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 14.599,
+          "optimized": 5.329,
+          "change_pct": -63.49749982875539,
+          "range": {
+            "baseline": [
+              14.584,
+              14.606
+            ],
+            "optimized": [
+              5.329,
+              5.447
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::contains_bang_char_short_ascii",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 39.3601336,
+          "optimized": 12.0968683,
+          "change_pct": -69.26619095622175,
+          "range": {
+            "baseline": [
+              39.348796,
+              39.3767405
+            ],
+            "optimized": [
+              12.0928094,
+              12.0983572
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 182.113369,
+          "optimized": 48.1134393,
+          "change_pct": -73.5805012206435,
+          "range": {
+            "baseline": [
+              182.1133671,
+              182.1133694
+            ],
+            "optimized": [
+              48.1134393,
+              48.1134397
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 48.0239078,
+          "optimized": 11.0239157,
+          "change_pct": -77.04494239429637,
+          "range": {
+            "baseline": [
+              48.0239074,
+              48.0239079
+            ],
+            "optimized": [
+              11.0239157,
+              11.0239158
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014111,
+          "optimized": 0.0014128,
+          "change_pct": 0.12047338955425424,
+          "range": {
+            "baseline": [
+              0.0014014,
+              0.0014166
+            ],
+            "optimized": [
+              0.0014036,
+              0.0014249
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 13.676,
+          "optimized": 4.26,
+          "change_pct": -68.8505410938871,
+          "range": {
+            "baseline": [
+              13.671,
+              13.68
+            ],
+            "optimized": [
+              4.258,
+              4.261
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::contains_bang_str_short_mixed",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 47.6276068,
+          "optimized": 27.543901,
+          "change_pct": -42.168202749166895,
+          "range": {
+            "baseline": [
+              47.6215934,
+              47.6278921
+            ],
+            "optimized": [
+              26.1313655,
+              28.4436239
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 221.113363,
+          "optimized": 84.1134337,
+          "change_pct": -61.95913600210585,
+          "range": {
+            "baseline": [
+              221.113363,
+              221.1133634
+            ],
+            "optimized": [
+              84.1134333,
+              84.1134337
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 55.0239055,
+          "optimized": 18.0239135,
+          "change_pct": -67.24348565188633,
+          "range": {
+            "baseline": [
+              55.0239055,
+              55.0239056
+            ],
+            "optimized": [
+              18.0239134,
+              18.0239135
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.001436,
+          "optimized": 0.0013997,
+          "change_pct": -2.52785515320334,
+          "range": {
+            "baseline": [
+              0.0014332,
+              0.0014375
+            ],
+            "optimized": [
+              0.0013915,
+              0.0014132
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 16.528,
+          "optimized": 9.595,
+          "change_pct": -41.94699903194577,
+          "range": {
+            "baseline": [
+              16.523,
+              16.528
+            ],
+            "optimized": [
+              9.103,
+              9.902
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::contains_bang_char_short_mixed",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 44.3248657,
+          "optimized": 12.0962737,
+          "change_pct": -72.70995972809004,
+          "range": {
+            "baseline": [
+              44.2539836,
+              44.3518485
+            ],
+            "optimized": [
+              12.0954901,
+              12.097203
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 199.1133711,
+          "optimized": 62.113441,
+          "change_pct": -68.80498750191668,
+          "range": {
+            "baseline": [
+              199.1133707,
+              199.1133715
+            ],
+            "optimized": [
+              62.1134391,
+              62.113441
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 51.023908,
+          "optimized": 14.0239158,
+          "change_pct": -72.51501041433362,
+          "range": {
+            "baseline": [
+              51.0239079,
+              51.0239081
+            ],
+            "optimized": [
+              14.0239154,
+              14.0239158
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014263,
+          "optimized": 0.0014095,
+          "change_pct": -1.1778728177802678,
+          "range": {
+            "baseline": [
+              0.0014191,
+              0.0014292
+            ],
+            "optimized": [
+              0.0013845,
+              0.0014196
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 15.388,
+          "optimized": 4.261,
+          "change_pct": -72.30959188978426,
+          "range": {
+            "baseline": [
+              15.362,
+              15.395
+            ],
+            "optimized": [
+              4.257,
+              4.261
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::contains_bang_str_short_pile_of_poo",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 24.2020038,
+          "optimized": 27.9108637,
+          "change_pct": 15.324598453290061,
+          "range": {
+            "baseline": [
+              24.1922791,
+              24.2066313
+            ],
+            "optimized": [
+              27.7047568,
+              27.9489621
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 122.1133705,
+          "optimized": 84.1134408,
+          "change_pct": -31.118565923131236,
+          "range": {
+            "baseline": [
+              122.1133705,
+              122.1133705
+            ],
+            "optimized": [
+              84.1134408,
+              84.1134412
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 23.0239103,
+          "optimized": 18.0239182,
+          "change_pct": -21.716520064795418,
+          "range": {
+            "baseline": [
+              23.0239103,
+              23.0239103
+            ],
+            "optimized": [
+              18.0239182,
+              18.0239183
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014269,
+          "optimized": 0.001413,
+          "change_pct": -0.9741397434999022,
+          "range": {
+            "baseline": [
+              0.0014243,
+              0.0014393
+            ],
+            "optimized": [
+              0.0013931,
+              0.0014191
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 8.44,
+          "optimized": 9.733,
+          "change_pct": 15.319905213270157,
+          "range": {
+            "baseline": [
+              8.438,
+              8.45
+            ],
+            "optimized": [
+              9.647,
+              9.735
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::contains_bang_char_short_pile_of_poo",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 20.8808664,
+          "optimized": 12.0979958,
+          "change_pct": -42.061811189980126,
+          "range": {
+            "baseline": [
+              20.875475,
+              20.8808852
+            ],
+            "optimized": [
+              12.0964369,
+              12.1017354
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 100.1133727,
+          "optimized": 62.1134415,
+          "change_pct": -37.956898439402984,
+          "range": {
+            "baseline": [
+              100.1133727,
+              100.1133731
+            ],
+            "optimized": [
+              62.1134411,
+              62.113443
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 19.023911,
+          "optimized": 14.0239186,
+          "change_pct": -26.28267342083338,
+          "range": {
+            "baseline": [
+              19.023911,
+              19.0239111
+            ],
+            "optimized": [
+              14.0239185,
+              14.0239189
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014014,
+          "optimized": 0.0014096,
+          "change_pct": 0.5851291565577288,
+          "range": {
+            "baseline": [
+              0.0013987,
+              0.001435
+            ],
+            "optimized": [
+              0.0014,
+              0.0014291
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 7.294,
+          "optimized": 4.26,
+          "change_pct": -41.59583219084178,
+          "range": {
+            "baseline": [
+              7.293,
+              7.297
+            ],
+            "optimized": [
+              4.258,
+              4.263
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::contains_bang_str_long_lorem_ipsum",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 612.1414815,
+          "optimized": 173.2943525,
+          "change_pct": -71.69047389578024,
+          "range": {
+            "baseline": [
+              612.1347515,
+              612.289045
+            ],
+            "optimized": [
+              173.173761,
+              174.6135545
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2427.566831,
+          "optimized": 679.5671825,
+          "change_pct": -72.006242060077,
+          "range": {
+            "baseline": [
+              2427.566829,
+              2427.566831
+            ],
+            "optimized": [
+              679.5671805,
+              679.5671845
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 377.1195445,
+          "optimized": 100.119584,
+          "change_pct": -73.45149954167915,
+          "range": {
+            "baseline": [
+              377.119544,
+              377.1195445
+            ],
+            "optimized": [
+              100.1195835,
+              100.1195845
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0074715,
+          "optimized": 0.0071095,
+          "change_pct": -4.845077962925782,
+          "range": {
+            "baseline": [
+              0.0073275,
+              0.0108485
+            ],
+            "optimized": [
+              0.0070785,
+              0.0072005
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 211.72,
+          "optimized": 60.265,
+          "change_pct": -71.53551860948421,
+          "range": {
+            "baseline": [
+              211.72,
+              211.775
+            ],
+            "optimized": [
+              60.195,
+              60.7
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::contains_bang_char_long_lorem_ipsum",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 607.530729,
+          "optimized": 160.7837435,
+          "change_pct": -73.53487884231778,
+          "range": {
+            "baseline": [
+              607.129106,
+              608.207056
+            ],
+            "optimized": [
+              160.624573,
+              161.2595875
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2405.5668365,
+          "optimized": 657.5671975,
+          "change_pct": -72.66477124964305,
+          "range": {
+            "baseline": [
+              2405.5668345,
+              2405.566846
+            ],
+            "optimized": [
+              657.567188,
+              657.5671975
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 373.1195465,
+          "optimized": 96.119588,
+          "change_pct": -74.23892988141804,
+          "range": {
+            "baseline": [
+              373.119546,
+              373.1195485
+            ],
+            "optimized": [
+              96.119586,
+              96.119588
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.007558,
+          "optimized": 0.007107,
+          "change_pct": -5.967187086530834,
+          "range": {
+            "baseline": [
+              0.0075555,
+              0.0098105
+            ],
+            "optimized": [
+              0.0070545,
+              0.0071525
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 210.11,
+          "optimized": 55.96,
+          "change_pct": -73.36633192137452,
+          "range": {
+            "baseline": [
+              209.99,
+              210.42
+            ],
+            "optimized": [
+              55.885,
+              56.12
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_empty",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 8.5065817,
+          "optimized": 8.4191859,
+          "change_pct": -1.0273903558699615,
+          "range": {
+            "baseline": [
+              8.4832816,
+              8.5273085
+            ],
+            "optimized": [
+              8.4145487,
+              8.4247063
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 27.1133657,
+          "optimized": 27.113436,
+          "change_pct": 0.0002592817165414374,
+          "range": {
+            "baseline": [
+              27.1133657,
+              27.1133657
+            ],
+            "optimized": [
+              27.1134345,
+              27.113436
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 4.0239091,
+          "optimized": 4.023917,
+          "change_pct": 0.0001963265024995664,
+          "range": {
+            "baseline": [
+              4.0239091,
+              4.0239091
+            ],
+            "optimized": [
+              4.0239167,
+              4.023917
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0013939,
+          "optimized": 0.0014081,
+          "change_pct": 1.018724442212493,
+          "range": {
+            "baseline": [
+              0.0013867,
+              0.0014242
+            ],
+            "optimized": [
+              0.0013987,
+              0.0014185
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 3.019,
+          "optimized": 2.992,
+          "change_pct": -0.8943358728055739,
+          "range": {
+            "baseline": [
+              3.015,
+              3.026
+            ],
+            "optimized": [
+              2.989,
+              2.992
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_empty_in_long",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 8.3112868,
+          "optimized": 8.3421805,
+          "change_pct": 0.371707784166464,
+          "range": {
+            "baseline": [
+              8.3067734,
+              8.4137967
+            ],
+            "optimized": [
+              8.3072545,
+              8.3925459
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 27.1133676,
+          "optimized": 27.1134375,
+          "change_pct": 0.0002578064113301082,
+          "range": {
+            "baseline": [
+              27.1133672,
+              27.1133676
+            ],
+            "optimized": [
+              27.1134375,
+              27.1134379
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 4.0239101,
+          "optimized": 4.0239179,
+          "change_pct": 0.00019384130871547,
+          "range": {
+            "baseline": [
+              4.02391,
+              4.0239101
+            ],
+            "optimized": [
+              4.0239179,
+              4.023918
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014028,
+          "optimized": 0.001422,
+          "change_pct": 1.368691189050475,
+          "range": {
+            "baseline": [
+              0.0014017,
+              0.0014249
+            ],
+            "optimized": [
+              0.0014,
+              0.0014316
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 2.953,
+          "optimized": 2.963,
+          "change_pct": 0.33863867253640656,
+          "range": {
+            "baseline": [
+              2.949,
+              2.99
+            ],
+            "optimized": [
+              2.949,
+              2.982
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_longer_needle",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 8.7036082,
+          "optimized": 8.7078615,
+          "change_pct": 0.048868238347399284,
+          "range": {
+            "baseline": [
+              8.6757795,
+              8.8952056
+            ],
+            "optimized": [
+              8.679473,
+              9.0088264
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 32.1133694,
+          "optimized": 32.1134393,
+          "change_pct": 0.00021766635300846104,
+          "range": {
+            "baseline": [
+              32.113369,
+              32.1133694
+            ],
+            "optimized": [
+              32.1134393,
+              32.1134397
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 7.0239102,
+          "optimized": 7.023918,
+          "change_pct": 0.00011104925572436031,
+          "range": {
+            "baseline": [
+              7.0239101,
+              7.0239102
+            ],
+            "optimized": [
+              7.023918,
+              7.0239181
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014101,
+          "optimized": 0.0014119,
+          "change_pct": 0.1276505212396195,
+          "range": {
+            "baseline": [
+              0.0014046,
+              0.0014201
+            ],
+            "optimized": [
+              0.0014119,
+              0.0014122
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 3.094,
+          "optimized": 3.091,
+          "change_pct": -0.09696186166773257,
+          "range": {
+            "baseline": [
+              3.08,
+              3.155
+            ],
+            "optimized": [
+              3.084,
+              3.193
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_unicode_str_hit",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 50.574562,
+          "optimized": 50.5439208,
+          "change_pct": -0.06058618955513406,
+          "range": {
+            "baseline": [
+              50.5112866,
+              51.2647554
+            ],
+            "optimized": [
+              50.5323104,
+              50.6224013
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 247.1134491,
+          "optimized": 247.113519,
+          "change_pct": 2.8286602882232614e-05,
+          "range": {
+            "baseline": [
+              247.1134487,
+              247.1134495
+            ],
+            "optimized": [
+              247.113519,
+              247.113519
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 48.0239196,
+          "optimized": 48.0239274,
+          "change_pct": 1.6241906242164816e-05,
+          "range": {
+            "baseline": [
+              48.0239195,
+              48.0239197
+            ],
+            "optimized": [
+              48.0239274,
+              48.0239274
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.001498,
+          "optimized": 0.0014993,
+          "change_pct": 0.08678237650201481,
+          "range": {
+            "baseline": [
+              0.0014964,
+              0.0015134
+            ],
+            "optimized": [
+              0.0014744,
+              0.0015091
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 17.541,
+          "optimized": 17.531,
+          "change_pct": -0.057009292514687004,
+          "range": {
+            "baseline": [
+              17.53,
+              17.786
+            ],
+            "optimized": [
+              17.528,
+              17.561
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_unicode_str_miss",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 478.7800075,
+          "optimized": 478.883917,
+          "change_pct": 0.021702973886172927,
+          "range": {
+            "baseline": [
+              478.689977,
+              479.2609745
+            ],
+            "optimized": [
+              478.7141105,
+              479.1579235
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2038.567235,
+          "optimized": 2038.5675885,
+          "change_pct": 1.7340610303229198e-05,
+          "range": {
+            "baseline": [
+              2038.5672275,
+              2038.567237
+            ],
+            "optimized": [
+              2038.5675865,
+              2038.5675905
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 256.119596,
+          "optimized": 256.119636,
+          "change_pct": 1.5617703863490817e-05,
+          "range": {
+            "baseline": [
+              256.1195945,
+              256.1195965
+            ],
+            "optimized": [
+              256.1196355,
+              256.1196365
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0072445,
+          "optimized": 0.007148,
+          "change_pct": -1.3320449996549133,
+          "range": {
+            "baseline": [
+              0.0071745,
+              0.0206735
+            ],
+            "optimized": [
+              0.0070905,
+              0.008153
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 165.695,
+          "optimized": 165.72,
+          "change_pct": 0.015087962823256973,
+          "range": {
+            "baseline": [
+              165.66,
+              165.88
+            ],
+            "optimized": [
+              165.64,
+              165.835
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_unicode_char_hit",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 53.9495765,
+          "optimized": 53.860335,
+          "change_pct": -0.1654164977550887,
+          "range": {
+            "baseline": [
+              53.8254337,
+              54.0163611
+            ],
+            "optimized": [
+              53.8152263,
+              54.0048907
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 273.1134659,
+          "optimized": 273.1135362,
+          "change_pct": 2.5740217446390545e-05,
+          "range": {
+            "baseline": [
+              273.1134655,
+              273.1134663
+            ],
+            "optimized": [
+              273.1135343,
+              273.1135362
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 53.0239235,
+          "optimized": 53.0239314,
+          "change_pct": 1.4898935196683283e-05,
+          "range": {
+            "baseline": [
+              53.0239234,
+              53.0239236
+            ],
+            "optimized": [
+              53.023931,
+              53.0239314
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0015682,
+          "optimized": 0.0015447,
+          "change_pct": -1.4985333503379716,
+          "range": {
+            "baseline": [
+              0.0015461,
+              0.0015934
+            ],
+            "optimized": [
+              0.001543,
+              0.0015912
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 18.709,
+          "optimized": 18.678,
+          "change_pct": -0.16569565449783275,
+          "range": {
+            "baseline": [
+              18.673,
+              18.731
+            ],
+            "optimized": [
+              18.673,
+              18.728
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_unicode_char_miss",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 481.176293,
+          "optimized": 481.338555,
+          "change_pct": 0.03372194398612027,
+          "range": {
+            "baseline": [
+              481.038831,
+              481.4684595
+            ],
+            "optimized": [
+              481.2027075,
+              481.470968
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2061.567319,
+          "optimized": 2061.5676725,
+          "change_pct": 1.7147148012597313e-05,
+          "range": {
+            "baseline": [
+              2061.5673135,
+              2061.567323
+            ],
+            "optimized": [
+              2061.5676705,
+              2061.5676725
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 261.1196155,
+          "optimized": 261.1196555,
+          "change_pct": 1.5318650015139212e-05,
+          "range": {
+            "baseline": [
+              261.1196145,
+              261.1196165
+            ],
+            "optimized": [
+              261.119655,
+              261.1196555
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0093235,
+          "optimized": 0.026156,
+          "change_pct": 180.53842441143345,
+          "range": {
+            "baseline": [
+              0.009297,
+              0.0261685
+            ],
+            "optimized": [
+              0.0093035,
+              0.0266605
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 166.515,
+          "optimized": 166.6,
+          "change_pct": 0.05104645227156368,
+          "range": {
+            "baseline": [
+              166.46,
+              166.635
+            ],
+            "optimized": [
+              166.53,
+              166.64
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_nul_str",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 591.7756855,
+          "optimized": 182.4793955,
+          "change_pct": -69.1640937653901,
+          "range": {
+            "baseline": [
+              591.668724,
+              600.0223965
+            ],
+            "optimized": [
+              181.895718,
+              182.8517975
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2334.5673385,
+          "optimized": 679.567692,
+          "change_pct": -70.89106487557416,
+          "range": {
+            "baseline": [
+              2334.5673385,
+              2334.5673385
+            ],
+            "optimized": [
+              679.56769,
+              679.5676935
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 347.119629,
+          "optimized": 100.119669,
+          "change_pct": -71.1570131345122,
+          "range": {
+            "baseline": [
+              347.119629,
+              347.119629
+            ],
+            "optimized": [
+              100.1196685,
+              100.1196695
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.011508,
+          "optimized": 0.0070975,
+          "change_pct": -38.325512686826556,
+          "range": {
+            "baseline": [
+              0.010024,
+              0.387468
+            ],
+            "optimized": [
+              0.0070925,
+              0.007101
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 204.685,
+          "optimized": 63.415,
+          "change_pct": -69.01824755111512,
+          "range": {
+            "baseline": [
+              204.63,
+              207.55
+            ],
+            "optimized": [
+              63.215,
+              63.56
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_ascii_char",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 587.0455435,
+          "optimized": 178.0192385,
+          "change_pct": -69.67539563648863,
+          "range": {
+            "baseline": [
+              586.957189,
+              595.5513335
+            ],
+            "optimized": [
+              176.9790275,
+              178.343557
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 2312.5672965,
+          "optimized": 657.567648,
+          "change_pct": -71.56546972729362,
+          "range": {
+            "baseline": [
+              2312.5672965,
+              2312.5672985
+            ],
+            "optimized": [
+              657.5676385,
+              657.56765
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 343.119619,
+          "optimized": 96.1196585,
+          "change_pct": -71.98654545603235,
+          "range": {
+            "baseline": [
+              343.119619,
+              343.1196195
+            ],
+            "optimized": [
+              96.1196565,
+              96.119659
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0080485,
+          "optimized": 0.0071295,
+          "change_pct": -11.418276697521268,
+          "range": {
+            "baseline": [
+              0.0075585,
+              0.283838
+            ],
+            "optimized": [
+              0.0070755,
+              0.0071535
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 203.09,
+          "optimized": 61.89,
+          "change_pct": -69.525825988478,
+          "range": {
+            "baseline": [
+              203.015,
+              205.995
+            ],
+            "optimized": [
+              61.52,
+              61.985
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_char_array",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 19.0934124,
+          "optimized": 19.0932597,
+          "change_pct": -0.000799752274760479,
+          "range": {
+            "baseline": [
+              19.0931735,
+              19.0970541
+            ],
+            "optimized": [
+              19.0909595,
+              19.09688
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 85.1134331,
+          "optimized": 85.1135034,
+          "change_pct": 8.259565786872258e-05,
+          "range": {
+            "baseline": [
+              85.1134331,
+              85.1134335
+            ],
+            "optimized": [
+              85.1135034,
+              85.1135034
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 24.0239197,
+          "optimized": 24.0239276,
+          "change_pct": 3.288389280875492e-05,
+          "range": {
+            "baseline": [
+              24.0239197,
+              24.0239198
+            ],
+            "optimized": [
+              24.0239276,
+              24.0239276
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014268,
+          "optimized": 0.0014213,
+          "change_pct": -0.3854779927109697,
+          "range": {
+            "baseline": [
+              0.0014257,
+              0.0014372
+            ],
+            "optimized": [
+              0.0014194,
+              0.0014245
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 6.68,
+          "optimized": 6.677,
+          "change_pct": -0.044910179640722525,
+          "range": {
+            "baseline": [
+              6.676000000000001,
+              6.6819999999999995
+            ],
+            "optimized": [
+              6.677,
+              6.679000000000001
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_char_slice",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 28.2474796,
+          "optimized": 28.0930339,
+          "change_pct": -0.5467592230777307,
+          "range": {
+            "baseline": [
+              28.0969137,
+              28.25345
+            ],
+            "optimized": [
+              28.0913794,
+              28.1841607
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 155.1134346,
+          "optimized": 155.1135045,
+          "change_pct": 4.5063794873456686e-05,
+          "range": {
+            "baseline": [
+              155.1134327,
+              155.1134346
+            ],
+            "optimized": [
+              155.1135045,
+              155.1135049
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 54.0239199,
+          "optimized": 54.0239277,
+          "change_pct": 1.4438048956399996e-05,
+          "range": {
+            "baseline": [
+              54.0239195,
+              54.0239199
+            ],
+            "optimized": [
+              54.0239277,
+              54.0239278
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014234,
+          "optimized": 0.0014245,
+          "change_pct": 0.07727975270479526,
+          "range": {
+            "baseline": [
+              0.0014122,
+              0.0014416
+            ],
+            "optimized": [
+              0.0014227,
+              0.0014315
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 9.833,
+          "optimized": 9.782,
+          "change_pct": -0.5186616495474472,
+          "range": {
+            "baseline": [
+              9.786,
+              9.839
+            ],
+            "optimized": [
+              9.78,
+              9.814
+            ]
+          }
+        }
+      },
+      {
+        "case": "str::extra_predicate",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 12.0994534,
+          "optimized": 12.0994987,
+          "change_pct": 0.00037439707814002077,
+          "range": {
+            "baseline": [
+              12.0976675,
+              12.0999829
+            ],
+            "optimized": [
+              12.092885,
+              12.1003706
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 57.1134294,
+          "optimized": 57.1135001,
+          "change_pct": 0.00012378874940655038,
+          "range": {
+            "baseline": [
+              57.1134279,
+              57.1134298
+            ],
+            "optimized": [
+              57.1134997,
+              57.1135001
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 18.023919,
+          "optimized": 18.023927,
+          "change_pct": 4.438546357121709e-05,
+          "range": {
+            "baseline": [
+              18.0239187,
+              18.0239191
+            ],
+            "optimized": [
+              18.0239269,
+              18.023927
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.0014213,
+          "optimized": 0.0014202,
+          "change_pct": -0.0773939351298103,
+          "range": {
+            "baseline": [
+              0.0014141,
+              0.0014325
+            ],
+            "optimized": [
+              0.0014135,
+              0.0014207
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 4.263,
+          "optimized": 4.261,
+          "change_pct": -0.046915317851270455,
+          "range": {
+            "baseline": [
+              4.26,
+              4.265
+            ],
+            "optimized": [
+              4.26,
+              4.262
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "matrix": {
+    "rows": 608,
+    "cases_complete": 0,
+    "cases": []
+  },
+  "split": {
+    "rows": 30,
+    "cases_complete": 5,
+    "cases": [
+      {
+        "case": "split_unicode_ascii",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 82.937969,
+          "optimized": 85.400665,
+          "change_pct": 2.969322771817584,
+          "range": {
+            "baseline": [
+              82.906862,
+              83.004094
+            ],
+            "optimized": [
+              84.468513,
+              87.177077
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 397.131859,
+          "optimized": 397.132717,
+          "change_pct": 0.0002160491485492244,
+          "range": {
+            "baseline": [
+              397.131859,
+              397.131863
+            ],
+            "optimized": [
+              397.132717,
+              397.132721
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 112.238701,
+          "optimized": 112.238819,
+          "change_pct": 0.00010513307704407282,
+          "range": {
+            "baseline": [
+              112.238701,
+              112.238702
+            ],
+            "optimized": [
+              112.238819,
+              112.23882
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.014184,
+          "optimized": 0.014207,
+          "change_pct": 0.16215454032713073,
+          "range": {
+            "baseline": [
+              0.014092,
+              0.014263
+            ],
+            "optimized": [
+              0.014002,
+              0.014369
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 29.46,
+          "optimized": 30.27,
+          "change_pct": 2.7494908350305547,
+          "range": {
+            "baseline": [
+              29.46,
+              29.49
+            ],
+            "optimized": [
+              29.97,
+              30.92
+            ]
+          }
+        }
+      },
+      {
+        "case": "split_ascii",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 160.963341,
+          "optimized": 162.933787,
+          "change_pct": 1.2241582386140815,
+          "range": {
+            "baseline": [
+              160.957195,
+              160.982241
+            ],
+            "optimized": [
+              162.928008,
+              162.939857
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 659.132578,
+          "optimized": 659.133436,
+          "change_pct": 0.00013017108069224292,
+          "range": {
+            "baseline": [
+              659.132567,
+              659.132582
+            ],
+            "optimized": [
+              659.133436,
+              659.133436
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 181.238901,
+          "optimized": 181.239019,
+          "change_pct": 6.510743519871909e-05,
+          "range": {
+            "baseline": [
+              181.238899,
+              181.238902
+            ],
+            "optimized": [
+              181.239019,
+              181.239019
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.01419,
+          "optimized": 0.014208,
+          "change_pct": 0.12684989429176952,
+          "range": {
+            "baseline": [
+              0.014026,
+              0.014274
+            ],
+            "optimized": [
+              0.014142,
+              0.014218
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 56.41,
+          "optimized": 57.08,
+          "change_pct": 1.187732671512154,
+          "range": {
+            "baseline": [
+              56.39,
+              56.57
+            ],
+            "optimized": [
+              57.08,
+              57.22
+            ]
+          }
+        }
+      },
+      {
+        "case": "split_extern_fn",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 101.595176,
+          "optimized": 102.074712,
+          "change_pct": 0.47200666299354044,
+          "range": {
+            "baseline": [
+              101.497661,
+              102.028091
+            ],
+            "optimized": [
+              101.57415,
+              102.271861
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 462.132491,
+          "optimized": 462.133353,
+          "change_pct": 0.00018652659503626268,
+          "range": {
+            "baseline": [
+              462.132472,
+              462.132495
+            ],
+            "optimized": [
+              462.13333,
+              462.133353
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 150.238885,
+          "optimized": 150.239004,
+          "change_pct": 7.920719058418513e-05,
+          "range": {
+            "baseline": [
+              150.238881,
+              150.238886
+            ],
+            "optimized": [
+              150.238999,
+              150.239004
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.148044,
+          "optimized": 0.16904,
+          "change_pct": 14.18227013590554,
+          "range": {
+            "baseline": [
+              0.130676,
+              0.174383
+            ],
+            "optimized": [
+              0.115131,
+              0.172707
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 36.01,
+          "optimized": 36.11,
+          "change_pct": 0.27770063871146444,
+          "range": {
+            "baseline": [
+              35.86,
+              36.02
+            ],
+            "optimized": [
+              35.88,
+              36.11
+            ]
+          }
+        }
+      },
+      {
+        "case": "split_closure",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 102.390956,
+          "optimized": 102.998952,
+          "change_pct": 0.5937985382224564,
+          "range": {
+            "baseline": [
+              102.176651,
+              102.649825
+            ],
+            "optimized": [
+              101.829918,
+              103.251721
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 462.132494,
+          "optimized": 462.133356,
+          "change_pct": 0.00018652659381501735,
+          "range": {
+            "baseline": [
+              462.132494,
+              462.132498
+            ],
+            "optimized": [
+              462.133352,
+              462.133356
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 150.238862,
+          "optimized": 150.238981,
+          "change_pct": 7.920720270782056e-05,
+          "range": {
+            "baseline": [
+              150.238862,
+              150.238863
+            ],
+            "optimized": [
+              150.23898,
+              150.238981
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.147957,
+          "optimized": 0.158942,
+          "change_pct": 7.424454402292557,
+          "range": {
+            "baseline": [
+              0.139319,
+              0.155113
+            ],
+            "optimized": [
+              0.11719,
+              0.173492
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 36.2,
+          "optimized": 36.37,
+          "change_pct": 0.46961325966849987,
+          "range": {
+            "baseline": [
+              36.18,
+              36.43
+            ],
+            "optimized": [
+              36.06,
+              36.46
+            ]
+          }
+        }
+      },
+      {
+        "case": "split_slice",
+        "samples": {
+          "baseline": 3,
+          "optimized": 3
+        },
+        "cycles": {
+          "baseline": 115.975361,
+          "optimized": 115.94717,
+          "change_pct": -0.024307749298579928,
+          "range": {
+            "baseline": [
+              115.932787,
+              115.989337
+            ],
+            "optimized": [
+              115.945149,
+              115.972786
+            ]
+          }
+        },
+        "instructions": {
+          "baseline": 470.132593,
+          "optimized": 470.133447,
+          "change_pct": 0.0001816508816254725,
+          "range": {
+            "baseline": [
+              470.132589,
+              470.132593
+            ],
+            "optimized": [
+              470.133432,
+              470.133451
+            ]
+          }
+        },
+        "branches": {
+          "baseline": 158.238903,
+          "optimized": 158.23902,
+          "change_pct": 7.393883412198932e-05,
+          "range": {
+            "baseline": [
+              158.238902,
+              158.238903
+            ],
+            "optimized": [
+              158.239017,
+              158.239021
+            ]
+          }
+        },
+        "branch_misses": {
+          "baseline": 0.014103,
+          "optimized": 0.014058,
+          "change_pct": -0.319081046585834,
+          "range": {
+            "baseline": [
+              0.013896,
+              0.014406
+            ],
+            "optimized": [
+              0.014032,
+              0.014308
+            ]
+          }
+        },
+        "ns_cpu": {
+          "baseline": 40.9,
+          "optimized": 40.86,
+          "change_pct": -0.09779951100243878,
+          "range": {
+            "baseline": [
+              40.87,
+              40.97
+            ],
+            "optimized": [
+              40.85,
+              40.9
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

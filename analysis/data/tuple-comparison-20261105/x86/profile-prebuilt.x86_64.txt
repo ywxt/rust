@@ -1,0 +1,51 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 891  of event 'cpu_core/cycles/u'
+# Event count (approx.): 1996498877
+#
+# Overhead  Command          Shared Object                 Symbol                                                                                              
+# ........  ...............  ............................  ....................................................................................................
+#
+    73.97%  corebenches-d63  corebenches-d6382d1542e5d229  [.] test::bench::ns_iter_inner::<[bool; 4], corebenches::tuple::bench_tuple_comparison::{closure#0}>
+            |
+            ---test::bench::ns_iter_inner::<[bool; 4], corebenches::tuple::bench_tuple_comparison::{closure#0}>
+               <corebenches::tuple::bench_tuple_comparison::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+               test::run_test
+               test::console::run_tests_console
+               test::test_main_inner
+               test::test_main_env_args
+               corebenches::main
+               std::sys::backtrace::__rust_begin_short_backtrace::<fn() -> std::process::ExitCode, std::process::ExitCode>
+               std::rt::lang_start::<std::process::ExitCode>::{closure#0}
+               std::rt::lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    25.90%  corebenches-d63  libc.so.6                     [.] __memcmp_avx2_movbe
+            |
+            ---__memcmp_avx2_movbe
+               <corebenches::tuple::bench_tuple_comparison::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+               test::run_test
+               test::console::run_tests_console
+               test::test_main_inner
+               test::test_main_env_args
+               corebenches::main
+               std::sys::backtrace::__rust_begin_short_backtrace::<fn() -> std::process::ExitCode, std::process::ExitCode>
+               std::rt::lang_start::<std::process::ExitCode>::{closure#0}
+               std::rt::lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: Boolean options have negative forms, e.g.: perf report --no-children)
+#
+

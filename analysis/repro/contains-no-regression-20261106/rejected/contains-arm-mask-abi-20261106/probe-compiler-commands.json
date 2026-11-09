@@ -1,0 +1,36 @@
+[
+  [
+    "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+    "/tmp/contains-arm-mask-abi-20261106/portable-mask-probe.rs",
+    "--sysroot",
+    "/tmp/contains-arm-mask-abi-20261106/sysroots/optimized",
+    "--target",
+    "aarch64-unknown-linux-gnu",
+    "-O",
+    "--edition=2024",
+    "--crate-type=lib",
+    "-Cprefer-dynamic",
+    "-Zinline-mir",
+    "-Cllvm-args=-import-instr-limit=10",
+    "--emit=llvm-ir,asm",
+    "--out-dir",
+    "/tmp/contains-arm-mask-abi-20261106/probe/aarch64-unknown-linux-gnu"
+  ],
+  [
+    "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+    "/tmp/contains-arm-mask-abi-20261106/portable-mask-probe.rs",
+    "--sysroot",
+    "/tmp/contains-arm-mask-abi-20261106/sysroots/optimized",
+    "--target",
+    "x86_64-unknown-linux-gnu",
+    "-O",
+    "--edition=2024",
+    "--crate-type=lib",
+    "-Cprefer-dynamic",
+    "-Zinline-mir",
+    "-Cllvm-args=-import-instr-limit=10",
+    "--emit=llvm-ir,asm",
+    "--out-dir",
+    "/tmp/contains-arm-mask-abi-20261106/probe/x86_64-unknown-linux-gnu"
+  ]
+]

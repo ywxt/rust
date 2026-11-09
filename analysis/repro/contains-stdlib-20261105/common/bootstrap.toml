@@ -1,0 +1,18 @@
+profile = "library"
+change-id = "ignore"
+[build]
+local-rebuild = true
+build-dir = "/tmp/contains-stdlib-build"
+rustc = "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc"
+cargo = "/tmp/contains-stdlib-20261105/cargo-1.99/cargo-nightly-aarch64-unknown-linux-gnu/cargo/bin/cargo"
+submodules = false
+host = ["aarch64-unknown-linux-gnu"]
+target = ["aarch64-unknown-linux-gnu", "x86_64-unknown-linux-gnu"]
+[rust]
+download-rustc = false
+incremental = false
+[target.x86_64-unknown-linux-gnu]
+cc = "/tmp/contains-stdlib-20261105/x86-cc"
+cxx = "/tmp/contains-stdlib-20261105/x86-cc"
+ar = "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/ci-llvm/bin/llvm-ar"
+linker = "/tmp/contains-stdlib-20261105/x86-cc"

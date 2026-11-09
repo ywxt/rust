@@ -1,0 +1,72 @@
+[
+  {
+    "mode": "original",
+    "command": [
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "997",
+      "-e",
+      "cycles:u",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/profile-original.aarch64.data",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe",
+      "original",
+      "1000"
+    ],
+    "stdout": "{\"elapsed_ns\":1625392420,\"reps\":1000}\n",
+    "stderr": "",
+    "report": [
+      "perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "--percent-limit",
+      "1",
+      "-i",
+      "/tmp/iter-filter-map-chain-sum-20261105/profile-original.aarch64.data"
+    ]
+  },
+  {
+    "mode": "guarded",
+    "command": [
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "997",
+      "-e",
+      "cycles:u",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/profile-guarded.aarch64.data",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe",
+      "guarded",
+      "1000"
+    ],
+    "stdout": "{\"elapsed_ns\":1083031870,\"reps\":1000}\n",
+    "stderr": "",
+    "report": [
+      "perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "--percent-limit",
+      "1",
+      "-i",
+      "/tmp/iter-filter-map-chain-sum-20261105/profile-guarded.aarch64.data"
+    ]
+  }
+]

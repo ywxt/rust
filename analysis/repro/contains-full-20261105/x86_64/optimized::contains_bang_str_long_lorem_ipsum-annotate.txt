@@ -1,0 +1,1714 @@
+ Percent |	Source code & Disassembly of benches for cpu_core/cycles/u (36766 samples, percent: local period)
+-----------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     00000000000431b0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once>:
+    0.00 :   431b0:  push   %rbp
+    0.00 :   431b1:  push   %r15
+    0.00 :   431b3:  push   %r14
+    0.00 :   431b5:  push   %r13
+    0.00 :   431b7:  push   %r12
+    0.00 :   431b9:  push   %rbx
+    0.00 :   431ba:  sub    $0x2f8,%rsp
+    0.00 :   431c1:  mov    %rdi,%rbx
+    0.00 :   431c4:  cmpb   $0x0,0x80(%rsi)
+    0.00 :   431cb:  je     431e8 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x38>
+    0.00 :   431cd:  lea    -0x32719(%rip),%rdi        # 10abb <__abi_tag+0x107bf>
+    0.00 :   431d4:  mov    $0x9f7,%esi
+    0.00 :   431d9:  mov    $0x1,%edx
+    0.00 :   431de:  call   25410 <test::bench::ns_iter_inner::<(), benches::optimized::contains_bang_str_short_ascii::{closure#0}>>
+    0.00 :   431e3:  jmp    43b86 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x9d6>
+    0.00 :   431e8:  mov    %rsi,0x48(%rsp)
+    0.00 :   431ed:  mov    %rbx,0x50(%rsp)
+    0.00 :   431f2:  lea    -0x3273e(%rip),%rdi        # 10abb <__abi_tag+0x107bf>
+    0.00 :   431f9:  mov    $0x9f7,%esi
+    0.00 :   431fe:  mov    $0x1,%edx
+    0.00 :   43203:  call   25410 <test::bench::ns_iter_inner::<(), benches::optimized::contains_bang_str_short_ascii::{closure#0}>>
+    0.00 :   43208:  mov    %rax,%rbx
+    0.00 :   4320b:  lea    0x160(%rsp),%rdi
+    0.00 :   43213:  movq   $0x0,0x30(%rsp)
+    0.00 :   4321c:  mov    $0x190,%edx
+    0.00 :   43221:  xor    %esi,%esi
+    0.00 :   43223:  call   *0x4c397(%rip)        # 8f5c0 <memset@GLIBC_2.2.5>
+    0.00 :   43229:  cmp    $0x1,%rbx
+    0.00 :   4322d:  adc    $0x0,%rbx
+    0.00 :   43231:  cmp    $0xf4240,%rbx
+    0.00 :   43238:  ja     43248 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x98>
+    0.00 :   4323a:  mov    $0xf4240,%eax
+    0.00 :   4323f:  xor    %edx,%edx
+    0.00 :   43241:  div    %ebx
+    0.00 :   43243:  mov    %eax,%r12d
+    0.00 :   43246:  jmp    4324b <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x9b>
+    0.00 :   43248:  xor    %r12d,%r12d
+    0.00 :   4324b:  cmp    $0x1,%r12
+    0.00 :   4324f:  adc    $0x0,%r12
+    0.00 :   43253:  mov    0x4c30e(%rip),%rax        # 8f568 <<std::time::Instant>::now@Base>
+    0.00 :   4325a:  lea    0xf0(%rsp),%rbp
+    0.00 :   43262:  lea    -0x3372e(%rip),%rbx        # fb3b <__abi_tag+0xf83f>
+    0.00 :   43269:  lea    0x18(%rsp),%r14
+    0.00 :   4326e:  movq   $0x0,0x28(%rsp)
+    0.00 :   43277:  call   *%rax
+    0.00 :   43279:  mov    %rax,0x70(%rsp)
+    0.00 :   4327e:  mov    %edx,0x78(%rsp)
+    0.00 :   43282:  xorps  %xmm0,%xmm0
+    0.00 :   43285:  cvtsi2sd %r12,%xmm0
+    0.00 :   4328a:  movsd  %xmm0,(%rsp)
+    0.00 :   4328f:  test   %r12,%r12
+    0.00 :   43292:  je     43570 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3c0>
+    0.00 :   43298:  xor    %eax,%eax
+    0.00 :   4329a:  jmp    43306 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x156>
+    0.00 :   4329c:  nopl   0x0(%rax)
+    0.00 :   432a0:  mov    %r15,%r13
+    0.00 :   432a3:  add    $0x8,%r15
+    0.00 :   432a7:  lea    0x8(%rsp),%rdi
+    0.00 :   432ac:  call   *0x4c2be(%rip)        # 8f570 <<std::time::Instant>::elapsed@Base>
+    0.00 :   432b2:  imul   $0x3b9aca00,%rax,%rax
+    0.00 :   432b9:  mov    %edx,%ecx
+    0.00 :   432bb:  add    %rax,%rcx
+    0.00 :   432be:  movq   %rcx,%xmm0
+    0.00 :   432c3:  movq   -0x3535b(%rip),%xmm1        # df70 <__abi_tag+0xdc74>
+    0.00 :   432cb:  punpckldq %xmm1,%xmm0
+    0.00 :   432cf:  movapd -0x35407(%rip),%xmm1        # ded0 <__abi_tag+0xdbd4>
+    0.00 :   432d7:  subpd  %xmm1,%xmm0
+    0.00 :   432db:  movapd %xmm0,%xmm1
+    0.00 :   432df:  unpckhpd %xmm0,%xmm1
+    0.00 :   432e3:  addsd  %xmm0,%xmm1
+    0.00 :   432e7:  divsd  (%rsp),%xmm1
+    0.00 :   432ec:  movsd  %xmm1,0x160(%rsp,%r13,1)
+    0.00 :   432f6:  mov    %r15,%rax
+    0.00 :   432f9:  cmp    $0x190,%r15
+    0.00 :   43300:  je     435ee <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x43e>
+    0.00 :   43306:  mov    %rax,%r15
+    0.00 :   43309:  call   *0x4c259(%rip)        # 8f568 <<std::time::Instant>::now@Base>
+    0.00 :   4330f:  mov    %rax,0x8(%rsp)
+    0.00 :   43314:  mov    %edx,0x10(%rsp)
+    0.00 :   43318:  xor    %r13d,%r13d
+    0.00 :   4331b:  jmp    43338 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x188>
+    0.00 :   4331d:  nopl   (%rax)
+    0.00 :   43320:  call   28e80 <<&str as core::str::pattern::Pattern>::is_contained_in>
+    0.00 :   43325:  inc    %r13
+    0.00 :   43328:  mov    %al,0xf0(%rsp)
+    0.20 :   4332f:  cmp    %r12,%r13
+    0.00 :   43332:  je     432a0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0xf0>
+    0.00 :   43338:  lea    -0x32884(%rip),%rax        # 10abb <__abi_tag+0x107bf>
+    0.00 :   4333f:  mov    %rax,0x18(%rsp)
+    0.00 :   43344:  movq   $0x9f7,0x20(%rsp)
+    0.00 :   4334d:  mov    %rbx,0xf0(%rsp)
+    0.00 :   43355:  movq   $0x1,0xf8(%rsp)
+    0.00 :   43361:  mov    0xf0(%rsp),%rdi
+    0.00 :   43369:  mov    0xf8(%rsp),%rsi
+    0.14 :   43371:  mov    0x18(%rsp),%rdx
+    0.00 :   43376:  mov    0x20(%rsp),%rcx
+    0.00 :   4337b:  cmp    $0x1,%rsi
+    0.00 :   4337f:  sete   %al
+    0.00 :   43382:  cmp    $0x10,%rcx
+    0.00 :   43386:  setae  %r8b
+    0.00 :   4338a:  test   %r8b,%al
+    0.00 :   4338d:  je     43320 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x170>
+    0.00 :   4338f:  movzbl (%rdi),%edi
+    0.13 :   43392:  cmp    $0x40,%rcx
+    0.00 :   43396:  jae    433f0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x240>
+    0.00 :   43398:  mov    %rcx,%rsi
+    0.00 :   4339b:  movd   %edi,%xmm0
+    0.00 :   4339f:  punpcklbw %xmm0,%xmm0
+    0.00 :   433a3:  pshuflw $0x0,%xmm0,%xmm0
+    0.00 :   433a8:  pshufd $0x44,%xmm0,%xmm0
+    0.00 :   433ad:  and    $0x30,%rsi
+    0.00 :   433b1:  je     433d2 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x222>
+    0.00 :   433b3:  movdqu (%rdx),%xmm1
+    0.00 :   433b7:  pcmpeqb %xmm0,%xmm1
+    0.00 :   433bb:  pmovmskb %xmm1,%edi
+    0.00 :   433bf:  mov    $0x1,%al
+    0.00 :   433c1:  test   %edi,%edi
+    0.00 :   433c3:  jne    43325 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x175>
+    0.00 :   433c9:  cmp    $0x10,%esi
+    0.00 :   433cc:  jne    4352a <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x37a>
+    0.00 :   433d2:  test   $0xf,%cl
+    0.00 :   433d5:  je     4351c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x36c>
+    0.00 :   433db:  movdqu -0x10(%rdx,%rcx,1),%xmm1
+    0.00 :   433e1:  pcmpeqb %xmm0,%xmm1
+    0.00 :   433e5:  pmovmskb %xmm1,%eax
+    0.00 :   433e9:  jmp    43512 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x362>
+    0.00 :   433ee:  xchg   %ax,%ax
+    0.00 :   433f0:  cmp    $0x7f,%rcx
+    0.00 :   433f4:  jbe    43456 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2a6>
+    0.00 :   433f6:  lea    0x3f(%rdx),%rsi
+    0.00 :   433fa:  and    $0xffffffffffffffc0,%rsi
+    0.00 :   433fe:  sub    %rdx,%rsi
+    0.00 :   43401:  je     43456 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2a6>
+    0.00 :   43403:  movd   %edi,%xmm0
+    0.00 :   43407:  punpcklbw %xmm0,%xmm0
+    0.00 :   4340b:  pshuflw $0x0,%xmm0,%xmm0
+    0.13 :   43410:  pshufd $0x44,%xmm0,%xmm0
+    0.00 :   43415:  movdqu (%rdx),%xmm1
+    0.10 :   43419:  movdqu 0x10(%rdx),%xmm2
+    0.00 :   4341e:  movdqu 0x20(%rdx),%xmm3
+    0.00 :   43423:  movdqu 0x30(%rdx),%xmm4
+    0.00 :   43428:  pcmpeqb %xmm0,%xmm1
+    0.44 :   4342c:  pcmpeqb %xmm0,%xmm2
+    0.00 :   43430:  por    %xmm1,%xmm2
+    0.05 :   43434:  pcmpeqb %xmm0,%xmm3
+    0.00 :   43438:  pcmpeqb %xmm0,%xmm4
+    0.00 :   4343c:  por    %xmm3,%xmm4
+    0.01 :   43440:  por    %xmm2,%xmm4
+    0.10 :   43444:  pmovmskb %xmm4,%r8d
+    0.05 :   43449:  mov    $0x1,%al
+    0.00 :   4344b:  test   %r8d,%r8d
+    0.00 :   4344e:  jne    43325 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x175>
+    0.07 :   43454:  jmp    43458 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2a8>
+    0.00 :   43456:  xor    %esi,%esi
+    0.00 :   43458:  mov    %rcx,%rax
+    0.00 :   4345b:  sub    %rsi,%rax
+    0.00 :   4345e:  mov    %rax,%r8
+    0.00 :   43461:  movd   %edi,%xmm0
+    0.07 :   43465:  punpcklbw %xmm0,%xmm0
+    0.00 :   43469:  pshuflw $0x0,%xmm0,%xmm0
+    0.01 :   4346e:  pshufd $0x44,%xmm0,%xmm0
+    0.05 :   43473:  movabs $0x7fffffffffffffc0,%rdi
+    0.00 :   4347d:  and    %rdi,%r8
+    0.00 :   43480:  je     434d6 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x326>
+    0.00 :   43482:  add    %rdx,%rsi
+    0.00 :   43485:  xor    %edi,%edi
+    0.08 :   43487:  nopw   0x0(%rax,%rax,1)
+    0.08 :   43490:  movdqu (%rsi,%rdi,1),%xmm1
+    0.02 :   43495:  movdqu 0x10(%rsi,%rdi,1),%xmm2
+    0.08 :   4349b:  movdqu 0x20(%rsi,%rdi,1),%xmm3
+    0.17 :   434a1:  movdqu 0x30(%rsi,%rdi,1),%xmm4
+    1.24 :   434a7:  pcmpeqb %xmm0,%xmm1
+    1.22 :   434ab:  pcmpeqb %xmm0,%xmm2
+    2.62 :   434af:  por    %xmm1,%xmm2
+    0.51 :   434b3:  pcmpeqb %xmm0,%xmm3
+    0.57 :   434b7:  pcmpeqb %xmm0,%xmm4
+    0.61 :   434bb:  por    %xmm3,%xmm4
+    0.40 :   434bf:  por    %xmm2,%xmm4
+    1.72 :   434c3:  pmovmskb %xmm4,%r9d
+    2.58 :   434c8:  test   %r9d,%r9d
+    0.00 :   434cb:  jne    43523 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x373>
+    2.49 :   434cd:  add    $0x40,%rdi
+    0.10 :   434d1:  cmp    %rdi,%r8
+    0.00 :   434d4:  jne    43490 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2e0>
+    0.00 :   434d6:  test   $0x3f,%al
+    0.00 :   434d8:  je     4351c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x36c>
+    0.02 :   434da:  movdqu -0x40(%rdx,%rcx,1),%xmm1
+    0.05 :   434e0:  movdqu -0x30(%rdx,%rcx,1),%xmm2
+    0.01 :   434e6:  movdqu -0x20(%rdx,%rcx,1),%xmm3
+    0.01 :   434ec:  movdqu -0x10(%rdx,%rcx,1),%xmm4
+    0.02 :   434f2:  pcmpeqb %xmm0,%xmm1
+    0.11 :   434f6:  pcmpeqb %xmm0,%xmm2
+    0.01 :   434fa:  por    %xmm1,%xmm2
+    0.01 :   434fe:  pcmpeqb %xmm0,%xmm3
+    0.01 :   43502:  pcmpeqb %xmm0,%xmm4
+    0.02 :   43506:  por    %xmm3,%xmm4
+    0.00 :   4350a:  por    %xmm2,%xmm4
+    0.05 :   4350e:  pmovmskb %xmm4,%eax
+    0.05 :   43512:  test   %eax,%eax
+    0.09 :   43514:  setne  %al
+    0.18 :   43517:  jmp    43325 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x175>
+    0.00 :   4351c:  xor    %eax,%eax
+    0.00 :   4351e:  jmp    43325 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x175>
+    0.00 :   43523:  mov    $0x1,%al
+    0.00 :   43525:  jmp    43325 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x175>
+    0.00 :   4352a:  movdqu 0x10(%rdx),%xmm1
+    0.00 :   4352f:  pcmpeqb %xmm0,%xmm1
+    0.00 :   43533:  pmovmskb %xmm1,%edi
+    0.00 :   43537:  test   %edi,%edi
+    0.00 :   43539:  jne    43325 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x175>
+    0.00 :   4353f:  cmp    $0x20,%esi
+    0.00 :   43542:  je     433d2 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x222>
+    0.00 :   43548:  movdqu 0x20(%rdx),%xmm1
+    0.00 :   4354d:  pcmpeqb %xmm0,%xmm1
+    0.00 :   43551:  pmovmskb %xmm1,%esi
+    0.00 :   43555:  test   %esi,%esi
+    0.00 :   43557:  jne    43325 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x175>
+    0.00 :   4355d:  jmp    433d2 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x222>
+    0.00 :   43562:  data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   43570:  xor    %r15d,%r15d
+    0.00 :   43573:  data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   43580:  lea    0x8(%r15),%r13
+    0.00 :   43584:  call   *0x4bfde(%rip)        # 8f568 <<std::time::Instant>::now@Base>
+    0.00 :   4358a:  mov    %rax,0x8(%rsp)
+    0.00 :   4358f:  mov    %edx,0x10(%rsp)
+    0.00 :   43593:  lea    0x8(%rsp),%rdi
+    0.00 :   43598:  call   *0x4bfd2(%rip)        # 8f570 <<std::time::Instant>::elapsed@Base>
+    0.00 :   4359e:  movapd -0x356d6(%rip),%xmm1        # ded0 <__abi_tag+0xdbd4>
+    0.00 :   435a6:  movq   -0x3563e(%rip),%xmm2        # df70 <__abi_tag+0xdc74>
+    0.00 :   435ae:  imul   $0x3b9aca00,%rax,%rax
+    0.00 :   435b5:  mov    %edx,%ecx
+    0.00 :   435b7:  add    %rax,%rcx
+    0.00 :   435ba:  movq   %rcx,%xmm0
+    0.00 :   435bf:  punpckldq %xmm2,%xmm0
+    0.00 :   435c3:  subpd  %xmm1,%xmm0
+    0.00 :   435c7:  movapd %xmm0,%xmm1
+    0.00 :   435cb:  unpckhpd %xmm0,%xmm1
+    0.00 :   435cf:  addsd  %xmm0,%xmm1
+    0.00 :   435d3:  divsd  (%rsp),%xmm1
+    0.00 :   435d8:  movsd  %xmm1,0x160(%rsp,%r15,1)
+    0.00 :   435e2:  mov    %r13,%r15
+    0.00 :   435e5:  cmp    $0x190,%r13
+    0.00 :   435ec:  jne    43580 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3d0>
+    0.00 :   435ee:  mov    $0x32,%esi
+    0.00 :   435f3:  lea    0x160(%rsp),%r15
+    0.00 :   435fb:  mov    %r15,%rdi
+    0.00 :   435fe:  movsd  -0x353f6(%rip),%xmm0        # e210 <__abi_tag+0xdf14>
+    0.00 :   43606:  call   *0x4bfbc(%rip)        # 8f5c8 <_DYNAMIC+0x290>
+    0.00 :   4360c:  mov    $0x32,%edx
+    0.00 :   43611:  mov    %rbp,%rdi
+    0.00 :   43614:  mov    %r15,%rsi
+    0.00 :   43617:  call   *0x4bfb3(%rip)        # 8f5d0 <_DYNAMIC+0x298>
+    0.00 :   4361d:  lea    (%r12,%r12,4),%r13
+    0.00 :   43621:  movq   %r13,%xmm0
+    0.00 :   43626:  punpckldq -0x356be(%rip),%xmm0        # df70 <__abi_tag+0xdc74>
+    0.00 :   4362e:  subpd  -0x35766(%rip),%xmm0        # ded0 <__abi_tag+0xdbd4>
+    0.00 :   43636:  movapd %xmm0,%xmm1
+    0.00 :   4363a:  unpckhpd %xmm0,%xmm1
+    0.00 :   4363e:  addsd  %xmm0,%xmm1
+    0.00 :   43642:  movapd %xmm1,0x60(%rsp)
+    0.00 :   43648:  mov    %r12,0x58(%rsp)
+    0.00 :   4364d:  test   %r12,%r12
+    0.00 :   43650:  je     43930 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x780>
+    0.00 :   43656:  movq   $0x0,(%rsp)
+    0.00 :   4365e:  jmp    436ca <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x51a>
+    0.00 :   43660:  mov    %rbx,%rbp
+    0.00 :   43663:  mov    (%rsp),%rbx
+    0.00 :   43667:  lea    0x8(%rbx),%r15
+    0.00 :   4366b:  lea    0x38(%rsp),%rdi
+    0.00 :   43670:  mov    0x4bef9(%rip),%r12        # 8f570 <<std::time::Instant>::elapsed@Base>
+    0.00 :   43677:  call   *%r12
+    0.00 :   4367a:  imul   $0x3b9aca00,%rax,%rax
+    0.00 :   43681:  mov    %edx,%ecx
+    0.00 :   43683:  add    %rax,%rcx
+    0.00 :   43686:  movq   %rcx,%xmm0
+    0.00 :   4368b:  punpckldq -0x35723(%rip),%xmm0        # df70 <__abi_tag+0xdc74>
+    0.00 :   43693:  subpd  -0x357cb(%rip),%xmm0        # ded0 <__abi_tag+0xdbd4>
+    0.00 :   4369b:  movapd %xmm0,%xmm1
+    0.00 :   4369f:  unpckhpd %xmm0,%xmm1
+    0.00 :   436a3:  addsd  %xmm0,%xmm1
+    0.00 :   436a7:  divsd  0x60(%rsp),%xmm1
+    0.00 :   436ad:  movsd  %xmm1,0x160(%rsp,%rbx,1)
+    0.00 :   436b6:  mov    %rbp,%rbx
+    0.00 :   436b9:  mov    %r15,(%rsp)
+    0.00 :   436bd:  cmp    $0x190,%r15
+    0.00 :   436c4:  je     439a4 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x7f4>
+    0.00 :   436ca:  call   *0x4be98(%rip)        # 8f568 <<std::time::Instant>::now@Base>
+    0.00 :   436d0:  mov    %rax,0x38(%rsp)
+    0.00 :   436d5:  mov    %edx,0x40(%rsp)
+    0.00 :   436d9:  xor    %r15d,%r15d
+    0.00 :   436dc:  jmp    436f5 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x545>
+    0.00 :   436de:  xchg   %ax,%ax
+    0.00 :   436e0:  call   28e80 <<&str as core::str::pattern::Pattern>::is_contained_in>
+    0.00 :   436e5:  inc    %r15
+    0.00 :   436e8:  mov    %al,0x18(%rsp)
+    1.17 :   436ec:  cmp    %r13,%r15
+    0.00 :   436ef:  je     43660 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4b0>
+    0.00 :   436f5:  lea    -0x32c41(%rip),%rax        # 10abb <__abi_tag+0x107bf>
+    0.00 :   436fc:  mov    %rax,0x8(%rsp)
+    0.00 :   43701:  movq   $0x9f7,0x10(%rsp)
+    0.00 :   4370a:  lea    0x8(%rsp),%rax
+    0.00 :   4370f:  mov    %rbx,0x18(%rsp)
+    0.00 :   43714:  movq   $0x1,0x20(%rsp)
+    0.00 :   4371d:  mov    0x18(%rsp),%rdi
+    0.57 :   43722:  mov    0x20(%rsp),%rsi
+    0.00 :   43727:  mov    0x8(%rsp),%rdx
+    0.00 :   4372c:  mov    0x10(%rsp),%rcx
+    0.00 :   43731:  cmp    $0x1,%rsi
+    0.00 :   43735:  sete   %al
+    0.00 :   43738:  cmp    $0x10,%rcx
+    0.00 :   4373c:  setae  %r8b
+    0.00 :   43740:  test   %r8b,%al
+    0.00 :   43743:  je     436e0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x530>
+    0.60 :   43745:  movzbl (%rdi),%edi
+    0.00 :   43748:  cmp    $0x40,%rcx
+    0.00 :   4374c:  jae    437b0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x600>
+    0.00 :   4374e:  mov    %rcx,%rsi
+    0.00 :   43751:  movd   %edi,%xmm0
+    0.00 :   43755:  punpcklbw %xmm0,%xmm0
+    0.00 :   43759:  pshuflw $0x0,%xmm0,%xmm0
+    0.00 :   4375e:  pshufd $0x44,%xmm0,%xmm0
+    0.00 :   43763:  and    $0x30,%rsi
+    0.00 :   43767:  je     43788 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x5d8>
+    0.00 :   43769:  movdqu (%rdx),%xmm1
+    0.00 :   4376d:  pcmpeqb %xmm0,%xmm1
+    0.00 :   43771:  pmovmskb %xmm1,%edi
+    0.00 :   43775:  mov    $0x1,%al
+    0.00 :   43777:  test   %edi,%edi
+    0.00 :   43779:  jne    436e5 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x535>
+    0.00 :   4377f:  cmp    $0x10,%esi
+    0.00 :   43782:  jne    438ea <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x73a>
+    0.00 :   43788:  test   $0xf,%cl
+    0.00 :   4378b:  je     438dc <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x72c>
+    0.00 :   43791:  movdqu -0x10(%rdx,%rcx,1),%xmm1
+    0.00 :   43797:  pcmpeqb %xmm0,%xmm1
+    0.00 :   4379b:  pmovmskb %xmm1,%eax
+    0.00 :   4379f:  jmp    438d2 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x722>
+    0.00 :   437a4:  data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   437b0:  cmp    $0x7f,%rcx
+    0.00 :   437b4:  jbe    43816 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x666>
+    0.00 :   437b6:  lea    0x3f(%rdx),%rsi
+    0.00 :   437ba:  and    $0xffffffffffffffc0,%rsi
+    0.00 :   437be:  sub    %rdx,%rsi
+    0.00 :   437c1:  je     43816 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x666>
+    0.00 :   437c3:  movd   %edi,%xmm0
+    0.00 :   437c7:  punpcklbw %xmm0,%xmm0
+    0.66 :   437cb:  pshuflw $0x0,%xmm0,%xmm0
+    0.01 :   437d0:  pshufd $0x44,%xmm0,%xmm0
+    0.02 :   437d5:  movdqu (%rdx),%xmm1
+    0.51 :   437d9:  movdqu 0x10(%rdx),%xmm2
+    0.00 :   437de:  movdqu 0x20(%rdx),%xmm3
+    0.00 :   437e3:  movdqu 0x30(%rdx),%xmm4
+    0.00 :   437e8:  pcmpeqb %xmm0,%xmm1
+    1.90 :   437ec:  pcmpeqb %xmm0,%xmm2
+    0.04 :   437f0:  por    %xmm1,%xmm2
+    0.22 :   437f4:  pcmpeqb %xmm0,%xmm3
+    0.01 :   437f8:  pcmpeqb %xmm0,%xmm4
+    0.01 :   437fc:  por    %xmm3,%xmm4
+    0.01 :   43800:  por    %xmm2,%xmm4
+    0.45 :   43804:  pmovmskb %xmm4,%r8d
+    0.23 :   43809:  mov    $0x1,%al
+    0.00 :   4380b:  test   %r8d,%r8d
+    0.00 :   4380e:  jne    436e5 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x535>
+    0.35 :   43814:  jmp    43818 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x668>
+    0.00 :   43816:  xor    %esi,%esi
+    0.00 :   43818:  mov    %rcx,%rax
+    0.00 :   4381b:  sub    %rsi,%rax
+    0.00 :   4381e:  mov    %rax,%r8
+    0.00 :   43821:  movd   %edi,%xmm0
+    0.30 :   43825:  punpcklbw %xmm0,%xmm0
+    0.00 :   43829:  pshuflw $0x0,%xmm0,%xmm0
+    0.01 :   4382e:  pshufd $0x44,%xmm0,%xmm0
+    0.29 :   43833:  movabs $0x7fffffffffffffc0,%rdi
+    0.00 :   4383d:  and    %rdi,%r8
+    0.00 :   43840:  je     43896 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x6e6>
+    0.00 :   43842:  add    %rdx,%rsi
+    0.00 :   43845:  xor    %edi,%edi
+    0.35 :   43847:  nopw   0x0(%rax,%rax,1)
+    0.60 :   43850:  movdqu (%rsi,%rdi,1),%xmm1
+    0.18 :   43855:  movdqu 0x10(%rsi,%rdi,1),%xmm2
+    0.42 :   4385b:  movdqu 0x20(%rsi,%rdi,1),%xmm3
+    1.12 :   43861:  movdqu 0x30(%rsi,%rdi,1),%xmm4
+    6.24 :   43867:  pcmpeqb %xmm0,%xmm1
+    5.49 :   4386b:  pcmpeqb %xmm0,%xmm2
+   14.03 :   4386f:  por    %xmm1,%xmm2
+    2.70 :   43873:  pcmpeqb %xmm0,%xmm3
+    3.23 :   43877:  pcmpeqb %xmm0,%xmm4
+    2.30 :   4387b:  por    %xmm3,%xmm4
+    2.42 :   4387f:  por    %xmm2,%xmm4
+    8.34 :   43883:  pmovmskb %xmm4,%r9d
+   11.70 :   43888:  test   %r9d,%r9d
+    0.00 :   4388b:  jne    438e3 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x733>
+   12.66 :   4388d:  add    $0x40,%rdi
+    0.45 :   43891:  cmp    %rdi,%r8
+    0.00 :   43894:  jne    43850 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x6a0>
+    0.01 :   43896:  test   $0x3f,%al
+    0.00 :   43898:  je     438dc <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x72c>
+    0.10 :   4389a:  movdqu -0x40(%rdx,%rcx,1),%xmm1
+    0.36 :   438a0:  movdqu -0x30(%rdx,%rcx,1),%xmm2
+    0.02 :   438a6:  movdqu -0x20(%rdx,%rcx,1),%xmm3
+    0.10 :   438ac:  movdqu -0x10(%rdx,%rcx,1),%xmm4
+    0.08 :   438b2:  pcmpeqb %xmm0,%xmm1
+    0.85 :   438b6:  pcmpeqb %xmm0,%xmm2
+    0.03 :   438ba:  por    %xmm1,%xmm2
+    0.05 :   438be:  pcmpeqb %xmm0,%xmm3
+    0.04 :   438c2:  pcmpeqb %xmm0,%xmm4
+    0.08 :   438c6:  por    %xmm3,%xmm4
+    0.03 :   438ca:  por    %xmm2,%xmm4
+    0.46 :   438ce:  pmovmskb %xmm4,%eax
+    0.26 :   438d2:  test   %eax,%eax
+    0.34 :   438d4:  setne  %al
+    0.98 :   438d7:  jmp    436e5 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x535>
+    0.00 :   438dc:  xor    %eax,%eax
+    0.00 :   438de:  jmp    436e5 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x535>
+    0.00 :   438e3:  mov    $0x1,%al
+    0.00 :   438e5:  jmp    436e5 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x535>
+    0.00 :   438ea:  movdqu 0x10(%rdx),%xmm1
+    0.00 :   438ef:  pcmpeqb %xmm0,%xmm1
+    0.00 :   438f3:  pmovmskb %xmm1,%edi
+    0.00 :   438f7:  test   %edi,%edi
+    0.00 :   438f9:  jne    436e5 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x535>
+    0.00 :   438ff:  cmp    $0x20,%esi
+    0.00 :   43902:  je     43788 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x5d8>
+    0.00 :   43908:  movdqu 0x20(%rdx),%xmm1
+    0.00 :   4390d:  pcmpeqb %xmm0,%xmm1
+    0.00 :   43911:  pmovmskb %xmm1,%esi
+    0.00 :   43915:  test   %esi,%esi
+    0.00 :   43917:  jne    436e5 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x535>
+    0.00 :   4391d:  jmp    43788 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x5d8>
+    0.00 :   43922:  data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   43930:  xor    %r15d,%r15d
+    0.00 :   43933:  mov    0x4bc36(%rip),%r12        # 8f570 <<std::time::Instant>::elapsed@Base>
+    0.00 :   4393a:  nopw   0x0(%rax,%rax,1)
+    0.00 :   43940:  lea    0x8(%r15),%r13
+    0.00 :   43944:  call   *0x4bc1e(%rip)        # 8f568 <<std::time::Instant>::now@Base>
+    0.00 :   4394a:  mov    %rax,0x38(%rsp)
+    0.00 :   4394f:  mov    %edx,0x40(%rsp)
+    0.00 :   43953:  lea    0x38(%rsp),%rdi
+    0.00 :   43958:  call   *%r12
+    0.00 :   4395b:  imul   $0x3b9aca00,%rax,%rax
+    0.00 :   43962:  mov    %edx,%ecx
+    0.00 :   43964:  add    %rax,%rcx
+    0.00 :   43967:  movq   %rcx,%xmm0
+    0.00 :   4396c:  punpckldq -0x35a04(%rip),%xmm0        # df70 <__abi_tag+0xdc74>
+    0.00 :   43974:  subpd  -0x35aac(%rip),%xmm0        # ded0 <__abi_tag+0xdbd4>
+    0.00 :   4397c:  movapd %xmm0,%xmm1
+    0.00 :   43980:  unpckhpd %xmm0,%xmm1
+    0.00 :   43984:  addsd  %xmm0,%xmm1
+    0.00 :   43988:  divsd  0x60(%rsp),%xmm1
+    0.00 :   4398e:  movsd  %xmm1,0x160(%rsp,%r15,1)
+    0.00 :   43998:  mov    %r13,%r15
+    0.00 :   4399b:  cmp    $0x190,%r13
+    0.00 :   439a2:  jne    43940 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x790>
+    0.00 :   439a4:  mov    $0x32,%esi
+    0.00 :   439a9:  lea    0x160(%rsp),%r15
+    0.00 :   439b1:  mov    %r15,%rdi
+    0.00 :   439b4:  movsd  -0x357ac(%rip),%xmm0        # e210 <__abi_tag+0xdf14>
+    0.00 :   439bc:  call   *0x4bc06(%rip)        # 8f5c8 <_DYNAMIC+0x290>
+    0.00 :   439c2:  mov    $0x32,%edx
+    0.00 :   439c7:  lea    0x80(%rsp),%rdi
+    0.00 :   439cf:  mov    %r15,%rsi
+    0.00 :   439d2:  call   *0x4bbf8(%rip)        # 8f5d0 <_DYNAMIC+0x298>
+    0.00 :   439d8:  lea    0x70(%rsp),%rdi
+    0.00 :   439dd:  call   *%r12
+    0.00 :   439e0:  xor    %ecx,%ecx
+    0.00 :   439e2:  cmp    $0x5f5e101,%edx
+    0.00 :   439e8:  setae  %cl
+    0.00 :   439eb:  xor    %esi,%esi
+    0.00 :   439ed:  test   %rax,%rax
+    0.00 :   439f0:  setne  %sil
+    0.00 :   439f4:  cmove  %ecx,%esi
+    0.00 :   439f7:  cmp    $0x1,%sil
+    0.00 :   439fb:  mov    0x30(%rsp),%rsi
+    0.00 :   43a00:  mov    0x58(%rsp),%r12
+    0.00 :   43a05:  mov    0x28(%rsp),%rdi
+    0.00 :   43a0a:  lea    0xf0(%rsp),%rbp
+    0.00 :   43a12:  jne    43a48 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x898>
+    0.00 :   43a14:  movsd  -0x35824(%rip),%xmm0        # e1f8 <__abi_tag+0xdefc>
+    0.00 :   43a1c:  ucomisd 0x138(%rsp),%xmm0
+    0.00 :   43a25:  jbe    43a48 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x898>
+    0.00 :   43a27:  movsd  0x110(%rsp),%xmm0
+    0.00 :   43a30:  subsd  0xa0(%rsp),%xmm0
+    0.00 :   43a39:  movsd  0xc0(%rsp),%xmm1
+    0.00 :   43a42:  ucomisd %xmm0,%xmm1
+    0.00 :   43a46:  ja     43ab1 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x901>
+    0.00 :   43a48:  add    %rax,%rdi
+    0.00 :   43a4b:  jb     43ba2 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x9f2>
+    0.00 :   43a51:  add    %edx,%esi
+    0.00 :   43a53:  cmp    $0x3b9aca00,%esi
+    0.00 :   43a59:  jb     43a6e <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x8be>
+    0.00 :   43a5b:  cmp    $0xffffffffffffffff,%rdi
+    0.00 :   43a5f:  je     43ba2 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x9f2>
+    0.00 :   43a65:  inc    %rdi
+    0.00 :   43a68:  add    $0xc4653600,%esi
+    0.00 :   43a6e:  xor    %eax,%eax
+    0.00 :   43a70:  cmp    $0x4,%rdi
+    0.00 :   43a74:  setae  %al
+    0.00 :   43a77:  xor    %ecx,%ecx
+    0.00 :   43a79:  test   %esi,%esi
+    0.00 :   43a7b:  setne  %cl
+    0.00 :   43a7e:  cmp    $0x3,%rdi
+    0.00 :   43a82:  cmove  %ecx,%eax
+    0.00 :   43a85:  test   %al,%al
+    0.00 :   43a87:  jne    43ab1 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x901>
+    0.00 :   43a89:  movabs $0x1999999999999999,%rax
+    0.00 :   43a93:  cmp    %rax,%r12
+    0.00 :   43a96:  ja     43ab1 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x901>
+    0.00 :   43a98:  mov    %rdi,0x28(%rsp)
+    0.00 :   43a9d:  mov    %rsi,0x30(%rsp)
+    0.00 :   43aa2:  add    %r12,%r12
+    0.00 :   43aa5:  mov    0x4babc(%rip),%rax        # 8f568 <<std::time::Instant>::now@Base>
+    0.00 :   43aac:  jmp    43277 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0xc7>
+    0.00 :   43ab1:  movups 0x80(%rsp),%xmm0
+    0.00 :   43ab9:  movups 0x90(%rsp),%xmm1
+    0.00 :   43ac1:  movups 0xa0(%rsp),%xmm2
+    0.00 :   43ac9:  movups 0xb0(%rsp),%xmm3
+    0.00 :   43ad1:  movaps %xmm0,0x160(%rsp)
+    0.00 :   43ad9:  movaps %xmm1,0x170(%rsp)
+    0.00 :   43ae1:  movaps %xmm2,0x180(%rsp)
+    0.00 :   43ae9:  movaps %xmm3,0x190(%rsp)
+    0.00 :   43af1:  movups 0xc0(%rsp),%xmm0
+    0.00 :   43af9:  movaps %xmm0,0x1a0(%rsp)
+    0.00 :   43b01:  movups 0xd0(%rsp),%xmm0
+    0.00 :   43b09:  movaps %xmm0,0x1b0(%rsp)
+    0.00 :   43b11:  movups 0xe0(%rsp),%xmm0
+    0.00 :   43b19:  movaps %xmm0,0x1c0(%rsp)
+    0.00 :   43b21:  mov    0x48(%rsp),%rax
+    0.00 :   43b26:  movq   $0x1,(%rax)
+    0.00 :   43b2d:  movaps 0x160(%rsp),%xmm0
+    0.00 :   43b35:  movaps 0x170(%rsp),%xmm1
+    0.00 :   43b3d:  movaps 0x180(%rsp),%xmm2
+    0.00 :   43b45:  movaps 0x190(%rsp),%xmm3
+    0.00 :   43b4d:  movups %xmm0,0x8(%rax)
+    0.00 :   43b51:  movups %xmm1,0x18(%rax)
+    0.00 :   43b55:  movups %xmm2,0x28(%rax)
+    0.00 :   43b59:  movups %xmm3,0x38(%rax)
+    0.00 :   43b5d:  movaps 0x1a0(%rsp),%xmm0
+    0.00 :   43b65:  movups %xmm0,0x48(%rax)
+    0.00 :   43b69:  movaps 0x1b0(%rsp),%xmm0
+    0.00 :   43b71:  movups %xmm0,0x58(%rax)
+    0.00 :   43b75:  movaps 0x1c0(%rsp),%xmm0
+    0.00 :   43b7d:  movups %xmm0,0x68(%rax)
+    0.00 :   43b81:  mov    0x50(%rsp),%rbx
+    0.00 :   43b86:  movq   $0xffffffffffffffff,(%rbx)
+    0.00 :   43b8d:  mov    %rbx,%rax
+    0.00 :   43b90:  add    $0x2f8,%rsp
+    0.00 :   43b97:  pop    %rbx
+    0.00 :   43b98:  pop    %r12
+    0.00 :   43b9a:  pop    %r13
+    0.00 :   43b9c:  pop    %r14
+    0.00 :   43b9e:  pop    %r15
+    0.00 :   43ba0:  pop    %rbp
+    0.00 :   43ba1:  ret
+    0.00 :   43ba2:  lea    -0x34127(%rip),%rdi        # fa82 <__abi_tag+0xf786>
+    0.00 :   43ba9:  lea    0x44558(%rip),%rdx        # 88108 <__frame_dummy_init_array_entry+0x50>
+    0.00 :   43bb0:  mov    $0x2b,%esi
+    0.00 :   43bb5:  call   *0x4ba1d(%rip)        # 8f5d8 <core::option::expect_failed@Base>
+ Percent |	Source code & Disassembly of perf-vdso.so-595tL8 for cpu_core/cycles/u (1 samples, percent: local period)
+-------------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    0000000000000cc0 <__vdso_clock_gettime@@LINUX_2.6>:
+    0.00 :    cc0:    push   %rbp
+    0.00 :    cc1:    mov    %rsp,%rbp
+    0.00 :    cc4:    push   %r14
+    0.00 :    cc6:    push   %rbx
+    0.00 :    cc7:    and    $0xfffffffffffffff0,%rsp
+    0.00 :    ccb:    sub    $0x10,%rsp
+    0.00 :    ccf:    cmp    $0x17,%edi
+    0.00 :    cd2:    ja     d93 <__vdso_clock_gettime@@LINUX_2.6+0xd3>
+    0.00 :    cd8:    mov    $0x1,%eax
+    0.00 :    cdd:    mov    %edi,%ecx
+    0.00 :    cdf:    lea    -0x6ce6(%rip),%r10        # ffffffffffffa000 <__vdso_futex_robust_list32_try_unlock@@LINUX_2.6+0xffffffffffff8960>
+    0.00 :    ce6:    shl    %cl,%eax
+    0.00 :    ce8:    test   $0x883,%eax
+    0.00 :    ced:    je     dbc <__vdso_clock_gettime@@LINUX_2.6+0xfc>
+    0.00 :    cf3:    mov    (%r10),%r11d
+  100.00 :    cf6:    test   $0x1,%r11b
+    0.00 :    cfa:    jne    da7 <__vdso_clock_gettime@@LINUX_2.6+0xe7>
+    0.00 :    d00:    mov    0x4(%r10),%eax
+    0.00 :    d04:    cmp    $0x1,%eax
+    0.00 :    d07:    jne    d85 <__vdso_clock_gettime@@LINUX_2.6+0xc5>
+    0.00 :    d09:    rdtscp
+    0.00 :    d0c:    xchg   %ax,%ax
+    0.00 :    d0e:    shl    $0x20,%rdx
+    0.00 :    d12:    or     %rax,%rdx
+    0.00 :    d15:    btr    $0x3f,%rdx
+    0.00 :    d1a:    movslq %edi,%r8
+    0.00 :    d1d:    mov    0x24(%r10),%ecx
+    0.00 :    d21:    sub    0x8(%r10),%rdx
+    0.00 :    d25:    shl    $0x4,%r8
+    0.00 :    d29:    add    %r10,%r8
+    0.00 :    d2c:    mov    0x30(%r8),%r9
+    0.00 :    d30:    cmp    %rdx,0x10(%r10)
+    0.00 :    d34:    jb     dd2 <__vdso_clock_gettime@@LINUX_2.6+0x112>
+    0.00 :    d3a:    mov    0x20(%r10),%eax
+    0.00 :    d3e:    imul   %rdx,%rax
+    0.00 :    d42:    add    %r9,%rax
+    0.00 :    d45:    shr    %cl,%rax
+    0.00 :    d48:    mov    0x28(%r8),%rcx
+    0.00 :    d4c:    mov    (%r10),%edx
+    0.00 :    d4f:    cmp    %edx,%r11d
+    0.00 :    d52:    jne    cf3 <__vdso_clock_gettime@@LINUX_2.6+0x33>
+    0.00 :    d54:    cmp    $0x3b9ac9ff,%rax
+    0.00 :    d5a:    jbe    d72 <__vdso_clock_gettime@@LINUX_2.6+0xb2>
+    0.00 :    d5c:    xor    %edx,%edx
+    0.00 :    d5e:    sub    $0x3b9aca00,%rax
+    0.00 :    d64:    add    $0x1,%edx
+    0.00 :    d67:    cmp    $0x3b9ac9ff,%rax
+    0.00 :    d6d:    ja     d5e <__vdso_clock_gettime@@LINUX_2.6+0x9e>
+    0.00 :    d6f:    add    %rdx,%rcx
+    0.00 :    d72:    mov    %rcx,(%rsi)
+    0.00 :    d75:    mov    %rax,0x8(%rsi)
+    0.00 :    d79:    lea    -0x10(%rbp),%rsp
+    0.00 :    d7d:    xor    %eax,%eax
+    0.00 :    d7f:    pop    %rbx
+    0.00 :    d80:    pop    %r14
+    0.00 :    d82:    pop    %rbp
+    0.00 :    d83:    ret
+    0.00 :    d84:    int3
+    0.00 :    d85:    cmp    $0x2,%eax
+    0.00 :    d88:    je     e67 <__vdso_clock_gettime@@LINUX_2.6+0x1a7>
+    0.00 :    d8e:    cmp    $0x3,%eax
+    0.00 :    d91:    je     e0a <__vdso_clock_gettime@@LINUX_2.6+0x14a>
+    0.00 :    d93:    movslq %edi,%rdi
+    0.00 :    d96:    mov    $0xe4,%eax
+    0.00 :    d9b:    syscall
+    0.00 :    d9d:    lea    -0x10(%rbp),%rsp
+    0.00 :    da1:    pop    %rbx
+    0.00 :    da2:    pop    %r14
+    0.00 :    da4:    pop    %rbp
+    0.00 :    da5:    ret
+    0.00 :    da6:    int3
+    0.00 :    da7:    cmpl   $0x7fffffff,0x4(%r10)
+    0.00 :    daf:    je     e81 <__vdso_clock_gettime@@LINUX_2.6+0x1c1>
+    0.00 :    db5:    pause
+    0.00 :    db7:    jmp    cf3 <__vdso_clock_gettime@@LINUX_2.6+0x33>
+    0.00 :    dbc:    test   $0x60,%al
+    0.00 :    dbe:    jne    e31 <__vdso_clock_gettime@@LINUX_2.6+0x171>
+    0.00 :    dc0:    add    $0xe8,%r10
+    0.00 :    dc7:    cmp    $0x4,%edi
+    0.00 :    dca:    je     cf3 <__vdso_clock_gettime@@LINUX_2.6+0x33>
+    0.00 :    dd0:    jmp    d93 <__vdso_clock_gettime@@LINUX_2.6+0xd3>
+    0.00 :    dd2:    bt     $0x3e,%rdx
+    0.00 :    dd7:    jae    de4 <__vdso_clock_gettime@@LINUX_2.6+0x124>
+    0.00 :    dd9:    mov    %r9,%rax
+    0.00 :    ddc:    shr    %cl,%rax
+    0.00 :    ddf:    jmp    d48 <__vdso_clock_gettime@@LINUX_2.6+0x88>
+    0.00 :    de4:    mov    0x20(%r10),%eax
+    0.00 :    de8:    btr    $0x3f,%rdx
+    0.00 :    ded:    mul    %rdx
+    0.00 :    df0:    add    %r9,%rax
+    0.00 :    df3:    adc    $0x0,%rdx
+    0.00 :    df7:    shrd   %cl,%rdx,%rax
+    0.00 :    dfb:    shr    %cl,%rdx
+    0.00 :    dfe:    and    $0x40,%ecx
+    0.00 :    e01:    cmovne %rdx,%rax
+    0.00 :    e05:    jmp    d48 <__vdso_clock_gettime@@LINUX_2.6+0x88>
+    0.00 :    e0a:    mov    %rsi,(%rsp)
+    0.00 :    e0e:    mov    %edi,0xc(%rsp)
+    0.00 :    e12:    call   900 <LINUX_2.6@@LINUX_2.6+0x900>
+    0.00 :    e17:    mov    (%rsp),%rsi
+    0.00 :    e1b:    mov    0xc(%rsp),%edi
+    0.00 :    e1f:    mov    %rax,%rdx
+    0.00 :    e22:    cmp    $0xffffffffffffffff,%rdx
+    0.00 :    e26:    je     d93 <__vdso_clock_gettime@@LINUX_2.6+0xd3>
+    0.00 :    e2c:    jmp    d1a <__vdso_clock_gettime@@LINUX_2.6+0x5a>
+    0.00 :    e31:    movslq %edi,%r8
+    0.00 :    e34:    lea    0x2(%r8),%rax
+    0.00 :    e38:    shl    $0x4,%rax
+    0.00 :    e3c:    add    %r10,%rax
+    0.00 :    e3f:    mov    (%r10),%edx
+    0.00 :    e42:    test   $0x1,%dl
+    0.00 :    e45:    jne    f37 <__vdso_clock_gettime@@LINUX_2.6+0x277>
+    0.00 :    e4b:    mov    0x8(%rax),%rcx
+    0.00 :    e4f:    mov    %rcx,(%rsi)
+    0.00 :    e52:    mov    0x10(%rax),%rcx
+    0.00 :    e56:    mov    %rcx,0x8(%rsi)
+    0.00 :    e5a:    mov    (%r10),%ecx
+    0.00 :    e5d:    cmp    %edx,%ecx
+    0.00 :    e5f:    je     d79 <__vdso_clock_gettime@@LINUX_2.6+0xb9>
+    0.00 :    e65:    jmp    e3f <__vdso_clock_gettime@@LINUX_2.6+0x17f>
+    0.00 :    e67:    mov    %rsi,(%rsp)
+    0.00 :    e6b:    mov    %edi,0xc(%rsp)
+    0.00 :    e6f:    call   950 <LINUX_2.6@@LINUX_2.6+0x950>
+    0.00 :    e74:    mov    0xc(%rsp),%edi
+    0.00 :    e78:    mov    (%rsp),%rsi
+    0.00 :    e7c:    mov    %rax,%rdx
+    0.00 :    e7f:    jmp    e22 <__vdso_clock_gettime@@LINUX_2.6+0x162>
+    0.00 :    e81:    lea    -0x5da0(%rip),%r11        # ffffffffffffb0e8 <__vdso_futex_robust_list32_try_unlock@@LINUX_2.6+0xffffffffffff9a48>
+    0.00 :    e88:    cmp    $0x4,%edi
+    0.00 :    e8b:    lea    -0xe8(%r11),%rax
+    0.00 :    e92:    cmovne %rax,%r11
+    0.00 :    e96:    mov    (%r11),%eax
+    0.00 :    e99:    mov    %eax,%ebx
+    0.00 :    e9b:    test   $0x1,%al
+    0.00 :    e9d:    jne    f98 <__vdso_clock_gettime@@LINUX_2.6+0x2d8>
+    0.00 :    ea3:    mov    0x4(%r11),%eax
+    0.00 :    ea7:    cmp    $0x1,%eax
+    0.00 :    eaa:    jne    f5f <__vdso_clock_gettime@@LINUX_2.6+0x29f>
+    0.00 :    eb0:    rdtscp
+    0.00 :    eb3:    xchg   %ax,%ax
+    0.00 :    eb5:    shl    $0x20,%rdx
+    0.00 :    eb9:    or     %rax,%rdx
+    0.00 :    ebc:    btr    $0x3f,%rdx
+    0.00 :    ec1:    movslq %edi,%r8
+    0.00 :    ec4:    mov    0x24(%r11),%ecx
+    0.00 :    ec8:    sub    0x8(%r11),%rdx
+    0.00 :    ecc:    mov    %r8,%rax
+    0.00 :    ecf:    shl    $0x4,%rax
+    0.00 :    ed3:    mov    0x30(%r11,%rax,1),%r9
+    0.00 :    ed8:    lea    (%r11,%rax,1),%r14
+    0.00 :    edc:    cmp    %rdx,0x10(%r11)
+    0.00 :    ee0:    jb     f50 <__vdso_clock_gettime@@LINUX_2.6+0x290>
+    0.00 :    ee2:    mov    0x20(%r11),%eax
+    0.00 :    ee6:    imul   %rdx,%rax
+    0.00 :    eea:    add    %r9,%rax
+    0.00 :    eed:    shr    %cl,%rax
+    0.00 :    ef0:    mov    0x28(%r14),%rdx
+    0.00 :    ef4:    mov    (%r11),%ecx
+    0.00 :    ef7:    cmp    %ebx,%ecx
+    0.00 :    ef9:    jne    e96 <__vdso_clock_gettime@@LINUX_2.6+0x1d6>
+    0.00 :    efb:    shl    $0x4,%r8
+    0.00 :    eff:    add    %r8,%r10
+    0.00 :    f02:    mov    0x28(%r10),%rcx
+    0.00 :    f06:    add    0x30(%r10),%rax
+    0.00 :    f0a:    add    %rdx,%rcx
+    0.00 :    f0d:    cmp    $0x3b9ac9ff,%rax
+    0.00 :    f13:    jbe    f4c <__vdso_clock_gettime@@LINUX_2.6+0x28c>
+    0.00 :    f15:    xor    %edx,%edx
+    0.00 :    f17:    sub    $0x3b9aca00,%rax
+    0.00 :    f1d:    add    $0x1,%edx
+    0.00 :    f20:    cmp    $0x3b9ac9ff,%rax
+    0.00 :    f26:    ja     f17 <__vdso_clock_gettime@@LINUX_2.6+0x257>
+    0.00 :    f28:    add    %rcx,%rdx
+    0.00 :    f2b:    mov    %rax,0x8(%rsi)
+    0.00 :    f2f:    mov    %rdx,(%rsi)
+    0.00 :    f32:    jmp    d79 <__vdso_clock_gettime@@LINUX_2.6+0xb9>
+    0.00 :    f37:    cmpl   $0x7fffffff,0x4(%r10)
+    0.00 :    f3f:    je     fc8 <__vdso_clock_gettime@@LINUX_2.6+0x308>
+    0.00 :    f45:    pause
+    0.00 :    f47:    jmp    e3f <__vdso_clock_gettime@@LINUX_2.6+0x17f>
+    0.00 :    f4c:    xor    %edx,%edx
+    0.00 :    f4e:    jmp    f28 <__vdso_clock_gettime@@LINUX_2.6+0x268>
+    0.00 :    f50:    bt     $0x3e,%rdx
+    0.00 :    f55:    jae    f9f <__vdso_clock_gettime@@LINUX_2.6+0x2df>
+    0.00 :    f57:    mov    %r9,%rax
+    0.00 :    f5a:    shr    %cl,%rax
+    0.00 :    f5d:    jmp    ef0 <__vdso_clock_gettime@@LINUX_2.6+0x230>
+    0.00 :    f5f:    cmp    $0x2,%eax
+    0.00 :    f62:    je     102e <__vdso_clock_gettime@@LINUX_2.6+0x36e>
+    0.00 :    f68:    cmp    $0x3,%eax
+    0.00 :    f6b:    jne    d93 <__vdso_clock_gettime@@LINUX_2.6+0xd3>
+    0.00 :    f71:    mov    %rsi,(%rsp)
+    0.00 :    f75:    mov    %edi,0xc(%rsp)
+    0.00 :    f79:    call   900 <LINUX_2.6@@LINUX_2.6+0x900>
+    0.00 :    f7e:    mov    (%rsp),%rsi
+    0.00 :    f82:    mov    0xc(%rsp),%edi
+    0.00 :    f86:    mov    %rax,%rdx
+    0.00 :    f89:    cmp    $0xffffffffffffffff,%rdx
+    0.00 :    f8d:    je     d93 <__vdso_clock_gettime@@LINUX_2.6+0xd3>
+    0.00 :    f93:    jmp    ec1 <__vdso_clock_gettime@@LINUX_2.6+0x201>
+    0.00 :    f98:    pause
+    0.00 :    f9a:    jmp    e96 <__vdso_clock_gettime@@LINUX_2.6+0x1d6>
+    0.00 :    f9f:    mov    %rdx,%rax
+    0.00 :    fa2:    mov    0x20(%r11),%edx
+    0.00 :    fa6:    btr    $0x3f,%rax
+    0.00 :    fab:    mul    %rdx
+    0.00 :    fae:    add    %r9,%rax
+    0.00 :    fb1:    adc    $0x0,%rdx
+    0.00 :    fb5:    shrd   %cl,%rdx,%rax
+    0.00 :    fb9:    shr    %cl,%rdx
+    0.00 :    fbc:    and    $0x40,%cl
+    0.00 :    fbf:    cmovne %rdx,%rax
+    0.00 :    fc3:    jmp    ef0 <__vdso_clock_gettime@@LINUX_2.6+0x230>
+    0.00 :    fc8:    lea    0x2(%r8),%rdx
+    0.00 :    fcc:    shl    $0x4,%rdx
+    0.00 :    fd0:    add    %r10,%rdx
+    0.00 :    fd3:    mov    0x1000(%r10),%r8d
+    0.00 :    fda:    mov    %r8d,%ecx
+    0.00 :    fdd:    and    $0x1,%ecx
+    0.00 :    fe0:    jne    104b <__vdso_clock_gettime@@LINUX_2.6+0x38b>
+    0.00 :    fe2:    mov    0x1008(%rdx),%rdi
+    0.00 :    fe9:    mov    0x1010(%rdx),%rax
+    0.00 :    ff0:    mov    0x1000(%r10),%r9d
+    0.00 :    ff7:    cmp    %r9d,%r8d
+    0.00 :    ffa:    jne    fd3 <__vdso_clock_gettime@@LINUX_2.6+0x313>
+    0.00 :    ffc:    add    0x10(%rdx),%rax
+    0.00 :   1000:   add    0x8(%rdx),%rdi
+    0.00 :   1004:   cmp    $0x3b9ac9ff,%rax
+    0.00 :   100a:   jbe    101d <__vdso_clock_gettime@@LINUX_2.6+0x35d>
+    0.00 :   100c:   sub    $0x3b9aca00,%rax
+    0.00 :   1012:   add    $0x1,%ecx
+    0.00 :   1015:   cmp    $0x3b9ac9ff,%rax
+    0.00 :   101b:   ja     100c <__vdso_clock_gettime@@LINUX_2.6+0x34c>
+    0.00 :   101d:   mov    %ecx,%edx
+    0.00 :   101f:   mov    %rax,0x8(%rsi)
+    0.00 :   1023:   add    %rdi,%rdx
+    0.00 :   1026:   mov    %rdx,(%rsi)
+    0.00 :   1029:   jmp    d79 <__vdso_clock_gettime@@LINUX_2.6+0xb9>
+    0.00 :   102e:   mov    %rsi,(%rsp)
+    0.00 :   1032:   mov    %edi,0xc(%rsp)
+    0.00 :   1036:   call   950 <LINUX_2.6@@LINUX_2.6+0x950>
+    0.00 :   103b:   mov    0xc(%rsp),%edi
+    0.00 :   103f:   mov    (%rsp),%rsi
+    0.00 :   1043:   mov    %rax,%rdx
+    0.00 :   1046:   jmp    f89 <__vdso_clock_gettime@@LINUX_2.6+0x2c9>
+    0.00 :   104b:   pause
+    0.00 :   104d:   jmp    fd3 <__vdso_clock_gettime@@LINUX_2.6+0x313>
+ Percent |	Source code & Disassembly of ld-linux-x86-64.so.2 for cpu_core/cycles/u (1 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    000000000000b260 <check_match>:
+    0.00 :   b260:   push   %rbp
+    0.00 :   b261:   mov    %ecx,%r11d
+    0.00 :   b264:   mov    %rdi,%r10
+    0.00 :   b267:   mov    %rsp,%rbp
+    0.00 :   b26a:   sub    $0x30,%rsp
+    0.00 :   b26e:   movzbl 0x4(%r9),%ecx
+  100.00 :   b273:   movzwl 0x6(%r9),%eax
+    0.00 :   b278:   mov    %r12,-0x10(%rbp)
+    0.00 :   b27c:   mov    %rdx,%r12
+    0.00 :   b27f:   and    $0xf,%ecx
+    0.00 :   b282:   cmpq   $0x0,0x8(%r9)
+    0.00 :   b287:   je     b408 <check_match+0x1a8>
+    0.00 :   b28d:   xor    %edx,%edx
+    0.00 :   b28f:   test   %ax,%ax
+    0.00 :   b292:   sete   %dl
+    0.00 :   b295:   and    %edx,%r8d
+    0.00 :   b298:   mov    $0xfffffb98,%edx
+    0.00 :   b29d:   sar    %cl,%edx
+    0.00 :   b29f:   and    $0x1,%edx
+    0.00 :   b2a2:   or     %edx,%r8d
+    0.00 :   b2a5:   jne    b3e8 <check_match+0x188>
+    0.00 :   b2ab:   mov    %rbx,-0x18(%rbp)
+    0.00 :   b2af:   mov    %r9,%rbx
+    0.00 :   b2b2:   mov    %r14,-0x8(%rbp)
+    0.00 :   b2b6:   mov    %r11d,%r14d
+    0.00 :   b2b9:   cmp    %rsi,%r9
+    0.00 :   b2bc:   je     b2d5 <check_match+0x75>
+    0.00 :   b2be:   mov    (%r9),%edi
+    0.00 :   b2c1:   mov    %r10,%rsi
+    0.00 :   b2c4:   add    0x18(%rbp),%rdi
+    0.00 :   b2c8:   call   2ac40 <strcmp>
+    0.00 :   b2cd:   test   %eax,%eax
+    0.00 :   b2cf:   jne    b3e0 <check_match+0x180>
+    0.00 :   b2d5:   mov    0x20(%rbp),%rax
+    0.00 :   b2d9:   mov    0x380(%rax),%rax
+    0.00 :   b2e0:   test   %r12,%r12
+    0.00 :   b2e3:   je     b368 <check_match+0x108>
+    0.00 :   b2e9:   test   %rax,%rax
+    0.00 :   b2ec:   je     b340 <check_match+0xe0>
+    0.00 :   b2ee:   mov    0x10(%rbp),%edx
+    0.00 :   b2f1:   movzwl (%rax,%rdx,2),%ecx
+    0.00 :   b2f5:   mov    %rcx,%rax
+    0.00 :   b2f8:   and    $0x7fff,%eax
+    0.00 :   b2fd:   lea    (%rax,%rax,2),%rdx
+    0.00 :   b301:   mov    0x20(%rbp),%rax
+    0.00 :   b305:   mov    0x320(%rax),%rax
+    0.00 :   b30c:   lea    (%rax,%rdx,8),%rdx
+    0.00 :   b310:   mov    0x8(%r12),%eax
+    0.00 :   b315:   cmp    %eax,0x8(%rdx)
+    0.00 :   b318:   jne    b3c0 <check_match+0x160>
+    0.00 :   b31e:   mov    (%rdx),%rdi
+    0.00 :   b321:   mov    (%r12),%rsi
+    0.00 :   b325:   mov    %ecx,-0x2c(%rbp)
+    0.00 :   b328:   mov    %rdx,-0x28(%rbp)
+    0.00 :   b32c:   call   2ac40 <strcmp>
+    0.00 :   b331:   mov    -0x28(%rbp),%rdx
+    0.00 :   b335:   mov    -0x2c(%rbp),%ecx
+    0.00 :   b338:   test   %eax,%eax
+    0.00 :   b33a:   jne    b3c0 <check_match+0x160>
+    0.00 :   b340:   mov    %rbx,%rax
+    0.00 :   b343:   mov    -0x8(%rbp),%r14
+    0.00 :   b347:   mov    -0x18(%rbp),%rbx
+    0.00 :   b34b:   mov    -0x10(%rbp),%r12
+    0.00 :   b34f:   leave
+    0.00 :   b350:   xor    %edx,%edx
+    0.00 :   b352:   xor    %ecx,%ecx
+    0.00 :   b354:   xor    %esi,%esi
+    0.00 :   b356:   xor    %edi,%edi
+    0.00 :   b358:   xor    %r8d,%r8d
+    0.00 :   b35b:   xor    %r9d,%r9d
+    0.00 :   b35e:   xor    %r10d,%r10d
+    0.00 :   b361:   xor    %r11d,%r11d
+    0.00 :   b364:   ret
+    0.00 :   b365:   nopl   (%rax)
+    0.00 :   b368:   test   %rax,%rax
+    0.00 :   b36b:   je     b340 <check_match+0xe0>
+    0.00 :   b36d:   mov    0x10(%rbp),%edx
+    0.00 :   b370:   movzwl (%rax,%rdx,2),%edx
+    0.00 :   b374:   xor    %eax,%eax
+    0.00 :   b376:   mov    %edx,%ecx
+    0.00 :   b378:   and    $0x7fff,%ecx
+    0.00 :   b37e:   and    $0x2,%r14d
+    0.00 :   b382:   sete   %al
+    0.00 :   b385:   add    $0x2,%eax
+    0.00 :   b388:   cmp    %eax,%ecx
+    0.00 :   b38a:   jl     b340 <check_match+0xe0>
+    0.00 :   b38c:   test   %dx,%dx
+    0.00 :   b38f:   jns    b420 <check_match+0x1c0>
+    0.00 :   b395:   mov    -0x18(%rbp),%rbx
+    0.00 :   b399:   mov    -0x8(%rbp),%r14
+    0.00 :   b39d:   xor    %eax,%eax
+    0.00 :   b39f:   mov    -0x10(%rbp),%r12
+    0.00 :   b3a3:   leave
+    0.00 :   b3a4:   xor    %edx,%edx
+    0.00 :   b3a6:   xor    %ecx,%ecx
+    0.00 :   b3a8:   xor    %esi,%esi
+    0.00 :   b3aa:   xor    %edi,%edi
+    0.00 :   b3ac:   xor    %r8d,%r8d
+    0.00 :   b3af:   xor    %r9d,%r9d
+    0.00 :   b3b2:   xor    %r10d,%r10d
+    0.00 :   b3b5:   xor    %r11d,%r11d
+    0.00 :   b3b8:   ret
+    0.00 :   b3b9:   nopl   0x0(%rax)
+    0.00 :   b3c0:   mov    0xc(%r12),%eax
+    0.00 :   b3c5:   test   %eax,%eax
+    0.00 :   b3c7:   jne    b3e0 <check_match+0x180>
+    0.00 :   b3c9:   mov    (%rdx),%rax
+    0.00 :   b3cc:   cmpb   $0x0,(%rax)
+    0.00 :   b3cf:   jne    b3e0 <check_match+0x180>
+    0.00 :   b3d1:   test   %cx,%cx
+    0.00 :   b3d4:   jns    b420 <check_match+0x1c0>
+    0.00 :   b3d6:   cs nopw 0x0(%rax,%rax,1)
+    0.00 :   b3e0:   mov    -0x18(%rbp),%rbx
+    0.00 :   b3e4:   mov    -0x8(%rbp),%r14
+    0.00 :   b3e8:   xor    %eax,%eax
+    0.00 :   b3ea:   mov    -0x10(%rbp),%r12
+    0.00 :   b3ee:   leave
+    0.00 :   b3ef:   xor    %edx,%edx
+    0.00 :   b3f1:   xor    %ecx,%ecx
+    0.00 :   b3f3:   xor    %esi,%esi
+    0.00 :   b3f5:   xor    %edi,%edi
+    0.00 :   b3f7:   xor    %r8d,%r8d
+    0.00 :   b3fa:   xor    %r9d,%r9d
+    0.00 :   b3fd:   xor    %r10d,%r10d
+    0.00 :   b400:   xor    %r11d,%r11d
+    0.00 :   b403:   ret
+    0.00 :   b404:   nopl   0x0(%rax)
+    0.00 :   b408:   cmp    $0x6,%cl
+    0.00 :   b40b:   je     b28d <check_match+0x2d>
+    0.00 :   b411:   cmp    $0xfff1,%ax
+    0.00 :   b415:   je     b28d <check_match+0x2d>
+    0.00 :   b41b:   xor    %eax,%eax
+    0.00 :   b41d:   jmp    b3ea <check_match+0x18a>
+    0.00 :   b41f:   nop
+    0.00 :   b420:   mov    0x30(%rbp),%rax
+    0.00 :   b424:   mov    0x30(%rbp),%rdi
+    0.00 :   b428:   mov    (%rax),%eax
+    0.00 :   b42a:   lea    0x1(%rax),%edx
+    0.00 :   b42d:   mov    %edx,(%rdi)
+    0.00 :   b42f:   test   %eax,%eax
+    0.00 :   b431:   jne    b3e0 <check_match+0x180>
+    0.00 :   b433:   mov    0x28(%rbp),%rax
+    0.00 :   b437:   mov    -0x8(%rbp),%r14
+    0.00 :   b43b:   mov    %rbx,(%rax)
+    0.00 :   b43e:   mov    -0x18(%rbp),%rbx
+    0.00 :   b442:   xor    %eax,%eax
+    0.00 :   b444:   jmp    b3ea <check_match+0x18a>
+ Percent |	Source code & Disassembly of ld-linux-x86-64.so.2 for cpu_core/cycles/u (1 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    000000000000b170 <do_lookup_x>:
+    0.00 :   b170:   push   %rbp
+    0.00 :   b171:   mov    %r9,%rax
+    0.00 :   b174:   mov    %rsp,%rbp
+    0.00 :   b177:   push   %r15
+    0.00 :   b179:   push   %r14
+    0.00 :   b17b:   push   %r13
+    0.00 :   b17d:   push   %r12
+    0.00 :   b17f:   push   %rbx
+    0.00 :   b180:   sub    $0x88,%rsp
+    0.00 :   b187:   mov    %rdi,-0x50(%rbp)
+    0.00 :   b18b:   mov    0x28(%rbp),%r10
+    0.00 :   b18f:   mov    0x38(%rbp),%r9
+    0.00 :   b193:   mov    0x8(%rax),%r11d
+    0.00 :   b197:   mov    %rdx,-0x70(%rbp)
+    0.00 :   b19b:   mov    %rcx,-0x58(%rbp)
+    0.00 :   b19f:   mov    %r8,-0x68(%rbp)
+    0.00 :   b1a3:   test   %r9,%r9
+    0.00 :   b1a6:   mov    (%rax),%r8
+    0.00 :   b1a9:   mov    0x30(%rbp),%r15d
+    0.00 :   b1ad:   mov    %esi,%r14d
+    0.00 :   b1b0:   sete   -0x60(%rbp)
+    0.00 :   b1b4:   jmp    b252 <do_lookup_x+0xe2>
+    0.00 :   b1b9:   nopl   0x0(%rax)
+    0.00 :   b1c0:   mov    0x32c(%rbx),%edi
+    0.00 :   b1c6:   test   %edi,%edi
+    0.00 :   b1c8:   je     b243 <do_lookup_x+0xd3>
+    0.00 :   b1ca:   mov    0x70(%rbx),%rax
+    0.00 :   b1ce:   movl   $0x0,-0x3c(%rbp)
+    0.00 :   b1d5:   movq   $0x0,-0x38(%rbp)
+    0.00 :   b1dd:   mov    0x8(%rax),%rsi
+    0.00 :   b1e1:   xor    %eax,%eax
+    0.00 :   b1e3:   testb  $0x20,0x356(%rbx)
+    0.00 :   b1ea:   je     b1f2 <do_lookup_x+0x82>
+    0.00 :   b1ec:   mov    (%rbx),%rax
+    0.00 :   b1ef:   add    %rax,%rsi
+    0.00 :   b1f2:   mov    0x68(%rbx),%rdx
+    0.00 :   b1f6:   add    0x8(%rdx),%rax
+    0.00 :   b1fa:   mov    0x338(%rbx),%rdx
+    0.00 :   b201:   mov    %rax,-0x48(%rbp)
+    0.00 :   b205:   test   %rdx,%rdx
+    0.00 :   b208:   je     b300 <do_lookup_x+0x190>
+    0.00 :   b20e:   mov    %r14d,%eax
+    0.00 :   b211:   mov    0x334(%rbx),%ecx
+    0.00 :   b217:   shr    $0x6,%eax
+    0.00 :   b21a:   and    0x330(%rbx),%eax
+    0.00 :   b220:   mov    (%rdx,%rax,8),%rax
+  100.00 :   b224:   mov    %r14d,%edx
+    0.00 :   b227:   shr    %cl,%edx
+    0.00 :   b229:   mov    %edx,%ecx
+    0.00 :   b22b:   mov    %rax,%rdx
+    0.00 :   b22e:   shr    %cl,%rdx
+    0.00 :   b231:   mov    %r14d,%ecx
+    0.00 :   b234:   shr    %cl,%rax
+    0.00 :   b237:   and    %rax,%rdx
+    0.00 :   b23a:   and    $0x1,%edx
+    0.00 :   b23d:   jne    b450 <do_lookup_x+0x2e0>
+    0.00 :   b243:   addq   $0x1,0x10(%rbp)
+    0.00 :   b248:   cmp    %r11,0x10(%rbp)
+    0.00 :   b24c:   jae    b738 <do_lookup_x+0x5c8>
+    0.00 :   b252:   mov    0x10(%rbp),%rax
+    0.00 :   b256:   mov    (%r8,%rax,8),%rax
+    0.00 :   b25a:   mov    0x28(%rax),%rbx
+    0.00 :   b25e:   cmp    %r10,%rbx
+    0.00 :   b261:   je     b243 <do_lookup_x+0xd3>
+    0.00 :   b263:   test   $0x2,%r15b
+    0.00 :   b267:   je     b272 <do_lookup_x+0x102>
+    0.00 :   b269:   testb  $0x3,0x354(%rbx)
+    0.00 :   b270:   je     b243 <do_lookup_x+0xd3>
+    0.00 :   b272:   testb  $0x4,0x356(%rbx)
+    0.00 :   b279:   je     b28a <do_lookup_x+0x11a>
+    0.00 :   b27b:   test   %r9,%r9
+    0.00 :   b27e:   je     b243 <do_lookup_x+0xd3>
+    0.00 :   b280:   testb  $0x4,0x356(%r9)
+    0.00 :   b288:   je     b243 <do_lookup_x+0xd3>
+    0.00 :   b28a:   testb  $0x8,0x2d82f(%rip)        # 38ac0 <_rtld_global_ro>
+    0.00 :   b291:   je     b1c0 <do_lookup_x+0x50>
+    0.00 :   b297:   mov    0x8(%rbx),%rdx
+    0.00 :   b29b:   mov    0x30(%rbx),%rcx
+    0.00 :   b29f:   cmpb   $0x0,(%rdx)
+    0.00 :   b2a2:   je     b2e0 <do_lookup_x+0x170>
+    0.00 :   b2a4:   mov    -0x50(%rbp),%rsi
+    0.00 :   b2a8:   lea    0x24e89(%rip),%rdi        # 30138 <__PRETTY_FUNCTION__.9+0x10>
+    0.00 :   b2af:   xor    %eax,%eax
+    0.00 :   b2b1:   mov    %r11,-0x78(%rbp)
+    0.00 :   b2b5:   mov    %r9,0x38(%rbp)
+    0.00 :   b2b9:   mov    %r10,0x28(%rbp)
+    0.00 :   b2bd:   mov    %r8,-0x48(%rbp)
+    0.00 :   b2c1:   call   f470 <_dl_debug_printf>
+    0.00 :   b2c6:   mov    -0x78(%rbp),%r11
+    0.00 :   b2ca:   mov    0x38(%rbp),%r9
+    0.00 :   b2ce:   mov    0x28(%rbp),%r10
+    0.00 :   b2d2:   mov    -0x48(%rbp),%r8
+    0.00 :   b2d6:   jmp    b1c0 <do_lookup_x+0x50>
+    0.00 :   b2db:   nopl   0x0(%rax,%rax,1)
+    0.00 :   b2e0:   mov    0x2d7b1(%rip),%rax        # 38a98 <_dl_argv>
+    0.00 :   b2e7:   mov    (%rax),%rdx
+    0.00 :   b2ea:   lea    0x22954(%rip),%rax        # 2dc45 <_sys_errname+0x5e5>
+    0.00 :   b2f1:   test   %rdx,%rdx
+    0.00 :   b2f4:   cmove  %rax,%rdx
+    0.00 :   b2f8:   jmp    b2a4 <do_lookup_x+0x134>
+    0.00 :   b2fa:   nopw   0x0(%rax,%rax,1)
+    0.00 :   b300:   mov    -0x70(%rbp),%rax
+    0.00 :   b304:   mov    $0xffffffff,%edx
+    0.00 :   b309:   mov    (%rax),%rax
+    0.00 :   b30c:   cmp    %rdx,%rax
+    0.00 :   b30f:   je     bb10 <do_lookup_x+0x9a0>
+    0.00 :   b315:   xor    %edx,%edx
+    0.00 :   b317:   div    %rdi
+    0.00 :   b31a:   shl    $0x2,%rdx
+    0.00 :   b31e:   mov    0x348(%rbx),%rax
+    0.00 :   b325:   mov    (%rax,%rdx,1),%eax
+    0.00 :   b328:   test   %eax,%eax
+    0.00 :   b32a:   je     b243 <do_lookup_x+0xd3>
+    0.00 :   b330:   mov    %r14d,-0x80(%rbp)
+    0.00 :   b334:   mov    %rbx,%r12
+    0.00 :   b337:   lea    -0x3c(%rbp),%r13
+    0.00 :   b33b:   mov    %rsi,%r14
+    0.00 :   b33e:   mov    %r8,-0x78(%rbp)
+    0.00 :   b342:   lea    -0x38(%rbp),%rbx
+    0.00 :   b346:   mov    %r10,0x28(%rbp)
+    0.00 :   b34a:   mov    %r15d,0x30(%rbp)
+    0.00 :   b34e:   mov    %r9,0x38(%rbp)
+    0.00 :   b352:   mov    %r11,-0x88(%rbp)
+    0.00 :   b359:   jmp    b374 <do_lookup_x+0x204>
+    0.00 :   b35b:   nopl   0x0(%rax,%rax,1)
+    0.00 :   b360:   mov    0x340(%r12),%rax
+    0.00 :   b368:   mov    (%rax,%r15,4),%eax
+    0.00 :   b36c:   test   %eax,%eax
+    0.00 :   b36e:   je     b908 <do_lookup_x+0x798>
+    0.00 :   b374:   sub    $0x8,%rsp
+    0.00 :   b378:   mov    %eax,%r15d
+    0.00 :   b37b:   mov    -0x58(%rbp),%rsi
+    0.00 :   b37f:   mov    -0x50(%rbp),%rdi
+    0.00 :   b383:   push   %r13
+    0.00 :   b385:   lea    (%r15,%r15,2),%rdx
+    0.00 :   b389:   push   %rbx
+    0.00 :   b38a:   lea    (%r14,%rdx,8),%r9
+    0.00 :   b38e:   mov    0x18(%rbp),%rdx
+    0.00 :   b392:   push   %r12
+    0.00 :   b394:   push   -0x48(%rbp)
+    0.00 :   b397:   push   %rax
+    0.00 :   b398:   mov    0x30(%rbp),%r8d
+    0.00 :   b39c:   mov    0x20(%rbp),%ecx
+    0.00 :   b39f:   call   afc0 <check_match>
+    0.00 :   b3a4:   add    $0x30,%rsp
+    0.00 :   b3a8:   test   %rax,%rax
+    0.00 :   b3ab:   je     b360 <do_lookup_x+0x1f0>
+    0.00 :   b3ad:   mov    -0x78(%rbp),%r8
+    0.00 :   b3b1:   mov    -0x80(%rbp),%r14d
+    0.00 :   b3b5:   mov    %rax,%rcx
+    0.00 :   b3b8:   mov    %r12,%rbx
+    0.00 :   b3bb:   mov    0x28(%rbp),%r10
+    0.00 :   b3bf:   mov    0x30(%rbp),%r15d
+    0.00 :   b3c3:   mov    0x38(%rbp),%r9
+    0.00 :   b3c7:   mov    -0x88(%rbp),%r11
+    0.00 :   b3ce:   xchg   %ax,%ax
+    0.00 :   b3d0:   movzbl 0x5(%rcx),%eax
+    0.00 :   b3d4:   mov    %eax,%edx
+    0.00 :   b3d6:   and    $0x3,%eax
+    0.00 :   b3d9:   sub    $0x1,%eax
+    0.00 :   b3dc:   and    $0x3,%edx
+    0.00 :   b3df:   cmp    $0x1,%eax
+    0.00 :   b3e2:   jbe    b243 <do_lookup_x+0xd3>
+    0.00 :   b3e8:   cmp    $0x3,%dl
+    0.00 :   b3eb:   jne    b3f7 <do_lookup_x+0x287>
+    0.00 :   b3ed:   cmpb   $0x0,-0x60(%rbp)
+    0.00 :   b3f1:   je     b550 <do_lookup_x+0x3e0>
+    0.00 :   b3f7:   movzbl 0x4(%rcx),%eax
+    0.00 :   b3fb:   shr    $0x4,%al
+    0.00 :   b3fe:   cmp    $0x2,%al
+    0.00 :   b400:   je     b700 <do_lookup_x+0x590>
+    0.00 :   b406:   cmp    $0xa,%al
+    0.00 :   b408:   je     b5d8 <do_lookup_x+0x468>
+    0.00 :   b40e:   cmp    $0x1,%al
+    0.00 :   b410:   jne    b243 <do_lookup_x+0xd3>
+    0.00 :   b416:   mov    -0x68(%rbp),%rax
+    0.00 :   b41a:   mov    %rcx,(%rax)
+    0.00 :   b41d:   mov    %rbx,0x8(%rax)
+    0.00 :   b421:   lea    -0x28(%rbp),%rsp
+    0.00 :   b425:   mov    $0x1,%eax
+    0.00 :   b42a:   pop    %rbx
+    0.00 :   b42b:   pop    %r12
+    0.00 :   b42d:   pop    %r13
+    0.00 :   b42f:   pop    %r14
+    0.00 :   b431:   pop    %r15
+    0.00 :   b433:   pop    %rbp
+    0.00 :   b434:   xor    %edx,%edx
+    0.00 :   b436:   xor    %ecx,%ecx
+    0.00 :   b438:   xor    %esi,%esi
+    0.00 :   b43a:   xor    %edi,%edi
+    0.00 :   b43c:   xor    %r8d,%r8d
+    0.00 :   b43f:   xor    %r9d,%r9d
+    0.00 :   b442:   xor    %r10d,%r10d
+    0.00 :   b445:   xor    %r11d,%r11d
+    0.00 :   b448:   ret
+    0.00 :   b449:   nopl   0x0(%rax)
+    0.00 :   b450:   mov    %r14d,%eax
+    0.00 :   b453:   xor    %edx,%edx
+    0.00 :   b455:   div    %edi
+    0.00 :   b457:   mov    0x340(%rbx),%rax
+    0.00 :   b45e:   mov    (%rax,%rdx,4),%eax
+    0.00 :   b461:   test   %eax,%eax
+    0.00 :   b463:   je     b243 <do_lookup_x+0xd3>
+    0.00 :   b469:   mov    0x348(%rbx),%rdx
+    0.00 :   b470:   mov    %r15d,0x30(%rbp)
+    0.00 :   b474:   mov    %rsi,%r12
+    0.00 :   b477:   mov    %r14d,%r15d
+    0.00 :   b47a:   mov    %r8,-0x88(%rbp)
+    0.00 :   b481:   mov    %rbx,%r14
+    0.00 :   b484:   lea    (%rdx,%rax,4),%r13
+    0.00 :   b488:   lea    -0x3c(%rbp),%rax
+    0.00 :   b48c:   mov    %rdx,-0x80(%rbp)
+    0.00 :   b490:   mov    %rax,-0x78(%rbp)
+    0.00 :   b494:   mov    %r10,0x28(%rbp)
+    0.00 :   b498:   mov    %r9,0x38(%rbp)
+    0.00 :   b49c:   mov    %r11,-0x90(%rbp)
+    0.00 :   b4a3:   jmp    b4cd <do_lookup_x+0x35d>
+    0.00 :   b4a5:   nopl   0x0(%rax,%rax,1)
+    0.00 :   b4aa:   data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   b4b5:   data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   b4c0:   add    $0x4,%r13
+    0.00 :   b4c4:   and    $0x1,%ebx
+    0.00 :   b4c7:   jne    bbc8 <do_lookup_x+0xa58>
+    0.00 :   b4cd:   mov    0x0(%r13),%ebx
+    0.00 :   b4d1:   mov    %ebx,%eax
+    0.00 :   b4d3:   xor    %r15d,%eax
+    0.00 :   b4d6:   shr    $1,%eax
+    0.00 :   b4d8:   jne    b4c0 <do_lookup_x+0x350>
+    0.00 :   b4da:   mov    %r13,%rax
+    0.00 :   b4dd:   sub    -0x80(%rbp),%rax
+    0.00 :   b4e1:   sub    $0x8,%rsp
+    0.00 :   b4e5:   push   -0x78(%rbp)
+    0.00 :   b4e8:   sar    $0x2,%rax
+    0.00 :   b4ec:   lea    -0x38(%rbp),%rcx
+    0.00 :   b4f0:   mov    -0x58(%rbp),%rsi
+    0.00 :   b4f4:   mov    %eax,%edx
+    0.00 :   b4f6:   push   %rcx
+    0.00 :   b4f7:   mov    -0x50(%rbp),%rdi
+    0.00 :   b4fb:   push   %r14
+    0.00 :   b4fd:   lea    (%rdx,%rdx,2),%rdx
+    0.00 :   b501:   push   -0x48(%rbp)
+    0.00 :   b504:   lea    (%r12,%rdx,8),%r9
+    0.00 :   b508:   mov    0x18(%rbp),%rdx
+    0.00 :   b50c:   push   %rax
+    0.00 :   b50d:   mov    0x30(%rbp),%r8d
+    0.00 :   b511:   mov    0x20(%rbp),%ecx
+    0.00 :   b514:   call   afc0 <check_match>
+    0.00 :   b519:   add    $0x30,%rsp
+    0.00 :   b51d:   test   %rax,%rax
+    0.00 :   b520:   je     b4c0 <do_lookup_x+0x350>
+    0.00 :   b522:   mov    %r14,%rbx
+    0.00 :   b525:   mov    -0x88(%rbp),%r8
+    0.00 :   b52c:   mov    %r15d,%r14d
+    0.00 :   b52f:   mov    %rax,%rcx
+    0.00 :   b532:   mov    0x28(%rbp),%r10
+    0.00 :   b536:   mov    0x30(%rbp),%r15d
+    0.00 :   b53a:   mov    0x38(%rbp),%r9
+    0.00 :   b53e:   mov    -0x90(%rbp),%r11
+    0.00 :   b545:   jmp    b3d0 <do_lookup_x+0x260>
+    0.00 :   b54a:   nopw   0x0(%rax,%rax,1)
+    0.00 :   b550:   testb  $0x3,0x354(%r9)
+    0.00 :   b558:   jne    b3f7 <do_lookup_x+0x287>
+    0.00 :   b55e:   test   $0x2,%r15b
+    0.00 :   b562:   jne    bbed <do_lookup_x+0xa7d>
+    0.00 :   b568:   test   $0x1,%r15b
+    0.00 :   b56c:   je     b3f7 <do_lookup_x+0x287>
+    0.00 :   b572:   mov    -0x58(%rbp),%rax
+    0.00 :   b576:   cmpq   $0x0,0x8(%rax)
+    0.00 :   b57b:   je     b3f7 <do_lookup_x+0x287>
+    0.00 :   b581:   cmpw   $0x0,0x6(%rax)
+    0.00 :   b586:   jne    b3f7 <do_lookup_x+0x287>
+    0.00 :   b58c:   mov    0x8(%rbx),%rdx
+    0.00 :   b590:   mov    -0x50(%rbp),%rsi
+    0.00 :   b594:   xor    %eax,%eax
+    0.00 :   b596:   mov    %r11,-0x80(%rbp)
+    0.00 :   b59a:   lea    0x24c0f(%rip),%rdi        # 301b0 <__PRETTY_FUNCTION__.9+0x88>
+    0.00 :   b5a1:   mov    %rcx,-0x88(%rbp)
+    0.00 :   b5a8:   mov    %r9,0x38(%rbp)
+    0.00 :   b5ac:   mov    %r10,0x28(%rbp)
+    0.00 :   b5b0:   mov    %r8,-0x78(%rbp)
+    0.00 :   b5b4:   call   f720 <_dl_error_printf>
+    0.00 :   b5b9:   mov    -0x88(%rbp),%rcx
+    0.00 :   b5c0:   mov    -0x80(%rbp),%r11
+    0.00 :   b5c4:   mov    0x38(%rbp),%r9
+    0.00 :   b5c8:   mov    0x28(%rbp),%r10
+    0.00 :   b5cc:   mov    -0x78(%rbp),%r8
+    0.00 :   b5d0:   jmp    bc31 <do_lookup_x+0xac1>
+    0.00 :   b5d5:   nopl   (%rax)
+    0.00 :   b5d8:   mov    0x30(%rbx),%rax
+    0.00 :   b5dc:   mov    %r14d,%r13d
+    0.00 :   b5df:   lea    0x2da1a(%rip),%r14        # 39000 <_rtld_global>
+    0.00 :   b5e6:   mov    %rcx,-0x60(%rbp)
+    0.00 :   b5ea:   mov    %r9,0x38(%rbp)
+    0.00 :   b5ee:   imul   $0x70,%rax,%r12
+    0.00 :   b5f2:   mov    %rax,-0x70(%rbp)
+    0.00 :   b5f6:   lea    0x28(%r14,%r12,1),%rax
+    0.00 :   b5fb:   add    %r14,%r12
+    0.00 :   b5fe:   mov    %rax,-0x88(%rbp)
+    0.00 :   b605:   mov    %rax,%rdi
+    0.00 :   b608:   call   *0x2d442(%rip)        # 38a50 <___rtld_mutex_lock>
+    0.00 :   b60e:   mov    0x50(%r12),%r11
+    0.00 :   b613:   mov    -0x60(%rbp),%rcx
+    0.00 :   b617:   test   %r11,%r11
+    0.00 :   b61a:   je     b75d <do_lookup_x+0x5ed>
+    0.00 :   b620:   mov    0x58(%r12),%r15
+    0.00 :   b625:   mov    %r13d,%eax
+    0.00 :   b628:   xor    %edx,%edx
+    0.00 :   b62a:   mov    %r13d,%r12d
+    0.00 :   b62d:   mov    %rax,-0x78(%rbp)
+    0.00 :   b631:   div    %r15
+    0.00 :   b634:   mov    -0x78(%rbp),%rax
+    0.00 :   b638:   mov    %rcx,-0x98(%rbp)
+    0.00 :   b63f:   mov    %rbx,-0xa0(%rbp)
+    0.00 :   b646:   lea    -0x2(%r15),%rdi
+    0.00 :   b64a:   mov    %rdx,%rsi
+    0.00 :   b64d:   xor    %edx,%edx
+    0.00 :   b64f:   div    %rdi
+    0.00 :   b652:   mov    %rsi,-0xa8(%rbp)
+    0.00 :   b659:   mov    %rsi,%r14
+    0.00 :   b65c:   mov    %r11,%rax
+    0.00 :   b65f:   lea    0x1(%rdx),%r10
+    0.00 :   b663:   mov    %r10,%rdx
+    0.00 :   b666:   mov    %r10,%rbx
+    0.00 :   b669:   shl    $0x5,%rdx
+    0.00 :   b66d:   mov    %rdx,%r13
+    0.00 :   b670:   mov    %r14,%rcx
+    0.00 :   b673:   mov    %r12d,%edx
+    0.00 :   b676:   mov    %rax,-0x80(%rbp)
+    0.00 :   b67a:   mov    %rbx,%r12
+    0.00 :   b67d:   shl    $0x5,%rcx
+    0.00 :   b681:   mov    %r15,%rbx
+    0.00 :   b684:   mov    %rax,-0x90(%rbp)
+    0.00 :   b68b:   mov    %r13,%r15
+    0.00 :   b68e:   lea    (%rcx,%rax,1),%r13
+    0.00 :   b692:   jmp    b6b0 <do_lookup_x+0x540>
+    0.00 :   b694:   nopl   0x0(%rax)
+    0.00 :   b698:   test   %rdi,%rdi
+    0.00 :   b69b:   je     b948 <do_lookup_x+0x7d8>
+    0.00 :   b6a1:   add    %r12,%r14
+    0.00 :   b6a4:   add    %r15,%r13
+    0.00 :   b6a7:   cmp    %rbx,%r14
+    0.00 :   b6aa:   jae    baf0 <do_lookup_x+0x980>
+    0.00 :   b6b0:   mov    0x8(%r13),%rdi
+    0.00 :   b6b4:   cmp    0x0(%r13),%edx
+    0.00 :   b6b8:   jne    b698 <do_lookup_x+0x528>
+    0.00 :   b6ba:   mov    -0x50(%rbp),%rsi
+    0.00 :   b6be:   mov    %edx,-0x60(%rbp)
+    0.00 :   b6c1:   call   27e80 <strcmp>
+    0.00 :   b6c6:   mov    -0x60(%rbp),%edx
+    0.00 :   b6c9:   test   %eax,%eax
+    0.00 :   b6cb:   jne    b6a1 <do_lookup_x+0x531>
+    0.00 :   b6cd:   testb  $0x2,0x30(%rbp)
+    0.00 :   b6d1:   je     bc71 <do_lookup_x+0xb01>
+    0.00 :   b6d7:   movq   -0x98(%rbp),%xmm0
+    0.00 :   b6df:   movhps -0xa0(%rbp),%xmm0
+    0.00 :   b6e6:   mov    -0x68(%rbp),%rax
+    0.00 :   b6ea:   mov    -0x88(%rbp),%rdi
+    0.00 :   b6f1:   movups %xmm0,(%rax)
+    0.00 :   b6f4:   call   *0x2d34e(%rip)        # 38a48 <___rtld_mutex_unlock>
+    0.00 :   b6fa:   jmp    b421 <do_lookup_x+0x2b1>
+    0.00 :   b6ff:   nop
+    0.00 :   b700:   mov    0x2d40e(%rip),%eax        # 38b14 <_rtld_global_ro+0x54>
+    0.00 :   b706:   test   %eax,%eax
+    0.00 :   b708:   je     b416 <do_lookup_x+0x2a6>
+    0.00 :   b70e:   mov    -0x68(%rbp),%rax
+    0.00 :   b712:   cmpq   $0x0,(%rax)
+    0.00 :   b716:   jne    b243 <do_lookup_x+0xd3>
+    0.00 :   b71c:   movq   %rcx,%xmm0
+    0.00 :   b721:   movq   %rbx,%xmm2
+    0.00 :   b726:   punpcklqdq %xmm2,%xmm0
+    0.00 :   b72a:   movups %xmm0,(%rax)
+    0.00 :   b72d:   jmp    b243 <do_lookup_x+0xd3>
+    0.00 :   b732:   nopw   0x0(%rax,%rax,1)
+    0.00 :   b738:   lea    -0x28(%rbp),%rsp
+    0.00 :   b73c:   xor    %eax,%eax
+    0.00 :   b73e:   pop    %rbx
+    0.00 :   b73f:   pop    %r12
+    0.00 :   b741:   pop    %r13
+    0.00 :   b743:   pop    %r14
+    0.00 :   b745:   pop    %r15
+    0.00 :   b747:   pop    %rbp
+    0.00 :   b748:   xor    %edx,%edx
+    0.00 :   b74a:   xor    %ecx,%ecx
+    0.00 :   b74c:   xor    %esi,%esi
+    0.00 :   b74e:   xor    %edi,%edi
+    0.00 :   b750:   xor    %r8d,%r8d
+    0.00 :   b753:   xor    %r9d,%r9d
+    0.00 :   b756:   xor    %r10d,%r10d
+    0.00 :   b759:   xor    %r11d,%r11d
+    0.00 :   b75c:   ret
+    0.00 :   b75d:   mov    %rcx,-0x50(%rbp)
+    0.00 :   b761:   mov    $0x1f,%esi
+    0.00 :   b766:   mov    $0x20,%edi
+    0.00 :   b76b:   call   *0x2d2cf(%rip)        # 38a40 <__rtld_calloc>
+    0.00 :   b771:   mov    %rax,%r11
+    0.00 :   b774:   test   %rax,%rax
+    0.00 :   b777:   je     bce1 <do_lookup_x+0xb71>
+    0.00 :   b77d:   mov    %r13d,%r10d
+    0.00 :   b780:   mov    0x38(%rbp),%r9
+    0.00 :   b784:   mov    -0x50(%rbp),%rcx
+    0.00 :   b788:   mov    %rax,0x50(%r12)
+    0.00 :   b78d:   mov    0x2d2a4(%rip),%rax        # 38a38 <__rtld_free>
+    0.00 :   b794:   mov    $0x1f,%r15d
+    0.00 :   b79a:   movq   $0x1f,0x58(%r12)
+    0.00 :   b7a3:   mov    %rax,0x68(%r12)
+    0.00 :   b7a8:   movabs $0x842108421084211,%rax
+    0.00 :   b7b2:   mul    %r10
+    0.00 :   b7b5:   mov    %r10,%rax
+    0.00 :   b7b8:   sub    %rdx,%rax
+    0.00 :   b7bb:   shr    $1,%rax
+    0.00 :   b7be:   lea    (%rdx,%rax,1),%rsi
+    0.00 :   b7c2:   shr    $0x4,%rsi
+    0.00 :   b7c6:   mov    %rsi,%rax
+    0.00 :   b7c9:   shl    $0x5,%rax
+    0.00 :   b7cd:   sub    %rsi,%rax
+    0.00 :   b7d0:   mov    %r10,%rsi
+    0.00 :   b7d3:   sub    %rax,%rsi
+    0.00 :   b7d6:   movabs $0x469ee58469ee5847,%rax
+    0.00 :   b7e0:   imul   %r10
+    0.00 :   b7e3:   sar    $0x3,%rdx
+    0.00 :   b7e7:   imul   $0x1d,%rdx,%rax
+    0.00 :   b7eb:   sub    %rax,%r10
+    0.00 :   b7ee:   add    $0x1,%r10
+    0.00 :   b7f2:   mov    (%rcx),%edx
+    0.00 :   b7f4:   mov    -0x48(%rbp),%rax
+    0.00 :   b7f8:   mov    %r10,%rdi
+    0.00 :   b7fb:   shl    $0x5,%rdi
+    0.00 :   b7ff:   add    %rax,%rdx
+    0.00 :   b802:   testb  $0x2,0x30(%rbp)
+    0.00 :   b806:   je     b883 <do_lookup_x+0x713>
+    0.00 :   b808:   mov    %rsi,%rax
+    0.00 :   b80b:   shl    $0x5,%rax
+    0.00 :   b80f:   add    %r11,%rax
+    0.00 :   b812:   jmp    b82f <do_lookup_x+0x6bf>
+    0.00 :   b814:   nop
+    0.00 :   b815:   data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   b820:   add    %r10,%rsi
+    0.00 :   b823:   add    %rdi,%rax
+    0.00 :   b826:   cmp    %r15,%rsi
+    0.00 :   b829:   jae    bb08 <do_lookup_x+0x998>
+    0.00 :   b82f:   cmpq   $0x0,0x8(%rax)
+    0.00 :   b834:   jne    b820 <do_lookup_x+0x6b0>
+    0.00 :   b836:   mov    -0x58(%rbp),%rsi
+    0.00 :   b83a:   mov    %r13d,(%rax)
+    0.00 :   b83d:   mov    %rdx,0x8(%rax)
+    0.00 :   b841:   mov    %rsi,0x10(%rax)
+    0.00 :   b845:   mov    %r9,0x18(%rax)
+    0.00 :   b849:   imul   $0x70,-0x70(%rbp),%rax
+    0.00 :   b84e:   lea    0x2d7ab(%rip),%rsi        # 39000 <_rtld_global>
+    0.00 :   b855:   mov    %rcx,-0x48(%rbp)
+    0.00 :   b859:   mov    -0x88(%rbp),%rdi
+    0.00 :   b860:   addq   $0x1,0x60(%rsi,%rax,1)
+    0.00 :   b866:   call   *0x2d1dc(%rip)        # 38a48 <___rtld_mutex_unlock>
+    0.00 :   b86c:   mov    -0x68(%rbp),%rax
+    0.00 :   b870:   mov    -0x48(%rbp),%rcx
+    0.00 :   b874:   mov    %rbx,0x8(%rax)
+    0.00 :   b878:   mov    %rcx,(%rax)
+    0.00 :   b87b:   jmp    b421 <do_lookup_x+0x2b1>
+    0.00 :   b880:   sub    %r15,%rsi
+    0.00 :   b883:   mov    %rsi,%rax
+    0.00 :   b886:   shl    $0x5,%rax
+    0.00 :   b88a:   add    %r11,%rax
+    0.00 :   b88d:   jmp    b8ab <do_lookup_x+0x73b>
+    0.00 :   b88f:   nopw   0x0(%rax,%rax,1)
+    0.00 :   b895:   data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   b8a0:   add    %r10,%rsi
+    0.00 :   b8a3:   add    %rdi,%rax
+    0.00 :   b8a6:   cmp    %r15,%rsi
+    0.00 :   b8a9:   jae    b880 <do_lookup_x+0x710>
+    0.00 :   b8ab:   cmpq   $0x0,0x8(%rax)
+    0.00 :   b8b0:   jne    b8a0 <do_lookup_x+0x730>
+    0.00 :   b8b2:   mov    %r13d,(%rax)
+    0.00 :   b8b5:   mov    %rdx,0x8(%rax)
+    0.00 :   b8b9:   mov    %rcx,0x10(%rax)
+    0.00 :   b8bd:   mov    %rbx,0x18(%rax)
+    0.00 :   b8c1:   movzbl 0x354(%rbx),%eax
+    0.00 :   b8c8:   and    $0x3,%eax
+    0.00 :   b8cb:   cmp    $0x2,%al
+    0.00 :   b8cd:   jne    b849 <do_lookup_x+0x6d9>
+    0.00 :   b8d3:   cmpb   $0x0,0x357(%rbx)
+    0.00 :   b8da:   jne    b849 <do_lookup_x+0x6d9>
+    0.00 :   b8e0:   testb  $0x8,0x20(%rbp)
+    0.00 :   b8e4:   jne    bc7c <do_lookup_x+0xb0c>
+    0.00 :   b8ea:   testb  $0x4,0x2d1cf(%rip)        # 38ac0 <_rtld_global_ro>
+    0.00 :   b8f1:   jne    bc9e <do_lookup_x+0xb2e>
+    0.00 :   b8f7:   movb   $0x1,0x357(%rbx)
+    0.00 :   b8fe:   jmp    b849 <do_lookup_x+0x6d9>
+    0.00 :   b903:   nopl   0x0(%rax,%rax,1)
+    0.00 :   b908:   mov    -0x78(%rbp),%r8
+    0.00 :   b90c:   mov    -0x80(%rbp),%r14d
+    0.00 :   b910:   mov    %r12,%rbx
+    0.00 :   b913:   mov    0x28(%rbp),%r10
+    0.00 :   b917:   mov    0x30(%rbp),%r15d
+    0.00 :   b91b:   mov    0x38(%rbp),%r9
+    0.00 :   b91f:   mov    -0x88(%rbp),%r11
+    0.00 :   b926:   cmpl   $0x1,-0x3c(%rbp)
+    0.00 :   b92a:   jne    b243 <do_lookup_x+0xd3>
+    0.00 :   b930:   mov    -0x38(%rbp),%rcx
+    0.00 :   b934:   test   %rcx,%rcx
+    0.00 :   b937:   jne    b3d0 <do_lookup_x+0x260>
+    0.00 :   b93d:   jmp    b243 <do_lookup_x+0xd3>
+    0.00 :   b942:   nopw   0x0(%rax,%rax,1)
+    0.00 :   b948:   mov    %edx,%r13d
+    0.00 :   b94b:   imul   $0x70,-0x70(%rbp),%rdx
+    0.00 :   b950:   mov    %rbx,%r15
+    0.00 :   b953:   mov    -0x80(%rbp),%r11
+    0.00 :   b957:   lea    0x2d6a2(%rip),%rdi        # 39000 <_rtld_global>
+    0.00 :   b95e:   lea    (%r15,%r15,2),%rax
+    0.00 :   b962:   mov    -0x98(%rbp),%rcx
+    0.00 :   b969:   mov    -0x90(%rbp),%r8
+    0.00 :   b970:   mov    -0xa0(%rbp),%rbx
+    0.00 :   b977:   mov    -0xa8(%rbp),%rsi
+    0.00 :   b97e:   mov    %r12,%r10
+    0.00 :   b981:   mov    0x60(%rdi,%rdx,1),%rdx
+    0.00 :   b986:   mov    0x38(%rbp),%r9
+    0.00 :   b98a:   shl    $0x2,%rdx
+    0.00 :   b98e:   cmp    %rax,%rdx
+    0.00 :   b991:   jb     b7f2 <do_lookup_x+0x682>
+    0.00 :   b997:   lea    0x1(%r15),%rdi
+    0.00 :   b99b:   mov    %r11,-0x90(%rbp)
+    0.00 :   b9a2:   mov    %r8,-0x80(%rbp)
+    0.00 :   b9a6:   mov    %rcx,-0x60(%rbp)
+    0.00 :   b9aa:   call   d010 <_dl_higher_prime_number>
+    0.00 :   b9af:   mov    $0x20,%edi
+    0.00 :   b9b4:   mov    %rax,%r12
+    0.00 :   b9b7:   mov    %rax,%rsi
+    0.00 :   b9ba:   call   *0x2d080(%rip)        # 38a40 <__rtld_calloc>
+    0.00 :   b9c0:   mov    %rax,%r14
+    0.00 :   b9c3:   test   %rax,%rax
+    0.00 :   b9c6:   je     bce1 <do_lookup_x+0xb71>
+    0.00 :   b9cc:   lea    -0x2(%r12),%rax
+    0.00 :   b9d1:   mov    -0x90(%rbp),%r11
+    0.00 :   b9d8:   mov    -0x60(%rbp),%rcx
+    0.00 :   b9dc:   mov    -0x80(%rbp),%r8
+    0.00 :   b9e0:   mov    0x38(%rbp),%r9
+    0.00 :   b9e4:   mov    %rax,-0x50(%rbp)
+    0.00 :   b9e8:   mov    %r15,%rax
+    0.00 :   b9eb:   shl    $0x5,%rax
+    0.00 :   b9ef:   test   %r15,%r15
+    0.00 :   b9f2:   je     ba91 <do_lookup_x+0x921>
+    0.00 :   b9f8:   mov    %rcx,-0x60(%rbp)
+    0.00 :   b9fc:   lea    (%r11,%rax,1),%r10
+    0.00 :   ba00:   mov    0x8(%r8),%rax
+    0.00 :   ba04:   test   %rax,%rax
+    0.00 :   ba07:   je     ba80 <do_lookup_x+0x910>
+    0.00 :   ba09:   movq   %rax,%xmm0
+    0.00 :   ba0e:   mov    (%r8),%eax
+    0.00 :   ba11:   xor    %edx,%edx
+    0.00 :   ba13:   mov    0x18(%r8),%rdi
+    0.00 :   ba17:   movhps 0x10(%r8),%xmm0
+    0.00 :   ba1c:   mov    %rax,%rsi
+    0.00 :   ba1f:   div    %r12
+    0.00 :   ba22:   mov    %esi,%eax
+    0.00 :   ba24:   mov    %rdx,%rcx
+    0.00 :   ba27:   xor    %edx,%edx
+    0.00 :   ba29:   divq   -0x50(%rbp)
+    0.00 :   ba2d:   add    $0x1,%rdx
+    0.00 :   ba31:   mov    %rdx,%r15
+    0.00 :   ba34:   shl    $0x5,%r15
+    0.00 :   ba38:   mov    %rcx,%rax
+    0.00 :   ba3b:   shl    $0x5,%rax
+    0.00 :   ba3f:   add    %r14,%rax
+    0.00 :   ba42:   jmp    ba6f <do_lookup_x+0x8ff>
+    0.00 :   ba44:   nopw   0x0(%rax,%rax,1)
+    0.00 :   ba4a:   data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   ba55:   data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   ba60:   add    %rdx,%rcx
+    0.00 :   ba63:   add    %r15,%rax
+    0.00 :   ba66:   cmp    %r12,%rcx
+    0.00 :   ba69:   jae    bc58 <do_lookup_x+0xae8>
+    0.00 :   ba6f:   cmpq   $0x0,0x8(%rax)
+    0.00 :   ba74:   jne    ba60 <do_lookup_x+0x8f0>
+    0.00 :   ba76:   mov    %esi,(%rax)
+    0.00 :   ba78:   mov    %rdi,0x18(%rax)
+    0.00 :   ba7c:   movups %xmm0,0x8(%rax)
+    0.00 :   ba80:   add    $0x20,%r8
+    0.00 :   ba84:   cmp    %r8,%r10
+    0.00 :   ba87:   jne    ba00 <do_lookup_x+0x890>
+    0.00 :   ba8d:   mov    -0x60(%rbp),%rcx
+    0.00 :   ba91:   imul   $0x70,-0x70(%rbp),%r15
+    0.00 :   ba96:   lea    0x2d563(%rip),%rax        # 39000 <_rtld_global>
+    0.00 :   ba9d:   mov    %r9,0x38(%rbp)
+    0.00 :   baa1:   mov    %r11,%rdi
+    0.00 :   baa4:   mov    %rcx,-0x60(%rbp)
+    0.00 :   baa8:   add    %rax,%r15
+    0.00 :   baab:   call   *0x68(%r15)
+    0.00 :   baaf:   mov    0x2cf82(%rip),%rax        # 38a38 <__rtld_free>
+    0.00 :   bab6:   xor    %edx,%edx
+    0.00 :   bab8:   mov    %r14,%r11
+    0.00 :   babb:   mov    -0x60(%rbp),%rcx
+    0.00 :   babf:   mov    0x38(%rbp),%r9
+    0.00 :   bac3:   mov    %r12,0x58(%r15)
+    0.00 :   bac7:   mov    %rax,0x68(%r15)
+    0.00 :   bacb:   mov    -0x78(%rbp),%rax
+    0.00 :   bacf:   mov    %r14,0x50(%r15)
+    0.00 :   bad3:   mov    %r12,%r15
+    0.00 :   bad6:   div    %r12
+    0.00 :   bad9:   mov    -0x78(%rbp),%rax
+    0.00 :   badd:   mov    %rdx,%rsi
+    0.00 :   bae0:   xor    %edx,%edx
+    0.00 :   bae2:   divq   -0x50(%rbp)
+    0.00 :   bae6:   lea    0x1(%rdx),%r10
+    0.00 :   baea:   jmp    b7f2 <do_lookup_x+0x682>
+    0.00 :   baef:   nop
+    0.00 :   baf0:   mov    %r15,%r13
+    0.00 :   baf3:   mov    %rbx,%r15
+    0.00 :   baf6:   mov    -0x80(%rbp),%rax
+    0.00 :   bafa:   mov    %r12,%rbx
+    0.00 :   bafd:   sub    %r15,%r14
+    0.00 :   bb00:   mov    %edx,%r12d
+    0.00 :   bb03:   jmp    b670 <do_lookup_x+0x500>
+    0.00 :   bb08:   sub    %r15,%rsi
+    0.00 :   bb0b:   jmp    b808 <do_lookup_x+0x698>
+    0.00 :   bb10:   mov    -0x50(%rbp),%rax
+    0.00 :   bb14:   xor    %edx,%edx
+    0.00 :   bb16:   movzbl (%rax),%ecx
+    0.00 :   bb19:   test   %rcx,%rcx
+    0.00 :   bb1c:   je     bbbc <do_lookup_x+0xa4c>
+    0.00 :   bb22:   movzbl 0x1(%rax),%eax
+    0.00 :   bb26:   test   %al,%al
+    0.00 :   bb28:   je     bc60 <do_lookup_x+0xaf0>
+    0.00 :   bb2e:   shl    $0x4,%rcx
+    0.00 :   bb32:   add    %rax,%rcx
+    0.00 :   bb35:   mov    -0x50(%rbp),%rax
+    0.00 :   bb39:   movzbl 0x2(%rax),%eax
+    0.00 :   bb3d:   test   %al,%al
+    0.00 :   bb3f:   je     bc60 <do_lookup_x+0xaf0>
+    0.00 :   bb45:   shl    $0x4,%rcx
+    0.00 :   bb49:   add    %rax,%rcx
+    0.00 :   bb4c:   mov    -0x50(%rbp),%rax
+    0.00 :   bb50:   movzbl 0x3(%rax),%eax
+    0.00 :   bb54:   test   %al,%al
+    0.00 :   bb56:   je     bc60 <do_lookup_x+0xaf0>
+    0.00 :   bb5c:   shl    $0x4,%rcx
+    0.00 :   bb60:   add    %rax,%rcx
+    0.00 :   bb63:   mov    -0x50(%rbp),%rax
+    0.00 :   bb67:   movzbl 0x4(%rax),%eax
+    0.00 :   bb6b:   test   %al,%al
+    0.00 :   bb6d:   je     bc60 <do_lookup_x+0xaf0>
+    0.00 :   bb73:   mov    -0x50(%rbp),%rdx
+    0.00 :   bb77:   shl    $0x4,%rcx
+    0.00 :   bb7b:   add    %rcx,%rax
+    0.00 :   bb7e:   movzbl 0x5(%rdx),%ecx
+    0.00 :   bb82:   test   %cl,%cl
+    0.00 :   bb84:   je     bbab <do_lookup_x+0xa3b>
+    0.00 :   bb86:   add    $0x5,%rdx
+    0.00 :   bb8a:   shl    $0x4,%rax
+    0.00 :   bb8e:   add    $0x1,%rdx
+    0.00 :   bb92:   add    %rax,%rcx
+    0.00 :   bb95:   mov    %rcx,%rax
+    0.00 :   bb98:   shr    $0x18,%rax
+    0.00 :   bb9c:   and    $0xf0,%eax
+    0.00 :   bba1:   xor    %rcx,%rax
+    0.00 :   bba4:   movzbl (%rdx),%ecx
+    0.00 :   bba7:   test   %cl,%cl
+    0.00 :   bba9:   jne    bb8a <do_lookup_x+0xa1a>
+    0.00 :   bbab:   and    $0xfffffff,%eax
+    0.00 :   bbb0:   xor    %edx,%edx
+    0.00 :   bbb2:   mov    %rax,%rcx
+    0.00 :   bbb5:   div    %rdi
+    0.00 :   bbb8:   shl    $0x2,%rdx
+    0.00 :   bbbc:   mov    -0x70(%rbp),%rax
+    0.00 :   bbc0:   mov    %rcx,(%rax)
+    0.00 :   bbc3:   jmp    b31e <do_lookup_x+0x1ae>
+    0.00 :   bbc8:   mov    %r14,%rbx
+    0.00 :   bbcb:   mov    0x28(%rbp),%r10
+    0.00 :   bbcf:   mov    %r15d,%r14d
+    0.00 :   bbd2:   mov    0x38(%rbp),%r9
+    0.00 :   bbd6:   mov    -0x88(%rbp),%r8
+    0.00 :   bbdd:   mov    0x30(%rbp),%r15d
+    0.00 :   bbe1:   mov    -0x90(%rbp),%r11
+    0.00 :   bbe8:   jmp    b926 <do_lookup_x+0x7b6>
+    0.00 :   bbed:   mov    0x8(%rbx),%rdx
+    0.00 :   bbf1:   mov    -0x50(%rbp),%rsi
+    0.00 :   bbf5:   xor    %eax,%eax
+    0.00 :   bbf7:   mov    %r11,-0x80(%rbp)
+    0.00 :   bbfb:   lea    0x2455e(%rip),%rdi        # 30160 <__PRETTY_FUNCTION__.9+0x38>
+    0.00 :   bc02:   mov    %rcx,-0x88(%rbp)
+    0.00 :   bc09:   mov    %r9,0x38(%rbp)
+    0.00 :   bc0d:   mov    %r10,0x28(%rbp)
+    0.00 :   bc11:   mov    %r8,-0x78(%rbp)
+    0.00 :   bc15:   call   f720 <_dl_error_printf>
+    0.00 :   bc1a:   mov    -0x78(%rbp),%r8
+    0.00 :   bc1e:   mov    0x28(%rbp),%r10
+    0.00 :   bc22:   mov    0x38(%rbp),%r9
+    0.00 :   bc26:   mov    -0x80(%rbp),%r11
+    0.00 :   bc2a:   mov    -0x88(%rbp),%rcx
+    0.00 :   bc31:   testb  $0x1,0x364(%rbx)
+    0.00 :   bc38:   je     b3f7 <do_lookup_x+0x287>
+    0.00 :   bc3e:   mov    0x8(%rbx),%rsi
+    0.00 :   bc42:   mov    -0x50(%rbp),%rdx
+    0.00 :   bc46:   lea    0x245c3(%rip),%rcx        # 30210 <__PRETTY_FUNCTION__.9+0xe8>
+    0.00 :   bc4d:   xor    %edi,%edi
+    0.00 :   bc4f:   call   21a0 <_dl_signal_error>
+    0.00 :   bc54:   nopl   0x0(%rax)
+    0.00 :   bc58:   sub    %r12,%rcx
+    0.00 :   bc5b:   jmp    ba38 <do_lookup_x+0x8c8>
+    0.00 :   bc60:   mov    %rcx,%rax
+    0.00 :   bc63:   xor    %edx,%edx
+    0.00 :   bc65:   div    %rdi
+    0.00 :   bc68:   shl    $0x2,%rdx
+    0.00 :   bc6c:   jmp    bbbc <do_lookup_x+0xa4c>
+    0.00 :   bc71:   movdqu 0x10(%r13),%xmm0
+    0.00 :   bc77:   jmp    b6e6 <do_lookup_x+0x576>
+    0.00 :   bc7c:   cmpb   $0x0,0x358(%rbx)
+    0.00 :   bc83:   jne    b849 <do_lookup_x+0x6d9>
+    0.00 :   bc89:   testb  $0x4,0x2ce30(%rip)        # 38ac0 <_rtld_global_ro>
+    0.00 :   bc90:   jne    bcc1 <do_lookup_x+0xb51>
+    0.00 :   bc92:   movb   $0x1,0x358(%rbx)
+    0.00 :   bc99:   jmp    b849 <do_lookup_x+0x6d9>
+    0.00 :   bc9e:   mov    0x30(%rbx),%rdx
+    0.00 :   bca2:   mov    0x8(%rbx),%rsi
+    0.00 :   bca6:   xor    %eax,%eax
+    0.00 :   bca8:   mov    %rcx,-0x48(%rbp)
+    0.00 :   bcac:   lea    0x2459d(%rip),%rdi        # 30250 <__PRETTY_FUNCTION__.9+0x128>
+    0.00 :   bcb3:   call   f470 <_dl_debug_printf>
+    0.00 :   bcb8:   mov    -0x48(%rbp),%rcx
+    0.00 :   bcbc:   jmp    b8f7 <do_lookup_x+0x787>
+    0.00 :   bcc1:   mov    0x30(%rbx),%rdx
+    0.00 :   bcc5:   mov    0x8(%rbx),%rsi
+    0.00 :   bcc9:   xor    %eax,%eax
+    0.00 :   bccb:   mov    %rcx,-0x48(%rbp)
+    0.00 :   bccf:   lea    0x2457a(%rip),%rdi        # 30250 <__PRETTY_FUNCTION__.9+0x128>
+    0.00 :   bcd6:   call   f470 <_dl_debug_printf>
+    0.00 :   bcdb:   mov    -0x48(%rbp),%rcx
+    0.00 :   bcdf:   jmp    bc92 <do_lookup_x+0xb22>
+    0.00 :   bce1:   mov    -0x88(%rbp),%rdi
+    0.00 :   bce8:   call   *0x2cd5a(%rip)        # 38a48 <___rtld_mutex_unlock>
+    0.00 :   bcee:   lea    0x22277(%rip),%rdi        # 2df6c <_sys_errname+0x90c>
+    0.00 :   bcf5:   xor    %eax,%eax
+    0.00 :   bcf7:   call   f7d0 <_dl_fatal_printf>

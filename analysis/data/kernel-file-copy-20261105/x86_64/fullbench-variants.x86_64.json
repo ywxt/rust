@@ -1,0 +1,542 @@
+[
+  {
+    "round": 0,
+    "root": "/tmp",
+    "mode": "original",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original"
+    ],
+    "stdout": "\nrunning 1 test\ntest original ... bench:       3,457.20 ns/iter (+/- 197.13) = 37914 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 2.12s\n\n",
+    "stderr": "",
+    "ns_per_call": 3457.2
+  },
+  {
+    "round": 0,
+    "root": "/tmp",
+    "mode": "limited",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "limited"
+    ],
+    "stdout": "\nrunning 1 test\ntest limited ... bench:       3,257.78 ns/iter (+/- 138.06) = 40243 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.25s\n\n",
+    "stderr": "",
+    "ns_per_call": 3257.78
+  },
+  {
+    "round": 0,
+    "root": "/tmp",
+    "mode": "buffered",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "buffered"
+    ],
+    "stdout": "\nrunning 1 test\ntest buffered ... bench:       5,735.70 ns/iter (+/- 355.79) = 22854 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.69s\n\n",
+    "stderr": "",
+    "ns_per_call": 5735.7
+  },
+  {
+    "round": 0,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "original",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original"
+    ],
+    "stdout": "\nrunning 1 test\ntest original ... bench:       5,554.12 ns/iter (+/- 177.26) = 23599 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.18s\n\n",
+    "stderr": "",
+    "ns_per_call": 5554.12
+  },
+  {
+    "round": 0,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "limited",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "limited"
+    ],
+    "stdout": "\nrunning 1 test\ntest limited ... bench:       5,518.22 ns/iter (+/- 327.08) = 23753 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.99s\n\n",
+    "stderr": "",
+    "ns_per_call": 5518.22
+  },
+  {
+    "round": 0,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "buffered",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "buffered"
+    ],
+    "stdout": "\nrunning 1 test\ntest buffered ... bench:       7,883.85 ns/iter (+/- 337.45) = 16627 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.73s\n\n",
+    "stderr": "",
+    "ns_per_call": 7883.85
+  },
+  {
+    "round": 1,
+    "root": "/tmp",
+    "mode": "original",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original"
+    ],
+    "stdout": "\nrunning 1 test\ntest original ... bench:       3,394.65 ns/iter (+/- 127.04) = 38618 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.39s\n\n",
+    "stderr": "",
+    "ns_per_call": 3394.65
+  },
+  {
+    "round": 1,
+    "root": "/tmp",
+    "mode": "limited",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "limited"
+    ],
+    "stdout": "\nrunning 1 test\ntest limited ... bench:       3,379.33 ns/iter (+/- 188.26) = 38790 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 1.54s\n\n",
+    "stderr": "",
+    "ns_per_call": 3379.33
+  },
+  {
+    "round": 1,
+    "root": "/tmp",
+    "mode": "buffered",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "buffered"
+    ],
+    "stdout": "\nrunning 1 test\ntest buffered ... bench:       5,855.55 ns/iter (+/- 260.64) = 22386 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.50s\n\n",
+    "stderr": "",
+    "ns_per_call": 5855.55
+  },
+  {
+    "round": 1,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "original",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original"
+    ],
+    "stdout": "\nrunning 1 test\ntest original ... bench:       5,654.46 ns/iter (+/- 191.73) = 23182 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.20s\n\n",
+    "stderr": "",
+    "ns_per_call": 5654.46
+  },
+  {
+    "round": 1,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "limited",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "limited"
+    ],
+    "stdout": "\nrunning 1 test\ntest limited ... bench:       5,623.97 ns/iter (+/- 316.73) = 23309 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 1.07s\n\n",
+    "stderr": "",
+    "ns_per_call": 5623.97
+  },
+  {
+    "round": 1,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "buffered",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "buffered"
+    ],
+    "stdout": "\nrunning 1 test\ntest buffered ... bench:       8,049.22 ns/iter (+/- 556.20) = 16284 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 8049.22
+  },
+  {
+    "round": 2,
+    "root": "/tmp",
+    "mode": "original",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original"
+    ],
+    "stdout": "\nrunning 1 test\ntest original ... bench:       3,383.66 ns/iter (+/- 215.73) = 38744 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.58s\n\n",
+    "stderr": "",
+    "ns_per_call": 3383.66
+  },
+  {
+    "round": 2,
+    "root": "/tmp",
+    "mode": "limited",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "limited"
+    ],
+    "stdout": "\nrunning 1 test\ntest limited ... bench:       3,289.32 ns/iter (+/- 167.24) = 39851 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.25s\n\n",
+    "stderr": "",
+    "ns_per_call": 3289.32
+  },
+  {
+    "round": 2,
+    "root": "/tmp",
+    "mode": "buffered",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "buffered"
+    ],
+    "stdout": "\nrunning 1 test\ntest buffered ... bench:       5,917.48 ns/iter (+/- 362.11) = 22151 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.10s\n\n",
+    "stderr": "",
+    "ns_per_call": 5917.48
+  },
+  {
+    "round": 2,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "original",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original"
+    ],
+    "stdout": "\nrunning 1 test\ntest original ... bench:       5,603.25 ns/iter (+/- 338.49) = 23393 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 1.99s\n\n",
+    "stderr": "",
+    "ns_per_call": 5603.25
+  },
+  {
+    "round": 2,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "limited",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "limited"
+    ],
+    "stdout": "\nrunning 1 test\ntest limited ... bench:       5,607.76 ns/iter (+/- 274.39) = 23376 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.51s\n\n",
+    "stderr": "",
+    "ns_per_call": 5607.76
+  },
+  {
+    "round": 2,
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "buffered",
+    "build": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/kernel-file-copy-20261105/harness.rs",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/harness"
+    ],
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/kernel-file-copy-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "buffered"
+    ],
+    "stdout": "\nrunning 1 test\ntest buffered ... bench:       7,955.52 ns/iter (+/- 571.62) = 16476 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 7955.52
+  }
+]

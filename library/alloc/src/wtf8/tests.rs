@@ -133,6 +133,51 @@ fn wtf8buf_from_wide() {
     assert!(!buf.is_known_utf8);
 }
 
+/// Whatever the input, `encode_wide` gives back what `from_wide` was given, and only unpaired
+/// surrogates make it not UTF-8. The inputs reach every code path of the decoder.
+#[test]
+fn wtf8buf_from_wide_round_trip() {
+    const UNITS: [&[u16]; 10] = [
+        &[0x61],
+        &[0x7F],
+        &[0x80],
+        &[0x7FF],
+        &[0x800],
+        &[0x4E2D],
+        &[0xFFFF],
+        &[0xD83D, 0xDE00],
+        &[0xD800],
+        &[0xDFFF],
+    ];
+    let mut state = 0x9E37_79B9_7F4A_7C15u64;
+    let mut next = move |n: usize| {
+        state ^= state << 13;
+        state ^= state >> 7;
+        state ^= state << 17;
+        (state % n as u64) as usize
+    };
+    let rounds = if cfg!(miri) { 1 } else { 40 };
+    for _ in 0..rounds {
+        for len in 0..80 {
+            let non_ascii_share = [0, 5, 30, 100][next(4)];
+            let mut v = Vec::new();
+            while v.len() < len {
+                let unit = if next(100) < non_ascii_share {
+                    UNITS[2 + next(UNITS.len() - 2)]
+                } else {
+                    UNITS[next(2)]
+                };
+                v.extend_from_slice(unit);
+            }
+            v.truncate(len);
+            let buf = Wtf8Buf::from_wide(&v);
+            assert_eq!(buf.encode_wide().collect::<Vec<u16>>(), v, "{v:x?}");
+            let utf8 = char::decode_utf16(v.iter().copied()).all(|r| r.is_ok());
+            assert_eq!(buf.is_known_utf8, utf8, "{v:x?}");
+        }
+    }
+}
+
 #[test]
 fn wtf8buf_push_str() {
     let mut string = Wtf8Buf::new();

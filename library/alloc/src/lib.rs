@@ -260,6 +260,8 @@ pub mod rc;
 pub mod slice;
 pub mod str;
 pub mod string;
+#[cfg(not(no_global_oom_handling))]
+mod utf16_decode;
 #[cfg(all(not(no_rc), not(no_sync), target_has_atomic = "ptr"))]
 pub mod sync;
 #[cfg(all(not(no_global_oom_handling), not(no_rc), not(no_sync)))]

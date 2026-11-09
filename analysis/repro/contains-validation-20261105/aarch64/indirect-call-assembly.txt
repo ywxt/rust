@@ -1,0 +1,68 @@
+_RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECslCgCmnnyZU1_6matrix:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-16]!
+	.cfi_def_cfa_offset 16
+	mov	x29, sp
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	blr	x0
+	//APP
+	//NO_APP
+	.cfi_def_cfa wsp, 16
+	ldp	x29, x30, [sp], #16
+	.cfi_def_cfa_offset 0
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end6:
+	.size	_RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECslCgCmnnyZU1_6matrix, .Lfunc_end6-_RINvNtNtCs60nHaxeZLXj_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECslCgCmnnyZU1_6matrix
+	.cfi_endproc
+
+	.section	.text.unlikely._RINvNvMs5_NtCshDmNPlWY1OA_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalECslCgCmnnyZU1_6matrix,"ax",@progbits
+
+	b.ne	.LBB12_307
+	stp	x21, x24, [sp, #160]
+	add	x8, sp, #160
+	//APP
+	//NO_APP
+	ldp	x0, x1, [sp, #160]
+	ldur	x8, [x29, #-80]
+.Ltmp17:
+	blr	x8
+.Ltmp18:
+	cmp	w20, w0
+	sturb	w0, [x29, #-68]
+	sturb	w20, [x29, #-160]
+	b.ne	.LBB12_309
+	ldur	x8, [x29, #-32]
+	stur	xzr, [x29, #-160]
+	cbz	x8, .LBB12_296
+	mov	x27, x25
+	mov	x23, xzr
+	add	x25, sp, #160
+	sub	x26, x29, #68
+.LBB12_285:
+
+	sub	x26, x29, #68
+.LBB12_285:
+	stp	x21, x24, [sp, #160]
+	//APP
+	//NO_APP
+	ldp	x0, x1, [sp, #160]
+	ldur	x8, [x29, #-80]
+.Ltmp19:
+	blr	x8
+.Ltmp20:
+	sturb	w0, [x29, #-68]
+	add	x23, x23, #1
+	//APP
+	//NO_APP
+	ldurb	w8, [x29, #-68]
+	ldur	x10, [x29, #-160]
+	ldur	x9, [x29, #-32]
+	add	x8, x10, x8
+	cmp	x23, x9
+	stur	x8, [x29, #-160]
+	b.lo	.LBB12_285
+	mov	x25, x27

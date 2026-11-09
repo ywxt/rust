@@ -1,0 +1,151 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 6K of event 'cycles:u'
+# Event count (approx.): 9411119702
+#
+# Overhead  Command       Shared Object               Symbol                                                                                                                                                                      
+# ........  ............  ..........................  ............................................................................................................................................................................
+#
+    51.02%  benches-base  benches-base                [.] _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+            |
+            ---_RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    19.43%  benches-base  libc.so.6                   [.] malloc
+            |
+            ---malloc
+               _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    13.87%  benches-base  libc.so.6                   [.] _int_free
+            |
+            ---_int_free
+               cfree@GLIBC_2.17
+               _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     7.88%  benches-base  libc.so.6                   [.] cfree@GLIBC_2.17
+            |
+            ---cfree@GLIBC_2.17
+               _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     3.38%  benches-base  libc.so.6                   [.] __memcpy_generic
+            |
+            ---__memcpy_generic
+               _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     1.31%  benches-base  libstd-7a2f7be1a1e543fc.so  [.] _RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+            |
+            ---_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+               _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.76%  benches-base  benches-base                [.] _RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2@plt
+            |
+            ---_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2@plt
+               _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.72%  benches-base  benches-base                [.] _RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc@plt
+            |
+            ---_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc@plt
+               _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.56%  benches-base  libstd-7a2f7be1a1e543fc.so  [.] _RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+            |
+            ---_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+               _RNvYNCNvNtCscmX2qrehp8H_7benches5slice26sort_unstable_small_random0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: To see list of saved events and attributes: perf evlist -v)
+#

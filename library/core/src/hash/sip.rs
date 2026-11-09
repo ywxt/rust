@@ -304,7 +304,13 @@ impl<S: Sip> super::Hasher for Hasher<S> {
         // This hasher works byte-wise, and `0xFF` cannot show up in a `str`,
         // so just hashing the one extra byte is enough to be prefix-free.
         self.write(s.as_bytes());
-        self.write_u8(0xFF);
+        if self.ntail < 7 {
+            self.length += 1;
+            self.tail |= 0xff << (8 * self.ntail);
+            self.ntail += 1;
+        } else {
+            self.write_u8(0xff);
+        }
     }
 
     #[inline]

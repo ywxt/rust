@@ -1,0 +1,53 @@
+--- a/library/core/src/slice/memchr.rs
++++ b/library/core/src/slice/memchr.rs
+@@ -159,3 +159,33 @@
+     // Find the byte before the point the body loop stopped.
+     text[..offset].iter().rposition(|elt| *elt == x)
+ }
++
++#[cfg(all(any(all(target_arch = "aarch64", target_feature = "neon"), all(target_arch = "x86_64", target_feature = "sse2")), target_pointer_width = "64"))]
++pub(super) fn contains_match(needle: u8, bytes: &[u8]) -> usize {
++    use crate::simd::cmp::SimdPartialEq;
++    use crate::simd::u8x16;
++
++    // SAFETY: the only caller checks the 16-byte minimum.
++    unsafe { crate::hint::assert_unchecked(bytes.len() >= 16) };
++    if bytes[0] == needle {
++        return 1;
++    }
++    let n = u8x16::splat(needle);
++    let mut chunks = bytes.chunks_exact(64);
++    for c in &mut chunks {
++        let a = u8x16::from_slice(&c[..16]).simd_eq(n);
++        let b = u8x16::from_slice(&c[16..32]).simd_eq(n);
++        let d = u8x16::from_slice(&c[32..48]).simd_eq(n);
++        let e = u8x16::from_slice(&c[48..64]).simd_eq(n);
++        if (a | b | d | e).any() {
++            return 1;
++        }
++    }
++    let mut tail = chunks.remainder().chunks_exact(16);
++    for c in &mut tail {
++        if u8x16::from_slice(c).simd_eq(n).any() {
++            return 1;
++        }
++    }
++    (!tail.remainder().is_empty() && u8x16::from_slice(&bytes[bytes.len() - 16..]).simd_eq(n).any()) as usize
++}
+--- a/library/core/src/slice/cmp.rs
++++ b/library/core/src/slice/cmp.rs
+@@ -400,6 +400,14 @@
+         let (byte, bytes) = unsafe {
+             (*(self as *const Self).cast::<u8>(), from_raw_parts(x.as_ptr().cast::<u8>(), x.len()))
+         };
++        #[cfg(all(any(all(target_arch = "aarch64", target_feature = "neon"), all(target_arch = "x86_64", target_feature = "sse2")), target_endian = "little", target_pointer_width = "64"))]
++        {
++            if bytes.len() < 16 {
++                return memchr::memchr(byte, bytes).is_some();
++            }
++            return memchr::contains_match(byte, bytes) != 0;
++        }
++        #[cfg(not(all(any(all(target_arch = "aarch64", target_feature = "neon"), all(target_arch = "x86_64", target_feature = "sse2")), target_endian = "little", target_pointer_width = "64")))]
+         memchr::memchr(byte, bytes).is_some()
+     }
+ }

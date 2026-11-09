@@ -1,0 +1,36 @@
+{
+  "command": [
+    "perf",
+    "record",
+    "-q",
+    "-F",
+    "1999",
+    "-e",
+    "cpu_core/cycles/u",
+    "-g",
+    "-o",
+    "/tmp/contains-bad-simd-20261105/baseline.x86_64.data",
+    "--",
+    "taskset",
+    "-c",
+    "12",
+    "env",
+    "LD_LIBRARY_PATH=/tmp/contains-stdlib-20261105/sysroots/optimized/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+    "/tmp/contains-stdlib-20261105/optimized/x86_64-unknown-linux-gnu/benches",
+    "--bench",
+    "--exact",
+    "str::bench_contains_bad_simd"
+  ],
+  "stdout": "\nrunning 1 test\ntest str::bench_contains_bad_simd              ... bench:          50.21 ns/iter (+/- 1.71) = 1480 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 27 filtered out; finished in 4.82s\n\n",
+  "stderr": "",
+  "report": [
+    "perf",
+    "report",
+    "--stdio",
+    "--no-children",
+    "--percent-limit",
+    "0.5",
+    "-i",
+    "/tmp/contains-bad-simd-20261105/baseline.x86_64.data"
+  ]
+}

@@ -1,0 +1,48 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 9K of event 'cpu_core/cycles/u'
+# Event count (approx.): 16782865197
+#
+# Overhead  Command       Shared Object               Symbol                                                                                                                               
+# ........  ............  ..........................  .....................................................................................................................................
+#
+    48.67%  benches-base  benches-base                [.] <benches::slice::sort_unstable_small_random::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+            |
+            ---<benches::slice::sort_unstable_small_random::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+
+    20.97%  benches-base  libc.so.6                   [.] cfree@GLIBC_2.2.5
+            |
+            ---cfree@GLIBC_2.2.5
+
+    20.49%  benches-base  libc.so.6                   [.] malloc
+            |
+            ---malloc
+
+     4.83%  benches-base  libc.so.6                   [.] __memmove_avx_unaligned_erms
+            |
+            ---__memmove_avx_unaligned_erms
+
+     1.35%  benches-base  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_alloc
+            |
+            ---__rustc::__rust_alloc
+
+     1.25%  benches-base  libstd-320fe7036dd8354d.so  [.] __rustc::__rdl_alloc
+            |
+            ---__rustc::__rdl_alloc
+
+     1.21%  benches-base  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_no_alloc_shim_is_unstable_v2
+            |
+            ---__rustc::__rust_no_alloc_shim_is_unstable_v2
+
+     1.18%  benches-base  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_dealloc
+            |
+            ---__rustc::__rust_dealloc
+
+
+
+#
+# (Tip: To trace calls using Processor Trace use perf record -e intel_pt// ... ; perf script --call-trace. Then use perf script --time A-B --insn-trace to look at region of interest.)
+#

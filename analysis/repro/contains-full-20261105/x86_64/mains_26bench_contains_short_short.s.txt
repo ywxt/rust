@@ -1,0 +1,83 @@
+_RINvNtCsbvh2iR3x0la_4test5bench13ns_iter_inneruNCNvNtCs3LK9MfeDMnJ_7benches4mains_26bench_contains_short_short0EBP_:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	pushq	%r15
+	.cfi_def_cfa_offset 24
+	pushq	%r14
+	.cfi_def_cfa_offset 32
+	pushq	%r13
+	.cfi_def_cfa_offset 40
+	pushq	%r12
+	.cfi_def_cfa_offset 48
+	pushq	%rbx
+	.cfi_def_cfa_offset 56
+	subq	$56, %rsp
+	.cfi_def_cfa_offset 112
+	.cfi_offset %rbx, -56
+	.cfi_offset %r12, -48
+	.cfi_offset %r13, -40
+	.cfi_offset %r14, -32
+	.cfi_offset %r15, -24
+	.cfi_offset %rbp, -16
+	movq	%rsi, %rbx
+	movq	%rdi, %r14
+	callq	*_RNvMNtCs9wefJfwQbYy_3std4timeNtB2_7Instant3now@GOTPCREL(%rip)
+	movq	%rax, 40(%rsp)
+	movl	%edx, 48(%rsp)
+	testq	%rbx, %rbx
+	je	.LBB12_4
+	movq	(%r14), %r15
+	movq	8(%r14), %r12
+	movq	16(%r14), %r14
+	leaq	8(%rsp), %r13
+	leaq	24(%rsp), %rbp
+	.p2align	4
+.LBB12_2:
+	movq	%r15, 8(%rsp)
+	movq	%r12, 16(%rsp)
+	#APP
+	#NO_APP
+	movups	(%r14), %xmm0
+	movups	%xmm0, 24(%rsp)
+	#APP
+	#NO_APP
+	movq	24(%rsp), %rdi
+	movq	32(%rsp), %rsi
+	movq	8(%rsp), %rdx
+	movq	16(%rsp), %rcx
+	callq	_RNvXst_NtNtCs6knCYbIatyh_4core3str7patternReNtB5_7Pattern15is_contained_in
+	testb	%al, %al
+	je	.LBB12_5
+	#APP
+	#NO_APP
+	decq	%rbx
+	jne	.LBB12_2
+.LBB12_4:
+	leaq	40(%rsp), %rdi
+	callq	*_RNvMNtCs9wefJfwQbYy_3std4timeNtB2_7Instant7elapsed@GOTPCREL(%rip)
+	imulq	$1000000000, %rax, %rcx
+	movl	%edx, %eax
+	addq	%rcx, %rax
+	addq	$56, %rsp
+	.cfi_def_cfa_offset 56
+	popq	%rbx
+	.cfi_def_cfa_offset 48
+	popq	%r12
+	.cfi_def_cfa_offset 40
+	popq	%r13
+	.cfi_def_cfa_offset 32
+	popq	%r14
+	.cfi_def_cfa_offset 24
+	popq	%r15
+	.cfi_def_cfa_offset 16
+	popq	%rbp
+	.cfi_def_cfa_offset 8
+	retq
+.LBB12_5:
+	.cfi_def_cfa_offset 112
+	leaq	.Lalloc_ae3ba8d2c79fb9fc29fd4d04bcc5e64a(%rip), %rdi
+	leaq	.Lalloc_8981f5751cd2d7c3fd1a87dc92935fdf(%rip), %rdx
+	movl	$61, %esi
+	callq	*_RNvNtCs6knCYbIatyh_4core9panicking5panic@GOTPCREL(%rip)
+.Lfunc_end12:

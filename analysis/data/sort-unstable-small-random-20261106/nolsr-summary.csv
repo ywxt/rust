@@ -1,0 +1,9 @@
+arch,variant,case,mode,trials,ns,min_ns,max_ns,cycles,instructions,branches,branch-misses,GHz
+aarch64,base,slice::sort_unstable_small_random,counted,5,45.96211,33.45424,46.672387,133.1261783,463.1123429,105.0236475,1.6665434,2.8907646541504106
+aarch64,base,slice::sort_unstable_small_random,libtest,5,31.55,31.44,32.02,,,,,2.8965559206635496
+aarch64,nolsr,slice::sort_unstable_small_random,counted,5,44.19505,32.539632,46.799638,127.9645058,446.1123416,105.0236473,1.5527853,2.891330511997831
+aarch64,nolsr,slice::sort_unstable_small_random,libtest,5,30.61,29.63,31.4,,,,,2.890593606581036
+x86_64,base,slice::sort_unstable_small_random,counted,5,31.4205672,29.4712194,47.4195945,103.1743932,378.3020189,91.0576744,0.0024771,3.1295741664434917
+x86_64,base,slice::sort_unstable_small_random,libtest,5,29.98,29.31,37.86,,,,,3.1260429882257856
+x86_64,nolsr,slice::sort_unstable_small_random,counted,5,30.0182254,28.9032893,32.144714,99.3853786,364.3020148,91.0576666,0.0023938,3.206391309366755
+x86_64,nolsr,slice::sort_unstable_small_random,libtest,5,27.99,24.91,31.96,,,,,3.2665004625596072

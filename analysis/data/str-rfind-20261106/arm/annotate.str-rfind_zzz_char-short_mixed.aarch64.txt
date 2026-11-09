@@ -1,0 +1,82 @@
+ Percent |	Source code & Disassembly of libstd-7a2f7be1a1e543fc.so for cycles:u (381 samples, percent: local period)
+-------------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     00000000000d88a8 <core::slice::memchr::memrchr>:
+         : 6     core::slice::memchr::memrchr:
+    1.84 :   d88a8:  stp     x29, x30, [sp, #-16]!
+    0.00 :   d88ac:  mov     x29, sp
+    0.00 :   d88b0:  add     x8, x1, #0x7
+    0.00 :   d88b4:  mov     x9, x2
+    0.27 :   d88b8:  mov     x11, x2
+    0.00 :   d88bc:  and     x8, x8, #0xfffffffffffffff8
+    0.00 :   d88c0:  sub     x8, x8, x1
+    0.00 :   d88c4:  cmp     x2, x8
+    0.00 :   d88c8:  b.cc    d88e0 <core::slice::memchr::memrchr+0x38>  // b.lo, b.ul, b.last
+    0.53 :   d88cc:  sub     w9, w2, w8
+    0.00 :   d88d0:  and     x9, x9, #0xf
+    0.00 :   d88d4:  subs    x9, x2, x9
+    0.00 :   d88d8:  b.cc    d89b8 <core::slice::memchr::memrchr+0x110>  // b.lo, b.ul, b.last
+    0.00 :   d88dc:  mov     x11, x8
+    0.00 :   d88e0:  cmp     x9, x2
+    0.00 :   d88e4:  and     w10, w0, #0xff
+    0.00 :   d88e8:  b.eq    d8914 <core::slice::memchr::memrchr+0x6c>  // b.none
+    1.59 :   d88ec:  sub     x8, x2, #0x1
+    0.00 :   d88f0:  neg     x12, x9
+    0.00 :   d88f4:  mov     w0, #0x1                        // #1
+   11.40 :   d88f8:  ldrb    w13, [x1, x8]
+    0.00 :   d88fc:  cmp     w13, w10
+    0.00 :   d8900:  b.eq    d8998 <core::slice::memchr::memrchr+0xf0>  // b.none
+   32.74 :   d8904:  sub     x8, x8, #0x1
+    0.00 :   d8908:  add     x13, x12, x8
+    0.00 :   d890c:  cmn     x13, #0x1
+    0.00 :   d8910:  b.ne    d88f8 <core::slice::memchr::memrchr+0x50>  // b.any
+    0.00 :   d8914:  mov     x8, #0x101010101010101          // #72340172838076673
+    0.00 :   d8918:  mov     x13, #0x101010101010101         // #72340172838076673
+    0.00 :   d891c:  sub     x14, x1, #0x8
+    0.00 :   d8920:  mul     x12, x10, x8
+    0.00 :   d8924:  movk    x13, #0x100
+    0.00 :   d8928:  mov     x15, #0x8080808080808080        // #-9187201950435737472
+   29.65 :   d892c:  mov     x8, x9
+    0.00 :   d8930:  cmp     x9, x11
+    0.00 :   d8934:  b.ls    d8968 <core::slice::memchr::memrchr+0xc0>  // b.plast
+    1.56 :   d8938:  add     x9, x14, x8
+    0.00 :   d893c:  ldp     x16, x9, [x9, #-8]
+    0.00 :   d8940:  eor     x16, x16, x12
+    0.00 :   d8944:  eor     x9, x9, x12
+    0.00 :   d8948:  sub     x17, x13, x16
+   14.75 :   d894c:  sub     x18, x13, x9
+    0.00 :   d8950:  orr     x16, x17, x16
+    0.00 :   d8954:  orr     x9, x18, x9
+    0.00 :   d8958:  and     x9, x16, x9
+    0.00 :   d895c:  bics    xzr, x15, x9
+    0.00 :   d8960:  sub     x9, x8, #0x10
+    0.00 :   d8964:  b.eq    d892c <core::slice::memchr::memrchr+0x84>  // b.none
+    0.00 :   d8968:  cmp     x8, x2
+    0.00 :   d896c:  b.hi    d89a4 <core::slice::memchr::memrchr+0xfc>  // b.pmore
+    0.00 :   d8970:  cbz     x8, d8994 <core::slice::memchr::memrchr+0xec>
+    0.00 :   d8974:  sub     x8, x8, #0x1
+    0.00 :   d8978:  mov     w0, #0x1                        // #1
+    0.80 :   d897c:  ldrb    w9, [x1, x8]
+    0.00 :   d8980:  cmp     w9, w10
+    0.00 :   d8984:  b.eq    d8998 <core::slice::memchr::memrchr+0xf0>  // b.none
+    2.32 :   d8988:  sub     x8, x8, #0x1
+    0.00 :   d898c:  cmn     x8, #0x1
+    0.00 :   d8990:  b.ne    d897c <core::slice::memchr::memrchr+0xd4>  // b.any
+    0.00 :   d8994:  mov     x0, xzr
+    0.00 :   d8998:  mov     x1, x8
+    2.55 :   d899c:  ldp     x29, x30, [sp], #16
+    0.00 :   d89a0:  ret
+    0.00 :   d89a4:  adrp    x3, 13d000 <std::panicking::EMPTY_PANIC+0x4c60>
+    0.00 :   d89a8:  add     x3, x3, #0xe98
+    0.00 :   d89ac:  mov     x0, xzr
+    0.00 :   d89b0:  mov     x1, x8
+    0.00 :   d89b4:  bl      45210 <core::slice::index::slice_index_fail@plt>
+    0.00 :   d89b8:  adrp    x3, 13d000 <std::panicking::EMPTY_PANIC+0x4c60>
+    0.00 :   d89bc:  add     x3, x3, #0xeb0
+    0.00 :   d89c0:  mov     x0, x9
+    0.00 :   d89c4:  mov     x1, x2
+    0.00 :   d89c8:  bl      45210 <core::slice::index::slice_index_fail@plt>

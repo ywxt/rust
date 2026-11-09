@@ -1,7 +1,7 @@
 use std::collections::BTreeSet;
 
 use rand::Rng;
-use test::Bencher;
+use test::{Bencher, black_box};
 
 fn random(n: u32) -> BTreeSet<u32> {
     let mut rng = crate::bench_rng();
@@ -222,3 +222,23 @@ set_bench! {is_subset_100_vs_100, is_subset, clone, [pos(100), pos(100)]}
 set_bench! {is_subset_100_vs_10k, is_subset, clone, [pos(100), pos(10_000)]}
 set_bench! {is_subset_10k_vs_100, is_subset, clone, [pos(10_000), pos(100)]}
 set_bench! {is_subset_10k_vs_10k, is_subset, clone, [pos(10_000), pos(10_000)]}
+
+#[bench]
+fn iteration_fold_100000(b: &mut Bencher) {
+    let set: BTreeSet<_> = (0..100_000).collect();
+    b.iter(|| {
+        set.iter().for_each(|entry| {
+            black_box(entry);
+        })
+    });
+}
+
+#[bench]
+fn range_fold_100000(b: &mut Bencher) {
+    let set: BTreeSet<_> = (0..100_000).collect();
+    b.iter(|| {
+        set.range(10_000..90_000).for_each(|entry| {
+            black_box(entry);
+        })
+    });
+}

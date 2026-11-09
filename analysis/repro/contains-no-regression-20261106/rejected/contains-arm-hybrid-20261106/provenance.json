@@ -1,0 +1,15 @@
+{
+  "baseline": "main contains implementation; unrelated preexisting changes fixed",
+  "change": "retain main alignment, word presence test and scalar hit/tail search for short/early cases; peel four word blocks before SIMD long body; preserve full first-index API",
+  "cpu_midr_el1": "0x00000000480fd020",
+  "cpu_model": "920B per user; hardware MIDR recorded",
+  "new_inline_attributes": 0,
+  "previous_candidate": "/tmp/contains-arm-chunks-20261106",
+  "acceptance": [
+    "no reproducible slowdown vs main in tested scenarios",
+    "ARM cycles / x86-main cycles decreases on optimized workloads"
+  ],
+  "endianness_and_pointer_guard": "aarch64 + neon + little-endian + 64-bit pointers; all other targets unchanged",
+  "audit_method": "read-only Python ELF parser; no objcopy rewriting of measured artifacts",
+  "tail_change": "original word and scalar hit/tail paths; SIMD restricted to long body"
+}

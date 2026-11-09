@@ -1,0 +1,26 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 6K of event 'cpu_core/cycles/u'
+# Event count (approx.): 11797389296
+#
+# Overhead  Command       Shared Object               Symbol                                                                                                                                   
+# ........  ............  ..........................  .........................................................................................................................................
+#
+    98.82%  benches-base  libstd-320fe7036dd8354d.so  [.] core::slice::memchr::memrchr
+            |
+            ---core::slice::memchr::memrchr
+               |          
+                --98.49%--<benches::str::rfind_zzz_char::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+
+     1.14%  benches-base  benches-base                [.] <benches::str::rfind_zzz_char::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+            |
+            ---<benches::str::rfind_zzz_char::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+
+
+
+#
+# (Tip: For tracepoint events, try: perf report -s trace_fields)
+#

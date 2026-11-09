@@ -11,6 +11,8 @@ mod count;
 mod error;
 mod iter;
 mod traits;
+#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+mod utf8_simd;
 mod validations;
 
 use self::pattern::{DoubleEndedSearcher, Pattern, ReverseSearcher, Searcher};

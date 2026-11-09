@@ -977,9 +977,213 @@ Tests: `coretests fuse` and `flatten`, `alloctests in_place` and `from_iter`, 92
 
 **Open**: needs a soundness sign-off from the `inplace_iteration` maintainers. `bench_in_place_recycle` has not exercised the in-place path since 2021 and timing cannot show it, so it should assert on allocation count. `Peekable` has the same gap; not evaluated.
 
+### 32. In-place `v.into_iter().filter(p).collect()` (`COMPACT`, same shape as `retain`) — SVE prototype verified
+
+**Interface**: `SpecInPlaceCollect::collect_in_place` (the `try_fold` default path) in `library/alloc/src/vec/in_place_collect.rs`, reached through `Filter` (`InPlaceIterable`). This is the common `v = v.into_iter().filter(p).collect()` idiom: semantically a `retain`, but it does not go through `Vec::retain`, so it gets none of `sve_retain.rs`.
+
+**Why it is slow**: `Filter::try_fold` calls `p` per element and only on a hit does `ptr::write(dst)` and advance `dst`. The write position is data-dependent, so LLVM cannot vectorize it, and a random predicate costs one hard-to-predict branch per element.
+
+**Fix**: the §22 template. Phase A calls `p` **in order, exactly once per element** over 256-element chunks, writing only a bool mask; Phase B writes the kept elements back into the same buffer with `COMPACT`. Since `dst ≤ src` and each iteration loads before it stores, no unread element is overwritten. Restricted to `!needs_drop` types of width 4/8 B (`COMPACT` only supports `.s`/`.d`), so a panic needs no drops and the guard only has to keep the written prefix valid.
+
+**Prototype core**:
+
+```rust
+for k in 0..m { mask[k] = p(&*ptr.add(i + k)) as u8; }        // in order, exactly once
+// ld1w z1 / ld1b z2 (mask) / cmpne p1 / compact z1.s, p1, z1.s
+// cntp k / whilelo p2 0..k / st1w z1, p2, [dst];  dst += k
+```
+
+**Benchmarks** (u32, standalone probe, `clone` subtracted, best of 5, pinned; `branchless` = the same Phase A plus a portable branch-free write-back):
+
+| n | predicate | std | branchless | SVE | SVE/std | SVE/branchless |
+|---:|---|---:|---:|---:|---:|---:|
+| 64 | random 1/3 | 42 ns | 62 | 49 | 0.86× | 1.26× |
+| 1 000 | random 1/3 | 610 | 605 | 277 | 2.2× | 2.2× |
+| 1 000 | sorted, first half | 459 | 571 | 241 | 1.9× | 2.4× |
+| 100 000 | random 1/3 | 275.7 µs | 58.5 | 27.8 | **9.9×** | 2.1× |
+| 100 000 | random 1/2 | 348.0 µs | 54.9 | 24.4 | **14.3×** | 2.3× |
+| 100 000 | sorted, first half | 43.5 µs | 56.4 | 30.7 | 1.4× | 1.8× |
+
+**Reading**: SVE is consistently 1.8–2.9× faster than the portable branch-free version; that part needs `COMPACT`. The large factors against std (10–14×) come mostly from branch mispredictions on random predicates. The n=1 000 std numbers are optimistic: the same data runs repeatedly and the branch predictor memorizes the 1 000-element pattern. n=64 regresses, so a threshold is needed (as with `MIN_SVE_SIZE_*` in `sve_retain.rs`). With `keep all`, LLVM folds std into a no-op, so that row is not representative.
+
+**Correctness**: 3 000 random lengths/predicates, identical to std; predicate call sequence and count identical.
+
+**Open**: hook is a `SpecInPlaceCollect` specialization for `Filter<vec::IntoIter<T>, P>`; same build premise as `sve_retain.rs` (static `+sve` build or runtime dispatch).
+
+### 33. `slice.iter().filter(p).copied().collect()` and `Iterator::partition` (one-/two-way `COMPACT`) — SVE prototype verified
+
+**Interface**: `extend_desugared` in `Vec: SpecFromIter` for non-`TrustedLen` iterators (per-element `push` plus a growth check driven by a `size_hint` lower bound of 0); the default `Iterator::partition`, which calls `extend_one` on each side.
+
+**Fix**: the same Phase A mask; `filter` does one `COMPACT`, `partition` does one `COMPACT` with `p1` and one with its inverse `p3`, writing two outputs. These are two independent output buffers, so the SVE2 `SPLICE` that §30 says swap-style partition needs is not required; base SVE suffices.
+
+**Benchmarks** (u32, ns/call; all three pre-allocate capacity n):
+
+| n | predicate | filter std | branchless | SVE | SVE/bl | partition std | branchless | SVE | SVE/bl |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 64 | random 1/2 | 156 | 52 | 45 | 1.16× | 304 | 75 | 66 | 1.15× |
+| 1 000 | random 1/3 | 1 220 | 697 | 369 | 1.89× | 2 118 | 884 | 493 | 1.79× |
+| 1 000 | sorted, first half | 1 221 | 488 | 389 | 1.26× | 2 971 | 777 | 522 | 1.49× |
+| 100 000 | random 1/3 | 307.8 µs | 66.9 | 34.6 | 1.93× | 522.6 µs | 82.4 | 47.0 | 1.75× |
+| 100 000 | random 1/2 | 405.2 µs | 67.9 | 27.8 | 2.44× | 426.7 µs | 79.3 | 38.7 | 2.05× |
+
+**Reading**: most of the gain (std → branchless, 4.6–6×) comes from a **portable branch-free rewrite** that needs no SVE; SVE adds another 1.2–2.4×. At n=64 or with a sorted (predictable) predicate SVE does not win or regresses. In the `keep all` row (not shown) LLVM folds the branch-free version into a vectorized copy, an artifact of the constant predicate.
+
+**Semantics and allocation**: both fast versions pre-allocate capacity n (extra memory for sparse filters; `capacity()` is unspecified but would change). Growing chunk by chunk instead is 4× slower for partition 1/3 at n=100 000 because of repeated reallocations, so it is not viable; accepting an n upper-bound allocation, or `shrink_to_fit` afterwards, is a trade-off to decide.
+
+**Open**: `filter` would hook a specialization like `SpecFromIter<T, Copied<Filter<slice::Iter<T>, P>>>`; `partition` is a default method generic over `B: Extend` and can only be specialized for `(Vec<T>, Vec<T>)` with a slice or `vec::IntoIter` source. Recommendation: **land the portable branch-free version first**, SVE second.
+
+### 34. ASCII runs in `String::from_utf16` / `str::encode_utf16().collect()` (SVE narrowing/widening memory ops + `brkb`) — SVE prototype verified
+
+**Interface**: `String::from_utf16` in `library/alloc/src/string.rs` (per-char `char::decode_utf16` plus `push`), and `EncodeUtf16` in `library/core/src/str/iter.rs` (a per-char iterator, collected through `extend`).
+
+**Why it is slow**: per-character decode/encode with a data-dependent output length; ASCII runs pay the full branch chain too.
+
+**Fix**: base SVE has single-instruction width-converting memory ops: `ld1h` plus a **truncating store `st1b {z.h}`** (u16→u8), and a **zero-extending load `ld1b {z.h}`** plus `st1h` (u8→u16). `cmphi #127` detects non-ASCII, `brkb` + `cntp` give the exact ASCII prefix length, and after writing the prefix the scalar decoder takes over; the tail is masked by `whilelo`. No closures and no side effects, so the semantic risk is the lowest of the three.
+
+**Benchmarks** (ns/call; `chunk16` = portable 16-unit OR-reduce chunked version; all three use the same scalar step for non-ASCII):
+
+| units | text | from_utf16 std | chunk16 | SVE | SVE/std | encode_utf16 std | chunk16 | SVE | SVE/std |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 64 | pure ASCII | 110 | 47 | 17 | 6.4× | 162 | 45 | 18 | 9.2× |
+| 1 000 | pure ASCII | 1 402 | 479 | 66 | **21×** | 1 203 | 473 | 64 | **19×** |
+| 1 000 | 1% é | 1 596 | 694 | 355 | 4.5× | 1 282 | 823 | 408 | 3.1× |
+| 1 000 | 10% é | 2 353 | 1 366 | 1 171 | 2.0× | 1 846 | 1 153 | 942 | 2.0× |
+| 100 000 | pure ASCII | 138.0 µs | 46.2 | 5.0 | **27×** | 103.6 µs | 44.8 | 4.1 | **25×** |
+| 100 000 | CJK | 241.7 µs | 509.7 | 478.1 | 0.51× | 172.5 µs | 213.3 | 239.3 | 0.72× |
+
+**Reading**: the gain is largest on mostly-ASCII text, where SVE is still 7–11× faster than the portable chunked version. The CJK regression in the table comes from two defects in the prototype's scalar step, not from the SVE kernel (chunk16 regresses equally): (1) each character is `encode_utf8`-ed into a temporary and then `extend_from_slice`-d, about 2.2 ns/char slower than `String::push`; (2) every 16 units it returns to the outer loop, calls `reserve` again and enters the SVE kernel once, about 1 ns/char extra on text without ASCII. **A fixed version** (stay scalar until an ASCII unit appears, then switch to SVE; write with `String::push`) at n=100 000: CJK 226.6 µs vs std 241.6 (**1.07×, no regression**), 10% é 1.92×, 1% é 9.79×, pure ASCII 27.4×. Also, the portable chunked version was not tuned for LLVM, so its 3× may not be the ceiling of a portable approach.
+
+**Correctness**: 3 000 random mixed texts (ASCII, é, 中, 😀), both directions identical to std; with an injected lone surrogate the error decision matches std.
+
+**In-tree A/B (2026-10-14, supersedes the reading above)**: an ASCII-run fast path inside `String::from_utf16`, with non-ASCII runs decoded in a single hand-written pass. All three std builds use `RUSTFLAGS_NOT_BOOTSTRAP=-Ctarget-feature=+sve` and differ only in the kernel; 9 new `string::bench_from_utf16_*` benches, median of 5 interleaved runs (median spread per cell 0.2%). Every kernel build passes a 230 921-case differential test and the 15 `alloctests` utf16 tests.
+
+| bench | original | NEON | SVE |
+|---|---:|---:|---:|
+| `ascii_0040` | 79.1 ns | 21.6 (3.7×) | 18.4 (4.3×) |
+| `ascii_1000` | 1 406 | 76.6 (18.4×) | 68.2 (20.6×) |
+| `ascii_100000` | 138.1 µs | 5.67 (24.4×) | 5.03 (27.5×) |
+| `latin1pct_1000` | 1 600 | 202 (7.9×) | 228 (7.0×) |
+| `latin10pct_100000` | 148.3 µs | 100.7 (1.47×) | 120.0 (1.24×) |
+| `cjk_100000` | 241.7 µs | 223.5 (1.08×) | 218.7 (1.11×) |
+| `emoji_1000` | 3 251 | 3 315 (0.98×) | 3 307 (0.98×) |
+
+**Correction**: the claim above that "SVE is 7–11× faster than the portable chunked version" does not hold: LLVM did not vectorize that chunked version at all (2 vector instructions in the whole function). Against hand-written NEON, SVE is only about 1.1× faster on long ASCII and slower on mixed text with short ASCII runs (0.84–0.88×), because each run pays the kernel entry cost while NEON sends runs shorter than 16 units straight to scalar code. **Conclusion: the version to land is NEON**: it needs no flags in shipped std, gains almost as much as SVE, and regresses nowhere (emoji −2%). Also: one SVE variant is 27% faster on `ascii_100000` because of data alignment, not code. Large buffers come from `mmap` and start 16 B into a page, so 32 B SVE loads straddle 64 B cache lines; the inference rests on only the offset that makes the loads 32 B-aligned being fast; cache-line crossings were not measured directly. An alignment prologue might recover that gain.
+
+**Portable chunk instead of NEON intrinsics (in-tree, 2026-10-14)**: yes, and it is faster, but the formulation matters. The same "is this chunk all ASCII" test is not vectorized at all when written as an `|` reduction; written as a `max` reduction (or the counting form LoongArch's `is_ascii` uses), LLVM emits `umax`/`umaxv`/`uzp1`, the same instructions as the intrinsics. Final form: 32 units per chunk, narrow the whole chunk into the output's spare capacity unconditionally while taking the `max`, then decide; bytes written for a failing chunk are not counted. The kernel must be `#[inline(never)]`: inlined, it changes the code generated for the non-ASCII decode loop in the same function, making CJK 39% slower even though CJK never enters the kernel. All three std builds without `+sve` (as shipped), median of 7 interleaved runs, spread 0.1%; both versions pass the 230 921-case differential test:
+
+| bench | original | NEON intrinsics | portable chunk | chunk vs NEON |
+|---|---:|---:|---:|---:|
+| `ascii_0040` | 76.9 ns | 21.8 | 21.4 | 1.02× |
+| `ascii_1000` | 1 405 | 76.4 | 64.0 | **1.19×** |
+| `ascii_100000` | 138.0 µs | 5.67 | 4.49 | **1.26×** |
+| `latin1pct_1000` | 1 532 | 207 | 193 | 1.08× |
+| `latin10pct_100000` | 157.0 µs | 96.9 | 101.7 | 0.95× |
+| `cjk_100000` | 224.5 µs | 223.5 | 223.5 | 1.00× |
+| `emoji_1000` | 3 163 | 3 316 | 3 315 | 1.00× |
+
+The chunk version wins by doing 32 units per iteration (the intrinsics do 16); with very short ASCII runs (about 9 units) both fall to scalar code and differ by 5%. Updated conclusion: **land the portable chunk version**: no `cfg(target_arch)` and no `unsafe` intrinsics. x86 codegen was not checked (SSE2 has no unsigned 16-bit `max`, so it may be worse there).
+
+**Extended to a shared decoder (in-tree, 2026-10-14)**: new `library/alloc/src/utf16_decode.rs` (`decode_utf16_into`: bulk narrowing of ASCII runs plus a single-pass decode of non-ASCII runs, with unpaired surrogates handed to a caller callback), shared by `String::from_utf16`, `from_utf16_lossy` and `Wtf8Buf::from_wide`; `from_utf16le`/`from_utf16le_lossy` already forward to the first two when little-endian and aligned, so they benefit automatically. `alloctests` includes the file via `#[path]` (because `wtf8` depends on it). Correctness: 0 mismatches over 230 921 differential cases (all three functions, plus the `encode_wide` round trip of `from_wide`); the alloctests utf16/wtf8/string tests and std `os_str` tests pass. Median of 7 interleaved runs, spread 0.1%:
+
+| bench (100 000 units) | original | new | speedup |
+|---|---:|---:|---:|
+| `from_utf16` pure ASCII | 138.1 µs | 4.49 | **30.8×** |
+| `from_utf16` CJK | 224.5 | 220.4 | 1.02× |
+| `from_utf16_lossy` pure ASCII | 243.2 | 4.49 | **54.2×** |
+| `from_utf16_lossy` 10% é | 253.3 | 112.5 | 2.25× |
+| `from_utf16_lossy` 10% unpaired surrogates | 252.4 | 119.2 | 2.12× |
+| `Wtf8Buf::from_wide` pure ASCII | 276.1 | 4.49 | **61.5×** |
+| `Wtf8Buf::from_wide` 10% é | 448.5 | 107.3 | 4.18× |
+| `Wtf8Buf::from_wide` CJK | 345.2 | 224.0 | 1.54× |
+
+The only regression: `from_utf16_emoji_1000` 0.90× (surrogate pairs are written via `push_code_point`, slower than `String::push`). `from_wide` implements `OsString::from_wide` on Windows.
+
+**Open**: `from_utf16` can take an ASCII-prefix fast path inside the function; `encode_utf16().collect()` needs a `SpecFromIter<u16, EncodeUtf16>` specialization. Windows `OsStr::encode_wide` goes through the same iterator, but most Windows-on-ARM devices lack SVE.
+
+### 35. Other encoding conversions and ASCII-run scans (follow-up to §34) — candidates, headroom measured
+
+Every std conversion whose ASCII runs are only a width change or a check was read, and the current code measured against a chunk prototype (`max`/count reductions, confirmed vectorized). Numbers are ns for 100 000 bytes/units.
+
+| rank | interface | current | prototype | headroom | notes |
+|---|---|---:|---:|---:|---|
+| 1 | `String::from_utf8_lossy` (Unix `OsStr::to_string_lossy`) | valid ASCII 34 643 | 4 532 | **7.6×** | `Utf8Chunks::next` is byte-by-byte with no ASCII fast path. The fix needs no SIMD: run `str::from_utf8` first and, on error, start `utf8_chunks` at `valid_up_to`. Valid 1% é 3.1×, CJK 1.26×, error at end 3.8×, error at start or dense 1.00×; no regressions; 0 mismatches over 200 000 differential cases |
+| 2 | `str::encode_utf16().collect()` (Windows `encode_wide`/`to_u16s`) | ASCII 95 034 | 19 024 | **5.0×** | per-char iterator, no `Vec<u16>` specialization; 10% é 1.47× (the prototype's non-ASCII path is crude and is slower at n=1000). On Windows every path passed to a system API goes through this |
+| 3 | `str::from_utf8` validation | ASCII 4 535 | 1 951 | **2.3×** | current 16 B/iteration integer SWAR, aligned only; `is_ascii` (NEON) lower bound 1 319. Widest use (`String::from_utf8`, `read_to_string`; fix #1 relies on it too) |
+| 4 | `String::from_utf16be`, unaligned `from_utf16le` | BE ASCII 157 051 | LE fast path 3 670 | **43×** | still the `decode_utf16` iterator; the §34 kernel plus a byte swap. Rarely used |
+| 5 | Windows `unrolled_find_u16s` (path NUL check) | 19 569 | 16 732 | 1.17× | manual unrolling is already decent; low value |
+
+Already handled: `str::to_lowercase`/`to_uppercase` (`convert_while_ascii` uses the same technique; its comment cites llvm-project#96395 for why it must be written as a sum), `[u8]::is_ascii` (NEON intrinsics), `chars().count()` (§4).
+
+### 36. aarch64-specific implementations (round 1): `str::find`/`rfind` (index-returning two-probe), `trim`/`split_whitespace`, `escape_ascii`, `Path` comparison — verified with standalone probes
+
+**Method**: three read-only subagents read every loop in `core`/`alloc`/`std` that LLVM cannot auto-vectorize (early exit, index-returning, data-dependent writes); five subagents verified survivors with ≥200k-case differential tests plus standalone probes, each pinned to its own CPU; I re-ran the decisive cells on another CPU, within 2%. The std side matches the official benches (`rfind_str_worst_case` 23 513 vs 23 523). Full chapter in `benchmarks-conclusion.md`.
+
+| interface | why slow | fix | key numbers |
+|---|---|---|---|
+| `str::rfind(&str)` (`pattern.rs:1252` → Two-Way `:1558`) | NEON `simd_contains` serves only `contains` and returns bool | mirrored two-probe scan from the end, verify from the highest lane | official `rfind_str_worst_case` **23 513 → 1 763 ns (13.3×)**; Lorem 7 KB 2.2–7.5×; no losing cell |
+| `str::find(&str)` (`:1173` → `:1463`) | same | two-probe, lowest lane first | Lorem 2.4–8.4×, 100 B 2–13×; official `find_str_worst_case` **0.78×** (that needle's tail byte `X` is outside the byteset, so Two-Way skips 20 B per step) |
+| `str::trim*` (`mod.rs:2186`, via the char-class searcher `pattern.rs:691`) | decodes every char through `CharIndices`, ~1 ns/char | 16 B blocks for the first non-whitespace; any byte ≥0x80 hands the rest to std (`is_whitespace`'s ASCII set includes `\x0B`) | whitespace runs ≥16 B 4–13×; **realistic 1–3 spaces 1.4–3.0×**; Unicode fallback 1.00× |
+| `split_whitespace()` | same | one mask per block, `popcount` for all word starts, state carried across blocks | Lorem 7 KB `count()` **17.4×**; the per-word alternating-search form is 0.5–0.75× instead |
+| `[u8]::escape_ascii` Display (`slice/ascii.rs:395`) | `take_while` compiles byte-at-a-time | range + 3× `vceqq` | official `no_escape` **4.0×**, `mixed` 1.00×; one escape per 8 B 0.8× → 0.95× with an 8 B scalar prologue (verified) |
+| `compare_components` (`path.rs:1083`, `Path` ordering / `BTreeMap<PathBuf>`) | scalar `zip().position(a != b)`; the source FIXME asks for SIMD | NEON `first_mismatch` + `rfind('/')` | official `cmp_fast_path_long` pair **5.1×**; ≤8 B 0.7×, needs a guard |
+| `[[u8;3]]::reverse` | non-power-of-two width is not vectorized | `vld3q/vst3q` | 4.2× at the official `reverse_u8x3` size |
+| `chars().rev().nth(n)` | no backward mirror of `advance_by` | 32 B chunked backward count (pure Rust) | 2.5 KB 831 → 84 ns |
+
+**Criterion**: implemented separately as NEON/SVE code under `cfg(target_arch = "aarch64")`, so it can land without changing or validating x86; whether x86 could do the same is irrelevant. Every item here is written in NEON and counts; only `chars().rev()` is a portable rewrite.
+
+**Rejected**: `Path::components()` (components are 1–12 B; official bench 0.79×), `Hash for Path` (SipHash dominates, +15%), `Iter::rposition` (arbitrary closure, no hook), `[T]::reverse` at power-of-two widths (already vectorized).
+
+**Prototype core** (backward two-probe; the rest is in the probes):
+
+```rust
+// per 16 B from the end: both = (hay[i..] == first) & (hay[i+spo..] == second);  mask = mask16(both)
+// on hit: verify the full needle from the highest lane downward; first/second chosen as in simd_contains
+```
+
+**Landing**: `find`/`rfind` hook into `StrSearcher::next_match(_back)` for needles 2..=32 that pass `simd_contains`'s probe conditions; `trim`/`split_whitespace` need the char-class searcher specialized for the concrete `char::is_whitespace` predicate; `escape_ascii` and `compare_components` are local rewrites. Probes: `/tmp/btree_bench/phase2/`.
+
+### 37. aarch64-specific implementations (round 2, driven by all 1 101 std benchmarks): `from_utf8` (NEON `tbl`), `Vec::dedup()` (SVE `compact`), `contains`'s emulated `to_bitmask`, `Ipv4Addr` parsing — probe-verified
+
+**Criterion**: counts if it can be implemented separately as an aarch64 NEON/SVE path; whether x86 could do the same is irrelevant. The round-2 agents worked under a narrowed "x86 cannot" criterion; the items they excluded are re-evaluated in §38.
+
+**Method**: the 1 101 benches were split by module into 7 groups, one agent each. Every bench was traced from its body down to the std function holding the hot loop, the aarch64 code was disassembled and classified, and candidates got standalone probes timed only after a 0-mismatch differential test. I re-ran every candidate on another CPU, within 1%. Library-wide G check: every x86 performance path already has an aarch64 NEON twin; the only gap is `Instant` on `aarch64-unknown-uefi` (functional, not measurable here). Full chapter in `benchmarks-conclusion.md`.
+
+| interface | class | x86 situation (for reference) | key numbers |
+|---|---|---|---|
+| `str::from_utf8` non-ASCII (`validations.rs:126`) | N | the lookup validator needs `pshufb`+`palignr` (SSSE3); x86_64 baseline is SSE2 and `core` cannot detect features at runtime | official `str_validate_emoji` **3 636 → 866 ns (4.20×)**; Chinese 5.41×, Russian 4.86×; <64 B must stay scalar (35 B 0.62×) |
+| `Vec::dedup()` on integers (`vec/mod.rs:2765`) | S | AVX2 has no compress; AVX-512 is not baseline | random_100000 **13.8×** (2.4× of it SVE-only, the rest from removing branches); random/all ≥1 000 1.9–2.8×; needs a prescan + 8-element warm-up, otherwise 0.44× |
+| `[[u8;3]]::reverse` | N | SSE2 has no `ld3/st3` de-interleave | 4.2× (§36) |
+| `str::contains(&str)` (`pattern.rs:1882`) | N (aarch64-only cost) | x86 `to_bitmask` is one `pmovmskb`; aarch64 emulates it with 3×`addp`+`umov` per 16 B block | six official benches 1.13–1.30×; `bad_simd` 0.96× |
+| `Ipv4Addr` parsing (`net/parser.rs:152`) | N (weak) | `tbl` maps to `pshufb` (SSSE3) | std/NEON 1.60×, but portable scalar already 1.42×; **ARM-only share just 1.13×** |
+
+**ARM-specific ideas rejected by measurement**: 16-wide hashbrown NEON group (1–20% slower in every cell), `swap_with_slice` with SVE `whilelo` (0.65× below 32 B), dropping `isb` from `Instant::now` (it lives in the kernel vDSO, not std), SipHash (LLVM already fuses `eor …, ror`), variable-mask `int_bits` (needs SVE2 `BDEP/BEXT`).
+
+**Portable improvements (measured, not counted)**: `{:b}` SWAR 4.6–6.3×, `dec2flt` long-digit second pass 28.3 → 10.8 ns, `eq_ignore_ascii_case` at 8–15 B 2.5–3.5×, 1-byte `&str` needles via memchr (1 830 vs 231 ns).
+
+**Landing**: `from_utf8` has the largest gain and widest reach (every `String::from_utf8` / `read_to_string`); `contains` is the smallest change; `dedup` has the same `+sve` build prerequisite as `sve_retain.rs`. Probes: `/tmp/btree_bench/phase3/`.
+
+### 38. aarch64-specific implementations (round 3, re-evaluated under the final criterion): integer `{:b}`/`{:x}` formatting, short `eq_ignore_ascii_case`, the `str` Debug scan, `swap_with_slice` short tails, `slice::contains` (SVE) — verified with three-way probes
+
+**Criterion**: can be written as a NEON/SVE path under `cfg(target_arch = "aarch64")`, so it lands without changing or validating x86. Items round 2 excluded as "SSE2 can do it too" are re-evaluated here. Each probe measures a std copy, the best portable version and the aarch64 version, timed only after a 0-mismatch differential test. The agents' CPUs were SMT siblings, so absolute numbers swing; the conclusions rest on interleaved relative measurements. Full chapter in `benchmarks-conclusion.md`.
+
+| interface | aarch64 implementation | vs std | vs portable | verdict |
+|---|---|---|---|---|
+| integer `{:b}` (`fmt/num.rs:9`) | `tbl` broadcast + `cmtst`, `x<2` gate | `write_i64_bin` 1.85×, `write_i128_bin` **2.95×** | 1.22× / 1.51× | **holds** |
+| integer `{:x}` | nibble `zip1` + `tbl`, `x<16` gate | i64 1.16×, i128 1.49× | 1.16–1.18× | holds (u8/u16 stay on std) |
+| integer `{:o}` | `tbl` + `ushl`, std below 2^12 | i64 1.22×, i128 1.58× | 1.07–1.09× | weak (u8/u16 stay on std) |
+| `eq_ignore_ascii_case` <16 B (`slice/ascii.rs:60`) | overlapping d/q loads + fold-compare, scalar for `n<4` | 4–7 B 2.6–4.3×, 8–15 B **4.2–7.3×** | ≈2× | **holds**, no regression at 0..32 B |
+| `<str as Debug>::fmt` scan (`fmt/mod.rs:2932`) | 8 B d head + 16 B blocks + overlapping tail | `ascii_only` −20.8%, 13 B input −25.4% | 13 B −8%, ≥256 B 1.6–2× | **holds** |
+| `swap_with_slice` short tail (`ptr/mod.rs:1479`) | q loop + overlap only within the remainder | `u8_30` −23%, `rgb_30` −24% | portable main loop 1.5× slower | **holds** |
+| `slice::contains` u16/u32/u64 (`slice/cmp.rs:420`) | SVE `whilelo` tail | 15–60% on average, no length regresses | — | holds (needs runtime SVE detection) |
+| `u64::from_str_radix` 16–20 digits | 16-digit block | 2.4–2.7× | 1.02–1.22× | weak (short inputs +0.2–0.7 ns) |
+
+**Also: an aarch64-gated `extract_bits` rewrite (landed in the tree)**. Per stage, `x ^= q; x ^= q >> n` becomes `x = (x & !m) + (q >> n)` (the moved bits land on known-zero positions, so it is an identity); on aarch64 LLVM fuses it into `bic` + `usra`, 3 instructions down to 2 per stage. u8–u64 `constant`/`invariant` 1.30–2.08× (`u64::invariant` 289 → 212 ns); `deposit` (no shift-left-accumulate instruction) and u128 (carry chain) unchanged; 53 tests pass. The rewrite adds a `movdqa` per stage on the x86 SSE2 baseline (loop 36 → 40 instructions), so it is gated with `cfg!(target_arch = "aarch64")`; x86 machine code is identical to before (LLVM merges the two versions' symbols). An aarch64-only NEON + scalar interleave on top reaches extract 2.08× and deposit 1.60× (probe). See the `int_bits` chapter in `benchmarks-conclusion.md`.
+
+**Rejected**: NEON for long `dec2flt` mantissas is 2–6 ns slower than portable SWAR (latency-bound), so land the portable version; the BTree full-node tail is 7–15% faster in isolation but full nodes are rare in the benches; the 1 MB `reverse` gap is misalignment and only 4–6% is recoverable.
+
 ## Tier 3: Candidate directions (root cause located, fix not prototyped)
 
-(#6, #7, #8, #10–#13, #16–#28 have been prototyped and moved up to Tier 2; #29–#30 are verified limits and rejections, also in Tier 2; #31 is prototyped and also in Tier 2.)
+(#6, #7, #8, #10–#13, #16–#28 have been prototyped and moved up to Tier 2; #29–#30 are verified limits and rejections, also in Tier 2; #31–#34 and #36–#38 are prototyped and also in Tier 2; #35 is a measured-headroom candidate.)
 
 ### 14. `BTreeMap` tree shape under sequential insert (`splitpoint` does not bias right-edge inserts) — candidate
 
@@ -1123,6 +1327,21 @@ select cost = csel_latency + (cmp → csel → address → load) chain on the cr
 | `u128::isqrt` final divide | `num::int_sqrt::u128_sqrt_{predictable,random,uniform}` | **prototype-verified** (narrowed to a native `udiv`; uniform −26.7%, predictable −18.8%, random −18.4%; u16/u32/u64/u8 ±0.2%) |
 | `Filter`/`FilterMap::next_chunk` loop | `iter::bench_next_chunk_{filter,filter_map}_*` (3 new shuffled benches) | **prototype-verified** (mostly_false −38%/−41%, shuffled −19%/−34%, `filter_even` −15%; `filter_map_even` +3.3%) |
 | `Fuse` lacks `InPlaceIterable` | `vec::bench_in_place_recycle` (invisible by time; allocations 1 → 0) | **prototype-verified** (standalone probe −12%; needs soundness sign-off) |
+| in-place `into_iter().filter(p).collect()` | no official bench (standalone probe) | **SVE prototype-verified** (n=100 000 random 10–14× vs std, 1.8–2.9× vs portable branch-free; n=64 regresses) |
+| `filter().copied().collect()` / `partition` | no official bench (standalone probe) | **SVE prototype-verified** (portable branch-free already 4.6–6×, SVE adds 1.2–2.4×; needs pre-allocated capacity) |
+| `String::from_utf16` / `encode_utf16().collect()` | no official bench (standalone probe) | **verified in-tree** (portable chunk version: pure ASCII 3.6–31×, 1% non-ASCII 8×, CJK 1.00×; up to 1.26× faster than NEON intrinsics; SVE within ±12% of NEON) |
+| `str::find`/`rfind(&str)` | `pattern::{find,rfind}_str[_worst_case]`, `str::find_*_str`, `match_indices_a_str`, `split_*_str` | **NEON probe-verified** (`rfind_str_worst_case` 13.3×; `find_str_worst_case` 0.78× is a byteset special case) |
+| `str::trim*` / `split_whitespace` | `str::trim_*_ascii_char` (proxy; no direct bench) | **NEON probe-verified** (1–3 spaces 1.4–3×; long runs 4–13×; `split_whitespace` 17×) |
+| `[u8]::escape_ascii` Display | `ascii::bench_ascii_escape_display_{no_escape,mixed}` | **NEON probe-verified** (4.0× / 1.00×; dense escapes 0.8×) |
+| `Path` ordering `compare_components` | `path::bench_path_cmp_fast_path_{long,short,buf_sort}` | **NEON probe-verified** (long 5.1×, short 1.2×) |
+| `str::from_utf8` non-ASCII | `str::str_validate_emoji` | **class N, probe-verified** (4.20×; Chinese 5.41×) |
+| `Vec::dedup()` on integers | `vec::bench_dedup_{random,all,none}_*` | **class S, probe-verified** (1.9–13.8×) |
+| `str::contains(&str)` | `str::bench_contains_*` | **class N, probe-verified** (1.13–1.30×; emulated `to_bitmask`) |
+| integer `{:b}`/`{:x}`/`{:o}` formatting | `fmt::write_i{8..128}_{bin,hex,oct}` | **aarch64-only, probe-verified** (i128 bin 2.95×) |
+| `eq_ignore_ascii_case` <16 B | `str::eq_ignore_ascii_case::bench_str_of_8_bytes_eq` | **aarch64-only, probe-verified** (8–15 B 4.2–7.3×) |
+| `<str as Debug>::fmt` | `str::debug::*`, `fmt::write_str_macro_debug_ascii` | **aarch64-only, probe-verified** (−0.8…−25.4%) |
+| `swap_with_slice` | `slice::swap_with_slice_{u8,rgb}_30` | **aarch64-only, probe-verified** (−23%) |
+| `extract_bits` (`int_bits.rs:103`) | `num::int_bits::{u8..u64}::{constant,invariant}::extract_bits` | **landed, aarch64-gated** (one-line rewrite 1.30–2.08×; `usra` fusion) |
 | `Iterator::array_chunks` | `iter::bench_next_chunk_trusted_random_access[_runtime_len]` (harness cannot see it; probe 3.06×) | **prototype-verified** (root cause is loop shape, not field access) |
 | `BTreeMap` sequential-insert tree shape (`splitpoint`) | `btree::map::find_seq_10_000`, `range_*`, `insert_seq_*` | candidate (same query on a `collect`-built tree −50%) |
 | `escape_debug_ext` BMP bitmap | `str::debug::{mostly_unicode,mixed,some_unicode}`, `fmt::write_{str,vec}_macro_debug` | **prototype-verified** (−87%/−75%; `ascii_*` flat) |

@@ -1,0 +1,57 @@
+{
+  "cpu": {
+    "command": [
+      "lscpu"
+    ],
+    "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  20\nOn-line CPU(s) list:                     0-19\nVendor ID:                               GenuineIntel\nModel name:                              12th Gen Intel(R) Core(TM) i7-12700\nCPU family:                              6\nModel:                                   151\nThread(s) per core:                      2\nCore(s) per socket:                      12\nSocket(s):                               1\nStepping:                                2\nMicrocode version:                       0x3e\nCPU(s) scaling MHz:                      28%\nCPU max MHz:                             4900.0000\nCPU min MHz:                             800.0000\nBogoMIPS:                                4224.00\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               512 KiB (12 instances)\nL1i cache:                               512 KiB (12 instances)\nL2 cache:                                12 MiB (9 instances)\nL3 cache:                                25 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-19\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Mitigation; Clear Register File\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "kernel": {
+    "command": [
+      "uname",
+      "-a"
+    ],
+    "stdout": "Linux ywxt-work 7.2.8 #1-NixOS SMP PREEMPT_DYNAMIC Fri Sep 25 14:37:14 UTC 2026 x86_64 GNU/Linux\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "libc": {
+    "command": [
+      "ldd",
+      "--version"
+    ],
+    "stdout": "ldd (GNU libc) 2.42\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\nWritten by Roland McGrath and Ulrich Drepper.\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "perf": {
+    "command": [
+      "perf",
+      "--version"
+    ],
+    "stdout": "perf version 7.3.0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "sources": {
+    "benches.rs": "0d2e3c258409f4bcc5e341d4d5a5798471923ad18329f3281eb701440cba8171",
+    "fixtures.rs": "2737f318272d13623d98874a4224eb2bd775c2c4583d6b647b94cefb10c017e9",
+    "counted.rs": "4652cfc3ca52bf937ba4c9cf264ceefb489c6a754094b50980d2f191eb95d69e",
+    "scenarios.rs": "f7d2eaeb35236bf585d25da4cc5068845bc92ccab6aa1ea239f7f05791e37218",
+    "probe-selection.rs": "1bfa9bc3c21f22c45bf14e791cb54eef94ab5b230b592fb7c8286862726b97f7",
+    "pattern.candidate.rs": "2f37bf876bfbbae455e0b8dfb8dd1061b00ef8b6ead0e543677d1b26742cde66",
+    "pattern.baseline.rs": "d37940d1114992bec9162974ae82ae1383bf403c99e749524c574a74966a02d0",
+    "stack-probe.rs": "e869db9490d3d82c6f92261234cb0da8b37f392e9faf2f1708ab81b7ddb662d4",
+    "pattern.combined.rs": "2b7127b20acc058d9131caf28d027b0e5e1fe933bd1c21d93403ea35ab7f331a",
+    "pattern.mask.rs": "f7438cb1490129ee3bced9b94fe88f54d4db7aaeaf5b8dfda5c351eb12d1e48d"
+  },
+  "binaries": {
+    "baseline/x86_64-unknown-linux-gnu/scenarios": "026051417dfb1cd706e0a180d3c39a0ecdf6dced6ba3b60f680b88acd7a8bacd",
+    "baseline/x86_64-unknown-linux-gnu/counted": "f0f0aa1ae5a73218a3d13e0f8e8dada46a555ea948726371de9d992bacbe9813",
+    "baseline/x86_64-unknown-linux-gnu/benches": "52051f630ac790f4300e5456bf04c7b09766d899d9e57c53c84d7e31985a863b",
+    "candidate/x86_64-unknown-linux-gnu/scenarios": "d5eb2bf3e1f7e894baed961ef6e9f64241eaf18604478320e0a2372d7cfcb13e",
+    "candidate/x86_64-unknown-linux-gnu/counted": "7593e74a472507b1dba4cc9dc340d19d13c5711a6c5d17ba607b2f8c51141820",
+    "candidate/x86_64-unknown-linux-gnu/benches": "d76c2fb4acd266bdd5c028c1609dff30bbdeacebe186c219ad8156e6343194a8"
+  }
+}

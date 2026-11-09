@@ -1,0 +1,1767 @@
+	b.ne	.LBB15_2
+	cmp	x3, #15
+	b.ls	.LBB15_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB15_12
+	ands	x8, x3, #0x30
+	b.eq	.LBB15_10
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB15_25
+	cmp	x8, #16
+	b.ne	.LBB15_24
+.LBB15_10:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB15_23
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB15_22
+.LBB15_12:
+	cmp	x3, #127
+
+	b.ne	.LBB16_2
+	cmp	x3, #15
+	b.ls	.LBB16_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB16_12
+	ands	x8, x3, #0x30
+	b.eq	.LBB16_10
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB16_25
+	cmp	x8, #16
+	b.ne	.LBB16_24
+.LBB16_10:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB16_23
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB16_22
+.LBB16_12:
+	cmp	x3, #127
+
+	b.ne	.LBB17_2
+	cmp	x3, #15
+	b.ls	.LBB17_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB17_12
+	ands	x8, x3, #0x30
+	b.eq	.LBB17_10
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB17_25
+	cmp	x8, #16
+	b.ne	.LBB17_24
+.LBB17_10:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB17_23
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB17_22
+.LBB17_12:
+	cmp	x3, #127
+
+	b.ne	.LBB18_2
+	cmp	x3, #15
+	b.ls	.LBB18_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB18_12
+	ands	x8, x3, #0x30
+	b.eq	.LBB18_10
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB18_3
+	cmp	x8, #16
+	b.ne	.LBB18_22
+.LBB18_10:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB18_26
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	addp	d0, v0.2d
+	fmov	x8, d0
+	cbnz	x8, .LBB18_3
+
+	b.ne	.LBB19_2
+	cmp	x3, #15
+	b.ls	.LBB19_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB19_12
+	ands	x8, x3, #0x30
+	b.eq	.LBB19_10
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB19_25
+	cmp	x8, #16
+	b.ne	.LBB19_24
+.LBB19_10:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB19_23
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB19_22
+.LBB19_12:
+	cmp	x3, #127
+
+	b.ne	.LBB20_2
+	cmp	x3, #15
+	b.ls	.LBB20_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB20_12
+	ands	x8, x3, #0x30
+	b.eq	.LBB20_10
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB20_25
+	cmp	x8, #16
+	b.ne	.LBB20_24
+.LBB20_10:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB20_23
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB20_22
+.LBB20_12:
+	cmp	x3, #127
+
+	b.ne	.LBB21_2
+	cmp	x3, #15
+	b.ls	.LBB21_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB21_15
+	ands	x8, x3, #0x30
+	b.eq	.LBB21_13
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB21_25
+	cmp	x8, #16
+	b.eq	.LBB21_13
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB21_25
+	cmp	x8, #32
+	b.eq	.LBB21_13
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB22_2
+	cmp	x3, #15
+	b.ls	.LBB22_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB22_15
+	ands	x8, x3, #0x30
+	b.eq	.LBB22_13
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB22_25
+	cmp	x8, #16
+	b.eq	.LBB22_13
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB22_25
+	cmp	x8, #32
+	b.eq	.LBB22_13
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB23_2
+	cmp	x3, #15
+	b.ls	.LBB23_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB23_15
+	ands	x8, x3, #0x30
+	b.eq	.LBB23_13
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB23_25
+	cmp	x8, #16
+	b.eq	.LBB23_13
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB23_25
+	cmp	x8, #32
+	b.eq	.LBB23_13
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB24_2
+	cmp	x3, #15
+	b.ls	.LBB24_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB24_15
+	ands	x8, x3, #0x30
+	b.eq	.LBB24_13
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB24_25
+	cmp	x8, #16
+	b.eq	.LBB24_13
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB24_25
+	cmp	x8, #32
+	b.eq	.LBB24_13
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB25_2
+	cmp	x3, #15
+	b.ls	.LBB25_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB25_15
+	ands	x8, x3, #0x30
+	b.eq	.LBB25_13
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB25_25
+	cmp	x8, #16
+	b.eq	.LBB25_13
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB25_25
+	cmp	x8, #32
+	b.eq	.LBB25_13
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB26_2
+	cmp	x3, #15
+	b.ls	.LBB26_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB26_12
+	ands	x8, x3, #0x30
+	b.eq	.LBB26_10
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB26_3
+	cmp	x8, #16
+	b.ne	.LBB26_22
+.LBB26_10:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB26_26
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	addp	d0, v0.2d
+	fmov	x8, d0
+	cbnz	x8, .LBB26_3
+
+	b.ne	.LBB27_2
+	cmp	x3, #15
+	b.ls	.LBB27_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB27_12
+	ands	x8, x3, #0x30
+	b.eq	.LBB27_10
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB27_25
+	cmp	x8, #16
+	b.ne	.LBB27_24
+.LBB27_10:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB27_23
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB27_22
+.LBB27_12:
+	cmp	x3, #127
+
+	b.ne	.LBB28_2
+	cmp	x3, #15
+	b.ls	.LBB28_2
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB28_15
+	ands	x8, x3, #0x30
+	b.eq	.LBB28_13
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB28_25
+	cmp	x8, #16
+	b.eq	.LBB28_13
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB28_25
+	cmp	x8, #32
+	b.eq	.LBB28_13
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB38_13
+	cmp	x3, #15
+	b.ls	.LBB38_13
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB38_23
+	ands	x8, x3, #0x30
+	b.eq	.LBB38_21
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB38_36
+	cmp	x8, #16
+	b.ne	.LBB38_35
+.LBB38_21:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB38_34
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB38_33
+.LBB38_23:
+	cmp	x3, #127
+
+	b.ne	.LBB38_50
+	cmp	x3, #15
+	b.ls	.LBB38_50
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB38_60
+	ands	x8, x3, #0x30
+	b.eq	.LBB38_58
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB38_73
+	cmp	x8, #16
+	b.ne	.LBB38_72
+.LBB38_58:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB38_71
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB38_70
+.LBB38_60:
+	cmp	x3, #127
+
+	ldp	x2, x3, [x29, #-176]
+	cmp	w0, #127
+	b.hi	.LBB39_29
+	cmp	x3, #15
+	b.ls	.LBB39_29
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB39_37
+	ands	x8, x3, #0x30
+	b.eq	.LBB39_27
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB39_19
+	cmp	x8, #16
+	b.ne	.LBB39_18
+.LBB39_27:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB39_52
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB39_51
+.LBB39_29:
+
+	ldp	x2, x3, [x29, #-48]
+	cmp	w0, #127
+	b.hi	.LBB39_80
+	cmp	x3, #15
+	b.ls	.LBB39_80
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB39_88
+	ands	x8, x3, #0x30
+	b.eq	.LBB39_78
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB39_70
+	cmp	x8, #16
+	b.ne	.LBB39_69
+.LBB39_78:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB39_103
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB39_102
+.LBB39_80:
+
+	cmp	x2, #15
+	mov	x3, x2
+	ccmp	w0, w8, #2, hi
+	mov	x2, x1
+	b.hs	.LBB40_7
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB40_13
+	ands	x8, x3, #0x30
+	b.eq	.LBB40_5
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB40_33
+	cmp	x8, #16
+	b.ne	.LBB40_32
+.LBB40_5:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB40_27
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB40_26
+.LBB40_7:
+
+	stur	x3, [x29, #-120]
+	b.ne	.LBB41_15
+	cmp	x3, #17
+	b.lo	.LBB41_50
+	ldrb	w9, [x0, #1]
+	dup	v2.16b, w8
+	mov	w21, #1
+	b	.LBB41_78
+.LBB41_13:
+	mov	x1, x2
+	mov	x2, x3
+	bl	_RNvNtNtCs5eKY5gNNvwM_4core5slice6memchr14memchr_aligned
+	cmp	x0, #1
+	b.ne	.LBB41_69
+.LBB41_14:
+	mov	w19, #1
+	b	.LBB41_70
+.LBB41_15:
+	subs	x9, x20, #4
+	csel	x10, xzr, x9, lo
+	cmp	x10, x20
+	b.hs	.LBB41_20
+	mov	x21, x24
+.LBB41_17:
+	cmp	x21, x20
+
+	and	w8, w8, #0x3f
+	orr	w8, w8, w11, lsl #6
+	bfi	w8, w10, #18, #3
+	b	.LBB41_102
+.LBB41_77:
+	dup	v2.16b, w8
+.LBB41_78:
+	dup	v3.16b, w9
+	add	x9, x20, #63
+	add	x8, x0, #1
+	cmp	x9, x3
+	adrp	x9, .LCPI41_0
+	stp	x2, x3, [x29, #-112]
+	stp	x8, x24, [x29, #-96]
+	stp	q3, q2, [sp, #112]
+	b.hs	.LBB41_91
+	add	x8, x21, x2
+	ldr	q4, [x9, :lo12:.LCPI41_0]
+	mov	x22, xzr
+	add	x28, x20, #127
+	add	x27, x8, #32
+	add	x25, x2, #48
+	str	q4, [sp, #64]
+.LBB41_80:
+	add	x8, x25, x22
+
+	bfi	w8, w10, #18, #3
+	b	.LBB41_102
+.LBB41_77:
+	dup	v2.16b, w8
+.LBB41_78:
+	dup	v3.16b, w9
+	add	x9, x20, #63
+	add	x8, x0, #1
+	cmp	x9, x3
+	adrp	x9, .LCPI41_0
+	stp	x2, x3, [x29, #-112]
+	stp	x8, x24, [x29, #-96]
+	stp	q3, q2, [sp, #112]
+	b.hs	.LBB41_91
+	add	x8, x21, x2
+	ldr	q4, [x9, :lo12:.LCPI41_0]
+	mov	x22, xzr
+	add	x28, x20, #127
+	add	x27, x8, #32
+	add	x25, x2, #48
+	str	q4, [sp, #64]
+.LBB41_80:
+	add	x8, x25, x22
+	add	x9, x27, x22
+	ldp	q0, q18, [x9, #-32]
+
+	b.ne	.LBB71_6
+	cmp	x3, #15
+	b.ls	.LBB71_6
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB71_16
+	ands	x8, x3, #0x30
+	b.eq	.LBB71_14
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB71_29
+	cmp	x8, #16
+	b.ne	.LBB71_28
+.LBB71_14:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB71_27
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB71_26
+.LBB71_16:
+	cmp	x3, #127
+
+	b.ne	.LBB71_38
+	cmp	x3, #15
+	b.ls	.LBB71_38
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB71_48
+	ands	x8, x3, #0x30
+	b.eq	.LBB71_46
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB71_61
+	cmp	x8, #16
+	b.ne	.LBB71_60
+.LBB71_46:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB71_59
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB71_58
+.LBB71_48:
+	cmp	x3, #127
+
+	b.ne	.LBB74_6
+	cmp	x3, #15
+	b.ls	.LBB74_6
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB74_16
+	ands	x8, x3, #0x30
+	b.eq	.LBB74_14
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB74_29
+	cmp	x8, #16
+	b.ne	.LBB74_28
+.LBB74_14:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB74_27
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB74_26
+.LBB74_16:
+	cmp	x3, #127
+
+	b.ne	.LBB74_38
+	cmp	x3, #15
+	b.ls	.LBB74_38
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB74_48
+	ands	x8, x3, #0x30
+	b.eq	.LBB74_46
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB74_61
+	cmp	x8, #16
+	b.ne	.LBB74_60
+.LBB74_46:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB74_59
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB74_58
+.LBB74_48:
+	cmp	x3, #127
+
+	b.ne	.LBB75_6
+	cmp	x3, #15
+	b.ls	.LBB75_6
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB75_16
+	ands	x8, x3, #0x30
+	b.eq	.LBB75_14
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB75_29
+	cmp	x8, #16
+	b.ne	.LBB75_28
+.LBB75_14:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB75_27
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB75_26
+.LBB75_16:
+	cmp	x3, #127
+
+	b.ne	.LBB75_37
+	cmp	x3, #15
+	b.ls	.LBB75_37
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB75_47
+	ands	x8, x3, #0x30
+	b.eq	.LBB75_45
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB75_60
+	cmp	x8, #16
+	b.ne	.LBB75_59
+.LBB75_45:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB75_58
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB75_57
+.LBB75_47:
+	cmp	x3, #127
+
+	b.ne	.LBB76_9
+	cmp	x3, #15
+	b.ls	.LBB76_9
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB76_19
+	ands	x8, x3, #0x30
+	b.eq	.LBB76_17
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB76_10
+	cmp	x8, #16
+	b.ne	.LBB76_29
+.LBB76_17:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB76_67
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	addp	d0, v0.2d
+	fmov	x8, d0
+	cbnz	x8, .LBB76_10
+
+	b.ne	.LBB76_34
+	cmp	x3, #15
+	b.ls	.LBB76_34
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB76_44
+	ands	x8, x3, #0x30
+	b.eq	.LBB76_42
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB76_35
+	cmp	x8, #16
+	b.ne	.LBB76_54
+.LBB76_42:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB76_67
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	addp	d0, v0.2d
+	fmov	x8, d0
+	cbnz	x8, .LBB76_35
+
+	b.ne	.LBB77_9
+	cmp	x3, #15
+	b.ls	.LBB77_9
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB77_19
+	ands	x8, x3, #0x30
+	b.eq	.LBB77_17
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB77_32
+	cmp	x8, #16
+	b.ne	.LBB77_31
+.LBB77_17:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB77_30
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB77_29
+.LBB77_19:
+	cmp	x3, #127
+
+	b.ne	.LBB77_46
+	cmp	x3, #15
+	b.ls	.LBB77_46
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB77_56
+	ands	x8, x3, #0x30
+	b.eq	.LBB77_54
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB77_69
+	cmp	x8, #16
+	b.ne	.LBB77_68
+.LBB77_54:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB77_67
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB77_66
+.LBB77_56:
+	cmp	x3, #127
+
+	ldp	x2, x3, [x29, #-176]
+	cmp	w0, #127
+	b.hi	.LBB78_24
+	cmp	x3, #15
+	b.ls	.LBB78_24
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB78_32
+	ands	x8, x3, #0x30
+	b.eq	.LBB78_22
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB78_14
+	cmp	x8, #16
+	b.ne	.LBB78_13
+.LBB78_22:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB78_47
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB78_46
+.LBB78_24:
+
+	ldp	x2, x3, [x29, #-48]
+	cmp	w0, #127
+	b.hi	.LBB78_74
+	cmp	x3, #15
+	b.ls	.LBB78_74
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB78_82
+	ands	x8, x3, #0x30
+	b.eq	.LBB78_72
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB78_64
+	cmp	x8, #16
+	b.ne	.LBB78_63
+.LBB78_72:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB78_97
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB78_96
+.LBB78_74:
+
+	b.ne	.LBB79_9
+	cmp	x3, #15
+	b.ls	.LBB79_9
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB79_19
+	ands	x8, x3, #0x30
+	b.eq	.LBB79_17
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB79_32
+	cmp	x8, #16
+	b.ne	.LBB79_31
+.LBB79_17:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB79_30
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB79_29
+.LBB79_19:
+	cmp	x3, #127
+
+	b.ne	.LBB79_46
+	cmp	x3, #15
+	b.ls	.LBB79_46
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB79_56
+	ands	x8, x3, #0x30
+	b.eq	.LBB79_54
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB79_69
+	cmp	x8, #16
+	b.ne	.LBB79_68
+.LBB79_54:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB79_67
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB79_66
+.LBB79_56:
+	cmp	x3, #127
+
+	b.ne	.LBB80_7
+	cmp	x3, #15
+	b.ls	.LBB80_7
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB80_20
+	ands	x8, x3, #0x30
+	b.eq	.LBB80_18
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB80_69
+	cmp	x8, #16
+	b.eq	.LBB80_18
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB80_69
+	cmp	x8, #32
+	b.eq	.LBB80_18
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB80_36
+	cmp	x3, #15
+	b.ls	.LBB80_36
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB80_49
+	ands	x8, x3, #0x30
+	b.eq	.LBB80_47
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB80_69
+	cmp	x8, #16
+	b.eq	.LBB80_47
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB80_69
+	cmp	x8, #32
+	b.eq	.LBB80_47
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	ldp	x2, x3, [x29, #-176]
+	cmp	w0, #127
+	b.hi	.LBB81_25
+	cmp	x3, #15
+	b.ls	.LBB81_25
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB81_33
+	ands	x8, x3, #0x30
+	b.eq	.LBB81_23
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB81_15
+	cmp	x8, #16
+	b.ne	.LBB81_14
+.LBB81_23:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB81_48
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB81_47
+.LBB81_25:
+
+	ldp	x2, x3, [x29, #-48]
+	cmp	w0, #127
+	b.hi	.LBB81_76
+	cmp	x3, #15
+	b.ls	.LBB81_76
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB81_84
+	ands	x8, x3, #0x30
+	b.eq	.LBB81_74
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB81_66
+	cmp	x8, #16
+	b.ne	.LBB81_65
+.LBB81_74:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB81_99
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB81_98
+.LBB81_76:
+
+	b.ne	.LBB82_7
+	cmp	x3, #15
+	b.ls	.LBB82_7
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB82_20
+	ands	x8, x3, #0x30
+	b.eq	.LBB82_18
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB82_69
+	cmp	x8, #16
+	b.eq	.LBB82_18
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB82_69
+	cmp	x8, #32
+	b.eq	.LBB82_18
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB82_36
+	cmp	x3, #15
+	b.ls	.LBB82_36
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB82_49
+	ands	x8, x3, #0x30
+	b.eq	.LBB82_47
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB82_69
+	cmp	x8, #16
+	b.eq	.LBB82_47
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB82_69
+	cmp	x8, #32
+	b.eq	.LBB82_47
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB83_7
+	cmp	x3, #15
+	b.ls	.LBB83_7
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB83_20
+	ands	x8, x3, #0x30
+	b.eq	.LBB83_18
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB83_69
+	cmp	x8, #16
+	b.eq	.LBB83_18
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB83_69
+	cmp	x8, #32
+	b.eq	.LBB83_18
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB83_36
+	cmp	x3, #15
+	b.ls	.LBB83_36
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB83_49
+	ands	x8, x3, #0x30
+	b.eq	.LBB83_47
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB83_69
+	cmp	x8, #16
+	b.eq	.LBB83_47
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB83_69
+	cmp	x8, #32
+	b.eq	.LBB83_47
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB84_7
+	cmp	x3, #15
+	b.ls	.LBB84_7
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB84_20
+	ands	x8, x3, #0x30
+	b.eq	.LBB84_18
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB84_69
+	cmp	x8, #16
+	b.eq	.LBB84_18
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB84_69
+	cmp	x8, #32
+	b.eq	.LBB84_18
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB84_36
+	cmp	x3, #15
+	b.ls	.LBB84_36
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB84_49
+	ands	x8, x3, #0x30
+	b.eq	.LBB84_47
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB84_69
+	cmp	x8, #16
+	b.eq	.LBB84_47
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB84_69
+	cmp	x8, #32
+	b.eq	.LBB84_47
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB85_7
+	cmp	x3, #15
+	b.ls	.LBB85_7
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB85_20
+	ands	x8, x3, #0x30
+	b.eq	.LBB85_18
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB85_69
+	cmp	x8, #16
+	b.eq	.LBB85_18
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB85_69
+	cmp	x8, #32
+	b.eq	.LBB85_18
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB85_36
+	cmp	x3, #15
+	b.ls	.LBB85_36
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB85_49
+	ands	x8, x3, #0x30
+	b.eq	.LBB85_47
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB85_69
+	cmp	x8, #16
+	b.eq	.LBB85_47
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB85_69
+	cmp	x8, #32
+	b.eq	.LBB85_47
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB86_9
+	cmp	x3, #15
+	b.ls	.LBB86_9
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB86_19
+	ands	x8, x3, #0x30
+	b.eq	.LBB86_17
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB86_10
+	cmp	x8, #16
+	b.ne	.LBB86_29
+.LBB86_17:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB86_67
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	addp	d0, v0.2d
+	fmov	x8, d0
+	cbnz	x8, .LBB86_10
+
+	b.ne	.LBB86_34
+	cmp	x3, #15
+	b.ls	.LBB86_34
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB86_44
+	ands	x8, x3, #0x30
+	b.eq	.LBB86_42
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB86_35
+	cmp	x8, #16
+	b.ne	.LBB86_54
+.LBB86_42:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB86_67
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	addp	d0, v0.2d
+	fmov	x8, d0
+	cbnz	x8, .LBB86_35
+
+	b.ne	.LBB87_6
+	cmp	x3, #15
+	b.ls	.LBB87_6
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB87_16
+	ands	x8, x3, #0x30
+	b.eq	.LBB87_14
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB87_29
+	cmp	x8, #16
+	b.ne	.LBB87_28
+.LBB87_14:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB87_27
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB87_26
+.LBB87_16:
+	cmp	x3, #127
+
+	b.ne	.LBB87_38
+	cmp	x3, #15
+	b.ls	.LBB87_38
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB87_48
+	ands	x8, x3, #0x30
+	b.eq	.LBB87_46
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB87_61
+	cmp	x8, #16
+	b.ne	.LBB87_60
+.LBB87_46:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB87_59
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB87_58
+.LBB87_48:
+	cmp	x3, #127
+
+	b.ne	.LBB88_6
+	cmp	x3, #15
+	b.ls	.LBB88_6
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB88_16
+	ands	x8, x3, #0x30
+	b.eq	.LBB88_14
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB88_29
+	cmp	x8, #16
+	b.ne	.LBB88_28
+.LBB88_14:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB88_27
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB88_26
+.LBB88_16:
+	cmp	x3, #127
+
+	b.ne	.LBB88_38
+	cmp	x3, #15
+	b.ls	.LBB88_38
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB88_48
+	ands	x8, x3, #0x30
+	b.eq	.LBB88_46
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB88_61
+	cmp	x8, #16
+	b.ne	.LBB88_60
+.LBB88_46:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB88_59
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB88_58
+.LBB88_48:
+	cmp	x3, #127
+
+	ldp	x2, x3, [x29, #-176]
+	cmp	w0, #127
+	b.hi	.LBB89_17
+	cmp	x3, #15
+	b.ls	.LBB89_17
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB89_25
+	ands	x8, x3, #0x30
+	b.eq	.LBB89_15
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB89_7
+	cmp	x8, #16
+	b.ne	.LBB89_6
+.LBB89_15:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB89_39
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB89_38
+.LBB89_17:
+
+	ldp	x2, x3, [x29, #-48]
+	cmp	w0, #127
+	b.hi	.LBB89_61
+	cmp	x3, #15
+	b.ls	.LBB89_61
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB89_69
+	ands	x8, x3, #0x30
+	b.eq	.LBB89_59
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB89_51
+	cmp	x8, #16
+	b.ne	.LBB89_50
+.LBB89_59:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB89_83
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB89_82
+.LBB89_61:
+
+	ldp	x2, x3, [x29, #-176]
+	cmp	w0, #127
+	b.hi	.LBB90_17
+	cmp	x3, #15
+	b.ls	.LBB90_17
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB90_25
+	ands	x8, x3, #0x30
+	b.eq	.LBB90_15
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB90_7
+	cmp	x8, #16
+	b.ne	.LBB90_6
+.LBB90_15:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB90_39
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB90_38
+.LBB90_17:
+
+	ldp	x2, x3, [x29, #-48]
+	cmp	w0, #127
+	b.hi	.LBB90_61
+	cmp	x3, #15
+	b.ls	.LBB90_61
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB90_69
+	ands	x8, x3, #0x30
+	b.eq	.LBB90_59
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB90_51
+	cmp	x8, #16
+	b.ne	.LBB90_50
+.LBB90_59:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB90_83
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB90_82
+.LBB90_61:
+
+	b.ne	.LBB91_7
+	cmp	x3, #15
+	b.ls	.LBB91_7
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB91_20
+	ands	x8, x3, #0x30
+	b.eq	.LBB91_18
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB91_69
+	cmp	x8, #16
+	b.eq	.LBB91_18
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB91_69
+	cmp	x8, #32
+	b.eq	.LBB91_18
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB91_36
+	cmp	x3, #15
+	b.ls	.LBB91_36
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB91_49
+	ands	x8, x3, #0x30
+	b.eq	.LBB91_47
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB91_69
+	cmp	x8, #16
+	b.eq	.LBB91_47
+	ldr	q1, [x2, #16]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB91_69
+	cmp	x8, #32
+	b.eq	.LBB91_47
+	ldr	q1, [x2, #32]
+	cmeq	v1.16b, v1.16b, v0.16b
+
+	b.ne	.LBB92_6
+	cmp	x3, #15
+	b.ls	.LBB92_6
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB92_16
+	ands	x8, x3, #0x30
+	b.eq	.LBB92_14
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB92_29
+	cmp	x8, #16
+	b.ne	.LBB92_28
+.LBB92_14:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB92_27
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB92_26
+.LBB92_16:
+	cmp	x3, #127
+
+	b.ne	.LBB92_38
+	cmp	x3, #15
+	b.ls	.LBB92_38
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB92_48
+	ands	x8, x3, #0x30
+	b.eq	.LBB92_46
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB92_61
+	cmp	x8, #16
+	b.ne	.LBB92_60
+.LBB92_46:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB92_59
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB92_58
+.LBB92_48:
+	cmp	x3, #127
+
+	ldp	x2, x3, [x29, #-176]
+	cmp	w0, #127
+	b.hi	.LBB93_17
+	cmp	x3, #15
+	b.ls	.LBB93_17
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB93_25
+	ands	x8, x3, #0x30
+	b.eq	.LBB93_15
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB93_7
+	cmp	x8, #16
+	b.ne	.LBB93_6
+.LBB93_15:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB93_39
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB93_38
+.LBB93_17:
+
+	ldp	x2, x3, [x29, #-48]
+	cmp	w0, #127
+	b.hi	.LBB93_61
+	cmp	x3, #15
+	b.ls	.LBB93_61
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB93_69
+	ands	x8, x3, #0x30
+	b.eq	.LBB93_59
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB93_51
+	cmp	x8, #16
+	b.ne	.LBB93_50
+.LBB93_59:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB93_83
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB93_82
+.LBB93_61:
+
+	b.ne	.LBB94_6
+	cmp	x3, #15
+	b.ls	.LBB94_6
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB94_16
+	ands	x8, x3, #0x30
+	b.eq	.LBB94_14
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB94_29
+	cmp	x8, #16
+	b.ne	.LBB94_28
+.LBB94_14:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB94_27
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB94_26
+.LBB94_16:
+	cmp	x3, #127
+
+	b.ne	.LBB94_38
+	cmp	x3, #15
+	b.ls	.LBB94_38
+	ldrb	w8, [x0]
+	cmp	x3, #64
+	dup	v0.16b, w8
+	b.hs	.LBB94_48
+	ands	x8, x3, #0x30
+	b.eq	.LBB94_46
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB94_61
+	cmp	x8, #16
+	b.ne	.LBB94_60
+.LBB94_46:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB94_59
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB94_58
+.LBB94_48:
+	cmp	x3, #127
+
+	ldp	x2, x3, [x29, #-176]
+	cmp	w0, #127
+	b.hi	.LBB95_17
+	cmp	x3, #15
+	b.ls	.LBB95_17
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB95_25
+	ands	x8, x3, #0x30
+	b.eq	.LBB95_15
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB95_7
+	cmp	x8, #16
+	b.ne	.LBB95_6
+.LBB95_15:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB95_39
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB95_38
+.LBB95_17:
+
+	ldp	x2, x3, [x29, #-48]
+	cmp	w0, #127
+	b.hi	.LBB95_61
+	cmp	x3, #15
+	b.ls	.LBB95_61
+	dup	v0.16b, w0
+	cmp	x3, #64
+	b.hs	.LBB95_69
+	ands	x8, x3, #0x30
+	b.eq	.LBB95_59
+	ldr	q1, [x2]
+	cmeq	v1.16b, v1.16b, v0.16b
+	addp	d1, v1.2d
+	fmov	x9, d1
+	cbnz	x9, .LBB95_51
+	cmp	x8, #16
+	b.ne	.LBB95_50
+.LBB95_59:
+	and	x8, x3, #0xf
+	cbz	x8, .LBB95_83
+	add	x8, x2, x3
+	ldur	q1, [x8, #-16]
+	cmeq	v0.16b, v1.16b, v0.16b
+	b	.LBB95_82
+.LBB95_61:

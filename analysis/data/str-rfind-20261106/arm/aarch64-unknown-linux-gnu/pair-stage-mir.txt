@@ -1,0 +1,753 @@
+warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type
+
+# *** IR Dump Before AArch64 load / store optimization pass (aarch64-ldst-opt) ***:
+# Machine code for function copied_memrchr: NoPHIs, TracksLiveness, NoVRegs, TiedOpsRewritten, TracksDebugUserValues
+Frame Objects:
+  fi#0: size=8, align=8, at location [SP-8]
+  fi#1: size=8, align=8, at location [SP-16]
+save/restore points:
+save points are empty
+restore points are empty
+Function Live Ins: $w0, $x1, $x2
+
+bb.0.start:
+  successors: %bb.3(0x40000000), %bb.1(0x40000000); %bb.3(50.00%), %bb.1(50.00%)
+  liveins: $w0, $x1, $x2, $lr
+  early-clobber $sp = frame-setup STPXpre killed $fp, killed $lr, $sp(tied-def 0), -2 :: (store (s64) into %stack.1), (store (s64) into %stack.0)
+  frame-setup CFI_INSTRUCTION def_cfa_offset 16
+  $fp = frame-setup ADDXri $sp, 0, 0
+  frame-setup CFI_INSTRUCTION def_cfa $w29, 16
+  frame-setup CFI_INSTRUCTION offset $w30, -8
+  frame-setup CFI_INSTRUCTION offset $w29, -16
+  renamable $x8 = ADDXri renamable $x1, 7, 0
+  renamable $x8 = ANDXri killed renamable $x8, 8060
+  $x8 = SUBXrs killed renamable $x8, renamable $x1, 0
+  $xzr = SUBSXrs renamable $x2, renamable $x8, 0, implicit-def $nzcv
+  $x9 = ORRXrs $xzr, $x2, 0
+  $x11 = ORRXrs $xzr, $x2, 0
+  Bcc 3, %bb.3, implicit $nzcv
+
+bb.1._RINvMNtCshp6Wxz1DwXO_4core5sliceSh8align_toTjjEECsfQ3UinuKA7O_7wordlib.exit:
+; predecessors: %bb.0
+  successors: %bb.7(0x0020c06a), %bb.2(0x7fdf3f96); %bb.7(0.10%), %bb.2(99.90%)
+  liveins: $w0, $x1, $x2, $x8
+  $w9 = SUBWrs renamable $w2, renamable $w8, 0, implicit-def $x9
+  renamable $x9 = ANDXri killed renamable $x9, 4099
+  $x9 = SUBSXrs renamable $x2, killed renamable $x9, 0, implicit-def $nzcv
+  Bcc 3, %bb.7, implicit killed $nzcv
+
+bb.2:
+; predecessors: %bb.1
+  successors: %bb.3(0x80000000); %bb.3(100.00%)
+  liveins: $w0, $x1, $x2, $x8, $x9
+  $x11 = ORRXrs $xzr, killed $x8, 0
+
+bb.3.bb14:
+; predecessors: %bb.0, %bb.2
+  successors: %bb.8(0x40000000), %bb.4(0x40000000); %bb.8(50.00%), %bb.4(50.00%)
+  liveins: $w0, $x1, $x2, $x9, $x11
+  $xzr = SUBSXrs renamable $x9, renamable $x2, 0, implicit-def $nzcv
+  renamable $w10 = ANDWri killed renamable $w0, 7, implicit-def $x10
+  Bcc 0, %bb.8, implicit $nzcv
+
+bb.4.bb6.i.lr.ph:
+; predecessors: %bb.3
+  successors: %bb.6(0x80000000); %bb.6(100.00%)
+  liveins: $x1, $x2, $x9, $x10, $x11
+  renamable $x8 = nsw SUBXri renamable $x2, 1, 0
+  $x12 = SUBXrs $xzr, renamable $x9, 0
+  renamable $w0 = MOVZWi 1, 0, implicit-def $x0
+  B %bb.6
+
+bb.5.bb4.i:
+; predecessors: %bb.6
+  successors: %bb.8(0x04000000), %bb.6(0x7c000000); %bb.8(3.12%), %bb.6(96.88%)
+  liveins: $x0, $x1, $x2, $x8, $x9, $x10, $x11, $x12
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  $x13 = ADDXrs renamable $x12, renamable $x8, 0
+  dead $xzr = ADDSXri killed renamable $x13, 1, 0, implicit-def $nzcv
+  Bcc 0, %bb.8, implicit $nzcv
+
+bb.6.bb6.i:
+; predecessors: %bb.4, %bb.5
+  successors: %bb.17(0x04000000), %bb.5(0x7c000000); %bb.17(3.12%), %bb.5(96.88%)
+  liveins: $x0, $x1, $x2, $x8, $x9, $x10, $x11, $x12
+  renamable $w13 = LDRBBroX renamable $x1, renamable $x8, 0, 0 :: (load (s8) from %ir.scevgep56, !noalias !9)
+  $wzr = SUBSWrs killed renamable $w13, renamable $w10, 0, implicit-def $nzcv
+  Bcc 1, %bb.5, implicit $nzcv
+  B %bb.17
+
+bb.7.bb13:
+; predecessors: %bb.1
+  liveins: $x2, $x9
+  $x3 = ADRP target-flags(aarch64-page) @alloc_3d26d86a09d4c08e50f7e3a9c381d0f1
+  renamable $x3 = ADDXri $x3, target-flags(aarch64-pageoff, aarch64-nc) @alloc_3d26d86a09d4c08e50f7e3a9c381d0f1, 0
+  $x0 = ORRXrs $xzr, killed $x9, 0
+  $x1 = ORRXrs $xzr, $x2, 0
+  BL @_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail, <regmask $fp $lr $wzr $wzr_hi $xzr $b8 $b9 $b10 $b11 $b12 $b13 $b14 $b15 $d8 $d9 $d10 $d11 $d12 $d13 $d14 $d15 $h8 $h9 $h10 $h11 $h12 $h13 $h14 $h15 $s8 $s9 $s10 $s11 and 92 more...>, implicit-def dead $lr, implicit $sp, implicit $x0, implicit $x1, implicit $x2, implicit $x3, implicit-def $sp
+
+bb.8.bb4:
+; predecessors: %bb.3, %bb.5
+  successors: %bb.9(0x80000000); %bb.9(100.00%)
+  liveins: $x1, $x2, $x9, $x10, $x11
+  renamable $x8 = ORRXri $xzr, 48
+  renamable $x12 = nuw MADDXrrr renamable $x10, killed renamable $x8, $xzr
+  renamable $x13 = ORRXri $xzr, 48
+  renamable $x13 = MOVKXi $x13(tied-def 0), 256, 0
+  renamable $x14 = SUBXri renamable $x1, 8, 0
+  renamable $x15 = ORRXri $xzr, 112
+
+bb.9.bb5:
+; predecessors: %bb.8, %bb.10
+  successors: %bb.10(0x7c000000), %bb.11(0x04000000); %bb.10(96.88%), %bb.11(3.12%)
+  liveins: $x1, $x2, $x9, $x10, $x11, $x12, $x13, $x14, $x15
+  $x8 = ORRXrs $xzr, $x9, 0
+  $xzr = SUBSXrs $x9, renamable $x11, 0, implicit-def $nzcv
+  Bcc 9, %bb.11, implicit $nzcv
+
+bb.10.bb6:
+; predecessors: %bb.9
+  successors: %bb.9(0x7c000000), %bb.11(0x04000000); %bb.9(96.88%), %bb.11(3.12%)
+  liveins: $x1, $x2, $x8, $x10, $x11, $x12, $x13, $x14, $x15
+  $x9 = ADDXrs renamable $x14, renamable $x8, 0
+  renamable $x16 = LDURXi renamable $x9, -8 :: (load (s64) from %ir.scevgep55)
+  renamable $x9 = LDRXui killed renamable $x9, 0 :: (load (s64) from %ir.scevgep53)
+  $x16 = EORXrs killed renamable $x16, renamable $x12, 0
+  $x9 = EORXrs killed renamable $x9, renamable $x12, 0
+  $x17 = SUBXrs renamable $x13, renamable $x16, 0
+  $x18 = SUBXrs renamable $x13, renamable $x9, 0
+  $x16 = ORRXrs killed renamable $x17, killed renamable $x16, 0
+  $x9 = ORRXrs killed renamable $x18, killed renamable $x9, 0
+  $x9 = ANDXrs killed renamable $x16, killed renamable $x9, 0
+  $xzr = BICSXrs renamable $x15, killed renamable $x9, 0, implicit-def $nzcv
+  renamable $x9 = SUBXri renamable $x8, 16, 0
+  Bcc 0, %bb.9, implicit $nzcv
+
+bb.11.bb10:
+; predecessors: %bb.9, %bb.10
+  successors: %bb.18(0x0020be52), %bb.12(0x7fdf41ae); %bb.18(0.10%), %bb.12(99.90%)
+  liveins: $x1, $x2, $x8, $x10
+  $xzr = SUBSXrs renamable $x8, renamable $x2, 0, implicit-def $nzcv
+  Bcc 8, %bb.18, implicit $nzcv
+
+bb.12.bb15:
+; predecessors: %bb.11
+  successors: %bb.13(0x30000000), %bb.15(0x50000000); %bb.13(37.50%), %bb.15(62.50%)
+  liveins: $x1, $x8, $x10
+  CBNZX renamable $x8, %bb.15
+
+bb.13:
+; predecessors: %bb.12, %bb.14
+  successors: %bb.17(0x80000000); %bb.17(100.00%)
+
+  $x0 = ORRXrs $xzr, $xzr, 0
+  renamable $x8 = IMPLICIT_DEF
+  B %bb.17
+
+bb.14.bb4.i16:
+; predecessors: %bb.16
+  successors: %bb.13(0x04000000), %bb.16(0x7c000000); %bb.13(3.12%), %bb.16(96.88%)
+  liveins: $x0, $x1, $x8, $x10
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  dead $xzr = ADDSXri renamable $x8, 1, 0, implicit-def $nzcv
+  Bcc 0, %bb.13, implicit $nzcv
+  B %bb.16
+
+bb.15:
+; predecessors: %bb.12
+  successors: %bb.16(0x80000000); %bb.16(100.00%)
+  liveins: $x1, $x8, $x10
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  renamable $w0 = MOVZWi 1, 0, implicit-def $x0
+
+bb.16.bb6.i19:
+; predecessors: %bb.14, %bb.15
+  successors: %bb.17(0x04000000), %bb.14(0x7c000000); %bb.17(3.12%), %bb.14(96.88%)
+  liveins: $x0, $x1, $x8, $x10
+  renamable $w9 = LDRBBroX renamable $x1, renamable $x8, 0, 0 :: (load (s8) from %ir.scevgep, !noalias !15)
+  $wzr = SUBSWrs killed renamable $w9, renamable $w10, 0, implicit-def $nzcv
+  Bcc 1, %bb.14, implicit killed $nzcv
+
+bb.17.bb12:
+; predecessors: %bb.6, %bb.16, %bb.13
+  liveins: $x0, $x8
+  $x1 = ORRXrs $xzr, killed $x8, 0
+  frame-destroy CFI_INSTRUCTION def_cfa $wsp, 16
+  early-clobber $sp, $fp, $lr = frame-destroy LDPXpost $sp(tied-def 0), 2 :: (load (s64) from %stack.1), (load (s64) from %stack.0)
+  frame-destroy CFI_INSTRUCTION def_cfa_offset 0
+  frame-destroy CFI_INSTRUCTION restore $w30
+  frame-destroy CFI_INSTRUCTION restore $w29
+  RET undef $lr, implicit $x0, implicit $x1
+
+bb.18.bb16:
+; predecessors: %bb.11
+  liveins: $x2, $x8
+  $x3 = ADRP target-flags(aarch64-page) @alloc_f77b16add3c824dd405a5b8eb5c54c47
+  renamable $x3 = ADDXri $x3, target-flags(aarch64-pageoff, aarch64-nc) @alloc_f77b16add3c824dd405a5b8eb5c54c47, 0
+  $x0 = ORRXrs $xzr, $xzr, 0
+  $x1 = ORRXrs $xzr, killed $x8, 0
+  BL @_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail, <regmask $fp $lr $wzr $wzr_hi $xzr $b8 $b9 $b10 $b11 $b12 $b13 $b14 $b15 $d8 $d9 $d10 $d11 $d12 $d13 $d14 $d15 $h8 $h9 $h10 $h11 $h12 $h13 $h14 $h15 $s8 $s9 $s10 $s11 and 92 more...>, implicit-def dead $lr, implicit $sp, implicit $x0, implicit $x1, implicit $x2, implicit $x3, implicit-def $sp
+
+# End machine code for function copied_memrchr.
+
+# *** IR Dump After AArch64 load / store optimization pass (aarch64-ldst-opt) ***:
+# Machine code for function copied_memrchr: NoPHIs, TracksLiveness, NoVRegs, TiedOpsRewritten, TracksDebugUserValues
+Frame Objects:
+  fi#0: size=8, align=8, at location [SP-8]
+  fi#1: size=8, align=8, at location [SP-16]
+save/restore points:
+save points are empty
+restore points are empty
+Function Live Ins: $w0, $x1, $x2
+
+bb.0.start:
+  successors: %bb.3(0x40000000), %bb.1(0x40000000); %bb.3(50.00%), %bb.1(50.00%)
+  liveins: $w0, $x1, $x2, $lr
+  early-clobber $sp = frame-setup STPXpre killed $fp, killed $lr, $sp(tied-def 0), -2 :: (store (s64) into %stack.1), (store (s64) into %stack.0)
+  frame-setup CFI_INSTRUCTION def_cfa_offset 16
+  $fp = frame-setup ADDXri $sp, 0, 0
+  frame-setup CFI_INSTRUCTION def_cfa $w29, 16
+  frame-setup CFI_INSTRUCTION offset $w30, -8
+  frame-setup CFI_INSTRUCTION offset $w29, -16
+  renamable $x8 = ADDXri renamable $x1, 7, 0
+  renamable $x8 = ANDXri killed renamable $x8, 8060
+  $x8 = SUBXrs killed renamable $x8, renamable $x1, 0
+  $xzr = SUBSXrs renamable $x2, renamable $x8, 0, implicit-def $nzcv
+  $x9 = ORRXrs $xzr, $x2, 0
+  $x11 = ORRXrs $xzr, $x2, 0
+  Bcc 3, %bb.3, implicit $nzcv
+
+bb.1._RINvMNtCshp6Wxz1DwXO_4core5sliceSh8align_toTjjEECsfQ3UinuKA7O_7wordlib.exit:
+; predecessors: %bb.0
+  successors: %bb.7(0x0020c06a), %bb.2(0x7fdf3f96); %bb.7(0.10%), %bb.2(99.90%)
+  liveins: $w0, $x1, $x2, $x8
+  $w9 = SUBWrs renamable $w2, renamable $w8, 0, implicit-def $x9
+  renamable $x9 = ANDXri killed renamable $x9, 4099
+  $x9 = SUBSXrs renamable $x2, killed renamable $x9, 0, implicit-def $nzcv
+  Bcc 3, %bb.7, implicit killed $nzcv
+
+bb.2:
+; predecessors: %bb.1
+  successors: %bb.3(0x80000000); %bb.3(100.00%)
+  liveins: $w0, $x1, $x2, $x8, $x9
+  $x11 = ORRXrs $xzr, killed $x8, 0
+
+bb.3.bb14:
+; predecessors: %bb.0, %bb.2
+  successors: %bb.8(0x40000000), %bb.4(0x40000000); %bb.8(50.00%), %bb.4(50.00%)
+  liveins: $w0, $x1, $x2, $x9, $x11
+  $xzr = SUBSXrs renamable $x9, renamable $x2, 0, implicit-def $nzcv
+  renamable $w10 = ANDWri killed renamable $w0, 7, implicit-def $x10
+  Bcc 0, %bb.8, implicit $nzcv
+
+bb.4.bb6.i.lr.ph:
+; predecessors: %bb.3
+  successors: %bb.6(0x80000000); %bb.6(100.00%)
+  liveins: $x1, $x2, $x9, $x10, $x11
+  renamable $x8 = nsw SUBXri renamable $x2, 1, 0
+  $x12 = SUBXrs $xzr, renamable $x9, 0
+  renamable $w0 = MOVZWi 1, 0, implicit-def $x0
+  B %bb.6
+
+bb.5.bb4.i:
+; predecessors: %bb.6
+  successors: %bb.8(0x04000000), %bb.6(0x7c000000); %bb.8(3.12%), %bb.6(96.88%)
+  liveins: $x0, $x1, $x2, $x8, $x9, $x10, $x11, $x12
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  $x13 = ADDXrs renamable $x12, renamable $x8, 0
+  dead $xzr = ADDSXri killed renamable $x13, 1, 0, implicit-def $nzcv
+  Bcc 0, %bb.8, implicit $nzcv
+
+bb.6.bb6.i:
+; predecessors: %bb.4, %bb.5
+  successors: %bb.17(0x04000000), %bb.5(0x7c000000); %bb.17(3.12%), %bb.5(96.88%)
+  liveins: $x0, $x1, $x2, $x8, $x9, $x10, $x11, $x12
+  renamable $w13 = LDRBBroX renamable $x1, renamable $x8, 0, 0 :: (load (s8) from %ir.scevgep56, !noalias !9)
+  $wzr = SUBSWrs killed renamable $w13, renamable $w10, 0, implicit-def $nzcv
+  Bcc 1, %bb.5, implicit $nzcv
+  B %bb.17
+
+bb.7.bb13:
+; predecessors: %bb.1
+  liveins: $x2, $x9
+  $x3 = ADRP target-flags(aarch64-page) @alloc_3d26d86a09d4c08e50f7e3a9c381d0f1
+  renamable $x3 = ADDXri $x3, target-flags(aarch64-pageoff, aarch64-nc) @alloc_3d26d86a09d4c08e50f7e3a9c381d0f1, 0
+  $x0 = ORRXrs $xzr, killed $x9, 0
+  $x1 = ORRXrs $xzr, $x2, 0
+  BL @_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail, <regmask $fp $lr $wzr $wzr_hi $xzr $b8 $b9 $b10 $b11 $b12 $b13 $b14 $b15 $d8 $d9 $d10 $d11 $d12 $d13 $d14 $d15 $h8 $h9 $h10 $h11 $h12 $h13 $h14 $h15 $s8 $s9 $s10 $s11 and 92 more...>, implicit-def dead $lr, implicit $sp, implicit $x0, implicit $x1, implicit $x2, implicit $x3, implicit-def $sp
+
+bb.8.bb4:
+; predecessors: %bb.3, %bb.5
+  successors: %bb.9(0x80000000); %bb.9(100.00%)
+  liveins: $x1, $x2, $x9, $x10, $x11
+  renamable $x8 = ORRXri $xzr, 48
+  renamable $x12 = nuw MADDXrrr renamable $x10, killed renamable $x8, $xzr
+  renamable $x13 = ORRXri $xzr, 48
+  renamable $x13 = MOVKXi $x13(tied-def 0), 256, 0
+  renamable $x14 = SUBXri renamable $x1, 8, 0
+  renamable $x15 = ORRXri $xzr, 112
+
+bb.9.bb5:
+; predecessors: %bb.8, %bb.10
+  successors: %bb.10(0x7c000000), %bb.11(0x04000000); %bb.10(96.88%), %bb.11(3.12%)
+  liveins: $x1, $x2, $x9, $x10, $x11, $x12, $x13, $x14, $x15
+  $x8 = ORRXrs $xzr, $x9, 0
+  $xzr = SUBSXrs $x9, renamable $x11, 0, implicit-def $nzcv
+  Bcc 9, %bb.11, implicit $nzcv
+
+bb.10.bb6:
+; predecessors: %bb.9
+  successors: %bb.9(0x7c000000), %bb.11(0x04000000); %bb.9(96.88%), %bb.11(3.12%)
+  liveins: $x1, $x2, $x8, $x10, $x11, $x12, $x13, $x14, $x15
+  $x9 = ADDXrs renamable $x14, renamable $x8, 0
+  renamable $x16, renamable $x9 = LDPXi renamable $x9, -1 :: (load (s64) from %ir.scevgep55), (load (s64) from %ir.scevgep53)
+  $x16 = EORXrs killed renamable $x16, renamable $x12, 0
+  $x9 = EORXrs killed renamable $x9, renamable $x12, 0
+  $x17 = SUBXrs renamable $x13, renamable $x16, 0
+  $x18 = SUBXrs renamable $x13, renamable $x9, 0
+  $x16 = ORRXrs killed renamable $x17, killed renamable $x16, 0
+  $x9 = ORRXrs killed renamable $x18, killed renamable $x9, 0
+  $x9 = ANDXrs killed renamable $x16, killed renamable $x9, 0
+  $xzr = BICSXrs renamable $x15, killed renamable $x9, 0, implicit-def $nzcv
+  renamable $x9 = SUBXri renamable $x8, 16, 0
+  Bcc 0, %bb.9, implicit $nzcv
+
+bb.11.bb10:
+; predecessors: %bb.9, %bb.10
+  successors: %bb.18(0x0020be52), %bb.12(0x7fdf41ae); %bb.18(0.10%), %bb.12(99.90%)
+  liveins: $x1, $x2, $x8, $x10
+  $xzr = SUBSXrs renamable $x8, renamable $x2, 0, implicit-def $nzcv
+  Bcc 8, %bb.18, implicit $nzcv
+
+bb.12.bb15:
+; predecessors: %bb.11
+  successors: %bb.13(0x30000000), %bb.15(0x50000000); %bb.13(37.50%), %bb.15(62.50%)
+  liveins: $x1, $x8, $x10
+  CBNZX renamable $x8, %bb.15
+
+bb.13:
+; predecessors: %bb.12, %bb.14
+  successors: %bb.17(0x80000000); %bb.17(100.00%)
+
+  $x0 = ORRXrs $xzr, $xzr, 0
+  renamable $x8 = IMPLICIT_DEF
+  B %bb.17
+
+bb.14.bb4.i16:
+; predecessors: %bb.16
+  successors: %bb.13(0x04000000), %bb.16(0x7c000000); %bb.13(3.12%), %bb.16(96.88%)
+  liveins: $x0, $x1, $x8, $x10
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  dead $xzr = ADDSXri renamable $x8, 1, 0, implicit-def $nzcv
+  Bcc 0, %bb.13, implicit $nzcv
+  B %bb.16
+
+bb.15:
+; predecessors: %bb.12
+  successors: %bb.16(0x80000000); %bb.16(100.00%)
+  liveins: $x1, $x8, $x10
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  renamable $w0 = MOVZWi 1, 0, implicit-def $x0
+
+bb.16.bb6.i19:
+; predecessors: %bb.14, %bb.15
+  successors: %bb.17(0x04000000), %bb.14(0x7c000000); %bb.17(3.12%), %bb.14(96.88%)
+  liveins: $x0, $x1, $x8, $x10
+  renamable $w9 = LDRBBroX renamable $x1, renamable $x8, 0, 0 :: (load (s8) from %ir.scevgep, !noalias !15)
+  $wzr = SUBSWrs killed renamable $w9, renamable $w10, 0, implicit-def $nzcv
+  Bcc 1, %bb.14, implicit killed $nzcv
+
+bb.17.bb12:
+; predecessors: %bb.6, %bb.16, %bb.13
+  liveins: $x0, $x8
+  $x1 = ORRXrs $xzr, killed $x8, 0
+  frame-destroy CFI_INSTRUCTION def_cfa $wsp, 16
+  early-clobber $sp, $fp, $lr = frame-destroy LDPXpost $sp(tied-def 0), 2 :: (load (s64) from %stack.1), (load (s64) from %stack.0)
+  frame-destroy CFI_INSTRUCTION def_cfa_offset 0
+  frame-destroy CFI_INSTRUCTION restore $w30
+  frame-destroy CFI_INSTRUCTION restore $w29
+  RET undef $lr, implicit $x0, implicit $x1
+
+bb.18.bb16:
+; predecessors: %bb.11
+  liveins: $x2, $x8
+  $x3 = ADRP target-flags(aarch64-page) @alloc_f77b16add3c824dd405a5b8eb5c54c47
+  renamable $x3 = ADDXri $x3, target-flags(aarch64-pageoff, aarch64-nc) @alloc_f77b16add3c824dd405a5b8eb5c54c47, 0
+  $x0 = ORRXrs $xzr, $xzr, 0
+  $x1 = ORRXrs $xzr, killed $x8, 0
+  BL @_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail, <regmask $fp $lr $wzr $wzr_hi $xzr $b8 $b9 $b10 $b11 $b12 $b13 $b14 $b15 $d8 $d9 $d10 $d11 $d12 $d13 $d14 $d15 $h8 $h9 $h10 $h11 $h12 $h13 $h14 $h15 $s8 $s9 $s10 $s11 and 92 more...>, implicit-def dead $lr, implicit $sp, implicit $x0, implicit $x1, implicit $x2, implicit $x3, implicit-def $sp
+
+# End machine code for function copied_memrchr.
+
+# *** IR Dump Before AArch64 load / store optimization pass (aarch64-ldst-opt) ***:
+# Machine code for function copied_memrchr: NoPHIs, TracksLiveness, NoVRegs, TiedOpsRewritten, TracksDebugUserValues
+Frame Objects:
+  fi#0: size=8, align=8, at location [SP-8]
+  fi#1: size=8, align=8, at location [SP-16]
+save/restore points:
+save points are empty
+restore points are empty
+Function Live Ins: $w0, $x1, $x2
+
+bb.0.start:
+  successors: %bb.3(0x40000000), %bb.1(0x40000000); %bb.3(50.00%), %bb.1(50.00%)
+  liveins: $w0, $x1, $x2, $lr
+  early-clobber $sp = frame-setup STPXpre $fp, killed $lr, $sp(tied-def 0), -2 :: (store (s64) into %stack.1), (store (s64) into %stack.0)
+  frame-setup CFI_INSTRUCTION def_cfa_offset 16
+  $fp = frame-setup ADDXri $sp, 0, 0
+  frame-setup CFI_INSTRUCTION def_cfa $w29, 16
+  frame-setup CFI_INSTRUCTION offset $w30, -8
+  frame-setup CFI_INSTRUCTION offset $w29, -16
+  renamable $x8 = ADDXri renamable $x1, 7, 0
+  $x9 = ORRXrs $xzr, $x2, 0
+  $x11 = ORRXrs $xzr, $x2, 0
+  renamable $x8 = ANDXri killed renamable $x8, 8060
+  $x8 = SUBXrs killed renamable $x8, renamable $x1, 0
+  $xzr = SUBSXrs renamable $x2, renamable $x8, 0, implicit-def $nzcv
+  Bcc 3, %bb.3, implicit $nzcv
+
+bb.1._RINvMNtCshp6Wxz1DwXO_4core5sliceSh8align_toTjjEECsfQ3UinuKA7O_7wordlib.exit:
+; predecessors: %bb.0
+  successors: %bb.7(0x0020c06a), %bb.2(0x7fdf3f96); %bb.7(0.10%), %bb.2(99.90%)
+  liveins: $w0, $x1, $x2, $x8
+  $w9 = SUBWrs renamable $w2, renamable $w8, 0, implicit-def $x9
+  renamable $x9 = ANDXri killed renamable $x9, 4099
+  $x9 = SUBSXrs renamable $x2, killed renamable $x9, 0, implicit-def $nzcv
+  Bcc 3, %bb.7, implicit killed $nzcv
+
+bb.2:
+; predecessors: %bb.1
+  successors: %bb.3(0x80000000); %bb.3(100.00%)
+  liveins: $w0, $x1, $x2, $x8, $x9
+  $x11 = ORRXrs $xzr, killed $x8, 0
+
+bb.3.bb14:
+; predecessors: %bb.0, %bb.2
+  successors: %bb.8(0x40000000), %bb.4(0x40000000); %bb.8(50.00%), %bb.4(50.00%)
+  liveins: $w0, $x1, $x2, $x9, $x11
+  $xzr = SUBSXrs renamable $x9, renamable $x2, 0, implicit-def $nzcv
+  renamable $w10 = ANDWri killed renamable $w0, 7, implicit-def $x10
+  Bcc 0, %bb.8, implicit $nzcv
+
+bb.4.bb6.i.lr.ph:
+; predecessors: %bb.3
+  successors: %bb.6(0x80000000); %bb.6(100.00%)
+  liveins: $x1, $x2, $x9, $x10, $x11
+  renamable $x8 = nsw SUBXri renamable $x2, 1, 0
+  $x12 = SUBXrs $xzr, renamable $x9, 0
+  renamable $w0 = MOVZWi 1, 0, implicit-def $x0
+
+bb.6.bb6.i:
+; predecessors: %bb.4, %bb.5
+  successors: %bb.17(0x04000000), %bb.5(0x7c000000); %bb.17(3.12%), %bb.5(96.88%)
+  liveins: $x0, $x1, $x2, $x8, $x9, $x10, $x11, $x12
+  renamable $w13 = LDRBBroX renamable $x1, renamable $x8, 0, 0 :: (load (s8) from %ir.scevgep56, !noalias !9)
+  $wzr = SUBSWrs killed renamable $w13, renamable $w10, 0, implicit-def $nzcv
+  Bcc 0, %bb.17, implicit $nzcv
+
+bb.5.bb4.i:
+; predecessors: %bb.6
+  successors: %bb.8(0x04000000), %bb.6(0x7c000000); %bb.8(3.12%), %bb.6(96.88%)
+  liveins: $x0, $x1, $x2, $x8, $x9, $x10, $x11, $x12
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  $x13 = ADDXrs renamable $x12, renamable $x8, 0
+  dead $xzr = ADDSXri killed renamable $x13, 1, 0, implicit-def $nzcv
+  Bcc 1, %bb.6, implicit $nzcv
+
+bb.8.bb4:
+; predecessors: %bb.3, %bb.5
+  successors: %bb.9(0x80000000); %bb.9(100.00%)
+  liveins: $x1, $x2, $x9, $x10, $x11
+  renamable $x8 = ORRXri $xzr, 48
+  renamable $x13 = ORRXri $xzr, 48
+  renamable $x14 = SUBXri renamable $x1, 8, 0
+  renamable $x12 = nuw MADDXrrr renamable $x10, killed renamable $x8, $xzr
+  renamable $x13 = MOVKXi killed $x13(tied-def 0), 256, 0
+  renamable $x15 = ORRXri $xzr, 112
+
+bb.9.bb5:
+; predecessors: %bb.8, %bb.10
+  successors: %bb.10(0x7c000000), %bb.11(0x04000000); %bb.10(96.88%), %bb.11(3.12%)
+  liveins: $x1, $x2, $x9, $x10, $x11, $x12, $x13, $x14, $x15
+  $x8 = ORRXrs $xzr, $x9, 0
+  $xzr = SUBSXrs killed $x9, renamable $x11, 0, implicit-def $nzcv
+  Bcc 9, %bb.11, implicit killed $nzcv
+
+bb.10.bb6:
+; predecessors: %bb.9
+  successors: %bb.9(0x7c000000), %bb.11(0x04000000); %bb.9(96.88%), %bb.11(3.12%)
+  liveins: $x1, $x2, $x8, $x10, $x11, $x12, $x13, $x14, $x15
+  $x9 = ADDXrs renamable $x14, renamable $x8, 0
+  renamable $x16, renamable $x9 = LDPXi killed renamable $x9, -1 :: (load (s64) from %ir.scevgep55), (load (s64) from %ir.scevgep53)
+  $x16 = EORXrs killed renamable $x16, renamable $x12, 0
+  $x9 = EORXrs killed renamable $x9, renamable $x12, 0
+  $x17 = SUBXrs renamable $x13, renamable $x16, 0
+  $x18 = SUBXrs renamable $x13, renamable $x9, 0
+  $x16 = ORRXrs killed renamable $x17, killed renamable $x16, 0
+  $x9 = ORRXrs killed renamable $x18, killed renamable $x9, 0
+  $x9 = ANDXrs killed renamable $x16, killed renamable $x9, 0
+  $xzr = BICSXrs renamable $x15, killed renamable $x9, 0, implicit-def $nzcv
+  renamable $x9 = SUBXri renamable $x8, 16, 0
+  Bcc 0, %bb.9, implicit killed $nzcv
+
+bb.11.bb10:
+; predecessors: %bb.9, %bb.10
+  successors: %bb.18(0x0020be52), %bb.12(0x7fdf41ae); %bb.18(0.10%), %bb.12(99.90%)
+  liveins: $x1, $x2, $x8, $x10
+  $xzr = SUBSXrs renamable $x8, renamable $x2, 0, implicit-def $nzcv
+  Bcc 8, %bb.18, implicit killed $nzcv
+
+bb.12.bb15:
+; predecessors: %bb.11
+  successors: %bb.13(0x30000000), %bb.15(0x50000000); %bb.13(37.50%), %bb.15(62.50%)
+  liveins: $x1, $x8, $x10
+  CBZX renamable $x8, %bb.13
+
+bb.15:
+; predecessors: %bb.12
+  successors: %bb.16(0x80000000); %bb.16(100.00%)
+  liveins: $x1, $x8, $x10
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  renamable $w0 = MOVZWi 1, 0, implicit-def $x0
+
+bb.16.bb6.i19:
+; predecessors: %bb.14, %bb.15
+  successors: %bb.17(0x04000000), %bb.14(0x7c000000); %bb.17(3.12%), %bb.14(96.88%)
+  liveins: $x0, $x1, $x8, $x10
+  renamable $w9 = LDRBBroX renamable $x1, renamable $x8, 0, 0 :: (load (s8) from %ir.scevgep, !noalias !15)
+  $wzr = SUBSWrs killed renamable $w9, renamable $w10, 0, implicit-def $nzcv
+  Bcc 0, %bb.17, implicit $nzcv
+
+bb.14.bb4.i16:
+; predecessors: %bb.16
+  successors: %bb.13(0x04000000), %bb.16(0x7c000000); %bb.13(3.12%), %bb.16(96.88%)
+  liveins: $x0, $x1, $x8, $x10
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  dead $xzr = ADDSXri renamable $x8, 1, 0, implicit-def $nzcv
+  Bcc 1, %bb.16, implicit $nzcv
+
+bb.13:
+; predecessors: %bb.12, %bb.14
+  successors: %bb.17(0x80000000); %bb.17(100.00%)
+
+  $x0 = ORRXrs $xzr, $xzr, 0
+  renamable $x8 = IMPLICIT_DEF
+
+bb.17.bb12:
+; predecessors: %bb.6, %bb.16, %bb.13
+  liveins: $x0, $x8
+  $x1 = ORRXrs $xzr, killed $x8, 0
+  frame-destroy CFI_INSTRUCTION def_cfa $wsp, 16
+  early-clobber $sp, $fp, $lr = frame-destroy LDPXpost $sp(tied-def 0), 2 :: (load (s64) from %stack.1), (load (s64) from %stack.0)
+  frame-destroy CFI_INSTRUCTION def_cfa_offset 0
+  frame-destroy CFI_INSTRUCTION restore $w30
+  frame-destroy CFI_INSTRUCTION restore $w29
+  RET undef $lr, implicit killed $x0, implicit killed $x1
+
+bb.18.bb16:
+; predecessors: %bb.11
+  liveins: $x2, $x8
+  $x3 = ADRP target-flags(aarch64-page) @alloc_f77b16add3c824dd405a5b8eb5c54c47
+  renamable $x3 = ADDXri killed $x3, target-flags(aarch64-pageoff, aarch64-nc) @alloc_f77b16add3c824dd405a5b8eb5c54c47, 0
+  $x0 = ORRXrs $xzr, $xzr, 0
+  $x1 = ORRXrs $xzr, killed $x8, 0
+  BL @_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail, <regmask $fp $lr $wzr $wzr_hi $xzr $b8 $b9 $b10 $b11 $b12 $b13 $b14 $b15 $d8 $d9 $d10 $d11 $d12 $d13 $d14 $d15 $h8 $h9 $h10 $h11 $h12 $h13 $h14 $h15 $s8 $s9 $s10 $s11 and 92 more...>, implicit-def dead $lr, implicit $sp, implicit killed $x0, implicit killed $x1, implicit killed $x2, implicit killed $x3, implicit-def $sp
+
+bb.7.bb13:
+; predecessors: %bb.1
+  liveins: $x2, $x9
+  $x3 = ADRP target-flags(aarch64-page) @alloc_3d26d86a09d4c08e50f7e3a9c381d0f1
+  renamable $x3 = ADDXri killed $x3, target-flags(aarch64-pageoff, aarch64-nc) @alloc_3d26d86a09d4c08e50f7e3a9c381d0f1, 0
+  $x0 = ORRXrs $xzr, killed $x9, 0
+  $x1 = ORRXrs $xzr, $x2, 0
+  BL @_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail, <regmask $fp $lr $wzr $wzr_hi $xzr $b8 $b9 $b10 $b11 $b12 $b13 $b14 $b15 $d8 $d9 $d10 $d11 $d12 $d13 $d14 $d15 $h8 $h9 $h10 $h11 $h12 $h13 $h14 $h15 $s8 $s9 $s10 $s11 and 92 more...>, implicit-def dead $lr, implicit $sp, implicit killed $x0, implicit killed $x1, implicit killed $x2, implicit killed $x3, implicit-def $sp
+
+# End machine code for function copied_memrchr.
+
+# *** IR Dump After AArch64 load / store optimization pass (aarch64-ldst-opt) ***:
+# Machine code for function copied_memrchr: NoPHIs, TracksLiveness, NoVRegs, TiedOpsRewritten, TracksDebugUserValues
+Frame Objects:
+  fi#0: size=8, align=8, at location [SP-8]
+  fi#1: size=8, align=8, at location [SP-16]
+save/restore points:
+save points are empty
+restore points are empty
+Function Live Ins: $w0, $x1, $x2
+
+bb.0.start:
+  successors: %bb.3(0x40000000), %bb.1(0x40000000); %bb.3(50.00%), %bb.1(50.00%)
+  liveins: $w0, $x1, $x2, $lr
+  early-clobber $sp = frame-setup STPXpre $fp, killed $lr, $sp(tied-def 0), -2 :: (store (s64) into %stack.1), (store (s64) into %stack.0)
+  frame-setup CFI_INSTRUCTION def_cfa_offset 16
+  $fp = frame-setup ADDXri $sp, 0, 0
+  frame-setup CFI_INSTRUCTION def_cfa $w29, 16
+  frame-setup CFI_INSTRUCTION offset $w30, -8
+  frame-setup CFI_INSTRUCTION offset $w29, -16
+  renamable $x8 = ADDXri renamable $x1, 7, 0
+  $x9 = ORRXrs $xzr, $x2, 0
+  $x11 = ORRXrs $xzr, $x2, 0
+  renamable $x8 = ANDXri killed renamable $x8, 8060
+  $x8 = SUBXrs killed renamable $x8, renamable $x1, 0
+  $xzr = SUBSXrs renamable $x2, renamable $x8, 0, implicit-def $nzcv
+  Bcc 3, %bb.3, implicit $nzcv
+
+bb.1._RINvMNtCshp6Wxz1DwXO_4core5sliceSh8align_toTjjEECsfQ3UinuKA7O_7wordlib.exit:
+; predecessors: %bb.0
+  successors: %bb.7(0x0020c06a), %bb.2(0x7fdf3f96); %bb.7(0.10%), %bb.2(99.90%)
+  liveins: $w0, $x1, $x2, $x8
+  $w9 = SUBWrs renamable $w2, renamable $w8, 0, implicit-def $x9
+  renamable $x9 = ANDXri killed renamable $x9, 4099
+  $x9 = SUBSXrs renamable $x2, killed renamable $x9, 0, implicit-def $nzcv
+  Bcc 3, %bb.7, implicit killed $nzcv
+
+bb.2:
+; predecessors: %bb.1
+  successors: %bb.3(0x80000000); %bb.3(100.00%)
+  liveins: $w0, $x1, $x2, $x8, $x9
+  $x11 = ORRXrs $xzr, killed $x8, 0
+
+bb.3.bb14:
+; predecessors: %bb.0, %bb.2
+  successors: %bb.8(0x40000000), %bb.4(0x40000000); %bb.8(50.00%), %bb.4(50.00%)
+  liveins: $w0, $x1, $x2, $x9, $x11
+  $xzr = SUBSXrs renamable $x9, renamable $x2, 0, implicit-def $nzcv
+  renamable $w10 = ANDWri killed renamable $w0, 7, implicit-def $x10
+  Bcc 0, %bb.8, implicit $nzcv
+
+bb.4.bb6.i.lr.ph:
+; predecessors: %bb.3
+  successors: %bb.6(0x80000000); %bb.6(100.00%)
+  liveins: $x1, $x2, $x9, $x10, $x11
+  renamable $x8 = nsw SUBXri renamable $x2, 1, 0
+  $x12 = SUBXrs $xzr, renamable $x9, 0
+  renamable $w0 = MOVZWi 1, 0, implicit-def $x0
+
+bb.6.bb6.i:
+; predecessors: %bb.4, %bb.5
+  successors: %bb.17(0x04000000), %bb.5(0x7c000000); %bb.17(3.12%), %bb.5(96.88%)
+  liveins: $x0, $x1, $x2, $x8, $x9, $x10, $x11, $x12
+  renamable $w13 = LDRBBroX renamable $x1, renamable $x8, 0, 0 :: (load (s8) from %ir.scevgep56, !noalias !9)
+  $wzr = SUBSWrs killed renamable $w13, renamable $w10, 0, implicit-def $nzcv
+  Bcc 0, %bb.17, implicit $nzcv
+
+bb.5.bb4.i:
+; predecessors: %bb.6
+  successors: %bb.8(0x04000000), %bb.6(0x7c000000); %bb.8(3.12%), %bb.6(96.88%)
+  liveins: $x0, $x1, $x2, $x8, $x9, $x10, $x11, $x12
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  $x13 = ADDXrs renamable $x12, renamable $x8, 0
+  dead $xzr = ADDSXri killed renamable $x13, 1, 0, implicit-def $nzcv
+  Bcc 1, %bb.6, implicit $nzcv
+
+bb.8.bb4:
+; predecessors: %bb.3, %bb.5
+  successors: %bb.9(0x80000000); %bb.9(100.00%)
+  liveins: $x1, $x2, $x9, $x10, $x11
+  renamable $x8 = ORRXri $xzr, 48
+  renamable $x13 = ORRXri $xzr, 48
+  renamable $x14 = SUBXri renamable $x1, 8, 0
+  renamable $x12 = nuw MADDXrrr renamable $x10, killed renamable $x8, $xzr
+  renamable $x13 = MOVKXi killed $x13(tied-def 0), 256, 0
+  renamable $x15 = ORRXri $xzr, 112
+
+bb.9.bb5:
+; predecessors: %bb.8, %bb.10
+  successors: %bb.10(0x7c000000), %bb.11(0x04000000); %bb.10(96.88%), %bb.11(3.12%)
+  liveins: $x1, $x2, $x9, $x10, $x11, $x12, $x13, $x14, $x15
+  $x8 = ORRXrs $xzr, $x9, 0
+  $xzr = SUBSXrs killed $x9, renamable $x11, 0, implicit-def $nzcv
+  Bcc 9, %bb.11, implicit killed $nzcv
+
+bb.10.bb6:
+; predecessors: %bb.9
+  successors: %bb.9(0x7c000000), %bb.11(0x04000000); %bb.9(96.88%), %bb.11(3.12%)
+  liveins: $x1, $x2, $x8, $x10, $x11, $x12, $x13, $x14, $x15
+  $x9 = ADDXrs renamable $x14, renamable $x8, 0
+  renamable $x16, renamable $x9 = LDPXi killed renamable $x9, -1 :: (load (s64) from %ir.scevgep55), (load (s64) from %ir.scevgep53)
+  $x16 = EORXrs killed renamable $x16, renamable $x12, 0
+  $x9 = EORXrs killed renamable $x9, renamable $x12, 0
+  $x17 = SUBXrs renamable $x13, renamable $x16, 0
+  $x18 = SUBXrs renamable $x13, renamable $x9, 0
+  $x16 = ORRXrs killed renamable $x17, killed renamable $x16, 0
+  $x9 = ORRXrs killed renamable $x18, killed renamable $x9, 0
+  $x9 = ANDXrs killed renamable $x16, killed renamable $x9, 0
+  $xzr = BICSXrs renamable $x15, killed renamable $x9, 0, implicit-def $nzcv
+  renamable $x9 = SUBXri renamable $x8, 16, 0
+  Bcc 0, %bb.9, implicit killed $nzcv
+
+bb.11.bb10:
+; predecessors: %bb.9, %bb.10
+  successors: %bb.18(0x0020be52), %bb.12(0x7fdf41ae); %bb.18(0.10%), %bb.12(99.90%)
+  liveins: $x1, $x2, $x8, $x10
+  $xzr = SUBSXrs renamable $x8, renamable $x2, 0, implicit-def $nzcv
+  Bcc 8, %bb.18, implicit killed $nzcv
+
+bb.12.bb15:
+; predecessors: %bb.11
+  successors: %bb.13(0x30000000), %bb.15(0x50000000); %bb.13(37.50%), %bb.15(62.50%)
+  liveins: $x1, $x8, $x10
+  CBZX renamable $x8, %bb.13
+
+bb.15:
+; predecessors: %bb.12
+  successors: %bb.16(0x80000000); %bb.16(100.00%)
+  liveins: $x1, $x8, $x10
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  renamable $w0 = MOVZWi 1, 0, implicit-def $x0
+
+bb.16.bb6.i19:
+; predecessors: %bb.14, %bb.15
+  successors: %bb.17(0x04000000), %bb.14(0x7c000000); %bb.17(3.12%), %bb.14(96.88%)
+  liveins: $x0, $x1, $x8, $x10
+  renamable $w9 = LDRBBroX renamable $x1, renamable $x8, 0, 0 :: (load (s8) from %ir.scevgep, !noalias !15)
+  $wzr = SUBSWrs killed renamable $w9, renamable $w10, 0, implicit-def $nzcv
+  Bcc 0, %bb.17, implicit $nzcv
+
+bb.14.bb4.i16:
+; predecessors: %bb.16
+  successors: %bb.13(0x04000000), %bb.16(0x7c000000); %bb.13(3.12%), %bb.16(96.88%)
+  liveins: $x0, $x1, $x8, $x10
+  renamable $x8 = SUBXri killed renamable $x8, 1, 0
+  dead $xzr = ADDSXri renamable $x8, 1, 0, implicit-def $nzcv
+  Bcc 1, %bb.16, implicit $nzcv
+
+bb.13:
+; predecessors: %bb.12, %bb.14
+  successors: %bb.17(0x80000000); %bb.17(100.00%)
+
+  $x0 = ORRXrs $xzr, $xzr, 0
+  renamable $x8 = IMPLICIT_DEF
+
+bb.17.bb12:
+; predecessors: %bb.6, %bb.16, %bb.13
+  liveins: $x0, $x8
+  $x1 = ORRXrs $xzr, killed $x8, 0
+  frame-destroy CFI_INSTRUCTION def_cfa $wsp, 16
+  early-clobber $sp, $fp, $lr = frame-destroy LDPXpost $sp(tied-def 0), 2 :: (load (s64) from %stack.1), (load (s64) from %stack.0)
+  frame-destroy CFI_INSTRUCTION def_cfa_offset 0
+  frame-destroy CFI_INSTRUCTION restore $w30
+  frame-destroy CFI_INSTRUCTION restore $w29
+  RET undef $lr, implicit killed $x0, implicit killed $x1
+
+bb.18.bb16:
+; predecessors: %bb.11
+  liveins: $x2, $x8
+  $x3 = ADRP target-flags(aarch64-page) @alloc_f77b16add3c824dd405a5b8eb5c54c47
+  renamable $x3 = ADDXri killed $x3, target-flags(aarch64-pageoff, aarch64-nc) @alloc_f77b16add3c824dd405a5b8eb5c54c47, 0
+  $x0 = ORRXrs $xzr, $xzr, 0
+  $x1 = ORRXrs $xzr, killed $x8, 0
+  BL @_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail, <regmask $fp $lr $wzr $wzr_hi $xzr $b8 $b9 $b10 $b11 $b12 $b13 $b14 $b15 $d8 $d9 $d10 $d11 $d12 $d13 $d14 $d15 $h8 $h9 $h10 $h11 $h12 $h13 $h14 $h15 $s8 $s9 $s10 $s11 and 92 more...>, implicit-def dead $lr, implicit $sp, implicit killed $x0, implicit killed $x1, implicit killed $x2, implicit killed $x3, implicit-def $sp
+
+bb.7.bb13:
+; predecessors: %bb.1
+  liveins: $x2, $x9
+  $x3 = ADRP target-flags(aarch64-page) @alloc_3d26d86a09d4c08e50f7e3a9c381d0f1
+  renamable $x3 = ADDXri killed $x3, target-flags(aarch64-pageoff, aarch64-nc) @alloc_3d26d86a09d4c08e50f7e3a9c381d0f1, 0
+  $x0 = ORRXrs $xzr, killed $x9, 0
+  $x1 = ORRXrs $xzr, $x2, 0
+  BL @_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail, <regmask $fp $lr $wzr $wzr_hi $xzr $b8 $b9 $b10 $b11 $b12 $b13 $b14 $b15 $d8 $d9 $d10 $d11 $d12 $d13 $d14 $d15 $h8 $h9 $h10 $h11 $h12 $h13 $h14 $h15 $s8 $s9 $s10 $s11 and 92 more...>, implicit-def dead $lr, implicit $sp, implicit killed $x0, implicit killed $x1, implicit killed $x2, implicit killed $x3, implicit-def $sp
+
+# End machine code for function copied_memrchr.
+
+warning: 1 warning emitted
+

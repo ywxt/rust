@@ -1,0 +1,7632 @@
+	.file	"probes.8be1419e6e3d8aed-cgu.0"
+	.section	.text._RINvNtCs68fcPop4ROg_3std2rt10lang_startuECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.hidden	_RINvNtCs68fcPop4ROg_3std2rt10lang_startuECsc0zNMb1uo1d_6probes
+	.globl	_RINvNtCs68fcPop4ROg_3std2rt10lang_startuECsc0zNMb1uo1d_6probes
+	.p2align	2
+	.type	_RINvNtCs68fcPop4ROg_3std2rt10lang_startuECsc0zNMb1uo1d_6probes,@function
+_RINvNtCs68fcPop4ROg_3std2rt10lang_startuECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	mov	w4, w3
+	mov	x3, x2
+	mov	x2, x1
+	str	x0, [sp, #8]
+	adrp	x1, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.1
+	add	x1, x1, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.1
+	add	x0, sp, #8
+	bl	_RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+	.cfi_def_cfa wsp, 32
+	ldp	x29, x30, [sp, #16]
+	add	sp, sp, #32
+	.cfi_def_cfa_offset 0
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end0:
+	.size	_RINvNtCs68fcPop4ROg_3std2rt10lang_startuECsc0zNMb1uo1d_6probes, .Lfunc_end0-_RINvNtCs68fcPop4ROg_3std2rt10lang_startuECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecIBC_yEEECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecIBC_yEEECsc0zNMb1uo1d_6probes,@function
+_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecIBC_yEEECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-48]!
+	.cfi_def_cfa_offset 48
+	stp	x22, x21, [sp, #16]
+	stp	x20, x19, [sp, #32]
+	mov	x29, sp
+	.cfi_def_cfa w29, 48
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w30, -40
+	.cfi_offset w29, -48
+	.cfi_remember_state
+	ldp	x19, x21, [x0, #8]
+	mov	x20, x0
+	cbz	x21, .LBB1_5
+	add	x22, x19, #8
+	b	.LBB1_3
+.LBB1_2:
+	subs	x21, x21, #1
+	add	x22, x22, #24
+	b.eq	.LBB1_5
+.LBB1_3:
+	ldur	x8, [x22, #-8]
+	cbz	x8, .LBB1_2
+	ldr	x0, [x22]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB1_2
+.LBB1_5:
+	ldr	x8, [x20]
+	cbz	x8, .LBB1_7
+	add	x8, x8, x8, lsl #1
+	mov	x0, x19
+	lsl	x1, x8, #3
+	mov	w2, #8
+	.cfi_def_cfa wsp, 48
+	ldp	x20, x19, [sp, #32]
+	ldp	x22, x21, [sp, #16]
+	ldp	x29, x30, [sp], #48
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w30
+	.cfi_restore w29
+	b	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB1_7:
+	.cfi_restore_state
+	.cfi_def_cfa wsp, 48
+	ldp	x20, x19, [sp, #32]
+	ldp	x22, x21, [sp, #16]
+	ldp	x29, x30, [sp], #48
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end1:
+	.size	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecIBC_yEEECsc0zNMb1uo1d_6probes, .Lfunc_end1-_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecIBC_yEEECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecNtNtBG_6string6StringEECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecNtNtBG_6string6StringEECsc0zNMb1uo1d_6probes,@function
+_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecNtNtBG_6string6StringEECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-48]!
+	.cfi_def_cfa_offset 48
+	stp	x22, x21, [sp, #16]
+	stp	x20, x19, [sp, #32]
+	mov	x29, sp
+	.cfi_def_cfa w29, 48
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w30, -40
+	.cfi_offset w29, -48
+	.cfi_remember_state
+	ldp	x19, x21, [x0, #8]
+	mov	x20, x0
+	cbz	x21, .LBB2_5
+	add	x22, x19, #8
+	b	.LBB2_3
+.LBB2_2:
+	subs	x21, x21, #1
+	add	x22, x22, #24
+	b.eq	.LBB2_5
+.LBB2_3:
+	ldur	x1, [x22, #-8]
+	cbz	x1, .LBB2_2
+	ldr	x0, [x22]
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB2_2
+.LBB2_5:
+	ldr	x8, [x20]
+	cbz	x8, .LBB2_7
+	add	x8, x8, x8, lsl #1
+	mov	x0, x19
+	lsl	x1, x8, #3
+	mov	w2, #8
+	.cfi_def_cfa wsp, 48
+	ldp	x20, x19, [sp, #32]
+	ldp	x22, x21, [sp, #16]
+	ldp	x29, x30, [sp], #48
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w30
+	.cfi_restore w29
+	b	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB2_7:
+	.cfi_restore_state
+	.cfi_def_cfa wsp, 48
+	ldp	x20, x19, [sp, #32]
+	ldp	x22, x21, [sp, #16]
+	ldp	x29, x30, [sp], #48
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end2:
+	.size	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecNtNtBG_6string6StringEECsc0zNMb1uo1d_6probes, .Lfunc_end2-_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecNtNtBG_6string6StringEECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueNtNtCs68fcPop4ROg_3std3env4ArgsECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueNtNtCs68fcPop4ROg_3std3env4ArgsECsc0zNMb1uo1d_6probes,@function
+_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueNtNtCs68fcPop4ROg_3std3env4ArgsECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-48]!
+	.cfi_def_cfa_offset 48
+	str	x21, [sp, #16]
+	stp	x20, x19, [sp, #32]
+	mov	x29, sp
+	.cfi_def_cfa w29, 48
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -32
+	.cfi_offset w30, -40
+	.cfi_offset w29, -48
+	.cfi_remember_state
+	ldr	x8, [x0, #8]
+	ldr	x9, [x0, #24]
+	mov	x19, x0
+	subs	x9, x9, x8
+	b.eq	.LBB3_5
+	mov	x10, #-6148914691236517206
+	add	x21, x8, #8
+	movk	x10, #43691
+	umulh	x9, x9, x10
+	lsr	x20, x9, #4
+	b	.LBB3_3
+.LBB3_2:
+	subs	x20, x20, #1
+	add	x21, x21, #24
+	b.eq	.LBB3_5
+.LBB3_3:
+	ldur	x1, [x21, #-8]
+	cbz	x1, .LBB3_2
+	ldr	x0, [x21]
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB3_2
+.LBB3_5:
+	ldr	x8, [x19, #16]
+	cbz	x8, .LBB3_7
+	add	x8, x8, x8, lsl #1
+	ldr	x0, [x19]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	.cfi_def_cfa wsp, 48
+	ldp	x20, x19, [sp, #32]
+	ldr	x21, [sp, #16]
+	ldp	x29, x30, [sp], #48
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w30
+	.cfi_restore w29
+	b	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB3_7:
+	.cfi_restore_state
+	.cfi_def_cfa wsp, 48
+	ldp	x20, x19, [sp, #32]
+	ldr	x21, [sp, #16]
+	ldp	x29, x30, [sp], #48
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end3:
+	.size	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueNtNtCs68fcPop4ROg_3std3env4ArgsECsc0zNMb1uo1d_6probes, .Lfunc_end3-_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueNtNtCs68fcPop4ROg_3std3env4ArgsECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text.unlikely._RINvNtCshp6Wxz1DwXO_4core9panicking13assert_failedINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEBM_ECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtCshp6Wxz1DwXO_4core9panicking13assert_failedINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEBM_ECsc0zNMb1uo1d_6probes,@function
+_RINvNtCshp6Wxz1DwXO_4core9panicking13assert_failedINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEBM_ECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #32
+	stp	x29, x30, [sp, #16]
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	mov	x7, x2
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.2
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.2
+	stp	x0, x1, [sp]
+	mov	x1, sp
+	add	x3, sp, #8
+	mov	w0, wzr
+	mov	x4, x2
+	mov	x5, xzr
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking19assert_failed_inner
+.Lfunc_end4:
+	.size	_RINvNtCshp6Wxz1DwXO_4core9panicking13assert_failedINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEBM_ECsc0zNMb1uo1d_6probes, .Lfunc_end4-_RINvNtCshp6Wxz1DwXO_4core9panicking13assert_failedINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEBM_ECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-16]!
+	.cfi_def_cfa_offset 16
+	mov	x29, sp
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	blr	x0
+	//APP
+	//NO_APP
+	.cfi_def_cfa wsp, 16
+	ldp	x29, x30, [sp], #16
+	.cfi_def_cfa_offset 0
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end5:
+	.size	_RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECsc0zNMb1uo1d_6probes, .Lfunc_end5-_RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable14driftsort_mainyNvYyNtNtB8_3cmp10PartialOrd2ltINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable14driftsort_mainyNvYyNtNtB8_3cmp10PartialOrd2ltINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable14driftsort_mainyNvYyNtNtB8_3cmp10PartialOrd2ltINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEECsc0zNMb1uo1d_6probes:
+.Lfunc_begin0:
+	.cfi_startproc
+	.cfi_personality 156, DW.ref.rust_eh_personality
+	.cfi_lsda 28, .Lexception0
+	stp	x29, x30, [sp, #-80]!
+	.cfi_def_cfa_offset 80
+	stp	x28, x25, [sp, #16]
+	stp	x24, x23, [sp, #32]
+	stp	x22, x21, [sp, #48]
+	stp	x20, x19, [sp, #64]
+	mov	x29, sp
+	.cfi_def_cfa w29, 80
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w25, -56
+	.cfi_offset w28, -64
+	.cfi_offset w30, -72
+	.cfi_offset w29, -80
+	.cfi_remember_state
+	sub	sp, sp, #1, lsl #12
+	mov	w9, #16960
+	sub	x8, x1, x1, lsr #1
+	ldr	xzr, [sp]
+	movk	w9, #15, lsl #16
+	cmp	x1, x9
+	csel	x9, x1, x9, lo
+	cmp	x9, x8
+	csel	x23, x9, x8, hi
+	mov	w9, #48
+	cmp	x23, #48
+	csel	x22, x23, x9, hi
+	cmp	x23, #513
+	b.lo	.LBB6_4
+	lsl	x20, x22, #3
+	mov	x9, #9223372036854775800
+	and	x8, x8, #0xe000000000000000
+	cmp	x20, x9
+	ccmp	x8, #0, #0, ls
+	b.eq	.LBB6_5
+	mov	x21, xzr
+.LBB6_3:
+	mov	x0, x21
+	mov	x1, x20
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.LBB6_4:
+	mov	x19, sp
+	mov	w3, #512
+	b	.LBB6_7
+.LBB6_5:
+	mov	x24, x0
+	mov	x25, x1
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x20
+	mov	w1, #8
+	mov	w21, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB6_3
+	mov	x19, x0
+	mov	x3, x22
+	mov	x1, x25
+	mov	x0, x24
+.LBB6_7:
+	cmp	x1, #65
+	cset	w4, lo
+.Ltmp0:
+	mov	x2, x19
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable5drift4sortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.Ltmp1:
+	cmp	x23, #512
+	b.ls	.LBB6_10
+	lsl	x1, x22, #3
+	mov	x0, x19
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB6_10:
+	add	sp, sp, #1, lsl #12
+	.cfi_def_cfa wsp, 80
+	ldp	x20, x19, [sp, #64]
+	ldp	x22, x21, [sp, #48]
+	ldp	x24, x23, [sp, #32]
+	ldp	x28, x25, [sp, #16]
+	ldp	x29, x30, [sp], #80
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB6_11:
+	.cfi_restore_state
+.Ltmp2:
+	cmp	x23, #512
+	mov	x20, x0
+	b.ls	.LBB6_13
+	lsl	x1, x22, #3
+	mov	x0, x19
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB6_13:
+	mov	x0, x20
+	bl	_Unwind_Resume
+.Lfunc_end6:
+	.size	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable14driftsort_mainyNvYyNtNtB8_3cmp10PartialOrd2ltINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEECsc0zNMb1uo1d_6probes, .Lfunc_end6-_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable14driftsort_mainyNvYyNtNtB8_3cmp10PartialOrd2ltINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+	.section	.gcc_except_table._RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable14driftsort_mainyNvYyNtNtB8_3cmp10PartialOrd2ltINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEECsc0zNMb1uo1d_6probes,"a",@progbits
+	.p2align	2, 0x0
+GCC_except_table6:
+.Lexception0:
+	.byte	255
+	.byte	255
+	.byte	1
+	.uleb128 .Lcst_end0-.Lcst_begin0
+.Lcst_begin0:
+	.uleb128 .Lfunc_begin0-.Lfunc_begin0
+	.uleb128 .Ltmp0-.Lfunc_begin0
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp0-.Lfunc_begin0
+	.uleb128 .Ltmp1-.Ltmp0
+	.uleb128 .Ltmp2-.Lfunc_begin0
+	.byte	0
+	.uleb128 .Ltmp1-.Lfunc_begin0
+	.uleb128 .Lfunc_end6-.Ltmp1
+	.byte	0
+	.byte	0
+.Lcst_end0:
+	.p2align	2, 0x0
+
+	.section	.text._RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNCINvMB6_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1r_,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNCINvMB6_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1r_,@function
+_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNCINvMB6_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1r_:
+	.cfi_startproc
+	ldr	x10, [x2]
+	ldp	x9, x8, [x0]
+	mov	x4, x2
+	ldr	x11, [x10]
+	cmp	x8, x9
+	ldr	w12, [x11]
+	add	w12, w12, #1
+	str	w12, [x11]
+	mov	w11, #2
+	mov	x12, x8
+	b.hs	.LBB7_3
+.LBB7_1:
+	ldr	x14, [x10]
+	ldr	x13, [x0, x11, lsl #3]
+	ldr	w15, [x14]
+	cmp	x13, x12
+	add	w15, w15, #1
+	str	w15, [x14]
+	b.hs	.LBB7_5
+	add	x11, x11, #1
+	mov	x12, x13
+	cmp	x1, x11
+	b.ne	.LBB7_1
+	b	.LBB7_6
+.LBB7_3:
+	ldr	x14, [x10]
+	ldr	x13, [x0, x11, lsl #3]
+	ldr	w15, [x14]
+	cmp	x13, x12
+	add	w15, w15, #1
+	str	w15, [x14]
+	b.lo	.LBB7_5
+	add	x11, x11, #1
+	mov	x12, x13
+	cmp	x1, x11
+	b.ne	.LBB7_3
+	b	.LBB7_6
+.LBB7_5:
+	cmp	x11, x1
+	b.ne	.LBB7_13
+.LBB7_6:
+	cmp	x8, x9
+	b.hs	.LBB7_12
+	lsr	x8, x1, #1
+	add	x11, x0, x1, lsl #3
+	add	x10, x0, #16
+	and	x9, x8, #0x7fffffffffffffc
+	sub	x11, x11, #16
+	and	x12, x8, #0x7fffffffffffffc
+.LBB7_8:
+	ldp	q1, q0, [x11, #-16]
+	sub	x12, x12, #4
+	ldp	q2, q3, [x10, #-16]
+	ext	v0.16b, v0.16b, v0.16b, #8
+	ext	v1.16b, v1.16b, v1.16b, #8
+	ext	v2.16b, v2.16b, v2.16b, #8
+	ext	v3.16b, v3.16b, v3.16b, #8
+	stp	q0, q1, [x10, #-16]
+	add	x10, x10, #32
+	stp	q3, q2, [x11, #-16]
+	sub	x11, x11, #32
+	cbnz	x12, .LBB7_8
+	subs	x8, x8, x9
+	b.eq	.LBB7_12
+	lsl	x9, x1, #2
+	and	x9, x9, #0xffffffffffffffe0
+	sub	x10, x0, x9
+	add	x9, x0, x9
+	add	x10, x10, x1, lsl #3
+	sub	x10, x10, #8
+.LBB7_11:
+	ldr	x11, [x10]
+	ldr	x12, [x9]
+	subs	x8, x8, #1
+	str	x11, [x9], #8
+	str	x12, [x10], #-8
+	b.ne	.LBB7_11
+.LBB7_12:
+	ret
+.LBB7_13:
+	orr	x8, x1, #0x1
+	mov	x2, xzr
+	clz	x8, x8
+	lsl	w8, w8, #1
+	eor	w3, w8, #0x7e
+	b	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1F_
+.Lfunc_end7:
+	.size	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNCINvMB6_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1r_, .Lfunc_end7-_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNCINvMB6_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1r_
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNvYyNtNtB8_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNvYyNtNtB8_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNvYyNtNtB8_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	ldp	x9, x8, [x0]
+	mov	w10, #2
+	mov	x11, x8
+	cmp	x8, x9
+	b.hs	.LBB8_3
+.LBB8_1:
+	ldr	x12, [x0, x10, lsl #3]
+	cmp	x12, x11
+	b.hs	.LBB8_5
+	add	x10, x10, #1
+	mov	x11, x12
+	cmp	x1, x10
+	b.ne	.LBB8_1
+	b	.LBB8_6
+.LBB8_3:
+	ldr	x12, [x0, x10, lsl #3]
+	cmp	x12, x11
+	b.lo	.LBB8_5
+	add	x10, x10, #1
+	mov	x11, x12
+	cmp	x1, x10
+	b.ne	.LBB8_3
+	b	.LBB8_6
+.LBB8_5:
+	cmp	x10, x1
+	b.ne	.LBB8_13
+.LBB8_6:
+	cmp	x8, x9
+	b.hs	.LBB8_12
+	lsr	x8, x1, #1
+	add	x11, x0, x1, lsl #3
+	add	x10, x0, #16
+	and	x9, x8, #0x7fffffffffffffc
+	sub	x11, x11, #16
+	and	x12, x8, #0x7fffffffffffffc
+.LBB8_8:
+	ldp	q1, q0, [x11, #-16]
+	sub	x12, x12, #4
+	ldp	q2, q3, [x10, #-16]
+	ext	v0.16b, v0.16b, v0.16b, #8
+	ext	v1.16b, v1.16b, v1.16b, #8
+	ext	v2.16b, v2.16b, v2.16b, #8
+	ext	v3.16b, v3.16b, v3.16b, #8
+	stp	q0, q1, [x10, #-16]
+	add	x10, x10, #32
+	stp	q3, q2, [x11, #-16]
+	sub	x11, x11, #32
+	cbnz	x12, .LBB8_8
+	subs	x8, x8, x9
+	b.eq	.LBB8_12
+	lsl	x9, x1, #2
+	and	x9, x9, #0xffffffffffffffe0
+	sub	x10, x0, x9
+	add	x9, x0, x9
+	add	x10, x10, x1, lsl #3
+	sub	x10, x10, #8
+.LBB8_11:
+	ldr	x11, [x10]
+	ldr	x12, [x9]
+	subs	x8, x8, #1
+	str	x11, [x9], #8
+	str	x12, [x10], #-8
+	b.ne	.LBB8_11
+.LBB8_12:
+	ret
+.LBB8_13:
+	orr	x8, x1, #0x1
+	mov	x2, xzr
+	clz	x8, x8
+	lsl	w8, w8, #1
+	eor	w3, w8, #0x7e
+	b	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.Lfunc_end8:
+	.size	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNvYyNtNtB8_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes, .Lfunc_end8-_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNvYyNtNtB8_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-80]!
+	.cfi_def_cfa_offset 80
+	str	x25, [sp, #16]
+	stp	x24, x23, [sp, #32]
+	stp	x22, x21, [sp, #48]
+	stp	x20, x19, [sp, #64]
+	mov	x29, sp
+	.cfi_def_cfa w29, 80
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w25, -64
+	.cfi_offset w30, -72
+	.cfi_offset w29, -80
+	mov	x21, x4
+	mov	x19, x2
+	mov	x20, x1
+	cmp	x3, #8
+	b.lo	.LBB9_2
+	lsr	x22, x3, #3
+	mov	x4, x21
+	lsl	x8, x22, #6
+	lsl	x24, x22, #5
+	mov	x3, x22
+	sub	x25, x8, x22, lsl #3
+	add	x1, x0, x24
+	add	x2, x0, x25
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_
+	mov	x23, x0
+	add	x1, x20, x24
+	add	x2, x20, x25
+	mov	x0, x20
+	mov	x3, x22
+	mov	x4, x21
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_
+	mov	x20, x0
+	add	x1, x19, x24
+	add	x2, x19, x25
+	mov	x0, x19
+	mov	x3, x22
+	mov	x4, x21
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_
+	mov	x19, x0
+	mov	x0, x23
+.LBB9_2:
+	ldr	x8, [x21]
+	ldr	x9, [x20]
+	ldr	x10, [x8]
+	ldr	w8, [x10]
+	add	w11, w8, #1
+	ldr	x8, [x0]
+	str	w11, [x10]
+	ldr	x10, [x21]
+	ldr	x11, [x0]
+	ldr	x12, [x19]
+	cmp	x8, x9
+	ldr	x10, [x10]
+	cset	w13, lo
+	cmp	x11, x12
+	cset	w11, lo
+	ldr	w14, [x10]
+	eor	w11, w13, w11
+	add	w12, w14, #1
+	str	w12, [x10]
+	tbnz	w11, #0, .LBB9_4
+	ldr	x10, [x21]
+	ldr	x11, [x20]
+	cmp	x8, x9
+	ldr	x12, [x19]
+	cset	w9, lo
+	ldr	x8, [x10]
+	cmp	x11, x12
+	cset	w11, lo
+	ldr	w10, [x8]
+	eor	w9, w9, w11
+	cmp	w9, #0
+	add	w10, w10, #1
+	csel	x0, x19, x20, ne
+	str	w10, [x8]
+.LBB9_4:
+	.cfi_def_cfa wsp, 80
+	ldp	x20, x19, [sp, #64]
+	ldr	x25, [sp, #16]
+	ldp	x22, x21, [sp, #48]
+	ldp	x24, x23, [sp, #32]
+	ldp	x29, x30, [sp], #80
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end9:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_, .Lfunc_end9-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-64]!
+	.cfi_def_cfa_offset 64
+	stp	x24, x23, [sp, #16]
+	stp	x22, x21, [sp, #32]
+	stp	x20, x19, [sp, #48]
+	mov	x29, sp
+	.cfi_def_cfa w29, 64
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w30, -56
+	.cfi_offset w29, -64
+	mov	x19, x2
+	mov	x20, x1
+	cmp	x3, #8
+	b.lo	.LBB10_2
+	lsr	x21, x3, #3
+	lsl	x8, x21, #6
+	lsl	x23, x21, #5
+	mov	x3, x21
+	sub	x24, x8, x21, lsl #3
+	add	x1, x0, x23
+	add	x2, x0, x24
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	mov	x22, x0
+	add	x1, x20, x23
+	add	x2, x20, x24
+	mov	x0, x20
+	mov	x3, x21
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	mov	x20, x0
+	add	x1, x19, x23
+	add	x2, x19, x24
+	mov	x0, x19
+	mov	x3, x21
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	mov	x19, x0
+	mov	x0, x22
+.LBB10_2:
+	ldr	x8, [x0]
+	ldr	x9, [x20]
+	ldr	x10, [x19]
+	cmp	x8, x9
+	cset	w11, lo
+	cmp	x8, x10
+	cset	w8, lo
+	cmp	x9, x10
+	cset	w9, lo
+	eor	w8, w11, w8
+	eor	w9, w11, w9
+	cmp	w9, #0
+	csel	x9, x19, x20, ne
+	cmp	w8, #0
+	csel	x0, x0, x9, ne
+	.cfi_def_cfa wsp, 64
+	ldp	x20, x19, [sp, #48]
+	ldp	x22, x21, [sp, #32]
+	ldp	x24, x23, [sp, #16]
+	ldp	x29, x30, [sp], #64
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end10:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes, .Lfunc_end10-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort12sort8_stableyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort12sort8_stableyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort12sort8_stableyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	ldp	x9, x8, [x0]
+	mov	w11, #2
+	ldp	x12, x10, [x0, #16]
+	cmp	x8, x9
+	cset	w8, lo
+	cset	w9, hs
+	cmp	x10, x12
+	cinc	x10, x11, hs
+	add	x12, x0, w9, uxtw #3
+	cinc	x13, x11, lo
+	add	x14, x0, x10, lsl #3
+	ldr	x15, [x0, w8, uxtw #3]
+	ldr	x16, [x0, x13, lsl #3]
+	ldr	x17, [x12]
+	ldr	x18, [x14]
+	cmp	x16, x15
+	csel	x3, x9, x13, lo
+	cmp	x18, x17
+	csel	x9, x13, x9, lo
+	csel	x10, x10, x3, lo
+	csel	x12, x12, x14, lo
+	cmp	x16, x15
+	csel	x8, x8, x9, lo
+	add	x9, x0, x10, lsl #3
+	csel	x10, x16, x15, lo
+	add	x8, x0, x8, lsl #3
+	ldr	x13, [x9]
+	ldr	x14, [x8]
+	str	x10, [x2]
+	cmp	x13, x14
+	csel	x13, x9, x8, lo
+	csel	x8, x8, x9, lo
+	mov	x9, x2
+	ldr	x13, [x13]
+	str	x13, [x2, #8]
+	ldr	x8, [x8]
+	str	x8, [x2, #16]
+	ldr	x8, [x12]
+	str	x8, [x9, #24]!
+	ldp	x12, x13, [x0, #32]!
+	ldp	x15, x14, [x0, #16]
+	cmp	x13, x12
+	cset	w12, lo
+	cset	w13, hs
+	cmp	x14, x15
+	cinc	x14, x11, hs
+	add	x15, x0, w13, uxtw #3
+	cinc	x11, x11, lo
+	add	x16, x0, x14, lsl #3
+	ldr	x17, [x0, w12, uxtw #3]
+	ldr	x18, [x0, x11, lsl #3]
+	ldr	x3, [x15]
+	ldr	x4, [x16]
+	cmp	x18, x17
+	csel	x5, x13, x11, lo
+	cmp	x4, x3
+	csel	x11, x11, x13, lo
+	csel	x13, x14, x5, lo
+	csel	x14, x15, x16, lo
+	cmp	x18, x17
+	mov	x16, x2
+	csel	x11, x12, x11, lo
+	add	x12, x0, x13, lsl #3
+	csel	x17, x18, x17, lo
+	add	x11, x0, x11, lsl #3
+	ldr	x13, [x12]
+	ldr	x15, [x11]
+	str	x17, [x16, #32]!
+	cmp	x13, x15
+	csel	x13, x12, x11, lo
+	csel	x11, x11, x12, lo
+	cmp	x17, x10
+	ldr	x13, [x13]
+	cset	w12, lo
+	csel	x10, x17, x10, lo
+	add	x12, x16, w12, uxtw #3
+	str	x13, [x2, #40]
+	ldr	x11, [x11]
+	str	x11, [x2, #48]
+	cset	w11, hs
+	ldr	x13, [x14]
+	add	x11, x2, w11, uxtw #3
+	ldr	x14, [x12]
+	cmp	x13, x8
+	str	x13, [x2, #56]!
+	csetm	x16, hs
+	csetm	x17, lo
+	ldr	x15, [x11]
+	add	x16, x2, x16, lsl #3
+	add	x9, x9, x17, lsl #3
+	csel	x8, x13, x8, hi
+	cmp	x14, x15
+	ldr	x17, [x16]
+	ldr	x18, [x9]
+	cset	w13, lo
+	cset	w0, hs
+	add	x12, x12, w13, uxtw #3
+	csel	x13, x14, x15, lo
+	cmp	x17, x18
+	add	x11, x11, w0, uxtw #3
+	stp	x10, x13, [x1]
+	csetm	x15, hs
+	csetm	x0, lo
+	ldr	x14, [x12]
+	add	x15, x16, x15, lsl #3
+	add	x16, x9, x0, lsl #3
+	ldr	x2, [x11]
+	csel	x17, x17, x18, hi
+	ldr	x18, [x15]
+	ldr	x0, [x16]
+	cmp	x14, x2
+	cset	w3, hs
+	cset	w9, lo
+	csel	x14, x14, x2, lo
+	cmp	x18, x0
+	add	x9, x12, w9, uxtw #3
+	add	x12, x11, w3, uxtw #3
+	csetm	x11, hs
+	csetm	x2, lo
+	stp	x17, x8, [x1, #48]
+	add	x11, x15, x11, lsl #3
+	add	x15, x16, x2, lsl #3
+	ldr	x3, [x9]
+	ldr	x4, [x12]
+	csel	x16, x18, x0, hi
+	ldr	x18, [x11]
+	ldr	x0, [x15]
+	cmp	x3, x4
+	cset	w13, hs
+	cset	w10, lo
+	csel	x2, x3, x4, lo
+	cmp	x18, x0
+	add	x12, x12, w13, uxtw #3
+	stp	x14, x2, [x1, #16]
+	csetm	x3, lo
+	csel	x13, x18, x0, hi
+	add	x8, x15, x3, lsl #3
+	stp	x13, x16, [x1, #32]
+	add	x14, x8, #8
+	csetm	x8, hs
+	cmp	x12, x14
+	b.ne	.LBB11_3
+	add	x8, x11, x8, lsl #3
+	add	x9, x9, w10, uxtw #3
+	add	x8, x8, #8
+	cmp	x9, x8
+	b.ne	.LBB11_3
+	ret
+.LBB11_3:
+	stp	x29, x30, [sp, #-16]!
+	.cfi_def_cfa_offset 16
+	mov	x29, sp
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	bl	_RNvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort22panic_on_ord_violation
+.Lfunc_end11:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort12sort8_stableyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes, .Lfunc_end11-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort12sort8_stableyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort25insertion_sort_shift_leftyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort25insertion_sort_shift_leftyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort25insertion_sort_shift_leftyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	cmp	x2, x1
+	b.hi	.LBB12_12
+	b.ne	.LBB12_3
+.LBB12_2:
+	ret
+.LBB12_3:
+	lsl	x8, x2, #3
+	add	x9, x0, x1, lsl #3
+	add	x10, x0, x8
+	b	.LBB12_7
+.LBB12_4:
+	sub	x13, x13, #8
+.LBB12_5:
+	str	x11, [x13]
+.LBB12_6:
+	add	x10, x10, #8
+	add	x8, x8, #8
+	cmp	x10, x9
+	b.eq	.LBB12_2
+.LBB12_7:
+	mov	x13, x10
+	ldr	x11, [x10]
+	ldr	x12, [x13, #-8]!
+	cmp	x11, x12
+	b.hs	.LBB12_6
+	cmp	x13, x0
+	str	x12, [x10]
+	mov	x12, x8
+	mov	x13, x0
+	b.eq	.LBB12_5
+.LBB12_9:
+	add	x13, x0, x12
+	ldur	x14, [x13, #-16]
+	cmp	x11, x14
+	b.hs	.LBB12_4
+	sub	x12, x12, #8
+	stur	x14, [x13, #-8]
+	cmp	x12, #8
+	b.ne	.LBB12_9
+	mov	x13, x0
+	b	.LBB12_5
+.LBB12_12:
+	brk	#0x1
+.Lfunc_end12:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort25insertion_sort_shift_leftyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes, .Lfunc_end12-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort25insertion_sort_shift_leftyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable5drift4sortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable5drift4sortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable5drift4sortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-96]!
+	.cfi_def_cfa_offset 96
+	stp	x28, x27, [sp, #16]
+	stp	x26, x25, [sp, #32]
+	stp	x24, x23, [sp, #48]
+	stp	x22, x21, [sp, #64]
+	stp	x20, x19, [sp, #80]
+	mov	x29, sp
+	.cfi_def_cfa w29, 96
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w25, -56
+	.cfi_offset w26, -64
+	.cfi_offset w27, -72
+	.cfi_offset w28, -80
+	.cfi_offset w30, -88
+	.cfi_offset w29, -96
+	.cfi_remember_state
+	sub	sp, sp, #720
+	mov	x8, #4611686018427387903
+	mov	x25, x3
+	mov	x20, x1
+	mov	x22, x0
+	cmp	x1, #1, lsl #12
+	add	x19, x1, x8
+	str	w4, [sp, #20]
+	str	x2, [sp, #96]
+	b.hi	.LBB13_2
+	sub	x8, x20, x20, lsr #1
+	mov	w9, #64
+	cmp	x8, #64
+	csel	x8, x8, x9, lo
+	str	x8, [sp, #48]
+	b	.LBB13_3
+.LBB13_2:
+	mov	x0, x20
+	bl	_RNvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable5drift11sqrt_approx
+	str	x0, [sp, #48]
+.LBB13_3:
+	udiv	x8, x19, x20
+	add	x9, x22, #16
+	mov	x21, xzr
+	mov	x23, xzr
+	mov	w28, #1
+	stp	x22, x25, [sp, #72]
+	stp	x8, x20, [sp, #24]
+	sub	x8, x22, #16
+	stp	x8, x9, [sp]
+	sub	x8, x22, #8
+	str	x8, [sp, #40]
+	subs	x9, x20, xzr
+	b.ls	.LBB13_7
+.LBB13_4:
+	ldr	x8, [sp, #48]
+	add	x0, x22, x21, lsl #3
+	cmp	x9, x8
+	b.hs	.LBB13_8
+.LBB13_5:
+	ldr	w8, [sp, #20]
+	tbz	w8, #0, .LBB13_11
+	cmp	x9, #32
+	mov	w8, #32
+	ldr	x2, [sp, #96]
+	csel	x25, x9, x8, lo
+	ldr	x3, [sp, #80]
+	mov	w4, wzr
+	mov	x1, x25
+	mov	x5, xzr
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	mov	w8, #1
+	orr	x11, x8, x25, lsl #1
+	ldr	x25, [sp, #80]
+	b	.LBB13_12
+.LBB13_7:
+	mov	w10, wzr
+	mov	w11, #1
+	cmp	x23, #2
+	b.hs	.LBB13_13
+	b	.LBB13_35
+.LBB13_8:
+	cmp	x9, #2
+	b.hs	.LBB13_37
+	mov	x8, x9
+.LBB13_10:
+	mov	w9, #1
+	orr	x11, x9, x8, lsl #1
+	b	.LBB13_12
+.LBB13_11:
+	ldr	x8, [sp, #48]
+	cmp	x9, x8
+	csel	x8, x9, x8, lo
+	lsl	x11, x8, #1
+.LBB13_12:
+	lsl	x8, x21, #1
+	ldr	x10, [sp, #24]
+	sub	x9, x8, x28, lsr #1
+	add	x8, x8, x11, lsr #1
+	mul	x9, x9, x10
+	mul	x8, x8, x10
+	eor	x8, x8, x9
+	clz	x10, x8
+	cmp	x23, #2
+	b.lo	.LBB13_35
+.LBB13_13:
+	lsl	x8, x21, #3
+	ldr	x9, [sp, #40]
+	str	x21, [sp, #88]
+	str	x10, [sp, #104]
+	add	x21, x22, x8
+	add	x8, x9, x8
+	stp	x8, x11, [sp, #56]
+	b	.LBB13_16
+.LBB13_14:
+	ldr	x22, [sp, #72]
+	sub	x2, x8, x1
+	mov	x0, x20
+	bl	memcpy
+	ldr	x25, [sp, #80]
+	ldr	x10, [sp, #104]
+.LBB13_15:
+	mov	w8, #1
+	orr	x28, x8, x19, lsl #1
+	cmp	x24, #1
+	b.ls	.LBB13_33
+.LBB13_16:
+	sub	x24, x23, #1
+	sub	x8, x29, #74
+	ldrb	w8, [x8, x24]
+	cmp	w8, w10
+	b.lo	.LBB13_34
+	add	x8, sp, #112
+	lsr	x27, x28, #1
+	mov	x23, x24
+	ldr	x8, [x8, x24, lsl #3]
+	lsr	x26, x8, #1
+	add	x19, x26, x27
+	cmp	x19, x25
+	b.hi	.LBB13_20
+	orr	w9, w8, w28
+	tbnz	w9, #0, .LBB13_20
+	lsl	x28, x19, #1
+	cmp	x24, #1
+	b.hi	.LBB13_16
+	b	.LBB13_33
+.LBB13_20:
+	ldr	x9, [sp, #88]
+	sub	x9, x9, x19
+	add	x20, x22, x9, lsl #3
+	tbz	w8, #0, .LBB13_23
+	tbz	w28, #0, .LBB13_24
+.LBB13_22:
+	cbnz	x27, .LBB13_25
+	b	.LBB13_15
+.LBB13_23:
+	orr	x8, x26, #0x1
+	ldr	x2, [sp, #96]
+	mov	x0, x20
+	clz	x8, x8
+	mov	x1, x26
+	mov	x3, x25
+	lsl	w8, w8, #1
+	mov	x5, xzr
+	eor	w4, w8, #0x7e
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	ldr	x10, [sp, #104]
+	tbnz	w28, #0, .LBB13_22
+.LBB13_24:
+	orr	x8, x27, #0x1
+	add	x0, x20, x26, lsl #3
+	ldr	x2, [sp, #96]
+	clz	x8, x8
+	mov	x1, x27
+	mov	x3, x25
+	lsl	w8, w8, #1
+	mov	x5, xzr
+	eor	w4, w8, #0x7e
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	ldr	x10, [sp, #104]
+	cbz	x27, .LBB13_15
+.LBB13_25:
+	cbz	x26, .LBB13_15
+	cmp	x27, x26
+	csel	x8, x27, x26, lo
+	cmp	x25, x8
+	b.lo	.LBB13_15
+	add	x25, x20, x26, lsl #3
+	lsl	x28, x8, #3
+	ldr	x22, [sp, #96]
+	cmp	x26, x27
+	csel	x1, x25, x20, hi
+	mov	x0, x22
+	mov	x2, x28
+	bl	memcpy
+	cmp	x26, x27
+	add	x8, x22, x28
+	b.ls	.LBB13_31
+	ldr	x9, [sp, #56]
+.LBB13_29:
+	ldr	x10, [x8, #-8]!
+	ldr	x11, [x25, #-8]!
+	cmp	x10, x11
+	cset	w12, hs
+	cset	w13, lo
+	csel	x10, x10, x11, hi
+	add	x25, x25, w12, uxtw #3
+	add	x8, x8, w13, uxtw #3
+	str	x10, [x9], #-8
+	cmp	x25, x20
+	ccmp	x8, x22, #4, ne
+	b.ne	.LBB13_29
+	mov	x20, x25
+	mov	x1, x22
+	b	.LBB13_14
+.LBB13_31:
+	mov	x1, x22
+.LBB13_32:
+	ldr	x9, [x25]
+	ldr	x10, [x1]
+	cmp	x9, x10
+	cset	w11, hs
+	cset	w12, lo
+	csel	x9, x9, x10, lo
+	add	x1, x1, w11, uxtw #3
+	add	x25, x25, w12, uxtw #3
+	str	x9, [x20], #8
+	cmp	x1, x8
+	ccmp	x25, x21, #4, ne
+	b.ne	.LBB13_32
+	b	.LBB13_14
+.LBB13_33:
+	mov	w23, #1
+.LBB13_34:
+	ldr	x20, [sp, #32]
+	ldr	x21, [sp, #88]
+	ldr	x11, [sp, #64]
+.LBB13_35:
+	add	x8, sp, #112
+	cmp	x20, x21
+	str	x28, [x8, x23, lsl #3]
+	sub	x8, x29, #74
+	strb	w10, [x8, x23]
+	b.ls	.LBB13_61
+	add	x21, x21, x11, lsr #1
+	add	x23, x23, #1
+	mov	x28, x11
+	subs	x9, x20, x21
+	b.ls	.LBB13_7
+	b	.LBB13_4
+.LBB13_37:
+	ldp	x11, x10, [x0]
+	cmp	x10, x11
+	b.hs	.LBB13_41
+	cmp	x9, #2
+	b.ne	.LBB13_44
+	ldr	x8, [sp, #48]
+	cmp	x8, #2
+	b.hi	.LBB13_5
+	mov	w9, #1
+	mov	w8, #2
+	b	.LBB13_54
+.LBB13_41:
+	cmp	x9, #2
+	b.ne	.LBB13_47
+	ldr	x8, [sp, #48]
+	cmp	x8, #2
+	b.hi	.LBB13_5
+	mov	w8, #2
+	b	.LBB13_10
+.LBB13_44:
+	mov	x12, x10
+	mov	w8, #2
+.LBB13_45:
+	ldr	x13, [x0, x8, lsl #3]
+	cmp	x13, x12
+	b.hs	.LBB13_51
+	add	x8, x8, #1
+	mov	x12, x13
+	cmp	x9, x8
+	b.ne	.LBB13_45
+	b	.LBB13_50
+.LBB13_47:
+	mov	x12, x10
+	mov	w8, #2
+.LBB13_48:
+	ldr	x13, [x0, x8, lsl #3]
+	cmp	x13, x12
+	b.lo	.LBB13_51
+	add	x8, x8, #1
+	mov	x12, x13
+	cmp	x9, x8
+	b.ne	.LBB13_48
+.LBB13_50:
+	mov	x8, x9
+.LBB13_51:
+	ldr	x12, [sp, #48]
+	cmp	x8, x12
+	b.lo	.LBB13_5
+	cmp	x10, x11
+	b.hs	.LBB13_10
+	lsr	x9, x8, #1
+	cbz	x9, .LBB13_10
+.LBB13_54:
+	cmp	x9, #4
+	b.hs	.LBB13_56
+	mov	x10, xzr
+	b	.LBB13_59
+.LBB13_56:
+	lsl	x11, x21, #3
+	ldp	x13, x14, [sp]
+	and	x10, x9, #0x7ffffffffffffffc
+	add	x12, x11, x8, lsl #3
+	add	x11, x14, x11
+	add	x12, x13, x12
+	and	x13, x9, #0x7ffffffffffffffc
+.LBB13_57:
+	ldp	q1, q0, [x12, #-16]
+	sub	x13, x13, #4
+	ldp	q2, q3, [x11, #-16]
+	ext	v0.16b, v0.16b, v0.16b, #8
+	ext	v1.16b, v1.16b, v1.16b, #8
+	ext	v2.16b, v2.16b, v2.16b, #8
+	ext	v3.16b, v3.16b, v3.16b, #8
+	stp	q0, q1, [x11, #-16]
+	add	x11, x11, #32
+	stp	q3, q2, [x12, #-16]
+	sub	x12, x12, #32
+	cbnz	x13, .LBB13_57
+	cmp	x9, x10
+	b.eq	.LBB13_10
+.LBB13_59:
+	lsl	x11, x21, #3
+	lsl	x12, x10, #3
+	sub	x9, x9, x10
+	add	x13, x11, x8, lsl #3
+	add	x11, x11, x12
+	add	x10, x22, x11
+	ldr	x11, [sp, #40]
+	sub	x12, x13, x12
+	add	x11, x11, x12
+.LBB13_60:
+	ldr	x12, [x11]
+	ldr	x13, [x10]
+	subs	x9, x9, #1
+	str	x12, [x10], #8
+	str	x13, [x11], #-8
+	b.ne	.LBB13_60
+	b	.LBB13_10
+.LBB13_61:
+	tbnz	w28, #0, .LBB13_63
+	orr	x8, x20, #0x1
+	ldr	x2, [sp, #96]
+	mov	x0, x22
+	clz	x8, x8
+	mov	x1, x20
+	mov	x3, x25
+	lsl	w8, w8, #1
+	mov	x5, xzr
+	eor	w4, w8, #0x7e
+	add	sp, sp, #720
+	.cfi_def_cfa wsp, 96
+	ldp	x20, x19, [sp, #80]
+	ldp	x22, x21, [sp, #64]
+	ldp	x24, x23, [sp, #48]
+	ldp	x26, x25, [sp, #32]
+	ldp	x28, x27, [sp, #16]
+	ldp	x29, x30, [sp], #96
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w26
+	.cfi_restore w27
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	b	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.LBB13_63:
+	.cfi_restore_state
+	add	sp, sp, #720
+	.cfi_def_cfa wsp, 96
+	ldp	x20, x19, [sp, #80]
+	ldp	x22, x21, [sp, #64]
+	ldp	x24, x23, [sp, #48]
+	ldp	x26, x25, [sp, #32]
+	ldp	x28, x27, [sp, #16]
+	ldp	x29, x30, [sp], #96
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w26
+	.cfi_restore w27
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end13:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable5drift4sortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes, .Lfunc_end13-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable5drift4sortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes:
+.Lfunc_begin1:
+	.cfi_startproc
+	.cfi_personality 156, DW.ref.rust_eh_personality
+	.cfi_lsda 28, .Lexception1
+	sub	sp, sp, #112
+	.cfi_def_cfa_offset 112
+	stp	x29, x30, [sp, #16]
+	stp	x28, x27, [sp, #32]
+	stp	x26, x25, [sp, #48]
+	stp	x24, x23, [sp, #64]
+	stp	x22, x21, [sp, #80]
+	stp	x20, x19, [sp, #96]
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 96
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w25, -56
+	.cfi_offset w26, -64
+	.cfi_offset w27, -72
+	.cfi_offset w28, -80
+	.cfi_offset w30, -88
+	.cfi_offset w29, -96
+	.cfi_remember_state
+	mov	x21, x3
+	mov	x23, x1
+	mov	x19, x2
+	cmp	x1, #33
+	mov	x24, x0
+	b.hs	.LBB14_2
+	mov	x25, x24
+	mov	x20, x23
+	b	.LBB14_48
+.LBB14_2:
+	mov	x26, x5
+	mov	w22, w4
+.LBB14_3:
+	cbz	w22, .LBB14_82
+.LBB14_4:
+	lsr	x3, x23, #3
+	mov	w8, #56
+	cmp	x23, #64
+	madd	x2, x3, x8, x24
+	add	x1, x24, x3, lsl #5
+	b.hs	.LBB14_6
+	ldr	x8, [x24]
+	ldr	x9, [x1]
+	ldr	x10, [x2]
+	cmp	x8, x9
+	cset	w11, lo
+	cmp	x8, x10
+	cset	w8, lo
+	cmp	x9, x10
+	cset	w9, lo
+	eor	w8, w11, w8
+	eor	w9, w11, w9
+	cmp	w9, #0
+	csel	x9, x2, x1, ne
+	cmp	w8, #0
+	csel	x0, x24, x9, ne
+	b	.LBB14_7
+.LBB14_6:
+	mov	x0, x24
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.LBB14_7:
+	sub	x25, x0, x24
+	ldr	x8, [x0]
+	add	x28, x19, x23, lsl #3
+	lsr	x27, x25, #3
+	sub	w22, w22, #1
+	str	x8, [sp, #8]
+	cbz	x26, .LBB14_9
+	ldr	x9, [x26]
+	cmp	x9, x8
+	b.hs	.LBB14_28
+.LBB14_9:
+	cmp	x21, x23
+	b.lo	.LBB14_81
+	mov	x20, xzr
+	mov	x9, x24
+	mov	x10, x28
+	mov	x11, x27
+	subs	x12, x27, #3
+	csel	x12, xzr, x12, lo
+	add	x12, x24, x12, lsl #3
+	cmp	x24, x12
+	b.hs	.LBB14_12
+.LBB14_11:
+	ldp	x13, x15, [x9]
+	sub	x14, x10, #8
+	sub	x16, x10, #16
+	sub	x17, x10, #24
+	sub	x10, x10, #32
+	cmp	x13, x8
+	csel	x14, x19, x14, lo
+	cinc	x18, x20, lo
+	cmp	x15, x8
+	str	x13, [x14, x20, lsl #3]
+	ldp	x13, x14, [x9, #16]
+	csel	x16, x19, x16, lo
+	cinc	x0, x18, lo
+	add	x9, x9, #32
+	str	x15, [x16, x18, lsl #3]
+	cmp	x13, x8
+	csel	x15, x19, x17, lo
+	str	x13, [x15, x0, lsl #3]
+	cinc	x13, x0, lo
+	cmp	x14, x8
+	csel	x15, x19, x10, lo
+	cinc	x20, x13, lo
+	cmp	x9, x12
+	str	x14, [x15, x13, lsl #3]
+	b.lo	.LBB14_11
+.LBB14_12:
+	add	x12, x24, x11, lsl #3
+	cmp	x9, x12
+	b.hs	.LBB14_14
+.LBB14_13:
+	ldr	x13, [x9], #8
+	sub	x10, x10, #8
+	cmp	x13, x8
+	csel	x14, x19, x10, lo
+	str	x13, [x14, x20, lsl #3]
+	cinc	x20, x20, lo
+	cmp	x9, x12
+	b.lo	.LBB14_13
+.LBB14_14:
+	cmp	x11, x23
+	b.eq	.LBB14_16
+	sub	x10, x10, #8
+	ldr	x11, [x9], #8
+	str	x11, [x10, x20, lsl #3]
+	mov	x11, x23
+	subs	x12, x23, #3
+	csel	x12, xzr, x12, lo
+	add	x12, x24, x12, lsl #3
+	cmp	x9, x12
+	b.lo	.LBB14_11
+	b	.LBB14_12
+.LBB14_16:
+	lsl	x2, x20, #3
+	mov	x0, x24
+	mov	x1, x19
+	bl	memcpy
+	subs	x1, x23, x20
+	b.eq	.LBB14_24
+	cmp	x1, #4
+	b.hs	.LBB14_19
+	mov	x8, xzr
+	b	.LBB14_22
+.LBB14_19:
+	add	x8, x24, #16
+	and	x11, x1, #0xfffffffffffffffc
+	add	x9, x8, x20, lsl #3
+	sub	x8, x19, #16
+	add	x10, x8, x23, lsl #3
+	and	x8, x1, #0xfffffffffffffffc
+.LBB14_20:
+	ldp	q1, q0, [x10, #-16]
+	sub	x11, x11, #4
+	sub	x10, x10, #32
+	ext	v0.16b, v0.16b, v0.16b, #8
+	ext	v1.16b, v1.16b, v1.16b, #8
+	stp	q0, q1, [x9, #-16]
+	add	x9, x9, #32
+	cbnz	x11, .LBB14_20
+	cmp	x1, x8
+	b.eq	.LBB14_24
+.LBB14_22:
+	lsl	x9, x8, #3
+	sub	x11, x19, #8
+	sub	x8, x8, x23
+	add	x8, x8, x20
+	add	x10, x24, x9
+	sub	x11, x11, x9
+	add	x9, x10, x20, lsl #3
+	add	x10, x11, x23, lsl #3
+.LBB14_23:
+	ldr	x11, [x10], #-8
+	adds	x8, x8, #1
+	str	x11, [x9], #8
+	b.lo	.LBB14_23
+.LBB14_24:
+	cbz	x20, .LBB14_28
+	cmp	x23, x20
+	b.lo	.LBB14_85
+	add	x0, x24, x20, lsl #3
+	add	x5, sp, #8
+	mov	x2, x19
+	mov	x3, x21
+	mov	w4, w22
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	cmp	x20, #33
+	b.lo	.LBB14_47
+	mov	x23, x20
+	cbnz	w22, .LBB14_4
+	b	.LBB14_83
+.LBB14_28:
+	cmp	x21, x23
+	b.lo	.LBB14_81
+	mov	x26, xzr
+	mov	x8, x24
+	subs	x9, x27, #3
+	csel	x9, xzr, x9, lo
+	add	x9, x24, x9, lsl #3
+	cmp	x24, x9
+	b.hs	.LBB14_32
+.LBB14_30:
+	ldr	x10, [x24, x25]
+.LBB14_31:
+	ldp	x11, x13, [x8]
+	sub	x12, x28, #8
+	sub	x14, x28, #16
+	sub	x15, x28, #24
+	sub	x28, x28, #32
+	cmp	x10, x11
+	csel	x12, x19, x12, hs
+	cinc	x16, x26, hs
+	cmp	x10, x13
+	str	x11, [x12, x26, lsl #3]
+	ldp	x11, x12, [x8, #16]
+	csel	x14, x19, x14, hs
+	cinc	x17, x16, hs
+	add	x8, x8, #32
+	str	x13, [x14, x16, lsl #3]
+	cmp	x10, x11
+	csel	x13, x19, x15, hs
+	str	x11, [x13, x17, lsl #3]
+	cinc	x11, x17, hs
+	cmp	x10, x12
+	csel	x13, x19, x28, hs
+	cinc	x26, x11, hs
+	cmp	x8, x9
+	str	x12, [x13, x11, lsl #3]
+	b.lo	.LBB14_31
+.LBB14_32:
+	add	x9, x24, x27, lsl #3
+	cmp	x8, x9
+	b.hs	.LBB14_35
+	ldr	x10, [x24, x25]
+.LBB14_34:
+	ldr	x11, [x8], #8
+	sub	x28, x28, #8
+	cmp	x10, x11
+	csel	x12, x19, x28, hs
+	str	x11, [x12, x26, lsl #3]
+	cinc	x26, x26, hs
+	cmp	x8, x9
+	b.lo	.LBB14_34
+.LBB14_35:
+	cmp	x27, x23
+	b.eq	.LBB14_37
+	ldr	x9, [x8], #8
+	sub	x28, x28, #8
+	str	x9, [x19, x26, lsl #3]
+	add	x26, x26, #1
+	mov	x27, x23
+	subs	x9, x23, #3
+	csel	x9, xzr, x9, lo
+	add	x9, x24, x9, lsl #3
+	cmp	x8, x9
+	b.lo	.LBB14_30
+	b	.LBB14_32
+.LBB14_37:
+	lsl	x2, x26, #3
+	mov	x0, x24
+	mov	x1, x19
+	bl	memcpy
+	subs	x20, x23, x26
+	b.eq	.LBB14_84
+	add	x25, x24, x26, lsl #3
+	cmp	x20, #4
+	b.hs	.LBB14_40
+	mov	x8, xzr
+	b	.LBB14_43
+.LBB14_40:
+	sub	x8, x19, #16
+	add	x10, x25, #16
+	and	x11, x20, #0xfffffffffffffffc
+	add	x9, x8, x23, lsl #3
+	and	x8, x20, #0xfffffffffffffffc
+.LBB14_41:
+	ldp	q1, q0, [x9, #-16]
+	sub	x11, x11, #4
+	sub	x9, x9, #32
+	ext	v0.16b, v0.16b, v0.16b, #8
+	ext	v1.16b, v1.16b, v1.16b, #8
+	stp	q0, q1, [x10, #-16]
+	add	x10, x10, #32
+	cbnz	x11, .LBB14_41
+	cmp	x20, x8
+	b.eq	.LBB14_45
+.LBB14_43:
+	lsl	x9, x8, #3
+	sub	x11, x19, #8
+	sub	x8, x8, x23
+	add	x8, x8, x26
+	add	x10, x24, x9
+	sub	x11, x11, x9
+	add	x9, x10, x26, lsl #3
+	add	x10, x11, x23, lsl #3
+.LBB14_44:
+	ldr	x11, [x10], #-8
+	adds	x8, x8, #1
+	str	x11, [x9], #8
+	b.lo	.LBB14_44
+.LBB14_45:
+	cmp	x23, x26
+	b.lo	.LBB14_86
+	mov	x26, xzr
+	cmp	x20, #33
+	mov	x24, x25
+	mov	x23, x20
+	b.hs	.LBB14_3
+	b	.LBB14_48
+.LBB14_47:
+	mov	x25, x24
+.LBB14_48:
+	cmp	x20, #2
+	b.lo	.LBB14_84
+	add	x8, x20, #16
+	cmp	x21, x8
+	b.lo	.LBB14_81
+	lsr	x22, x20, #1
+	cmp	x20, #15
+	lsl	x23, x22, #3
+	b.ls	.LBB14_52
+	add	x21, x19, x20, lsl #3
+	mov	x0, x25
+	mov	x1, x19
+	mov	x2, x21
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort12sort8_stableyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	add	x0, x25, x23
+	add	x1, x19, x23
+	add	x2, x21, #64
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort12sort8_stableyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	mov	w9, #8
+	cmp	x9, x22
+	sub	x10, x20, x22
+	b.lo	.LBB14_55
+	b	.LBB14_64
+.LBB14_52:
+	cmp	x20, #7
+	b.ls	.LBB14_54
+	add	x8, x25, x23
+	mov	w13, #2
+	ldp	x10, x9, [x8]
+	ldp	x12, x11, [x8, #16]
+	ldp	x0, x18, [x25]
+	cmp	x9, x10
+	cset	w9, lo
+	cset	w10, hs
+	cmp	x11, x12
+	cinc	x11, x13, lo
+	cinc	x12, x13, hs
+	ldr	x14, [x8, w9, uxtw #3]
+	ldr	x15, [x8, x11, lsl #3]
+	ldr	x16, [x8, w10, uxtw #3]
+	ldr	x17, [x8, x12, lsl #3]
+	cmp	x15, x14
+	csel	x1, x10, x11, lo
+	cmp	x17, x16
+	csel	x10, x11, x10, lo
+	ldp	x2, x11, [x25, #16]
+	csel	x12, x12, x1, lo
+	csel	x16, x17, x16, hi
+	cmp	x15, x14
+	csel	x9, x9, x10, lo
+	csel	x10, x15, x14, lo
+	cmp	x18, x0
+	cset	w14, lo
+	cset	w15, hs
+	cmp	x11, x2
+	cinc	x11, x13, lo
+	cinc	x13, x13, hs
+	ldr	x17, [x25, w14, uxtw #3]
+	ldr	x18, [x25, x11, lsl #3]
+	ldr	x0, [x25, w15, uxtw #3]
+	ldr	x1, [x25, x13, lsl #3]
+	ldr	x12, [x8, x12, lsl #3]
+	ldr	x8, [x8, x9, lsl #3]
+	cmp	x18, x17
+	csel	x2, x15, x11, lo
+	cmp	x1, x0
+	csel	x11, x11, x15, lo
+	csel	x13, x13, x2, lo
+	csel	x15, x1, x0, hi
+	cmp	x18, x17
+	ldr	x13, [x25, x13, lsl #3]
+	str	x15, [x19, #24]
+	csel	x11, x14, x11, lo
+	csel	x14, x18, x17, lo
+	ldr	x11, [x25, x11, lsl #3]
+	str	x14, [x19]
+	cmp	x13, x11
+	csel	x17, x13, x11, lo
+	csel	x9, x13, x11, hi
+	cmp	x12, x8
+	stp	x17, x9, [x19, #8]
+	add	x9, x19, x23
+	csel	x11, x12, x8, lo
+	csel	x8, x12, x8, hi
+	stp	x10, x11, [x9]
+	stp	x8, x16, [x9, #16]
+	mov	w9, #4
+	cmp	x9, x22
+	sub	x10, x20, x22
+	b.lo	.LBB14_55
+	b	.LBB14_64
+.LBB14_54:
+	ldr	x8, [x25]
+	ldr	x9, [x25, x22, lsl #3]
+	str	x8, [x19]
+	str	x9, [x19, x22, lsl #3]
+	mov	w9, #1
+	cmp	x9, x22
+	sub	x10, x20, x22
+	b.hs	.LBB14_64
+.LBB14_55:
+	lsl	x8, x9, #3
+	mov	x11, x9
+	b	.LBB14_59
+.LBB14_56:
+	sub	x14, x14, #8
+.LBB14_57:
+	str	x12, [x14]
+.LBB14_58:
+	add	x11, x11, #1
+	add	x8, x8, #8
+	cmp	x11, x22
+	b.eq	.LBB14_64
+.LBB14_59:
+	lsl	x12, x11, #3
+	add	x13, x19, x12
+	ldr	x12, [x25, x12]
+	ldur	x14, [x13, #-8]
+	str	x12, [x13]
+	cmp	x12, x14
+	b.hs	.LBB14_58
+	cmp	x11, #1
+	str	x14, [x13]
+	mov	x13, x8
+	mov	x14, x19
+	b.eq	.LBB14_57
+.LBB14_61:
+	add	x14, x19, x13
+	ldur	x15, [x14, #-16]
+	cmp	x12, x15
+	b.hs	.LBB14_56
+	sub	x13, x13, #8
+	stur	x15, [x14, #-8]
+	cmp	x13, #8
+	b.ne	.LBB14_61
+	mov	x14, x19
+	b	.LBB14_57
+.LBB14_64:
+	cmp	x9, x10
+	add	x8, x19, x23
+	b.hs	.LBB14_74
+	mov	w11, #8
+	add	x12, x25, x23
+	sub	x11, x11, x9, lsl #3
+	b	.LBB14_69
+.LBB14_66:
+	mov	x16, x14
+.LBB14_67:
+	str	x13, [x16]
+.LBB14_68:
+	add	x9, x9, #1
+	sub	x11, x11, #8
+	cmp	x9, x10
+	b.eq	.LBB14_74
+.LBB14_69:
+	lsl	x13, x9, #3
+	add	x15, x8, x13
+	ldr	x13, [x12, x13]
+	mov	x14, x15
+	ldr	x16, [x14, #-8]!
+	str	x13, [x15]
+	cmp	x13, x16
+	b.hs	.LBB14_68
+	cmp	x9, #1
+	str	x16, [x15]
+	mov	x15, x11
+	mov	x16, x8
+	b.eq	.LBB14_67
+.LBB14_71:
+	mov	x16, x14
+	ldr	x17, [x16, #-8]!
+	cmp	x13, x17
+	b.hs	.LBB14_66
+	adds	x15, x15, #8
+	str	x17, [x14]
+	mov	x14, x16
+	b.ne	.LBB14_71
+	mov	x16, x8
+	b	.LBB14_67
+.LBB14_74:
+	lsl	x21, x20, #3
+	mov	x11, xzr
+	sub	x13, x8, #8
+	mov	x10, x19
+	sub	x12, x21, #8
+	add	x9, x19, x12
+.LBB14_75:
+	ldr	x14, [x8]
+	ldr	x15, [x10]
+	ldr	x16, [x9]
+	ldr	x17, [x13]
+	cmp	x14, x15
+	csel	x14, x14, x15, lo
+	str	x14, [x25, x11, lsl #3]
+	cset	w15, lo
+	cset	w14, hs
+	cmp	x16, x17
+	add	x8, x8, w15, uxtw #3
+	add	x10, x10, w14, uxtw #3
+	csel	x14, x16, x17, hi
+	csetm	x15, hs
+	csetm	x16, lo
+	add	x11, x11, #1
+	add	x9, x9, x15, lsl #3
+	add	x13, x13, x16, lsl #3
+	cmp	x22, x11
+	str	x14, [x25, x12]
+	sub	x12, x12, #8
+	b.ne	.LBB14_75
+	add	x12, x13, #8
+	tbz	w20, #0, .LBB14_78
+	cmp	x10, x12
+	cset	w13, hs
+	cset	w14, lo
+	csel	x15, x10, x8, lo
+	add	x10, x10, w14, uxtw #3
+	add	x8, x8, w13, uxtw #3
+	ldr	x15, [x15]
+	str	x15, [x25, x11, lsl #3]
+.LBB14_78:
+	cmp	x10, x12
+	b.ne	.LBB14_80
+	add	x9, x9, #8
+	cmp	x8, x9
+	b.eq	.LBB14_84
+.LBB14_80:
+.Ltmp3:
+	bl	_RNvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort22panic_on_ord_violation
+.Ltmp4:
+.LBB14_81:
+	brk	#0x1
+.LBB14_82:
+	mov	x20, x23
+.LBB14_83:
+	mov	x0, x24
+	mov	x1, x20
+	mov	x2, x19
+	mov	x3, x21
+	mov	w4, #1
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable5drift4sortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.LBB14_84:
+	.cfi_def_cfa wsp, 112
+	ldp	x20, x19, [sp, #96]
+	ldp	x22, x21, [sp, #80]
+	ldp	x24, x23, [sp, #64]
+	ldp	x26, x25, [sp, #48]
+	ldp	x28, x27, [sp, #32]
+	ldp	x29, x30, [sp, #16]
+	add	sp, sp, #112
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w26
+	.cfi_restore w27
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB14_85:
+	.cfi_restore_state
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.35
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.35
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.4
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.4
+	mov	w1, #19
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking9panic_fmt
+.LBB14_86:
+	adrp	x3, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.5
+	add	x3, x3, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.5
+	mov	x0, x26
+	mov	x1, x23
+	mov	x2, x23
+	bl	_RNvNtNtCshp6Wxz1DwXO_4core5slice5index16slice_index_fail
+.LBB14_87:
+.Ltmp5:
+	mov	x20, x0
+	mov	x0, x25
+	mov	x1, x19
+	mov	x2, x21
+	bl	memcpy
+	mov	x0, x20
+	bl	_Unwind_Resume
+.Lfunc_end14:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes, .Lfunc_end14-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+	.section	.gcc_except_table._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"a",@progbits
+	.p2align	2, 0x0
+GCC_except_table14:
+.Lexception1:
+	.byte	255
+	.byte	255
+	.byte	1
+	.uleb128 .Lcst_end1-.Lcst_begin1
+.Lcst_begin1:
+	.uleb128 .Lfunc_begin1-.Lfunc_begin1
+	.uleb128 .Ltmp3-.Lfunc_begin1
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp3-.Lfunc_begin1
+	.uleb128 .Ltmp4-.Ltmp3
+	.uleb128 .Ltmp5-.Lfunc_begin1
+	.byte	0
+	.uleb128 .Ltmp4-.Lfunc_begin1
+	.uleb128 .Lfunc_end14-.Ltmp4
+	.byte	0
+	.byte	0
+.Lcst_end1:
+	.p2align	2, 0x0
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1D_,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1D_,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1D_:
+	.cfi_startproc
+	add	x8, x1, x1, lsr #1
+	b	.LBB15_2
+.LBB15_1:
+	cbz	x8, .LBB15_12
+.LBB15_2:
+	sub	x8, x8, #1
+	subs	x9, x8, x1
+	b.hs	.LBB15_4
+	ldr	x10, [x0, x8, lsl #3]
+	mov	x9, xzr
+	ldr	x11, [x0]
+	str	x10, [x0]
+	str	x11, [x0, x8, lsl #3]
+.LBB15_4:
+	mov	w11, #1
+	cmp	x1, x8
+	bfi	x11, x9, #1, #62
+	csel	x10, x1, x8, lo
+	cmp	x11, x10
+	b.hs	.LBB15_1
+	lsl	x14, x9, #1
+.LBB15_6:
+	add	x12, x14, #2
+	cmp	x12, x10
+	b.hs	.LBB15_9
+	ldr	x13, [x2]
+	ldr	x14, [x0, x11, lsl #3]
+	ldr	x12, [x0, x12, lsl #3]
+	ldr	w15, [x13]
+	cmp	x14, x12
+	add	w15, w15, #1
+	str	w15, [x13]
+	b.hs	.LBB15_9
+	add	x12, x11, #1
+	b	.LBB15_10
+.LBB15_9:
+	mov	x12, x11
+.LBB15_10:
+	ldr	x11, [x2]
+	ldr	x13, [x0, x9, lsl #3]
+	ldr	x14, [x0, x12, lsl #3]
+	ldr	w15, [x11]
+	cmp	x13, x14
+	add	w15, w15, #1
+	str	w15, [x11]
+	b.hs	.LBB15_1
+	mov	w11, #1
+	str	x14, [x0, x9, lsl #3]
+	lsl	x14, x12, #1
+	bfi	x11, x12, #1, #62
+	mov	x9, x12
+	str	x13, [x0, x12, lsl #3]
+	cmp	x11, x10
+	b.lo	.LBB15_6
+	b	.LBB15_1
+.LBB15_12:
+	ret
+.Lfunc_end15:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1D_, .Lfunc_end15-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1D_
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	add	x8, x1, x1, lsr #1
+	b	.LBB16_2
+.LBB16_1:
+	cbz	x8, .LBB16_10
+.LBB16_2:
+	sub	x8, x8, #1
+	subs	x9, x8, x1
+	b.hs	.LBB16_4
+	ldr	x10, [x0, x8, lsl #3]
+	mov	x9, xzr
+	ldr	x11, [x0]
+	str	x10, [x0]
+	str	x11, [x0, x8, lsl #3]
+.LBB16_4:
+	mov	w11, #1
+	cmp	x1, x8
+	bfi	x11, x9, #1, #62
+	csel	x10, x1, x8, lo
+	cmp	x11, x10
+	b.hs	.LBB16_1
+	lsl	x14, x9, #1
+.LBB16_6:
+	add	x12, x14, #2
+	cmp	x12, x10
+	b.hs	.LBB16_8
+	ldr	x13, [x0, x11, lsl #3]
+	ldr	x12, [x0, x12, lsl #3]
+	cmp	x13, x12
+	cinc	x12, x11, lo
+	ldr	x13, [x0, x9, lsl #3]
+	ldr	x14, [x0, x12, lsl #3]
+	cmp	x13, x14
+	b.lo	.LBB16_9
+	b	.LBB16_1
+.LBB16_8:
+	mov	x12, x11
+	ldr	x13, [x0, x9, lsl #3]
+	ldr	x14, [x0, x11, lsl #3]
+	cmp	x13, x14
+	b.hs	.LBB16_1
+.LBB16_9:
+	mov	w11, #1
+	str	x14, [x0, x9, lsl #3]
+	lsl	x14, x12, #1
+	bfi	x11, x12, #1, #62
+	mov	x9, x12
+	str	x13, [x0, x12, lsl #3]
+	cmp	x11, x10
+	b.lo	.LBB16_6
+	b	.LBB16_1
+.LBB16_10:
+	ret
+.Lfunc_end16:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes, .Lfunc_end16-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1F_,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1F_,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1F_:
+	.cfi_startproc
+	sub	sp, sp, #352
+	.cfi_def_cfa_offset 352
+	stp	x29, x30, [sp, #256]
+	str	x28, [sp, #272]
+	stp	x26, x25, [sp, #288]
+	stp	x24, x23, [sp, #304]
+	stp	x22, x21, [sp, #320]
+	stp	x20, x19, [sp, #336]
+	add	x29, sp, #256
+	.cfi_def_cfa w29, 96
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w25, -56
+	.cfi_offset w26, -64
+	.cfi_offset w28, -80
+	.cfi_offset w30, -88
+	.cfi_offset w29, -96
+	.cfi_remember_state
+	mov	x21, x4
+	mov	x20, x1
+	cmp	x1, #33
+	mov	x19, x0
+	b.hs	.LBB17_21
+.LBB17_1:
+	cmp	x20, #2
+	b.lo	.LBB17_60
+	lsr	x9, x20, #1
+	ldr	x10, [x21]
+	cmp	x20, #18
+	mov	x11, x19
+	add	x8, x19, x9, lsl #3
+	csel	x12, x20, x9, lo
+.LBB17_3:
+	cmp	x12, #12
+	b.ls	.LBB17_5
+	ldr	x14, [x10]
+	mov	x13, x11
+	ldr	x15, [x11]
+	ldr	x16, [x13, #96]!
+	ldr	w17, [x14]
+	cmp	x16, x15
+	add	w15, w17, #1
+	csel	x16, x13, x11, lo
+	str	w15, [x14]
+	csel	x14, x11, x13, lo
+	ldr	x15, [x16]
+	ldr	x14, [x14]
+	ldr	x16, [x10]
+	ldr	x17, [x11, #8]
+	str	x15, [x11]
+	ldr	x15, [x11, #80]
+	str	x14, [x13]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x15, x16, [x11, #72]
+	ldp	x14, x17, [x11, #8]
+	csel	x18, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x18, [x11, #8]
+	cmp	x15, x17
+	str	x14, [x11, #80]
+	ldr	w14, [x16]
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x15, [x11, #16]
+	ldr	x16, [x11, #72]
+	ldr	x18, [x10]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #56]
+	str	x17, [x11, #16]
+	str	x14, [x11, #72]
+	cmp	x16, x15
+	ldr	w14, [x18]
+	add	w14, w14, #1
+	str	w14, [x18]
+	ldr	x14, [x11, #24]
+	ldr	x17, [x11, #56]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x11, #40]
+	str	x15, [x11, #24]
+	ldr	x15, [x11, #88]
+	str	x14, [x11, #56]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x15, [x11, #40]
+	ldr	x16, [x11, #88]
+	ldr	x18, [x10]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #64]
+	str	x17, [x11, #40]
+	str	x14, [x11, #88]
+	cmp	x16, x15
+	ldr	w14, [x18]
+	add	w14, w14, #1
+	str	w14, [x18]
+	ldr	x14, [x11, #48]
+	ldr	x17, [x11, #64]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x11, #8]
+	str	x15, [x11, #48]
+	str	x14, [x11, #64]
+	cmp	x15, x17
+	ldr	w14, [x16]
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x15, [x11, #8]
+	ldr	x16, [x11, #48]
+	ldr	x18, [x10]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #24]
+	str	x17, [x11, #8]
+	str	x14, [x11, #48]
+	cmp	x16, x15
+	ldr	w14, [x18]
+	add	w14, w14, #1
+	str	w14, [x18]
+	ldp	x14, x17, [x11, #16]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x11, #32]
+	stp	x15, x14, [x11, #16]
+	ldr	x15, [x11, #88]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldr	x14, [x11, #32]
+	ldr	x16, [x11, #88]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #56]
+	str	x15, [x11, #32]
+	ldr	x15, [x11, #72]
+	str	x14, [x11, #88]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldp	x17, x15, [x11, #72]
+	ldp	x14, x16, [x11, #56]
+	csel	x18, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x10]
+	str	x18, [x11, #56]
+	cmp	x15, x16
+	str	x14, [x11, #72]
+	ldr	w14, [x17]
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldr	x14, [x11, #64]
+	ldr	x17, [x11, #80]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x11]
+	str	x15, [x11, #64]
+	ldr	x15, [x11, #32]
+	str	x14, [x11, #80]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x15, [x11]
+	ldr	x16, [x11, #32]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11]
+	ldr	x17, [x11, #16]
+	str	x14, [x11, #32]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x16, [x11, #8]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #24]
+	stp	x15, x14, [x11, #8]
+	ldr	x15, [x11, #48]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldp	x17, x15, [x11, #48]
+	ldr	x14, [x11, #24]
+	csel	x16, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x10]
+	str	x16, [x11, #24]
+	ldr	x16, [x11, #64]
+	str	x14, [x11, #48]
+	ldr	w14, [x17]
+	cmp	x16, x15
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldp	x14, x17, [x11, #56]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	stp	x15, x14, [x11, #56]
+	ldp	x17, x15, [x11, #72]
+	ldr	w14, [x16]
+	add	w14, w14, #1
+	cmp	x15, x17
+	str	w14, [x16]
+	ldp	x14, x16, [x11, #72]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #88]
+	stp	x15, x14, [x11, #72]
+	ldr	x15, [x13]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldr	x14, [x11, #88]
+	ldr	x17, [x13]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x11, #32]
+	str	x15, [x11, #88]
+	ldr	x15, [x11, #48]
+	str	x14, [x13]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x15, [x11, #32]
+	ldr	x16, [x11, #48]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #32]
+	ldr	x17, [x11, #72]
+	str	x14, [x11, #48]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x15, x16, [x11, #64]
+	ldr	x14, [x11, #40]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #40]
+	ldr	x17, [x11, #88]
+	str	x14, [x11, #72]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x15, x16, [x11, #80]
+	ldr	x14, [x11, #64]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #64]
+	ldr	x17, [x13]
+	str	x14, [x11, #88]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldr	x14, [x11, #80]
+	ldr	x16, [x13]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	str	x15, [x11, #80]
+	ldr	x15, [x11]
+	str	x14, [x13]
+	ldr	x14, [x11, #40]
+	ldr	w13, [x17]
+	cmp	x14, x15
+	add	w13, w13, #1
+	str	w13, [x17]
+	ldr	x13, [x11]
+	ldr	x16, [x11, #40]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	ldr	x16, [x11, #24]
+	str	x14, [x11]
+	ldr	x14, [x11, #64]
+	str	x13, [x11, #40]
+	ldr	w13, [x15]
+	cmp	x14, x16
+	add	w13, w13, #1
+	str	w13, [x15]
+	ldp	x14, x15, [x11, #56]
+	ldp	x13, x16, [x11, #24]
+	csel	x17, x15, x13, lo
+	csel	x13, x13, x15, lo
+	ldr	x15, [x10]
+	str	x17, [x11, #24]
+	cmp	x14, x16
+	str	x13, [x11, #64]
+	ldr	w13, [x15]
+	add	w13, w13, #1
+	str	w13, [x15]
+	ldp	x14, x15, [x11, #48]
+	ldr	x13, [x11, #32]
+	ldr	x17, [x10]
+	csel	x16, x15, x13, lo
+	csel	x13, x13, x15, lo
+	ldr	x15, [x11, #88]
+	str	x16, [x11, #32]
+	str	x13, [x11, #56]
+	cmp	x15, x14
+	ldr	w13, [x17]
+	add	w13, w13, #1
+	str	w13, [x17]
+	ldr	x13, [x11, #48]
+	ldr	x16, [x11, #88]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	str	x14, [x11, #48]
+	ldp	x16, x14, [x11, #72]
+	str	x13, [x11, #88]
+	ldr	w13, [x15]
+	cmp	x14, x16
+	add	w13, w13, #1
+	str	w13, [x15]
+	ldp	x13, x15, [x11, #72]
+	ldr	x16, [x10]
+	csel	x14, x15, x13, lo
+	csel	x13, x13, x15, lo
+	stp	x14, x13, [x11, #72]
+	ldp	x15, x14, [x11]
+	ldr	w13, [x16]
+	add	w13, w13, #1
+	cmp	x14, x15
+	str	w13, [x16]
+	ldp	x13, x16, [x11]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	ldr	x16, [x11, #16]
+	stp	x14, x13, [x11]
+	ldr	x14, [x11, #40]
+	ldr	w13, [x15]
+	cmp	x14, x16
+	add	w13, w13, #1
+	str	w13, [x15]
+	ldp	x15, x14, [x11, #40]
+	ldr	x13, [x11, #16]
+	ldr	x17, [x10]
+	csel	x16, x15, x13, lo
+	csel	x13, x13, x15, lo
+	ldr	x15, [x11, #72]
+	str	x16, [x11, #16]
+	str	x13, [x11, #40]
+	cmp	x15, x14
+	ldr	w13, [x17]
+	add	w13, w13, #1
+	str	w13, [x17]
+	ldp	x14, x16, [x11, #64]
+	ldp	x13, x15, [x11, #48]
+	csel	x17, x16, x13, lo
+	csel	x13, x13, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #48]
+	cmp	x14, x15
+	str	x13, [x11, #72]
+	ldr	w13, [x16]
+	add	w13, w13, #1
+	str	w13, [x16]
+	ldp	x13, x16, [x11, #56]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	stp	x14, x13, [x11, #56]
+	ldp	x16, x14, [x11, #80]
+	ldr	w13, [x15]
+	add	w13, w13, #1
+	cmp	x14, x16
+	str	w13, [x15]
+	ldp	x13, x15, [x11, #80]
+	ldr	x16, [x10]
+	csel	x14, x15, x13, lo
+	csel	x13, x13, x15, lo
+	ldr	x15, [x11, #8]
+	stp	x14, x13, [x11, #80]
+	ldr	x14, [x11, #24]
+	ldr	w13, [x16]
+	cmp	x14, x15
+	add	w13, w13, #1
+	str	w13, [x16]
+	ldp	x16, x14, [x11, #24]
+	ldp	x13, x15, [x11, #8]
+	csel	x17, x16, x13, lo
+	csel	x13, x13, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #8]
+	cmp	x14, x15
+	str	x13, [x11, #24]
+	ldr	w13, [x16]
+	add	w13, w13, #1
+	str	w13, [x16]
+	ldp	x16, x14, [x11, #32]
+	ldr	x13, [x11, #16]
+	ldr	x17, [x10]
+	csel	x15, x16, x13, lo
+	csel	x13, x13, x16, lo
+	str	x15, [x11, #16]
+	ldr	x15, [x11, #48]
+	str	x13, [x11, #32]
+	ldr	w13, [x17]
+	cmp	x15, x14
+	add	w13, w13, #1
+	str	w13, [x17]
+	ldp	x13, x16, [x11, #40]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	stp	x14, x13, [x11, #40]
+	ldp	x16, x14, [x11, #72]
+	ldr	w13, [x15]
+	add	w13, w13, #1
+	cmp	x14, x16
+	str	w13, [x15]
+	ldp	x13, x15, [x11, #72]
+	ldr	x16, [x10]
+	csel	x14, x15, x13, lo
+	csel	x13, x13, x15, lo
+	stp	x14, x13, [x11, #72]
+	ldp	x15, x14, [x11, #8]
+	ldr	w13, [x16]
+	add	w13, w13, #1
+	cmp	x14, x15
+	str	w13, [x16]
+	ldp	x13, x16, [x11, #8]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	stp	x14, x13, [x11, #8]
+	ldp	x16, x14, [x11, #24]
+	ldr	w13, [x15]
+	add	w13, w13, #1
+	cmp	x14, x16
+	str	w13, [x15]
+	ldp	x13, x15, [x11, #24]
+	ldr	x16, [x10]
+	csel	x14, x15, x13, lo
+	csel	x13, x13, x15, lo
+	ldr	x15, [x11, #40]
+	stp	x14, x13, [x11, #24]
+	ldr	x14, [x11, #56]
+	ldr	w13, [x16]
+	cmp	x14, x15
+	add	w13, w13, #1
+	str	w13, [x16]
+	ldp	x16, x14, [x11, #56]
+	ldp	x13, x15, [x11, #40]
+	csel	x17, x16, x13, lo
+	csel	x13, x13, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #40]
+	cmp	x14, x15
+	str	x13, [x11, #56]
+	ldr	w13, [x16]
+	add	w13, w13, #1
+	str	w13, [x16]
+	ldr	x13, [x11, #48]
+	ldr	x16, [x11, #64]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	str	x14, [x11, #48]
+	ldp	x16, x14, [x11, #16]
+	str	x13, [x11, #64]
+	ldr	w13, [x15]
+	cmp	x14, x16
+	add	w13, w13, #1
+	str	w13, [x15]
+	ldp	x13, x15, [x11, #16]
+	ldr	x16, [x10]
+	csel	x14, x15, x13, lo
+	csel	x13, x13, x15, lo
+	stp	x14, x13, [x11, #16]
+	ldp	x15, x14, [x11, #32]
+	ldr	w13, [x16]
+	add	w13, w13, #1
+	cmp	x14, x15
+	str	w13, [x16]
+	ldp	x13, x16, [x11, #32]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	stp	x14, x13, [x11, #32]
+	ldp	x16, x14, [x11, #48]
+	ldr	w13, [x15]
+	add	w13, w13, #1
+	cmp	x14, x16
+	str	w13, [x15]
+	ldp	x13, x15, [x11, #48]
+	ldr	x16, [x10]
+	csel	x14, x15, x13, lo
+	csel	x13, x13, x15, lo
+	stp	x14, x13, [x11, #48]
+	ldp	x15, x14, [x11, #64]
+	ldr	w13, [x16]
+	add	w13, w13, #1
+	cmp	x14, x15
+	str	w13, [x16]
+	ldp	x13, x16, [x11, #64]
+	ldr	x15, [x10]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	stp	x14, x13, [x11, #64]
+	ldp	x16, x14, [x11, #24]
+	ldr	w13, [x15]
+	add	w13, w13, #1
+	cmp	x14, x16
+	str	w13, [x15]
+	ldp	x13, x15, [x11, #24]
+	ldr	x16, [x10]
+	csel	x14, x15, x13, lo
+	csel	x13, x13, x15, lo
+	stp	x14, x13, [x11, #24]
+	ldp	x15, x14, [x11, #40]
+	ldr	w13, [x16]
+	add	w13, w13, #1
+	cmp	x14, x15
+	str	w13, [x16]
+	ldp	x13, x16, [x11, #40]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	stp	x14, x13, [x11, #40]
+	mov	w13, #13
+	b	.LBB17_8
+.LBB17_5:
+	cmp	x12, #8
+	b.ls	.LBB17_7
+	ldr	x14, [x10]
+	mov	x13, x11
+	ldr	x15, [x11]
+	ldr	x16, [x13, #24]!
+	ldr	w17, [x14]
+	cmp	x16, x15
+	add	w15, w17, #1
+	csel	x16, x13, x11, lo
+	str	w15, [x14]
+	csel	x14, x11, x13, lo
+	ldr	x15, [x16]
+	ldr	x14, [x14]
+	ldr	x16, [x10]
+	ldr	x17, [x11, #8]
+	str	x15, [x11]
+	ldr	x15, [x11, #56]
+	str	x14, [x13]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x15, [x11, #8]
+	ldr	x16, [x11, #56]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #8]
+	ldr	x17, [x11, #40]
+	str	x14, [x11, #56]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x15, x16, [x11, #32]
+	ldr	x14, [x11, #16]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #16]
+	ldr	x17, [x11, #64]
+	str	x14, [x11, #40]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x15, x16, [x11, #56]
+	ldr	x14, [x11, #32]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #32]
+	ldr	x17, [x11]
+	str	x14, [x11, #64]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldr	x14, [x11]
+	ldr	x16, [x11, #56]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #16]
+	str	x15, [x11]
+	ldr	x15, [x11, #32]
+	str	x14, [x11, #56]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldr	x14, [x11, #16]
+	ldr	x17, [x11, #32]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x13]
+	str	x15, [x11, #16]
+	ldr	x15, [x11, #64]
+	str	x14, [x11, #32]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldr	x14, [x13]
+	ldr	x16, [x11, #64]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	str	x15, [x13]
+	ldp	x16, x15, [x11, #40]
+	str	x14, [x11, #64]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldp	x14, x17, [x11, #40]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x11]
+	stp	x15, x14, [x11, #40]
+	ldr	x15, [x11, #16]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x15, [x11]
+	ldr	x16, [x11, #16]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11]
+	ldr	x17, [x13]
+	str	x14, [x11, #16]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldr	x14, [x11, #8]
+	ldr	x16, [x13]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	str	x15, [x11, #8]
+	ldp	x16, x15, [x11, #32]
+	str	x14, [x13]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldp	x14, x17, [x11, #32]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	stp	x15, x14, [x11, #32]
+	ldp	x17, x15, [x11, #56]
+	ldr	w14, [x16]
+	add	w14, w14, #1
+	cmp	x15, x17
+	str	w14, [x16]
+	ldp	x14, x16, [x11, #56]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #8]
+	stp	x15, x14, [x11, #56]
+	ldr	x15, [x11, #32]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldr	x14, [x11, #8]
+	ldr	x17, [x11, #32]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x13]
+	str	x15, [x11, #8]
+	ldr	x15, [x11, #48]
+	str	x14, [x11, #32]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x15, x16, [x11, #40]
+	ldr	x14, [x13]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x13]
+	ldr	x17, [x11, #56]
+	str	x14, [x11, #48]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldr	x14, [x11, #40]
+	ldr	x16, [x11, #56]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	str	x15, [x11, #40]
+	ldp	x16, x15, [x11]
+	str	x14, [x11, #56]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldp	x14, x17, [x11]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x11, #16]
+	stp	x15, x14, [x11]
+	ldr	x15, [x11, #32]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x16, x15, [x11, #32]
+	ldr	x14, [x11, #16]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x11, #16]
+	ldr	x17, [x13]
+	str	x14, [x11, #32]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x16, x15, [x11, #40]
+	ldr	x14, [x13]
+	csel	x17, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x10]
+	str	x17, [x13]
+	ldr	x17, [x11, #64]
+	str	x14, [x11, #40]
+	ldr	w14, [x16]
+	cmp	x17, x15
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldr	x14, [x11, #48]
+	ldr	x16, [x11, #64]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x11, #16]
+	str	x15, [x11, #48]
+	ldr	x15, [x13]
+	str	x14, [x11, #64]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldr	x14, [x11, #16]
+	ldr	x17, [x13]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	str	x15, [x11, #16]
+	ldp	x17, x15, [x11, #32]
+	str	x14, [x13]
+	ldr	w14, [x16]
+	cmp	x15, x17
+	add	w14, w14, #1
+	str	w14, [x16]
+	ldp	x14, x16, [x11, #32]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	stp	x15, x14, [x11, #32]
+	ldp	x16, x15, [x11, #48]
+	ldr	w14, [x17]
+	add	w14, w14, #1
+	cmp	x15, x16
+	str	w14, [x17]
+	ldp	x14, x17, [x11, #48]
+	ldr	x16, [x10]
+	csel	x15, x17, x14, lo
+	csel	x14, x14, x17, lo
+	stp	x15, x14, [x11, #48]
+	ldp	x17, x15, [x11, #8]
+	ldr	w14, [x16]
+	add	w14, w14, #1
+	cmp	x15, x17
+	str	w14, [x16]
+	ldp	x14, x16, [x11, #8]
+	ldr	x17, [x10]
+	csel	x15, x16, x14, lo
+	csel	x14, x14, x16, lo
+	ldr	x16, [x13]
+	stp	x15, x14, [x11, #8]
+	ldr	x15, [x11, #32]
+	ldr	w14, [x17]
+	cmp	x15, x16
+	add	w14, w14, #1
+	str	w14, [x17]
+	ldp	x17, x15, [x11, #32]
+	ldr	x14, [x13]
+	csel	x16, x17, x14, lo
+	csel	x14, x14, x17, lo
+	ldr	x17, [x10]
+	str	x16, [x13]
+	str	x14, [x11, #32]
+	ldr	x14, [x11, #48]
+	ldr	w13, [x17]
+	cmp	x14, x15
+	add	w13, w13, #1
+	str	w13, [x17]
+	ldp	x13, x16, [x11, #40]
+	csel	x14, x16, x13, lo
+	csel	x13, x13, x16, lo
+	stp	x14, x13, [x11, #40]
+	mov	w13, #9
+	b	.LBB17_8
+.LBB17_7:
+	mov	w13, #1
+.LBB17_8:
+	cmp	x13, x12
+	b.hi	.LBB17_62
+	b.ne	.LBB17_12
+.LBB17_10:
+	cmp	x20, #18
+	b.lo	.LBB17_60
+	cmp	x11, x19
+	sub	x12, x20, x9
+	mov	x11, x8
+	b.eq	.LBB17_3
+	b	.LBB17_53
+.LBB17_12:
+	lsl	x13, x13, #3
+	add	x12, x11, x12, lsl #3
+	add	x14, x11, x13
+	b	.LBB17_16
+.LBB17_13:
+	sub	x17, x17, #8
+.LBB17_14:
+	str	x15, [x17]
+.LBB17_15:
+	add	x14, x14, #8
+	add	x13, x13, #8
+	cmp	x14, x12
+	b.eq	.LBB17_10
+.LBB17_16:
+	ldr	x18, [x10]
+	mov	x16, x14
+	ldr	x15, [x14]
+	ldr	x17, [x16, #-8]!
+	ldr	w0, [x18]
+	cmp	x15, x17
+	add	w0, w0, #1
+	str	w0, [x18]
+	b.hs	.LBB17_15
+	cmp	x16, x11
+	str	x17, [x14]
+	mov	x16, x13
+	mov	x17, x11
+	b.eq	.LBB17_14
+.LBB17_18:
+	ldr	x0, [x10]
+	add	x17, x11, x16
+	ldur	x18, [x17, #-16]
+	ldr	w1, [x0]
+	cmp	x15, x18
+	add	w1, w1, #1
+	str	w1, [x0]
+	b.hs	.LBB17_13
+	sub	x16, x16, #8
+	stur	x18, [x17, #-8]
+	cmp	x16, #8
+	b.ne	.LBB17_18
+	mov	x17, x11
+	b	.LBB17_14
+.LBB17_21:
+	mov	w22, w3
+	cbz	w3, .LBB17_52
+	mov	x23, x2
+	mov	w24, #56
+.LBB17_23:
+	lsr	x3, x20, #3
+	cmp	x20, #64
+	madd	x2, x3, x24, x19
+	add	x1, x19, x3, lsl #5
+	b.hs	.LBB17_27
+	ldr	x8, [x21]
+	ldr	x11, [x19]
+	mov	x0, x19
+	ldr	x10, [x8]
+	ldr	w9, [x10]
+	add	w12, w9, #1
+	ldr	x9, [x1]
+	str	w12, [x10]
+	ldr	x10, [x2]
+	ldr	x12, [x8]
+	cmp	x11, x9
+	cset	w13, lo
+	cmp	x11, x10
+	ldr	w14, [x12]
+	cset	w15, lo
+	eor	w13, w13, w15
+	add	w14, w14, #1
+	str	w14, [x12]
+	tbnz	w13, #0, .LBB17_26
+	cmp	x11, x9
+	ldr	x8, [x8]
+	cset	w11, lo
+	cmp	x9, x10
+	cset	w10, lo
+	ldr	w9, [x8]
+	eor	w10, w11, w10
+	cmp	w10, #0
+	add	w9, w9, #1
+	csel	x0, x2, x1, ne
+	str	w9, [x8]
+.LBB17_26:
+	add	x8, x19, x20, lsl #3
+	sub	w22, w22, #1
+	sub	x10, x0, x19
+	cbnz	x23, .LBB17_28
+	b	.LBB17_29
+.LBB17_27:
+	mov	x0, x19
+	mov	x4, x21
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1C_
+	add	x8, x19, x20, lsl #3
+	sub	w22, w22, #1
+	sub	x10, x0, x19
+	cbz	x23, .LBB17_29
+.LBB17_28:
+	ldr	x9, [x21]
+	ldr	x11, [x23]
+	ldr	x12, [x19, x10]
+	ldr	x9, [x9]
+	cmp	x11, x12
+	ldr	w13, [x9]
+	add	w13, w13, #1
+	str	w13, [x9]
+	b.hs	.LBB17_40
+.LBB17_29:
+	ldr	x9, [x19, x10]
+	ldr	x11, [x19]
+	sub	x15, x8, #8
+	add	x13, x19, #16
+	str	x9, [x19]
+	mov	x9, x19
+	cmp	x13, x15
+	str	x11, [x19, x10]
+	ldr	x11, [x21]
+	ldr	x10, [x9, #8]!
+	ldr	x12, [x19]
+	b.hs	.LBB17_33
+	mov	x14, xzr
+.LBB17_31:
+	ldr	x16, [x11]
+	ldr	x17, [x9, x14, lsl #3]
+	ldr	x0, [x13]
+	ldr	w18, [x16]
+	stur	x17, [x13, #-8]
+	cmp	x0, x12
+	str	x0, [x9, x14, lsl #3]
+	add	w17, w18, #1
+	ldr	x18, [x13, #8]
+	str	w17, [x16]
+	cinc	x16, x14, lo
+	ldr	x14, [x11]
+	ldr	x17, [x9, x16, lsl #3]
+	cmp	x18, x12
+	ldr	w0, [x14]
+	str	x17, [x13], #16
+	str	x18, [x9, x16, lsl #3]
+	add	w17, w0, #1
+	str	w17, [x14]
+	cinc	x14, x16, lo
+	cmp	x13, x15
+	b.lo	.LBB17_31
+	sub	x15, x13, #8
+	b	.LBB17_35
+.LBB17_33:
+	mov	x14, xzr
+	mov	x15, x9
+	b	.LBB17_35
+.LBB17_34:
+	mov	x15, x13
+	cmp	x16, x12
+	ldr	x16, [x13], #8
+	str	x16, [x9, x14, lsl #3]
+	cinc	x14, x14, lo
+.LBB17_35:
+	cmp	x13, x8
+	mov	x16, x10
+	b.eq	.LBB17_37
+	ldr	x16, [x13]
+.LBB17_37:
+	ldr	x17, [x11]
+	ldr	x0, [x9, x14, lsl #3]
+	cmp	x13, x8
+	ldr	w18, [x17]
+	str	x0, [x15]
+	add	w18, w18, #1
+	str	w18, [x17]
+	b.ne	.LBB17_34
+	cmp	x16, x12
+	str	x10, [x9, x14, lsl #3]
+	cinc	x1, x14, lo
+	cmp	x1, x20
+	b.hs	.LBB17_62
+	add	x25, x19, x1, lsl #3
+	ldr	x9, [x19]
+	mvn	x10, x1
+	mov	x0, x19
+	mov	x2, x23
+	mov	w3, w22
+	ldr	x8, [x25]
+	mov	x26, x25
+	mov	x4, x21
+	add	x20, x20, x10
+	str	x8, [x19]
+	str	x9, [x26], #8
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1F_
+	mov	x23, x25
+	mov	x19, x26
+	cmp	x20, #33
+	b.hs	.LBB17_51
+	b	.LBB17_1
+.LBB17_40:
+	ldr	x9, [x19, x10]
+	ldr	x11, [x19]
+	sub	x14, x8, #8
+	add	x12, x19, #16
+	str	x9, [x19]
+	mov	x9, x19
+	cmp	x12, x14
+	str	x11, [x19, x10]
+	ldr	x10, [x9, #8]!
+	ldr	x11, [x19]
+	b.hs	.LBB17_44
+	mov	x13, xzr
+.LBB17_42:
+	ldr	x15, [x21]
+	ldr	x17, [x12]
+	ldr	x18, [x9, x13, lsl #3]
+	ldr	x15, [x15]
+	cmp	x11, x17
+	stur	x18, [x12, #-8]
+	str	x17, [x9, x13, lsl #3]
+	ldr	w16, [x15]
+	ldr	x17, [x12, #8]
+	add	w16, w16, #1
+	str	w16, [x15]
+	cinc	x16, x13, hs
+	cmp	x11, x17
+	ldr	x15, [x21]
+	ldr	x13, [x15]
+	ldr	x15, [x9, x16, lsl #3]
+	ldr	w18, [x13]
+	str	x15, [x12], #16
+	str	x17, [x9, x16, lsl #3]
+	add	w15, w18, #1
+	str	w15, [x13]
+	cinc	x13, x16, hs
+	cmp	x12, x14
+	b.lo	.LBB17_42
+	sub	x14, x12, #8
+	b	.LBB17_46
+.LBB17_44:
+	mov	x13, xzr
+	mov	x14, x9
+	b	.LBB17_46
+.LBB17_45:
+	mov	x14, x12
+	cmp	x11, x15
+	ldr	x15, [x12], #8
+	str	x15, [x9, x13, lsl #3]
+	cinc	x13, x13, hs
+.LBB17_46:
+	cmp	x12, x8
+	mov	x15, x10
+	b.eq	.LBB17_48
+	ldr	x15, [x12]
+.LBB17_48:
+	ldr	x16, [x21]
+	ldr	x18, [x9, x13, lsl #3]
+	cmp	x12, x8
+	ldr	x16, [x16]
+	str	x18, [x14]
+	ldr	w17, [x16]
+	add	w17, w17, #1
+	str	w17, [x16]
+	b.ne	.LBB17_45
+	cmp	x11, x15
+	str	x10, [x9, x13, lsl #3]
+	cinc	x8, x13, hs
+	cmp	x8, x20
+	b.hs	.LBB17_62
+	ldr	x9, [x19, x8, lsl #3]
+	ldr	x10, [x19]
+	add	x11, x8, #1
+	mov	x23, xzr
+	sub	x20, x20, x11
+	str	x9, [x19]
+	str	x10, [x19, x8, lsl #3]
+	add	x19, x19, x11, lsl #3
+	cmp	x20, #33
+	b.lo	.LBB17_1
+.LBB17_51:
+	cbnz	w22, .LBB17_23
+.LBB17_52:
+	ldr	x2, [x21]
+	mov	x0, x19
+	mov	x1, x20
+	.cfi_def_cfa wsp, 352
+	ldp	x20, x19, [sp, #336]
+	ldr	x28, [sp, #272]
+	ldp	x22, x21, [sp, #320]
+	ldp	x24, x23, [sp, #304]
+	ldp	x26, x25, [sp, #288]
+	ldp	x29, x30, [sp, #256]
+	add	sp, sp, #352
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w26
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	b	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1D_
+.LBB17_53:
+	.cfi_restore_state
+	.cfi_remember_state
+	lsl	x2, x20, #3
+	mov	x13, xzr
+	sub	x15, x8, #8
+	mov	x16, sp
+	mov	x12, x19
+	sub	x14, x2, #8
+	add	x11, x19, x14
+.LBB17_54:
+	ldr	x17, [x10]
+	ldr	x0, [x8]
+	ldr	x1, [x12]
+	ldr	x3, [x11]
+	ldr	w18, [x17]
+	cmp	x0, x1
+	add	w18, w18, #1
+	str	w18, [x17]
+	ldr	x17, [x15]
+	csel	x18, x0, x1, lo
+	str	x18, [x16, x13, lsl #3]
+	ldr	x18, [x10]
+	cset	w0, hs
+	cset	w1, lo
+	cmp	x3, x17
+	add	x12, x12, w0, uxtw #3
+	add	x8, x8, w1, uxtw #3
+	ldr	w1, [x18]
+	csel	x17, x3, x17, hi
+	csetm	x0, hs
+	csetm	x3, lo
+	add	x13, x13, #1
+	add	x11, x11, x0, lsl #3
+	add	x15, x15, x3, lsl #3
+	cmp	x9, x13
+	add	w1, w1, #1
+	str	x17, [x16, x14]
+	sub	x14, x14, #8
+	str	w1, [x18]
+	b.ne	.LBB17_54
+	add	x9, x15, #8
+	tbz	w20, #0, .LBB17_57
+	cmp	x12, x9
+	mov	x16, sp
+	cset	w14, hs
+	cset	w15, lo
+	csel	x10, x12, x8, lo
+	add	x12, x12, w15, uxtw #3
+	add	x8, x8, w14, uxtw #3
+	ldr	x10, [x10]
+	str	x10, [x16, x13, lsl #3]
+.LBB17_57:
+	cmp	x12, x9
+	b.ne	.LBB17_61
+	add	x9, x11, #8
+	cmp	x8, x9
+	b.ne	.LBB17_61
+	mov	x1, sp
+	mov	x0, x19
+	bl	memcpy
+.LBB17_60:
+	.cfi_def_cfa wsp, 352
+	ldp	x20, x19, [sp, #336]
+	ldr	x28, [sp, #272]
+	ldp	x22, x21, [sp, #320]
+	ldp	x24, x23, [sp, #304]
+	ldp	x26, x25, [sp, #288]
+	ldp	x29, x30, [sp, #256]
+	add	sp, sp, #352
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w26
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB17_61:
+	.cfi_restore_state
+	bl	_RNvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort22panic_on_ord_violation
+.LBB17_62:
+	brk	#0x1
+.Lfunc_end17:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1F_, .Lfunc_end17-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNCINvMB8_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1F_
+	.cfi_endproc
+
+	.section	.text._RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes,@function
+_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #336
+	.cfi_def_cfa_offset 336
+	stp	x29, x30, [sp, #256]
+	stp	x28, x25, [sp, #272]
+	stp	x24, x23, [sp, #288]
+	stp	x22, x21, [sp, #304]
+	stp	x20, x19, [sp, #320]
+	add	x29, sp, #256
+	.cfi_def_cfa w29, 80
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w25, -56
+	.cfi_offset w28, -64
+	.cfi_offset w30, -72
+	.cfi_offset w29, -80
+	.cfi_remember_state
+	mov	x20, x1
+	cmp	x1, #33
+	mov	x19, x0
+	b.hs	.LBB18_21
+.LBB18_1:
+	cmp	x20, #2
+	b.lo	.LBB18_55
+	lsr	x9, x20, #1
+	cmp	x20, #18
+	mov	x10, x19
+	add	x8, x19, x9, lsl #3
+	csel	x11, x20, x9, lo
+.LBB18_3:
+	cmp	x11, #12
+	b.ls	.LBB18_5
+	ldp	x18, x13, [x10, #88]
+	ldp	x14, x16, [x10]
+	ldp	x17, x15, [x10, #72]
+	cmp	x13, x14
+	csel	x12, x13, x14, hi
+	csel	x13, x13, x14, lo
+	cmp	x15, x16
+	ldp	x14, x0, [x10, #16]
+	csel	x2, x15, x16, hi
+	csel	x15, x15, x16, lo
+	ldp	x16, x1, [x10, #56]
+	cmp	x17, x14
+	csel	x3, x17, x14, hi
+	csel	x14, x17, x14, lo
+	cmp	x16, x0
+	ldp	x4, x17, [x10, #40]
+	csel	x5, x16, x0, hi
+	csel	x16, x16, x0, lo
+	ldr	x0, [x10, #32]
+	cmp	x18, x4
+	csel	x6, x18, x4, hi
+	csel	x18, x18, x4, lo
+	cmp	x1, x17
+	csel	x4, x1, x17, lo
+	csel	x17, x1, x17, hi
+	cmp	x4, x15
+	csel	x1, x4, x15, hi
+	csel	x15, x4, x15, lo
+	cmp	x16, x14
+	csel	x4, x16, x14, hi
+	csel	x14, x16, x14, lo
+	cmp	x6, x0
+	csel	x16, x6, x0, hi
+	csel	x0, x6, x0, lo
+	cmp	x3, x5
+	csel	x6, x3, x5, hi
+	csel	x3, x3, x5, lo
+	cmp	x2, x17
+	csel	x5, x2, x17, hi
+	csel	x17, x2, x17, lo
+	cmp	x0, x13
+	csel	x2, x0, x13, hi
+	csel	x13, x0, x13, lo
+	cmp	x14, x15
+	csel	x0, x14, x15, hi
+	csel	x14, x14, x15, lo
+	cmp	x1, x4
+	csel	x15, x1, x4, hi
+	csel	x1, x1, x4, lo
+	cmp	x17, x3
+	csel	x4, x17, x3, hi
+	csel	x17, x17, x3, lo
+	cmp	x5, x6
+	csel	x3, x5, x6, hi
+	csel	x5, x5, x6, lo
+	cmp	x12, x16
+	csel	x6, x12, x16, hi
+	csel	x12, x12, x16, lo
+	cmp	x15, x2
+	csel	x16, x15, x2, hi
+	csel	x15, x15, x2, lo
+	cmp	x5, x18
+	csel	x2, x5, x18, hi
+	csel	x18, x5, x18, lo
+	cmp	x12, x4
+	csel	x5, x12, x4, hi
+	csel	x12, x12, x4, lo
+	cmp	x6, x3
+	csel	x4, x6, x3, hi
+	csel	x3, x6, x3, lo
+	cmp	x18, x13
+	str	x4, [x10, #96]
+	csel	x4, x18, x13, hi
+	csel	x13, x18, x13, lo
+	cmp	x12, x1
+	csel	x18, x12, x1, hi
+	csel	x12, x12, x1, lo
+	cmp	x17, x15
+	csel	x1, x17, x15, hi
+	csel	x15, x17, x15, lo
+	cmp	x5, x16
+	csel	x17, x5, x16, hi
+	csel	x16, x5, x16, lo
+	cmp	x3, x2
+	csel	x5, x3, x2, hi
+	csel	x2, x3, x2, lo
+	cmp	x14, x13
+	csel	x3, x14, x13, hi
+	csel	x13, x14, x13, lo
+	cmp	x4, x0
+	csel	x14, x4, x0, hi
+	csel	x0, x4, x0, lo
+	cmp	x2, x16
+	csel	x4, x2, x16, hi
+	csel	x16, x2, x16, lo
+	cmp	x18, x1
+	csel	x2, x18, x1, hi
+	csel	x18, x18, x1, lo
+	cmp	x17, x5
+	csel	x1, x17, x5, hi
+	csel	x17, x17, x5, lo
+	cmp	x12, x3
+	csel	x5, x12, x3, hi
+	csel	x12, x12, x3, lo
+	cmp	x15, x0
+	csel	x3, x15, x0, hi
+	csel	x15, x15, x0, lo
+	cmp	x16, x14
+	csel	x0, x16, x14, hi
+	csel	x14, x16, x14, lo
+	cmp	x17, x4
+	csel	x16, x17, x4, hi
+	csel	x17, x17, x4, lo
+	cmp	x15, x12
+	csel	x4, x15, x12, lo
+	csel	x12, x15, x12, hi
+	cmp	x3, x5
+	stp	x13, x4, [x10]
+	csel	x13, x3, x5, hi
+	csel	x15, x3, x5, lo
+	cmp	x18, x14
+	stp	x16, x1, [x10, #80]
+	csel	x16, x18, x14, hi
+	csel	x14, x18, x14, lo
+	cmp	x2, x0
+	csel	x18, x2, x0, hi
+	csel	x0, x2, x0, lo
+	cmp	x15, x12
+	csel	x1, x15, x12, hi
+	csel	x12, x15, x12, lo
+	cmp	x14, x13
+	csel	x15, x14, x13, hi
+	csel	x13, x14, x13, lo
+	cmp	x16, x0
+	csel	x14, x16, x0, hi
+	csel	x16, x16, x0, lo
+	cmp	x17, x18
+	csel	x0, x17, x18, hi
+	csel	x17, x17, x18, lo
+	cmp	x13, x1
+	csel	x18, x13, x1, lo
+	stp	x17, x0, [x10, #64]
+	stp	x12, x18, [x10, #16]
+	csel	x12, x13, x1, hi
+	cmp	x16, x15
+	csel	x13, x16, x15, lo
+	stp	x12, x13, [x10, #32]
+	csel	x12, x16, x15, hi
+	stp	x12, x14, [x10, #48]
+	mov	w12, #13
+	b	.LBB18_8
+.LBB18_5:
+	cmp	x11, #8
+	b.ls	.LBB18_7
+	ldp	x17, x12, [x10, #16]
+	ldp	x13, x15, [x10]
+	ldp	x14, x18, [x10, #56]
+	ldp	x16, x0, [x10, #40]
+	cmp	x12, x13
+	csel	x1, x12, x13, hi
+	csel	x12, x12, x13, lo
+	cmp	x14, x15
+	ldr	x13, [x10, #32]
+	csel	x2, x14, x15, hi
+	csel	x14, x14, x15, lo
+	cmp	x16, x17
+	csel	x15, x16, x17, hi
+	csel	x16, x16, x17, lo
+	cmp	x18, x13
+	csel	x17, x18, x13, hi
+	csel	x13, x18, x13, lo
+	cmp	x2, x12
+	csel	x18, x2, x12, hi
+	csel	x12, x2, x12, lo
+	cmp	x13, x16
+	csel	x2, x13, x16, hi
+	csel	x13, x13, x16, lo
+	cmp	x17, x1
+	csel	x16, x17, x1, hi
+	csel	x17, x17, x1, lo
+	cmp	x0, x15
+	csel	x1, x0, x15, hi
+	csel	x15, x0, x15, lo
+	cmp	x13, x12
+	csel	x0, x13, x12, hi
+	csel	x12, x13, x12, lo
+	cmp	x17, x14
+	csel	x13, x17, x14, hi
+	csel	x14, x17, x14, lo
+	cmp	x15, x2
+	csel	x17, x15, x2, hi
+	csel	x15, x15, x2, lo
+	cmp	x16, x18
+	csel	x2, x16, x18, hi
+	csel	x16, x16, x18, lo
+	cmp	x15, x14
+	csel	x18, x15, x14, hi
+	csel	x14, x15, x14, lo
+	cmp	x1, x13
+	csel	x15, x1, x13, hi
+	csel	x13, x1, x13, lo
+	cmp	x16, x17
+	csel	x1, x16, x17, hi
+	csel	x16, x16, x17, lo
+	cmp	x14, x12
+	csel	x17, x14, x12, hi
+	csel	x12, x14, x12, lo
+	cmp	x18, x0
+	csel	x14, x18, x0, hi
+	csel	x18, x18, x0, lo
+	cmp	x16, x13
+	csel	x0, x16, x13, hi
+	csel	x13, x16, x13, lo
+	cmp	x2, x15
+	csel	x16, x2, x15, hi
+	csel	x15, x2, x15, lo
+	cmp	x13, x18
+	csel	x2, x13, x18, hi
+	csel	x13, x13, x18, lo
+	cmp	x0, x14
+	csel	x18, x0, x14, hi
+	csel	x14, x0, x14, lo
+	cmp	x1, x15
+	csel	x0, x1, x15, hi
+	csel	x15, x1, x15, lo
+	cmp	x13, x17
+	csel	x1, x13, x17, lo
+	stp	x0, x16, [x10, #56]
+	stp	x12, x1, [x10]
+	csel	x12, x13, x17, hi
+	cmp	x14, x2
+	csel	x13, x14, x2, lo
+	stp	x12, x13, [x10, #16]
+	csel	x12, x14, x2, hi
+	cmp	x15, x18
+	csel	x13, x15, x18, lo
+	stp	x12, x13, [x10, #32]
+	csel	x12, x15, x18, hi
+	str	x12, [x10, #48]
+	mov	w12, #9
+	b	.LBB18_8
+.LBB18_7:
+	mov	w12, #1
+.LBB18_8:
+	cmp	x12, x11
+	b.hi	.LBB18_57
+	b.ne	.LBB18_12
+.LBB18_10:
+	cmp	x20, #18
+	b.lo	.LBB18_55
+	cmp	x10, x19
+	sub	x11, x20, x9
+	mov	x10, x8
+	b.eq	.LBB18_3
+	b	.LBB18_48
+.LBB18_12:
+	lsl	x12, x12, #3
+	add	x11, x10, x11, lsl #3
+	add	x13, x10, x12
+	b	.LBB18_16
+.LBB18_13:
+	sub	x16, x16, #8
+.LBB18_14:
+	str	x14, [x16]
+.LBB18_15:
+	add	x13, x13, #8
+	add	x12, x12, #8
+	cmp	x13, x11
+	b.eq	.LBB18_10
+.LBB18_16:
+	mov	x16, x13
+	ldr	x14, [x13]
+	ldr	x15, [x16, #-8]!
+	cmp	x14, x15
+	b.hs	.LBB18_15
+	cmp	x16, x10
+	str	x15, [x13]
+	mov	x15, x12
+	mov	x16, x10
+	b.eq	.LBB18_14
+.LBB18_18:
+	add	x16, x10, x15
+	ldur	x17, [x16, #-16]
+	cmp	x14, x17
+	b.hs	.LBB18_13
+	sub	x15, x15, #8
+	stur	x17, [x16, #-8]
+	cmp	x15, #8
+	b.ne	.LBB18_18
+	mov	x16, x10
+	b	.LBB18_14
+.LBB18_21:
+	mov	w21, w3
+	cbz	w3, .LBB18_47
+	mov	x22, x2
+	mov	w23, #56
+.LBB18_23:
+	lsr	x3, x20, #3
+	cmp	x20, #64
+	madd	x2, x3, x23, x19
+	add	x1, x19, x3, lsl #5
+	b.hs	.LBB18_30
+	ldr	x8, [x19]
+	ldr	x9, [x1]
+	ldr	x10, [x2]
+	cmp	x8, x9
+	cset	w11, lo
+	cmp	x8, x10
+	cset	w8, lo
+	cmp	x9, x10
+	cset	w9, lo
+	eor	w8, w11, w8
+	eor	w9, w11, w9
+	cmp	w9, #0
+	csel	x9, x2, x1, ne
+	cmp	w8, #0
+	csel	x0, x19, x9, ne
+	add	x8, x19, x20, lsl #3
+	sub	w21, w21, #1
+	sub	x10, x0, x19
+	cbz	x22, .LBB18_31
+.LBB18_25:
+	ldr	x12, [x22]
+	ldr	x9, [x19, x10]
+	ldr	x11, [x19]
+	cmp	x12, x9
+	b.lo	.LBB18_32
+	str	x9, [x19]
+	mov	x9, x19
+	sub	x14, x8, #8
+	str	x11, [x19, x10]
+	add	x12, x19, #16
+	ldr	x10, [x9, #8]!
+	ldr	x11, [x19]
+	cmp	x12, x14
+	b.hs	.LBB18_41
+	mov	x13, xzr
+.LBB18_28:
+	ldr	x15, [x12]
+	ldr	x16, [x9, x13, lsl #3]
+	cmp	x11, x15
+	stur	x16, [x12, #-8]
+	str	x15, [x9, x13, lsl #3]
+	cinc	x15, x13, hs
+	ldr	x16, [x12, #8]
+	ldr	x13, [x9, x15, lsl #3]
+	cmp	x11, x16
+	str	x13, [x12], #16
+	cinc	x13, x15, hs
+	cmp	x12, x14
+	str	x16, [x9, x15, lsl #3]
+	b.lo	.LBB18_28
+	sub	x14, x12, #8
+	cmp	x12, x8
+	b.ne	.LBB18_42
+	b	.LBB18_44
+.LBB18_30:
+	mov	x0, x19
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared5pivot11median3_recyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	add	x8, x19, x20, lsl #3
+	sub	w21, w21, #1
+	sub	x10, x0, x19
+	cbnz	x22, .LBB18_25
+.LBB18_31:
+	ldr	x11, [x19]
+	ldr	x9, [x19, x10]
+.LBB18_32:
+	str	x9, [x19]
+	mov	x9, x19
+	sub	x14, x8, #8
+	str	x11, [x19, x10]
+	add	x12, x19, #16
+	ldr	x10, [x9, #8]!
+	ldr	x11, [x19]
+	cmp	x12, x14
+	b.hs	.LBB18_36
+	mov	x13, xzr
+.LBB18_34:
+	ldr	x15, [x12]
+	ldr	x16, [x9, x13, lsl #3]
+	cmp	x15, x11
+	stur	x16, [x12, #-8]
+	str	x15, [x9, x13, lsl #3]
+	cinc	x15, x13, lo
+	ldr	x16, [x12, #8]
+	ldr	x13, [x9, x15, lsl #3]
+	cmp	x16, x11
+	str	x13, [x12], #16
+	cinc	x13, x15, lo
+	cmp	x12, x14
+	str	x16, [x9, x15, lsl #3]
+	b.lo	.LBB18_34
+	sub	x14, x12, #8
+	cmp	x12, x8
+	b.ne	.LBB18_37
+	b	.LBB18_39
+.LBB18_36:
+	mov	x13, xzr
+	mov	x14, x9
+	cmp	x12, x8
+	b.eq	.LBB18_39
+.LBB18_37:
+	mov	x15, x14
+	mov	x14, x12
+	ldr	x17, [x9, x13, lsl #3]
+	ldr	x16, [x12], #8
+	str	x17, [x15]
+	cmp	x16, x11
+	str	x16, [x9, x13, lsl #3]
+	cinc	x13, x13, lo
+	cmp	x12, x8
+	b.ne	.LBB18_37
+	sub	x14, x12, #8
+.LBB18_39:
+	cmp	x10, x11
+	ldr	x8, [x9, x13, lsl #3]
+	cinc	x1, x13, lo
+	cmp	x1, x20
+	str	x8, [x14]
+	str	x10, [x9, x13, lsl #3]
+	b.hs	.LBB18_57
+	add	x24, x19, x1, lsl #3
+	ldr	x9, [x19]
+	mvn	x10, x1
+	mov	x0, x19
+	mov	x2, x22
+	mov	w3, w21
+	ldr	x8, [x24]
+	mov	x25, x24
+	add	x20, x20, x10
+	str	x8, [x19]
+	str	x9, [x25], #8
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	mov	x22, x24
+	mov	x19, x25
+	cmp	x20, #33
+	b.hs	.LBB18_46
+	b	.LBB18_1
+.LBB18_41:
+	mov	x13, xzr
+	mov	x14, x9
+	cmp	x12, x8
+	b.eq	.LBB18_44
+.LBB18_42:
+	mov	x15, x14
+	mov	x14, x12
+	ldr	x17, [x9, x13, lsl #3]
+	ldr	x16, [x12], #8
+	str	x17, [x15]
+	cmp	x11, x16
+	str	x16, [x9, x13, lsl #3]
+	cinc	x13, x13, hs
+	cmp	x12, x8
+	b.ne	.LBB18_42
+	sub	x14, x12, #8
+.LBB18_44:
+	cmp	x11, x10
+	ldr	x11, [x9, x13, lsl #3]
+	cinc	x8, x13, hs
+	cmp	x8, x20
+	str	x11, [x14]
+	str	x10, [x9, x13, lsl #3]
+	b.hs	.LBB18_57
+	ldr	x9, [x19, x8, lsl #3]
+	ldr	x10, [x19]
+	add	x11, x8, #1
+	mov	x22, xzr
+	sub	x20, x20, x11
+	str	x9, [x19]
+	str	x10, [x19, x8, lsl #3]
+	add	x19, x19, x11, lsl #3
+	cmp	x20, #33
+	b.lo	.LBB18_1
+.LBB18_46:
+	cbnz	w21, .LBB18_23
+.LBB18_47:
+	mov	x0, x19
+	mov	x1, x20
+	.cfi_def_cfa wsp, 336
+	ldp	x20, x19, [sp, #320]
+	ldp	x22, x21, [sp, #304]
+	ldp	x24, x23, [sp, #288]
+	ldp	x28, x25, [sp, #272]
+	ldp	x29, x30, [sp, #256]
+	add	sp, sp, #336
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	b	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable8heapsort8heapsortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.LBB18_48:
+	.cfi_restore_state
+	.cfi_remember_state
+	lsl	x2, x20, #3
+	mov	x12, xzr
+	sub	x14, x8, #8
+	mov	x15, sp
+	mov	x11, x19
+	sub	x13, x2, #8
+	add	x10, x19, x13
+.LBB18_49:
+	ldr	x16, [x8]
+	ldr	x17, [x11]
+	ldr	x18, [x10]
+	ldr	x0, [x14]
+	cmp	x16, x17
+	csel	x16, x16, x17, lo
+	str	x16, [x15, x12, lsl #3]
+	cset	w17, lo
+	cset	w16, hs
+	cmp	x18, x0
+	add	x8, x8, w17, uxtw #3
+	add	x11, x11, w16, uxtw #3
+	csel	x16, x18, x0, hi
+	csetm	x17, hs
+	csetm	x18, lo
+	add	x12, x12, #1
+	add	x10, x10, x17, lsl #3
+	add	x14, x14, x18, lsl #3
+	cmp	x9, x12
+	str	x16, [x15, x13]
+	sub	x13, x13, #8
+	b.ne	.LBB18_49
+	add	x9, x14, #8
+	tbz	w20, #0, .LBB18_52
+	cmp	x11, x9
+	mov	x16, sp
+	cset	w14, hs
+	cset	w15, lo
+	csel	x13, x11, x8, lo
+	add	x11, x11, w15, uxtw #3
+	add	x8, x8, w14, uxtw #3
+	ldr	x13, [x13]
+	str	x13, [x16, x12, lsl #3]
+.LBB18_52:
+	cmp	x11, x9
+	b.ne	.LBB18_56
+	add	x9, x10, #8
+	cmp	x8, x9
+	b.ne	.LBB18_56
+	mov	x1, sp
+	mov	x0, x19
+	bl	memcpy
+.LBB18_55:
+	.cfi_def_cfa wsp, 336
+	ldp	x20, x19, [sp, #320]
+	ldp	x22, x21, [sp, #304]
+	ldp	x24, x23, [sp, #288]
+	ldp	x28, x25, [sp, #272]
+	ldp	x29, x30, [sp, #256]
+	add	sp, sp, #336
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB18_56:
+	.cfi_restore_state
+	bl	_RNvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort22panic_on_ord_violation
+.LBB18_57:
+	brk	#0x1
+.Lfunc_end18:
+	.size	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes, .Lfunc_end18-_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable9quicksort9quicksortyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text.unlikely._RINvNvMs2_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalECsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RINvNvMs2_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalECsc0zNMb1uo1d_6probes,@function
+_RINvNvMs2_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalECsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #32]
+	stp	x20, x19, [sp, #48]
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 32
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w30, -24
+	.cfi_offset w29, -32
+	.cfi_remember_state
+	adds	x8, x2, x1
+	b.hs	.LBB19_3
+	ldp	x1, x2, [x0]
+	mov	x4, x3
+	mov	x19, x0
+	add	x0, sp, #8
+	lsl	x9, x1, #1
+	cmp	x8, x9
+	csel	x8, x8, x9, hi
+	mov	w9, #4
+	cmp	x8, #4
+	csel	x20, x8, x9, hi
+	mov	x3, x20
+	bl	_RNvMs5_NtCs6sh1iPzjxYC_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc0zNMb1uo1d_6probes
+	ldr	x8, [sp, #8]
+	cbnz	x8, .LBB19_4
+	ldr	x8, [sp, #16]
+	stp	x20, x8, [x19]
+	.cfi_def_cfa wsp, 64
+	ldp	x20, x19, [sp, #48]
+	ldp	x29, x30, [sp, #32]
+	add	sp, sp, #64
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB19_3:
+	.cfi_restore_state
+	mov	x0, xzr
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.LBB19_4:
+	ldp	x0, x1, [sp, #16]
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Lfunc_end19:
+	.size	_RINvNvMs2_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalECsc0zNMb1uo1d_6probes, .Lfunc_end19-_RINvNvMs2_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalECsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Csc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Csc0zNMb1uo1d_6probes,@function
+_RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Csc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-16]!
+	.cfi_def_cfa_offset 16
+	mov	x29, sp
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	ldr	x0, [x0]
+	bl	_RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECsc0zNMb1uo1d_6probes
+	mov	w0, wzr
+	.cfi_def_cfa wsp, 16
+	ldp	x29, x30, [sp], #16
+	.cfi_def_cfa_offset 0
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end20:
+	.size	_RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Csc0zNMb1uo1d_6probes, .Lfunc_end20-_RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Csc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNSNvYNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceuE9call_once6vtableCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNSNvYNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceuE9call_once6vtableCsc0zNMb1uo1d_6probes,@function
+_RNSNvYNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceuE9call_once6vtableCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-16]!
+	.cfi_def_cfa_offset 16
+	mov	x29, sp
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	ldr	x0, [x0]
+	bl	_RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECsc0zNMb1uo1d_6probes
+	mov	w0, wzr
+	.cfi_def_cfa wsp, 16
+	ldp	x29, x30, [sp], #16
+	.cfi_def_cfa_offset 0
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end21:
+	.size	_RNSNvYNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceuE9call_once6vtableCsc0zNMb1uo1d_6probes, .Lfunc_end21-_RNSNvYNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceuE9call_once6vtableCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNvCsc0zNMb1uo1d_6probes4main,"ax",@progbits
+	.hidden	_RNvCsc0zNMb1uo1d_6probes4main
+	.globl	_RNvCsc0zNMb1uo1d_6probes4main
+	.p2align	2
+	.type	_RNvCsc0zNMb1uo1d_6probes4main,@function
+_RNvCsc0zNMb1uo1d_6probes4main:
+.Lfunc_begin2:
+	.cfi_startproc
+	.cfi_personality 156, DW.ref.rust_eh_personality
+	.cfi_lsda 28, .Lexception2
+	sub	sp, sp, #448
+	.cfi_def_cfa_offset 448
+	stp	x29, x30, [sp, #352]
+	stp	x28, x27, [sp, #368]
+	stp	x26, x25, [sp, #384]
+	stp	x24, x23, [sp, #400]
+	stp	x22, x21, [sp, #416]
+	stp	x20, x19, [sp, #432]
+	add	x29, sp, #352
+	.cfi_def_cfa w29, 96
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w25, -56
+	.cfi_offset w26, -64
+	.cfi_offset w27, -72
+	.cfi_offset w28, -80
+	.cfi_offset w30, -88
+	.cfi_offset w29, -96
+	.cfi_remember_state
+	sub	x8, x29, #64
+	bl	_RNvNtCs68fcPop4ROg_3std3env4args
+.Ltmp6:
+	add	x8, sp, #80
+	sub	x0, x29, #64
+	bl	_RNvXsc_NtCs68fcPop4ROg_3std3envNtB5_4ArgsNtNtNtNtCshp6Wxz1DwXO_4core4iter6traits8iterator8Iterator4next
+.Ltmp7:
+	ldr	x19, [sp, #80]
+	cmn	x19, #1
+	b.eq	.LBB22_253
+	ldur	x8, [x29, #-56]
+	ldur	x9, [x29, #-40]
+	mov	x10, #-6148914691236517206
+	movk	x10, #43691
+	ldr	x21, [sp, #88]
+	sub	x8, x9, x8
+	lsr	x9, x8, #3
+	mul	x9, x9, x10
+	mov	w10, #3
+	cmp	x9, #3
+	csel	x9, x9, x10, hi
+	mov	x10, #9223372036854775776
+	add	x25, x9, #1
+	cmp	x8, x10
+	add	x9, x25, x25, lsl #1
+	lsl	x22, x9, #3
+	b.ls	.LBB22_5
+	mov	x23, xzr
+.LBB22_4:
+.Ltmp113:
+	mov	x0, x23
+	mov	x1, x22
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Ltmp114:
+	b	.LBB22_271
+.LBB22_5:
+	ldr	x26, [sp, #96]
+	cbz	x22, .LBB22_8
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x22
+	mov	w1, #8
+	mov	w23, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB22_4
+	mov	x20, x0
+	b	.LBB22_9
+.LBB22_8:
+	mov	x25, xzr
+	mov	w20, #8
+.LBB22_9:
+	stp	x19, x21, [x20]
+	mov	x24, xzr
+	mov	w8, #1
+	str	x26, [x20, #16]
+	mov	w23, #2
+	mov	x26, #1
+	ldp	q0, q1, [x29, #-64]
+	stp	x25, x20, [x29, #-128]
+	mov	x25, #-6148914691236517206
+	stur	x8, [x29, #-112]
+	movk	x25, #43691
+	stp	q0, q1, [sp, #80]
+	b	.LBB22_12
+.LBB22_10:
+	ldur	x20, [x29, #-120]
+.LBB22_11:
+	add	x8, x20, x24
+	add	x24, x24, #24
+	stp	x21, x22, [x8, #24]
+	str	x27, [x8, #40]
+	stur	x23, [x29, #-112]
+	add	x23, x23, #1
+.LBB22_12:
+.Ltmp9:
+	sub	x8, x29, #104
+	add	x0, sp, #80
+	bl	_RNvXsc_NtCs68fcPop4ROg_3std3envNtB5_4ArgsNtNtNtNtCshp6Wxz1DwXO_4core4iter6traits8iterator8Iterator4next
+.Ltmp10:
+	ldur	x21, [x29, #-104]
+	sub	x19, x23, #1
+	cmn	x21, #1
+	b.eq	.LBB22_16
+	ldur	x8, [x29, #-128]
+	ldp	x22, x27, [x29, #-96]
+	cmp	x19, x8
+	b.ne	.LBB22_11
+	ldr	x8, [sp, #104]
+	ldr	x9, [sp, #88]
+	sub	x8, x8, x9
+	lsr	x8, x8, #3
+	madd	x2, x8, x25, x26
+.Ltmp12:
+	sub	x0, x29, #128
+	sub	x1, x23, #1
+	mov	w3, #24
+	bl	_RINvNvMs2_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalECsc0zNMb1uo1d_6probes
+.Ltmp13:
+	b	.LBB22_10
+.LBB22_16:
+	ldr	x8, [sp, #88]
+	ldr	x9, [sp, #104]
+	subs	x9, x9, x8
+	b.eq	.LBB22_21
+	mov	x10, #-6148914691236517206
+	add	x21, x8, #8
+	movk	x10, #43691
+	umulh	x9, x9, x10
+	lsr	x20, x9, #4
+	b	.LBB22_19
+.LBB22_18:
+	subs	x20, x20, #1
+	add	x21, x21, #24
+	b.eq	.LBB22_21
+.LBB22_19:
+	ldur	x1, [x21, #-8]
+	cbz	x1, .LBB22_18
+	ldr	x0, [x21]
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_18
+.LBB22_21:
+	ldr	x8, [sp, #96]
+	cbz	x8, .LBB22_23
+	add	x8, x8, x8, lsl #1
+	ldr	x0, [sp, #80]
+	mov	w2, #8
+	lsl	x1, x8, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_23:
+	ldp	x8, x28, [x29, #-128]
+	cmp	x19, #2
+	str	x8, [sp, #8]
+	b.lo	.LBB22_257
+	ldr	x8, [x28, #40]
+	cmp	x8, #5
+	b.ne	.LBB22_26
+	ldr	x8, [x28, #32]
+	ldrb	w9, [x8, #4]
+	ldr	w8, [x8]
+	cmp	w9, #107
+	mov	w9, #26723
+	movk	w9, #25445, lsl #16
+	ccmp	w8, w9, #0, eq
+	b.eq	.LBB22_92
+.LBB22_26:
+	cmp	x23, #3
+	b.eq	.LBB22_264
+	ldp	x9, x8, [x28, #56]
+	cmp	x8, #1
+	b.eq	.LBB22_30
+	cbz	x8, .LBB22_268
+	ldrb	w11, [x9]
+	b	.LBB22_32
+.LBB22_30:
+	ldrb	w11, [x9]
+	mov	w10, #1
+	cmp	w11, #43
+	b.eq	.LBB22_236
+	cmp	w11, #45
+	b.eq	.LBB22_236
+.LBB22_32:
+	cmp	w11, #43
+	cset	w10, eq
+	cinc	x9, x9, eq
+	sub	x8, x8, x10
+	cmp	x8, #17
+	b.hs	.LBB22_37
+	mov	x23, xzr
+	cbz	x8, .LBB22_42
+	mov	w10, #10
+.LBB22_35:
+	ldrb	w11, [x9], #1
+	sub	w11, w11, #48
+	cmp	w11, #9
+	b.hi	.LBB22_249
+	mul	x12, x23, x10
+	subs	x8, x8, #1
+	add	x23, x12, w11, uxtw
+	b.ne	.LBB22_35
+	b	.LBB22_42
+.LBB22_37:
+	mov	x23, xzr
+	mov	w10, #10
+.LBB22_38:
+	umulh	x12, x23, x10
+	ldrb	w11, [x9], #1
+	cmp	xzr, x12
+	b.ne	.LBB22_234
+	sub	w11, w11, #48
+	cmp	w11, #10
+	b.hs	.LBB22_249
+	add	x12, x23, x23, lsl #2
+	lsl	x12, x12, #1
+	adds	x23, x12, w11, uxtw
+	b.hs	.LBB22_235
+	sub	x8, x8, #1
+	cbnz	x8, .LBB22_38
+.LBB22_42:
+	cmp	x19, #5
+	b.lo	.LBB22_265
+	ldp	x9, x8, [x28, #104]
+	cmp	x8, #1
+	b.eq	.LBB22_46
+	cbz	x8, .LBB22_269
+	ldrb	w11, [x9]
+	b	.LBB22_48
+.LBB22_46:
+	ldrb	w11, [x9]
+	mov	w10, #1
+	cmp	w11, #43
+	b.eq	.LBB22_239
+	cmp	w11, #45
+	b.eq	.LBB22_239
+.LBB22_48:
+	cmp	w11, #43
+	cset	w10, eq
+	cinc	x9, x9, eq
+	sub	x8, x8, x10
+	cmp	x8, #17
+	b.hs	.LBB22_53
+	mov	x25, xzr
+	cbz	x8, .LBB22_58
+	mov	w10, #10
+.LBB22_51:
+	ldrb	w11, [x9], #1
+	sub	w11, w11, #48
+	cmp	w11, #9
+	b.hi	.LBB22_250
+	mul	x12, x25, x10
+	subs	x8, x8, #1
+	add	x25, x12, w11, uxtw
+	b.ne	.LBB22_51
+	b	.LBB22_58
+.LBB22_53:
+	mov	x25, xzr
+	mov	w10, #10
+.LBB22_54:
+	umulh	x12, x25, x10
+	ldrb	w11, [x9], #1
+	cmp	xzr, x12
+	b.ne	.LBB22_237
+	sub	w11, w11, #48
+	cmp	w11, #10
+	b.hs	.LBB22_250
+	add	x12, x25, x25, lsl #2
+	lsl	x12, x12, #1
+	adds	x25, x12, w11, uxtw
+	b.hs	.LBB22_238
+	sub	x8, x8, #1
+	cbnz	x8, .LBB22_54
+.LBB22_58:
+	ldp	x2, x3, [x28, #80]
+.Ltmp17:
+	sub	x0, x29, #152
+	mov	x1, x23
+	bl	_RNvCsc0zNMb1uo1d_6probes5input
+.Ltmp18:
+	ldur	x22, [x29, #-136]
+	cbz	x22, .LBB22_66
+	ldur	x21, [x29, #-144]
+	lsl	x20, x22, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x20
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB22_267
+	mov	x1, x21
+	mov	x2, x20
+	stp	x22, x0, [x29, #-128]
+	bl	memcpy
+	ldur	x21, [x29, #-136]
+	stur	x22, [x29, #-112]
+	cbz	x21, .LBB22_67
+	ldur	x24, [x29, #-144]
+	lsl	x20, x21, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x20
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB22_270
+	mov	x1, x24
+	mov	x2, x20
+	stp	x21, x0, [x29, #-104]
+	str	x0, [sp, #56]
+	bl	memcpy
+	cmp	x21, #1
+	stur	x21, [x29, #-88]
+	b.eq	.LBB22_68
+	cmp	x21, #21
+	b.hs	.LBB22_272
+	ldr	x0, [sp, #56]
+	mov	x1, x21
+	mov	w2, #1
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort25insertion_sort_shift_leftyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	b	.LBB22_68
+.LBB22_66:
+	mov	w8, #8
+	stur	xzr, [x29, #-112]
+	stp	xzr, x8, [x29, #-128]
+.LBB22_67:
+	mov	w9, #8
+	mov	w8, #8
+	mov	x21, xzr
+	stp	xzr, x9, [x29, #-104]
+	str	x8, [sp, #56]
+	stur	xzr, [x29, #-88]
+.LBB22_68:
+.Ltmp27:
+	bl	_RNvMNtCs68fcPop4ROg_3std4timeNtB2_7Instant3now
+.Ltmp28:
+	ldp	x8, x9, [x28, #32]
+	str	x0, [sp, #64]
+	str	w1, [sp, #72]
+	cmp	x9, #5
+	b.eq	.LBB22_85
+	cmp	x9, #4
+	b.ne	.LBB22_91
+	ldr	w9, [x8]
+	mov	w10, #30054
+	str	x21, [sp, #48]
+	movk	w10, #27756, lsl #16
+	cmp	w9, w10
+	b.eq	.LBB22_189
+	ldr	w9, [x8]
+	mov	w10, #28531
+	movk	w10, #29810, lsl #16
+	cmp	w9, w10
+	b.eq	.LBB22_201
+	ldr	w8, [x8]
+	mov	w9, #24950
+	movk	w9, #31090, lsl #16
+	cmp	w8, w9
+	b.ne	.LBB22_91
+	mov	x22, #52719
+	mov	x24, xzr
+	mov	w27, wzr
+	movk	x22, #35243, lsl #16
+	mov	w8, #8
+	str	x28, [sp]
+	movk	x22, #17767, lsl #32
+	stp	xzr, x8, [x29, #-64]
+	movk	x22, #291, lsl #48
+	stur	xzr, [x29, #-48]
+	b	.LBB22_77
+.LBB22_75:
+.Ltmp34:
+	sub	x0, x29, #64
+	bl	_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecINtNtB7_3vec3VecyEE8grow_oneCsc0zNMb1uo1d_6probes
+.Ltmp35:
+.LBB22_76:
+	mov	w8, #24
+	ldur	x20, [x29, #-56]
+	add	w27, w27, #1
+	madd	x8, x26, x8, x20
+	cmp	w27, #256
+	stp	x21, x24, [x8]
+	add	x24, x26, #1
+	str	x28, [x8, #16]
+	stur	x24, [x29, #-48]
+	b.eq	.LBB22_163
+.LBB22_77:
+	mov	w8, #8
+	mov	x28, xzr
+	str	xzr, [sp, #96]
+	stp	xzr, x8, [sp, #80]
+	cbz	x23, .LBB22_84
+	mov	w8, #8
+	b	.LBB22_81
+.LBB22_79:
+	ldr	x8, [sp, #88]
+.LBB22_80:
+	eor	x9, x22, x22, lsl #13
+	eor	x9, x9, x9, lsr #7
+	eor	x22, x9, x9, lsl #17
+	str	x22, [x8, x28, lsl #3]
+	add	x28, x28, #1
+	cmp	x23, x28
+	str	x28, [sp, #96]
+	b.eq	.LBB22_83
+.LBB22_81:
+	ldr	x9, [sp, #80]
+	cmp	x28, x9
+	b.ne	.LBB22_80
+.Ltmp31:
+	add	x0, sp, #80
+	bl	_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecyE8grow_oneCsc0zNMb1uo1d_6probes
+.Ltmp32:
+	b	.LBB22_79
+.LBB22_83:
+	ldp	x21, x24, [sp, #80]
+	ldur	x26, [x29, #-48]
+	ldur	x8, [x29, #-64]
+	cmp	x26, x8
+	b.eq	.LBB22_75
+	b	.LBB22_76
+.LBB22_84:
+	mov	x21, xzr
+	mov	x26, x24
+	mov	w24, #8
+	ldur	x8, [x29, #-64]
+	cmp	x26, x8
+	b.ne	.LBB22_76
+	b	.LBB22_75
+.LBB22_85:
+	ldrb	w9, [x8, #4]
+	ldr	w10, [x8]
+	str	x21, [sp, #48]
+	cmp	w9, #101
+	mov	w9, #27747
+	movk	w9, #28271, lsl #16
+	ccmp	w10, w9, #0, eq
+	b.eq	.LBB22_193
+	ldrb	w9, [x8, #4]
+	ldr	w8, [x8]
+	cmp	w9, #116
+	mov	w9, #25970
+	movk	w9, #25971, lsl #16
+	ccmp	w8, w9, #0, eq
+	b.ne	.LBB22_91
+	cbz	x25, .LBB22_206
+	add	x21, sp, #80
+	adrp	x20, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.23
+	add	x20, x20, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.23
+	sub	x22, x29, #128
+.LBB22_89:
+	ldp	x8, x9, [x29, #-144]
+	stp	x8, x9, [sp, #80]
+	ldp	x8, x0, [x29, #-120]
+	//APP
+	//NO_APP
+	ldr	x1, [sp, #88]
+	cmp	x0, x1
+	b.ne	.LBB22_241
+	ldr	x1, [sp, #80]
+	lsl	x2, x0, #3
+	mov	x0, x8
+	bl	memcpy
+	str	x22, [sp, #80]
+	subs	x25, x25, #1
+	//APP
+	//NO_APP
+	b.ne	.LBB22_89
+	b	.LBB22_206
+.LBB22_91:
+.Ltmp67:
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.15
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.15
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.16
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.16
+	mov	w1, #14
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking5panic
+.Ltmp68:
+	b	.LBB22_271
+.LBB22_92:
+	add	x8, sp, #80
+	mov	x24, xzr
+	str	x28, [sp]
+	add	x8, x8, #16
+	str	x8, [sp, #32]
+	b	.LBB22_94
+.LBB22_93:
+	ldr	x24, [sp, #16]
+	cmp	x24, #65
+	b.eq	.LBB22_222
+.LBB22_94:
+	mov	w8, #5
+	adrp	x9, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.26
+	add	x9, x9, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.26
+	stp	x8, x9, [sp, #88]
+	mov	w9, #8
+	mov	x22, xzr
+	str	x9, [sp, #104]
+	adrp	x9, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.27
+	add	x10, x9, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.27
+	mov	w9, #9
+	str	x24, [sp, #40]
+	stp	x10, x9, [sp, #112]
+	adrp	x9, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.28
+	add	x10, x9, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.28
+	mov	w9, #10
+	stp	x10, x9, [sp, #128]
+	adrp	x9, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.29
+	add	x9, x9, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.29
+	stp	x9, x8, [sp, #144]
+	adrp	x8, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.30
+	add	x9, x8, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.30
+	add	x8, x24, #1
+	str	x8, [sp, #16]
+	mov	w8, #3
+	stp	x9, x8, [sp, #160]
+	b	.LBB22_96
+.LBB22_95:
+	cmp	x22, #5
+	b.eq	.LBB22_93
+.LBB22_96:
+	ldr	x8, [sp, #32]
+	add	x21, x22, #1
+	str	x21, [sp, #80]
+	add	x8, x8, x22, lsl #4
+	ldp	x28, x20, [x8]
+.Ltmp72:
+	add	x0, sp, #176
+	mov	x1, x24
+	mov	x2, x28
+	mov	x3, x20
+	bl	_RNvCsc0zNMb1uo1d_6probes5input
+.Ltmp73:
+	ldr	x26, [sp, #192]
+	str	x21, [sp, #48]
+	lsl	x21, x26, #3
+	cbz	x26, .LBB22_100
+	mov	x23, x21
+	ldr	x21, [sp, #184]
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x23
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB22_247
+	mov	x1, x21
+	mov	x2, x23
+	mov	x22, x0
+	stp	x26, x0, [x29, #-152]
+	bl	memcpy
+	mov	x21, x23
+	b	.LBB22_101
+.LBB22_100:
+	mov	w8, #8
+	mov	w22, #8
+	stp	xzr, x8, [x29, #-152]
+.LBB22_101:
+	stur	x26, [x29, #-136]
+.Ltmp78:
+	mov	x0, x22
+	mov	x1, x26
+	str	x22, [sp, #56]
+	bl	sort_u64
+.Ltmp79:
+	ldr	x23, [sp, #192]
+	cbz	x23, .LBB22_106
+	ldr	x25, [sp, #184]
+	lsl	x27, x23, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x27
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB22_246
+	mov	x1, x25
+	mov	x2, x27
+	mov	x22, x0
+	stp	x23, x0, [x29, #-128]
+	bl	memcpy
+	cmp	x23, #1
+	stur	x23, [x29, #-112]
+	b.ne	.LBB22_143
+.LBB22_105:
+	ldr	x24, [sp, #40]
+	b	.LBB22_107
+.LBB22_106:
+	mov	w8, #8
+	mov	w22, #8
+	stur	xzr, [x29, #-112]
+	stp	xzr, x8, [x29, #-128]
+.LBB22_107:
+	cmp	x26, x23
+	b.ne	.LBB22_231
+	ldr	x0, [sp, #56]
+	mov	x1, x22
+	mov	x2, x21
+	bl	bcmp
+	cbnz	w0, .LBB22_230
+	ldr	x23, [sp, #192]
+	str	wzr, [sp, #64]
+	cbz	x23, .LBB22_113
+	mov	x24, x21
+	ldr	x21, [sp, #184]
+	lsl	x25, x23, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x25
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB22_248
+	mov	x1, x21
+	mov	x2, x25
+	mov	x27, x0
+	stp	x23, x0, [x29, #-104]
+	bl	memcpy
+	add	x8, sp, #64
+	cmp	x23, #1
+	stp	x23, x8, [x29, #-88]
+	sub	x8, x29, #80
+	stur	x8, [x29, #-64]
+	b.ne	.LBB22_152
+	mov	x21, x24
+	ldr	x24, [sp, #40]
+	b	.LBB22_114
+.LBB22_113:
+	mov	w8, #8
+	mov	w27, #8
+	stur	xzr, [x29, #-88]
+	stp	xzr, x8, [x29, #-104]
+.LBB22_114:
+	cmp	x23, x26
+	b.ne	.LBB22_233
+	mov	x0, x27
+	mov	x1, x22
+	mov	x2, x21
+	bl	bcmp
+	cbnz	w0, .LBB22_232
+.Ltmp96:
+	add	x0, sp, #176
+	mov	x23, x26
+	bl	clone_sort
+.Ltmp97:
+	cmp	x24, #10
+	b.ne	.LBB22_139
+	cmp	x20, #8
+	b.ne	.LBB22_139
+	mov	x9, #29295
+	ldr	x8, [x28]
+	movk	x9, #26473, lsl #16
+	movk	x9, #28265, lsl #32
+	movk	x9, #27745, lsl #48
+	cmp	x8, x9
+	b.ne	.LBB22_139
+	ldr	x28, [sp, #192]
+	str	x21, [sp, #24]
+	lsl	x20, x28, #3
+	cbz	x28, .LBB22_124
+	ldr	x21, [sp, #184]
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x20
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB22_251
+	mov	x1, x21
+	mov	x2, x20
+	mov	x23, x0
+	bl	memcpy
+	cmp	x28, #1
+	b.ne	.LBB22_125
+	mov	x25, xzr
+	mov	x21, xzr
+	b	.LBB22_132
+.LBB22_124:
+	mov	x25, xzr
+	mov	x21, xzr
+	mov	w23, #8
+	b	.LBB22_132
+.LBB22_125:
+	mov	x21, xzr
+	mov	x25, xzr
+	add	x8, x23, #8
+	mov	w9, #1
+.LBB22_126:
+	mov	x0, x9
+	mov	x11, x25
+	add	x9, x9, #1
+	ldr	x10, [x23, x0, lsl #3]
+	add	x12, x21, #1
+	mov	x14, x8
+	add	x21, x0, x21
+	add	x25, x0, x25
+	mov	x13, x8
+.LBB22_127:
+	ldr	x15, [x13, #-8]!
+	cmp	x10, x15
+	b.hs	.LBB22_129
+	sub	x0, x0, #1
+	str	x15, [x14]
+	add	x11, x11, #1
+	add	x12, x12, #1
+	mov	x14, x13
+	cbnz	x0, .LBB22_127
+	b	.LBB22_130
+.LBB22_129:
+	mov	x21, x12
+	mov	x25, x11
+.LBB22_130:
+	cmp	x0, x28
+	b.hs	.LBB22_244
+	cmp	x9, x28
+	add	x8, x8, #8
+	str	x10, [x23, x0, lsl #3]
+	b.ne	.LBB22_126
+.LBB22_132:
+	cmp	x28, #2
+	b.lo	.LBB22_136
+	add	x8, x28, #1
+	add	x9, x23, #8
+.LBB22_134:
+	ldp	x10, x11, [x9, #-8]
+	cmp	x10, x11
+	b.hi	.LBB22_243
+	sub	x8, x8, #1
+	add	x9, x9, #8
+	cmp	x8, #3
+	b.hs	.LBB22_134
+.LBB22_136:
+	cbz	x28, .LBB22_138
+	mov	x0, x23
+	mov	x1, x20
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_138:
+	add	x8, sp, #176
+	stp	x21, x25, [x29, #-80]
+	stur	x8, [x29, #-64]
+	adrp	x8, _RNvXsr_NtCs6sh1iPzjxYC_5alloc3vecINtB5_3VecyENtNtCshp6Wxz1DwXO_4core3fmt5Debug3fmtCsc0zNMb1uo1d_6probes
+	add	x9, x8, :lo12:_RNvXsr_NtCs6sh1iPzjxYC_5alloc3vecINtB5_3VecyENtNtCshp6Wxz1DwXO_4core3fmt5Debug3fmtCsc0zNMb1uo1d_6probes
+	add	x8, sp, #64
+	stp	x9, x8, [x29, #-56]
+	adrp	x8, :got:_RNvXs9_NtNtNtCshp6Wxz1DwXO_4core3fmt3num3implNtB9_7Display3fmt
+	ldr	x9, [x8, :got_lo12:_RNvXs9_NtNtNtCshp6Wxz1DwXO_4core3fmt3num3implNtB9_7Display3fmt]
+	sub	x8, x29, #80
+	stp	x9, x8, [x29, #-40]
+	adrp	x8, _RNvXs1G_NtCshp6Wxz1DwXO_4core3fmtTjjENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	add	x8, x8, :lo12:_RNvXs1G_NtCshp6Wxz1DwXO_4core3fmtTjjENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	stur	x8, [x29, #-24]
+.Ltmp107:
+	sub	x1, x29, #64
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.33
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.33
+	ldr	x21, [sp, #24]
+	mov	x23, x26
+	bl	_RNvNtNtCs68fcPop4ROg_3std2io5stdio6__print
+.Ltmp108:
+	ldr	x24, [sp, #40]
+.LBB22_139:
+	cbz	x26, .LBB22_141
+	mov	x0, x27
+	mov	x1, x21
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	mov	x0, x22
+	mov	x1, x21
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	ldr	x0, [sp, #56]
+	mov	x1, x21
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_141:
+	ldr	x22, [sp, #48]
+	ldr	x8, [sp, #176]
+	cbz	x8, .LBB22_95
+	ldr	x0, [sp, #184]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_95
+.LBB22_143:
+	ldr	x24, [sp, #40]
+	cmp	x23, #21
+	b.hs	.LBB22_161
+	add	x9, x22, x23, lsl #3
+	mov	x8, xzr
+	add	x10, x22, #8
+	b	.LBB22_147
+.LBB22_145:
+	str	x11, [x12]
+.LBB22_146:
+	add	x10, x10, #8
+	add	x8, x8, #8
+	cmp	x10, x9
+	b.eq	.LBB22_107
+.LBB22_147:
+	mov	x13, x10
+	ldr	x11, [x10]
+	ldr	x12, [x13, #-8]!
+	cmp	x11, x12
+	b.hs	.LBB22_146
+	cmp	x13, x22
+	str	x12, [x10]
+	mov	x13, x8
+	mov	x12, x22
+	b.eq	.LBB22_145
+.LBB22_149:
+	add	x12, x22, x13
+	ldur	x14, [x12, #-8]
+	cmp	x11, x14
+	b.hs	.LBB22_145
+	subs	x13, x13, #8
+	str	x14, [x12]
+	b.ne	.LBB22_149
+	mov	x12, x22
+	b	.LBB22_145
+.LBB22_152:
+	cmp	x23, #21
+	b.hs	.LBB22_162
+	add	x9, x27, x23, lsl #3
+	mov	x21, x24
+	ldr	x24, [sp, #40]
+	mov	x8, xzr
+	add	x10, x27, #8
+	b	.LBB22_156
+.LBB22_154:
+	str	x11, [x13]
+.LBB22_155:
+	add	x10, x10, #8
+	add	x8, x8, #8
+	cmp	x10, x9
+	b.eq	.LBB22_114
+.LBB22_156:
+	ldur	x14, [x29, #-80]
+	mov	x12, x10
+	ldr	x11, [x10]
+	ldr	x13, [x12, #-8]!
+	ldr	w15, [x14]
+	cmp	x11, x13
+	add	w15, w15, #1
+	str	w15, [x14]
+	b.hs	.LBB22_155
+	cmp	x12, x27
+	str	x13, [x10]
+	mov	x12, x8
+	mov	x13, x27
+	b.eq	.LBB22_154
+.LBB22_158:
+	ldur	x15, [x29, #-80]
+	add	x13, x27, x12
+	ldur	x14, [x13, #-8]
+	ldr	w16, [x15]
+	cmp	x11, x14
+	add	w16, w16, #1
+	str	w16, [x15]
+	b.hs	.LBB22_154
+	subs	x12, x12, #8
+	str	x14, [x13]
+	b.ne	.LBB22_158
+	mov	x13, x27
+	b	.LBB22_154
+.LBB22_161:
+.Ltmp81:
+	mov	x0, x22
+	mov	x1, x23
+	bl	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable14driftsort_mainyNvYyNtNtB8_3cmp10PartialOrd2ltINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEECsc0zNMb1uo1d_6probes
+.Ltmp82:
+	b	.LBB22_105
+.LBB22_162:
+.Ltmp89:
+	sub	x2, x29, #64
+	mov	x0, x27
+	mov	x1, x23
+	mov	x21, x24
+	bl	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNCINvMB6_Sy16sort_unstable_byNCNvCsc0zNMb1uo1d_6probes5check0E0EB1r_
+.Ltmp90:
+	ldr	x24, [sp, #40]
+	b	.LBB22_114
+.LBB22_163:
+.Ltmp37:
+	ldr	x28, [sp]
+	ldr	x21, [sp, #48]
+	bl	_RNvMNtCs68fcPop4ROg_3std4timeNtB2_7Instant3now
+.Ltmp38:
+	stur	x0, [x29, #-80]
+	stur	w1, [x29, #-72]
+	cbz	x25, .LBB22_170
+	mov	x21, xzr
+	mov	w22, #24
+	add	x23, sp, #80
+	sub	x27, x29, #128
+.LBB22_166:
+	and	x0, x21, #0xff
+	cmp	x0, x24
+	b.hs	.LBB22_252
+	umaddl	x8, w0, w22, x20
+	ldp	x9, x8, [x8, #8]
+	stp	x9, x8, [sp, #80]
+	ldp	x8, x0, [x29, #-120]
+	//APP
+	//NO_APP
+	ldr	x1, [sp, #88]
+	cmp	x0, x1
+	b.ne	.LBB22_242
+	ldr	x1, [sp, #80]
+	lsl	x2, x0, #3
+	mov	x0, x8
+	bl	memcpy
+	ldp	x8, x9, [x29, #-120]
+	stp	x8, x9, [sp, #80]
+	//APP
+	//NO_APP
+	ldp	x0, x1, [sp, #80]
+.Ltmp43:
+	bl	sort_u64
+.Ltmp44:
+	str	x27, [sp, #80]
+	add	x21, x21, #1
+	//APP
+	//NO_APP
+	cmp	x25, x21
+	b.ne	.LBB22_166
+.LBB22_170:
+.Ltmp46:
+	sub	x0, x29, #80
+	ldr	x21, [sp, #48]
+	bl	_RNvMNtCs68fcPop4ROg_3std4timeNtB2_7Instant7elapsed
+.Ltmp47:
+	mov	w8, #51712
+	add	x10, sp, #176
+	movk	w8, #15258, lsl #16
+	mul	x9, x0, x8
+	umulh	x8, x0, x8
+	adds	x9, x9, w1, uxtw
+	str	x9, [sp, #176]
+	adrp	x9, :got:_RNvXNtNtCshp6Wxz1DwXO_4core3fmt3numoNtB4_7Display3fmt
+	cinc	x8, x8, hs
+	ldr	x9, [x9, :got_lo12:_RNvXNtNtCshp6Wxz1DwXO_4core3fmt3numoNtB4_7Display3fmt]
+	str	x8, [sp, #184]
+	stp	x10, x9, [sp, #80]
+.Ltmp48:
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.17
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.17
+	add	x1, sp, #80
+	bl	_RNvNtNtCs68fcPop4ROg_3std2io5stdio6__print
+.Ltmp49:
+	ldur	x8, [x29, #-112]
+	cmp	x8, #2
+	b.lo	.LBB22_176
+	ldur	x9, [x29, #-120]
+	add	x8, x8, #1
+	add	x9, x9, #8
+.LBB22_174:
+	ldp	x10, x11, [x9, #-8]
+	cmp	x10, x11
+	b.hi	.LBB22_258
+	sub	x8, x8, #1
+	add	x9, x9, #8
+	cmp	x8, #3
+	b.hs	.LBB22_174
+.LBB22_176:
+	cbz	x24, .LBB22_181
+	add	x21, x26, #1
+	add	x22, x20, #8
+	b	.LBB22_179
+.LBB22_178:
+	subs	x21, x21, #1
+	add	x22, x22, #24
+	b.eq	.LBB22_181
+.LBB22_179:
+	ldur	x8, [x22, #-8]
+	cbz	x8, .LBB22_178
+	ldr	x0, [x22]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_178
+.LBB22_181:
+	ldur	x8, [x29, #-64]
+	cbz	x8, .LBB22_183
+	add	x8, x8, x8, lsl #1
+	mov	x0, x20
+	mov	w2, #8
+	lsl	x1, x8, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_183:
+	ldr	x8, [sp, #48]
+	cbz	x8, .LBB22_185
+	lsl	x1, x8, #3
+	ldr	x0, [sp, #56]
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_185:
+	ldur	x8, [x29, #-128]
+	cbz	x8, .LBB22_187
+	ldur	x0, [x29, #-120]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_187:
+	ldur	x8, [x29, #-152]
+	cbz	x8, .LBB22_223
+	ldur	x0, [x29, #-144]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_223
+.LBB22_189:
+	cbz	x25, .LBB22_206
+	sub	x20, x29, #152
+	add	x21, sp, #80
+.LBB22_191:
+	str	x20, [sp, #80]
+	//APP
+	//NO_APP
+	ldr	x0, [sp, #80]
+.Ltmp58:
+	bl	clone_sort
+.Ltmp59:
+	subs	x25, x25, #1
+	b.ne	.LBB22_191
+	b	.LBB22_206
+.LBB22_193:
+	cbz	x25, .LBB22_206
+	sub	x21, x29, #152
+	sub	x22, x29, #64
+	add	x26, sp, #80
+	b	.LBB22_198
+.LBB22_195:
+	mov	w24, #8
+	stp	x27, x24, [sp, #80]
+	str	x27, [sp, #96]
+	//APP
+	//NO_APP
+	ldr	x8, [sp, #80]
+	cbz	x8, .LBB22_197
+.LBB22_196:
+	ldr	x0, [sp, #88]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_197:
+	subs	x25, x25, #1
+	b.eq	.LBB22_206
+.LBB22_198:
+	stur	x21, [x29, #-64]
+	//APP
+	//NO_APP
+	ldur	x8, [x29, #-64]
+	ldr	x27, [x8, #16]
+	cbz	x27, .LBB22_195
+	ldr	x23, [x8, #8]
+	lsl	x20, x27, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x20
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB22_259
+	mov	x1, x23
+	mov	x2, x20
+	mov	x24, x0
+	bl	memcpy
+	stp	x27, x24, [sp, #80]
+	str	x27, [sp, #96]
+	//APP
+	//NO_APP
+	ldr	x8, [sp, #80]
+	cbnz	x8, .LBB22_196
+	b	.LBB22_197
+.LBB22_201:
+	cbz	x25, .LBB22_206
+	add	x21, sp, #80
+	adrp	x20, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.22
+	add	x20, x20, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.22
+	sub	x22, x29, #128
+.LBB22_203:
+	ldp	x8, x9, [x29, #-144]
+	stp	x8, x9, [sp, #80]
+	ldp	x8, x0, [x29, #-120]
+	//APP
+	//NO_APP
+	ldr	x1, [sp, #88]
+	cmp	x0, x1
+	b.ne	.LBB22_241
+	ldr	x1, [sp, #80]
+	lsl	x2, x0, #3
+	mov	x0, x8
+	bl	memcpy
+	ldp	x8, x9, [x29, #-120]
+	stp	x8, x9, [sp, #80]
+	//APP
+	//NO_APP
+	ldp	x0, x1, [sp, #80]
+.Ltmp55:
+	bl	sort_u64
+.Ltmp56:
+	str	x22, [sp, #80]
+	subs	x25, x25, #1
+	//APP
+	//NO_APP
+	b.ne	.LBB22_203
+.LBB22_206:
+.Ltmp61:
+	add	x0, sp, #64
+	ldr	x21, [sp, #48]
+	bl	_RNvMNtCs68fcPop4ROg_3std4timeNtB2_7Instant7elapsed
+.Ltmp62:
+	mov	w8, #51712
+	sub	x10, x29, #64
+	movk	w8, #15258, lsl #16
+	mul	x9, x0, x8
+	umulh	x8, x0, x8
+	adds	x9, x9, w1, uxtw
+	stur	x9, [x29, #-64]
+	adrp	x9, :got:_RNvXNtNtCshp6Wxz1DwXO_4core3fmt3numoNtB4_7Display3fmt
+	cinc	x8, x8, hs
+	ldr	x9, [x9, :got_lo12:_RNvXNtNtCshp6Wxz1DwXO_4core3fmt3numoNtB4_7Display3fmt]
+	stur	x8, [x29, #-56]
+	stp	x10, x9, [sp, #80]
+.Ltmp63:
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.17
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.17
+	add	x1, sp, #80
+	bl	_RNvNtNtCs68fcPop4ROg_3std2io5stdio6__print
+.Ltmp64:
+	ldr	x8, [x28, #40]
+	cmp	x8, #4
+	b.ne	.LBB22_212
+	ldr	x8, [x28, #32]
+	mov	w9, #28531
+	movk	w9, #29810, lsl #16
+	ldr	w8, [x8]
+	cmp	w8, w9
+	b.ne	.LBB22_212
+	ldur	x8, [x29, #-112]
+	cmp	x8, x21
+	b.ne	.LBB22_245
+	ldur	x0, [x29, #-120]
+	lsl	x2, x21, #3
+	ldr	x1, [sp, #56]
+	bl	bcmp
+	cbnz	w0, .LBB22_245
+.LBB22_212:
+	cbz	x21, .LBB22_214
+	lsl	x1, x21, #3
+	ldr	x0, [sp, #56]
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_214:
+	ldur	x8, [x29, #-128]
+	cbz	x8, .LBB22_216
+	ldur	x0, [x29, #-120]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_216:
+	ldur	x8, [x29, #-152]
+	cbz	x8, .LBB22_218
+	ldur	x0, [x29, #-144]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_218:
+	add	x20, x28, #8
+	b	.LBB22_220
+.LBB22_219:
+	subs	x19, x19, #1
+	add	x20, x20, #24
+	b.eq	.LBB22_227
+.LBB22_220:
+	ldur	x1, [x20, #-8]
+	cbz	x1, .LBB22_219
+	ldr	x0, [x20]
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_219
+.LBB22_222:
+.Ltmp110:
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.25
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.25
+	mov	w1, #19
+	ldr	x28, [sp]
+	bl	_RNvNtNtCs68fcPop4ROg_3std2io5stdio6__print
+.Ltmp111:
+.LBB22_223:
+	add	x20, x28, #8
+	b	.LBB22_225
+.LBB22_224:
+	subs	x19, x19, #1
+	add	x20, x20, #24
+	b.eq	.LBB22_227
+.LBB22_225:
+	ldur	x1, [x20, #-8]
+	cbz	x1, .LBB22_224
+	ldr	x0, [x20]
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_224
+.LBB22_227:
+	ldr	x8, [sp, #8]
+	cbz	x8, .LBB22_229
+	add	x8, x8, x8, lsl #1
+	mov	x0, x28
+	mov	w2, #8
+	lsl	x1, x8, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_229:
+	.cfi_def_cfa wsp, 448
+	ldp	x20, x19, [sp, #432]
+	ldp	x22, x21, [sp, #416]
+	ldp	x24, x23, [sp, #400]
+	ldp	x26, x25, [sp, #384]
+	ldp	x28, x27, [sp, #368]
+	ldp	x29, x30, [sp, #352]
+	add	sp, sp, #448
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w26
+	.cfi_restore w27
+	.cfi_restore w28
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB22_230:
+	.cfi_restore_state
+	mov	x23, x26
+.LBB22_231:
+.Ltmp87:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.31
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.31
+	sub	x0, x29, #152
+	sub	x1, x29, #128
+	bl	_RINvNtCshp6Wxz1DwXO_4core9panicking13assert_failedINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEBM_ECsc0zNMb1uo1d_6probes
+.Ltmp88:
+	b	.LBB22_271
+.LBB22_232:
+	mov	x23, x26
+.LBB22_233:
+.Ltmp94:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.32
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.32
+	sub	x0, x29, #104
+	sub	x1, x29, #128
+	bl	_RINvNtCshp6Wxz1DwXO_4core9panicking13assert_failedINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEBM_ECsc0zNMb1uo1d_6probes
+.Ltmp95:
+	b	.LBB22_271
+.LBB22_234:
+	sub	w8, w11, #48
+	cmp	w8, #10
+	mov	w8, #1
+	cinc	w10, w8, lo
+	b	.LBB22_236
+.LBB22_235:
+	mov	w10, #2
+.LBB22_236:
+	strb	w10, [sp, #80]
+	adrp	x4, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.12
+	add	x4, x4, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.12
+	b	.LBB22_240
+.LBB22_237:
+	sub	w8, w11, #48
+	cmp	w8, #10
+	mov	w8, #1
+	cinc	w10, w8, lo
+	b	.LBB22_239
+.LBB22_238:
+	mov	w10, #2
+.LBB22_239:
+	adrp	x4, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.14
+	add	x4, x4, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.14
+	strb	w10, [sp, #80]
+.LBB22_240:
+	add	x2, sp, #80
+.Ltmp15:
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.37
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.37
+	adrp	x3, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.36
+	add	x3, x3, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.36
+	mov	w1, #43
+	bl	_RNvNtCshp6Wxz1DwXO_4core6result13unwrap_failed
+.Ltmp16:
+	b	.LBB22_271
+.LBB22_241:
+	ldr	x21, [sp, #48]
+.Ltmp53:
+	mov	x2, x20
+	bl	_RNvNvNtCshp6Wxz1DwXO_4core5slice20copy_from_slice_impl17len_mismatch_fail
+.Ltmp54:
+	b	.LBB22_271
+.LBB22_242:
+.Ltmp41:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.21
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.21
+	ldr	x21, [sp, #48]
+	bl	_RNvNvNtCshp6Wxz1DwXO_4core5slice20copy_from_slice_impl17len_mismatch_fail
+.Ltmp42:
+	b	.LBB22_271
+.LBB22_243:
+.Ltmp104:
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.7
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.7
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.8
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.8
+	mov	w1, #52
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking5panic
+.Ltmp105:
+	b	.LBB22_271
+.LBB22_244:
+.Ltmp98:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.9
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.9
+	mov	x1, x28
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking18panic_bounds_check
+.Ltmp99:
+	b	.LBB22_271
+.LBB22_245:
+.Ltmp65:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.24
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.24
+	sub	x0, x29, #128
+	sub	x1, x29, #104
+	bl	_RINvNtCshp6Wxz1DwXO_4core9panicking13assert_failedINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEBM_ECsc0zNMb1uo1d_6probes
+.Ltmp66:
+	b	.LBB22_271
+.LBB22_246:
+.Ltmp84:
+	mov	w0, #8
+	mov	x1, x27
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Ltmp85:
+	b	.LBB22_271
+.LBB22_247:
+.Ltmp75:
+	mov	w0, #8
+	mov	x1, x23
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Ltmp76:
+	b	.LBB22_271
+.LBB22_248:
+.Ltmp91:
+	mov	w0, #8
+	mov	x1, x25
+	mov	x23, x26
+	mov	x21, x24
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Ltmp92:
+	b	.LBB22_271
+.LBB22_249:
+	mov	w10, #1
+	b	.LBB22_236
+.LBB22_250:
+	mov	w10, #1
+	b	.LBB22_239
+.LBB22_251:
+.Ltmp101:
+	mov	w0, #8
+	mov	x1, x20
+	ldr	x21, [sp, #24]
+	mov	x23, x26
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Ltmp102:
+	b	.LBB22_271
+.LBB22_252:
+.Ltmp39:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.20
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.20
+	mov	x1, x24
+	ldr	x21, [sp, #48]
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking18panic_bounds_check
+.Ltmp40:
+	b	.LBB22_271
+.LBB22_253:
+	ldur	x8, [x29, #-56]
+	ldur	x9, [x29, #-40]
+	subs	x9, x9, x8
+	b.ne	.LBB22_260
+.LBB22_254:
+	ldur	x8, [x29, #-48]
+	cbz	x8, .LBB22_256
+	add	x8, x8, x8, lsl #1
+	ldur	x0, [x29, #-64]
+	mov	w2, #8
+	lsl	x1, x8, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_256:
+	mov	x19, xzr
+	mov	w28, #8
+	str	xzr, [sp, #8]
+.LBB22_257:
+.Ltmp116:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.10
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.10
+	mov	w0, #1
+	mov	x1, x19
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking18panic_bounds_check
+.Ltmp117:
+	b	.LBB22_271
+.LBB22_258:
+.Ltmp50:
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.18
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.18
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.19
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.19
+	mov	w1, #55
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking5panic
+.Ltmp51:
+	b	.LBB22_271
+.LBB22_259:
+.Ltmp29:
+	mov	w0, #8
+	mov	x1, x20
+	ldr	x21, [sp, #48]
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Ltmp30:
+	b	.LBB22_271
+.LBB22_260:
+	mov	x10, #-6148914691236517206
+	add	x20, x8, #8
+	movk	x10, #43691
+	umulh	x9, x9, x10
+	lsr	x19, x9, #4
+	b	.LBB22_262
+.LBB22_261:
+	subs	x19, x19, #1
+	add	x20, x20, #24
+	b.eq	.LBB22_254
+.LBB22_262:
+	ldur	x1, [x20, #-8]
+	cbz	x1, .LBB22_261
+	ldr	x0, [x20]
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_261
+.LBB22_264:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.11
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.11
+	mov	w0, #2
+	mov	w1, #2
+	b	.LBB22_266
+.LBB22_265:
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.13
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.13
+	mov	w0, #4
+	mov	x1, x19
+.LBB22_266:
+.Ltmp70:
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking18panic_bounds_check
+.Ltmp71:
+	b	.LBB22_271
+.LBB22_267:
+.Ltmp24:
+	mov	w0, #8
+	mov	x1, x20
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Ltmp25:
+	b	.LBB22_271
+.LBB22_268:
+	mov	w10, wzr
+	b	.LBB22_236
+.LBB22_269:
+	mov	w10, wzr
+	b	.LBB22_239
+.LBB22_270:
+.Ltmp21:
+	mov	w0, #8
+	mov	x1, x20
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Ltmp22:
+.LBB22_271:
+	brk	#0x1
+.LBB22_272:
+.Ltmp19:
+	ldr	x0, [sp, #56]
+	mov	x1, x21
+	bl	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort6stable14driftsort_mainyNvYyNtNtB8_3cmp10PartialOrd2ltINtNtCs6sh1iPzjxYC_5alloc3vec3VecyEECsc0zNMb1uo1d_6probes
+.Ltmp20:
+	b	.LBB22_68
+.LBB22_273:
+.Ltmp83:
+	ldr	x28, [sp]
+	mov	x25, x0
+	b	.LBB22_317
+.LBB22_274:
+.Ltmp23:
+	mov	x25, x0
+	b	.LBB22_326
+.LBB22_275:
+.Ltmp26:
+	mov	x25, x0
+	b	.LBB22_328
+.LBB22_276:
+.Ltmp57:
+	b	.LBB22_280
+.LBB22_277:
+.Ltmp36:
+	mov	x25, x0
+	cbz	x21, .LBB22_294
+	lsl	x1, x21, #3
+	mov	x0, x24
+	b	.LBB22_293
+.LBB22_279:
+.Ltmp60:
+.LBB22_280:
+	ldr	x21, [sp, #48]
+	b	.LBB22_323
+.LBB22_281:
+.Ltmp8:
+	mov	x25, x0
+	b	.LBB22_337
+.LBB22_282:
+.Ltmp45:
+	mov	x25, x0
+	b	.LBB22_295
+.LBB22_283:
+.Ltmp118:
+	mov	x25, x0
+	cbnz	x19, .LBB22_286
+.LBB22_284:
+	ldr	x8, [sp, #8]
+	cbz	x8, .LBB22_339
+	add	x8, x8, x8, lsl #1
+	mov	x0, x28
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	mov	x0, x25
+	bl	_Unwind_Resume
+.LBB22_286:
+	mov	w19, #1
+	b	.LBB22_331
+.LBB22_287:
+.Ltmp14:
+	mov	x25, x0
+	cbz	x21, .LBB22_290
+	mov	x0, x22
+	mov	x1, x21
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	add	x0, sp, #80
+	bl	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueNtNtCs68fcPop4ROg_3std3env4ArgsECsc0zNMb1uo1d_6probes
+	sub	x0, x29, #128
+	bl	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecNtNtBG_6string6StringEECsc0zNMb1uo1d_6probes
+	mov	x0, x25
+	bl	_Unwind_Resume
+.LBB22_289:
+.Ltmp11:
+	mov	x25, x0
+.LBB22_290:
+	add	x0, sp, #80
+	bl	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueNtNtCs68fcPop4ROg_3std3env4ArgsECsc0zNMb1uo1d_6probes
+	sub	x0, x29, #128
+	bl	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecNtNtBG_6string6StringEECsc0zNMb1uo1d_6probes
+	mov	x0, x25
+	bl	_Unwind_Resume
+.LBB22_291:
+.Ltmp33:
+	ldr	x8, [sp, #80]
+	mov	x25, x0
+	cbz	x8, .LBB22_294
+	ldr	x0, [sp, #88]
+	lsl	x1, x8, #3
+.LBB22_293:
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_294:
+	ldr	x28, [sp]
+.LBB22_295:
+	ldr	x21, [sp, #48]
+	b	.LBB22_307
+.LBB22_296:
+.Ltmp77:
+	ldr	x28, [sp]
+	mov	x25, x0
+	b	.LBB22_320
+.LBB22_297:
+.Ltmp86:
+	b	.LBB22_300
+.LBB22_298:
+.Ltmp74:
+	ldr	x28, [sp]
+	mov	x25, x0
+	b	.LBB22_331
+.LBB22_299:
+.Ltmp80:
+.LBB22_300:
+	ldr	x28, [sp]
+	mov	x25, x0
+	b	.LBB22_318
+.LBB22_301:
+.Ltmp109:
+	b	.LBB22_310
+.LBB22_302:
+.Ltmp100:
+	mov	x25, x0
+	b	.LBB22_304
+.LBB22_303:
+.Ltmp106:
+	mov	x25, x0
+	cbz	x28, .LBB22_305
+.LBB22_304:
+	mov	x0, x23
+	mov	x1, x20
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_305:
+	ldr	x28, [sp]
+	ldr	x21, [sp, #24]
+	mov	x23, x26
+	b	.LBB22_311
+.LBB22_306:
+.Ltmp52:
+	mov	x25, x0
+.LBB22_307:
+	sub	x0, x29, #64
+	bl	_RINvNtCshp6Wxz1DwXO_4core3ptr9drop_glueINtNtCs6sh1iPzjxYC_5alloc3vec3VecIBC_yEEECsc0zNMb1uo1d_6probes
+	b	.LBB22_324
+.LBB22_308:
+.Ltmp112:
+	mov	x25, x0
+	b	.LBB22_331
+.LBB22_309:
+.Ltmp103:
+.LBB22_310:
+	ldr	x28, [sp]
+	mov	x25, x0
+.LBB22_311:
+	cbnz	x23, .LBB22_313
+	mov	x23, x26
+	b	.LBB22_315
+.LBB22_313:
+	lsl	x1, x23, #3
+	mov	x0, x27
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	mov	x23, x26
+	b	.LBB22_315
+.LBB22_314:
+.Ltmp93:
+	ldr	x28, [sp]
+	mov	x25, x0
+.LBB22_315:
+	cbz	x23, .LBB22_318
+	lsl	x27, x23, #3
+.LBB22_317:
+	mov	x0, x22
+	mov	x1, x27
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_318:
+	ldr	x0, [sp, #56]
+	cbz	x26, .LBB22_320
+	mov	x1, x21
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_320:
+	ldr	x8, [sp, #176]
+	cbz	x8, .LBB22_331
+	ldr	x0, [sp, #184]
+	b	.LBB22_330
+.LBB22_322:
+.Ltmp69:
+.LBB22_323:
+	mov	x25, x0
+.LBB22_324:
+	cbz	x21, .LBB22_326
+	lsl	x1, x21, #3
+	ldr	x0, [sp, #56]
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_326:
+	ldur	x8, [x29, #-128]
+	cbz	x8, .LBB22_328
+	ldur	x0, [x29, #-120]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_328:
+	ldur	x8, [x29, #-152]
+	cbz	x8, .LBB22_331
+	ldur	x0, [x29, #-144]
+.LBB22_330:
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_331:
+	add	x20, x28, #8
+	b	.LBB22_333
+.LBB22_332:
+	subs	x19, x19, #1
+	add	x20, x20, #24
+	b.eq	.LBB22_284
+.LBB22_333:
+	ldur	x1, [x20, #-8]
+	cbz	x1, .LBB22_332
+	ldr	x0, [x20]
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_332
+.LBB22_335:
+.Ltmp115:
+	mov	x25, x0
+	cbz	x19, .LBB22_337
+	mov	x0, x21
+	mov	x1, x19
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB22_337:
+	ldur	x8, [x29, #-56]
+	ldur	x9, [x29, #-40]
+	subs	x9, x9, x8
+	b.ne	.LBB22_340
+.LBB22_338:
+	ldur	x8, [x29, #-48]
+	cbnz	x8, .LBB22_344
+.LBB22_339:
+	mov	x0, x25
+	bl	_Unwind_Resume
+.LBB22_340:
+	mov	x10, #-6148914691236517206
+	add	x20, x8, #8
+	movk	x10, #43691
+	umulh	x9, x9, x10
+	lsr	x19, x9, #4
+	b	.LBB22_342
+.LBB22_341:
+	subs	x19, x19, #1
+	add	x20, x20, #24
+	b.eq	.LBB22_338
+.LBB22_342:
+	ldur	x1, [x20, #-8]
+	cbz	x1, .LBB22_341
+	ldr	x0, [x20]
+	mov	w2, #1
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	b	.LBB22_341
+.LBB22_344:
+	add	x8, x8, x8, lsl #1
+	ldur	x0, [x29, #-64]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	mov	x0, x25
+	bl	_Unwind_Resume
+.Lfunc_end22:
+	.size	_RNvCsc0zNMb1uo1d_6probes4main, .Lfunc_end22-_RNvCsc0zNMb1uo1d_6probes4main
+	.cfi_endproc
+	.section	.gcc_except_table._RNvCsc0zNMb1uo1d_6probes4main,"a",@progbits
+	.p2align	2, 0x0
+GCC_except_table22:
+.Lexception2:
+	.byte	255
+	.byte	255
+	.byte	1
+	.uleb128 .Lcst_end2-.Lcst_begin2
+.Lcst_begin2:
+	.uleb128 .Lfunc_begin2-.Lfunc_begin2
+	.uleb128 .Ltmp6-.Lfunc_begin2
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp6-.Lfunc_begin2
+	.uleb128 .Ltmp7-.Ltmp6
+	.uleb128 .Ltmp8-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp113-.Lfunc_begin2
+	.uleb128 .Ltmp114-.Ltmp113
+	.uleb128 .Ltmp115-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp9-.Lfunc_begin2
+	.uleb128 .Ltmp10-.Ltmp9
+	.uleb128 .Ltmp11-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp12-.Lfunc_begin2
+	.uleb128 .Ltmp13-.Ltmp12
+	.uleb128 .Ltmp14-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp17-.Lfunc_begin2
+	.uleb128 .Ltmp18-.Ltmp17
+	.uleb128 .Ltmp112-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp18-.Lfunc_begin2
+	.uleb128 .Ltmp27-.Ltmp18
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp27-.Lfunc_begin2
+	.uleb128 .Ltmp28-.Ltmp27
+	.uleb128 .Ltmp69-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp34-.Lfunc_begin2
+	.uleb128 .Ltmp35-.Ltmp34
+	.uleb128 .Ltmp36-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp31-.Lfunc_begin2
+	.uleb128 .Ltmp32-.Ltmp31
+	.uleb128 .Ltmp33-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp32-.Lfunc_begin2
+	.uleb128 .Ltmp67-.Ltmp32
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp67-.Lfunc_begin2
+	.uleb128 .Ltmp68-.Ltmp67
+	.uleb128 .Ltmp69-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp72-.Lfunc_begin2
+	.uleb128 .Ltmp73-.Ltmp72
+	.uleb128 .Ltmp74-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp73-.Lfunc_begin2
+	.uleb128 .Ltmp78-.Ltmp73
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp78-.Lfunc_begin2
+	.uleb128 .Ltmp79-.Ltmp78
+	.uleb128 .Ltmp80-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp79-.Lfunc_begin2
+	.uleb128 .Ltmp96-.Ltmp79
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp96-.Lfunc_begin2
+	.uleb128 .Ltmp97-.Ltmp96
+	.uleb128 .Ltmp109-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp97-.Lfunc_begin2
+	.uleb128 .Ltmp107-.Ltmp97
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp107-.Lfunc_begin2
+	.uleb128 .Ltmp108-.Ltmp107
+	.uleb128 .Ltmp109-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp81-.Lfunc_begin2
+	.uleb128 .Ltmp82-.Ltmp81
+	.uleb128 .Ltmp83-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp89-.Lfunc_begin2
+	.uleb128 .Ltmp90-.Ltmp89
+	.uleb128 .Ltmp109-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp37-.Lfunc_begin2
+	.uleb128 .Ltmp38-.Ltmp37
+	.uleb128 .Ltmp52-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp38-.Lfunc_begin2
+	.uleb128 .Ltmp43-.Ltmp38
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp43-.Lfunc_begin2
+	.uleb128 .Ltmp44-.Ltmp43
+	.uleb128 .Ltmp45-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp46-.Lfunc_begin2
+	.uleb128 .Ltmp49-.Ltmp46
+	.uleb128 .Ltmp52-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp58-.Lfunc_begin2
+	.uleb128 .Ltmp59-.Ltmp58
+	.uleb128 .Ltmp60-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp59-.Lfunc_begin2
+	.uleb128 .Ltmp55-.Ltmp59
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp55-.Lfunc_begin2
+	.uleb128 .Ltmp56-.Ltmp55
+	.uleb128 .Ltmp57-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp61-.Lfunc_begin2
+	.uleb128 .Ltmp64-.Ltmp61
+	.uleb128 .Ltmp69-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp110-.Lfunc_begin2
+	.uleb128 .Ltmp111-.Ltmp110
+	.uleb128 .Ltmp112-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp87-.Lfunc_begin2
+	.uleb128 .Ltmp88-.Ltmp87
+	.uleb128 .Ltmp93-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp94-.Lfunc_begin2
+	.uleb128 .Ltmp95-.Ltmp94
+	.uleb128 .Ltmp103-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp15-.Lfunc_begin2
+	.uleb128 .Ltmp16-.Ltmp15
+	.uleb128 .Ltmp112-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp53-.Lfunc_begin2
+	.uleb128 .Ltmp54-.Ltmp53
+	.uleb128 .Ltmp69-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp41-.Lfunc_begin2
+	.uleb128 .Ltmp42-.Ltmp41
+	.uleb128 .Ltmp52-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp104-.Lfunc_begin2
+	.uleb128 .Ltmp105-.Ltmp104
+	.uleb128 .Ltmp106-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp98-.Lfunc_begin2
+	.uleb128 .Ltmp99-.Ltmp98
+	.uleb128 .Ltmp100-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp65-.Lfunc_begin2
+	.uleb128 .Ltmp66-.Ltmp65
+	.uleb128 .Ltmp69-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp84-.Lfunc_begin2
+	.uleb128 .Ltmp85-.Ltmp84
+	.uleb128 .Ltmp86-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp75-.Lfunc_begin2
+	.uleb128 .Ltmp76-.Ltmp75
+	.uleb128 .Ltmp77-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp91-.Lfunc_begin2
+	.uleb128 .Ltmp92-.Ltmp91
+	.uleb128 .Ltmp93-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp101-.Lfunc_begin2
+	.uleb128 .Ltmp102-.Ltmp101
+	.uleb128 .Ltmp103-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp39-.Lfunc_begin2
+	.uleb128 .Ltmp40-.Ltmp39
+	.uleb128 .Ltmp52-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp116-.Lfunc_begin2
+	.uleb128 .Ltmp117-.Ltmp116
+	.uleb128 .Ltmp118-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp50-.Lfunc_begin2
+	.uleb128 .Ltmp51-.Ltmp50
+	.uleb128 .Ltmp52-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp29-.Lfunc_begin2
+	.uleb128 .Ltmp30-.Ltmp29
+	.uleb128 .Ltmp69-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp70-.Lfunc_begin2
+	.uleb128 .Ltmp71-.Ltmp70
+	.uleb128 .Ltmp112-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp24-.Lfunc_begin2
+	.uleb128 .Ltmp25-.Ltmp24
+	.uleb128 .Ltmp26-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp21-.Lfunc_begin2
+	.uleb128 .Ltmp22-.Ltmp21
+	.uleb128 .Ltmp23-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp19-.Lfunc_begin2
+	.uleb128 .Ltmp20-.Ltmp19
+	.uleb128 .Ltmp69-.Lfunc_begin2
+	.byte	0
+	.uleb128 .Ltmp20-.Lfunc_begin2
+	.uleb128 .Lfunc_end22-.Ltmp20
+	.byte	0
+	.byte	0
+.Lcst_end2:
+	.p2align	2, 0x0
+
+	.section	.rodata.cst16,"aM",@progbits,16
+	.p2align	4, 0x0
+.LCPI23_0:
+	.byte	0
+	.byte	1
+	.byte	2
+	.byte	3
+	.byte	4
+	.byte	5
+	.byte	6
+	.byte	7
+	.byte	8
+	.byte	9
+	.byte	10
+	.byte	11
+	.byte	12
+	.byte	13
+	.byte	14
+	.byte	15
+.LCPI23_1:
+	.xword	0
+	.xword	-1
+.LCPI23_2:
+	.xword	0
+	.xword	1
+	.section	.text._RNvCsc0zNMb1uo1d_6probes5input,"ax",@progbits
+	.p2align	2
+	.type	_RNvCsc0zNMb1uo1d_6probes5input,@function
+_RNvCsc0zNMb1uo1d_6probes5input:
+.Lfunc_begin3:
+	.cfi_startproc
+	.cfi_personality 156, DW.ref.rust_eh_personality
+	.cfi_lsda 28, .Lexception3
+	sub	sp, sp, #144
+	.cfi_def_cfa_offset 144
+	stp	x29, x30, [sp, #64]
+	str	x25, [sp, #80]
+	stp	x24, x23, [sp, #96]
+	stp	x22, x21, [sp, #112]
+	stp	x20, x19, [sp, #128]
+	add	x29, sp, #64
+	.cfi_def_cfa w29, 80
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w23, -40
+	.cfi_offset w24, -48
+	.cfi_offset w25, -64
+	.cfi_offset w30, -72
+	.cfi_offset w29, -80
+	.cfi_remember_state
+	adrp	x8, .LCPI23_0
+	mov	x19, x0
+	mov	x0, sp
+	ldr	q0, [x8, :lo12:.LCPI23_0]
+	add	x8, sp, #24
+	mov	x22, x3
+	mov	x21, x2
+	mov	x20, x1
+	str	q0, [sp]
+	bl	_RNvXs0_CsfUlAgZTwVfa_13rand_xorshiftNtB5_11XorShiftRngNtCsdyN4l0OUOIM_9rand_core11SeedableRng9from_seed
+	cmp	x22, #8
+	b.gt	.LBB23_13
+	cmp	x22, #5
+	b.eq	.LBB23_25
+	cmp	x22, #8
+	b.ne	.LBB23_32
+	mov	x9, #29295
+	ldr	x8, [x21]
+	movk	x9, #26473, lsl #16
+	movk	x9, #28265, lsl #32
+	movk	x9, #27745, lsl #48
+	cmp	x8, x9
+	b.ne	.LBB23_70
+	cbz	x20, .LBB23_40
+	ldp	w8, w9, [sp, #24]
+	ldr	w11, [sp, #36]
+	cmp	x20, #4
+	mov	w12, #4
+	csel	x25, x20, x12, hi
+	ldr	d0, [sp, #32]
+	eor	w8, w8, w8, lsl #11
+	eor	w9, w9, w9, lsl #11
+	lsl	x21, x25, #3
+	str	d0, [sp, #24]
+	lsr	w10, w8, #8
+	eor	w8, w8, w11
+	eor	w10, w10, w11, lsr #19
+	lsr	w11, w9, #8
+	eor	w23, w10, w8
+	mov	x10, #9223372036854775800
+	eor	w8, w11, w23, lsr #19
+	eor	w9, w9, w23
+	cmp	x21, x10
+	and	x10, x20, #0xe000000000000000
+	eor	w24, w8, w9
+	ccmp	x10, #0, #0, ls
+	stp	w23, w24, [sp, #32]
+	b.ne	.LBB23_35
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x21
+	mov	w1, #8
+	mov	w22, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB23_36
+	orr	x8, x23, x24, lsl #32
+	sub	x20, x20, #1
+	mov	w9, #1
+	stp	x25, x0, [x29, #-24]
+	str	x8, [x0]
+	stur	x9, [x29, #-8]
+	cbz	x20, .LBB23_41
+	mov	x1, x25
+	mov	w21, #1
+	b	.LBB23_11
+.LBB23_9:
+	ldp	x1, x0, [x29, #-24]
+.LBB23_10:
+	orr	x8, x22, x23, lsl #32
+	sub	x20, x20, #1
+	str	x8, [x0, x21, lsl #3]
+	add	x21, x21, #1
+	stur	x21, [x29, #-8]
+	cbz	x20, .LBB23_41
+.LBB23_11:
+	ldp	w8, w9, [sp, #24]
+	ldr	w11, [sp, #36]
+	ldr	d0, [sp, #32]
+	cmp	x21, x1
+	eor	w8, w8, w8, lsl #11
+	eor	w9, w9, w9, lsl #11
+	str	d0, [sp, #24]
+	lsr	w10, w8, #8
+	eor	w8, w8, w11
+	eor	w10, w10, w11, lsr #19
+	lsr	w11, w9, #8
+	eor	w22, w10, w8
+	eor	w8, w11, w22, lsr #19
+	eor	w9, w9, w22
+	eor	w23, w8, w9
+	stp	w22, w23, [sp, #32]
+	b.ne	.LBB23_10
+.Ltmp119:
+	sub	x0, x29, #24
+	mov	x2, x20
+	mov	w3, #8
+	bl	_RINvNvMs2_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalECsc0zNMb1uo1d_6probes
+.Ltmp120:
+	b	.LBB23_9
+.LBB23_13:
+	cmp	x22, #9
+	b.eq	.LBB23_20
+	cmp	x22, #10
+	b.ne	.LBB23_70
+	mov	x10, #25956
+	ldr	x8, [x21]
+	ldrh	w9, [x21, #8]
+	movk	x10, #25459, lsl #16
+	movk	x10, #28261, lsl #32
+	movk	x10, #26980, lsl #48
+	cmp	x8, x10
+	mov	w8, #26478
+	ccmp	w9, w8, #0, eq
+	b.ne	.LBB23_70
+	lsl	x21, x20, #3
+	mov	x8, #9223372036854775800
+	and	x9, x20, #0xe000000000000000
+	cmp	x21, x8
+	ccmp	x9, #0, #0, ls
+	b.ne	.LBB23_35
+	cbz	x21, .LBB23_45
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x21
+	mov	w1, #8
+	mov	w22, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB23_36
+	mov	x8, x20
+	cbnz	x20, .LBB23_46
+	b	.LBB23_68
+.LBB23_20:
+	ldrb	w8, [x21, #8]
+	ldr	x9, [x21]
+	cmp	w8, #103
+	mov	x8, #29537
+	movk	x8, #25955, lsl #16
+	movk	x8, #25710, lsl #32
+	movk	x8, #28265, lsl #48
+	ccmp	x9, x8, #0, eq
+	b.ne	.LBB23_70
+	lsl	x21, x20, #3
+	mov	x8, #9223372036854775800
+	and	x9, x20, #0xe000000000000000
+	cmp	x21, x8
+	ccmp	x9, #0, #0, ls
+	b.ne	.LBB23_35
+	cbz	x21, .LBB23_42
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x21
+	mov	w1, #8
+	mov	w22, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB23_36
+	mov	x8, x20
+	cbnz	x20, .LBB23_43
+	b	.LBB23_68
+.LBB23_25:
+	ldrb	w8, [x21, #4]
+	ldr	w9, [x21]
+	cmp	w8, #108
+	mov	w8, #29029
+	movk	w8, #24949, lsl #16
+	ccmp	w9, w8, #0, eq
+	b.ne	.LBB23_70
+	lsl	x21, x20, #3
+	mov	x8, #9223372036854775800
+	and	x9, x20, #0xe000000000000000
+	cmp	x21, x8
+	ccmp	x9, #0, #0, ls
+	b.ne	.LBB23_35
+	cbz	x21, .LBB23_48
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x21
+	mov	w1, #8
+	mov	w22, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB23_36
+	mov	x8, x20
+	cmp	x20, #2
+	b.lo	.LBB23_49
+.LBB23_30:
+	cmp	x20, #5
+	b.hs	.LBB23_62
+	mov	w11, #1
+	mov	x9, x0
+	b	.LBB23_65
+.LBB23_32:
+	cmp	x22, #3
+	b.ne	.LBB23_70
+	ldrb	w8, [x21, #2]
+	ldrh	w9, [x21]
+	cmp	w8, #119
+	mov	w8, #25958
+	ccmp	w9, w8, #0, eq
+	b.ne	.LBB23_70
+	lsl	x21, x20, #3
+	mov	x8, #9223372036854775800
+	and	x9, x20, #0xe000000000000000
+	cmp	x21, x8
+	ccmp	x9, #0, #0, ls
+	b.eq	.LBB23_37
+.LBB23_35:
+	mov	x22, xzr
+.LBB23_36:
+	mov	x0, x22
+	mov	x1, x21
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.LBB23_37:
+	cbz	x21, .LBB23_50
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x21
+	mov	w1, #8
+	mov	w22, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB23_36
+	mov	x8, x20
+	cbnz	x20, .LBB23_51
+	b	.LBB23_68
+.LBB23_40:
+	mov	w8, #8
+	str	xzr, [x19, #16]
+	stp	xzr, x8, [x19]
+	b	.LBB23_69
+.LBB23_41:
+	ldur	q0, [x29, #-24]
+	ldur	x8, [x29, #-8]
+	str	q0, [x19]
+	str	x8, [x19, #16]
+	b	.LBB23_69
+.LBB23_42:
+	mov	x8, xzr
+	mov	w0, #8
+	cbz	x20, .LBB23_68
+.LBB23_43:
+	cmp	x20, #4
+	b.hs	.LBB23_53
+	mov	x9, xzr
+	b	.LBB23_56
+.LBB23_45:
+	mov	x8, xzr
+	mov	w0, #8
+	cbz	x20, .LBB23_68
+.LBB23_46:
+	cmp	x20, #4
+	b.hs	.LBB23_57
+	mov	x9, xzr
+	mov	x10, x20
+	b	.LBB23_60
+.LBB23_48:
+	mov	x8, xzr
+	mov	w0, #8
+	cmp	x20, #2
+	b.hs	.LBB23_30
+.LBB23_49:
+	mov	x9, x0
+	cbnz	x20, .LBB23_67
+	b	.LBB23_68
+.LBB23_50:
+	mov	x8, xzr
+	mov	w0, #8
+	cbz	x20, .LBB23_68
+.LBB23_51:
+	ldp	w13, w12, [sp, #24]
+	ldp	w9, w14, [sp, #32]
+	mov	x10, x0
+	mov	x11, x20
+.LBB23_52:
+	eor	w13, w13, w13, lsl #11
+	eor	w16, w12, w12, lsl #11
+	mov	w12, w14
+	subs	x11, x11, #1
+	lsr	w15, w13, #8
+	lsr	w17, w16, #8
+	eor	w14, w15, w14, lsr #19
+	eor	w15, w13, w12
+	mov	w13, w9
+	eor	w9, w14, w15
+	eor	w14, w17, w9, lsr #19
+	eor	w15, w16, w9
+	and	w16, w9, #0x3
+	str	x16, [x10], #8
+	eor	w14, w14, w15
+	b.ne	.LBB23_52
+	b	.LBB23_68
+.LBB23_53:
+	mov	w9, #2
+	mov	w10, #4
+	adrp	x11, .LCPI23_2
+	dup	v0.2d, x9
+	dup	v1.2d, x10
+	ldr	q2, [x11, :lo12:.LCPI23_2]
+	and	x9, x20, #0x1ffffffffffffffc
+	add	x10, x0, #16
+	and	x11, x20, #0x1ffffffffffffffc
+.LBB23_54:
+	add	v3.2d, v2.2d, v0.2d
+	subs	x11, x11, #4
+	stp	q2, q3, [x10, #-16]
+	add	v2.2d, v2.2d, v1.2d
+	add	x10, x10, #32
+	b.ne	.LBB23_54
+	cmp	x20, x9
+	b.eq	.LBB23_68
+.LBB23_56:
+	mov	x10, x9
+	add	x9, x9, #1
+	cmp	x20, x9
+	str	x10, [x0, x10, lsl #3]
+	b.ne	.LBB23_56
+	b	.LBB23_68
+.LBB23_57:
+	dup	v1.2d, x20
+	adrp	x9, .LCPI23_1
+	movi	v0.2d, #0xffffffffffffffff
+	ldr	q2, [x9, :lo12:.LCPI23_1]
+	mov	x9, #-3
+	mov	x10, #-4
+	dup	v3.2d, x10
+	and	x10, x20, #0x3
+	add	x11, x0, #16
+	add	v1.2d, v1.2d, v2.2d
+	dup	v2.2d, x9
+	and	x9, x20, #0x1ffffffffffffffc
+	and	x12, x20, #0x1ffffffffffffffc
+.LBB23_58:
+	add	v4.2d, v1.2d, v0.2d
+	add	v5.2d, v1.2d, v2.2d
+	subs	x12, x12, #4
+	add	v1.2d, v1.2d, v3.2d
+	stp	q4, q5, [x11, #-16]
+	add	x11, x11, #32
+	b.ne	.LBB23_58
+	cmp	x20, x9
+	b.eq	.LBB23_68
+.LBB23_60:
+	add	x9, x0, x9, lsl #3
+	sub	x10, x10, #1
+.LBB23_61:
+	str	x10, [x9], #8
+	sub	x10, x10, #1
+	cmn	x10, #1
+	b.ne	.LBB23_61
+	b	.LBB23_68
+.LBB23_62:
+	sub	x10, x20, #1
+	mov	w9, #7
+	add	x13, x0, #16
+	and	x12, x10, #0xfffffffffffffffc
+	dup	v0.2d, x9
+	and	x14, x10, #0xfffffffffffffffc
+	add	x9, x0, x12, lsl #3
+	orr	x11, x12, #0x1
+.LBB23_63:
+	subs	x14, x14, #4
+	stp	q0, q0, [x13, #-16]
+	add	x13, x13, #32
+	b.ne	.LBB23_63
+	cmp	x10, x12
+	b.eq	.LBB23_67
+.LBB23_65:
+	sub	x10, x20, x11
+	mov	w11, #7
+.LBB23_66:
+	subs	x10, x10, #1
+	str	x11, [x9], #8
+	b.ne	.LBB23_66
+.LBB23_67:
+	mov	w10, #7
+	str	x10, [x9]
+.LBB23_68:
+	stp	x8, x0, [x19]
+	str	x20, [x19, #16]
+.LBB23_69:
+	.cfi_def_cfa wsp, 144
+	ldp	x20, x19, [sp, #128]
+	ldr	x25, [sp, #80]
+	ldp	x22, x21, [sp, #112]
+	ldp	x24, x23, [sp, #96]
+	ldp	x29, x30, [sp, #64]
+	add	sp, sp, #144
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w23
+	.cfi_restore w24
+	.cfi_restore w25
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB23_70:
+	.cfi_restore_state
+	adrp	x0, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.15
+	add	x0, x0, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.15
+	adrp	x2, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.34
+	add	x2, x2, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.34
+	mov	w1, #14
+	bl	_RNvNtCshp6Wxz1DwXO_4core9panicking5panic
+.LBB23_71:
+.Ltmp121:
+	ldur	x8, [x29, #-24]
+	mov	x19, x0
+	cbz	x8, .LBB23_73
+	ldur	x0, [x29, #-16]
+	lsl	x1, x8, #3
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB23_73:
+	mov	x0, x19
+	bl	_Unwind_Resume
+.Lfunc_end23:
+	.size	_RNvCsc0zNMb1uo1d_6probes5input, .Lfunc_end23-_RNvCsc0zNMb1uo1d_6probes5input
+	.cfi_endproc
+	.section	.gcc_except_table._RNvCsc0zNMb1uo1d_6probes5input,"a",@progbits
+	.p2align	2, 0x0
+GCC_except_table23:
+.Lexception3:
+	.byte	255
+	.byte	255
+	.byte	1
+	.uleb128 .Lcst_end3-.Lcst_begin3
+.Lcst_begin3:
+	.uleb128 .Lfunc_begin3-.Lfunc_begin3
+	.uleb128 .Ltmp119-.Lfunc_begin3
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp119-.Lfunc_begin3
+	.uleb128 .Ltmp120-.Ltmp119
+	.uleb128 .Ltmp121-.Lfunc_begin3
+	.byte	0
+	.uleb128 .Ltmp120-.Lfunc_begin3
+	.uleb128 .Lfunc_end23-.Ltmp120
+	.byte	0
+	.byte	0
+.Lcst_end3:
+	.p2align	2, 0x0
+
+	.section	.text.unlikely._RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecINtNtB7_3vec3VecyEE8grow_oneCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecINtNtB7_3vec3VecyEE8grow_oneCsc0zNMb1uo1d_6probes,@function
+_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecINtNtB7_3vec3VecyEE8grow_oneCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #32]
+	stp	x20, x19, [sp, #48]
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 32
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w30, -24
+	.cfi_offset w29, -32
+	.cfi_remember_state
+	ldp	x1, x2, [x0]
+	mov	w8, #4
+	mov	x19, x0
+	add	x0, sp, #8
+	mov	w4, #24
+	lsl	x9, x1, #1
+	cmp	x9, #4
+	csel	x20, x9, x8, hi
+	mov	x3, x20
+	bl	_RNvMs5_NtCs6sh1iPzjxYC_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc0zNMb1uo1d_6probes
+	ldr	x8, [sp, #8]
+	cbnz	x8, .LBB24_2
+	ldr	x8, [sp, #16]
+	stp	x20, x8, [x19]
+	.cfi_def_cfa wsp, 64
+	ldp	x20, x19, [sp, #48]
+	ldp	x29, x30, [sp, #32]
+	add	sp, sp, #64
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB24_2:
+	.cfi_restore_state
+	ldp	x0, x1, [sp, #16]
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Lfunc_end24:
+	.size	_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecINtNtB7_3vec3VecyEE8grow_oneCsc0zNMb1uo1d_6probes, .Lfunc_end24-_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecINtNtB7_3vec3VecyEE8grow_oneCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text.unlikely._RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecyE8grow_oneCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecyE8grow_oneCsc0zNMb1uo1d_6probes,@function
+_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecyE8grow_oneCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #32]
+	stp	x20, x19, [sp, #48]
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 32
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w30, -24
+	.cfi_offset w29, -32
+	.cfi_remember_state
+	ldp	x1, x2, [x0]
+	mov	w8, #4
+	mov	x19, x0
+	add	x0, sp, #8
+	mov	w4, #8
+	lsl	x9, x1, #1
+	cmp	x9, #4
+	csel	x20, x9, x8, hi
+	mov	x3, x20
+	bl	_RNvMs5_NtCs6sh1iPzjxYC_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc0zNMb1uo1d_6probes
+	ldr	x8, [sp, #8]
+	cbnz	x8, .LBB25_2
+	ldr	x8, [sp, #16]
+	stp	x20, x8, [x19]
+	.cfi_def_cfa wsp, 64
+	ldp	x20, x19, [sp, #48]
+	ldp	x29, x30, [sp, #32]
+	add	sp, sp, #64
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB25_2:
+	.cfi_restore_state
+	ldp	x0, x1, [sp, #16]
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.Lfunc_end25:
+	.size	_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecyE8grow_oneCsc0zNMb1uo1d_6probes, .Lfunc_end25-_RNvMs4_NtCs6sh1iPzjxYC_5alloc7raw_vecINtB5_6RawVecyE8grow_oneCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text.unlikely._RNvMs5_NtCs6sh1iPzjxYC_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvMs5_NtCs6sh1iPzjxYC_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc0zNMb1uo1d_6probes,@function
+_RNvMs5_NtCs6sh1iPzjxYC_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	stp	x29, x30, [sp, #-32]!
+	.cfi_def_cfa_offset 32
+	stp	x20, x19, [sp, #16]
+	mov	x29, sp
+	.cfi_def_cfa w29, 32
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w30, -24
+	.cfi_offset w29, -32
+	.cfi_remember_state
+	umulh	x8, x4, x3
+	mov	x20, x0
+	mul	x19, x4, x3
+	cmp	xzr, x8
+	mov	x8, #9223372036854775800
+	ccmp	x19, x8, #2, eq
+	b.ls	.LBB26_2
+	mov	w8, #1
+	mov	w9, #8
+	str	xzr, [x20, x9]
+	str	x8, [x20]
+	.cfi_def_cfa wsp, 32
+	ldp	x20, x19, [sp, #16]
+	ldp	x29, x30, [sp], #32
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB26_2:
+	.cfi_restore_state
+	.cfi_remember_state
+	cbz	x1, .LBB26_4
+	mul	x1, x4, x1
+	mov	x0, x2
+	mov	w2, #8
+	mov	x3, x19
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_realloc
+	cbnz	x0, .LBB26_8
+	b	.LBB26_6
+.LBB26_4:
+	cbz	x19, .LBB26_7
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x19
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbnz	x0, .LBB26_8
+.LBB26_6:
+	mov	w8, #8
+	str	x8, [x20, #8]
+	mov	w8, #1
+	mov	w9, #16
+	str	x19, [x20, x9]
+	str	x8, [x20]
+	.cfi_def_cfa wsp, 32
+	ldp	x20, x19, [sp, #16]
+	ldp	x29, x30, [sp], #32
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB26_7:
+	.cfi_restore_state
+	mov	w0, #8
+.LBB26_8:
+	str	x0, [x20, #8]
+	mov	w9, #16
+	str	x19, [x20, x9]
+	str	xzr, [x20]
+	.cfi_def_cfa wsp, 32
+	ldp	x20, x19, [sp, #16]
+	ldp	x29, x30, [sp], #32
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end26:
+	.size	_RNvMs5_NtCs6sh1iPzjxYC_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc0zNMb1uo1d_6probes, .Lfunc_end26-_RNvMs5_NtCs6sh1iPzjxYC_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNvXs1G_NtCshp6Wxz1DwXO_4core3fmtTjjENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvXs1G_NtCshp6Wxz1DwXO_4core3fmtTjjENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,@function
+_RNvXs1G_NtCshp6Wxz1DwXO_4core3fmtTjjENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #32]
+	str	x19, [sp, #48]
+	add	x29, sp, #32
+	.cfi_def_cfa w29, 32
+	.cfi_offset w19, -16
+	.cfi_offset w30, -24
+	.cfi_offset w29, -32
+	mov	x19, x0
+	mov	x8, sp
+	mov	x0, x1
+	mov	w1, #1
+	mov	x2, xzr
+	bl	_RNvMsa_NtCshp6Wxz1DwXO_4core3fmtNtB5_9Formatter11debug_tuple
+	stur	x19, [x29, #-8]
+	add	x8, x19, #8
+	adrp	x19, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.38
+	add	x19, x19, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.38
+	mov	x0, sp
+	sub	x1, x29, #8
+	mov	x2, x19
+	str	x8, [x29, #24]
+	bl	_RNvMs3_NtNtCshp6Wxz1DwXO_4core3fmt8buildersNtB5_10DebugTuple5field
+	mov	x0, sp
+	add	x1, x29, #24
+	mov	x2, x19
+	bl	_RNvMs3_NtNtCshp6Wxz1DwXO_4core3fmt8buildersNtB5_10DebugTuple5field
+	mov	x0, sp
+	bl	_RNvMs3_NtNtCshp6Wxz1DwXO_4core3fmt8buildersNtB5_10DebugTuple6finish
+	.cfi_def_cfa wsp, 64
+	ldp	x29, x30, [sp, #32]
+	ldr	x19, [sp, #48]
+	add	sp, sp, #64
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end27:
+	.size	_RNvXs1G_NtCshp6Wxz1DwXO_4core3fmtTjjENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes, .Lfunc_end27-_RNvXs1G_NtCshp6Wxz1DwXO_4core3fmtTjjENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRINtNtCs6sh1iPzjxYC_5alloc3vec3VecyENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRINtNtCs6sh1iPzjxYC_5alloc3vec3VecyENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,@function
+_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRINtNtCs6sh1iPzjxYC_5alloc3vec3VecyENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #16]
+	str	x21, [sp, #32]
+	stp	x20, x19, [sp, #48]
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 48
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -32
+	.cfi_offset w30, -40
+	.cfi_offset w29, -48
+	ldr	x8, [x0]
+	mov	x0, x1
+	ldp	x20, x19, [x8, #8]
+	mov	x8, sp
+	bl	_RNvMsa_NtCshp6Wxz1DwXO_4core3fmtNtB5_9Formatter10debug_list
+	cbz	x19, .LBB28_3
+	lsl	x21, x19, #3
+	adrp	x19, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.0
+	add	x19, x19, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.0
+.LBB28_2:
+	mov	x0, sp
+	add	x1, x29, #24
+	mov	x2, x19
+	str	x20, [x29, #24]
+	add	x20, x20, #8
+	bl	_RNvMs6_NtNtCshp6Wxz1DwXO_4core3fmt8buildersNtB5_9DebugList5entry
+	subs	x21, x21, #8
+	b.ne	.LBB28_2
+.LBB28_3:
+	mov	x0, sp
+	bl	_RNvMs6_NtNtCshp6Wxz1DwXO_4core3fmt8buildersNtB5_9DebugList6finish
+	.cfi_def_cfa wsp, 64
+	ldp	x20, x19, [sp, #48]
+	ldr	x21, [sp, #32]
+	ldp	x29, x30, [sp, #16]
+	add	sp, sp, #64
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end28:
+	.size	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRINtNtCs6sh1iPzjxYC_5alloc3vec3VecyENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes, .Lfunc_end28-_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRINtNtCs6sh1iPzjxYC_5alloc3vec3VecyENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,@function
+_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	ldr	x8, [x0]
+	adrp	x9, .Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	add	x9, x9, :lo12:.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	mov	x0, x1
+	ldrb	w8, [x8]
+	ldrb	w2, [x9, x8]
+	adrp	x9, .Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel
+	add	x9, x9, :lo12:.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel
+	ldrsw	x8, [x9, x8, lsl #2]
+	add	x1, x9, x8
+	b	_RNvMsa_NtCshp6Wxz1DwXO_4core3fmtNtB5_9Formatter9write_str
+.Lfunc_end29:
+	.size	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes, .Lfunc_end29-_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRjNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRjNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,@function
+_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRjNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	ldr	w8, [x1, #16]
+	ldr	x0, [x0]
+	tbnz	w8, #25, .LBB30_3
+	tbnz	w8, #26, .LBB30_4
+	b	_RNvXsi_NtNtNtCshp6Wxz1DwXO_4core3fmt3num3impjNtB9_7Display3fmt
+.LBB30_3:
+	b	_RNvXs6_NtNtCshp6Wxz1DwXO_4core3fmt3numjNtB7_8LowerHex3fmt
+.LBB30_4:
+	b	_RNvXs8_NtNtCshp6Wxz1DwXO_4core3fmt3numjNtB7_8UpperHex3fmt
+.Lfunc_end30:
+	.size	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRjNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes, .Lfunc_end30-_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRjNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRyNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRyNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,@function
+_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRyNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	ldr	w8, [x1, #16]
+	ldr	x0, [x0]
+	tbnz	w8, #25, .LBB31_3
+	tbnz	w8, #26, .LBB31_4
+	b	_RNvXsd_NtNtNtCshp6Wxz1DwXO_4core3fmt3num3impyNtB9_7Display3fmt
+.LBB31_3:
+	b	_RNvXsC_NtNtCshp6Wxz1DwXO_4core3fmt3numyNtB7_8LowerHex3fmt
+.LBB31_4:
+	b	_RNvXsE_NtNtCshp6Wxz1DwXO_4core3fmt3numyNtB7_8UpperHex3fmt
+.Lfunc_end31:
+	.size	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRyNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes, .Lfunc_end31-_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRyNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text._RNvXsd_NtNtCshp6Wxz1DwXO_4core3num5errorNtB5_13ParseIntErrorNtNtB9_3fmt5Debug3fmt,"ax",@progbits
+	.p2align	2
+	.type	_RNvXsd_NtNtCshp6Wxz1DwXO_4core3num5errorNtB5_13ParseIntErrorNtNtB9_3fmt5Debug3fmt,@function
+_RNvXsd_NtNtCshp6Wxz1DwXO_4core3num5errorNtB5_13ParseIntErrorNtNtB9_3fmt5Debug3fmt:
+	.cfi_startproc
+	sub	sp, sp, #32
+	.cfi_def_cfa_offset 32
+	stp	x29, x30, [sp, #16]
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	mov	x8, x1
+	str	x0, [sp, #8]
+	adrp	x1, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.40
+	add	x1, x1, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.40
+	adrp	x3, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.41
+	add	x3, x3, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.41
+	adrp	x6, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.39
+	add	x6, x6, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.39
+	add	x5, sp, #8
+	mov	x0, x8
+	mov	w2, #13
+	mov	w4, #4
+	bl	_RNvMsa_NtCshp6Wxz1DwXO_4core3fmtNtB5_9Formatter26debug_struct_field1_finish
+	.cfi_def_cfa wsp, 32
+	ldp	x29, x30, [sp, #16]
+	add	sp, sp, #32
+	.cfi_def_cfa_offset 0
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end32:
+	.size	_RNvXsd_NtNtCshp6Wxz1DwXO_4core3num5errorNtB5_13ParseIntErrorNtNtB9_3fmt5Debug3fmt, .Lfunc_end32-_RNvXsd_NtNtCshp6Wxz1DwXO_4core3num5errorNtB5_13ParseIntErrorNtNtB9_3fmt5Debug3fmt
+	.cfi_endproc
+
+	.section	.text._RNvXsr_NtCs6sh1iPzjxYC_5alloc3vecINtB5_3VecyENtNtCshp6Wxz1DwXO_4core3fmt5Debug3fmtCsc0zNMb1uo1d_6probes,"ax",@progbits
+	.p2align	2
+	.type	_RNvXsr_NtCs6sh1iPzjxYC_5alloc3vecINtB5_3VecyENtNtCshp6Wxz1DwXO_4core3fmt5Debug3fmtCsc0zNMb1uo1d_6probes,@function
+_RNvXsr_NtCs6sh1iPzjxYC_5alloc3vecINtB5_3VecyENtNtCshp6Wxz1DwXO_4core3fmt5Debug3fmtCsc0zNMb1uo1d_6probes:
+	.cfi_startproc
+	sub	sp, sp, #64
+	.cfi_def_cfa_offset 64
+	stp	x29, x30, [sp, #16]
+	str	x21, [sp, #32]
+	stp	x20, x19, [sp, #48]
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 48
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -32
+	.cfi_offset w30, -40
+	.cfi_offset w29, -48
+	ldp	x20, x19, [x0, #8]
+	mov	x0, x1
+	mov	x8, sp
+	bl	_RNvMsa_NtCshp6Wxz1DwXO_4core3fmtNtB5_9Formatter10debug_list
+	cbz	x19, .LBB33_3
+	lsl	x21, x19, #3
+	adrp	x19, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.0
+	add	x19, x19, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.0
+.LBB33_2:
+	mov	x0, sp
+	add	x1, x29, #24
+	mov	x2, x19
+	str	x20, [x29, #24]
+	add	x20, x20, #8
+	bl	_RNvMs6_NtNtCshp6Wxz1DwXO_4core3fmt8buildersNtB5_9DebugList5entry
+	subs	x21, x21, #8
+	b.ne	.LBB33_2
+.LBB33_3:
+	mov	x0, sp
+	bl	_RNvMs6_NtNtCshp6Wxz1DwXO_4core3fmt8buildersNtB5_9DebugList6finish
+	.cfi_def_cfa wsp, 64
+	ldp	x20, x19, [sp, #48]
+	ldr	x21, [sp, #32]
+	ldp	x29, x30, [sp, #16]
+	add	sp, sp, #64
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.Lfunc_end33:
+	.size	_RNvXsr_NtCs6sh1iPzjxYC_5alloc3vecINtB5_3VecyENtNtCshp6Wxz1DwXO_4core3fmt5Debug3fmtCsc0zNMb1uo1d_6probes, .Lfunc_end33-_RNvXsr_NtCs6sh1iPzjxYC_5alloc3vecINtB5_3VecyENtNtCshp6Wxz1DwXO_4core3fmt5Debug3fmtCsc0zNMb1uo1d_6probes
+	.cfi_endproc
+
+	.section	.text.clone_sort,"ax",@progbits
+	.globl	clone_sort
+	.p2align	2
+	.type	clone_sort,@function
+clone_sort:
+.Lfunc_begin4:
+	.cfi_startproc
+	.cfi_personality 156, DW.ref.rust_eh_personality
+	.cfi_lsda 28, .Lexception4
+	stp	x29, x30, [sp, #-48]!
+	.cfi_def_cfa_offset 48
+	stp	x22, x21, [sp, #16]
+	stp	x20, x19, [sp, #32]
+	mov	x29, sp
+	.cfi_def_cfa w29, 48
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w21, -24
+	.cfi_offset w22, -32
+	.cfi_offset w30, -40
+	.cfi_offset w29, -48
+	.cfi_remember_state
+	ldr	x21, [x0, #16]
+	cbz	x21, .LBB34_4
+	ldr	x22, [x0, #8]
+	lsl	x19, x21, #3
+	bl	_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+	mov	x0, x19
+	mov	w1, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc12___rust_alloc
+	cbz	x0, .LBB34_7
+	mov	x1, x22
+	mov	x2, x19
+	mov	x20, x0
+	bl	memcpy
+	cmp	x21, #1
+	b.ne	.LBB34_5
+.LBB34_3:
+	mov	x0, x20
+	mov	x1, x19
+	mov	w2, #8
+	.cfi_def_cfa wsp, 48
+	ldp	x20, x19, [sp, #32]
+	ldp	x22, x21, [sp, #16]
+	ldp	x29, x30, [sp], #48
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w30
+	.cfi_restore w29
+	b	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+.LBB34_4:
+	.cfi_restore_state
+	.cfi_remember_state
+	.cfi_def_cfa wsp, 48
+	ldp	x20, x19, [sp, #32]
+	ldp	x22, x21, [sp, #16]
+	ldp	x29, x30, [sp], #48
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w21
+	.cfi_restore w22
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB34_5:
+	.cfi_restore_state
+	cmp	x21, #21
+	b.hs	.LBB34_8
+	mov	x0, x20
+	mov	x1, x21
+	mov	w2, #1
+	bl	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort25insertion_sort_shift_leftyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+	b	.LBB34_3
+.LBB34_7:
+	mov	w0, #8
+	mov	x1, x19
+	bl	_RNvNtCs6sh1iPzjxYC_5alloc7raw_vec12handle_error
+.LBB34_8:
+.Ltmp122:
+	mov	x0, x20
+	mov	x1, x21
+	bl	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNvYyNtNtB8_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.Ltmp123:
+	b	.LBB34_3
+.LBB34_9:
+.Ltmp124:
+	mov	x21, x0
+	mov	x0, x20
+	mov	x1, x19
+	mov	w2, #8
+	bl	_RNvCshVjSbrpHdcL_7___rustc14___rust_dealloc
+	mov	x0, x21
+	bl	_Unwind_Resume
+.Lfunc_end34:
+	.size	clone_sort, .Lfunc_end34-clone_sort
+	.cfi_endproc
+	.section	.gcc_except_table.clone_sort,"a",@progbits
+	.p2align	2, 0x0
+GCC_except_table34:
+.Lexception4:
+	.byte	255
+	.byte	255
+	.byte	1
+	.uleb128 .Lcst_end4-.Lcst_begin4
+.Lcst_begin4:
+	.uleb128 .Lfunc_begin4-.Lfunc_begin4
+	.uleb128 .Ltmp122-.Lfunc_begin4
+	.byte	0
+	.byte	0
+	.uleb128 .Ltmp122-.Lfunc_begin4
+	.uleb128 .Ltmp123-.Ltmp122
+	.uleb128 .Ltmp124-.Lfunc_begin4
+	.byte	0
+	.uleb128 .Ltmp123-.Lfunc_begin4
+	.uleb128 .Lfunc_end34-.Ltmp123
+	.byte	0
+	.byte	0
+.Lcst_end4:
+	.p2align	2, 0x0
+
+	.section	.text.sort_u64,"ax",@progbits
+	.globl	sort_u64
+	.p2align	2
+	.type	sort_u64,@function
+sort_u64:
+	.cfi_startproc
+	cmp	x1, #2
+	b.hs	.LBB35_2
+	ret
+.LBB35_2:
+	cmp	x1, #21
+	b.hs	.LBB35_4
+	mov	w2, #1
+	b	_RINvNtNtNtNtCshp6Wxz1DwXO_4core5slice4sort6shared9smallsort25insertion_sort_shift_leftyNvYyNtNtBa_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.LBB35_4:
+	b	_RINvNtNtNtCshp6Wxz1DwXO_4core5slice4sort8unstable7ipnsortyNvYyNtNtB8_3cmp10PartialOrd2ltECsc0zNMb1uo1d_6probes
+.Lfunc_end35:
+	.size	sort_u64, .Lfunc_end35-sort_u64
+	.cfi_endproc
+
+	.section	.text.main,"ax",@progbits
+	.globl	main
+	.p2align	2
+	.type	main,@function
+main:
+	.cfi_startproc
+	sub	sp, sp, #32
+	stp	x29, x30, [sp, #16]
+	add	x29, sp, #16
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	sxtw	x2, w0
+	mov	x3, x1
+	adrp	x8, _RNvCsc0zNMb1uo1d_6probes4main
+	add	x8, x8, :lo12:_RNvCsc0zNMb1uo1d_6probes4main
+	adrp	x1, .Lanon.f58e4a5dde7708c44c35bab839f67bb2.1
+	add	x1, x1, :lo12:.Lanon.f58e4a5dde7708c44c35bab839f67bb2.1
+	add	x0, sp, #8
+	mov	w4, wzr
+	str	x8, [sp, #8]
+	bl	_RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+	ldp	x29, x30, [sp, #16]
+	add	sp, sp, #32
+	ret
+.Lfunc_end36:
+	.size	main, .Lfunc_end36-main
+	.cfi_endproc
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.0,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.0,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.0:
+	.asciz	"\000\000\000\000\000\000\000\000\b\000\000\000\000\000\000\000\b\000\000\000\000\000\000"
+	.xword	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRyNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.0, 32
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.1,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.1,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.1:
+	.asciz	"\000\000\000\000\000\000\000\000\b\000\000\000\000\000\000\000\b\000\000\000\000\000\000"
+	.xword	_RNSNvYNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceuE9call_once6vtableCsc0zNMb1uo1d_6probes
+	.xword	_RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Csc0zNMb1uo1d_6probes
+	.xword	_RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Csc0zNMb1uo1d_6probes
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.1, 48
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.2,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.2,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.2:
+	.asciz	"\000\000\000\000\000\000\000\000\b\000\000\000\000\000\000\000\b\000\000\000\000\000\000"
+	.xword	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRINtNtCs6sh1iPzjxYC_5alloc3vec3VecyENtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.2, 32
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.3,@object
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.3:
+	.asciz	"library/core/src/slice/sort/stable/quicksort.rs"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.3, 48
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.4,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.4,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.4:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.3
+	.asciz	"/\000\000\000\000\000\000\000M\000\000\000\037\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.4, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.5,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.5,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.5:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.3
+	.asciz	"/\000\000\000\000\000\000\000G\000\000\000\027\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.5, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6,@object
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6:
+	.asciz	"/tmp/sort-small-random-20261106/probes.rs"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6, 42
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.7,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.7,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.7:
+	.ascii	"assertion failed: a.windows(2).all(|w| w[0] <= w[1])"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.7, 52
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.8,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.8,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.8:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000&\000\000\000\005\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.8, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.9,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.9,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.9:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000$\000\000\000\n\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.9, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.10,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.10,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.10:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\0009\000\000\000\t\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.10, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.11,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.11,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.11:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000:\000\000\000\024\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.11, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.12,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.12,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.12:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000:\000\000\000 \000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.12, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.13,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.13,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.13:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000:\000\000\0009\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.13, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.14,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.14,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.14:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000:\000\000\000E\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.14, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.15,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.15,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.15:
+	.ascii	"explicit panic"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.15, 14
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.16,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.16,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.16:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000J\000\000\000\f\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.16, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.17,@object
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.17:
+	.asciz	"\300\001\n"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.17, 4
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.18,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.18,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.18:
+	.ascii	"assertion failed: work.windows(2).all(|w| w[0] <= w[1])"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.18, 55
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.19,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.19,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.19:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000H\000\000\0004\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.19, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.20,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.20,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.20:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000G\000\000\000C\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.20, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.21,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.21,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.21:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000G\000\000\000$\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.21, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.22,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.22,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.22:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000A\000\000\000+\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.22, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.23,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.23,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.23:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000@\000\000\000,\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.23, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.24,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.24,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.24:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000M\000\000\000\026\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.24, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.25,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.25,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.25:
+	.ascii	"CHECK_OK\n"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.25, 9
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.26,@object
+	.section	.rodata.cst8,"aM",@progbits,8
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.26:
+	.ascii	"original"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.26, 8
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.27,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.27,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.27:
+	.ascii	"ascending"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.27, 9
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.28,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.28,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.28:
+	.ascii	"descending"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.28, 10
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.29,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.29,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.29:
+	.ascii	"equal"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.29, 5
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.30,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.30,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.30:
+	.ascii	"few"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.30, 3
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.31,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.31,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.31:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000.\000\000\000:\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.31, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.32,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.32,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.32:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000/\000\000\000v\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.32, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.33,@object
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.33:
+	.asciz	"\006input=\300\r comparisons=\300\017 insertion_ops=\300\001\n"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.33, 43
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.34,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.34,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.34:
+	.xword	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.6
+	.asciz	")\000\000\000\000\000\000\000\016\000\000\000\016\000\000"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.34, 24
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.35,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.35,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.35:
+	.ascii	"mid > len"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.35, 9
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.36,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.36,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.36:
+	.asciz	"\000\000\000\000\000\000\000\000\001\000\000\000\000\000\000\000\001\000\000\000\000\000\000"
+	.xword	_RNvXsd_NtNtCshp6Wxz1DwXO_4core3num5errorNtB5_13ParseIntErrorNtNtB9_3fmt5Debug3fmt
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.36, 32
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.37,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.37,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.37:
+	.ascii	"called `Result::unwrap()` on an `Err` value"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.37, 43
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.38,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.38,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.38:
+	.asciz	"\000\000\000\000\000\000\000\000\b\000\000\000\000\000\000\000\b\000\000\000\000\000\000"
+	.xword	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRjNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.38, 32
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.39,@object
+	.section	.data.rel.ro..Lanon.f58e4a5dde7708c44c35bab839f67bb2.39,"aw",@progbits
+	.p2align	3, 0x0
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.39:
+	.asciz	"\000\000\000\000\000\000\000\000\b\000\000\000\000\000\000\000\b\000\000\000\000\000\000"
+	.xword	_RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.39, 32
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.40,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.40,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.40:
+	.ascii	"ParseIntError"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.40, 13
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.41,@object
+	.section	.rodata.cst4,"aM",@progbits,4
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.41:
+	.ascii	"kind"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.41, 4
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.42,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.42,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.42:
+	.ascii	"Empty"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.42, 5
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.43,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.43,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.43:
+	.ascii	"InvalidDigit"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.43, 12
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.44,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.44,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.44:
+	.ascii	"PosOverflow"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.44, 11
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.45,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.45,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.45:
+	.ascii	"NegOverflow"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.45, 11
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.46,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.46,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.46:
+	.ascii	"Zero"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.46, 4
+
+	.type	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.47,@object
+	.section	.rodata..Lanon.f58e4a5dde7708c44c35bab839f67bb2.47,"a",@progbits
+.Lanon.f58e4a5dde7708c44c35bab839f67bb2.47:
+	.ascii	"NotAPowerOfTwo"
+	.size	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.47, 14
+
+	.type	.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,@object
+	.section	.rodata..Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes,"a",@progbits
+	.p2align	3, 0x0
+.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes:
+	.ascii	"\005\f\013\013\004\016"
+	.size	.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes, 6
+
+	.type	.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel,@object
+	.section	.rodata..Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel,"a",@progbits
+	.p2align	2, 0x0
+.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel:
+	.word	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.42-.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel
+	.word	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.43-.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel
+	.word	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.44-.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel
+	.word	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.45-.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel
+	.word	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.46-.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel
+	.word	.Lanon.f58e4a5dde7708c44c35bab839f67bb2.47-.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel
+	.size	.Lswitch.table._RNvXs1g_NtCshp6Wxz1DwXO_4core3fmtRNtNtNtB8_3num5error12IntErrorKindNtB6_5Debug3fmtCsc0zNMb1uo1d_6probes.115.rel, 24
+
+	.hidden	DW.ref.rust_eh_personality
+	.weak	DW.ref.rust_eh_personality
+	.section	.data.DW.ref.rust_eh_personality,"awG",@progbits,DW.ref.rust_eh_personality,comdat
+	.p2align	3, 0x0
+	.type	DW.ref.rust_eh_personality,@object
+	.size	DW.ref.rust_eh_personality, 8
+DW.ref.rust_eh_personality:
+	.xword	rust_eh_personality
+	.ident	"rustc version 1.99.0-dev"
+	.section	".note.GNU-stack","",@progbits

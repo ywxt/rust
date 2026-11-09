@@ -187,6 +187,18 @@ impl<'a, K: 'a, V: 'a> LazyLeafRange<marker::Immut<'a>, K, V> {
             let node = edge.into_node();
             let (keys, vals) = unsafe { node.into_key_val_slices_from(edge.idx()) };
             let take = keys.len().min(length);
+            let next = if length > take {
+                let kv = unsafe { Handle::new_edge(node, node.len()) }.next_kv().ok().unwrap();
+                let next_edge = kv.next_leaf_edge();
+                if length > take + 1 {
+                    core::intrinsics::prefetch_read_data::<(), 3>(
+                        next_edge.reborrow().into_node().as_ptr(),
+                    );
+                }
+                Some((kv, next_edge))
+            } else {
+                None
+            };
             for (k, v) in keys[..take].iter().zip(&vals[..take]) {
                 acc = f(acc, (k, v));
             }
@@ -194,15 +206,13 @@ impl<'a, K: 'a, V: 'a> LazyLeafRange<marker::Immut<'a>, K, V> {
             if length == 0 {
                 return acc;
             }
-            // The leaf is exhausted; the next KV is in an ancestor node,
-            // and the next leaf is the leftmost one below its right edge.
-            let kv = unsafe { Handle::new_edge(node, node.len()) }.next_kv().ok().unwrap();
+            let (kv, next_edge) = next.unwrap();
             acc = f(acc, kv.into_kv());
             length -= 1;
             if length == 0 {
                 return acc;
             }
-            edge = kv.next_leaf_edge();
+            edge = next_edge;
         }
     }
 }
@@ -227,6 +237,21 @@ impl<'a, K: 'a, V: 'a> LazyLeafRange<marker::ValMut<'a>, K, V> {
             let node_len = node.len();
             let (keys, vals) = unsafe { ptr::read(&node).into_key_val_slices_from(idx) };
             let take = keys.len().min(length);
+            let next = if length > take {
+                let kv = unsafe { Handle::new_edge(ptr::read(&node), node_len) }
+                    .next_kv()
+                    .ok()
+                    .unwrap();
+                let next_edge = unsafe { ptr::read(&kv) }.next_leaf_edge();
+                if length > take + 1 {
+                    core::intrinsics::prefetch_read_data::<(), 3>(
+                        next_edge.reborrow().into_node().as_ptr(),
+                    );
+                }
+                Some((kv, next_edge))
+            } else {
+                None
+            };
             for (k, v) in keys[..take].iter().zip(&mut vals[..take]) {
                 acc = f(acc, (k, v));
             }
@@ -234,8 +259,8 @@ impl<'a, K: 'a, V: 'a> LazyLeafRange<marker::ValMut<'a>, K, V> {
             if length == 0 {
                 return acc;
             }
-            let kv = unsafe { Handle::new_edge(node, node_len) }.next_kv().ok().unwrap();
-            edge = unsafe { ptr::read(&kv) }.next_leaf_edge();
+            let (kv, next_edge) = next.unwrap();
+            edge = next_edge;
             acc = f(acc, kv.into_kv_valmut());
             length -= 1;
             if length == 0 {

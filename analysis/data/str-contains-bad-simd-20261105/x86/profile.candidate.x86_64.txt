@@ -1,0 +1,27 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 60  of event 'cpu_core/cycles/u'
+# Event count (approx.): 231925271
+#
+# Overhead  Command  Shared Object         Symbol                                                    
+# ........  .......  ....................  ..........................................................
+#
+    94.77%  counted  counted               [.] <&str as core::str::pattern::Pattern>::is_contained_in
+            |
+            ---<&str as core::str::pattern::Pattern>::is_contained_in
+               |          
+                --13.18%--0
+
+     4.34%  counted  counted               [.] counted::str::bench_contains_bad_simd
+            |
+            ---counted::str::bench_contains_bad_simd
+               0
+
+
+
+#
+# (Tip: For a higher level overview, try: perf report --sort comm,dso)
+#

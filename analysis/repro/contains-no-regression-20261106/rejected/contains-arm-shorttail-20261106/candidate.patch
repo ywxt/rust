@@ -1,0 +1,80 @@
+--- a/library/core/src/slice/memchr.rs
++++ b/library/core/src/slice/memchr.rs
+@@ -159,3 +159,60 @@
+     // Find the byte before the point the body loop stopped.
+     text[..offset].iter().rposition(|elt| *elt == x)
+ }
++
++#[cfg(all(target_arch = "aarch64", target_feature = "neon", target_pointer_width = "64"))]
++pub(super) fn contains_match(needle: u8, bytes: &[u8]) -> usize {
++    use crate::simd::cmp::SimdPartialEq;
++    use crate::simd::u8x16;
++
++    // SAFETY: the only caller checks the 16-byte minimum.
++    unsafe { crate::hint::assert_unchecked(bytes.len() >= 16) };
++    if bytes[0] == needle {
++        return 1;
++    }
++    if bytes.len() < 64 {
++        let repeated = usize::repeat_u8(needle);
++        let mut words = bytes.chunks_exact(16);
++        for block in &mut words {
++            if word_pair_has_byte(repeated, block) {
++                return 1;
++            }
++        }
++        let tail = words.remainder();
++        if tail.is_empty() {
++            return 0;
++        }
++        if tail.len() <= 4 {
++            return memchr_naive(needle, tail).is_some() as usize;
++        }
++        return word_pair_has_byte(repeated, &bytes[bytes.len() - 16..]) as usize;
++    }
++    let n = u8x16::splat(needle);
++    let mut chunks = bytes.chunks_exact(64);
++    for c in &mut chunks {
++        let a = u8x16::from_slice(&c[..16]).simd_eq(n);
++        let b = u8x16::from_slice(&c[16..32]).simd_eq(n);
++        let d = u8x16::from_slice(&c[32..48]).simd_eq(n);
++        let e = u8x16::from_slice(&c[48..64]).simd_eq(n);
++        if (a | b | d | e).any() {
++            return 1;
++        }
++    }
++    let mut tail = chunks.remainder().chunks_exact(16);
++    for c in &mut tail {
++        if u8x16::from_slice(c).simd_eq(n).any() {
++            return 1;
++        }
++    }
++    (!tail.remainder().is_empty() && u8x16::from_slice(&bytes[bytes.len() - 16..]).simd_eq(n).any()) as usize
++}
++
++#[cfg(all(target_arch = "aarch64", target_feature = "neon", target_pointer_width = "64"))]
++fn word_pair_has_byte(repeated: usize, bytes: &[u8]) -> bool {
++    let ptr = bytes.as_ptr().cast::<usize>();
++    // SAFETY: both callers provide a readable 16-byte block; reads allow unaligned input.
++    let (u, v) = unsafe {
++        (crate::ptr::read_unaligned(ptr), crate::ptr::read_unaligned(ptr.add(1)))
++    };
++    contains_zero_byte(u ^ repeated) | contains_zero_byte(v ^ repeated)
++}
+--- a/library/core/src/slice/cmp.rs
++++ b/library/core/src/slice/cmp.rs
+@@ -400,6 +400,14 @@
+         let (byte, bytes) = unsafe {
+             (*(self as *const Self).cast::<u8>(), from_raw_parts(x.as_ptr().cast::<u8>(), x.len()))
+         };
++        #[cfg(all(target_arch = "aarch64", target_feature = "neon", target_endian = "little", target_pointer_width = "64"))]
++        {
++            if bytes.len() < 16 {
++                return memchr::memchr(byte, bytes).is_some();
++            }
++            return memchr::contains_match(byte, bytes) == 1;
++        }
++        #[cfg(not(all(target_arch = "aarch64", target_feature = "neon", target_endian = "little", target_pointer_width = "64")))]
+         memchr::memchr(byte, bytes).is_some()
+     }
+ }

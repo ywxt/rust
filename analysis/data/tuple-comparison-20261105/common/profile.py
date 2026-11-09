@@ -1,0 +1,6 @@
+from pathlib import Path
+import subprocess,os,json,platform
+p=Path(__file__).resolve().parent;arch=platform.machine();core='52'if arch=='aarch64'else'12';ld=Path('/tmp/xdiff/libdir.txt').read_text().strip()+':'+os.environ.get('LD_LIBRARY_PATH','');e=os.environ.copy();e.pop('LD_LIBRARY_PATH',None);ev='cycles:u'if arch=='aarch64'else'cpu_core/cycles/u';out=[]
+for mode in ['original','two']:
+ data=p/('profile-'+mode+'.'+arch+'.data');c=['perf','record','-q','-F','997','-e',ev,'-g','-o',str(data),'--','taskset','-c',core,'env','LD_LIBRARY_PATH='+ld,str(p/'probe'),mode,'100000000'];x=subprocess.run(c,env=e,capture_output=True,text=True,check=True);report=['perf','report','--stdio','--no-children','--percent-limit','1','-i',str(data)];y=subprocess.run(report,env=e,capture_output=True,text=True,check=True);(p/('profile-'+mode+'.'+arch+'.txt')).write_text(y.stdout+'\n'+y.stderr);ann=['perf','annotate','--stdio','--symbol',('memcmp'if arch=='aarch64'else'__memcmp_avx2_movbe'),'-i',str(data)];z=subprocess.run(ann,env=e,capture_output=True,text=True);(p/('annotate-memcmp-'+mode+'.'+arch+'.txt')).write_text(z.stdout+'\n'+z.stderr);out.append({'mode':mode,'record':c,'report':report,'annotate':ann,'stdout':x.stdout,'stderr':x.stderr})
+(p/('profiles.'+arch+'.json')).write_text(json.dumps(out,indent=2));print('profiles saved')

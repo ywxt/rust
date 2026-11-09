@@ -1,0 +1,896 @@
+{
+  "build": [
+    [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "/tmp/iter-filter-map-chain-sum-20261105/harness.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/harness-base"
+    ],
+    [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--test",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-unroll-count=4",
+      "/tmp/iter-filter-map-chain-sum-20261105/harness.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/harness-u4"
+    ]
+  ],
+  "raw": [
+    {
+      "round": 0,
+      "method": "prebuilt",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_ref_sum ... bench:     815,798.00 ns/iter (+/- 14,112.10)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.25s\n\n",
+      "stderr": "",
+      "ns_per_call": 815798.0
+    },
+    {
+      "round": 0,
+      "method": "original",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_ref_sum ... bench:   1,626,424.00 ns/iter (+/- 18,728.20)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.49s\n\n",
+      "stderr": "",
+      "ns_per_call": 1626424.0
+    },
+    {
+      "round": 0,
+      "method": "u4",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_ref_sum ... bench:     727,307.00 ns/iter (+/- 1,436.00)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.22s\n\n",
+      "stderr": "",
+      "ns_per_call": 727307.0
+    },
+    {
+      "round": 0,
+      "method": "guarded",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_ref_sum ... bench:     540,928.00 ns/iter (+/- 7,436.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540928.0
+    },
+    {
+      "round": 0,
+      "method": "u4",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_sum ... bench:     366,350.50 ns/iter (+/- 972.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.22s\n\n",
+      "stderr": "",
+      "ns_per_call": 366350.5
+    },
+    {
+      "round": 0,
+      "method": "original",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_sum ... bench:   1,628,634.00 ns/iter (+/- 18,235.40)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.49s\n\n",
+      "stderr": "",
+      "ns_per_call": 1628634.0
+    },
+    {
+      "round": 0,
+      "method": "original",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_sum ... bench:     540,854.00 ns/iter (+/- 2,600.40)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540854.0
+    },
+    {
+      "round": 0,
+      "method": "u4",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_ref_sum ... bench:   1,454,812.00 ns/iter (+/- 2,281.30)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.44s\n\n",
+      "stderr": "",
+      "ns_per_call": 1454812.0
+    },
+    {
+      "round": 0,
+      "method": "u4",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_sum ... bench:   1,455,387.00 ns/iter (+/- 3,160.50)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.44s\n\n",
+      "stderr": "",
+      "ns_per_call": 1455387.0
+    },
+    {
+      "round": 0,
+      "method": "prebuilt",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_chain_sum ... bench:   1,622,977.25 ns/iter (+/- 13,441.98)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 3.41s\n\n",
+      "stderr": "",
+      "ns_per_call": 1622977.25
+    },
+    {
+      "round": 0,
+      "method": "prebuilt",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_sum ... bench:     540,855.00 ns/iter (+/- 1,133.10)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540855.0
+    },
+    {
+      "round": 0,
+      "method": "original",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_ref_sum ... bench:     815,326.00 ns/iter (+/- 15,003.90)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.25s\n\n",
+      "stderr": "",
+      "ns_per_call": 815326.0
+    },
+    {
+      "round": 0,
+      "method": "guarded",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_sum ... bench:     540,855.00 ns/iter (+/- 1,061.70)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540855.0
+    },
+    {
+      "round": 0,
+      "method": "guarded",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_chain_ref_sum ... bench:   1,081,455.00 ns/iter (+/- 1,388.50)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.33s\n\n",
+      "stderr": "",
+      "ns_per_call": 1081455.0
+    },
+    {
+      "round": 0,
+      "method": "guarded",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_chain_sum ... bench:   1,081,318.00 ns/iter (+/- 1,347.30)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.33s\n\n",
+      "stderr": "",
+      "ns_per_call": 1081318.0
+    },
+    {
+      "round": 0,
+      "method": "prebuilt",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_chain_ref_sum ... bench:   1,637,063.00 ns/iter (+/- 28,558.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.49s\n\n",
+      "stderr": "",
+      "ns_per_call": 1637063.0
+    },
+    {
+      "round": 1,
+      "method": "original",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_ref_sum ... bench:   1,629,151.00 ns/iter (+/- 19,043.20)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.49s\n\n",
+      "stderr": "",
+      "ns_per_call": 1629151.0
+    },
+    {
+      "round": 1,
+      "method": "u4",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_sum ... bench:   1,455,397.00 ns/iter (+/- 2,261.60)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.44s\n\n",
+      "stderr": "",
+      "ns_per_call": 1455397.0
+    },
+    {
+      "round": 1,
+      "method": "original",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_sum ... bench:     540,763.00 ns/iter (+/- 991.00)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540763.0
+    },
+    {
+      "round": 1,
+      "method": "prebuilt",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_chain_ref_sum ... bench:   1,639,081.00 ns/iter (+/- 19,035.40)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 1.48s\n\n",
+      "stderr": "",
+      "ns_per_call": 1639081.0
+    },
+    {
+      "round": 1,
+      "method": "guarded",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_chain_ref_sum ... bench:   1,081,224.00 ns/iter (+/- 1,162.00)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.33s\n\n",
+      "stderr": "",
+      "ns_per_call": 1081224.0
+    },
+    {
+      "round": 1,
+      "method": "guarded",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_ref_sum ... bench:     540,842.00 ns/iter (+/- 1,044.10)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540842.0
+    },
+    {
+      "round": 1,
+      "method": "prebuilt",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_chain_sum ... bench:   1,620,259.00 ns/iter (+/- 14,845.95)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 3.41s\n\n",
+      "stderr": "",
+      "ns_per_call": 1620259.0
+    },
+    {
+      "round": 1,
+      "method": "prebuilt",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_ref_sum ... bench:     816,777.00 ns/iter (+/- 15,757.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.25s\n\n",
+      "stderr": "",
+      "ns_per_call": 816777.0
+    },
+    {
+      "round": 1,
+      "method": "original",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_sum ... bench:   1,631,827.00 ns/iter (+/- 13,754.00)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.49s\n\n",
+      "stderr": "",
+      "ns_per_call": 1631827.0
+    },
+    {
+      "round": 1,
+      "method": "u4",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_sum ... bench:     366,276.00 ns/iter (+/- 538.90)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.22s\n\n",
+      "stderr": "",
+      "ns_per_call": 366276.0
+    },
+    {
+      "round": 1,
+      "method": "original",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_ref_sum ... bench:     816,720.00 ns/iter (+/- 14,093.70)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.25s\n\n",
+      "stderr": "",
+      "ns_per_call": 816720.0
+    },
+    {
+      "round": 1,
+      "method": "u4",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_ref_sum ... bench:   1,455,794.00 ns/iter (+/- 3,386.90)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.44s\n\n",
+      "stderr": "",
+      "ns_per_call": 1455794.0
+    },
+    {
+      "round": 1,
+      "method": "guarded",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_sum ... bench:     540,863.00 ns/iter (+/- 1,106.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540863.0
+    },
+    {
+      "round": 1,
+      "method": "u4",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_ref_sum ... bench:     727,582.00 ns/iter (+/- 2,196.00)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.22s\n\n",
+      "stderr": "",
+      "ns_per_call": 727582.0
+    },
+    {
+      "round": 1,
+      "method": "guarded",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_chain_sum ... bench:   1,081,644.00 ns/iter (+/- 1,663.60)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.33s\n\n",
+      "stderr": "",
+      "ns_per_call": 1081644.0
+    },
+    {
+      "round": 1,
+      "method": "prebuilt",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_sum ... bench:     540,940.00 ns/iter (+/- 2,907.60)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540940.0
+    },
+    {
+      "round": 2,
+      "method": "u4",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_ref_sum ... bench:   1,455,094.00 ns/iter (+/- 2,360.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.44s\n\n",
+      "stderr": "",
+      "ns_per_call": 1455094.0
+    },
+    {
+      "round": 2,
+      "method": "u4",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_ref_sum ... bench:     727,313.00 ns/iter (+/- 8,204.30)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.22s\n\n",
+      "stderr": "",
+      "ns_per_call": 727313.0
+    },
+    {
+      "round": 2,
+      "method": "guarded",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_sum ... bench:     540,799.00 ns/iter (+/- 1,340.60)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540799.0
+    },
+    {
+      "round": 2,
+      "method": "prebuilt",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_ref_sum ... bench:     817,338.00 ns/iter (+/- 16,629.60)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.25s\n\n",
+      "stderr": "",
+      "ns_per_call": 817338.0
+    },
+    {
+      "round": 2,
+      "method": "guarded",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_chain_sum ... bench:   1,081,329.00 ns/iter (+/- 1,551.30)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.33s\n\n",
+      "stderr": "",
+      "ns_per_call": 1081329.0
+    },
+    {
+      "round": 2,
+      "method": "original",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_ref_sum ... bench:   1,627,441.00 ns/iter (+/- 21,330.90)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.49s\n\n",
+      "stderr": "",
+      "ns_per_call": 1627441.0
+    },
+    {
+      "round": 2,
+      "method": "u4",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_sum ... bench:     366,280.00 ns/iter (+/- 557.20)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.22s\n\n",
+      "stderr": "",
+      "ns_per_call": 366280.0
+    },
+    {
+      "round": 2,
+      "method": "guarded",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_chain_ref_sum ... bench:   1,081,403.00 ns/iter (+/- 5,386.10)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.33s\n\n",
+      "stderr": "",
+      "ns_per_call": 1081403.0
+    },
+    {
+      "round": 2,
+      "method": "u4",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-u4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_sum ... bench:   1,455,129.00 ns/iter (+/- 6,276.90)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.44s\n\n",
+      "stderr": "",
+      "ns_per_call": 1455129.0
+    },
+    {
+      "round": 2,
+      "method": "prebuilt",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_chain_sum ... bench:   1,621,896.50 ns/iter (+/- 11,404.62)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 3.41s\n\n",
+      "stderr": "",
+      "ns_per_call": 1621896.5
+    },
+    {
+      "round": 2,
+      "method": "original",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_ref_sum ... bench:     814,625.00 ns/iter (+/- 15,328.60)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.25s\n\n",
+      "stderr": "",
+      "ns_per_call": 814625.0
+    },
+    {
+      "round": 2,
+      "method": "guarded",
+      "name": "bench_filter_map_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "guarded_bench_filter_map_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest guarded_bench_filter_map_ref_sum ... bench:     540,846.00 ns/iter (+/- 1,062.90)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540846.0
+    },
+    {
+      "round": 2,
+      "method": "original",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_sum ... bench:     540,801.00 ns/iter (+/- 1,148.60)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540801.0
+    },
+    {
+      "round": 2,
+      "method": "original",
+      "name": "bench_filter_map_chain_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/iter-filter-map-chain-sum-20261105/harness-base",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "original_bench_filter_map_chain_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest original_bench_filter_map_chain_sum ... bench:   1,629,221.00 ns/iter (+/- 17,241.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 7 filtered out; finished in 0.49s\n\n",
+      "stderr": "",
+      "ns_per_call": 1629221.0
+    },
+    {
+      "round": 2,
+      "method": "prebuilt",
+      "name": "bench_filter_map_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_sum ... bench:     540,855.00 ns/iter (+/- 1,253.90)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.16s\n\n",
+      "stderr": "",
+      "ns_per_call": 540855.0
+    },
+    {
+      "round": 2,
+      "method": "prebuilt",
+      "name": "bench_filter_map_chain_ref_sum",
+      "command": [
+        "taskset",
+        "-c",
+        "52",
+        "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+        "--bench",
+        "--exact",
+        "--test-threads=1",
+        "iter::bench_filter_map_chain_ref_sum"
+      ],
+      "stdout": "\nrunning 1 test\ntest iter::bench_filter_map_chain_ref_sum ... bench:   1,637,567.00 ns/iter (+/- 25,649.00)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.49s\n\n",
+      "stderr": "",
+      "ns_per_call": 1637567.0
+    }
+  ]
+}

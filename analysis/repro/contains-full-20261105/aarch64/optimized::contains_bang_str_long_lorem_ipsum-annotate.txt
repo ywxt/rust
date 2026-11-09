@@ -1,0 +1,652 @@
+ Percent |	Source code & Disassembly of benches for cycles:u (1760 samples, percent: local period)
+-------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     00000000000268cc <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once>:
+         : 6     <benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once:
+    0.00 :   268cc:  stp     d9, d8, [sp, #-112]!
+    0.00 :   268d0:  stp     x29, x30, [sp, #16]
+    0.00 :   268d4:  stp     x28, x27, [sp, #32]
+    0.00 :   268d8:  stp     x26, x25, [sp, #48]
+    0.00 :   268dc:  stp     x24, x23, [sp, #64]
+    0.00 :   268e0:  stp     x22, x21, [sp, #80]
+    0.00 :   268e4:  stp     x20, x19, [sp, #96]
+    0.00 :   268e8:  add     x29, sp, #0x10
+    0.00 :   268ec:  sub     sp, sp, #0x2e0
+    0.00 :   268f0:  ldrb    w9, [x0, #128]
+    0.00 :   268f4:  mov     x19, x8
+    0.00 :   268f8:  tbz     w9, #0, 26914 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x48>
+    0.00 :   268fc:  adrp    x0, 63000 <_fini+0x1f00>
+    0.00 :   26900:  add     x0, x0, #0xc94
+    0.00 :   26904:  mov     w1, #0x9f7                      // #2551
+    0.00 :   26908:  mov     w2, #0x1                        // #1
+    0.00 :   2690c:  bl      14144 <test::bench::ns_iter_inner::<(), benches::optimized::contains_bang_str_short_ascii::{closure#0}>>
+    0.00 :   26910:  b       26fa0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x6d4>
+    0.00 :   26914:  adrp    x21, 63000 <_fini+0x1f00>
+    0.00 :   26918:  add     x21, x21, #0xc94
+    0.00 :   2691c:  stp     x0, x19, [sp]
+    0.00 :   26920:  mov     w19, #0xca00                    // #51712
+    0.00 :   26924:  mov     x0, x21
+    0.00 :   26928:  mov     w1, #0x9f7                      // #2551
+    0.00 :   2692c:  mov     w2, #0x1                        // #1
+    0.00 :   26930:  movk    w19, #0x3b9a, lsl #16
+    0.00 :   26934:  mov     w23, #0x9f7                     // #2551
+    0.00 :   26938:  mov     w24, #0x1                       // #1
+    0.00 :   2693c:  bl      14144 <test::bench::ns_iter_inner::<(), benches::optimized::contains_bang_str_short_ascii::{closure#0}>>
+    0.00 :   26940:  cmp     x0, #0x1
+    0.00 :   26944:  mov     w8, #0x4240                     // #16960
+    0.00 :   26948:  movi    v0.2d, #0x0
+    0.00 :   2694c:  movk    w8, #0xf, lsl #16
+    0.00 :   26950:  csinc   x9, x0, xzr, hi // hi = pmore
+    0.00 :   26954:  fmov    d8, #1.000000000000000000e+00
+    0.00 :   26958:  udiv    x8, x8, x9
+    0.00 :   2695c:  sub     x26, x29, #0xb8
+    0.00 :   26960:  adrp    x20, 62000 <_fini+0xf00>
+    0.00 :   26964:  add     x20, x20, #0xd0a
+    0.00 :   26968:  sub     x25, x29, #0x28
+    0.00 :   2696c:  str     xzr, [sp, #24]
+    0.00 :   26970:  stp     q0, q0, [sp, #160]
+    0.00 :   26974:  stp     q0, q0, [sp, #192]
+    0.00 :   26978:  stp     q0, q0, [sp, #224]
+    0.00 :   2697c:  stp     q0, q0, [sp, #256]
+    0.00 :   26980:  stp     q0, q0, [sp, #288]
+    0.00 :   26984:  stp     q0, q0, [sp, #320]
+    0.00 :   26988:  stp     q0, q0, [sp, #352]
+    0.00 :   2698c:  stp     q0, q0, [sp, #384]
+    0.00 :   26990:  stp     q0, q0, [sp, #416]
+    0.00 :   26994:  stp     q0, q0, [sp, #448]
+    0.00 :   26998:  stp     q0, q0, [sp, #480]
+    0.00 :   2699c:  stp     q0, q0, [sp, #512]
+    0.00 :   269a0:  str     q0, [sp, #144]
+    0.00 :   269a4:  cmp     x8, #0x1
+    0.00 :   269a8:  csinc   x27, x8, xzr, hi        // hi = pmore
+    0.00 :   269ac:  sub     w8, w19, #0x1
+    0.00 :   269b0:  stp     w8, wzr, [sp, #16]
+    0.00 :   269b4:  bl      da00 <<std::time::Instant>::now@plt>
+    0.00 :   269b8:  ucvtf   d9, x27
+    0.00 :   269bc:  stur    x0, [x29, #-200]
+    0.00 :   269c0:  stur    w1, [x29, #-192]
+    0.00 :   269c4:  cbz     x27, 26bd4 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x308>
+    0.00 :   269c8:  mov     x22, xzr
+    0.00 :   269cc:  b       26a08 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x13c>
+    0.00 :   269d0:  sub     x0, x29, #0x38
+    0.00 :   269d4:  add     x19, x22, #0x8
+    0.00 :   269d8:  bl      d470 <<std::time::Instant>::elapsed@plt>
+    0.00 :   269dc:  mov     w8, #0xca00                     // #51712
+    0.00 :   269e0:  cmp     x19, #0x190
+    0.00 :   269e4:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   269e8:  mul     x8, x0, x8
+    0.00 :   269ec:  add     x8, x8, w1, uxtw
+    0.00 :   269f0:  ucvtf   d0, x8
+    0.00 :   269f4:  add     x8, sp, #0x90
+    0.00 :   269f8:  fdiv    d0, d0, d9
+    0.00 :   269fc:  str     d0, [x8, x22]
+    0.00 :   26a00:  mov     x22, x19
+    0.00 :   26a04:  b.eq    26c1c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x350>  // b.none
+    0.00 :   26a08:  bl      da00 <<std::time::Instant>::now@plt>
+    0.00 :   26a0c:  mov     x19, xzr
+    0.00 :   26a10:  stur    x0, [x29, #-56]
+    0.00 :   26a14:  stur    w1, [x29, #-48]
+    0.00 :   26a18:  b       26a30 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x164>
+    0.00 :   26a1c:  bl      14b04 <<&str as core::str::pattern::Pattern>::is_contained_in>
+    0.00 :   26a20:  sturb   w0, [x29, #-184]
+    0.00 :   26a24:  add     x19, x19, #0x1
+    0.00 :   26a28:  cmp     x19, x27
+    0.00 :   26a2c:  b.eq    269d0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x104>  // b.none
+    0.00 :   26a30:  stp     x21, x23, [x29, #-40]
+    0.00 :   26a34:  stp     x20, x24, [x29, #-184]
+    0.00 :   26a38:  ldp     x0, x1, [x29, #-184]
+    0.06 :   26a3c:  ldp     x2, x3, [x29, #-40]
+    0.00 :   26a40:  cmp     x1, #0x1
+    0.00 :   26a44:  b.ne    26a1c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x150>  // b.any
+    0.00 :   26a48:  cmp     x3, #0xf
+    0.00 :   26a4c:  b.ls    26a1c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x150>  // b.plast
+    0.00 :   26a50:  ldrb    w8, [x0]
+    0.00 :   26a54:  cmp     x3, #0x40
+    0.00 :   26a58:  dup     v0.16b, w8
+    0.00 :   26a5c:  b.cs    26a9c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1d0>  // b.hs, b.nlast
+    0.00 :   26a60:  ands    x8, x3, #0x30
+    0.00 :   26a64:  b.eq    26a84 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1b8>  // b.none
+    0.00 :   26a68:  ldr     q1, [x2]
+    0.00 :   26a6c:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26a70:  addp    d1, v1.2d
+    0.00 :   26a74:  fmov    x9, d1
+    0.00 :   26a78:  cbnz    x9, 26bac <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2e0>
+    0.00 :   26a7c:  cmp     x8, #0x10
+    0.00 :   26a80:  b.ne    26b98 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2cc>  // b.any
+    0.00 :   26a84:  and     x8, x3, #0xf
+    0.00 :   26a88:  cbz     x8, 26b90 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2c4>
+    0.00 :   26a8c:  add     x8, x2, x3
+    0.00 :   26a90:  ldur    q1, [x8, #-16]
+    0.00 :   26a94:  cmeq    v0.16b, v1.16b, v0.16b
+    0.00 :   26a98:  b       26b7c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2b0>
+    0.00 :   26a9c:  cmp     x3, #0x7f
+    0.00 :   26aa0:  b.ls    26af4 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x228>  // b.plast
+    0.00 :   26aa4:  add     x8, x2, #0x3f
+    0.00 :   26aa8:  and     x8, x8, #0xffffffffffffffc0
+    0.00 :   26aac:  subs    x9, x8, x2
+    0.00 :   26ab0:  b.eq    26ae4 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x218>  // b.none
+    0.00 :   26ab4:  ldp     q1, q2, [x2]
+    0.40 :   26ab8:  ldp     q3, q4, [x2, #32]
+    0.00 :   26abc:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26ac0:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   26ac4:  cmeq    v3.16b, v3.16b, v0.16b
+    0.00 :   26ac8:  cmeq    v4.16b, v4.16b, v0.16b
+    0.00 :   26acc:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26ad0:  orr     v2.16b, v3.16b, v4.16b
+    0.00 :   26ad4:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26ad8:  addp    d1, v1.2d
+    0.00 :   26adc:  fmov    x8, d1
+    0.00 :   26ae0:  cbnz    x8, 26bac <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2e0>
+    1.88 :   26ae4:  sub     x8, x3, x9
+    0.00 :   26ae8:  tst     x8, #0x7fffffffffffffc0
+    0.00 :   26aec:  b.ne    26b04 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x238>  // b.any
+    0.00 :   26af0:  b       26b4c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x280>
+    0.00 :   26af4:  mov     x9, xzr
+    0.00 :   26af8:  sub     x8, x3, xzr
+    0.00 :   26afc:  tst     x8, #0x7fffffffffffffc0
+    0.00 :   26b00:  b.eq    26b4c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x280>  // b.none
+    0.00 :   26b04:  and     x10, x8, #0x7fffffffffffffc0
+    0.00 :   26b08:  add     x9, x2, x9
+    0.00 :   26b0c:  neg     x10, x10
+    0.28 :   26b10:  ldp     q1, q2, [x9]
+    0.00 :   26b14:  ldp     q3, q4, [x9, #32]
+    0.00 :   26b18:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26b1c:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   26b20:  cmeq    v3.16b, v3.16b, v0.16b
+    0.00 :   26b24:  cmeq    v4.16b, v4.16b, v0.16b
+    0.00 :   26b28:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26b2c:  orr     v2.16b, v3.16b, v4.16b
+    0.00 :   26b30:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26b34:  addp    d1, v1.2d
+    0.00 :   26b38:  fmov    x11, d1
+    0.00 :   26b3c:  cbnz    x11, 26bac <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2e0>
+   14.09 :   26b40:  adds    x10, x10, #0x40
+    0.00 :   26b44:  add     x9, x9, #0x40
+    0.00 :   26b48:  b.ne    26b10 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x244>  // b.any
+    0.06 :   26b4c:  and     x8, x8, #0x3f
+    0.00 :   26b50:  cbz     x8, 26b90 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2c4>
+    0.00 :   26b54:  add     x8, x2, x3
+    0.00 :   26b58:  ldp     q1, q2, [x8, #-64]
+    0.00 :   26b5c:  ldp     q3, q4, [x8, #-32]
+    0.00 :   26b60:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26b64:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   26b68:  cmeq    v3.16b, v3.16b, v0.16b
+    0.00 :   26b6c:  cmeq    v0.16b, v4.16b, v0.16b
+    0.00 :   26b70:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26b74:  orr     v0.16b, v3.16b, v0.16b
+    0.00 :   26b78:  orr     v0.16b, v1.16b, v0.16b
+    0.11 :   26b7c:  addp    d0, v0.2d
+    0.00 :   26b80:  fmov    x8, d0
+    0.00 :   26b84:  cmp     x8, #0x0
+    0.00 :   26b88:  cset    w0, ne  // ne = any
+    0.00 :   26b8c:  b       26a20 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x154>
+    0.00 :   26b90:  mov     w0, wzr
+    0.00 :   26b94:  b       26a20 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x154>
+    0.00 :   26b98:  ldr     q1, [x2, #16]
+    0.00 :   26b9c:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26ba0:  addp    d1, v1.2d
+    0.00 :   26ba4:  fmov    x9, d1
+    0.00 :   26ba8:  cbz     x9, 26bb4 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2e8>
+    0.00 :   26bac:  mov     w0, #0x1                        // #1
+    0.00 :   26bb0:  b       26a20 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x154>
+    0.00 :   26bb4:  cmp     x8, #0x20
+    0.00 :   26bb8:  b.eq    26a84 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1b8>  // b.none
+    0.00 :   26bbc:  ldr     q1, [x2, #32]
+    0.00 :   26bc0:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26bc4:  addp    d1, v1.2d
+    0.00 :   26bc8:  fmov    x8, d1
+    0.00 :   26bcc:  cbnz    x8, 26bac <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2e0>
+    0.00 :   26bd0:  b       26a84 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1b8>
+    0.00 :   26bd4:  mov     x19, xzr
+    0.00 :   26bd8:  mov     x22, x19
+    0.00 :   26bdc:  add     x19, x19, #0x8
+    0.00 :   26be0:  bl      da00 <<std::time::Instant>::now@plt>
+    0.00 :   26be4:  stur    x0, [x29, #-56]
+    0.00 :   26be8:  sub     x0, x29, #0x38
+    0.00 :   26bec:  stur    w1, [x29, #-48]
+    0.00 :   26bf0:  bl      d470 <<std::time::Instant>::elapsed@plt>
+    0.00 :   26bf4:  mov     w8, #0xca00                     // #51712
+    0.00 :   26bf8:  cmp     x19, #0x190
+    0.00 :   26bfc:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   26c00:  mul     x8, x0, x8
+    0.00 :   26c04:  add     x8, x8, w1, uxtw
+    0.00 :   26c08:  ucvtf   d0, x8
+    0.00 :   26c0c:  add     x8, sp, #0x90
+    0.00 :   26c10:  fdiv    d0, d0, d9
+    0.00 :   26c14:  str     d0, [x8, x22]
+    0.00 :   26c18:  b.ne    26bd8 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x30c>  // b.any
+    0.00 :   26c1c:  fmov    d0, #5.000000000000000000e+00
+    0.00 :   26c20:  add     x0, sp, #0x90
+    0.00 :   26c24:  mov     w1, #0x32                       // #50
+    0.00 :   26c28:  bl      46c8c <test::stats::winsorize>
+    0.00 :   26c2c:  sub     x8, x29, #0xb8
+    0.00 :   26c30:  add     x0, sp, #0x90
+    0.00 :   26c34:  mov     w1, #0x32                       // #50
+    0.00 :   26c38:  bl      3a738 <<test::stats::Summary>::new>
+    0.00 :   26c3c:  add     x22, x27, x27, lsl #2
+    0.00 :   26c40:  mov     x19, xzr
+    0.00 :   26c44:  ucvtf   d9, x22
+    0.00 :   26c48:  b       26c84 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3b8>
+    0.00 :   26c4c:  sub     x0, x29, #0x48
+    0.00 :   26c50:  add     x28, x19, #0x8
+    0.00 :   26c54:  bl      d470 <<std::time::Instant>::elapsed@plt>
+    0.00 :   26c58:  mov     w8, #0xca00                     // #51712
+    0.00 :   26c5c:  cmp     x28, #0x190
+    0.00 :   26c60:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   26c64:  mul     x8, x0, x8
+    0.00 :   26c68:  add     x8, x8, w1, uxtw
+    0.00 :   26c6c:  ucvtf   d0, x8
+    0.00 :   26c70:  add     x8, sp, #0x90
+    0.00 :   26c74:  fdiv    d0, d0, d9
+    0.00 :   26c78:  str     d0, [x8, x19]
+    0.00 :   26c7c:  mov     x19, x28
+    0.00 :   26c80:  b.eq    26e58 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x58c>  // b.none
+    0.00 :   26c84:  bl      da00 <<std::time::Instant>::now@plt>
+    0.00 :   26c88:  stur    x0, [x29, #-72]
+    0.00 :   26c8c:  stur    w1, [x29, #-64]
+    0.00 :   26c90:  cbz     x27, 26c4c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x380>
+    0.00 :   26c94:  mov     x28, xzr
+    0.00 :   26c98:  b       26cb0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3e4>
+    0.00 :   26c9c:  bl      14b04 <<&str as core::str::pattern::Pattern>::is_contained_in>
+    0.00 :   26ca0:  sturb   w0, [x29, #-40]
+    0.00 :   26ca4:  add     x28, x28, #0x1
+    0.00 :   26ca8:  cmp     x28, x22
+    0.00 :   26cac:  b.eq    26c4c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x380>  // b.none
+    0.00 :   26cb0:  stp     x21, x23, [x29, #-56]
+    0.00 :   26cb4:  sub     x8, x29, #0x38
+    0.00 :   26cb8:  stp     x20, x24, [x29, #-40]
+    0.00 :   26cbc:  ldp     x0, x1, [x29, #-40]
+    0.57 :   26cc0:  ldp     x2, x3, [x29, #-56]
+    0.00 :   26cc4:  cmp     x1, #0x1
+    0.00 :   26cc8:  b.ne    26c9c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3d0>  // b.any
+    0.00 :   26ccc:  cmp     x3, #0xf
+    0.00 :   26cd0:  b.ls    26c9c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3d0>  // b.plast
+    0.00 :   26cd4:  ldrb    w8, [x0]
+    0.00 :   26cd8:  cmp     x3, #0x40
+    0.00 :   26cdc:  dup     v0.16b, w8
+    0.00 :   26ce0:  b.cs    26d20 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x454>  // b.hs, b.nlast
+    0.00 :   26ce4:  ands    x8, x3, #0x30
+    0.00 :   26ce8:  b.eq    26d08 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x43c>  // b.none
+    0.00 :   26cec:  ldr     q1, [x2]
+    0.00 :   26cf0:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26cf4:  addp    d1, v1.2d
+    0.00 :   26cf8:  fmov    x9, d1
+    0.00 :   26cfc:  cbnz    x9, 26e30 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x564>
+    0.00 :   26d00:  cmp     x8, #0x10
+    0.00 :   26d04:  b.ne    26e1c <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x550>  // b.any
+    0.00 :   26d08:  and     x8, x3, #0xf
+    0.00 :   26d0c:  cbz     x8, 26e14 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x548>
+    0.00 :   26d10:  add     x8, x2, x3
+    0.00 :   26d14:  ldur    q1, [x8, #-16]
+    0.00 :   26d18:  cmeq    v0.16b, v1.16b, v0.16b
+    0.00 :   26d1c:  b       26e00 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x534>
+    0.23 :   26d20:  cmp     x3, #0x7f
+    0.00 :   26d24:  b.ls    26d78 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4ac>  // b.plast
+    0.00 :   26d28:  add     x8, x2, #0x3f
+    0.00 :   26d2c:  and     x8, x8, #0xffffffffffffffc0
+    0.00 :   26d30:  subs    x9, x8, x2
+    0.00 :   26d34:  b.eq    26d68 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x49c>  // b.none
+    0.00 :   26d38:  ldp     q1, q2, [x2]
+    0.57 :   26d3c:  ldp     q3, q4, [x2, #32]
+    0.00 :   26d40:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26d44:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   26d48:  cmeq    v3.16b, v3.16b, v0.16b
+    0.34 :   26d4c:  cmeq    v4.16b, v4.16b, v0.16b
+    0.00 :   26d50:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26d54:  orr     v2.16b, v3.16b, v4.16b
+    0.00 :   26d58:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26d5c:  addp    d1, v1.2d
+    0.00 :   26d60:  fmov    x8, d1
+    0.00 :   26d64:  cbnz    x8, 26e30 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x564>
+    9.03 :   26d68:  sub     x8, x3, x9
+    0.00 :   26d6c:  tst     x8, #0x7fffffffffffffc0
+    0.00 :   26d70:  b.ne    26d88 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4bc>  // b.any
+    0.00 :   26d74:  b       26dd0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x504>
+    0.00 :   26d78:  mov     x9, xzr
+    0.00 :   26d7c:  sub     x8, x3, xzr
+    0.00 :   26d80:  tst     x8, #0x7fffffffffffffc0
+    0.00 :   26d84:  b.eq    26dd0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x504>  // b.none
+    0.00 :   26d88:  and     x10, x8, #0x7fffffffffffffc0
+    0.00 :   26d8c:  add     x9, x2, x9
+    0.00 :   26d90:  neg     x10, x10
+    0.45 :   26d94:  ldp     q1, q2, [x9]
+    0.11 :   26d98:  ldp     q3, q4, [x9, #32]
+    0.00 :   26d9c:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26da0:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   26da4:  cmeq    v3.16b, v3.16b, v0.16b
+    0.00 :   26da8:  cmeq    v4.16b, v4.16b, v0.16b
+    0.00 :   26dac:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26db0:  orr     v2.16b, v3.16b, v4.16b
+    0.00 :   26db4:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26db8:  addp    d1, v1.2d
+    0.00 :   26dbc:  fmov    x11, d1
+    0.00 :   26dc0:  cbnz    x11, 26e30 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x564>
+   71.31 :   26dc4:  adds    x10, x10, #0x40
+    0.00 :   26dc8:  add     x9, x9, #0x40
+    0.00 :   26dcc:  b.ne    26d94 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4c8>  // b.any
+    0.11 :   26dd0:  and     x8, x8, #0x3f
+    0.00 :   26dd4:  cbz     x8, 26e14 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x548>
+    0.00 :   26dd8:  add     x8, x2, x3
+    0.00 :   26ddc:  ldp     q1, q2, [x8, #-64]
+    0.00 :   26de0:  ldp     q3, q4, [x8, #-32]
+    0.00 :   26de4:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26de8:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   26dec:  cmeq    v3.16b, v3.16b, v0.16b
+    0.00 :   26df0:  cmeq    v0.16b, v4.16b, v0.16b
+    0.00 :   26df4:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   26df8:  orr     v0.16b, v3.16b, v0.16b
+    0.00 :   26dfc:  orr     v0.16b, v1.16b, v0.16b
+    0.34 :   26e00:  addp    d0, v0.2d
+    0.00 :   26e04:  fmov    x8, d0
+    0.00 :   26e08:  cmp     x8, #0x0
+    0.00 :   26e0c:  cset    w0, ne  // ne = any
+    0.06 :   26e10:  b       26ca0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3d4>
+    0.00 :   26e14:  mov     w0, wzr
+    0.00 :   26e18:  b       26ca0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3d4>
+    0.00 :   26e1c:  ldr     q1, [x2, #16]
+    0.00 :   26e20:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26e24:  addp    d1, v1.2d
+    0.00 :   26e28:  fmov    x9, d1
+    0.00 :   26e2c:  cbz     x9, 26e38 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x56c>
+    0.00 :   26e30:  mov     w0, #0x1                        // #1
+    0.00 :   26e34:  b       26ca0 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3d4>
+    0.00 :   26e38:  cmp     x8, #0x20
+    0.00 :   26e3c:  b.eq    26d08 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x43c>  // b.none
+    0.00 :   26e40:  ldr     q1, [x2, #32]
+    0.00 :   26e44:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   26e48:  addp    d1, v1.2d
+    0.00 :   26e4c:  fmov    x8, d1
+    0.00 :   26e50:  cbnz    x8, 26e30 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x564>
+    0.00 :   26e54:  b       26d08 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x43c>
+    0.00 :   26e58:  fmov    d0, #5.000000000000000000e+00
+    0.00 :   26e5c:  add     x0, sp, #0x90
+    0.00 :   26e60:  mov     w1, #0x32                       // #50
+    0.00 :   26e64:  bl      46c8c <test::stats::winsorize>
+    0.00 :   26e68:  add     x8, sp, #0x20
+    0.00 :   26e6c:  add     x0, sp, #0x90
+    0.00 :   26e70:  mov     w1, #0x32                       // #50
+    0.00 :   26e74:  bl      3a738 <<test::stats::Summary>::new>
+    0.00 :   26e78:  sub     x0, x29, #0xc8
+    0.00 :   26e7c:  bl      d470 <<std::time::Instant>::elapsed@plt>
+    0.00 :   26e80:  mov     w8, #0xe100                     // #57600
+    0.00 :   26e84:  ldr     x10, [sp, #24]
+    0.00 :   26e88:  ldr     w11, [sp, #20]
+    0.00 :   26e8c:  movk    w8, #0x5f5, lsl #16
+    0.00 :   26e90:  cmp     w1, w8
+    0.00 :   26e94:  cset    w8, hi  // hi = pmore
+    0.00 :   26e98:  cmp     x0, #0x0
+    0.00 :   26e9c:  cset    w9, ne  // ne = any
+    0.00 :   26ea0:  csel    w8, w8, w9, eq  // eq = none
+    0.00 :   26ea4:  cbz     w8, 26ecc <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x600>
+    0.00 :   26ea8:  ldur    d0, [x29, #-112]
+    0.00 :   26eac:  fcmp    d0, d8
+    0.00 :   26eb0:  b.pl    26ecc <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x600>  // b.nfrst
+    0.00 :   26eb4:  ldur    d0, [x29, #-152]
+    0.00 :   26eb8:  ldr     d1, [sp, #64]
+    0.00 :   26ebc:  ldr     d2, [sp, #96]
+    0.00 :   26ec0:  fsub    d0, d0, d1
+    0.00 :   26ec4:  fcmp    d0, d2
+    0.00 :   26ec8:  b.mi    26f48 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x67c>  // b.first
+    0.00 :   26ecc:  adds    x10, x0, x10
+    0.00 :   26ed0:  b.cs    26fcc <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x700>  // b.hs, b.nlast
+    0.00 :   26ed4:  ldr     w8, [sp, #16]
+    0.00 :   26ed8:  add     w11, w1, w11
+    0.00 :   26edc:  cmp     w11, w8
+    0.00 :   26ee0:  b.ls    26efc <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x630>  // b.plast
+    0.00 :   26ee4:  cmn     x10, #0x1
+    0.00 :   26ee8:  b.eq    26fcc <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x700>  // b.none
+    0.00 :   26eec:  mov     w8, #0x3600                     // #13824
+    0.00 :   26ef0:  add     x10, x10, #0x1
+    0.00 :   26ef4:  movk    w8, #0xc465, lsl #16
+    0.00 :   26ef8:  add     w11, w11, w8
+    0.00 :   26efc:  cmp     w11, #0x0
+    0.00 :   26f00:  cset    w8, ne  // ne = any
+    0.00 :   26f04:  cmp     x10, #0x3
+    0.00 :   26f08:  cset    w9, hi  // hi = pmore
+    0.00 :   26f0c:  csel    w8, w8, w9, eq  // eq = none
+    0.00 :   26f10:  tbnz    w8, #0, 26f48 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x67c>
+    0.00 :   26f14:  mov     x8, #0x9999999999999999         // #-7378697629483820647
+    0.00 :   26f18:  movk    x8, #0x1999, lsl #48
+    0.00 :   26f1c:  cmp     x27, x8
+    0.00 :   26f20:  b.hi    26f48 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x67c>  // b.pmore
+    0.00 :   26f24:  str     w11, [sp, #20]
+    0.00 :   26f28:  lsl     x27, x27, #1
+    0.00 :   26f2c:  str     x10, [sp, #24]
+    0.00 :   26f30:  bl      da00 <<std::time::Instant>::now@plt>
+    0.00 :   26f34:  ucvtf   d9, x27
+    0.00 :   26f38:  stur    x0, [x29, #-200]
+    0.00 :   26f3c:  stur    w1, [x29, #-192]
+    0.00 :   26f40:  cbnz    x27, 269c8 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0xfc>
+    0.00 :   26f44:  b       26bd4 <<benches::optimized::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x308>
+    0.00 :   26f48:  ldp     q0, q1, [sp, #96]
+    0.00 :   26f4c:  mov     w8, #0x1                        // #1
+    0.00 :   26f50:  ldr     q2, [sp, #128]
+    0.00 :   26f54:  ldp     x9, x19, [sp]
+    0.00 :   26f58:  stp     q0, q1, [sp, #208]
+    0.00 :   26f5c:  ldp     q0, q1, [sp, #32]
+    0.00 :   26f60:  str     q2, [sp, #240]
+    0.00 :   26f64:  str     x8, [x9]
+    0.00 :   26f68:  stp     q0, q1, [sp, #144]
+    0.00 :   26f6c:  ldp     q2, q0, [sp, #64]
+    0.00 :   26f70:  stp     q2, q0, [sp, #176]
+    0.00 :   26f74:  ldp     q1, q0, [sp, #208]
+    0.00 :   26f78:  stur    q1, [x9, #72]
+    0.00 :   26f7c:  ldr     q1, [sp, #240]
+    0.00 :   26f80:  stur    q0, [x9, #88]
+    0.00 :   26f84:  stur    q1, [x9, #104]
+    0.00 :   26f88:  ldp     q0, q1, [sp, #144]
+    0.00 :   26f8c:  stur    q0, [x9, #8]
+    0.00 :   26f90:  stur    q1, [x9, #24]
+    0.00 :   26f94:  ldp     q0, q1, [sp, #176]
+    0.00 :   26f98:  stur    q0, [x9, #40]
+    0.00 :   26f9c:  stur    q1, [x9, #56]
+    0.00 :   26fa0:  mov     x8, #0xffffffffffffffff         // #-1
+    0.00 :   26fa4:  str     x8, [x19]
+    0.00 :   26fa8:  add     sp, sp, #0x2e0
+    0.00 :   26fac:  ldp     x20, x19, [sp, #96]
+    0.00 :   26fb0:  ldp     x22, x21, [sp, #80]
+    0.00 :   26fb4:  ldp     x24, x23, [sp, #64]
+    0.00 :   26fb8:  ldp     x26, x25, [sp, #48]
+    0.00 :   26fbc:  ldp     x28, x27, [sp, #32]
+    0.00 :   26fc0:  ldp     x29, x30, [sp, #16]
+    0.00 :   26fc4:  ldp     d9, d8, [sp], #112
+    0.00 :   26fc8:  ret
+    0.00 :   26fcc:  adrp    x0, 62000 <_fini+0xf00>
+    0.00 :   26fd0:  add     x0, x0, #0xc40
+    0.00 :   26fd4:  adrp    x2, 88000 <GCC_except_table8+0x129d0>
+    0.00 :   26fd8:  add     x2, x2, #0x658
+    0.00 :   26fdc:  mov     w1, #0x2b                       // #43
+    0.00 :   26fe0:  bl      d780 <core::option::expect_failed@plt>
+ Percent |	Source code & Disassembly of benches for cycles:u (1 samples, percent: local period)
+----------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000045a78 <test::cli::get_log_file>:
+         : 6     test::cli::get_log_file:
+  100.00 :   45a78:  sub     sp, sp, #0x60
+    0.00 :   45a7c:  stp     x29, x30, [sp, #32]
+    0.00 :   45a80:  str     x23, [sp, #48]
+    0.00 :   45a84:  stp     x22, x21, [sp, #64]
+    0.00 :   45a88:  stp     x20, x19, [sp, #80]
+    0.00 :   45a8c:  add     x29, sp, #0x20
+    0.00 :   45a90:  mov     x9, x1
+    0.00 :   45a94:  mov     x19, x0
+    0.00 :   45a98:  adrp    x1, 65000 <_fini+0x3f00>
+    0.00 :   45a9c:  add     x1, x1, #0x7f2
+    0.00 :   45aa0:  add     x8, sp, #0x8
+    0.00 :   45aa4:  mov     x0, x9
+    0.00 :   45aa8:  mov     w2, #0x7                        // #7
+    0.00 :   45aac:  bl      5edd8 <<getopts::Matches>::opt_str>
+    0.00 :   45ab0:  ldr     x21, [sp, #8]
+    0.00 :   45ab4:  cmn     x21, #0x1
+    0.00 :   45ab8:  b.eq    45af0 <test::cli::get_log_file+0x78>  // b.none
+    0.00 :   45abc:  ldp     x22, x20, [sp, #16]
+    0.00 :   45ac0:  cbz     x20, 45af8 <test::cli::get_log_file+0x80>
+    0.00 :   45ac4:  bl      d720 <__rustc::__rust_no_alloc_shim_is_unstable_v2@plt>
+    0.00 :   45ac8:  mov     x0, x20
+    0.00 :   45acc:  mov     w1, #0x1                        // #1
+    0.00 :   45ad0:  bl      d560 <__rustc::__rust_alloc@plt>
+    0.00 :   45ad4:  cbz     x0, 45b30 <test::cli::get_log_file+0xb8>
+    0.00 :   45ad8:  mov     x1, x22
+    0.00 :   45adc:  mov     x2, x20
+    0.00 :   45ae0:  mov     x23, x0
+    0.00 :   45ae4:  bl      d310 <memcpy@plt>
+    0.00 :   45ae8:  cbnz    x21, 45b00 <test::cli::get_log_file+0x88>
+    0.00 :   45aec:  b       45b10 <test::cli::get_log_file+0x98>
+    0.00 :   45af0:  mov     x20, #0xffffffffffffffff        // #-1
+    0.00 :   45af4:  b       45b10 <test::cli::get_log_file+0x98>
+    0.00 :   45af8:  mov     w23, #0x1                       // #1
+    0.00 :   45afc:  cbz     x21, 45b10 <test::cli::get_log_file+0x98>
+    0.00 :   45b00:  mov     x0, x22
+    0.00 :   45b04:  mov     x1, x21
+    0.00 :   45b08:  mov     w2, #0x1                        // #1
+    0.00 :   45b0c:  bl      d7d0 <__rustc::__rust_dealloc@plt>
+    0.00 :   45b10:  stp     x23, x20, [x19, #16]
+    0.00 :   45b14:  stp     xzr, x20, [x19]
+    0.00 :   45b18:  ldp     x20, x19, [sp, #80]
+    0.00 :   45b1c:  ldr     x23, [sp, #48]
+    0.00 :   45b20:  ldp     x22, x21, [sp, #64]
+    0.00 :   45b24:  ldp     x29, x30, [sp, #32]
+    0.00 :   45b28:  add     sp, sp, #0x60
+    0.00 :   45b2c:  ret
+    0.00 :   45b30:  mov     w0, #0x1                        // #1
+    0.00 :   45b34:  mov     x1, x20
+    0.00 :   45b38:  bl      d870 <alloc::raw_vec::handle_error@plt>
+    0.00 :   45b3c:  brk     #0x1
+    0.00 :   45b40:  mov     x19, x0
+    0.00 :   45b44:  cbz     x21, 45b58 <test::cli::get_log_file+0xe0>
+    0.00 :   45b48:  mov     x0, x22
+    0.00 :   45b4c:  mov     x1, x21
+    0.00 :   45b50:  mov     w2, #0x1                        // #1
+    0.00 :   45b54:  bl      d7d0 <__rustc::__rust_dealloc@plt>
+    0.00 :   45b58:  mov     x0, x19
+    0.00 :   45b5c:  bl      db20 <_Unwind_Resume@plt>
+ Percent |	Source code & Disassembly of benches for cycles:u (1 samples, percent: local period)
+----------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     00000000000510dc <<[f64] as test::stats::Stats>::sum>:
+         : 6     <[f64] as test::stats::Stats>::sum:
+    0.00 :   510dc:  sub     sp, sp, #0x50
+    0.00 :   510e0:  str     d8, [sp, #32]
+    0.00 :   510e4:  stp     x29, x30, [sp, #40]
+    0.00 :   510e8:  str     x21, [sp, #56]
+    0.00 :   510ec:  stp     x20, x19, [sp, #64]
+    0.00 :   510f0:  add     x29, sp, #0x28
+    0.00 :   510f4:  mov     x20, x0
+    0.00 :   510f8:  mov     w0, #0x8                        // #8
+    0.00 :   510fc:  str     xzr, [sp, #24]
+    0.00 :   51100:  stp     xzr, x0, [sp, #8]
+    0.00 :   51104:  cbz     x1, 511d0 <<[f64] as test::stats::Stats>::sum+0xf4>
+    0.00 :   51108:  add     x21, x20, x1, lsl #3
+    0.00 :   5110c:  mov     x19, xzr
+    0.00 :   51110:  mov     w0, #0x8                        // #8
+    0.00 :   51114:  b       51134 <<[f64] as test::stats::Stats>::sum+0x58>
+    0.00 :   51118:  mov     x8, x19
+    0.00 :   5111c:  ldr     x0, [sp, #16]
+    0.00 :   51120:  add     x19, x8, #0x1
+    0.00 :   51124:  cmp     x20, x21
+    0.00 :   51128:  str     x19, [sp, #24]
+    0.00 :   5112c:  str     d8, [x0, x8, lsl #3]
+    0.00 :   51130:  b.eq    511bc <<[f64] as test::stats::Stats>::sum+0xe0>  // b.none
+    0.00 :   51134:  ldr     d8, [x20], #8
+    0.00 :   51138:  cbz     x19, 51194 <<[f64] as test::stats::Stats>::sum+0xb8>
+    0.00 :   5113c:  mov     x9, xzr
+    0.00 :   51140:  mov     x8, xzr
+    0.00 :   51144:  b       51154 <<[f64] as test::stats::Stats>::sum+0x78>
+  100.00 :   51148:  add     x9, x9, #0x1
+    0.00 :   5114c:  cmp     x19, x9
+    0.00 :   51150:  b.eq    51198 <<[f64] as test::stats::Stats>::sum+0xbc>  // b.none
+    0.00 :   51154:  ldr     d0, [x0, x9, lsl #3]
+    0.00 :   51158:  fabs    d1, d8
+    0.00 :   5115c:  fabs    d2, d0
+    0.00 :   51160:  fcmp    d1, d2
+    0.00 :   51164:  fcsel   d1, d0, d8, mi  // mi = first
+    0.00 :   51168:  fcsel   d2, d8, d0, mi  // mi = first
+    0.00 :   5116c:  fadd    d8, d8, d0
+    0.00 :   51170:  fsub    d0, d8, d1
+    0.00 :   51174:  fsub    d0, d2, d0
+    0.00 :   51178:  fcmp    d0, #0.0
+    0.00 :   5117c:  b.eq    51148 <<[f64] as test::stats::Stats>::sum+0x6c>  // b.none
+    0.00 :   51180:  cmp     x8, x19
+    0.00 :   51184:  b.cs    5125c <<[f64] as test::stats::Stats>::sum+0x180>  // b.hs, b.nlast
+    0.00 :   51188:  str     d0, [x0, x8, lsl #3]
+    0.00 :   5118c:  add     x8, x8, #0x1
+    0.00 :   51190:  b       51148 <<[f64] as test::stats::Stats>::sum+0x6c>
+    0.00 :   51194:  mov     x8, xzr
+    0.00 :   51198:  cmp     x8, x19
+    0.00 :   5119c:  b.cc    5111c <<[f64] as test::stats::Stats>::sum+0x40>  // b.lo, b.ul, b.last
+    0.00 :   511a0:  ldr     x8, [sp, #8]
+    0.00 :   511a4:  cmp     x19, x8
+    0.00 :   511a8:  b.ne    51118 <<[f64] as test::stats::Stats>::sum+0x3c>  // b.any
+    0.00 :   511ac:  add     x0, sp, #0x8
+    0.00 :   511b0:  bl      113bc <<alloc::raw_vec::RawVec<f64>>::grow_one>
+    0.00 :   511b4:  mov     x8, x19
+    0.00 :   511b8:  b       5111c <<[f64] as test::stats::Stats>::sum+0x40>
+    0.00 :   511bc:  movi    d8, #0x0
+    0.00 :   511c0:  cmp     x19, #0x4
+    0.00 :   511c4:  b.cs    511d8 <<[f64] as test::stats::Stats>::sum+0xfc>  // b.hs, b.nlast
+    0.00 :   511c8:  mov     x9, xzr
+    0.00 :   511cc:  b       51214 <<[f64] as test::stats::Stats>::sum+0x138>
+    0.00 :   511d0:  movi    d8, #0x0
+    0.00 :   511d4:  b       5122c <<[f64] as test::stats::Stats>::sum+0x150>
+    0.00 :   511d8:  and     x9, x19, #0xfffffffffffffffc
+    0.00 :   511dc:  add     x10, x0, #0x10
+    0.00 :   511e0:  and     x11, x19, #0xfffffffffffffffc
+    0.00 :   511e4:  ldp     q0, q1, [x10, #-16]
+    0.00 :   511e8:  subs    x11, x11, #0x4
+    0.00 :   511ec:  add     x10, x10, #0x20
+    0.00 :   511f0:  mov     d2, v0.d[1]
+    0.00 :   511f4:  fadd    d0, d8, d0
+    0.00 :   511f8:  fadd    d0, d0, d2
+    0.00 :   511fc:  mov     d2, v1.d[1]
+    0.00 :   51200:  fadd    d0, d0, d1
+    0.00 :   51204:  fadd    d8, d0, d2
+    0.00 :   51208:  b.ne    511e4 <<[f64] as test::stats::Stats>::sum+0x108>  // b.any
+    0.00 :   5120c:  cmp     x19, x9
+    0.00 :   51210:  b.eq    5122c <<[f64] as test::stats::Stats>::sum+0x150>  // b.none
+    0.00 :   51214:  add     x8, x8, #0x1
+    0.00 :   51218:  ldr     d0, [x0, x9, lsl #3]
+    0.00 :   5121c:  add     x9, x9, #0x1
+    0.00 :   51220:  cmp     x8, x9
+    0.00 :   51224:  fadd    d8, d8, d0
+    0.00 :   51228:  b.ne    51218 <<[f64] as test::stats::Stats>::sum+0x13c>  // b.any
+    0.00 :   5122c:  ldr     x8, [sp, #8]
+    0.00 :   51230:  cbz     x8, 51240 <<[f64] as test::stats::Stats>::sum+0x164>
+    0.00 :   51234:  lsl     x1, x8, #3
+    0.00 :   51238:  mov     w2, #0x8                        // #8
+    0.00 :   5123c:  bl      d7d0 <__rustc::__rust_dealloc@plt>
+    0.00 :   51240:  fmov    d0, d8
+    0.00 :   51244:  ldp     x20, x19, [sp, #64]
+    0.00 :   51248:  ldr     x21, [sp, #56]
+    0.00 :   5124c:  ldp     x29, x30, [sp, #40]
+    0.00 :   51250:  ldr     d8, [sp, #32]
+    0.00 :   51254:  add     sp, sp, #0x50
+    0.00 :   51258:  ret
+    0.00 :   5125c:  adrp    x2, 8f000 <benches::optimized::contains_bang_char_short_pile_of_poo+0x4750>
+    0.00 :   51260:  add     x2, x2, #0x638
+    0.00 :   51264:  mov     x0, x8
+    0.00 :   51268:  mov     x1, x19
+    0.00 :   5126c:  bl      d440 <core::panicking::panic_bounds_check@plt>
+    0.00 :   51270:  brk     #0x1
+    0.00 :   51274:  b       51278 <<[f64] as test::stats::Stats>::sum+0x19c>
+    0.00 :   51278:  ldr     x9, [sp, #8]
+    0.00 :   5127c:  cbz     x9, 5129c <<[f64] as test::stats::Stats>::sum+0x1c0>
+    0.00 :   51280:  ldr     x8, [sp, #16]
+    0.00 :   51284:  lsl     x1, x9, #3
+    0.00 :   51288:  mov     x19, x0
+    0.00 :   5128c:  mov     w2, #0x8                        // #8
+    0.00 :   51290:  mov     x0, x8
+    0.00 :   51294:  bl      d7d0 <__rustc::__rust_dealloc@plt>
+    0.00 :   51298:  mov     x0, x19
+    0.00 :   5129c:  bl      db20 <_Unwind_Resume@plt>

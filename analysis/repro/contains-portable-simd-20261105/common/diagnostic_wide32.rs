@@ -1,0 +1,2 @@
+#![feature(portable_simd)]
+use core::simd::cmp::SimdPartialEq;use core::simd::u8x32;pub fn contains_byte_64(c:&[u8],needle:u8)->bool{assert_eq!(c.len(),64);let n = u8x32::splat(needle); let a=u8x32::from_slice(&c[..32]).simd_eq(n);let b=u8x32::from_slice(&c[32..]).simd_eq(n);(a|b).any()}

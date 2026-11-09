@@ -1,0 +1,25 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 373  of event 'cpu_core/cycles/u'
+# Event count (approx.): 1618181177
+#
+# Overhead  Symbol                                                                      IPC   [IPC Coverage]
+# ........  ..........................................................................  ....................
+#
+    41.12%  [.] core::unicode::unicode_data::default_ignorable_code_point::lookup_slow  -      -            
+    21.19%  [.] <str as core::fmt::Debug>::fmt                                          -      -            
+    13.55%  [.] core::unicode::unicode_data::cf::lookup_slow                            -      -            
+    12.59%  [.] <char>::escape_debug_ext                                                -      -            
+     3.20%  [.] core::fmt::write                                                        -      -            
+     1.53%  [.] core::unicode::unicode_data::white_space::lookup                        -      -            
+     1.41%  [.] probe::main                                                             -      -            
+     1.39%  [.] <probe::Counter as core::fmt::Write>::write_char                        -      -            
+     1.39%  [.] <char>::is_assigned                                                     -      -            
+
+
+#
+# (Tip: To adjust path to source files to local file system use perf report --prefix=... --prefix-strip=...)
+#

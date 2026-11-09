@@ -1,0 +1,42 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 513  of event 'cpu_core/cycles/u'
+# Event count (approx.): 2257141436
+#
+# Overhead  Command  Shared Object               Symbol                                                    
+# ........  .......  ..........................  ..........................................................
+#
+    54.59%  counted  counted                     [.] <&str as core::str::pattern::Pattern>::is_contained_in
+            |
+            ---<&str as core::str::pattern::Pattern>::is_contained_in
+               |          
+               |--8.17%--0
+               |          
+                --6.70%--0x6161616161616161
+
+    28.21%  counted  libstd-320fe7036dd8354d.so  [.] <core::str::pattern::StrSearcher>::new
+            |
+            ---<core::str::pattern::StrSearcher>::new
+               |          
+                --28.00%--<&str as core::str::pattern::Pattern>::is_contained_in
+                          0
+
+    13.17%  counted  libc.so.6                   [.] __memcmp_avx2_movbe
+            |
+            ---__memcmp_avx2_movbe
+               <&str as core::str::pattern::Pattern>::is_contained_in
+               0
+
+     3.94%  counted  counted                     [.] counted::str::bench_contains_bad_simd
+            |
+            ---counted::str::bench_contains_bad_simd
+               0
+
+
+
+#
+# (Tip: To change sampling frequency to 100 Hz: perf record -F 100)
+#

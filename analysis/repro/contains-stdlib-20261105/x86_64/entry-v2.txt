@@ -1,0 +1,7 @@
+            #[cfg(any(
+                all(target_arch = "aarch64", target_feature = "neon"),
+                all(target_arch = "x86_64", target_feature = "sse2"),
+            ))]
+            if haystack.len() >= 64 {
+                return contains_byte_simd(haystack.as_bytes(), NEEDLE);
+            }

@@ -1,0 +1,96 @@
+{
+  "target": "benchmarks-conclusion.md",
+  "before_sha256": "04dd331cbdccacb7f25b291c5c9bae6ebd404aba3fbbc1e5abc9ecc021e98d18",
+  "after_sha256": "a68bf7f7523c434f8990988cf392f7ffcea996620d55f6f0f654dcef4f517a7d",
+  "sources": [
+    {
+      "source": "any-downcast-ref-analysis.md",
+      "anchor": "any-downcast-ref",
+      "source_sha256": "3a622e01685e70d850b8dbddee89df19391326031e155f9ce7a24cfe72977290"
+    },
+    {
+      "source": "iter-filter-chain-ref-count-analysis.md",
+      "anchor": "iter-filter-chain-ref-count",
+      "source_sha256": "09a60922d06b3b5effe2797331b641a43bb62161288a8690f4cb2b3180e676fe"
+    },
+    {
+      "source": "str-debug-some-unicode-analysis.md",
+      "anchor": "str-debug-some-unicode",
+      "source_sha256": "aa4bc0a1736298bbb8ca5975331b7d6ce74fc77aa9414979622961905c9baa54"
+    },
+    {
+      "source": "kernel-file-to-file-copy-analysis.md",
+      "anchor": "kernel-file-copy",
+      "source_sha256": "c74b1f52832d163605ee89cc877944bf73f5e9f45d5b36e32778102ce9d80c6c"
+    },
+    {
+      "source": "iter-filter-map-chain-sum-analysis.md",
+      "anchor": "iter-filter-map-chain-sum",
+      "source_sha256": "4a262ad4c8d4f491638cc67abff4b09b9a26d2addb8add1b92547fb5a9de77ee"
+    },
+    {
+      "source": "slice-swap-usize30-analysis.md",
+      "anchor": "slice-swap-usize30",
+      "source_sha256": "e404b7cfbb474f2ebdffb0513c6beac337d5d8d0b2d57f85d63615ae6a99071d"
+    }
+  ],
+  "changes": [
+    {
+      "old_title": "# `sys::io::kernel_copy::linux::tests::bench_socket_pipe_socket_copy`:「慢」在每 iter ~4.4 次 syscall 的內核往返,splice 零拷貝本身工作正常(本章基線,推測未綁核);07e526db9df 綁單核時 124 996.41 ns,主要是自旋執行緒的排程",
+      "start": 4730,
+      "end": 4888,
+      "action": "retain socket analysis, replace file-copy cross-reference, insert file-copy chapter"
+    },
+    {
+      "old_title": "# `any::bench_downcast_ref`:3.2 ns = 一次不可去虛化的 vtable 調用 + 128-bit 比較 + 兩個 black_box 的棧往返;唯一頭寸是 `TypeId` 陣列佈局導致的 sret 回傳(≈0.2 ns)",
+      "start": 6684,
+      "end": 6835,
+      "action": "replace"
+    },
+    {
+      "old_title": "# `str::debug::mostly_unicode`:`07e526db9df` 上 1744.81 ns,30 個西里爾字元各付 4 次稀疏表查找(`cn_planes_0_3`/`grapheme_extend`/`cf`/`default_ignorable_code_point` 的 `lookup_slow`)佔 85.37%;本地原型 BMP 64 碼點塊位圖(舊表建置,未在 `07e526db9df` 上重驗)令 `mostly_unicode` −87%、`fmt::write_{str,vec}_macro_debug` −71…−75%",
+      "start": 8819,
+      "end": 8986,
+      "action": "scope four-table statement to mostly_unicode and link specific case"
+    },
+    {
+      "old_title": "# `iter::bench_filter_map_chain_ref_sum`:多出的 50% 全是 `checked_mul` 倖存的溢出檢查——LLVM 只在界「先於迴圈旋轉」變成常數時才消得掉;Chain 與 `&mut I` 轉發均零成本",
+      "start": 9895,
+      "end": 10052,
+      "action": "replace and insert adjacent iterator analysis"
+    },
+    {
+      "old_title": "# `iter::bench_filter_map_ref_sum`:ref 版 +51% 的逐 pass 證據——`Range` 經指標進 `try_fold`,界在 callee 內是 load;std 側用 `assert_unchecked` 補救不可行,assume 在內聯前就被 EarlyCSE 當冗餘刪除",
+      "start": 10211,
+      "end": 10335,
+      "action": "merge duplicate mechanism into filter_map chapter"
+    },
+    {
+      "old_title": "# `str::debug::mixed`(及同族 5 項):66–82% 在 `escape_debug_ext` 的 4 張 Unicode 稀疏表;對 `mixed` 而言槓桿是 portable 的區塊位圖(§17,本地原型,探針 −82%),本地原型 aarch64 NEON 16 B 分類 + 2 位元組區塊 `TBL` 只再多 6%;NEON 的大收益在純 ASCII / 西里爾等「長串可直接印出」的輸入(4–100×),但對中文需另行處理",
+      "start": 12541,
+      "end": 12715,
+      "action": "scope mixed mechanism and insert some_unicode chapter"
+    },
+    {
+      "old_title": "# `slice::swap_with_slice_usize_30`:比值 1.47,其中約 10 cycles/次交換來自 bench 的 `black_box(skip + 1)` 把迴圈攜帶的 `skip` 經棧往返(本機同址 store→load 7 cycles,x86 約 1);`skip` 留在暫存器後接口本身只差 1.12–1.14",
+      "start": 14107,
+      "end": 14175,
+      "action": "replace"
+    }
+  ],
+  "before_lines": 14453,
+  "after_lines": 15063,
+  "chapters_before": 100,
+  "chapters_after": 102,
+  "relative_links_to_check": [
+    "analysis/data/any-downcast-ref-20261104/README.md",
+    "analysis/data/iter-filter-chain-ref-count-20261105/README.md",
+    "analysis/data/iter-filter-map-chain-sum-20261105/README.md",
+    "analysis/data/iter-filter-map-chain-sum-20261105/scenario-results.md",
+    "analysis/data/kernel-file-copy-20261105/README.md",
+    "analysis/data/slice-swap-usize30-20261105/README.md",
+    "analysis/data/slice-swap-usize30-20261105/related-benchmarks.md",
+    "analysis/data/slice-swap-usize30-20261105/scenario-results.csv",
+    "analysis/data/str-debug-some-unicode-20261105/README.md"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "baseline": "main contains implementation; unrelated preexisting changes fixed",
+  "change": "Only unsigned byte SliceContains calls ARM contains_index, preserving main Option<usize> caller ABI and full first index semantics. Original memchr paths for find/split/i8 untouched. ARM helper uses original short word path plus SIMD long body.",
+  "cpu_midr_el1": "0x00000000480fd020",
+  "cpu_model": "920B per user; hardware MIDR recorded",
+  "new_inline_attributes": 0,
+  "previous_candidate": "/tmp/contains-arm-bool-20261106",
+  "acceptance": [
+    "no reproducible regression in tested scenarios",
+    "lower 920B/x86-main cycles ratio"
+  ],
+  "endianness_and_pointer_guard": "aarch64 + neon + 64bit; boolean SIMD does not depend on endianness",
+  "audit_method": "read-only Python ELF parser; no objcopy rewriting of measured artifacts",
+  "tail_change": "original word and scalar hit/tail paths; SIMD restricted to long body"
+}

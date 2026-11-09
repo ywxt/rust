@@ -1,0 +1,3866 @@
+[
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::bench_contains_16b_in_long",
+    "ns": 68.76,
+    "cycles_est": 306.8456584730411,
+    "instructions_est": 1693.4786044491852,
+    "events": {
+      "cycles": 920358473.0,
+      "instructions": 5079450660.0,
+      "branches": 797573514.0,
+      "branch-misses": 2804497.0,
+      "task-clock": 206.24,
+      "context-switches": 6.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::bench_contains_16b_in_long",
+    "ns": 69.3,
+    "cycles_est": 311.95349299651235,
+    "instructions_est": 1740.66504937542,
+    "events": {
+      "cycles": 1406851734.0,
+      "instructions": 7850072841.0,
+      "branches": 1232574864.0,
+      "branch-misses": 4201540.0,
+      "task-clock": 312.53,
+      "context-switches": 8.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::bench_contains_2b_repeated_long",
+    "ns": 61.94,
+    "cycles_est": 278.4474321154824,
+    "instructions_est": 1651.794882700203,
+    "events": {
+      "cycles": 11981870822.0,
+      "instructions": 71078381864.0,
+      "branches": 10993557125.0,
+      "branch-misses": 42913628.0,
+      "task-clock": 2665.34,
+      "context-switches": 115.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::bench_contains_2b_repeated_long",
+    "ns": 61.82,
+    "cycles_est": 276.636103043331,
+    "instructions_est": 1641.4351655390053,
+    "events": {
+      "cycles": 1241327321.0,
+      "instructions": 7365482286.0,
+      "branches": 1139280931.0,
+      "branch-misses": 4458652.0,
+      "task-clock": 277.4,
+      "context-switches": 24.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::bench_contains_32b_in_long",
+    "ns": 61.1,
+    "cycles_est": 276.12959252876846,
+    "instructions_est": 1653.8250300028283,
+    "events": {
+      "cycles": 14538878346.0,
+      "instructions": 87077812619.0,
+      "branches": 13505280350.0,
+      "branch-misses": 52978968.0,
+      "task-clock": 3217.06,
+      "context-switches": 193.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::bench_contains_32b_in_long",
+    "ns": 60.95,
+    "cycles_est": 272.8007713512084,
+    "instructions_est": 1632.730811528637,
+    "events": {
+      "cycles": 846331384.0,
+      "instructions": 5065349781.0,
+      "branches": 785685231.0,
+      "branch-misses": 3101582.0,
+      "task-clock": 189.09,
+      "context-switches": 9.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::bench_contains_bad_naive",
+    "ns": 4.44,
+    "cycles_est": 20.09081794124772,
+    "instructions_est": 136.36393080931555,
+    "events": {
+      "cycles": 14420772822.0,
+      "instructions": 97879203976.0,
+      "branches": 14985192594.0,
+      "branch-misses": 32059.0,
+      "task-clock": 3186.94,
+      "context-switches": 223.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::bench_contains_bad_naive",
+    "ns": 4.51,
+    "cycles_est": 20.3753821916227,
+    "instructions_est": 135.97626777871028,
+    "events": {
+      "cycles": 18829970443.0,
+      "instructions": 125662874892.0,
+      "branches": 19238830407.0,
+      "branch-misses": 32321.0,
+      "task-clock": 4167.93,
+      "context-switches": 225.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::bench_contains_bad_simd",
+    "ns": 52.1,
+    "cycles_est": 236.78988226208565,
+    "instructions_est": 1228.007206779187,
+    "events": {
+      "cycles": 14656884670.0,
+      "instructions": 76011524782.0,
+      "branches": 19169990428.0,
+      "branch-misses": 27975029.0,
+      "task-clock": 3224.9,
+      "context-switches": 124.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::bench_contains_bad_simd",
+    "ns": 52.03,
+    "cycles_est": 235.18618107930737,
+    "instructions_est": 1232.579191093202,
+    "events": {
+      "cycles": 25586068723.0,
+      "instructions": 134093150138.0,
+      "branches": 33818350025.0,
+      "branch-misses": 52012439.0,
+      "task-clock": 5660.38,
+      "context-switches": 233.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::bench_contains_equal",
+    "ns": 3.43,
+    "cycles_est": 15.887524324942856,
+    "instructions_est": 58.67035702001449,
+    "events": {
+      "cycles": 1661659031.0,
+      "instructions": 6136269352.0,
+      "branches": 1451609626.0,
+      "branch-misses": 28367.0,
+      "task-clock": 358.74,
+      "context-switches": 21.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::bench_contains_equal",
+    "ns": 3.49,
+    "cycles_est": 16.035663406574027,
+    "instructions_est": 59.63673584644142,
+    "events": {
+      "cycles": 1302794270.0,
+      "instructions": 4845100310.0,
+      "branches": 1146163125.0,
+      "branch-misses": 26983.0,
+      "task-clock": 283.54,
+      "context-switches": 13.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::bench_contains_short_long",
+    "ns": 61.09,
+    "cycles_est": 279.8687761913666,
+    "instructions_est": 1665.2654013418671,
+    "events": {
+      "cycles": 2229741890.0,
+      "instructions": 13267332190.0,
+      "branches": 2054473727.0,
+      "branch-misses": 7984045.0,
+      "task-clock": 486.71,
+      "context-switches": 20.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::bench_contains_short_long",
+    "ns": 61.29,
+    "cycles_est": 278.24297114753114,
+    "instructions_est": 1655.622322819271,
+    "events": {
+      "cycles": 2270025010.0,
+      "instructions": 13507274108.0,
+      "branches": 2091628018.0,
+      "branch-misses": 8086169.0,
+      "task-clock": 500.03,
+      "context-switches": 16.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::bench_contains_short_short",
+    "ns": 5.47,
+    "cycles_est": 25.043706400328194,
+    "instructions_est": 158.86719845454678,
+    "events": {
+      "cycles": 19111964899.0,
+      "instructions": 121238616678.0,
+      "branches": 25262972732.0,
+      "branch-misses": 33703.0,
+      "task-clock": 4174.4,
+      "context-switches": 147.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::bench_contains_short_short",
+    "ns": 5.56,
+    "cycles_est": 25.008441578176257,
+    "instructions_est": 158.99426274121154,
+    "events": {
+      "cycles": 16234256838.0,
+      "instructions": 103211297235.0,
+      "branches": 21506513319.0,
+      "branch-misses": 34538.0,
+      "task-clock": 3609.28,
+      "context-switches": 138.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_long_lorem_ipsum",
+    "ns": 28.11,
+    "cycles_est": 127.28205710032607,
+    "instructions_est": 747.9918692042257,
+    "events": {
+      "cycles": 24467405838.0,
+      "instructions": 143786335987.0,
+      "branches": 17829697774.0,
+      "branch-misses": 19995606.0,
+      "task-clock": 5403.58,
+      "context-switches": 372.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_long_lorem_ipsum",
+    "ns": 28.66,
+    "cycles_est": 129.74148980400128,
+    "instructions_est": 750.8880951006303,
+    "events": {
+      "cycles": 15882196281.0,
+      "instructions": 91919339985.0,
+      "branches": 11398188538.0,
+      "branch-misses": 18563542.0,
+      "task-clock": 3508.39,
+      "context-switches": 211.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_ascii",
+    "ns": 3.12,
+    "cycles_est": 13.924242778178227,
+    "instructions_est": 61.1318258073562,
+    "events": {
+      "cycles": 903960056.0,
+      "instructions": 3968670294.0,
+      "branches": 727530140.0,
+      "branch-misses": 25630.0,
+      "task-clock": 202.55,
+      "context-switches": 48.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_ascii",
+    "ns": 3.14,
+    "cycles_est": 13.966667471149854,
+    "instructions_est": 60.87676203514598,
+    "events": {
+      "cycles": 964367253.0,
+      "instructions": 4203404706.0,
+      "branches": 770564677.0,
+      "branch-misses": 25439.0,
+      "task-clock": 216.81,
+      "context-switches": 102.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_mixed",
+    "ns": 2.91,
+    "cycles_est": 13.030652783627373,
+    "instructions_est": 82.00580922192313,
+    "events": {
+      "cycles": 15320286248.0,
+      "instructions": 96415159865.0,
+      "branches": 16461082370.0,
+      "branch-misses": 36655.0,
+      "task-clock": 3421.32,
+      "context-switches": 2687.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_mixed",
+    "ns": 2.91,
+    "cycles_est": 13.009892668690405,
+    "instructions_est": 81.56951025496888,
+    "events": {
+      "cycles": 18159261836.0,
+      "instructions": 113855058783.0,
+      "branches": 19438627210.0,
+      "branch-misses": 47348.0,
+      "task-clock": 4061.79,
+      "context-switches": 4402.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_pile_of_poo",
+    "ns": 2.84,
+    "cycles_est": 12.854260834032337,
+    "instructions_est": 81.81082215119676,
+    "events": {
+      "cycles": 17493698504.0,
+      "instructions": 111338479556.0,
+      "branches": 19008965396.0,
+      "branch-misses": 38795.0,
+      "task-clock": 3865.03,
+      "context-switches": 1549.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_pile_of_poo",
+    "ns": 2.81,
+    "cycles_est": 12.819761565072504,
+    "instructions_est": 81.63796788659275,
+    "events": {
+      "cycles": 23533614967.0,
+      "instructions": 149865229020.0,
+      "branches": 25586693649.0,
+      "branch-misses": 39422.0,
+      "task-clock": 5158.4,
+      "context-switches": 597.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_long_lorem_ipsum",
+    "ns": 30.27,
+    "cycles_est": 136.85723682324092,
+    "instructions_est": 777.1312143643787,
+    "events": {
+      "cycles": 18558420029.0,
+      "instructions": 105382278852.0,
+      "branches": 13224092908.0,
+      "branch-misses": 77193429.0,
+      "task-clock": 4104.74,
+      "context-switches": 1344.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_long_lorem_ipsum",
+    "ns": 30.0,
+    "cycles_est": 136.03279465433758,
+    "instructions_est": 771.4434773151968,
+    "events": {
+      "cycles": 23028130266.0,
+      "instructions": 130592780466.0,
+      "branches": 16387633719.0,
+      "branch-misses": 100335428.0,
+      "task-clock": 5078.51,
+      "context-switches": 603.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_ascii",
+    "ns": 3.97,
+    "cycles_est": 17.76131944854259,
+    "instructions_est": 83.02933252490331,
+    "events": {
+      "cycles": 948552884.0,
+      "instructions": 4434226469.0,
+      "branches": 801316602.0,
+      "branch-misses": 26139.0,
+      "task-clock": 212.02,
+      "context-switches": 14.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_ascii",
+    "ns": 3.95,
+    "cycles_est": 17.75053233181328,
+    "instructions_est": 81.96470862214377,
+    "events": {
+      "cycles": 916466725.0,
+      "instructions": 4231869032.0,
+      "branches": 764746000.0,
+      "branch-misses": 25199.0,
+      "task-clock": 203.94,
+      "context-switches": 24.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_mixed",
+    "ns": 3.94,
+    "cycles_est": 17.83326642639188,
+    "instructions_est": 104.7784238854946,
+    "events": {
+      "cycles": 16871492116.0,
+      "instructions": 99127569243.0,
+      "branches": 16993248630.0,
+      "branch-misses": 36391.0,
+      "task-clock": 3727.51,
+      "context-switches": 512.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_mixed",
+    "ns": 3.92,
+    "cycles_est": 17.677774366679316,
+    "instructions_est": 104.48823072652924,
+    "events": {
+      "cycles": 1069730831.0,
+      "instructions": 6322870717.0,
+      "branches": 1083910218.0,
+      "branch-misses": 25227.0,
+      "task-clock": 237.21,
+      "context-switches": 24.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_pile_of_poo",
+    "ns": 3.94,
+    "cycles_est": 17.787702689566498,
+    "instructions_est": 104.4197252827884,
+    "events": {
+      "cycles": 983109172.0,
+      "instructions": 5771177507.0,
+      "branches": 989333959.0,
+      "branch-misses": 25618.0,
+      "task-clock": 217.76,
+      "context-switches": 18.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_pile_of_poo",
+    "ns": 3.95,
+    "cycles_est": 17.88641902086241,
+    "instructions_est": 105.30107183211133,
+    "events": {
+      "cycles": 13821809542.0,
+      "instructions": 81371869782.0,
+      "branches": 13949414478.0,
+      "branch-misses": 34781.0,
+      "task-clock": 3052.38,
+      "context-switches": 375.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_ascii_char",
+    "ns": 27.9,
+    "cycles_est": 126.27827842006185,
+    "instructions_est": 742.9641097431733,
+    "events": {
+      "cycles": 18393313842.0,
+      "instructions": 108217915344.0,
+      "branches": 13274929318.0,
+      "branch-misses": 14637845.0,
+      "task-clock": 4063.83,
+      "context-switches": 745.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_ascii_char",
+    "ns": 28.38,
+    "cycles_est": 128.1866884679293,
+    "instructions_est": 750.6269366715396,
+    "events": {
+      "cycles": 22696857917.0,
+      "instructions": 132906724824.0,
+      "branches": 16303424451.0,
+      "branch-misses": 14059542.0,
+      "task-clock": 5024.99,
+      "context-switches": 849.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_char_array",
+    "ns": 3.63,
+    "cycles_est": 16.129100503179497,
+    "instructions_est": 112.2016088558889,
+    "events": {
+      "cycles": 1138945546.0,
+      "instructions": 7923040881.0,
+      "branches": 1732219724.0,
+      "branch-misses": 24204.0,
+      "task-clock": 256.33,
+      "context-switches": 105.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_char_array",
+    "ns": 3.59,
+    "cycles_est": 15.979262699045684,
+    "instructions_est": 111.16251760568527,
+    "events": {
+      "cycles": 1096070596.0,
+      "instructions": 7625005560.0,
+      "branches": 1667053147.0,
+      "branch-misses": 24499.0,
+      "task-clock": 246.25,
+      "context-switches": 102.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_char_slice",
+    "ns": 5.08,
+    "cycles_est": 22.584686165125984,
+    "instructions_est": 156.7769552502245,
+    "events": {
+      "cycles": 1683270448.0,
+      "instructions": 11684821023.0,
+      "branches": 3348690365.0,
+      "branch-misses": 24940.0,
+      "task-clock": 378.62,
+      "context-switches": 171.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_char_slice",
+    "ns": 5.06,
+    "cycles_est": 22.521164465990324,
+    "instructions_est": 155.87588302375752,
+    "events": {
+      "cycles": 1039756765.0,
+      "instructions": 7196475303.0,
+      "branches": 2062221390.0,
+      "branch-misses": 24816.0,
+      "task-clock": 233.61,
+      "context-switches": 104.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_empty",
+    "ns": 1.58,
+    "cycles_est": 7.054151469491147,
+    "instructions_est": 31.008329690603397,
+    "events": {
+      "cycles": 5005545519.0,
+      "instructions": 22003157489.0,
+      "branches": 3548904526.0,
+      "branch-misses": 44331.0,
+      "task-clock": 1121.15,
+      "context-switches": 543.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_empty",
+    "ns": 1.59,
+    "cycles_est": 7.044328278389551,
+    "instructions_est": 31.083120112863448,
+    "events": {
+      "cycles": 1275377850.0,
+      "instructions": 5627608671.0,
+      "branches": 907703009.0,
+      "branch-misses": 25449.0,
+      "task-clock": 287.87,
+      "context-switches": 132.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_empty_in_long",
+    "ns": 1.58,
+    "cycles_est": 7.031562481496834,
+    "instructions_est": 31.052891779679083,
+    "events": {
+      "cycles": 1503241250.0,
+      "instructions": 6638636573.0,
+      "branches": 1070772154.0,
+      "branch-misses": 25916.0,
+      "task-clock": 337.78,
+      "context-switches": 115.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_empty_in_long",
+    "ns": 1.55,
+    "cycles_est": 6.952452120456062,
+    "instructions_est": 30.718278580608665,
+    "events": {
+      "cycles": 1546090788.0,
+      "instructions": 6831150609.0,
+      "branches": 1101822837.0,
+      "branch-misses": 25258.0,
+      "task-clock": 344.69,
+      "context-switches": 12.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_longer_needle",
+    "ns": 1.56,
+    "cycles_est": 6.9980550523356255,
+    "instructions_est": 35.90103999336066,
+    "events": {
+      "cycles": 1324292200.0,
+      "instructions": 6793811549.0,
+      "branches": 1132302310.0,
+      "branch-misses": 25130.0,
+      "task-clock": 295.21,
+      "context-switches": 22.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_longer_needle",
+    "ns": 1.53,
+    "cycles_est": 6.922905995192307,
+    "instructions_est": 35.40537011899038,
+    "events": {
+      "cycles": 1242322268.0,
+      "instructions": 6353528379.0,
+      "branches": 1058921779.0,
+      "branch-misses": 25221.0,
+      "task-clock": 274.56,
+      "context-switches": 27.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_nul_str",
+    "ns": 29.07,
+    "cycles_est": 132.06381780220067,
+    "instructions_est": 765.3042965001047,
+    "events": {
+      "cycles": 16485853015.0,
+      "instructions": 95534828190.0,
+      "branches": 11960019638.0,
+      "branch-misses": 22679876.0,
+      "task-clock": 3628.88,
+      "context-switches": 361.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_nul_str",
+    "ns": 29.05,
+    "cycles_est": 133.8877225108402,
+    "instructions_est": 775.318473886864,
+    "events": {
+      "cycles": 15401604783.0,
+      "instructions": 89187779819.0,
+      "branches": 11165443739.0,
+      "branch-misses": 20639272.0,
+      "task-clock": 3341.73,
+      "context-switches": 193.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_predicate",
+    "ns": 1.91,
+    "cycles_est": 8.765059814567914,
+    "instructions_est": 61.37834388868193,
+    "events": {
+      "cycles": 936209347.0,
+      "instructions": 6555914103.0,
+      "branches": 1902854287.0,
+      "branch-misses": 24504.0,
+      "task-clock": 204.01,
+      "context-switches": 8.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_predicate",
+    "ns": 1.89,
+    "cycles_est": 8.705571560638905,
+    "instructions_est": 60.86232504403879,
+    "events": {
+      "cycles": 3633539749.0,
+      "instructions": 25402775191.0,
+      "branches": 7374457200.0,
+      "branch-misses": 36575.0,
+      "task-clock": 788.85,
+      "context-switches": 31.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_char_hit",
+    "ns": 12.56,
+    "cycles_est": 57.980592383367366,
+    "instructions_est": 289.5795854111253,
+    "events": {
+      "cycles": 18787512285.0,
+      "instructions": 93832777396.0,
+      "branches": 17563595686.0,
+      "branch-misses": 27702.0,
+      "task-clock": 4069.83,
+      "context-switches": 217.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_char_hit",
+    "ns": 12.49,
+    "cycles_est": 57.28790360137771,
+    "instructions_est": 288.7135030585503,
+    "events": {
+      "cycles": 19682362384.0,
+      "instructions": 99193083271.0,
+      "branches": 18566943867.0,
+      "branch-misses": 28472.0,
+      "task-clock": 4291.18,
+      "context-switches": 329.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_char_miss",
+    "ns": 62.99,
+    "cycles_est": 285.8225614612549,
+    "instructions_est": 1696.9599280445052,
+    "events": {
+      "cycles": 1181678226.0,
+      "instructions": 7015753365.0,
+      "branches": 1087838256.0,
+      "branch-misses": 4153322.0,
+      "task-clock": 260.42,
+      "context-switches": 9.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_char_miss",
+    "ns": 61.7,
+    "cycles_est": 282.8661120734259,
+    "instructions_est": 1680.585300099296,
+    "events": {
+      "cycles": 1555946998.0,
+      "instructions": 9244308671.0,
+      "branches": 1433364656.0,
+      "branch-misses": 5456422.0,
+      "task-clock": 339.39,
+      "context-switches": 15.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_str_hit",
+    "ns": 12.1,
+    "cycles_est": 55.58317519064427,
+    "instructions_est": 269.52334857037437,
+    "events": {
+      "cycles": 17243876214.0,
+      "instructions": 83615720829.0,
+      "branches": 15041351053.0,
+      "branch-misses": 28667.0,
+      "task-clock": 3753.85,
+      "context-switches": 200.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_str_hit",
+    "ns": 11.94,
+    "cycles_est": 54.83599162735453,
+    "instructions_est": 265.9078833215388,
+    "events": {
+      "cycles": 17496447285.0,
+      "instructions": 84842876460.0,
+      "branches": 15262101405.0,
+      "branch-misses": 28895.0,
+      "task-clock": 3809.68,
+      "context-switches": 350.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_str_miss",
+    "ns": 60.83,
+    "cycles_est": 277.6203772606169,
+    "instructions_est": 1636.9369641683613,
+    "events": {
+      "cycles": 6895098898.0,
+      "instructions": 40655669332.0,
+      "branches": 6272311206.0,
+      "branch-misses": 24362192.0,
+      "task-clock": 1510.8,
+      "context-switches": 132.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 0,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_str_miss",
+    "ns": 62.36,
+    "cycles_est": 279.4429938606075,
+    "instructions_est": 1666.4563259596396,
+    "events": {
+      "cycles": 3190964745.0,
+      "instructions": 19029295785.0,
+      "branches": 2935862705.0,
+      "branch-misses": 11418361.0,
+      "task-clock": 712.09,
+      "context-switches": 276.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_str_miss",
+    "ns": 62.34,
+    "cycles_est": 277.07155129143905,
+    "instructions_est": 1650.3837401672135,
+    "events": {
+      "cycles": 732012905.0,
+      "instructions": 4360253481.0,
+      "branches": 672778033.0,
+      "branch-misses": 2631985.0,
+      "task-clock": 164.7,
+      "context-switches": 64.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_str_miss",
+    "ns": 62.16,
+    "cycles_est": 277.878751857577,
+    "instructions_est": 1652.9182467876678,
+    "events": {
+      "cycles": 720669781.0,
+      "instructions": 4286791354.0,
+      "branches": 661444859.0,
+      "branch-misses": 2591339.0,
+      "task-clock": 161.21,
+      "context-switches": 13.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_str_hit",
+    "ns": 12.56,
+    "cycles_est": 57.86350641679964,
+    "instructions_est": 271.20774172768483,
+    "events": {
+      "cycles": 26130855438.0,
+      "instructions": 122475991028.0,
+      "branches": 22031832368.0,
+      "branch-misses": 28168.0,
+      "task-clock": 5672.03,
+      "context-switches": 382.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_str_hit",
+    "ns": 13.14,
+    "cycles_est": 59.50547185964304,
+    "instructions_est": 272.6573858994923,
+    "events": {
+      "cycles": 25283259107.0,
+      "instructions": 115849301244.0,
+      "branches": 20839773454.0,
+      "branch-misses": 31420.0,
+      "task-clock": 5583.05,
+      "context-switches": 1562.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_char_miss",
+    "ns": 63.21,
+    "cycles_est": 284.10076546273007,
+    "instructions_est": 1685.5026536678529,
+    "events": {
+      "cycles": 2855075609.0,
+      "instructions": 16938488383.0,
+      "branches": 2626300317.0,
+      "branch-misses": 9974987.0,
+      "task-clock": 635.23,
+      "context-switches": 295.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_char_miss",
+    "ns": 62.78,
+    "cycles_est": 280.71491659711506,
+    "instructions_est": 1664.9694852297864,
+    "events": {
+      "cycles": 706750553.0,
+      "instructions": 4191861689.0,
+      "branches": 650014909.0,
+      "branch-misses": 2475465.0,
+      "task-clock": 158.06,
+      "context-switches": 34.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_char_hit",
+    "ns": 12.66,
+    "cycles_est": 58.41714339444974,
+    "instructions_est": 286.2220663501173,
+    "events": {
+      "cycles": 22368736324.0,
+      "instructions": 109598408280.0,
+      "branches": 20514622142.0,
+      "branch-misses": 27531.0,
+      "task-clock": 4847.69,
+      "context-switches": 381.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_char_hit",
+    "ns": 12.96,
+    "cycles_est": 59.900790308587055,
+    "instructions_est": 296.61882483945027,
+    "events": {
+      "cycles": 18676197487.0,
+      "instructions": 92481446781.0,
+      "branches": 17310652083.0,
+      "branch-misses": 27719.0,
+      "task-clock": 4040.74,
+      "context-switches": 173.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_predicate",
+    "ns": 1.91,
+    "cycles_est": 8.827210917072538,
+    "instructions_est": 61.702968933264245,
+    "events": {
+      "cycles": 1783928489.0,
+      "instructions": 12469814664.0,
+      "branches": 3619759846.0,
+      "branch-misses": 24531.0,
+      "task-clock": 386.0,
+      "context-switches": 14.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_predicate",
+    "ns": 1.94,
+    "cycles_est": 8.839209630730165,
+    "instructions_est": 62.26567736813754,
+    "events": {
+      "cycles": 16256673399.0,
+      "instructions": 114516209393.0,
+      "branches": 33246035238.0,
+      "branch-misses": 31607.0,
+      "task-clock": 3567.96,
+      "context-switches": 583.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_nul_str",
+    "ns": 28.79,
+    "cycles_est": 131.7327658041118,
+    "instructions_est": 763.5032777568578,
+    "events": {
+      "cycles": 16427290951.0,
+      "instructions": 95210105164.0,
+      "branches": 11919370044.0,
+      "branch-misses": 19993207.0,
+      "task-clock": 3590.16,
+      "context-switches": 1344.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_nul_str",
+    "ns": 28.43,
+    "cycles_est": 132.07092697584736,
+    "instructions_est": 765.8183699092938,
+    "events": {
+      "cycles": 15956379226.0,
+      "instructions": 92523681088.0,
+      "branches": 11583060423.0,
+      "branch-misses": 21254415.0,
+      "task-clock": 3434.82,
+      "context-switches": 221.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_longer_needle",
+    "ns": 1.52,
+    "cycles_est": 6.971003911990254,
+    "instructions_est": 35.764771178957936,
+    "events": {
+      "cycles": 1279821284.0,
+      "instructions": 6566129635.0,
+      "branches": 1094355498.0,
+      "branch-misses": 25037.0,
+      "task-clock": 279.06,
+      "context-switches": 12.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_longer_needle",
+    "ns": 1.53,
+    "cycles_est": 7.026569972815159,
+    "instructions_est": 36.09896787306655,
+    "events": {
+      "cycles": 25923404745.0,
+      "instructions": 133181361414.0,
+      "branches": 22196861345.0,
+      "branch-misses": 34928.0,
+      "task-clock": 5644.69,
+      "context-switches": 423.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_empty_in_long",
+    "ns": 1.55,
+    "cycles_est": 7.012864233742923,
+    "instructions_est": 30.992286898902382,
+    "events": {
+      "cycles": 1310817436.0,
+      "instructions": 5792958297.0,
+      "branches": 934372549.0,
+      "branch-misses": 24799.0,
+      "task-clock": 289.72,
+      "context-switches": 18.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_empty_in_long",
+    "ns": 1.56,
+    "cycles_est": 6.987570062822953,
+    "instructions_est": 30.878036375033993,
+    "events": {
+      "cycles": 1317604878.0,
+      "instructions": 5822489218.0,
+      "branches": 939135269.0,
+      "branch-misses": 24897.0,
+      "task-clock": 294.16,
+      "context-switches": 17.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_empty",
+    "ns": 1.53,
+    "cycles_est": 7.016346767391306,
+    "instructions_est": 31.016796382065223,
+    "events": {
+      "cycles": 1518832712.0,
+      "instructions": 6714224158.0,
+      "branches": 1082963819.0,
+      "branch-misses": 24783.0,
+      "task-clock": 331.2,
+      "context-switches": 13.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_empty",
+    "ns": 1.5,
+    "cycles_est": 6.859611603248609,
+    "instructions_est": 30.30061954805234,
+    "events": {
+      "cycles": 1216254868.0,
+      "instructions": 5372501850.0,
+      "branches": 866557102.0,
+      "branch-misses": 24906.0,
+      "task-clock": 265.96,
+      "context-switches": 28.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_char_slice",
+    "ns": 4.95,
+    "cycles_est": 22.62305952264382,
+    "instructions_est": 156.82420727137614,
+    "events": {
+      "cycles": 3397892134.0,
+      "instructions": 23554362299.0,
+      "branches": 6750723262.0,
+      "branch-misses": 25314.0,
+      "task-clock": 743.47,
+      "context-switches": 30.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_char_slice",
+    "ns": 4.9,
+    "cycles_est": 22.63697527639292,
+    "instructions_est": 156.83884701638087,
+    "events": {
+      "cycles": 1686500856.0,
+      "instructions": 11684814182.0,
+      "branches": 3348688842.0,
+      "branch-misses": 24592.0,
+      "task-clock": 365.06,
+      "context-switches": 14.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_char_array",
+    "ns": 3.48,
+    "cycles_est": 15.788862566692876,
+    "instructions_est": 109.88493111394872,
+    "events": {
+      "cycles": 1442548521.0,
+      "instructions": 10039630416.0,
+      "branches": 2195022554.0,
+      "branch-misses": 24114.0,
+      "task-clock": 317.95,
+      "context-switches": 11.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_char_array",
+    "ns": 3.51,
+    "cycles_est": 16.191896034019653,
+    "instructions_est": 112.75345601006083,
+    "events": {
+      "cycles": 4929071485.0,
+      "instructions": 34323950925.0,
+      "branches": 7504858828.0,
+      "branch-misses": 25891.0,
+      "task-clock": 1068.5,
+      "context-switches": 56.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::extra_ascii_char",
+    "ns": 27.81,
+    "cycles_est": 127.69477320175424,
+    "instructions_est": 747.5930063834879,
+    "events": {
+      "cycles": 18845654716.0,
+      "instructions": 110332469475.0,
+      "branches": 13534314121.0,
+      "branch-misses": 13226163.0,
+      "task-clock": 4104.3,
+      "context-switches": 303.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::extra_ascii_char",
+    "ns": 27.21,
+    "cycles_est": 125.17499913929524,
+    "instructions_est": 738.3470592626861,
+    "events": {
+      "cycles": 19611025885.0,
+      "instructions": 115676000726.0,
+      "branches": 14189788305.0,
+      "branch-misses": 13213714.0,
+      "task-clock": 4262.96,
+      "context-switches": 312.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_pile_of_poo",
+    "ns": 3.86,
+    "cycles_est": 17.840581247468577,
+    "instructions_est": 104.91024428018667,
+    "events": {
+      "cycles": 18084710652.0,
+      "instructions": 106345829540.0,
+      "branches": 18230664272.0,
+      "branch-misses": 28920.0,
+      "task-clock": 3912.82,
+      "context-switches": 170.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_pile_of_poo",
+    "ns": 3.8,
+    "cycles_est": 17.605429562045696,
+    "instructions_est": 103.93820580193199,
+    "events": {
+      "cycles": 16004586384.0,
+      "instructions": 94487214157.0,
+      "branches": 16197759434.0,
+      "branch-misses": 31855.0,
+      "task-clock": 3454.47,
+      "context-switches": 166.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_mixed",
+    "ns": 3.9,
+    "cycles_est": 17.948345531455583,
+    "instructions_est": 105.738691755847,
+    "events": {
+      "cycles": 16180709625.0,
+      "instructions": 95325057367.0,
+      "branches": 16341388728.0,
+      "branch-misses": 31455.0,
+      "task-clock": 3515.91,
+      "context-switches": 252.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_mixed",
+    "ns": 3.93,
+    "cycles_est": 17.900431565081995,
+    "instructions_est": 105.2252736418391,
+    "events": {
+      "cycles": 22290136634.0,
+      "instructions": 131029563075.0,
+      "branches": 22462153144.0,
+      "branch-misses": 41173.0,
+      "task-clock": 4893.75,
+      "context-switches": 1228.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_ascii",
+    "ns": 3.8,
+    "cycles_est": 17.451696841487276,
+    "instructions_est": 81.06600047064578,
+    "events": {
+      "cycles": 938717588.0,
+      "instructions": 4360497499.0,
+      "branches": 787992032.0,
+      "branch-misses": 25164.0,
+      "task-clock": 204.4,
+      "context-switches": 12.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_ascii",
+    "ns": 3.87,
+    "cycles_est": 17.715788926227823,
+    "instructions_est": 81.96730961045277,
+    "events": {
+      "cycles": 2004905446.0,
+      "instructions": 9276284907.0,
+      "branches": 1676375722.0,
+      "branch-misses": 26057.0,
+      "task-clock": 437.97,
+      "context-switches": 17.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_long_lorem_ipsum",
+    "ns": 29.82,
+    "cycles_est": 136.5322167965654,
+    "instructions_est": 775.5881450446703,
+    "events": {
+      "cycles": 20529051880.0,
+      "instructions": 116617818422.0,
+      "branches": 14633984673.0,
+      "branch-misses": 84064237.0,
+      "task-clock": 4483.75,
+      "context-switches": 516.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_long_lorem_ipsum",
+    "ns": 29.83,
+    "cycles_est": 136.06675940380924,
+    "instructions_est": 774.2831616773674,
+    "events": {
+      "cycles": 23247391283.0,
+      "instructions": 132288471499.0,
+      "branches": 16600419500.0,
+      "branch-misses": 94746187.0,
+      "task-clock": 5096.54,
+      "context-switches": 613.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_pile_of_poo",
+    "ns": 2.88,
+    "cycles_est": 13.011281566513123,
+    "instructions_est": 82.97477746852567,
+    "events": {
+      "cycles": 14613747390.0,
+      "instructions": 93193928013.0,
+      "branches": 15911113664.0,
+      "branch-misses": 36890.0,
+      "task-clock": 3234.7,
+      "context-switches": 712.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_pile_of_poo",
+    "ns": 2.85,
+    "cycles_est": 12.801927334936696,
+    "instructions_est": 81.5953931784886,
+    "events": {
+      "cycles": 13073912142.0,
+      "instructions": 83328937409.0,
+      "branches": 14226847411.0,
+      "branch-misses": 41930.0,
+      "task-clock": 2910.55,
+      "context-switches": 1097.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_mixed",
+    "ns": 2.84,
+    "cycles_est": 12.87916836310333,
+    "instructions_est": 81.21276413174711,
+    "events": {
+      "cycles": 21346768070.0,
+      "instructions": 134607296944.0,
+      "branches": 22981679522.0,
+      "branch-misses": 41003.0,
+      "task-clock": 4707.2,
+      "context-switches": 436.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_mixed",
+    "ns": 2.82,
+    "cycles_est": 12.820059801904845,
+    "instructions_est": 80.90009985112822,
+    "events": {
+      "cycles": 16343485032.0,
+      "instructions": 103134430840.0,
+      "branches": 17608272996.0,
+      "branch-misses": 34461.0,
+      "task-clock": 3595.04,
+      "context-switches": 336.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_ascii",
+    "ns": 3.03,
+    "cycles_est": 13.726700526090054,
+    "instructions_est": 61.09070367671188,
+    "events": {
+      "cycles": 26522567667.0,
+      "instructions": 118038731814.0,
+      "branches": 21640328508.0,
+      "branch-misses": 43358.0,
+      "task-clock": 5854.53,
+      "context-switches": 648.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_ascii",
+    "ns": 3.02,
+    "cycles_est": 13.66144356274479,
+    "instructions_est": 60.47490564619426,
+    "events": {
+      "cycles": 25675235606.0,
+      "instructions": 113656177225.0,
+      "branches": 20836860478.0,
+      "branch-misses": 40988.0,
+      "task-clock": 5675.77,
+      "context-switches": 549.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_long_lorem_ipsum",
+    "ns": 28.69,
+    "cycles_est": 129.37715257226003,
+    "instructions_est": 751.4741471286245,
+    "events": {
+      "cycles": 17603274540.0,
+      "instructions": 102246845433.0,
+      "branches": 12678800957.0,
+      "branch-misses": 19511051.0,
+      "task-clock": 3903.61,
+      "context-switches": 953.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_long_lorem_ipsum",
+    "ns": 28.17,
+    "cycles_est": 127.56651665683695,
+    "instructions_est": 749.1427672093588,
+    "events": {
+      "cycles": 20136761837.0,
+      "instructions": 118254459560.0,
+      "branches": 14663743788.0,
+      "branch-misses": 16926380.0,
+      "task-clock": 4446.72,
+      "context-switches": 479.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::bench_contains_short_short",
+    "ns": 5.57,
+    "cycles_est": 25.134688764056953,
+    "instructions_est": 161.33510515031284,
+    "events": {
+      "cycles": 14394370017.0,
+      "instructions": 92394905784.0,
+      "branches": 19252638337.0,
+      "branch-misses": 32494.0,
+      "task-clock": 3189.88,
+      "context-switches": 388.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::bench_contains_short_short",
+    "ns": 5.73,
+    "cycles_est": 25.691116187520414,
+    "instructions_est": 161.71847439860267,
+    "events": {
+      "cycles": 16197598632.0,
+      "instructions": 101959405756.0,
+      "branches": 21245650266.0,
+      "branch-misses": 35833.0,
+      "task-clock": 3612.62,
+      "context-switches": 1337.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::bench_contains_short_long",
+    "ns": 62.69,
+    "cycles_est": 278.47293048147986,
+    "instructions_est": 1655.4283178073385,
+    "events": {
+      "cycles": 1024162049.0,
+      "instructions": 6088300414.0,
+      "branches": 942833355.0,
+      "branch-misses": 3674992.0,
+      "task-clock": 230.56,
+      "context-switches": 278.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::bench_contains_short_long",
+    "ns": 62.81,
+    "cycles_est": 279.02938285170995,
+    "instructions_est": 1658.9419697033788,
+    "events": {
+      "cycles": 1078179131.0,
+      "instructions": 6410208821.0,
+      "branches": 992679763.0,
+      "branch-misses": 3856739.0,
+      "task-clock": 242.7,
+      "context-switches": 274.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::bench_contains_equal",
+    "ns": 3.59,
+    "cycles_est": 16.005856048261634,
+    "instructions_est": 59.214261454369066,
+    "events": {
+      "cycles": 2550637935.0,
+      "instructions": 9436180177.0,
+      "branches": 2232479814.0,
+      "branch-misses": 27282.0,
+      "task-clock": 572.09,
+      "context-switches": 451.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::bench_contains_equal",
+    "ns": 3.59,
+    "cycles_est": 15.969469430858926,
+    "instructions_est": 59.311185928764985,
+    "events": {
+      "cycles": 1083432862.0,
+      "instructions": 4023908759.0,
+      "branches": 951806022.0,
+      "branch-misses": 26650.0,
+      "task-clock": 243.56,
+      "context-switches": 188.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::bench_contains_bad_simd",
+    "ns": 52.65,
+    "cycles_est": 235.5372220488143,
+    "instructions_est": 1232.5295480326845,
+    "events": {
+      "cycles": 13684600760.0,
+      "instructions": 71609381494.0,
+      "branches": 18059757028.0,
+      "branch-misses": 24787491.0,
+      "task-clock": 3058.94,
+      "context-switches": 2427.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::bench_contains_bad_simd",
+    "ns": 51.65,
+    "cycles_est": 232.08277121158096,
+    "instructions_est": 1222.1650565598868,
+    "events": {
+      "cycles": 14202971327.0,
+      "instructions": 74793898593.0,
+      "branches": 18862901821.0,
+      "branch-misses": 28357281.0,
+      "task-clock": 3160.87,
+      "context-switches": 765.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::bench_contains_bad_naive",
+    "ns": 4.47,
+    "cycles_est": 20.19877380265191,
+    "instructions_est": 136.72599944954723,
+    "events": {
+      "cycles": 15703665477.0,
+      "instructions": 106298500015.0,
+      "branches": 16274174916.0,
+      "branch-misses": 32574.0,
+      "task-clock": 3475.23,
+      "context-switches": 497.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::bench_contains_bad_naive",
+    "ns": 4.42,
+    "cycles_est": 20.05676857174768,
+    "instructions_est": 136.2445446244561,
+    "events": {
+      "cycles": 16007797072.0,
+      "instructions": 108740100117.0,
+      "branches": 16647980169.0,
+      "branch-misses": 31868.0,
+      "task-clock": 3527.71,
+      "context-switches": 494.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::bench_contains_32b_in_long",
+    "ns": 60.97,
+    "cycles_est": 274.3716781506958,
+    "instructions_est": 1644.9671318782614,
+    "events": {
+      "cycles": 1241670222.0,
+      "instructions": 7444305905.0,
+      "branches": 1154646064.0,
+      "branch-misses": 4542175.0,
+      "task-clock": 275.92,
+      "context-switches": 27.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::bench_contains_32b_in_long",
+    "ns": 59.88,
+    "cycles_est": 269.5907165765052,
+    "instructions_est": 1612.1401672450531,
+    "events": {
+      "cycles": 1180787529.0,
+      "instructions": 7061055472.0,
+      "branches": 1095206413.0,
+      "branch-misses": 4310050.0,
+      "task-clock": 262.27,
+      "context-switches": 43.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::bench_contains_2b_repeated_long",
+    "ns": 61.18,
+    "cycles_est": 275.19561680157904,
+    "instructions_est": 1633.6001168202731,
+    "events": {
+      "cycles": 991342955.0,
+      "instructions": 5884752039.0,
+      "branches": 910260222.0,
+      "branch-misses": 3576449.0,
+      "task-clock": 220.39,
+      "context-switches": 23.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::bench_contains_2b_repeated_long",
+    "ns": 61.4,
+    "cycles_est": 279.0346157981291,
+    "instructions_est": 1655.5663469026465,
+    "events": {
+      "cycles": 11241641168.0,
+      "instructions": 66698831428.0,
+      "branches": 10316184507.0,
+      "branch-misses": 40263382.0,
+      "task-clock": 2473.66,
+      "context-switches": 275.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "optimized",
+    "bench": "str::bench_contains_16b_in_long",
+    "ns": 70.2,
+    "cycles_est": 313.1782401368984,
+    "instructions_est": 1747.7915838006418,
+    "events": {
+      "cycles": 1042812160.0,
+      "instructions": 5819747617.0,
+      "branches": 913803513.0,
+      "branch-misses": 3150381.0,
+      "task-clock": 233.75,
+      "context-switches": 27.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 1,
+    "variant": "baseline",
+    "bench": "str::bench_contains_16b_in_long",
+    "ns": 67.6,
+    "cycles_est": 307.4021532114382,
+    "instructions_est": 1723.8379326255315,
+    "events": {
+      "cycles": 2469630701.0,
+      "instructions": 13849099746.0,
+      "branches": 2174444736.0,
+      "branch-misses": 7239419.0,
+      "task-clock": 543.09,
+      "context-switches": 74.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::bench_contains_16b_in_long",
+    "ns": 68.76,
+    "cycles_est": 309.65453323088656,
+    "instructions_est": 1718.0081310091484,
+    "events": {
+      "cycles": 827006377.0,
+      "instructions": 4588350977.0,
+      "branches": 720467997.0,
+      "branch-misses": 2570477.0,
+      "task-clock": 183.64,
+      "context-switches": 12.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::bench_contains_16b_in_long",
+    "ns": 69.04,
+    "cycles_est": 309.48759441803617,
+    "instructions_est": 1726.9865667189692,
+    "events": {
+      "cycles": 1085627254.0,
+      "instructions": 6057960700.0,
+      "branches": 951204222.0,
+      "branch-misses": 3290487.0,
+      "task-clock": 242.18,
+      "context-switches": 16.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::bench_contains_2b_repeated_long",
+    "ns": 60.97,
+    "cycles_est": 276.28343852708167,
+    "instructions_est": 1644.21785881621,
+    "events": {
+      "cycles": 3291293867.0,
+      "instructions": 19587146387.0,
+      "branches": 3029549573.0,
+      "branch-misses": 11856483.0,
+      "task-clock": 726.32,
+      "context-switches": 68.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::bench_contains_2b_repeated_long",
+    "ns": 61.17,
+    "cycles_est": 277.95550435930204,
+    "instructions_est": 1655.8814725080463,
+    "events": {
+      "cycles": 12099220891.0,
+      "instructions": 72079434985.0,
+      "branches": 11148387359.0,
+      "branch-misses": 43481344.0,
+      "task-clock": 2662.69,
+      "context-switches": 261.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::bench_contains_32b_in_long",
+    "ns": 60.39,
+    "cycles_est": 270.4942309345809,
+    "instructions_est": 1619.1243753200843,
+    "events": {
+      "cycles": 849689611.0,
+      "instructions": 5086072098.0,
+      "branches": 788899004.0,
+      "branch-misses": 3114506.0,
+      "task-clock": 189.7,
+      "context-switches": 29.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::bench_contains_32b_in_long",
+    "ns": 61.49,
+    "cycles_est": 274.4296305664501,
+    "instructions_est": 1635.125797680449,
+    "events": {
+      "cycles": 982260813.0,
+      "instructions": 5852575001.0,
+      "branches": 907778409.0,
+      "branch-misses": 3581523.0,
+      "task-clock": 220.09,
+      "context-switches": 67.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::bench_contains_bad_naive",
+    "ns": 4.5,
+    "cycles_est": 20.203450599818076,
+    "instructions_est": 136.9127922685615,
+    "events": {
+      "cycles": 14412423313.0,
+      "instructions": 97668717994.0,
+      "branches": 14952969005.0,
+      "branch-misses": 33903.0,
+      "task-clock": 3210.14,
+      "context-switches": 1275.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::bench_contains_bad_naive",
+    "ns": 4.43,
+    "cycles_est": 20.02897751032482,
+    "instructions_est": 135.9982919914183,
+    "events": {
+      "cycles": 18234055598.0,
+      "instructions": 123810634673.0,
+      "branches": 18955255292.0,
+      "branch-misses": 33953.0,
+      "task-clock": 4033.0,
+      "context-switches": 655.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::bench_contains_bad_simd",
+    "ns": 52.49,
+    "cycles_est": 238.30158230188076,
+    "instructions_est": 1216.7646579782493,
+    "events": {
+      "cycles": 15253616638.0,
+      "instructions": 77884760362.0,
+      "branches": 19642427830.0,
+      "branch-misses": 29235722.0,
+      "task-clock": 3359.87,
+      "context-switches": 355.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::bench_contains_bad_simd",
+    "ns": 51.72,
+    "cycles_est": 234.02143239122307,
+    "instructions_est": 1223.7485650518383,
+    "events": {
+      "cycles": 25786926610.0,
+      "instructions": 134845403319.0,
+      "branches": 34008070776.0,
+      "branch-misses": 49466923.0,
+      "task-clock": 5699.05,
+      "context-switches": 679.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::bench_contains_equal",
+    "ns": 3.5,
+    "cycles_est": 15.763711646308845,
+    "instructions_est": 58.41081402683666,
+    "events": {
+      "cycles": 1010318799.0,
+      "instructions": 3743632515.0,
+      "branches": 885532933.0,
+      "branch-misses": 25521.0,
+      "task-clock": 224.32,
+      "context-switches": 29.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::bench_contains_equal",
+    "ns": 3.52,
+    "cycles_est": 15.912759214124636,
+    "instructions_est": 59.064367908035855,
+    "events": {
+      "cycles": 3287612219.0,
+      "instructions": 12202832647.0,
+      "branches": 2887101545.0,
+      "branch-misses": 29256.0,
+      "task-clock": 727.24,
+      "context-switches": 95.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::bench_contains_short_long",
+    "ns": 62.43,
+    "cycles_est": 277.3850868725414,
+    "instructions_est": 1438.2636813535394,
+    "events": {
+      "cycles": 799675924.0,
+      "instructions": 4146383107.0,
+      "branches": 642134177.0,
+      "branch-misses": 2510771.0,
+      "task-clock": 179.98,
+      "context-switches": 3.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::bench_contains_short_long",
+    "ns": 61.85,
+    "cycles_est": 278.1843114498045,
+    "instructions_est": 1654.899200191692,
+    "events": {
+      "cycles": 2162146519.0,
+      "instructions": 12862459879.0,
+      "branches": 1991781012.0,
+      "branch-misses": 7737589.0,
+      "task-clock": 480.72,
+      "context-switches": 51.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::bench_contains_short_short",
+    "ns": 5.51,
+    "cycles_est": 24.909718783310943,
+    "instructions_est": 158.71719833168177,
+    "events": {
+      "cycles": 21770506510.0,
+      "instructions": 138715086653.0,
+      "branches": 28904649421.0,
+      "branch-misses": 35200.0,
+      "task-clock": 4815.61,
+      "context-switches": 465.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::bench_contains_short_short",
+    "ns": 5.55,
+    "cycles_est": 25.185959455317075,
+    "instructions_est": 160.747215450622,
+    "events": {
+      "cycles": 17049941569.0,
+      "instructions": 108819782533.0,
+      "branches": 22675188130.0,
+      "branch-misses": 33902.0,
+      "task-clock": 3757.14,
+      "context-switches": 484.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_long_lorem_ipsum",
+    "ns": 28.13,
+    "cycles_est": 127.70619427242507,
+    "instructions_est": 750.4437285625361,
+    "events": {
+      "cycles": 20006698455.0,
+      "instructions": 117565960448.0,
+      "branches": 14578370529.0,
+      "branch-misses": 17459838.0,
+      "task-clock": 4406.9,
+      "context-switches": 424.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_long_lorem_ipsum",
+    "ns": 28.53,
+    "cycles_est": 128.85063353900185,
+    "instructions_est": 750.0827067193378,
+    "events": {
+      "cycles": 23635442500.0,
+      "instructions": 137589829386.0,
+      "branches": 17061330593.0,
+      "branch-misses": 24018146.0,
+      "task-clock": 5233.34,
+      "context-switches": 661.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_ascii",
+    "ns": 3.06,
+    "cycles_est": 13.812939210837849,
+    "instructions_est": 59.821122889620675,
+    "events": {
+      "cycles": 1082916378.0,
+      "instructions": 4689897837.0,
+      "branches": 859754804.0,
+      "branch-misses": 25070.0,
+      "task-clock": 239.9,
+      "context-switches": 20.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_ascii",
+    "ns": 3.06,
+    "cycles_est": 13.63058615948276,
+    "instructions_est": 60.39583837500001,
+    "events": {
+      "cycles": 1054098663.0,
+      "instructions": 4670611501.0,
+      "branches": 856219242.0,
+      "branch-misses": 25287.0,
+      "task-clock": 236.64,
+      "context-switches": 93.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_mixed",
+    "ns": 2.83,
+    "cycles_est": 12.81490804106947,
+    "instructions_est": 80.82813670898642,
+    "events": {
+      "cycles": 17420758064.0,
+      "instructions": 109878854367.0,
+      "branches": 18759759984.0,
+      "branch-misses": 33104.0,
+      "task-clock": 3847.14,
+      "context-switches": 417.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_mixed",
+    "ns": 2.87,
+    "cycles_est": 13.010173787943886,
+    "instructions_est": 81.66797239429886,
+    "events": {
+      "cycles": 16987161790.0,
+      "instructions": 106632477224.0,
+      "branches": 18205500496.0,
+      "branch-misses": 46473.0,
+      "task-clock": 3747.31,
+      "context-switches": 619.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::contains_bang_char_short_pile_of_poo",
+    "ns": 2.85,
+    "cycles_est": 12.870099162658505,
+    "instructions_est": 81.99351775911589,
+    "events": {
+      "cycles": 15801365853.0,
+      "instructions": 100668188746.0,
+      "branches": 17187207935.0,
+      "branch-misses": 32999.0,
+      "task-clock": 3499.11,
+      "context-switches": 867.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::contains_bang_char_short_pile_of_poo",
+    "ns": 2.87,
+    "cycles_est": 12.99668821819167,
+    "instructions_est": 82.7231180040276,
+    "events": {
+      "cycles": 16966610411.0,
+      "instructions": 107991427631.0,
+      "branches": 18437517000.0,
+      "branch-misses": 34934.0,
+      "task-clock": 3746.66,
+      "context-switches": 443.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_long_lorem_ipsum",
+    "ns": 30.22,
+    "cycles_est": 136.60322229631842,
+    "instructions_est": 775.1959705538529,
+    "events": {
+      "cycles": 15433632756.0,
+      "instructions": 87582779691.0,
+      "branches": 10990518218.0,
+      "branch-misses": 65843982.0,
+      "task-clock": 3414.3,
+      "context-switches": 540.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_long_lorem_ipsum",
+    "ns": 29.89,
+    "cycles_est": 135.3784005872855,
+    "instructions_est": 771.1132756536286,
+    "events": {
+      "cycles": 17442209294.0,
+      "instructions": 99350554335.0,
+      "branches": 12467199339.0,
+      "branch-misses": 70885436.0,
+      "task-clock": 3851.04,
+      "context-switches": 448.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_ascii",
+    "ns": 3.94,
+    "cycles_est": 17.896227353132605,
+    "instructions_est": 82.73524839533631,
+    "events": {
+      "cycles": 1772589524.0,
+      "instructions": 8194779362.0,
+      "branches": 1480922411.0,
+      "branch-misses": 26729.0,
+      "task-clock": 390.25,
+      "context-switches": 33.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_ascii",
+    "ns": 3.94,
+    "cycles_est": 17.949430665552274,
+    "instructions_est": 82.84700570405211,
+    "events": {
+      "cycles": 15371090620.0,
+      "instructions": 70946474905.0,
+      "branches": 12821555890.0,
+      "branch-misses": 34221.0,
+      "task-clock": 3374.04,
+      "context-switches": 371.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_mixed",
+    "ns": 3.91,
+    "cycles_est": 17.782626756445353,
+    "instructions_est": 104.67257371700657,
+    "events": {
+      "cycles": 3173539418.0,
+      "instructions": 18680172689.0,
+      "branches": 3202284206.0,
+      "branch-misses": 27467.0,
+      "task-clock": 697.79,
+      "context-switches": 92.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_mixed",
+    "ns": 3.92,
+    "cycles_est": 17.806146961681925,
+    "instructions_est": 104.89058765606082,
+    "events": {
+      "cycles": 16379247741.0,
+      "instructions": 96485159008.0,
+      "branches": 16540263708.0,
+      "branch-misses": 35146.0,
+      "task-clock": 3605.87,
+      "context-switches": 336.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::contains_bang_str_short_pile_of_poo",
+    "ns": 3.94,
+    "cycles_est": 17.854666671457522,
+    "instructions_est": 104.97897380119058,
+    "events": {
+      "cycles": 27077780234.0,
+      "instructions": 159207541316.0,
+      "branches": 27292663976.0,
+      "branch-misses": 36561.0,
+      "task-clock": 5975.27,
+      "context-switches": 568.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::contains_bang_str_short_pile_of_poo",
+    "ns": 3.97,
+    "cycles_est": 17.807079944966805,
+    "instructions_est": 104.55457265023843,
+    "events": {
+      "cycles": 1006570985.0,
+      "instructions": 5910098652.0,
+      "branches": 1013149003.0,
+      "branch-misses": 25490.0,
+      "task-clock": 224.41,
+      "context-switches": 27.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_ascii_char",
+    "ns": 27.81,
+    "cycles_est": 126.71592728450017,
+    "instructions_est": 746.1891149362558,
+    "events": {
+      "cycles": 19027528769.0,
+      "instructions": 112046963281.0,
+      "branches": 13744625454.0,
+      "branch-misses": 14677470.0,
+      "task-clock": 4175.92,
+      "context-switches": 458.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_ascii_char",
+    "ns": 27.97,
+    "cycles_est": 127.39373130608662,
+    "instructions_est": 744.6944220971526,
+    "events": {
+      "cycles": 15819231590.0,
+      "instructions": 92473102139.0,
+      "branches": 11343564811.0,
+      "branch-misses": 12833300.0,
+      "task-clock": 3473.2,
+      "context-switches": 328.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_char_array",
+    "ns": 3.52,
+    "cycles_est": 15.965958618283596,
+    "instructions_est": 111.33312447241839,
+    "events": {
+      "cycles": 2787420514.0,
+      "instructions": 19437118839.0,
+      "branches": 4249805805.0,
+      "branch-misses": 24790.0,
+      "task-clock": 614.54,
+      "context-switches": 57.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_char_array",
+    "ns": 3.55,
+    "cycles_est": 16.071631615069503,
+    "instructions_est": 111.92663758948358,
+    "events": {
+      "cycles": 1348296712.0,
+      "instructions": 9389856678.0,
+      "branches": 2052945777.0,
+      "branch-misses": 24216.0,
+      "task-clock": 297.82,
+      "context-switches": 27.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_char_slice",
+    "ns": 4.98,
+    "cycles_est": 22.487002561850545,
+    "instructions_est": 143.57617519666152,
+    "events": {
+      "cycles": 1633874901.0,
+      "instructions": 10432048842.0,
+      "branches": 2989616449.0,
+      "branch-misses": 24843.0,
+      "task-clock": 361.84,
+      "context-switches": 30.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_char_slice",
+    "ns": 5.03,
+    "cycles_est": 22.697154621944158,
+    "instructions_est": 157.50809907702214,
+    "events": {
+      "cycles": 3505153626.0,
+      "instructions": 24324198068.0,
+      "branches": 6971410138.0,
+      "branch-misses": 25577.0,
+      "task-clock": 776.79,
+      "context-switches": 72.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_empty",
+    "ns": 1.56,
+    "cycles_est": 6.97224376852699,
+    "instructions_est": 30.787694654711803,
+    "events": {
+      "cycles": 977008005.0,
+      "instructions": 4314224392.0,
+      "branches": 695866666.0,
+      "branch-misses": 24908.0,
+      "task-clock": 218.6,
+      "context-switches": 17.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_empty",
+    "ns": 1.55,
+    "cycles_est": 6.981841305022914,
+    "instructions_est": 30.852401502351665,
+    "events": {
+      "cycles": 1494023951.0,
+      "instructions": 6602015826.0,
+      "branches": 1064865436.0,
+      "branch-misses": 25141.0,
+      "task-clock": 331.68,
+      "context-switches": 28.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_empty_in_long",
+    "ns": 1.54,
+    "cycles_est": 6.938325313313341,
+    "instructions_est": 30.64827916774036,
+    "events": {
+      "cycles": 3140132853.0,
+      "instructions": 13870734501.0,
+      "branches": 2237231725.0,
+      "branch-misses": 26975.0,
+      "task-clock": 696.97,
+      "context-switches": 60.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_empty_in_long",
+    "ns": 1.56,
+    "cycles_est": 7.004624614985557,
+    "instructions_est": 30.90327619630962,
+    "events": {
+      "cycles": 1523326248.0,
+      "instructions": 6720670181.0,
+      "branches": 1083994680.0,
+      "branch-misses": 25565.0,
+      "task-clock": 339.26,
+      "context-switches": 36.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_longer_needle",
+    "ns": 1.55,
+    "cycles_est": 6.96694495355067,
+    "instructions_est": 35.76807122875314,
+    "events": {
+      "cycles": 2869167724.0,
+      "instructions": 14730214779.0,
+      "branches": 2455027122.0,
+      "branch-misses": 26229.0,
+      "task-clock": 638.33,
+      "context-switches": 72.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_longer_needle",
+    "ns": 1.57,
+    "cycles_est": 7.008430616342782,
+    "instructions_est": 35.94157002608124,
+    "events": {
+      "cycles": 1222056029.0,
+      "instructions": 6267110962.0,
+      "branches": 1044518572.0,
+      "branch-misses": 24894.0,
+      "task-clock": 273.76,
+      "context-switches": 33.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_nul_str",
+    "ns": 29.2,
+    "cycles_est": 132.83271436935982,
+    "instructions_est": 770.985249274237,
+    "events": {
+      "cycles": 20834128889.0,
+      "instructions": 120925075808.0,
+      "branches": 15138580034.0,
+      "branch-misses": 26070221.0,
+      "task-clock": 4579.87,
+      "context-switches": 483.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_nul_str",
+    "ns": 29.31,
+    "cycles_est": 132.55806693407348,
+    "instructions_est": 767.0443492285971,
+    "events": {
+      "cycles": 14913166953.0,
+      "instructions": 86294713743.0,
+      "branches": 10803266779.0,
+      "branch-misses": 20435203.0,
+      "task-clock": 3297.46,
+      "context-switches": 446.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_predicate",
+    "ns": 1.95,
+    "cycles_est": 8.829264580866182,
+    "instructions_est": 60.997527785907636,
+    "events": {
+      "cycles": 1070559650.0,
+      "instructions": 7396028446.0,
+      "branches": 2146757568.0,
+      "branch-misses": 24651.0,
+      "task-clock": 236.44,
+      "context-switches": 17.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_predicate",
+    "ns": 1.94,
+    "cycles_est": 8.768866378440052,
+    "instructions_est": 60.80805959883163,
+    "events": {
+      "cycles": 990384697.0,
+      "instructions": 6867862855.0,
+      "branches": 1993418831.0,
+      "branch-misses": 24804.0,
+      "task-clock": 219.11,
+      "context-switches": 28.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_char_hit",
+    "ns": 13.09,
+    "cycles_est": 59.131026426115206,
+    "instructions_est": 289.0383970947109,
+    "events": {
+      "cycles": 18062699080.0,
+      "instructions": 88292287566.0,
+      "branches": 16526521743.0,
+      "branch-misses": 28570.0,
+      "task-clock": 3998.59,
+      "context-switches": 572.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_char_hit",
+    "ns": 13.19,
+    "cycles_est": 59.71789909945447,
+    "instructions_est": 289.75837621024874,
+    "events": {
+      "cycles": 23089049613.0,
+      "instructions": 112030825347.0,
+      "branches": 20969924623.0,
+      "branch-misses": 29051.0,
+      "task-clock": 5099.72,
+      "context-switches": 559.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_char_miss",
+    "ns": 62.25,
+    "cycles_est": 282.4479615068416,
+    "instructions_est": 1676.7852353165997,
+    "events": {
+      "cycles": 1611564128.0,
+      "instructions": 9567238231.0,
+      "branches": 1483432282.0,
+      "branch-misses": 5683152.0,
+      "task-clock": 355.18,
+      "context-switches": 37.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_char_miss",
+    "ns": 63.73,
+    "cycles_est": 287.13259962164153,
+    "instructions_est": 1702.7267068790616,
+    "events": {
+      "cycles": 5510260662.0,
+      "instructions": 32676428951.0,
+      "branches": 5066381517.0,
+      "branch-misses": 19345022.0,
+      "task-clock": 1223.02,
+      "context-switches": 357.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_str_hit",
+    "ns": 12.63,
+    "cycles_est": 57.19308695553861,
+    "instructions_est": 267.77406770338035,
+    "events": {
+      "cycles": 18584402280.0,
+      "instructions": 87010882945.0,
+      "branches": 15652099001.0,
+      "branch-misses": 28661.0,
+      "task-clock": 4104.01,
+      "context-switches": 392.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_str_hit",
+    "ns": 12.91,
+    "cycles_est": 58.21962248250173,
+    "instructions_est": 270.50089890501465,
+    "events": {
+      "cycles": 24449896423.0,
+      "instructions": 113599482074.0,
+      "branches": 20435057887.0,
+      "branch-misses": 28669.0,
+      "task-clock": 5421.68,
+      "context-switches": 568.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "baseline",
+    "bench": "str::extra_unicode_str_miss",
+    "ns": 61.95,
+    "cycles_est": 280.0193077422926,
+    "instructions_est": 1673.263885323097,
+    "events": {
+      "cycles": 5634422400.0,
+      "instructions": 33668662324.0,
+      "branches": 5194375448.0,
+      "branch-misses": 20224611.0,
+      "task-clock": 1246.53,
+      "context-switches": 110.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  },
+  {
+    "trial": 2,
+    "variant": "optimized",
+    "bench": "str::extra_unicode_str_miss",
+    "ns": 62.15,
+    "cycles_est": 277.520063216341,
+    "instructions_est": 1649.663337184491,
+    "events": {
+      "cycles": 783709514.0,
+      "instructions": 4658606795.0,
+      "branches": 718807194.0,
+      "branch-misses": 2817558.0,
+      "task-clock": 175.51,
+      "context-switches": 22.0,
+      "cpu-migrations": 0.0
+    },
+    "running_percent": [
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ]
+  }
+]

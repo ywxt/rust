@@ -1,0 +1,47 @@
+{
+  "record": [
+    "perf",
+    "record",
+    "-q",
+    "-F",
+    "997",
+    "-e",
+    "cycles:u",
+    "-g",
+    "-o",
+    "/tmp/contains-bad-simd-20261105/profile.candidate.aarch64.data",
+    "--",
+    "taskset",
+    "-c",
+    "52",
+    "env",
+    "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/candidate/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+    "setarch",
+    "aarch64",
+    "-R",
+    "/tmp/contains-bad-simd-20261105/candidate/aarch64-unknown-linux-gnu/counted",
+    "str::bench_contains_bad_simd",
+    "10000000"
+  ],
+  "stdout": "completed 10000000 calls\n",
+  "stderr": "personality=00040000\n",
+  "report": [
+    "perf",
+    "report",
+    "--stdio",
+    "--no-children",
+    "--percent-limit",
+    "0.5",
+    "-i",
+    "/tmp/contains-bad-simd-20261105/profile.candidate.aarch64.data"
+  ],
+  "annotate": [
+    "perf",
+    "annotate",
+    "--stdio",
+    "--symbol",
+    "_RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in",
+    "-i",
+    "/tmp/contains-bad-simd-20261105/profile.candidate.aarch64.data"
+  ]
+}

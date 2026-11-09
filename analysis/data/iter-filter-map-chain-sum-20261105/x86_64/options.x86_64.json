@@ -1,0 +1,92 @@
+[
+  {
+    "name": "u4",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-unroll-count=4",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/u4"
+    ],
+    "checks": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  },
+  {
+    "name": "u8",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-unroll-count=8",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/u8"
+    ],
+    "checks": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  },
+  {
+    "name": "nolsr",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-disable-lsr",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/nolsr"
+    ],
+    "checks": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  },
+  {
+    "name": "nohoist",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-disable-constant-hoisting",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/nohoist"
+    ],
+    "checks": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  },
+  {
+    "name": "nosched",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-enable-misched=false",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/nosched"
+    ],
+    "checks": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  }
+]

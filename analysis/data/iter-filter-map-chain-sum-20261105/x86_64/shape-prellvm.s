@@ -1,0 +1,973 @@
+	.att_syntax
+	.file	"shape.dc6e593b42efc4fc-cgu.0"
+	.section	.text._RINvNtCs6knCYbIatyh_4core4hint9black_boxxECsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end0, nop
+	.type	_RINvNtCs6knCYbIatyh_4core4hint9black_boxxECsiVlEIo5dfo6_5shape,@function
+_RINvNtCs6knCYbIatyh_4core4hint9black_boxxECsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	movq	%rdi, -8(%rsp)
+	leaq	-8(%rsp), %rax
+	#APP
+	#NO_APP
+	movq	-8(%rsp), %rax
+	retq
+.Lfunc_end0:
+	.size	_RINvNtCs6knCYbIatyh_4core4hint9black_boxxECsiVlEIo5dfo6_5shape, .Lfunc_end0-_RINvNtCs6knCYbIatyh_4core4hint9black_boxxECsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text._RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_,"ax",@progbits
+	.prefalign	4, .Lfunc_end1, nop
+	.type	_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_,@function
+_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_:
+	.cfi_startproc
+	pushq	%rbx
+	.cfi_def_cfa_offset 16
+	subq	$32, %rsp
+	.cfi_def_cfa_offset 48
+	.cfi_offset %rbx, -16
+	movq	%rdi, %rbx
+	movq	%rsi, 16(%rsp)
+	movb	$1, 14(%rsp)
+	movb	$1, 13(%rsp)
+	cmpl	$1, (%rdi)
+	jne	.LBB1_2
+	movq	8(%rbx), %rdi
+	movq	16(%rbx), %rsi
+	movq	16(%rsp), %rdx
+	leaq	15(%rsp), %rcx
+	callq	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxQNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1E_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3U_3Sum3sumINtB30_3MapINtB1C_9FilterMapINtNtB1E_5chain5ChainB3_B3_EB2o_EB3m_EE0E0E0EB2s_
+	movq	%rax, 16(%rsp)
+.LBB1_2:
+	cmpb	$0, 24(%rbx)
+	je	.LBB1_5
+	movb	$0, 14(%rsp)
+	movq	32(%rbx), %rdi
+	movq	40(%rbx), %rsi
+	movb	$0, 13(%rsp)
+	movq	16(%rsp), %rdx
+	callq	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3T_3Sum3sumINtB2Z_3MapINtB1B_9FilterMapINtNtB1D_5chain5ChainB3_B3_EB2n_EB3l_EE0E0E0EB2r_
+	movq	%rax, 16(%rsp)
+	jmp	.LBB1_4
+.LBB1_5:
+	movq	16(%rsp), %rax
+.LBB1_4:
+	movq	%rax, 24(%rsp)
+	movq	24(%rsp), %rax
+	addq	$32, %rsp
+	.cfi_def_cfa_offset 16
+	popq	%rbx
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end1:
+	.size	_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_, .Lfunc_end1-_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_
+	.cfi_endproc
+
+	.section	.text._RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_,"ax",@progbits
+	.prefalign	4, .Lfunc_end2, nop
+	.type	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_,@function
+_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	subq	$56, %rsp
+	.cfi_def_cfa_offset 80
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rdi, 40(%rsp)
+	movq	%rsi, 48(%rsp)
+	movb	$1, 14(%rsp)
+	movq	%rdx, 16(%rsp)
+	leaq	40(%rsp), %rbx
+	leaq	15(%rsp), %r14
+	.p2align	4
+.LBB2_1:
+	movq	%rbx, %rdi
+	callq	_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape
+	movq	%rax, 24(%rsp)
+	movq	%rdx, 32(%rsp)
+	cmpl	$1, 24(%rsp)
+	jne	.LBB2_3
+	movq	32(%rsp), %rdx
+	movb	$0, 14(%rsp)
+	movq	16(%rsp), %rsi
+	movq	%r14, %rdi
+	callq	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_
+	movb	$1, 14(%rsp)
+	movq	%rax, 16(%rsp)
+	jmp	.LBB2_1
+.LBB2_3:
+	movq	16(%rsp), %rax
+	addq	$56, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end2:
+	.size	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_, .Lfunc_end2-_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_
+	.cfi_endproc
+
+	.section	.text._RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3T_3Sum3sumINtB2Z_3MapINtB1B_9FilterMapINtNtB1D_5chain5ChainB3_B3_EB2n_EB3l_EE0E0E0EB2r_,"ax",@progbits
+	.prefalign	4, .Lfunc_end3, nop
+	.type	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3T_3Sum3sumINtB2Z_3MapINtB1B_9FilterMapINtNtB1D_5chain5ChainB3_B3_EB2n_EB3l_EE0E0E0EB2r_,@function
+_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3T_3Sum3sumINtB2Z_3MapINtB1B_9FilterMapINtNtB1D_5chain5ChainB3_B3_EB2n_EB3l_EE0E0E0EB2r_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	subq	$56, %rsp
+	.cfi_def_cfa_offset 80
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rdi, 40(%rsp)
+	movq	%rsi, 48(%rsp)
+	movb	$1, 14(%rsp)
+	movq	%rdx, 16(%rsp)
+	leaq	40(%rsp), %rbx
+	leaq	15(%rsp), %r14
+	.p2align	4
+.LBB3_1:
+	movq	%rbx, %rdi
+	callq	_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape
+	movq	%rax, 24(%rsp)
+	movq	%rdx, 32(%rsp)
+	cmpl	$1, 24(%rsp)
+	jne	.LBB3_3
+	movq	32(%rsp), %rdx
+	movb	$0, 14(%rsp)
+	movq	16(%rsp), %rsi
+	movq	%r14, %rdi
+	callq	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_
+	movb	$1, 14(%rsp)
+	movq	%rax, 16(%rsp)
+	jmp	.LBB3_1
+.LBB3_3:
+	movq	16(%rsp), %rax
+	addq	$56, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end3:
+	.size	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3T_3Sum3sumINtB2Z_3MapINtB1B_9FilterMapINtNtB1D_5chain5ChainB3_B3_EB2n_EB3l_EE0E0E0EB2r_, .Lfunc_end3-_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3T_3Sum3sumINtB2Z_3MapINtB1B_9FilterMapINtNtB1D_5chain5ChainB3_B3_EB2n_EB3l_EE0E0E0EB2r_
+	.cfi_endproc
+
+	.section	.text._RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxQNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1E_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3U_3Sum3sumINtB30_3MapINtB1C_9FilterMapINtNtB1E_5chain5ChainB3_B3_EB2o_EB3m_EE0E0E0EB2s_,"ax",@progbits
+	.prefalign	4, .Lfunc_end4, nop
+	.type	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxQNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1E_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3U_3Sum3sumINtB30_3MapINtB1C_9FilterMapINtNtB1E_5chain5ChainB3_B3_EB2o_EB3m_EE0E0E0EB2s_,@function
+_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxQNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1E_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3U_3Sum3sumINtB30_3MapINtB1C_9FilterMapINtNtB1E_5chain5ChainB3_B3_EB2o_EB3m_EE0E0E0EB2s_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	subq	$56, %rsp
+	.cfi_def_cfa_offset 80
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rdi, 40(%rsp)
+	movq	%rsi, 48(%rsp)
+	movq	%rcx, 16(%rsp)
+	movb	$1, 7(%rsp)
+	movq	%rdx, 8(%rsp)
+	leaq	40(%rsp), %rbx
+	leaq	16(%rsp), %r14
+	.p2align	4
+.LBB4_1:
+	movq	%rbx, %rdi
+	callq	_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape
+	movq	%rax, 24(%rsp)
+	movq	%rdx, 32(%rsp)
+	cmpl	$1, 24(%rsp)
+	jne	.LBB4_3
+	movq	32(%rsp), %rdx
+	movb	$0, 7(%rsp)
+	movq	8(%rsp), %rsi
+	movq	%r14, %rdi
+	callq	_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_
+	movb	$1, 7(%rsp)
+	movq	%rax, 8(%rsp)
+	jmp	.LBB4_1
+.LBB4_3:
+	movq	8(%rsp), %rax
+	addq	$56, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end4:
+	.size	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxQNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1E_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3U_3Sum3sumINtB30_3MapINtB1C_9FilterMapINtNtB1E_5chain5ChainB3_B3_EB2o_EB3m_EE0E0E0EB2s_, .Lfunc_end4-_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxQNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB1E_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3U_3Sum3sumINtB30_3MapINtB1C_9FilterMapINtNtB1E_5chain5ChainB3_B3_EB2o_EB3m_EE0E0E0EB2s_
+	.cfi_endproc
+
+	.section	.text._RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator5chainB3_ECsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end5, nop
+	.type	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator5chainB3_ECsiVlEIo5dfo6_5shape,@function
+_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator5chainB3_ECsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	pushq	%r15
+	.cfi_def_cfa_offset 16
+	pushq	%r14
+	.cfi_def_cfa_offset 24
+	pushq	%rbx
+	.cfi_def_cfa_offset 32
+	subq	$48, %rsp
+	.cfi_def_cfa_offset 80
+	.cfi_offset %rbx, -32
+	.cfi_offset %r14, -24
+	.cfi_offset %r15, -16
+	movq	%rdx, %r14
+	movq	%rsi, %r15
+	movq	%rdi, %rbx
+	movq	%rcx, %rdi
+	movq	%r8, %rsi
+	callq	_RNvXNtNtNtCs6knCYbIatyh_4core4iter6traits7collectINtNtNtB8_3ops5range5RangexENtB2_12IntoIterator9into_iterCsiVlEIo5dfo6_5shape
+	movq	%r15, 32(%rsp)
+	movq	%r14, 40(%rsp)
+	movq	$1, 24(%rsp)
+	movq	%rax, 8(%rsp)
+	movq	%rdx, 16(%rsp)
+	movq	$1, (%rsp)
+	movq	%r14, 16(%rbx)
+	movq	24(%rsp), %rax
+	movq	%rax, (%rbx)
+	movq	32(%rsp), %rax
+	movq	%rax, 8(%rbx)
+	movq	(%rsp), %rax
+	movq	%rax, 24(%rbx)
+	movq	8(%rsp), %rax
+	movq	%rax, 32(%rbx)
+	movq	16(%rsp), %rax
+	movq	%rax, 40(%rbx)
+	movq	%rbx, %rax
+	addq	$48, %rsp
+	.cfi_def_cfa_offset 32
+	popq	%rbx
+	.cfi_def_cfa_offset 24
+	popq	%r14
+	.cfi_def_cfa_offset 16
+	popq	%r15
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end5:
+	.size	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator5chainB3_ECsiVlEIo5dfo6_5shape, .Lfunc_end5-_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator5chainB3_ECsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text._RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_,"ax",@progbits
+	.prefalign	4, .Lfunc_end6, nop
+	.type	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_,@function
+_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	subq	$72, %rsp
+	.cfi_def_cfa_offset 96
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rdi, %rbx
+	movq	%rdx, 56(%rsp)
+	movq	%rcx, 64(%rsp)
+	movb	$1, 15(%rsp)
+	movq	%rsi, 16(%rsp)
+	leaq	56(%rsp), %r14
+	.p2align	4
+.LBB6_1:
+	movq	%rbx, %rdi
+	callq	_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape
+	movq	%rax, 32(%rsp)
+	movq	%rdx, 40(%rsp)
+	cmpl	$1, 32(%rsp)
+	jne	.LBB6_3
+	movq	40(%rsp), %rdx
+	movb	$0, 15(%rsp)
+	movq	16(%rsp), %rsi
+	movq	%r14, %rdi
+	callq	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_
+	movq	%rax, %rdi
+	callq	_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try6branchCsiVlEIo5dfo6_5shape
+	movq	%rax, 48(%rsp)
+	movq	48(%rsp), %rax
+	movb	$1, 15(%rsp)
+	movq	%rax, 16(%rsp)
+	jmp	.LBB6_1
+.LBB6_3:
+	movb	$0, 15(%rsp)
+	movq	16(%rsp), %rdi
+	callq	_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try11from_outputCsiVlEIo5dfo6_5shape
+	movq	%rax, 24(%rsp)
+	movq	24(%rsp), %rax
+	addq	$72, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end6:
+	.size	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_, .Lfunc_end6-_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_
+	.cfi_endproc
+
+	.section	.text._RNCINvMNtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxE10wrap_mut_2xxNCINvXse_NtNtNtB9_4iter6traits5accumxNtB1u_3Sum3sumQINtNtNtB1y_8adapters3map3MapINtNtB2g_10filter_map9FilterMapINtNtB7_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtB9_4hint9black_boxxEEE0E0B3y_,"ax",@progbits
+	.prefalign	4, .Lfunc_end7, nop
+	.type	_RNCINvMNtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxE10wrap_mut_2xxNCINvXse_NtNtNtB9_4iter6traits5accumxNtB1u_3Sum3sumQINtNtNtB1y_8adapters3map3MapINtNtB2g_10filter_map9FilterMapINtNtB7_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtB9_4hint9black_boxxEEE0E0B3y_,@function
+_RNCINvMNtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxE10wrap_mut_2xxNCINvXse_NtNtNtB9_4iter6traits5accumxNtB1u_3Sum3sumQINtNtNtB1y_8adapters3map3MapINtNtB2g_10filter_map9FilterMapINtNtB7_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtB9_4hint9black_boxxEEE0E0B3y_:
+	.cfi_startproc
+	pushq	%rax
+	.cfi_def_cfa_offset 16
+	callq	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumQINtNtNtBc_8adapters3map3MapINtNtB19_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtBe_4hint9black_boxxEEE0B2w_
+	popq	%rcx
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end7:
+	.size	_RNCINvMNtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxE10wrap_mut_2xxNCINvXse_NtNtNtB9_4iter6traits5accumxNtB1u_3Sum3sumQINtNtNtB1y_8adapters3map3MapINtNtB2g_10filter_map9FilterMapINtNtB7_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtB9_4hint9black_boxxEEE0E0B3y_, .Lfunc_end7-_RNCINvMNtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxE10wrap_mut_2xxNCINvXse_NtNtNtB9_4iter6traits5accumxNtB1u_3Sum3sumQINtNtNtB1y_8adapters3map3MapINtNtB2g_10filter_map9FilterMapINtNtB7_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtB9_4hint9black_boxxEEE0E0B3y_
+	.cfi_endproc
+
+	.section	.text._RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_,"ax",@progbits
+	.prefalign	4, .Lfunc_end8, nop
+	.type	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_,@function
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	subq	$40, %rsp
+	.cfi_def_cfa_offset 64
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rsi, %rbx
+	movq	%rdi, %r14
+	movb	$1, 15(%rsp)
+	movq	%rdx, %rsi
+	callq	_RNCNvCsiVlEIo5dfo6_5shape6single0B3_
+	movq	%rax, 24(%rsp)
+	movq	%rdx, 32(%rsp)
+	cmpq	$1, %rax
+	jne	.LBB8_2
+	movq	32(%rsp), %rdx
+	movb	$0, 15(%rsp)
+	movq	%r14, %rdi
+	movq	%rbx, %rsi
+	callq	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtNtBa_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EBX_EE0E0B3e_
+	movq	%rax, 16(%rsp)
+	jmp	.LBB8_3
+.LBB8_2:
+	movq	%rbx, 16(%rsp)
+.LBB8_3:
+	movq	16(%rsp), %rax
+	addq	$40, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end8:
+	.size	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_, .Lfunc_end8-_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_
+	.cfi_endproc
+
+	.section	.text._RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_,"ax",@progbits
+	.prefalign	4, .Lfunc_end9, nop
+	.type	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_,@function
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	subq	$40, %rsp
+	.cfi_def_cfa_offset 64
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rsi, %rbx
+	movq	%rdi, %r14
+	movb	$1, 15(%rsp)
+	movq	%rdx, %rsi
+	callq	_RNCNvCsiVlEIo5dfo6_5shape7chained0B3_
+	movq	%rax, 24(%rsp)
+	movq	%rdx, 32(%rsp)
+	cmpq	$1, %rax
+	jne	.LBB9_2
+	movq	32(%rsp), %rdx
+	movb	$0, 15(%rsp)
+	movq	%r14, %rdi
+	movq	%rbx, %rsi
+	callq	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB32_ENCNvCsiVlEIo5dfo6_5shape7chained0EBX_EE0E0B3D_
+	movq	%rax, 16(%rsp)
+	jmp	.LBB9_3
+.LBB9_2:
+	movq	%rbx, 16(%rsp)
+.LBB9_3:
+	movq	16(%rsp), %rax
+	addq	$40, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end9:
+	.size	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_, .Lfunc_end9-_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_
+	.cfi_endproc
+
+	.section	.text._RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_,"ax",@progbits
+	.prefalign	4, .Lfunc_end10, nop
+	.type	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_,@function
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	subq	$40, %rsp
+	.cfi_def_cfa_offset 64
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rsi, %rbx
+	movq	%rdi, %r14
+	movb	$1, 15(%rsp)
+	movq	(%rdi), %rdi
+	movq	%rdx, %rsi
+	callq	_RNCNvCsiVlEIo5dfo6_5shape10single_ref0B3_
+	movq	%rax, 24(%rsp)
+	movq	%rdx, 32(%rsp)
+	cmpq	$1, %rax
+	jne	.LBB10_2
+	movq	32(%rsp), %rdx
+	addq	$8, %r14
+	movb	$0, 15(%rsp)
+	movq	%r14, %rdi
+	movq	%rbx, %rsi
+	callq	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map12map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxEINvNtBa_4hint9black_boxxENCINvMB15_B12_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB2L_3Sum3sumQINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB17_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EB1L_EE0E0E0B4q_
+	jmp	.LBB10_3
+.LBB10_2:
+	movb	$0, 15(%rsp)
+	movq	%rbx, %rdi
+	callq	_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try11from_outputCsiVlEIo5dfo6_5shape
+.LBB10_3:
+	movq	%rax, 16(%rsp)
+	movq	16(%rsp), %rax
+	addq	$40, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end10:
+	.size	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_, .Lfunc_end10-_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_
+	.cfi_endproc
+
+	.section	.text._RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map12map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxEINvNtBa_4hint9black_boxxENCINvMB15_B12_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB2L_3Sum3sumQINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB17_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EB1L_EE0E0E0B4q_,"ax",@progbits
+	.prefalign	4, .Lfunc_end11, nop
+	.type	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map12map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxEINvNtBa_4hint9black_boxxENCINvMB15_B12_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB2L_3Sum3sumQINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB17_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EB1L_EE0E0E0B4q_,@function
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map12map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxEINvNtBa_4hint9black_boxxENCINvMB15_B12_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB2L_3Sum3sumQINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB17_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EB1L_EE0E0E0B4q_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	pushq	%rax
+	.cfi_def_cfa_offset 32
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rsi, %rbx
+	movq	%rdi, %r14
+	movb	$1, 7(%rsp)
+	movq	(%rdi), %rdi
+	addq	$8, %r14
+	movq	%rdx, %rsi
+	callq	_RNvYINvNtCs6knCYbIatyh_4core4hint9black_boxxEINtNtNtB7_3ops8function5FnMutTxEE8call_mutCsiVlEIo5dfo6_5shape
+	movb	$0, 7(%rsp)
+	movq	%r14, %rdi
+	movq	%rbx, %rsi
+	movq	%rax, %rdx
+	callq	_RNCINvMNtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxE10wrap_mut_2xxNCINvXse_NtNtNtB9_4iter6traits5accumxNtB1u_3Sum3sumQINtNtNtB1y_8adapters3map3MapINtNtB2g_10filter_map9FilterMapINtNtB7_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtB9_4hint9black_boxxEEE0E0B3y_
+	addq	$8, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end11:
+	.size	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map12map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxEINvNtBa_4hint9black_boxxENCINvMB15_B12_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB2L_3Sum3sumQINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB17_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EB1L_EE0E0E0B4q_, .Lfunc_end11-_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map12map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxEINvNtBa_4hint9black_boxxENCINvMB15_B12_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB2L_3Sum3sumQINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB17_5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EB1L_EE0E0E0B4q_
+	.cfi_endproc
+
+	.section	.text._RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB32_ENCNvCsiVlEIo5dfo6_5shape7chained0EBX_EE0E0B3D_,"ax",@progbits
+	.prefalign	4, .Lfunc_end12, nop
+	.type	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB32_ENCNvCsiVlEIo5dfo6_5shape7chained0EBX_EE0E0B3D_,@function
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB32_ENCNvCsiVlEIo5dfo6_5shape7chained0EBX_EE0E0B3D_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	pushq	%rax
+	.cfi_def_cfa_offset 32
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rsi, %rbx
+	movq	%rdi, %r14
+	movb	$1, 7(%rsp)
+	movq	%rdx, %rsi
+	callq	_RNvYINvNtCs6knCYbIatyh_4core4hint9black_boxxEINtNtNtB7_3ops8function5FnMutTxEE8call_mutCsiVlEIo5dfo6_5shape
+	movb	$0, 7(%rsp)
+	movq	%r14, %rdi
+	movq	%rbx, %rsi
+	movq	%rax, %rdx
+	callq	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtB18_5chain5ChainINtNtNtBe_3ops5range5RangexEB2k_ENCNvCsiVlEIo5dfo6_5shape7chained0EINvNtBe_4hint9black_boxxEEE0B2V_
+	addq	$8, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end12:
+	.size	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB32_ENCNvCsiVlEIo5dfo6_5shape7chained0EBX_EE0E0B3D_, .Lfunc_end12-_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB32_ENCNvCsiVlEIo5dfo6_5shape7chained0EBX_EE0E0B3D_
+	.cfi_endproc
+
+	.section	.text._RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtNtBa_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EBX_EE0E0B3e_,"ax",@progbits
+	.prefalign	4, .Lfunc_end13, nop
+	.type	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtNtBa_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EBX_EE0E0B3e_,@function
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtNtBa_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EBX_EE0E0B3e_:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	pushq	%rax
+	.cfi_def_cfa_offset 32
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rsi, %rbx
+	movq	%rdi, %r14
+	movb	$1, 7(%rsp)
+	movq	%rdx, %rsi
+	callq	_RNvYINvNtCs6knCYbIatyh_4core4hint9black_boxxEINtNtNtB7_3ops8function5FnMutTxEE8call_mutCsiVlEIo5dfo6_5shape
+	movb	$0, 7(%rsp)
+	movq	%r14, %rdi
+	movq	%rbx, %rsi
+	movq	%rax, %rdx
+	callq	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EINvNtBe_4hint9black_boxxEEE0B2v_
+	addq	$8, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end13:
+	.size	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtNtBa_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EBX_EE0E0B3e_, .Lfunc_end13-_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB1v_3Sum3sumINtB4_3MapINtNtB6_10filter_map9FilterMapINtNtNtBa_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EBX_EE0E0B3e_
+	.cfi_endproc
+
+	.section	.text._RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtB18_5chain5ChainINtNtNtBe_3ops5range5RangexEB2k_ENCNvCsiVlEIo5dfo6_5shape7chained0EINvNtBe_4hint9black_boxxEEE0B2V_,"ax",@progbits
+	.prefalign	4, .Lfunc_end14, nop
+	.type	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtB18_5chain5ChainINtNtNtBe_3ops5range5RangexEB2k_ENCNvCsiVlEIo5dfo6_5shape7chained0EINvNtBe_4hint9black_boxxEEE0B2V_,@function
+_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtB18_5chain5ChainINtNtNtBe_3ops5range5RangexEB2k_ENCNvCsiVlEIo5dfo6_5shape7chained0EINvNtBe_4hint9black_boxxEEE0B2V_:
+	.cfi_startproc
+	leaq	(%rsi,%rdx), %rax
+	retq
+.Lfunc_end14:
+	.size	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtB18_5chain5ChainINtNtNtBe_3ops5range5RangexEB2k_ENCNvCsiVlEIo5dfo6_5shape7chained0EINvNtBe_4hint9black_boxxEEE0B2V_, .Lfunc_end14-_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtB18_5chain5ChainINtNtNtBe_3ops5range5RangexEB2k_ENCNvCsiVlEIo5dfo6_5shape7chained0EINvNtBe_4hint9black_boxxEEE0B2V_
+	.cfi_endproc
+
+	.section	.text._RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EINvNtBe_4hint9black_boxxEEE0B2v_,"ax",@progbits
+	.prefalign	4, .Lfunc_end15, nop
+	.type	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EINvNtBe_4hint9black_boxxEEE0B2v_,@function
+_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EINvNtBe_4hint9black_boxxEEE0B2v_:
+	.cfi_startproc
+	leaq	(%rsi,%rdx), %rax
+	retq
+.Lfunc_end15:
+	.size	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EINvNtBe_4hint9black_boxxEEE0B2v_, .Lfunc_end15-_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtB18_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape6single0EINvNtBe_4hint9black_boxxEEE0B2v_
+	.cfi_endproc
+
+	.section	.text._RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumQINtNtNtBc_8adapters3map3MapINtNtB19_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtBe_4hint9black_boxxEEE0B2w_,"ax",@progbits
+	.prefalign	4, .Lfunc_end16, nop
+	.type	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumQINtNtNtBc_8adapters3map3MapINtNtB19_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtBe_4hint9black_boxxEEE0B2w_,@function
+_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumQINtNtNtBc_8adapters3map3MapINtNtB19_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtBe_4hint9black_boxxEEE0B2w_:
+	.cfi_startproc
+	leaq	(%rsi,%rdx), %rax
+	retq
+.Lfunc_end16:
+	.size	_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumQINtNtNtBc_8adapters3map3MapINtNtB19_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtBe_4hint9black_boxxEEE0B2w_, .Lfunc_end16-_RNCINvXse_NtNtNtCs6knCYbIatyh_4core4iter6traits5accumxNtB8_3Sum3sumQINtNtNtBc_8adapters3map3MapINtNtB19_10filter_map9FilterMapINtNtNtBe_3ops5range5RangexENCNvCsiVlEIo5dfo6_5shape10single_ref0EINvNtBe_4hint9black_boxxEEE0B2w_
+	.cfi_endproc
+
+	.section	.text._RNCNvCsiVlEIo5dfo6_5shape10single_ref0B3_,"ax",@progbits
+	.prefalign	4, .Lfunc_end17, nop
+	.type	_RNCNvCsiVlEIo5dfo6_5shape10single_ref0B3_,@function
+_RNCNvCsiVlEIo5dfo6_5shape10single_ref0B3_:
+	.cfi_startproc
+	imulq	%rsi, %rsi
+	jno	.LBB17_1
+	movups	.Lanon.696f6e254a364983a82d474a7278ae8b.0(%rip), %xmm0
+	movups	%xmm0, -16(%rsp)
+	movq	-16(%rsp), %rax
+	movq	-8(%rsp), %rdx
+	retq
+.LBB17_1:
+	movq	%rsi, -8(%rsp)
+	movq	$1, -16(%rsp)
+	movq	-16(%rsp), %rax
+	movq	-8(%rsp), %rdx
+	retq
+.Lfunc_end17:
+	.size	_RNCNvCsiVlEIo5dfo6_5shape10single_ref0B3_, .Lfunc_end17-_RNCNvCsiVlEIo5dfo6_5shape10single_ref0B3_
+	.cfi_endproc
+
+	.section	.text._RNCNvCsiVlEIo5dfo6_5shape6single0B3_,"ax",@progbits
+	.prefalign	4, .Lfunc_end18, nop
+	.type	_RNCNvCsiVlEIo5dfo6_5shape6single0B3_,@function
+_RNCNvCsiVlEIo5dfo6_5shape6single0B3_:
+	.cfi_startproc
+	imulq	%rsi, %rsi
+	jno	.LBB18_1
+	movups	.Lanon.696f6e254a364983a82d474a7278ae8b.0(%rip), %xmm0
+	movups	%xmm0, -16(%rsp)
+	movq	-16(%rsp), %rax
+	movq	-8(%rsp), %rdx
+	retq
+.LBB18_1:
+	movq	%rsi, -8(%rsp)
+	movq	$1, -16(%rsp)
+	movq	-16(%rsp), %rax
+	movq	-8(%rsp), %rdx
+	retq
+.Lfunc_end18:
+	.size	_RNCNvCsiVlEIo5dfo6_5shape6single0B3_, .Lfunc_end18-_RNCNvCsiVlEIo5dfo6_5shape6single0B3_
+	.cfi_endproc
+
+	.section	.text._RNCNvCsiVlEIo5dfo6_5shape7chained0B3_,"ax",@progbits
+	.prefalign	4, .Lfunc_end19, nop
+	.type	_RNCNvCsiVlEIo5dfo6_5shape7chained0B3_,@function
+_RNCNvCsiVlEIo5dfo6_5shape7chained0B3_:
+	.cfi_startproc
+	imulq	%rsi, %rsi
+	jno	.LBB19_1
+	movups	.Lanon.696f6e254a364983a82d474a7278ae8b.0(%rip), %xmm0
+	movups	%xmm0, -16(%rsp)
+	movq	-16(%rsp), %rax
+	movq	-8(%rsp), %rdx
+	retq
+.LBB19_1:
+	movq	%rsi, -8(%rsp)
+	movq	$1, -16(%rsp)
+	movq	-16(%rsp), %rax
+	movq	-8(%rsp), %rdx
+	retq
+.Lfunc_end19:
+	.size	_RNCNvCsiVlEIo5dfo6_5shape7chained0B3_, .Lfunc_end19-_RNCNvCsiVlEIo5dfo6_5shape7chained0B3_
+	.cfi_endproc
+
+	.section	.text.unlikely._RNvNtCs6knCYbIatyh_4core10intrinsics9cold_path,"ax",@progbits
+	.prefalign	4, .Lfunc_end20, nop
+	.type	_RNvNtCs6knCYbIatyh_4core10intrinsics9cold_path,@function
+_RNvNtCs6knCYbIatyh_4core10intrinsics9cold_path:
+	.cfi_startproc
+	retq
+.Lfunc_end20:
+	.size	_RNvNtCs6knCYbIatyh_4core10intrinsics9cold_path, .Lfunc_end20-_RNvNtCs6knCYbIatyh_4core10intrinsics9cold_path
+	.cfi_endproc
+
+	.section	.text._RNvNvNtCs6knCYbIatyh_4core4hint21unreachable_unchecked18precondition_check,"ax",@progbits
+	.prefalign	4, .Lfunc_end21, nop
+	.type	_RNvNvNtCs6knCYbIatyh_4core4hint21unreachable_unchecked18precondition_check,@function
+_RNvNvNtCs6knCYbIatyh_4core4hint21unreachable_unchecked18precondition_check:
+	.cfi_startproc
+	pushq	%rax
+	.cfi_def_cfa_offset 16
+	movq	%rdi, %rcx
+	leaq	.Lalloc_75fb06c2453febd814e73f5f2e72ae38(%rip), %rdi
+	movl	$399, %esi
+	xorl	%edx, %edx
+	callq	*_RNvNtCs6knCYbIatyh_4core9panicking18panic_nounwind_fmt@GOTPCREL(%rip)
+.Lfunc_end21:
+	.size	_RNvNvNtCs6knCYbIatyh_4core4hint21unreachable_unchecked18precondition_check, .Lfunc_end21-_RNvNvNtCs6knCYbIatyh_4core4hint21unreachable_unchecked18precondition_check
+	.cfi_endproc
+
+	.section	.text._RNvXNtNtNtCs6knCYbIatyh_4core4iter6traits7collectINtNtNtB8_3ops5range5RangexENtB2_12IntoIterator9into_iterCsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end22, nop
+	.type	_RNvXNtNtNtCs6knCYbIatyh_4core4iter6traits7collectINtNtNtB8_3ops5range5RangexENtB2_12IntoIterator9into_iterCsiVlEIo5dfo6_5shape,@function
+_RNvXNtNtNtCs6knCYbIatyh_4core4iter6traits7collectINtNtNtB8_3ops5range5RangexENtB2_12IntoIterator9into_iterCsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	movq	%rsi, %rdx
+	movq	%rdi, %rax
+	retq
+.Lfunc_end22:
+	.size	_RNvXNtNtNtCs6knCYbIatyh_4core4iter6traits7collectINtNtNtB8_3ops5range5RangexENtB2_12IntoIterator9into_iterCsiVlEIo5dfo6_5shape, .Lfunc_end22-_RNvXNtNtNtCs6knCYbIatyh_4core4iter6traits7collectINtNtNtB8_3ops5range5RangexENtB2_12IntoIterator9into_iterCsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text._RNvXs0_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxEINtB5_12FromResidualNtB5_25NeverShortCircuitResidualE13from_residualCsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end23, nop
+	.type	_RNvXs0_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxEINtB5_12FromResidualNtB5_25NeverShortCircuitResidualE13from_residualCsiVlEIo5dfo6_5shape,@function
+_RNvXs0_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxEINtB5_12FromResidualNtB5_25NeverShortCircuitResidualE13from_residualCsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	ud2
+.Lfunc_end23:
+	.size	_RNvXs0_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxEINtB5_12FromResidualNtB5_25NeverShortCircuitResidualE13from_residualCsiVlEIo5dfo6_5shape, .Lfunc_end23-_RNvXs0_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB5_17NeverShortCircuitxEINtB5_12FromResidualNtB5_25NeverShortCircuitResidualE13from_residualCsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text._RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_,"ax",@progbits
+	.prefalign	4, .Lfunc_end24, nop
+	.type	_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_,@function
+_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_:
+	.cfi_startproc
+	subq	$24, %rsp
+	.cfi_def_cfa_offset 32
+	movq	%rsi, 8(%rsp)
+	movq	%rdx, 16(%rsp)
+	movq	(%rdi), %rdi
+	callq	_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_
+	addq	$24, %rsp
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end24:
+	.size	_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_, .Lfunc_end24-_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_
+	.cfi_endproc
+
+	.section	.text._RNvXs1e_NtNtCs6knCYbIatyh_4core3cmp5implsxNtB8_10PartialOrd2lt,"ax",@progbits
+	.prefalign	4, .Lfunc_end25, nop
+	.type	_RNvXs1e_NtNtCs6knCYbIatyh_4core3cmp5implsxNtB8_10PartialOrd2lt,@function
+_RNvXs1e_NtNtCs6knCYbIatyh_4core3cmp5implsxNtB8_10PartialOrd2lt:
+	.cfi_startproc
+	movq	(%rdi), %rax
+	cmpq	(%rsi), %rax
+	setl	%al
+	retq
+.Lfunc_end25:
+	.size	_RNvXs1e_NtNtCs6knCYbIatyh_4core3cmp5implsxNtB8_10PartialOrd2lt, .Lfunc_end25-_RNvXs1e_NtNtCs6knCYbIatyh_4core3cmp5implsxNtB8_10PartialOrd2lt
+	.cfi_endproc
+
+	.section	.text._RNvXs3_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtB5_17RangeIteratorImpl9spec_nextCsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end26, nop
+	.type	_RNvXs3_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtB5_17RangeIteratorImpl9spec_nextCsiVlEIo5dfo6_5shape,@function
+_RNvXs3_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtB5_17RangeIteratorImpl9spec_nextCsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	subq	$24, %rsp
+	.cfi_def_cfa_offset 48
+	.cfi_offset %rbx, -24
+	.cfi_offset %r14, -16
+	movq	%rdi, %rbx
+	leaq	8(%rdi), %rsi
+	callq	_RNvXs1e_NtNtCs6knCYbIatyh_4core3cmp5implsxNtB8_10PartialOrd2lt
+	testb	%al, %al
+	je	.LBB26_1
+	movq	(%rbx), %r14
+	movl	$1, %esi
+	movq	%r14, %rdi
+	callq	_RNvXsK_NtNtCs6knCYbIatyh_4core4iter5rangexNtB5_4Step17forward_unchecked
+	movq	%rax, (%rbx)
+	movq	%r14, 16(%rsp)
+	movq	$1, 8(%rsp)
+	jmp	.LBB26_3
+.LBB26_1:
+	movq	$0, 8(%rsp)
+.LBB26_3:
+	movq	8(%rsp), %rax
+	movq	16(%rsp), %rdx
+	addq	$24, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end26:
+	.size	_RNvXs3_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtB5_17RangeIteratorImpl9spec_nextCsiVlEIo5dfo6_5shape, .Lfunc_end26-_RNvXs3_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtB5_17RangeIteratorImpl9spec_nextCsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text._RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end27, nop
+	.type	_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape,@function
+_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	pushq	%rax
+	.cfi_def_cfa_offset 16
+	callq	_RNvXs3_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtB5_17RangeIteratorImpl9spec_nextCsiVlEIo5dfo6_5shape
+	popq	%rcx
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end27:
+	.size	_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape, .Lfunc_end27-_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text._RNvXsK_NtNtCs6knCYbIatyh_4core4iter5rangexNtB5_4Step17forward_unchecked,"ax",@progbits
+	.prefalign	4, .Lfunc_end28, nop
+	.type	_RNvXsK_NtNtCs6knCYbIatyh_4core4iter5rangexNtB5_4Step17forward_unchecked,@function
+_RNvXsK_NtNtCs6knCYbIatyh_4core4iter5rangexNtB5_4Step17forward_unchecked:
+	.cfi_startproc
+	movq	%rdi, %rax
+	addq	%rsi, %rax
+	seto	%cl
+	testq	%rsi, %rsi
+	sets	%dl
+	xorb	%cl, %dl
+	jne	.LBB28_2
+	retq
+.LBB28_2:
+	subq	$24, %rsp
+	.cfi_def_cfa_offset 32
+	movups	.Lanon.696f6e254a364983a82d474a7278ae8b.0(%rip), %xmm0
+	movups	%xmm0, 8(%rsp)
+	leaq	.Lalloc_10446d1ac166c759fa26c68ac43743ab(%rip), %rdi
+	callq	_RNvNvNtCs6knCYbIatyh_4core4hint21unreachable_unchecked18precondition_check
+	ud2
+.Lfunc_end28:
+	.size	_RNvXsK_NtNtCs6knCYbIatyh_4core4iter5rangexNtB5_4Step17forward_unchecked, .Lfunc_end28-_RNvXsK_NtNtCs6knCYbIatyh_4core4iter5rangexNtB5_4Step17forward_unchecked
+	.cfi_endproc
+
+	.section	.text._RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try11from_outputCsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end29, nop
+	.type	_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try11from_outputCsiVlEIo5dfo6_5shape,@function
+_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try11from_outputCsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	movq	%rdi, %rax
+	retq
+.Lfunc_end29:
+	.size	_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try11from_outputCsiVlEIo5dfo6_5shape, .Lfunc_end29-_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try11from_outputCsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text._RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try6branchCsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end30, nop
+	.type	_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try6branchCsiVlEIo5dfo6_5shape,@function
+_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try6branchCsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	movq	%rdi, %rax
+	retq
+.Lfunc_end30:
+	.size	_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try6branchCsiVlEIo5dfo6_5shape, .Lfunc_end30-_RNvXs_NtNtCs6knCYbIatyh_4core3ops9try_traitINtB4_17NeverShortCircuitxENtB4_3Try6branchCsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text._RNvYINvNtCs6knCYbIatyh_4core4hint9black_boxxEINtNtNtB7_3ops8function5FnMutTxEE8call_mutCsiVlEIo5dfo6_5shape,"ax",@progbits
+	.prefalign	4, .Lfunc_end31, nop
+	.type	_RNvYINvNtCs6knCYbIatyh_4core4hint9black_boxxEINtNtNtB7_3ops8function5FnMutTxEE8call_mutCsiVlEIo5dfo6_5shape,@function
+_RNvYINvNtCs6knCYbIatyh_4core4hint9black_boxxEINtNtNtB7_3ops8function5FnMutTxEE8call_mutCsiVlEIo5dfo6_5shape:
+	.cfi_startproc
+	pushq	%rax
+	.cfi_def_cfa_offset 16
+	movq	%rsi, %rdi
+	movq	%rsi, (%rsp)
+	callq	_RINvNtCs6knCYbIatyh_4core4hint9black_boxxECsiVlEIo5dfo6_5shape
+	popq	%rcx
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end31:
+	.size	_RNvYINvNtCs6knCYbIatyh_4core4hint9black_boxxEINtNtNtB7_3ops8function5FnMutTxEE8call_mutCsiVlEIo5dfo6_5shape, .Lfunc_end31-_RNvYINvNtCs6knCYbIatyh_4core4hint9black_boxxEINtNtNtB7_3ops8function5FnMutTxEE8call_mutCsiVlEIo5dfo6_5shape
+	.cfi_endproc
+
+	.section	.text.chained,"ax",@progbits
+	.globl	chained
+	.prefalign	4, .Lfunc_end32, nop
+	.type	chained,@function
+chained:
+	.cfi_startproc
+	pushq	%rbx
+	.cfi_def_cfa_offset 16
+	subq	$48, %rsp
+	.cfi_def_cfa_offset 64
+	.cfi_offset %rbx, -16
+	movq	%rsp, %rbx
+	movl	$1000000, %edx
+	movl	$1000000, %r8d
+	movq	%rbx, %rdi
+	xorl	%esi, %esi
+	xorl	%ecx, %ecx
+	callq	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator5chainB3_ECsiVlEIo5dfo6_5shape
+	movq	%rbx, %rdi
+	xorl	%esi, %esi
+	callq	_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_
+	addq	$48, %rsp
+	.cfi_def_cfa_offset 16
+	popq	%rbx
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end32:
+	.size	chained, .Lfunc_end32-chained
+	.cfi_endproc
+
+	.section	.text.single,"ax",@progbits
+	.globl	single
+	.prefalign	4, .Lfunc_end33, nop
+	.type	single,@function
+single:
+	.cfi_startproc
+	pushq	%rax
+	.cfi_def_cfa_offset 16
+	movl	$1000000, %esi
+	xorl	%edi, %edi
+	xorl	%edx, %edx
+	callq	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_
+	popq	%rcx
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end33:
+	.size	single, .Lfunc_end33-single
+	.cfi_endproc
+
+	.section	.text.single_ref,"ax",@progbits
+	.globl	single_ref
+	.prefalign	4, .Lfunc_end34, nop
+	.type	single_ref,@function
+single_ref:
+	.cfi_startproc
+	subq	$24, %rsp
+	.cfi_def_cfa_offset 32
+	movq	$0, 8(%rsp)
+	movq	$1000000, 16(%rsp)
+	leaq	24(%rsp), %rcx
+	leaq	8(%rsp), %rdi
+	xorl	%esi, %esi
+	movq	%rcx, %rdx
+	callq	_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_
+	addq	$24, %rsp
+	.cfi_def_cfa_offset 8
+	retq
+.Lfunc_end34:
+	.size	single_ref, .Lfunc_end34-single_ref
+	.cfi_endproc
+
+	.type	.Lanon.696f6e254a364983a82d474a7278ae8b.0,@object
+	.section	.rodata.cst16,"aM",@progbits,16
+	.p2align	3, 0x0
+.Lanon.696f6e254a364983a82d474a7278ae8b.0:
+	.zero	8
+	.zero	8
+	.size	.Lanon.696f6e254a364983a82d474a7278ae8b.0, 16
+
+	.type	.Lalloc_75fb06c2453febd814e73f5f2e72ae38,@object
+	.section	.rodata..Lalloc_75fb06c2453febd814e73f5f2e72ae38,"a",@progbits
+.Lalloc_75fb06c2453febd814e73f5f2e72ae38:
+	.ascii	"unsafe precondition(s) violated: hint::unreachable_unchecked must never be reached\n\nThis indicates a bug in the program. This Undefined Behavior check is optional, and cannot be relied on for safety."
+	.size	.Lalloc_75fb06c2453febd814e73f5f2e72ae38, 199
+
+	.type	.Lalloc_a33676e91c7b5ffa451931d99589ff10,@object
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.Lalloc_a33676e91c7b5ffa451931d99589ff10:
+	.asciz	"library/core/src/iter/range.rs"
+	.size	.Lalloc_a33676e91c7b5ffa451931d99589ff10, 31
+
+	.type	.Lalloc_10446d1ac166c759fa26c68ac43743ab,@object
+	.section	.data.rel.ro..Lalloc_10446d1ac166c759fa26c68ac43743ab,"aw",@progbits
+	.p2align	3, 0x0
+.Lalloc_10446d1ac166c759fa26c68ac43743ab:
+	.quad	.Lalloc_a33676e91c7b5ffa451931d99589ff10
+	.asciz	"\036\000\000\000\000\000\000\000%\002\000\000\001\000\000"
+	.size	.Lalloc_10446d1ac166c759fa26c68ac43743ab, 24
+
+	.ident	"rustc version 1.101.0-dev"
+	.section	".note.GNU-stack","",@progbits

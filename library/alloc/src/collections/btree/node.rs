@@ -280,6 +280,10 @@ impl<'a, K, V> NodeRef<marker::Mut<'a>, K, V, marker::Internal> {
 }
 
 impl<BorrowType, K, V, Type> NodeRef<BorrowType, K, V, Type> {
+    pub(super) fn as_ptr(&self) -> *const () {
+        self.node.as_ptr().cast()
+    }
+
     /// Finds the length of the node. This is the number of keys or values.
     /// The number of edges is `len() + 1`.
     /// Note that, despite being safe, calling this function can have the side effect

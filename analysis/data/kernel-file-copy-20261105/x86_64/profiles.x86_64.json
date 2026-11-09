@@ -1,0 +1,80 @@
+[
+  {
+    "root": "/tmp",
+    "record": [
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "997",
+      "-e",
+      "cpu_core/cycles/",
+      "-g",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/profile-0.x86_64.data",
+      "--",
+      "taskset",
+      "-c",
+      "12",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/lib/rustlib/x86_64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/c9f6899463cab7b6/out:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib:/nix/store/s21axjr25zw6x9g6ripn7kamgbvw0y69-curl-8.22.0/lib:/nix/store/lw86vj9kfwgvlivg3p8qg2nibpmhmsl9-zlib-1.3.2/lib",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "std",
+      "131072",
+      "200000",
+      "/tmp"
+    ],
+    "report": [
+      "perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "--percent-limit",
+      "0.5",
+      "-i",
+      "/tmp/kernel-file-copy-20261105/profile-0.x86_64.data"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":200000,\"loop_ns\":702628394,\"ns_per_call\":3513.14197}\n",
+    "stderr": "Couldn't record kernel reference relocation symbol\nSymbol resolution may be skewed if relocation was used (e.g. kexec).\nCheck /proc/kallsyms permission or run as root.\n",
+    "report_stderr": "Warning:\nKernel address maps (/proc/{kallsyms,modules}) were restricted.\n\nCheck /proc/sys/kernel/kptr_restrict before running 'perf record'.\n\nAs no suitable kallsyms nor vmlinux was found, kernel samples\ncan't be resolved.\n\nSamples in kernel modules can't be resolved as well.\n\n"
+  },
+  {
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "record": [
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "997",
+      "-e",
+      "cpu_core/cycles/",
+      "-g",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/profile-1.x86_64.data",
+      "--",
+      "taskset",
+      "-c",
+      "12",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/lib/rustlib/x86_64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/c9f6899463cab7b6/out:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib:/nix/store/s21axjr25zw6x9g6ripn7kamgbvw0y69-curl-8.22.0/lib:/nix/store/lw86vj9kfwgvlivg3p8qg2nibpmhmsl9-zlib-1.3.2/lib",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "std",
+      "131072",
+      "200000",
+      "/dev/shm/kernel-file-copy-20261105"
+    ],
+    "report": [
+      "perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "--percent-limit",
+      "0.5",
+      "-i",
+      "/tmp/kernel-file-copy-20261105/profile-1.x86_64.data"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":200000,\"loop_ns\":1147114246,\"ns_per_call\":5735.57123}\n",
+    "stderr": "Couldn't record kernel reference relocation symbol\nSymbol resolution may be skewed if relocation was used (e.g. kexec).\nCheck /proc/kallsyms permission or run as root.\n",
+    "report_stderr": "Warning:\nKernel address maps (/proc/{kallsyms,modules}) were restricted.\n\nCheck /proc/sys/kernel/kptr_restrict before running 'perf record'.\n\nAs no suitable kallsyms nor vmlinux was found, kernel samples\ncan't be resolved.\n\nSamples in kernel modules can't be resolved as well.\n\n"
+  }
+]

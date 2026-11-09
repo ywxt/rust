@@ -1,0 +1,60 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 396  of event 'cycles:u'
+# Event count (approx.): 556660749
+#
+# Overhead  Command       Shared Object               Symbol                                                                                                                                                                       
+# ........  ............  ..........................  .............................................................................................................................................................................
+#
+    97.82%  benches-base  libstd-7a2f7be1a1e543fc.so  [.] _RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr
+            |
+            ---_RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr
+               _RNvYNCNvNtNtCscmX2qrehp8H_7benches3str14rfind_zzz_char11short_mixed0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceBa_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     1.53%  benches-base  benches-base                [.] _RNvYNCNvNtNtCscmX2qrehp8H_7benches3str14rfind_zzz_char11short_mixed0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceBa_
+            |
+            ---_RNvYNCNvNtNtCscmX2qrehp8H_7benches3str14rfind_zzz_char11short_mixed0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceBa_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.52%  benches-base  benches-base                [.] _RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr@plt
+            |
+            ---_RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr@plt
+               _RNvYNCNvNtNtCscmX2qrehp8H_7benches3str14rfind_zzz_char11short_mixed0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceBa_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: To show IPC for sampling periods use perf record -e '{cycles,instructions}:S' and then browse context)
+#

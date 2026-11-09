@@ -1,0 +1,19 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 3K of event 'cpu_core/cycles/u'
+# Event count (approx.): 1857011142
+#
+# Overhead  Symbol                                                                                                                                        IPC   [IPC Coverage]
+# ........  ............................................................................................................................................  ....................
+#
+    95.48%  [.] core::slice::memchr::memchr_aligned                                                                                                       -      -            
+     2.56%  [.] <benches::main::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once  -      -            
+     1.80%  [.] <&str as core::str::pattern::Pattern>::is_contained_in                                                                                    -      -            
+
+
+#
+# (Tip: To analyze particular parallelism levels, try: perf report --latency --parallelism=32-64)
+#

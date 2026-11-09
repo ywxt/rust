@@ -1,0 +1,48 @@
+{
+  "command": [
+    "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+    "--edition=2024",
+    "--crate-type=lib",
+    "-O",
+    "-C",
+    "codegen-units=1",
+    "-C",
+    "llvm-args=-print-after-all -filter-print-funcs=single,single_ref,chained",
+    "--emit=llvm-ir",
+    "/tmp/iter-filter-map-chain-sum-20261105/shape.rs",
+    "-o",
+    "/tmp/iter-filter-map-chain-sum-20261105/shape-trace.ll"
+  ],
+  "transitions": [
+    {
+      "function": "single",
+      "dump": 1,
+      "header": "*** IR Dump After MemProfRemoveInfo on [module] ***",
+      "checked_muls": 0
+    },
+    {
+      "function": "single_ref",
+      "dump": 1,
+      "header": "*** IR Dump After MemProfRemoveInfo on [module] ***",
+      "checked_muls": 0
+    },
+    {
+      "function": "single_ref",
+      "dump": 163,
+      "header": "*** IR Dump After InlinerPass on (single_ref) ***",
+      "checked_muls": 1
+    },
+    {
+      "function": "chained",
+      "dump": 1,
+      "header": "*** IR Dump After MemProfRemoveInfo on [module] ***",
+      "checked_muls": 0
+    },
+    {
+      "function": "chained",
+      "dump": 38,
+      "header": "*** IR Dump After InlinerPass on (chained) ***",
+      "checked_muls": 2
+    }
+  ]
+}

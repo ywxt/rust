@@ -1,0 +1,31 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 224  of event 'cycles:u'
+# Event count (approx.): 306066022
+#
+# Overhead  Command       Shared Object               Symbol                                              
+# ........  ............  ..........................  ....................................................
+#
+    99.58%  benches-base  libstd-7a2f7be1a1e543fc.so  [.] _RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr
+            |
+            ---_RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr
+               _RNvYNCNvNtNtCscmX2qrehp8H_7benches3str14rfind_zzz_char16long_lorem_ipsum0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceBa_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: To browse sample contexts use perf report --sample 10 and select in context menu)
+#

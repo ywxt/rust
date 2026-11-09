@@ -1,0 +1,154 @@
+[
+  {
+    "root": "/tmp",
+    "mode": "std",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-0-std.x86_64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "std",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":3,\"loop_ns\":655070,\"ns_per_call\":218356.66666666666}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/tmp",
+    "mode": "take",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-0-take.x86_64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "take",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"take\",\"bytes\":131072,\"reps\":3,\"loop_ns\":848069,\"ns_per_call\":282689.6666666667}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/tmp",
+    "mode": "cfr",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-0-cfr.x86_64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "cfr",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"cfr\",\"bytes\":131072,\"reps\":3,\"loop_ns\":714423,\"ns_per_call\":238141}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/tmp",
+    "mode": "rw128",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-0-rw128.x86_64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "rw128",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"rw128\",\"bytes\":131072,\"reps\":3,\"loop_ns\":485266,\"ns_per_call\":161755.33333333334}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "std",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-1-std.x86_64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "std",
+      "131072",
+      "3",
+      "/dev/shm/kernel-file-copy-20261105"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":3,\"loop_ns\":1110763,\"ns_per_call\":370254.3333333333}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "take",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-1-take.x86_64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "take",
+      "131072",
+      "3",
+      "/dev/shm/kernel-file-copy-20261105"
+    ],
+    "stdout": "{\"mode\":\"take\",\"bytes\":131072,\"reps\":3,\"loop_ns\":999543,\"ns_per_call\":333181}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "cfr",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-1-cfr.x86_64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "cfr",
+      "131072",
+      "3",
+      "/dev/shm/kernel-file-copy-20261105"
+    ],
+    "stdout": "{\"mode\":\"cfr\",\"bytes\":131072,\"reps\":3,\"loop_ns\":801432,\"ns_per_call\":267144}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/dev/shm/kernel-file-copy-20261105",
+    "mode": "rw128",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-1-rw128.x86_64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "rw128",
+      "131072",
+      "3",
+      "/dev/shm/kernel-file-copy-20261105"
+    ],
+    "stdout": "{\"mode\":\"rw128\",\"bytes\":131072,\"reps\":3,\"loop_ns\":1453260,\"ns_per_call\":484420}\n",
+    "stderr": "",
+    "exit_code": 0
+  }
+]

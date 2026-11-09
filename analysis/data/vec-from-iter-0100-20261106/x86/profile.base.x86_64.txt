@@ -1,0 +1,44 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 7K of event 'cpu_core/cycles/u'
+# Event count (approx.): 15932580310
+#
+# Overhead  Command       Shared Object               Symbol                                          
+# ........  ............  ..........................  ................................................
+#
+    48.99%  benches-base  benches-base                [.] benches::vec::do_bench_from_iter
+            |
+            ---benches::vec::do_bench_from_iter
+
+    24.18%  benches-base  libc.so.6                   [.] malloc
+            |
+            ---malloc
+
+    19.96%  benches-base  libc.so.6                   [.] cfree@GLIBC_2.2.5
+            |
+            ---cfree@GLIBC_2.2.5
+
+     2.50%  benches-base  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_no_alloc_shim_is_unstable_v2
+            |
+            ---__rustc::__rust_no_alloc_shim_is_unstable_v2
+
+     1.53%  benches-base  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_dealloc
+            |
+            ---__rustc::__rust_dealloc
+
+     1.40%  benches-base  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_alloc
+            |
+            ---__rustc::__rust_alloc
+
+     1.40%  benches-base  libstd-320fe7036dd8354d.so  [.] __rustc::__rdl_alloc
+            |
+            ---__rustc::__rdl_alloc
+
+
+
+#
+# (Tip: For parallelism histogram, try: perf report --hierarchy --sort latency,parallelism,comm,symbol)
+#

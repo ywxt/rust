@@ -1,0 +1,46 @@
+{
+  "command": [
+    "perf",
+    "record",
+    "-q",
+    "-F",
+    "1999",
+    "-e",
+    "cycles:u",
+    "-g",
+    "-o",
+    "/tmp/tuple-comparison-20261105/profile-prebuilt.aarch64.data",
+    "--",
+    "taskset",
+    "-c",
+    "52",
+    "env",
+    "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+    "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+    "--bench",
+    "--exact",
+    "--test-threads=1",
+    "tuple::bench_tuple_comparison"
+  ],
+  "stdout": "\nrunning 1 test\ntest tuple::bench_tuple_comparison ... bench:          11.45 ns/iter (+/- 0.07)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.20s\n\n",
+  "stderr": "",
+  "report": [
+    "perf",
+    "report",
+    "--stdio",
+    "--no-children",
+    "--percent-limit",
+    "0.5",
+    "-i",
+    "/tmp/tuple-comparison-20261105/profile-prebuilt.aarch64.data"
+  ],
+  "annotate": [
+    "perf",
+    "annotate",
+    "--stdio",
+    "--symbol",
+    "__memcmp_generic",
+    "-i",
+    "/tmp/tuple-comparison-20261105/profile-prebuilt.aarch64.data"
+  ]
+}

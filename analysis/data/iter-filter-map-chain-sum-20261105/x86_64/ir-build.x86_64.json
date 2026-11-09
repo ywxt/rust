@@ -1,0 +1,92 @@
+[
+  {
+    "tag": "checked",
+    "source_sha256": "54afbfc616a2df2d76e5c399d75b1795a29a8c2f876f80ca40be4508c5c44781",
+    "commands": [
+      [
+        "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/opt",
+        "-S",
+        "-passes=default<O3>",
+        "/tmp/iter-filter-map-chain-sum-20261105/repro.ll",
+        "-o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-checked.ll"
+      ],
+      [
+        "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/llc",
+        "-O3",
+        "-filetype=obj",
+        "-relocation-model=pic",
+        "-mtriple=x86_64-unknown-linux-gnu",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-checked.ll",
+        "-o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-checked.o"
+      ],
+      [
+        "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/llc",
+        "-O3",
+        "-mtriple=x86_64-unknown-linux-gnu",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-checked.ll",
+        "-o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-checked.s"
+      ],
+      [
+        "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+        "--edition=2024",
+        "-O",
+        "-C",
+        "codegen-units=1",
+        "-C",
+        "link-arg=/tmp/iter-filter-map-chain-sum-20261105/ir-checked.o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-driver.rs",
+        "-o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-checked"
+      ]
+    ],
+    "check": "{\"elapsed_ns\":352518,\"reps\":1}\n"
+  },
+  {
+    "tag": "mul",
+    "source_sha256": "9eefb276f81cb8de7e3dd76cb62a9e5388f33ee9240fc459b139f844a71f4067",
+    "commands": [
+      [
+        "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/opt",
+        "-S",
+        "-passes=default<O3>",
+        "/tmp/iter-filter-map-chain-sum-20261105/repro-mul.ll",
+        "-o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-mul.ll"
+      ],
+      [
+        "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/llc",
+        "-O3",
+        "-filetype=obj",
+        "-relocation-model=pic",
+        "-mtriple=x86_64-unknown-linux-gnu",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-mul.ll",
+        "-o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-mul.o"
+      ],
+      [
+        "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/llc",
+        "-O3",
+        "-mtriple=x86_64-unknown-linux-gnu",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-mul.ll",
+        "-o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-mul.s"
+      ],
+      [
+        "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+        "--edition=2024",
+        "-O",
+        "-C",
+        "codegen-units=1",
+        "-C",
+        "link-arg=/tmp/iter-filter-map-chain-sum-20261105/ir-mul.o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-driver.rs",
+        "-o",
+        "/tmp/iter-filter-map-chain-sum-20261105/ir-mul"
+      ]
+    ],
+    "check": "{\"elapsed_ns\":230928,\"reps\":1}\n"
+  }
+]

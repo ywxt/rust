@@ -1,0 +1,5 @@
+{"id":"B1b","slug":"blackbox-loop-index","kind":"rust","tags":["B1","N4"],
+ "chapters":["slice::swap_with_slice_usize_30"],
+ "status":"reproduced",
+ "summary":"swap_with_slice_usize_30 同形閉包:skip 經 black_box 寫棧再讀回時本機 34.86、x86 22.35 cycles/次交換;skip 留在暫存器後 25.05 對 22.02(本機省 9.81,x86 省 0.33);只取偶數 skip 再省 2.90 對 2.19;8 組緩衝輪流(不讀剛寫資料)本機反慢,排除跨交換轉發",
+ "doc_mismatch":""}

@@ -1,0 +1,277 @@
+ Percent |	Source code & Disassembly of libc.so.6 for cpu_core/cycles/u (353 samples, percent: local period)
+-----------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3      Disassembly of section .text:
+         :
+         : 5      000000000017e960 <__memcmp_avx2_movbe>:
+    5.44 :   17e960: endbr64
+    0.00 :   17e964: cmp    $0x20,%rdx
+    0.00 :   17e968: jb     17ec40 <__memcmp_avx2_movbe+0x2e0>
+    0.00 :   17e96e: vmovdqu (%rsi),%ymm1
+    0.00 :   17e972: vpcmpeqb (%rdi),%ymm1,%ymm1
+    0.00 :   17e976: vpmovmskb %ymm1,%eax
+    0.00 :   17e97a: inc    %eax
+    0.00 :   17e97c: jne    17ea40 <__memcmp_avx2_movbe+0xe0>
+    0.00 :   17e982: cmp    $0x40,%rdx
+    0.00 :   17e986: jbe    17ebc4 <__memcmp_avx2_movbe+0x264>
+    0.00 :   17e98c: vmovdqu 0x20(%rsi),%ymm2
+    0.00 :   17e991: vpcmpeqb 0x20(%rdi),%ymm2,%ymm2
+    0.00 :   17e996: vpmovmskb %ymm2,%eax
+    0.00 :   17e99a: inc    %eax
+    0.00 :   17e99c: jne    17ea60 <__memcmp_avx2_movbe+0x100>
+    0.00 :   17e9a2: cmp    $0x80,%rdx
+    0.00 :   17e9a9: jbe    17ebb0 <__memcmp_avx2_movbe+0x250>
+    0.00 :   17e9af: vmovdqu 0x40(%rsi),%ymm3
+    0.00 :   17e9b4: vpcmpeqb 0x40(%rdi),%ymm3,%ymm3
+    0.00 :   17e9b9: vpmovmskb %ymm3,%eax
+    0.00 :   17e9bd: inc    %eax
+    0.00 :   17e9bf: jne    17ea80 <__memcmp_avx2_movbe+0x120>
+    0.00 :   17e9c5: vmovdqu 0x60(%rsi),%ymm4
+    0.00 :   17e9ca: vpcmpeqb 0x60(%rdi),%ymm4,%ymm4
+    0.00 :   17e9cf: vpmovmskb %ymm4,%ecx
+    0.00 :   17e9d3: inc    %ecx
+    0.00 :   17e9d5: jne    17eabb <__memcmp_avx2_movbe+0x15b>
+    0.00 :   17e9db: cmp    $0x100,%rdx
+    0.00 :   17e9e2: ja     17ead0 <__memcmp_avx2_movbe+0x170>
+    0.00 :   17e9e8: vmovdqu -0x80(%rsi,%rdx,1),%ymm1
+    0.00 :   17e9ee: vmovdqu -0x60(%rsi,%rdx,1),%ymm2
+    0.00 :   17e9f4: lea    -0x80(%rdi,%rdx,1),%rdi
+    0.00 :   17e9f9: lea    -0x80(%rsi,%rdx,1),%rsi
+    0.00 :   17e9fe: vpcmpeqb (%rdi),%ymm1,%ymm1
+    0.00 :   17ea02: vpcmpeqb 0x20(%rdi),%ymm2,%ymm2
+    0.00 :   17ea07: vmovdqu 0x40(%rsi),%ymm3
+    0.00 :   17ea0c: vpcmpeqb 0x40(%rdi),%ymm3,%ymm3
+    0.00 :   17ea11: vmovdqu 0x60(%rsi),%ymm4
+    0.00 :   17ea16: vpcmpeqb 0x60(%rdi),%ymm4,%ymm4
+    0.00 :   17ea1b: vpand  %ymm1,%ymm2,%ymm5
+    0.00 :   17ea1f: vpand  %ymm3,%ymm4,%ymm6
+    0.00 :   17ea23: vpand  %ymm5,%ymm6,%ymm7
+    0.00 :   17ea27: vpmovmskb %ymm7,%ecx
+    0.00 :   17ea2b: inc    %ecx
+    0.00 :   17ea2d: jne    17eaa3 <__memcmp_avx2_movbe+0x143>
+    0.00 :   17ea2f: vzeroupper
+    0.00 :   17ea32: ret
+    0.00 :   17ea33: xchg   %ax,%ax
+    0.00 :   17ea35: data16 cs nopw 0x0(%rax,%rax,1)
+    1.49 :   17ea40: tzcnt  %eax,%eax
+    5.44 :   17ea44: movzbl (%rsi,%rax,1),%ecx
+   22.01 :   17ea48: movzbl (%rdi,%rax,1),%eax
+    1.13 :   17ea4c: sub    %ecx,%eax
+    3.13 :   17ea4e: vzeroupper
+    0.00 :   17ea51: ret
+    0.00 :   17ea52: nopl   (%rax)
+    0.00 :   17ea55: data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   17ea60: tzcnt  %eax,%eax
+    0.00 :   17ea64: movzbl 0x20(%rsi,%rax,1),%ecx
+    0.00 :   17ea69: movzbl 0x20(%rdi,%rax,1),%eax
+    0.00 :   17ea6e: sub    %ecx,%eax
+    0.00 :   17ea70: vzeroupper
+    0.00 :   17ea73: ret
+    0.00 :   17ea74: nop
+    0.00 :   17ea75: data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   17ea80: tzcnt  %eax,%eax
+    0.00 :   17ea84: movzbl 0x40(%rsi,%rax,1),%ecx
+    0.00 :   17ea89: movzbl 0x40(%rdi,%rax,1),%eax
+    0.00 :   17ea8e: sub    %ecx,%eax
+    0.00 :   17ea90: vzeroupper
+    0.00 :   17ea93: ret
+    0.00 :   17ea94: nop
+    0.00 :   17ea95: data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   17eaa0: add    %rdi,%rsi
+    0.00 :   17eaa3: vpmovmskb %ymm1,%eax
+    0.00 :   17eaa7: inc    %eax
+    0.00 :   17eaa9: jne    17ea40 <__memcmp_avx2_movbe+0xe0>
+    0.00 :   17eaab: vpmovmskb %ymm2,%eax
+    0.00 :   17eaaf: inc    %eax
+    0.00 :   17eab1: jne    17ea60 <__memcmp_avx2_movbe+0x100>
+    0.00 :   17eab3: vpmovmskb %ymm3,%eax
+    0.00 :   17eab7: inc    %eax
+    0.00 :   17eab9: jne    17ea80 <__memcmp_avx2_movbe+0x120>
+    0.00 :   17eabb: tzcnt  %ecx,%ecx
+    0.00 :   17eabf: movzbl 0x60(%rdi,%rcx,1),%eax
+    0.00 :   17eac4: movzbl 0x60(%rsi,%rcx,1),%ecx
+    0.00 :   17eac9: sub    %ecx,%eax
+    0.00 :   17eacb: vzeroupper
+    0.00 :   17eace: ret
+    0.00 :   17eacf: nop
+    0.00 :   17ead0: lea    -0x80(%rdi,%rdx,1),%rdx
+    0.00 :   17ead5: sub    %rdi,%rsi
+    0.00 :   17ead8: and    $0xffffffffffffffe0,%rdi
+    0.00 :   17eadc: sub    $0xffffffffffffff80,%rdi
+    0.00 :   17eae0: vmovdqu (%rsi,%rdi,1),%ymm1
+    0.00 :   17eae5: vpcmpeqb (%rdi),%ymm1,%ymm1
+    0.00 :   17eae9: vmovdqu 0x20(%rsi,%rdi,1),%ymm2
+    0.00 :   17eaef: vpcmpeqb 0x20(%rdi),%ymm2,%ymm2
+    0.00 :   17eaf4: vmovdqu 0x40(%rsi,%rdi,1),%ymm3
+    0.00 :   17eafa: vpcmpeqb 0x40(%rdi),%ymm3,%ymm3
+    0.00 :   17eaff: vmovdqu 0x60(%rsi,%rdi,1),%ymm4
+    0.00 :   17eb05: vpcmpeqb 0x60(%rdi),%ymm4,%ymm4
+    0.00 :   17eb0a: vpand  %ymm1,%ymm2,%ymm5
+    0.00 :   17eb0e: vpand  %ymm3,%ymm4,%ymm6
+    0.00 :   17eb12: vpand  %ymm5,%ymm6,%ymm7
+    0.00 :   17eb16: vpmovmskb %ymm7,%ecx
+    0.00 :   17eb1a: inc    %ecx
+    0.00 :   17eb1c: jne    17eaa0 <__memcmp_avx2_movbe+0x140>
+    0.00 :   17eb1e: sub    $0xffffffffffffff80,%rdi
+    0.00 :   17eb22: cmp    %rdx,%rdi
+    0.00 :   17eb25: jb     17eae0 <__memcmp_avx2_movbe+0x180>
+    0.00 :   17eb27: sub    %rdx,%rdi
+    0.00 :   17eb2a: cmp    $0x60,%edi
+    0.00 :   17eb2d: jae    17eb90 <__memcmp_avx2_movbe+0x230>
+    0.00 :   17eb2f: vmovdqu 0x40(%rsi,%rdx,1),%ymm3
+    0.00 :   17eb35: cmp    $0x40,%edi
+    0.00 :   17eb38: jae    17eb80 <__memcmp_avx2_movbe+0x220>
+    0.00 :   17eb3a: vmovdqu (%rsi,%rdx,1),%ymm1
+    0.00 :   17eb3f: vpcmpeqb (%rdx),%ymm1,%ymm1
+    0.00 :   17eb43: vmovdqu 0x20(%rsi,%rdx,1),%ymm2
+    0.00 :   17eb49: vpcmpeqb 0x20(%rdx),%ymm2,%ymm2
+    0.00 :   17eb4e: vpcmpeqb 0x40(%rdx),%ymm3,%ymm3
+    0.00 :   17eb53: vmovdqu 0x60(%rsi,%rdx,1),%ymm4
+    0.00 :   17eb59: vpcmpeqb 0x60(%rdx),%ymm4,%ymm4
+    0.00 :   17eb5e: vpand  %ymm1,%ymm2,%ymm5
+    0.00 :   17eb62: vpand  %ymm3,%ymm4,%ymm6
+    0.00 :   17eb66: vpand  %ymm5,%ymm6,%ymm7
+    0.00 :   17eb6a: vpmovmskb %ymm7,%ecx
+    0.00 :   17eb6e: mov    %rdx,%rdi
+    0.00 :   17eb71: inc    %ecx
+    0.00 :   17eb73: jne    17eaa0 <__memcmp_avx2_movbe+0x140>
+    0.00 :   17eb79: vzeroupper
+    0.00 :   17eb7c: ret
+    0.00 :   17eb7d: nopl   (%rax)
+    0.00 :   17eb80: vpcmpeqb 0x40(%rdx),%ymm3,%ymm3
+    0.00 :   17eb85: vpmovmskb %ymm3,%eax
+    0.00 :   17eb89: inc    %eax
+    0.00 :   17eb8b: jne    17ebe0 <__memcmp_avx2_movbe+0x280>
+    0.00 :   17eb8d: nopl   (%rax)
+    0.00 :   17eb90: vmovdqu 0x60(%rsi,%rdx,1),%ymm4
+    0.00 :   17eb96: vpcmpeqb 0x60(%rdx),%ymm4,%ymm4
+    0.00 :   17eb9b: vpmovmskb %ymm4,%eax
+    0.00 :   17eb9f: inc    %eax
+    0.00 :   17eba1: jne    17ebe4 <__memcmp_avx2_movbe+0x284>
+    0.00 :   17eba3: vzeroupper
+    0.00 :   17eba6: ret
+    0.00 :   17eba7: nopw   0x0(%rax,%rax,1)
+    0.00 :   17ebb0: vmovdqu -0x40(%rsi,%rdx,1),%ymm1
+    0.00 :   17ebb6: vpcmpeqb -0x40(%rdi,%rdx,1),%ymm1,%ymm1
+    0.00 :   17ebbc: vpmovmskb %ymm1,%eax
+    0.00 :   17ebc0: inc    %eax
+    0.00 :   17ebc2: jne    17ec00 <__memcmp_avx2_movbe+0x2a0>
+    0.00 :   17ebc4: vmovdqu -0x20(%rsi,%rdx,1),%ymm1
+    0.00 :   17ebca: vpcmpeqb -0x20(%rdi,%rdx,1),%ymm1,%ymm1
+    0.00 :   17ebd0: vpmovmskb %ymm1,%eax
+    0.00 :   17ebd4: inc    %eax
+    0.00 :   17ebd6: jne    17ec20 <__memcmp_avx2_movbe+0x2c0>
+    0.00 :   17ebd8: vzeroupper
+    0.00 :   17ebdb: ret
+    0.00 :   17ebdc: nopl   0x0(%rax)
+    0.00 :   17ebe0: sub    $0x20,%rdx
+    0.00 :   17ebe4: tzcnt  %eax,%eax
+    0.00 :   17ebe8: add    %rdx,%rax
+    0.00 :   17ebeb: movzbl 0x60(%rsi,%rax,1),%ecx
+    0.00 :   17ebf0: movzbl 0x60(%rax),%eax
+    0.00 :   17ebf4: sub    %ecx,%eax
+    0.00 :   17ebf6: vzeroupper
+    0.00 :   17ebf9: ret
+    0.00 :   17ebfa: nopw   0x0(%rax,%rax,1)
+    0.00 :   17ec00: tzcnt  %eax,%eax
+    0.00 :   17ec04: add    %edx,%eax
+    0.00 :   17ec06: movzbl -0x40(%rsi,%rax,1),%ecx
+    0.00 :   17ec0b: movzbl -0x40(%rdi,%rax,1),%eax
+    0.00 :   17ec10: sub    %ecx,%eax
+    0.00 :   17ec12: vzeroupper
+    0.00 :   17ec15: ret
+    0.00 :   17ec16: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   17ec20: tzcnt  %eax,%eax
+    0.00 :   17ec24: add    %edx,%eax
+    0.00 :   17ec26: movzbl -0x20(%rsi,%rax,1),%ecx
+    0.00 :   17ec2b: movzbl -0x20(%rdi,%rax,1),%eax
+    0.00 :   17ec30: sub    %ecx,%eax
+    0.00 :   17ec32: vzeroupper
+    0.00 :   17ec35: ret
+    0.00 :   17ec36: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   17ec40: cmp    $0x1,%edx
+    0.00 :   17ec43: jbe    17ecc0 <__memcmp_avx2_movbe+0x360>
+    2.08 :   17ec45: mov    %edi,%eax
+    0.00 :   17ec47: or     %esi,%eax
+    0.00 :   17ec49: and    $0xfff,%eax
+    0.00 :   17ec4e: cmp    $0xfe0,%eax
+    0.00 :   17ec53: jg     17ec80 <__memcmp_avx2_movbe+0x320>
+    0.29 :   17ec55: vmovdqu (%rsi),%ymm2
+    6.29 :   17ec59: vpcmpeqb (%rdi),%ymm2,%ymm2
+    9.12 :   17ec5d: vpmovmskb %ymm2,%eax
+    0.00 :   17ec61: inc    %eax
+    1.82 :   17ec63: bzhi   %edx,%eax,%edx
+    3.16 :   17ec68: jne    17ea40 <__memcmp_avx2_movbe+0xe0>
+    4.85 :   17ec6e: xor    %eax,%eax
+    0.58 :   17ec70: vzeroupper
+    0.57 :   17ec73: ret
+    0.00 :   17ec74: nop
+    0.00 :   17ec75: data16 cs nopw 0x0(%rax,%rax,1)
+    2.01 :   17ec80: cmp    $0x10,%edx
+    0.00 :   17ec83: jae    17ed03 <__memcmp_avx2_movbe+0x3a3>
+    0.00 :   17ec85: cmp    $0x8,%edx
+    0.00 :   17ec88: jae    17ece0 <__memcmp_avx2_movbe+0x380>
+    0.00 :   17ec8a: cmp    $0x4,%edx
+    0.00 :   17ec8d: jb     17ed40 <__memcmp_avx2_movbe+0x3e0>
+    0.00 :   17ec93: movbe  (%rdi),%eax
+    0.00 :   17ec97: movbe  (%rsi),%ecx
+    0.00 :   17ec9b: shl    $0x20,%rax
+    0.00 :   17ec9f: shl    $0x20,%rcx
+    0.00 :   17eca3: movbe  -0x4(%rdi,%rdx,1),%edi
+    0.00 :   17eca9: movbe  -0x4(%rsi,%rdx,1),%esi
+    0.00 :   17ecaf: or     %rdi,%rax
+    0.00 :   17ecb2: or     %rsi,%rcx
+    0.00 :   17ecb5: sub    %rcx,%rax
+    0.00 :   17ecb8: jne    17ecd0 <__memcmp_avx2_movbe+0x370>
+    0.00 :   17ecba: ret
+    0.00 :   17ecbb: nopl   0x0(%rax,%rax,1)
+    0.00 :   17ecc0: jb     17ecd6 <__memcmp_avx2_movbe+0x376>
+    0.00 :   17ecc2: movzbl (%rsi),%ecx
+    0.00 :   17ecc5: movzbl (%rdi),%eax
+    0.00 :   17ecc8: sub    %ecx,%eax
+    0.00 :   17ecca: ret
+    0.00 :   17eccb: nopl   0x0(%rax,%rax,1)
+    0.00 :   17ecd0: sbb    %eax,%eax
+    0.00 :   17ecd2: or     $0x1,%eax
+    0.00 :   17ecd5: ret
+    0.00 :   17ecd6: xor    %eax,%eax
+    0.00 :   17ecd8: ret
+    0.00 :   17ecd9: nopl   0x0(%rax)
+    0.00 :   17ece0: movbe  (%rdi),%rax
+    0.00 :   17ece5: movbe  (%rsi),%rcx
+    0.00 :   17ecea: sub    %rcx,%rax
+    0.00 :   17eced: jne    17ecd0 <__memcmp_avx2_movbe+0x370>
+    0.00 :   17ecef: movbe  -0x8(%rdi,%rdx,1),%rax
+    0.00 :   17ecf6: movbe  -0x8(%rsi,%rdx,1),%rcx
+    0.00 :   17ecfd: sub    %rcx,%rax
+    0.00 :   17ed00: jne    17ecd0 <__memcmp_avx2_movbe+0x370>
+    0.00 :   17ed02: ret
+    2.57 :   17ed03: vmovdqu (%rsi),%xmm2
+   11.73 :   17ed07: vpcmpeqb (%rdi),%xmm2,%xmm2
+   12.86 :   17ed0b: vpmovmskb %xmm2,%eax
+    0.00 :   17ed0f: sub    $0xffff,%eax
+    0.00 :   17ed14: jne    17ea40 <__memcmp_avx2_movbe+0xe0>
+    0.00 :   17ed1a: vmovdqu -0x10(%rsi,%rdx,1),%xmm2
+    0.00 :   17ed20: lea    -0x10(%rdi,%rdx,1),%rdi
+    0.00 :   17ed25: lea    -0x10(%rsi,%rdx,1),%rsi
+    0.00 :   17ed2a: vpcmpeqb (%rdi),%xmm2,%xmm2
+    3.44 :   17ed2e: vpmovmskb %xmm2,%eax
+    0.00 :   17ed32: sub    $0xffff,%eax
+    0.00 :   17ed37: jne    17ea40 <__memcmp_avx2_movbe+0xe0>
+    0.00 :   17ed3d: ret
+    0.00 :   17ed3e: xchg   %ax,%ax
+    0.00 :   17ed40: movzwl (%rdi),%eax
+    0.00 :   17ed43: movzwl (%rsi),%ecx
+    0.00 :   17ed46: bswap  %eax
+    0.00 :   17ed48: bswap  %ecx
+    0.00 :   17ed4a: shr    $1,%eax
+    0.00 :   17ed4c: shr    $1,%ecx
+    0.00 :   17ed4e: movzbl -0x1(%rdi,%rdx,1),%edi
+    0.00 :   17ed53: movzbl -0x1(%rsi,%rdx,1),%esi
+    0.00 :   17ed58: or     %edi,%eax
+    0.00 :   17ed5a: or     %esi,%ecx
+    0.00 :   17ed5c: sub    %ecx,%eax
+    0.00 :   17ed5e: ret
+

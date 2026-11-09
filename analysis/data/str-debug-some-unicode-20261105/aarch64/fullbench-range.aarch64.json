@@ -1,0 +1,206 @@
+[
+  {
+    "round": 0,
+    "name": "prebuilt",
+    "ns_per_call": 288.25,
+    "stdout": "\nrunning 1 test\ntest str::debug::some_unicode ... bench:         288.25 ns/iter (+/- 3.33)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "str::debug::some_unicode"
+    ]
+  },
+  {
+    "round": 0,
+    "name": "original",
+    "ns_per_call": 285.31,
+    "stdout": "\nrunning 1 test\ntest some_unicode ... bench:         285.31 ns/iter (+/- 4.69)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.48s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode"
+    ]
+  },
+  {
+    "round": 0,
+    "name": "copy",
+    "ns_per_call": 285.49,
+    "stdout": "\nrunning 1 test\ntest some_unicode_copy ... bench:         285.49 ns/iter (+/- 3.53)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.21s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode_copy"
+    ]
+  },
+  {
+    "round": 0,
+    "name": "fast",
+    "ns_per_call": 184.26,
+    "stdout": "\nrunning 1 test\ntest some_unicode_fast ... bench:         184.26 ns/iter (+/- 0.63)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 5.62s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode_fast"
+    ]
+  },
+  {
+    "round": 1,
+    "name": "prebuilt",
+    "ns_per_call": 287.51,
+    "stdout": "\nrunning 1 test\ntest str::debug::some_unicode ... bench:         287.51 ns/iter (+/- 2.62)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.31s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "str::debug::some_unicode"
+    ]
+  },
+  {
+    "round": 1,
+    "name": "original",
+    "ns_per_call": 283.87,
+    "stdout": "\nrunning 1 test\ntest some_unicode ... bench:         283.87 ns/iter (+/- 4.69)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.50s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode"
+    ]
+  },
+  {
+    "round": 1,
+    "name": "copy",
+    "ns_per_call": 284.48,
+    "stdout": "\nrunning 1 test\ntest some_unicode_copy ... bench:         284.48 ns/iter (+/- 5.71)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.25s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode_copy"
+    ]
+  },
+  {
+    "round": 1,
+    "name": "fast",
+    "ns_per_call": 183.59,
+    "stdout": "\nrunning 1 test\ntest some_unicode_fast ... bench:         183.59 ns/iter (+/- 1.11)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 3.23s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode_fast"
+    ]
+  },
+  {
+    "round": 2,
+    "name": "prebuilt",
+    "ns_per_call": 288.47,
+    "stdout": "\nrunning 1 test\ntest str::debug::some_unicode ... bench:         288.47 ns/iter (+/- 2.97)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "str::debug::some_unicode"
+    ]
+  },
+  {
+    "round": 2,
+    "name": "original",
+    "ns_per_call": 284.79,
+    "stdout": "\nrunning 1 test\ntest some_unicode ... bench:         284.79 ns/iter (+/- 3.87)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.50s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode"
+    ]
+  },
+  {
+    "round": 2,
+    "name": "copy",
+    "ns_per_call": 289.81,
+    "stdout": "\nrunning 1 test\ntest some_unicode_copy ... bench:         289.81 ns/iter (+/- 6.17)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 0.22s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode_copy"
+    ]
+  },
+  {
+    "round": 2,
+    "name": "fast",
+    "ns_per_call": 184.21,
+    "stdout": "\nrunning 1 test\ntest some_unicode_fast ... bench:         184.21 ns/iter (+/- 0.90)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 2 filtered out; finished in 5.12s\n\n",
+    "stderr": "",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/str-debug-some-unicode-20261105/harness-range",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "some_unicode_fast"
+    ]
+  }
+]

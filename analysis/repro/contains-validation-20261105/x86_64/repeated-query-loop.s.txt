@@ -1,0 +1,21 @@
+.LBB12_285:
+	movq	%r12, 96(%rsp)
+	movq	%r13, 104(%rsp)
+	#APP
+	#NO_APP
+	movq	96(%rsp), %rdi
+	movq	104(%rsp), %rsi
+.Ltmp19:
+	callq	*40(%rsp)
+.Ltmp20:
+	movb	%al, 7(%rsp)
+	#APP
+	#NO_APP
+	movzbl	7(%rsp), %eax
+	addq	224(%rsp), %rax
+	incq	%r14
+	movq	%rax, 224(%rsp)
+	movq	8(%rsp), %rcx
+	cmpq	%rcx, %r14
+	jb	.LBB12_285
+	jmp	.LBB12_288

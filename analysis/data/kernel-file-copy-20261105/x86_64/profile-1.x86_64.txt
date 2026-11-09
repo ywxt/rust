@@ -1,0 +1,375 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 1K of event 'cpu_core/cycles/'
+# Event count (approx.): 5287957799
+#
+# Overhead  Command  Shared Object         Symbol                                                   
+# ........  .......  ....................  .........................................................
+#
+    24.72%  probe    [unknown]             [k] 0xffffffffb680614d
+            |
+            ---0xffffffffb680614d
+               |          
+               |--21.98%--0xffffffffb6836432
+               |          0xffffffffb6805bce
+               |          0xffffffffb68345c6
+               |          0xffffffffb69b2b9e
+               |          0xffffffffb69b10b6
+               |          0xffffffffb69b24df
+               |          0xffffffffb69b2796
+               |          0xffffffffb695b3db
+               |          0xffffffffb695b8d6
+               |          0xffffffffb7349c74
+               |          0xffffffffb6200130
+               |          __internal_syscall_cancel
+               |          __syscall_cancel
+               |          copy_file_range
+               |          std::sys::io::kernel_copy::linux::copy_regular_files
+               |          <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               |          <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               |          <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               |          <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               |          alloc::io::copy::copy::<std::fs::File, std::fs::File>
+               |          
+                --2.74%--0xffffffffb683ad78
+                          0xffffffffb69b24a5
+                          0xffffffffb69b2796
+                          0xffffffffb695b3db
+                          0xffffffffb695b8d6
+                          0xffffffffb7349c74
+                          0xffffffffb6200130
+                          __internal_syscall_cancel
+                          __syscall_cancel
+                          copy_file_range
+                          std::sys::io::kernel_copy::linux::copy_regular_files
+                          <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+                          <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+                          <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+                          <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+                          alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     9.02%  probe    [unknown]             [k] 0xffffffffb680a808
+            |
+            ---0xffffffffb680a808
+               0xffffffffb683a2c7
+               |          
+               |--6.50%--0xffffffffb683b40a
+               |          0xffffffffb6805b32
+               |          0xffffffffb68345c6
+               |          0xffffffffb69b2b9e
+               |          0xffffffffb69b10b6
+               |          0xffffffffb69b24df
+               |          0xffffffffb69b2796
+               |          0xffffffffb695b3db
+               |          0xffffffffb695b8d6
+               |          0xffffffffb7349c74
+               |          0xffffffffb6200130
+               |          __internal_syscall_cancel
+               |          __syscall_cancel
+               |          copy_file_range
+               |          std::sys::io::kernel_copy::linux::copy_regular_files
+               |          <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               |          <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               |          <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               |          <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               |          alloc::io::copy::copy::<std::fs::File, std::fs::File>
+               |          
+                --2.52%--0xffffffffb683ae99
+                          0xffffffffb69b24a5
+                          0xffffffffb69b2796
+                          0xffffffffb695b3db
+                          0xffffffffb695b8d6
+                          0xffffffffb7349c74
+                          0xffffffffb6200130
+                          __internal_syscall_cancel
+                          __syscall_cancel
+                          copy_file_range
+                          std::sys::io::kernel_copy::linux::copy_regular_files
+                          <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+                          <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+                          <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+                          <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+                          alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     7.02%  probe    [unknown]             [k] 0xffffffffb7353f8c
+            |
+            ---0xffffffffb7353f8c
+               0xffffffffb6bdc712
+               0xffffffffb6805ba8
+               0xffffffffb68345c6
+               0xffffffffb69b2b9e
+               0xffffffffb69b10b6
+               0xffffffffb69b24df
+               0xffffffffb69b2796
+               0xffffffffb695b3db
+               0xffffffffb695b8d6
+               0xffffffffb7349c74
+               0xffffffffb6200130
+               __internal_syscall_cancel
+               __syscall_cancel
+               copy_file_range
+               std::sys::io::kernel_copy::linux::copy_regular_files
+               <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     4.16%  probe    [unknown]             [k] 0xffffffffb683a23a
+            |
+            ---0xffffffffb683a23a
+               |          
+               |--2.42%--0xffffffffb683b40a
+               |          0xffffffffb6805b32
+               |          0xffffffffb68345c6
+               |          0xffffffffb69b2b9e
+               |          0xffffffffb69b10b6
+               |          0xffffffffb69b24df
+               |          0xffffffffb69b2796
+               |          0xffffffffb695b3db
+               |          0xffffffffb695b8d6
+               |          0xffffffffb7349c74
+               |          0xffffffffb6200130
+               |          __internal_syscall_cancel
+               |          __syscall_cancel
+               |          copy_file_range
+               |          std::sys::io::kernel_copy::linux::copy_regular_files
+               |          <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               |          <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               |          <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               |          <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               |          alloc::io::copy::copy::<std::fs::File, std::fs::File>
+               |          
+                --1.75%--0xffffffffb683ae99
+                          0xffffffffb69b24a5
+                          0xffffffffb69b2796
+                          0xffffffffb695b3db
+                          0xffffffffb695b8d6
+                          0xffffffffb7349c74
+                          0xffffffffb6200130
+                          __internal_syscall_cancel
+                          __syscall_cancel
+                          copy_file_range
+                          std::sys::io::kernel_copy::linux::copy_regular_files
+                          <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+                          <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+                          <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+                          <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+                          alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     3.00%  probe    [unknown]             [k] 0xffffffffb69b0af6
+            |
+            ---0xffffffffb69b0af6
+               0xffffffffb69b2c29
+               0xffffffffb69b10b6
+               0xffffffffb69b24df
+               0xffffffffb69b2796
+               0xffffffffb695b3db
+               0xffffffffb695b8d6
+               0xffffffffb7349c74
+               0xffffffffb6200130
+               __internal_syscall_cancel
+               __syscall_cancel
+               copy_file_range
+               std::sys::io::kernel_copy::linux::copy_regular_files
+               <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     2.75%  probe    [unknown]             [k] 0xffffffffb683ae0e
+            |
+            ---0xffffffffb683ae0e
+               0xffffffffb69b24a5
+               0xffffffffb69b2796
+               0xffffffffb695b3db
+               0xffffffffb695b8d6
+               0xffffffffb7349c74
+               0xffffffffb6200130
+               __internal_syscall_cancel
+               __syscall_cancel
+               copy_file_range
+               std::sys::io::kernel_copy::linux::copy_regular_files
+               <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     2.38%  probe    [unknown]             [k] 0xffffffffb6200080
+            |
+            ---0xffffffffb6200080
+               |          
+               |--1.06%--statx
+               |          std::sys::io::kernel_copy::linux::fd_to_meta::<std::fs::File>
+               |          |          
+               |           --0.62%--0x8000
+               |          
+               |--0.71%--llseek@GLIBC_2.2.5
+               |          
+                --0.62%--__internal_syscall_cancel
+                          __syscall_cancel
+                          copy_file_range
+                          std::sys::io::kernel_copy::linux::copy_regular_files
+                          <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+                          <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+                          <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+                          <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+                          alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     2.28%  probe    [unknown]             [k] 0xffffffffb6836436
+            |
+            ---0xffffffffb6836436
+               0xffffffffb6805bce
+               0xffffffffb68345c6
+               0xffffffffb69b2b9e
+               0xffffffffb69b10b6
+               0xffffffffb69b24df
+               0xffffffffb69b2796
+               0xffffffffb695b3db
+               0xffffffffb695b8d6
+               0xffffffffb7349c74
+               0xffffffffb6200130
+               __internal_syscall_cancel
+               __syscall_cancel
+               copy_file_range
+               std::sys::io::kernel_copy::linux::copy_regular_files
+               <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     2.02%  probe    [unknown]             [k] 0xffffffffb680cd17
+            |
+            ---0xffffffffb680cd17
+               0xffffffffb683ae05
+               0xffffffffb69b24a5
+               0xffffffffb69b2796
+               0xffffffffb695b3db
+               0xffffffffb695b8d6
+               0xffffffffb7349c74
+               0xffffffffb6200130
+               __internal_syscall_cancel
+               __syscall_cancel
+               copy_file_range
+               std::sys::io::kernel_copy::linux::copy_regular_files
+               <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     1.67%  probe    [unknown]             [k] 0xffffffffb683ad80
+            |
+            ---0xffffffffb683ad80
+               0xffffffffb69b24a5
+               0xffffffffb69b2796
+               0xffffffffb695b3db
+               0xffffffffb695b8d6
+               0xffffffffb7349c74
+               0xffffffffb6200130
+               __internal_syscall_cancel
+               __syscall_cancel
+               copy_file_range
+               std::sys::io::kernel_copy::linux::copy_regular_files
+               <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     1.51%  probe    [unknown]             [k] 0xffffffffb681babc
+            |
+            ---0xffffffffb681babc
+               0xffffffffb683a31a
+               0xffffffffb683b40a
+               0xffffffffb6805b32
+               0xffffffffb68345c6
+               0xffffffffb69b2b9e
+               0xffffffffb69b10b6
+               0xffffffffb69b24df
+               0xffffffffb69b2796
+               0xffffffffb695b3db
+               0xffffffffb695b8d6
+               0xffffffffb7349c74
+               0xffffffffb6200130
+               __internal_syscall_cancel
+               __syscall_cancel
+               copy_file_range
+               std::sys::io::kernel_copy::linux::copy_regular_files
+               <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     1.41%  probe    [unknown]             [k] 0xffffffffb683a25b
+            |
+            ---0xffffffffb683a25b
+               0xffffffffb683ae99
+               0xffffffffb69b24a5
+               0xffffffffb69b2796
+               0xffffffffb695b3db
+               0xffffffffb695b8d6
+               0xffffffffb7349c74
+               0xffffffffb6200130
+               __internal_syscall_cancel
+               __syscall_cancel
+               copy_file_range
+               std::sys::io::kernel_copy::linux::copy_regular_files
+               <std::sys::io::kernel_copy::linux::CopyResult>::update_take::<std::fs::File> (inlined)
+               <std::sys::io::kernel_copy::linux::Copier<std::fs::File, std::fs::File> as std::sys::io::kernel_copy::linux::SpecCopy>::copy (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopy>::copy::<std::fs::File, std::fs::File> (inlined)
+               <std::fs::File as alloc::io::copy::specialization::SpecCopyInner>::copy::<std::fs::File> (inlined)
+               alloc::io::copy::copy::<std::fs::File, std::fs::File>
+
+     0.66%  probe    [unknown]             [k] 0xffffffffb66194a0
+            |
+            ---0xffffffffb66194a0
+               0xffffffffb680a7cc
+               0xffffffffb683a2c7
+
+     0.62%  probe    libc.so.6             [.] statx
+            |
+            ---statx
+               std::sys::io::kernel_copy::linux::fd_to_meta::<std::fs::File>
+               <std::fs::File as std::sys::io::kernel_copy::linux::CopyRead>::properties (inlined)
+
+     0.61%  probe    [unknown]             [k] 0xffffffffb680a7d5
+            |
+            ---0xffffffffb680a7d5
+               0xffffffffb683a2c7
+
+     0.53%  probe    libc.so.6             [.] __internal_syscall_cancel
+            |
+            ---__internal_syscall_cancel
+
+     0.53%  probe    [unknown]             [k] 0xffffffffb683a182
+            |
+            ---0xffffffffb683a182
+
+     0.53%  probe    [unknown]             [k] 0xffffffffb681bad3
+            |
+            ---0xffffffffb681bad3
+
+
+
+#
+# (Tip: Show estimate cycles per function and IPC in annotate use perf record -b ... ; perf report --total-cycles)
+#
+
+Warning:
+Kernel address maps (/proc/{kallsyms,modules}) were restricted.
+
+Check /proc/sys/kernel/kptr_restrict before running 'perf record'.
+
+As no suitable kallsyms nor vmlinux was found, kernel samples
+can't be resolved.
+
+Samples in kernel modules can't be resolved as well.
+

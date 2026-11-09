@@ -1,0 +1,47 @@
+<bang_probe_v7::simd64>:
+    46b8:	f101003f 	cmp	x1, #0x40
+    46bc:	54000042 	b.cs	46c4 <bang_probe_v7::simd64+0xc>  // b.hs, b.nlast
+    46c0:	17ffff94 	b	4510 <bang_probe_v7::fold16>
+    46c4:	f27ae43f 	tst	x1, #0xffffffffffffffc0
+    46c8:	54000280 	b.eq	4718 <bang_probe_v7::simd64+0x60>  // b.none
+    46cc:	4f01e420 	movi	v0.16b, #0x21
+    46d0:	927ae428 	and	x8, x1, #0xffffffffffffffc0
+    46d4:	aa0003e9 	mov	x9, x0
+    46d8:	cb0803e8 	neg	x8, x8
+    46dc:	ad400921 	ldp	q1, q2, [x9]
+    46e0:	ad411123 	ldp	q3, q4, [x9, #32]
+    46e4:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    46e8:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    46ec:	6e208c63 	cmeq	v3.16b, v3.16b, v0.16b
+    46f0:	6e208c84 	cmeq	v4.16b, v4.16b, v0.16b
+    46f4:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    46f8:	4ea41c62 	orr	v2.16b, v3.16b, v4.16b
+    46fc:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    4700:	5ef1b821 	addp	d1, v1.2d
+    4704:	9e66002a 	fmov	x10, d1
+    4708:	b50002ca 	cbnz	x10, 4760 <bang_probe_v7::simd64+0xa8>
+    470c:	b1010108 	adds	x8, x8, #0x40
+    4710:	91010129 	add	x9, x9, #0x40
+    4714:	54fffe41 	b.ne	46dc <bang_probe_v7::simd64+0x24>  // b.any
+    4718:	92401428 	and	x8, x1, #0x3f
+    471c:	b4000268 	cbz	x8, 4768 <bang_probe_v7::simd64+0xb0>
+    4720:	4f01e420 	movi	v0.16b, #0x21
+    4724:	8b010008 	add	x8, x0, x1
+    4728:	ad7e0901 	ldp	q1, q2, [x8, #-64]
+    472c:	ad7f1103 	ldp	q3, q4, [x8, #-32]
+    4730:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    4734:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    4738:	6e208c63 	cmeq	v3.16b, v3.16b, v0.16b
+    473c:	6e208c80 	cmeq	v0.16b, v4.16b, v0.16b
+    4740:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    4744:	4ea01c60 	orr	v0.16b, v3.16b, v0.16b
+    4748:	4ea01c20 	orr	v0.16b, v1.16b, v0.16b
+    474c:	5ef1b800 	addp	d0, v0.2d
+    4750:	9e660008 	fmov	x8, d0
+    4754:	f100011f 	cmp	x8, #0x0
+    4758:	1a9f07e0 	cset	w0, ne	// ne = any
+    475c:	d65f03c0 	ret
+    4760:	52800020 	mov	w0, #0x1                   	// #1
+    4764:	d65f03c0 	ret
+    4768:	2a1f03e0 	mov	w0, wzr
+    476c:	d65f03c0 	ret

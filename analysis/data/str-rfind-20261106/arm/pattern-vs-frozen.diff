@@ -1,0 +1,157 @@
+--- /tmp/contains-bad-simd-source/library/core/src/str/pattern.rs	2026-11-05 19:18:36.747734840 +0800
++++ /home/wheel/c00936152/rust-analysis/library/core/src/str/pattern.rs	2026-11-06 09:13:12.139734840 +0800
+@@ -584,13 +584,6 @@
+     #[inline]
+     fn is_contained_in(self, haystack: &str) -> bool {
+         if (self as u32) < 128 {
+-            #[cfg(any(
+-                all(target_arch = "aarch64", target_feature = "neon"),
+-                all(target_arch = "x86_64", target_feature = "sse2"),
+-            ))]
+-            if haystack.len() >= 64 {
+-                return contains_byte_simd(haystack.as_bytes(), self as u8);
+-            }
+             haystack.as_bytes().contains(&(self as u8))
+         } else {
+             let mut buffer = [0u8; 4];
+@@ -1001,13 +994,6 @@
+         match self.len().cmp(&haystack.len()) {
+             Ordering::Less => {
+                 if self.len() == 1 {
+-                    #[cfg(any(
+-                        all(target_arch = "aarch64", target_feature = "neon"),
+-                        all(target_arch = "x86_64", target_feature = "sse2"),
+-                    ))]
+-                    if haystack.len() >= 64 {
+-                        return contains_byte_simd(haystack.as_bytes(), self.as_bytes()[0]);
+-                    }
+                     return haystack.as_bytes().contains(&self.as_bytes()[0]);
+                 }
+ 
+@@ -1848,7 +1834,7 @@
+     } else {
+         // try a few bytes in case first and last byte of the needle are the same
+         let Some(second_probe_offset) =
+-            (1..needle.len()).rfind(|&idx| needle[idx] != first_probe)
++            (needle.len().saturating_sub(4)..needle.len()).rfind(|&idx| needle[idx] != first_probe)
+         else {
+             // fall back to other search methods if we can't find any different bytes
+             // since we could otherwise hit some degenerate cases
+@@ -1894,7 +1880,7 @@
+         false
+     };
+ 
+-    let test_chunk = |idx| -> Mask {
++    let test_chunk = |idx| -> u16 {
+         // SAFETY: this requires at least LANES bytes being readable at idx
+         // that is ensured by the loop ranges (see comments below)
+         let a: Block = unsafe { haystack.as_ptr().add(idx).cast::<Block>().read_unaligned() };
+@@ -1905,7 +1891,9 @@
+         let eq_first: Mask = a.simd_eq(first_probe);
+         let eq_last: Mask = b.simd_eq(second_probe);
+         let both = eq_first.bitand(eq_last);
+-        both
++        let mask = both.to_bitmask() as u16;
++
++        mask
+     };
+ 
+     let mut i = 0;
+@@ -1914,24 +1902,22 @@
+     // and not only at the current index but also at the index shifted by block_offset
+     const UNROLL: usize = 4;
+     while i + last_byte_offset + UNROLL * Block::LEN < haystack.len() && !result {
+-        let mut masks = [Mask::splat(false); UNROLL];
++        let mut masks = [0u16; UNROLL];
+         for j in 0..UNROLL {
+             masks[j] = test_chunk(i + j * Block::LEN);
+         }
+-        if (masks[0] | masks[1] | masks[2] | masks[3]).any() {
+-            for j in 0..UNROLL {
+-                let mask = masks[j].to_bitmask() as u16;
+-                if mask != 0 {
+-                    result |= check_mask(i + j * Block::LEN, mask, result);
+-                }
++        for j in 0..UNROLL {
++            let mask = masks[j];
++            if mask != 0 {
++                result |= check_mask(i + j * Block::LEN, mask, result);
+             }
+         }
+         i += UNROLL * Block::LEN;
+     }
+     while i + last_byte_offset + Block::LEN < haystack.len() && !result {
+         let mask = test_chunk(i);
+-        if mask.any() {
+-            result |= check_mask(i, mask.to_bitmask() as u16, result);
++        if mask != 0 {
++            result |= check_mask(i, mask, result);
+         }
+         i += Block::LEN;
+     }
+@@ -1942,8 +1928,8 @@
+     // we don't miss a single byte or read out of bounds.
+     let i = haystack.len() - last_byte_offset - Block::LEN;
+     let mask = test_chunk(i);
+-    if mask.any() {
+-        result |= check_mask(i, mask.to_bitmask() as u16, result);
++    if mask != 0 {
++        result |= check_mask(i, mask, result);
+     }
+ 
+     Some(result)
+@@ -2021,54 +2007,3 @@
+         vx == vy
+     }
+ }
+-
+-#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+-fn contains_byte_64(c: &[u8], needle: u8) -> bool {
+-    use crate::arch::aarch64::*;
+-    assert_eq!(c.len(), 64);
+-    unsafe {
+-        let p = c.as_ptr();
+-        let n = vdupq_n_u8(needle);
+-        let a = vceqq_u8(vld1q_u8(p), n);
+-        let b = vceqq_u8(vld1q_u8(p.add(16)), n);
+-        let d = vceqq_u8(vld1q_u8(p.add(32)), n);
+-        let e = vceqq_u8(vld1q_u8(p.add(48)), n);
+-        vmaxvq_u8(vorrq_u8(vorrq_u8(a, b), vorrq_u8(d, e))) != 0
+-    }
+-}
+-
+-#[cfg(all(target_arch = "x86_64", target_feature = "sse2"))]
+-fn contains_byte_64(c: &[u8], needle: u8) -> bool {
+-    use crate::arch::x86_64::*;
+-    assert_eq!(c.len(), 64);
+-    unsafe {
+-        let p = c.as_ptr().cast::<__m128i>();
+-        let n = _mm_set1_epi8(needle as i8);
+-        let a = _mm_cmpeq_epi8(_mm_loadu_si128(p), n);
+-        let b = _mm_cmpeq_epi8(_mm_loadu_si128(p.add(1)), n);
+-        let d = _mm_cmpeq_epi8(_mm_loadu_si128(p.add(2)), n);
+-        let e = _mm_cmpeq_epi8(_mm_loadu_si128(p.add(3)), n);
+-        _mm_movemask_epi8(_mm_or_si128(_mm_or_si128(a, b), _mm_or_si128(d, e))) != 0
+-    }
+-}
+-
+-#[cfg(any(
+-    all(target_arch = "aarch64", target_feature = "neon"),
+-    all(target_arch = "x86_64", target_feature = "sse2"),
+-))]
+-fn contains_byte_simd(bytes: &[u8], needle: u8) -> bool {
+-    if bytes[0] == needle {
+-        return true;
+-    }
+-    let prefix = if bytes.len() >= 128 { bytes.as_ptr().align_offset(64) } else { 0 };
+-    if prefix != 0 && contains_byte_64(&bytes[..64], needle) {
+-        return true;
+-    }
+-    let mut chunks = bytes[prefix..].chunks_exact(64);
+-    for c in &mut chunks {
+-        if contains_byte_64(c, needle) {
+-            return true;
+-        }
+-    }
+-    !chunks.remainder().is_empty() && contains_byte_64(&bytes[bytes.len() - 64..], needle)
+-}

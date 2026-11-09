@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/clang --target=x86_64-unknown-linux-gnu --sysroot=/tmp/contains-stdlib-20261105/x86-sysroot -B/tmp/contains-stdlib-20261105/x86-sysroot/usr/lib -L/tmp/contains-stdlib-20261105/x86-sysroot/usr/lib -fuse-ld=/tmp/contains-stdlib-20261105/ld.lld -Wl,--dynamic-linker=/nix/store/lm3pknxi0ipypy3lxh1wmm8wvvavdwrn-glibc-2.42-84/lib/ld-linux-x86-64.so.2 "$@"

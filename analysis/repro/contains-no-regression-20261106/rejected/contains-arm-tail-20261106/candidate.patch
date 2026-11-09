@@ -1,0 +1,50 @@
+--- a/library/core/src/slice/cmp.rs
++++ b/library/core/src/slice/cmp.rs
+@@ -400,6 +400,14 @@
+         let (byte, bytes) = unsafe {
+             (*(self as *const Self).cast::<u8>(), from_raw_parts(x.as_ptr().cast::<u8>(), x.len()))
+         };
++        #[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
++        {
++            if bytes.len() < 16 {
++                return memchr::memchr(byte, bytes).is_some();
++            }
++            return byte_contains_aligned(byte, bytes);
++        }
++        #[cfg(not(all(target_arch = "aarch64", target_feature = "neon")))]
+         memchr::memchr(byte, bytes).is_some()
+     }
+ }
+@@ -442,3 +450,32 @@
+ }
+ 
+ impl_slice_contains!(u16, u32, u64, i16, i32, i64, f32, f64, usize, isize, char);
++
++#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
++fn byte_contains_aligned(needle: u8, bytes: &[u8]) -> bool {
++    use crate::simd::cmp::SimdPartialEq;
++    use crate::simd::u8x16;
++
++    assert!(bytes.len() >= 16);
++    if bytes[0] == needle {
++        return true;
++    }
++    let n = u8x16::splat(needle);
++    let mut chunks = bytes.chunks_exact(64);
++    for c in &mut chunks {
++        let a = u8x16::from_slice(&c[..16]).simd_eq(n);
++        let b = u8x16::from_slice(&c[16..32]).simd_eq(n);
++        let d = u8x16::from_slice(&c[32..48]).simd_eq(n);
++        let e = u8x16::from_slice(&c[48..64]).simd_eq(n);
++        if (a | b | d | e).any() {
++            return true;
++        }
++    }
++    let mut tail = chunks.remainder().chunks_exact(16);
++    for c in &mut tail {
++        if u8x16::from_slice(c).simd_eq(n).any() {
++            return true;
++        }
++    }
++    !tail.remainder().is_empty() && u8x16::from_slice(&bytes[bytes.len() - 16..]).simd_eq(n).any()
++}

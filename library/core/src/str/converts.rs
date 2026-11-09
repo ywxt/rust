@@ -2,6 +2,8 @@
 
 use super::Utf8Error;
 use super::validations::run_utf8_validation;
+#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+use crate::intrinsics::const_eval_select;
 use crate::{mem, ptr};
 
 /// Converts a slice of bytes to a string slice.
@@ -86,7 +88,25 @@ use crate::{mem, ptr};
 #[stable(feature = "rust1", since = "1.0.0")]
 #[rustc_const_stable(feature = "const_str_from_utf8_shared", since = "1.63.0")]
 #[rustc_diagnostic_item = "str_from_utf8"]
+#[rustc_allow_const_fn_unstable(const_eval_select)] // both arms have the same behavior
 pub const fn from_utf8(v: &[u8]) -> Result<&str, Utf8Error> {
+    // At run time, AArch64 validates long inputs 16 bytes at a time. This is a tail call, so the
+    // scalar path below does not need a stack frame.
+    #[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+    if v.len() >= super::utf8_simd::MIN_LEN {
+        return const_eval_select!(
+            @capture { v: &[u8] } -> Result<&str, Utf8Error>:
+            if const {
+                match run_utf8_validation(v) {
+                    // SAFETY: validation succeeded.
+                    Ok(_) => Ok(unsafe { from_utf8_unchecked(v) }),
+                    Err(err) => Err(err),
+                }
+            } else {
+                super::utf8_simd::from_utf8(v)
+            }
+        );
+    }
     // FIXME(const-hack): This should use `?` again, once it's `const`
     match run_utf8_validation(v) {
         Ok(_) => {
@@ -132,7 +152,24 @@ pub const fn from_utf8(v: &[u8]) -> Result<&str, Utf8Error> {
 #[stable(feature = "str_mut_extras", since = "1.20.0")]
 #[rustc_const_stable(feature = "const_str_from_utf8", since = "1.87.0")]
 #[rustc_diagnostic_item = "str_from_utf8_mut"]
+#[rustc_allow_const_fn_unstable(const_eval_select)] // both arms have the same behavior
 pub const fn from_utf8_mut(v: &mut [u8]) -> Result<&mut str, Utf8Error> {
+    // See `from_utf8`.
+    #[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
+    if v.len() >= super::utf8_simd::MIN_LEN {
+        return const_eval_select!(
+            @capture { v: &mut [u8] } -> Result<&mut str, Utf8Error>:
+            if const {
+                match run_utf8_validation(v) {
+                    // SAFETY: validation succeeded.
+                    Ok(_) => Ok(unsafe { from_utf8_unchecked_mut(v) }),
+                    Err(err) => Err(err),
+                }
+            } else {
+                super::utf8_simd::from_utf8_mut(v)
+            }
+        );
+    }
     // FIXME(const-hack): This should use `?` again, once it's `const`
     match run_utf8_validation(v) {
         Ok(_) => {

@@ -238,6 +238,88 @@ fn test_from_utf16_lossy() {
     );
 }
 
+/// Lengths and mixes of UTF-16 units that reach every code path of the decoder: mostly ASCII
+/// and dense non-ASCII text, blocks of 16 units, and surrogates anywhere.
+fn utf16_test_inputs(mut f: impl FnMut(&[u16])) {
+    // Both ends of the one-, two- and three-byte ranges, a surrogate pair, lone surrogates.
+    const UNITS: [&[u16]; 13] = [
+        &[0x61],
+        &[0x7F],
+        &[0x80],
+        &[0xE9],
+        &[0x7FF],
+        &[0x800],
+        &[0x4E2D],
+        &[0xD7FF],
+        &[0xE000],
+        &[0xFFFF],
+        &[0xD83D, 0xDE00],
+        &[0xD800],
+        &[0xDFFF],
+    ];
+
+    // A small xorshift generator, so that the test is deterministic.
+    let mut state = 0x9E37_79B9_7F4A_7C15u64;
+    let mut next = move |n: usize| {
+        state ^= state << 13;
+        state ^= state >> 7;
+        state ^= state << 17;
+        (state % n as u64) as usize
+    };
+
+    let rounds = if cfg!(miri) { 1 } else { 40 };
+    for _ in 0..rounds {
+        for len in 0..100 {
+            let non_ascii_share = [0, 5, 30, 100][next(4)];
+            // Lone surrogates in only some inputs, so that `from_utf16` succeeds as well.
+            let kinds = if next(2) == 0 { UNITS.len() - 2 } else { UNITS.len() };
+            let mut v = Vec::new();
+            while v.len() < len {
+                let unit = if next(100) < non_ascii_share {
+                    UNITS[2 + next(kinds - 2)]
+                } else {
+                    UNITS[next(2)]
+                };
+                v.extend_from_slice(unit);
+            }
+            v.truncate(len);
+            f(&v);
+        }
+    }
+
+    // A lone surrogate and a surrogate pair at every position, and the text cut off at every
+    // position, in text that starts with ASCII and in text that starts with CJK.
+    for text in [
+        "ASCII text, é, Ж, 中文, 😀 and more text to fill the blocks. ",
+        "中文中文中文中文中文中文 Ж, é, 😀 and some ASCII text. 中文中文中文中文中文中文",
+    ] {
+        let text: Vec<u16> = text.repeat(3).encode_utf16().collect();
+        for at in 0..text.len() {
+            for bad in [0xD800, 0xDBFF, 0xDC00, 0xDFFF] {
+                let mut v = text.clone();
+                v[at] = bad;
+                f(&v);
+            }
+            let mut v = text.clone();
+            v.splice(at..at, [0xD83D, 0xDE00]);
+            f(&v);
+            f(&text[..at]);
+            f(&text[at..]);
+        }
+    }
+}
+
+#[test]
+fn test_from_utf16_matches_decode_utf16() {
+    utf16_test_inputs(|v| {
+        let decoded = || char::decode_utf16(v.iter().copied());
+        let lossy: String = decoded().map(|r| r.unwrap_or(char::REPLACEMENT_CHARACTER)).collect();
+        let strict: Option<String> = decoded().collect::<Result<_, _>>().ok();
+        assert_eq!(String::from_utf16_lossy(v), lossy, "{v:x?}");
+        assert_eq!(String::from_utf16(v).ok(), strict, "{v:x?}");
+    });
+}
+
 #[test]
 fn test_push_bytes() {
     let mut s = String::from("ABC");

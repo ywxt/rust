@@ -1,0 +1,117 @@
+--- a/library/core/src/slice/memchr.rs
++++ b/library/core/src/slice/memchr.rs
+@@ -47,6 +47,12 @@
+     None
+ }
+ 
++#[cfg(not(all(
++    target_arch = "aarch64",
++    target_feature = "neon",
++    target_endian = "little",
++    target_pointer_width = "64"
++)))]
+ #[rustc_allow_const_fn_unstable(const_eval_select)] // fallback impl has same behavior
+ const fn memchr_aligned(x: u8, text: &[u8]) -> Option<usize> {
+     // The runtime version behaves the same as the compiletime version, it's
+@@ -159,3 +165,101 @@
+     // Find the byte before the point the body loop stopped.
+     text[..offset].iter().rposition(|elt| *elt == x)
+ }
++
++#[cfg(all(
++    target_arch = "aarch64",
++    target_feature = "neon",
++    target_endian = "little",
++    target_pointer_width = "64"
++))]
++#[rustc_allow_const_fn_unstable(const_eval_select)] // fallback impl has same behavior
++const fn memchr_aligned(x: u8, text: &[u8]) -> Option<usize> {
++    // The runtime version behaves the same as the compiletime version, it's
++    // just more optimized.
++    const_eval_select!(
++        @capture { x: u8, text: &[u8] } -> Option<usize>:
++        if const {
++            memchr_naive(x, text)
++        } else {
++            // Scan for a single byte value by reading two `usize` words at a time.
++            //
++            // Split `text` in three parts
++            // - unaligned initial part, before the first word aligned address in text
++            // - body, scan by 2 words at a time
++            // - the last remaining part, < 2 word size
++
++            // search up to an aligned boundary
++            let len = text.len();
++            let ptr = text.as_ptr();
++            let mut offset = ptr.align_offset(USIZE_BYTES);
++
++            if offset > 0 {
++                offset = offset.min(len);
++                let slice = &text[..offset];
++                if let Some(index) = memchr_naive(x, slice) {
++                    return Some(index);
++                }
++            }
++
++            // search the body of the text
++            // SAFETY: the public caller checks two words before taking this runtime path.
++            unsafe { crate::hint::assert_unchecked(len >= 2 * USIZE_BYTES) };
++            let repeated_x = usize::repeat_u8(x);
++            'search: while offset <= len - 2 * USIZE_BYTES {
++                // SAFETY: the loop predicate covers two aligned words.
++                let (u, v) = unsafe {
++                    (*(ptr.add(offset) as *const usize),
++                     *(ptr.add(offset + USIZE_BYTES) as *const usize))
++                };
++                let zu = contains_zero_byte(u ^ repeated_x);
++                let zv = contains_zero_byte(v ^ repeated_x);
++                if zu || zv {
++                    break;
++                }
++                offset += 2 * USIZE_BYTES;
++                macro_rules! next_pair {
++                    () => {{
++                        if offset > len - 2 * USIZE_BYTES {
++                            if offset == len {
++                                return None;
++                            }
++                            break 'search;
++                        }
++                        // SAFETY: the preceding comparison covers two aligned words.
++                        let (u, v) = unsafe {
++                            (*(ptr.add(offset) as *const usize),
++                             *(ptr.add(offset + USIZE_BYTES) as *const usize))
++                        };
++                        let zu = contains_zero_byte(u ^ repeated_x);
++                        let zv = contains_zero_byte(v ^ repeated_x);
++                        if zu || zv {
++                            break 'search;
++                        }
++                        offset += 2 * USIZE_BYTES;
++                    }};
++                }
++                next_pair!();
++                next_pair!();
++                next_pair!();
++                if offset > len - 2 * USIZE_BYTES {
++                    if offset == len {
++                        return None;
++                    }
++                    break 'search;
++                }
++            }
++
++            // SAFETY: exhausted input returns above; every other exit has bytes remaining.
++            unsafe { crate::hint::assert_unchecked(offset < len) };
++
++            // Find the byte after the point the body loop stopped.
++            // FIXME(const-hack): Use `?` instead.
++            // FIXME(const-hack, fee1-dead): use range slicing
++            let slice =
++            // SAFETY: offset is within bounds
++                unsafe { super::from_raw_parts(text.as_ptr().add(offset), text.len() - offset) };
++            if let Some(i) = memchr_naive(x, slice) { Some(offset + i) } else { None }
++        }
++    )
++}
++

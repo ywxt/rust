@@ -1,0 +1,79 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 9K of event 'cycles:u'
+# Event count (approx.): 14378748278
+#
+# Overhead  Command  Shared Object               Symbol                                                                                                                                                                 
+# ........  .......  ..........................  .......................................................................................................................................................................
+#
+    68.05%  benches  benches                     [.] _RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in
+            |
+            ---_RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3str23bench_contains_bad_simd0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    26.78%  benches  libstd-7a2f7be1a1e543fc.so  [.] _RNvMsu_NtNtCshp6Wxz1DwXO_4core3str7patternNtB5_11StrSearcher3new
+            |
+            ---_RNvMsu_NtNtCshp6Wxz1DwXO_4core3str7patternNtB5_11StrSearcher3new
+               |          
+                --26.50%--_RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in
+                          _RNvYNCNvNtCscmX2qrehp8H_7benches3str23bench_contains_bad_simd0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+                          _RNvCs8okFKGt2BSQ_4test8run_test
+                          _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+                          _RNvCs8okFKGt2BSQ_4test16test_main_static
+                          _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+                          _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+                          _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+                          main
+                          __libc_start_call_main
+                          __libc_start_main@@GLIBC_2.34
+                          _start
+
+     3.28%  benches  benches                     [.] _RNvYNCNvNtCscmX2qrehp8H_7benches3str23bench_contains_bad_simd0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+            |
+            ---_RNvYNCNvNtCscmX2qrehp8H_7benches3str23bench_contains_bad_simd0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     1.66%  benches  libc.so.6                   [.] memcmp
+            |
+            ---memcmp
+               _RNvMsu_NtNtCshp6Wxz1DwXO_4core3str7patternNtB5_11StrSearcher3new
+               _RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3str23bench_contains_bad_simd0INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: Add -I to perf record to sample register values, which will be visible in perf report sample context.)
+#

@@ -1,0 +1,2 @@
+use std::hint::black_box;
+fn main(){let h=black_box("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");let n=black_box("aaabaaaa");let bytes=n.as_bytes();let tail=(bytes.len().saturating_sub(4)..bytes.len()).rfind(|&i|bytes[i]!=bytes[0]);let full=(1..bytes.len()).rfind(|&i|bytes[i]!=bytes[0]);assert_eq!(tail,None);assert_eq!(full,Some(3));assert!(!h.contains(n));println!("haystack_len={} needle_len={} old_probe={:?} full_probe={:?} contains=false",h.len(),n.len(),tail,full);}

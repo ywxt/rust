@@ -1,0 +1,33 @@
+[
+  {
+    "variant": "base",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "1999",
+      "-e",
+      "cycles:u",
+      "-g",
+      "-o",
+      "/tmp/sort-small-random-20261106/profile.base.aarch64.data",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+      "setarch",
+      "aarch64",
+      "-R",
+      "/tmp/sort-small-random-20261106/aarch64-unknown-linux-gnu/benches-base",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::sort_unstable_small_random"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::sort_unstable_small_random            ... bench:          31.64 ns/iter (+/- 11.64) = 2580 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 21 filtered out; finished in 3.27s\n\n",
+    "stderr": ""
+  }
+]

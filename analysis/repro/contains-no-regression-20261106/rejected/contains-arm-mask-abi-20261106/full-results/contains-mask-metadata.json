@@ -1,0 +1,28 @@
+{
+  "candidate": "contains-arm-mask-abi-20261106",
+  "measurement_entries": 1601,
+  "overlapping_contains_grid_inputs": 16,
+  "distinct_combined_contains_grid_inputs": 848,
+  "entries_after_deduplicating_the_two_contains_grids": 1585,
+  "rounds_per_variant": 3,
+  "long_split_retests": 5,
+  "long_split_rounds": 9,
+  "raw_measurements": 19392,
+  "hardware_events_running_percent": 100,
+  "data_source": "existing frozen cohort; no rerun or mixing other candidates",
+  "input_roots": {
+    "arm": "/tmp/contains-mask-full-results-20261106/arm",
+    "x86": "/tmp/contains-arm-mask-abi-20261106"
+  },
+  "implementation": "ARM-only byte SliceContains >=16B: SIMD64 body, SIMD16 remainder and overlapping SIMD16 final load, integer0/1 existence result; original <16B scalar branch unchanged",
+  "groups": {
+    "counted": 28,
+    "matrix": 288,
+    "byte": 480,
+    "index": 224,
+    "boundary": 576,
+    "split": 5,
+    "split-long": 5
+  },
+  "source_change_applied": false
+}

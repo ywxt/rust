@@ -900,6 +900,104 @@ fn test_is_utf8() {
     assert!(from_utf8(&[0xF4, 0x8F, 0xBF, 0xBF]).is_ok());
 }
 
+/// A direct transcription of the well-formed byte sequences in Table 3-7 of the Unicode Standard,
+/// returning `(valid_up_to, error_len)` like `Utf8Error`.
+fn reference_utf8_error(v: &[u8]) -> Option<(usize, Option<u8>)> {
+    let mut i = 0;
+    while i < v.len() {
+        // The length of the character and the range of its second byte.
+        let (len, lo, hi) = match v[i] {
+            0x00..=0x7F => {
+                i += 1;
+                continue;
+            }
+            0xC2..=0xDF => (2, 0x80, 0xBF),
+            0xE0 => (3, 0xA0, 0xBF),
+            0xE1..=0xEC | 0xEE..=0xEF => (3, 0x80, 0xBF),
+            0xED => (3, 0x80, 0x9F),
+            0xF0 => (4, 0x90, 0xBF),
+            0xF1..=0xF3 => (4, 0x80, 0xBF),
+            0xF4 => (4, 0x80, 0x8F),
+            _ => return Some((i, Some(1))),
+        };
+        for k in 1..len {
+            let (lo, hi) = if k == 1 { (lo, hi) } else { (0x80, 0xBF) };
+            match v.get(i + k) {
+                None => return Some((i, None)),
+                Some(&b) if b < lo || b > hi => return Some((i, Some(k as u8))),
+                Some(_) => {}
+            }
+        }
+        i += len;
+    }
+    None
+}
+
+fn check_utf8_against_reference(v: &[u8]) {
+    let got = from_utf8(v).err().map(|e| (e.valid_up_to(), e.error_len().map(|n| n as u8)));
+    assert_eq!(got, reference_utf8_error(v), "{v:x?}");
+}
+
+/// `from_utf8` takes different code paths depending on the length of its input (for example,
+/// vectors for inputs of 64 bytes or more), so check all of them, with the error in every position.
+#[test]
+fn test_utf8_validation_matches_reference() {
+    const CHARS: [&str; 7] = ["a", "~", "é", "\u{7FF}", "中", "\u{FFFF}", "😀"];
+    const BAD: [u8; 10] = [0x80, 0xBF, 0xC0, 0xC2, 0xE0, 0xED, 0xF0, 0xF4, 0xF5, 0xFF];
+
+    // A small xorshift generator, so that the test is deterministic.
+    let mut state = 0x9E37_79B9_7F4A_7C15u64;
+    let mut next = move |n: usize| {
+        state ^= state << 13;
+        state ^= state >> 7;
+        state ^= state << 17;
+        (state % n as u64) as usize
+    };
+
+    // Text of every length up to 300 bytes, mostly ASCII or with a lot of multi-byte characters.
+    let rounds = if cfg!(miri) { 1 } else { 40 };
+    for _ in 0..rounds {
+        for len in 0..300 {
+            let multibyte_share = [0, 4, 30, 100][next(4)];
+            let mut v = Vec::new();
+            while v.len() < len {
+                let c =
+                    if next(100) < multibyte_share { CHARS[2 + next(5)] } else { CHARS[next(2)] };
+                v.extend_from_slice(c.as_bytes());
+            }
+            v.truncate(len);
+            check_utf8_against_reference(&v);
+        }
+    }
+
+    // One bad byte at every position, and the text cut off at every position.
+    let text = "ASCII text, é, 中文, 😀 and more text to fill up the buffer. ".repeat(5);
+    let bytes = text.as_bytes();
+    assert!(bytes.len() > 256);
+    for at in 0..bytes.len() {
+        for bad in BAD {
+            let mut v = bytes.to_vec();
+            v[at] = bad;
+            check_utf8_against_reference(&v);
+        }
+        check_utf8_against_reference(&bytes[..at]);
+        check_utf8_against_reference(&bytes[at..]);
+    }
+}
+
+#[test]
+fn test_const_is_utf8_long() {
+    const _: () = {
+        let mut v = [b'a'; 100];
+        assert!(from_utf8(&v).is_ok());
+        v[99] = 0xC3;
+        assert!(from_utf8(&v).is_err());
+        v[99] = b'a';
+        v[3] = 0xFF;
+        assert!(from_utf8(&v).is_err());
+    };
+}
+
 #[test]
 fn test_const_is_utf8() {
     const _: () = {
@@ -2576,5 +2674,70 @@ fn ceil_char_boundary() {
     ];
     for (idx, &ret) in expected.iter().enumerate() {
         check_many(s, [idx], ret);
+    }
+}
+
+#[test]
+fn test_contains_runtime_ascii_all_alignments() {
+    let lengths = [0usize, 1, 7, 8, 15, 16, 17, 31, 32, 63, 64, 65, 127, 128, 129, 255, 256, 257];
+    for needle in 0..=127u8 {
+        let encoded = [needle];
+        let pattern = from_utf8(&encoded).unwrap();
+        let fill = if needle == b'x' { b'y' } else { b'x' };
+        for len in lengths {
+            for offset in 0..64 {
+                let mut bytes = vec![fill; len + 64];
+                for pos in [None, Some(0), Some(len / 2), len.checked_sub(1)] {
+                    bytes.fill(fill);
+                    if let Some(i) = pos {
+                        if i < len {
+                            bytes[offset + i] = needle;
+                        }
+                    }
+                    let haystack = from_utf8(&bytes[offset..offset + len]).unwrap();
+                    let expected = pos.is_some_and(|p| p < len);
+                    assert_eq!(haystack.contains(pattern), expected);
+                    assert_eq!(haystack.contains(needle as char), expected);
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn test_contains_runtime_full_pattern_semantics() {
+    let haystacks = [
+        "",
+        "a!b",
+        "é中💩",
+        "a\0b",
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    ];
+    for haystack in haystacks {
+        for pattern in
+            ["", "!", "\0", "é", "中💩", "💩中", "aaaaaaaaab", "longer than a short haystack"]
+        {
+            let expected = pattern.is_empty()
+                || haystack.as_bytes().windows(pattern.len()).any(|w| w == pattern.as_bytes());
+            assert_eq!(haystack.contains(pattern), expected);
+        }
+        for needle in ['!', '\0', 'é', '中', '💩', '\u{10ffff}'] {
+            assert_eq!(haystack.contains(needle), haystack.chars().any(|c| c == needle));
+        }
+        let chars = ['!', '中'];
+        let expected = haystack.chars().any(|c| chars.iter().any(|&n| n == c));
+        assert_eq!(haystack.contains(&chars[..]), expected);
+        let mut actual_visits = Vec::new();
+        let mut expected_visits = Vec::new();
+        let actual = haystack.contains(|c| {
+            actual_visits.push(c);
+            c == '中'
+        });
+        let expected = haystack.chars().any(|c| {
+            expected_visits.push(c);
+            c == '中'
+        });
+        assert_eq!(actual, expected);
+        assert_eq!(actual_visits, expected_visits);
     }
 }

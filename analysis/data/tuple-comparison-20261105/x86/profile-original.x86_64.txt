@@ -1,0 +1,25 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 973  of event 'cpu_core/cycles/u'
+# Event count (approx.): 4372379839
+#
+# Overhead  Command  Shared Object         Symbol                          
+# ........  .......  ....................  ................................
+#
+    59.61%  probe    probe                 [.] original
+            |
+            ---original
+
+    40.36%  probe    libc.so.6             [.] __memcmp_avx2_movbe
+            |
+            ---__memcmp_avx2_movbe
+
+
+
+#
+# (Tip: To only collect call graph on one event use perf record -e cpu/cpu-cycles,callgraph=1/,branches ; perf report --show-ref-call-graph)
+#
+

@@ -1,0 +1,42 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 543  of event 'cpu_core/cycles/u'
+# Event count (approx.): 2423920461
+#
+# Overhead  Command  Shared Object               Symbol                                                    
+# ........  .......  ..........................  ..........................................................
+#
+    54.90%  counted  counted                     [.] <&str as core::str::pattern::Pattern>::is_contained_in
+            |
+            ---<&str as core::str::pattern::Pattern>::is_contained_in
+               |          
+               |--5.99%--0
+               |          
+                --5.22%--0x6161616161616161
+
+    29.16%  counted  libstd-320fe7036dd8354d.so  [.] <core::str::pattern::StrSearcher>::new
+            |
+            ---<core::str::pattern::StrSearcher>::new
+               |          
+                --28.98%--<&str as core::str::pattern::Pattern>::is_contained_in
+                          0
+
+    11.41%  counted  libc.so.6                   [.] __memcmp_avx2_movbe
+            |
+            ---__memcmp_avx2_movbe
+               <&str as core::str::pattern::Pattern>::is_contained_in
+               0
+
+     4.44%  counted  counted                     [.] counted::str::bench_contains_bad_simd
+            |
+            ---counted::str::bench_contains_bad_simd
+               0
+
+
+
+#
+# (Tip: If you have debuginfo enabled, try: perf report -s sym,srcline)
+#

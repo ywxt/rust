@@ -1,0 +1,47 @@
+Classifying expressions for: @original
+  %_0.i.i.i.i.i.i = alloca [8 x i8], align 8
+  -->  %_0.i.i.i.i.i.i U: [8,-15) S: [-9223372036854775808,9223372036854775801)
+  %_0.i.i.i.i.i.i.i = alloca [8 x i8], align 8
+  -->  %_0.i.i.i.i.i.i.i U: [8,-15) S: [-9223372036854775808,9223372036854775801)
+  %accum.sroa.0.09.i.i = phi i64 [ %_0.sroa.0.0.i.i3.i.i, %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsjQ8WedNVfna_5probe8original0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3i_3Sum3sumINtB2p_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4C_EB1M_EB2K_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i ], [ 0, %bb1.i ]
+  -->  %accum.sroa.0.09.i.i U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i.i: Variant }
+  %self.sroa.0.08.i.i = phi i64 [ %0, %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsjQ8WedNVfna_5probe8original0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3i_3Sum3sumINtB2p_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4C_EB1M_EB2K_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i ], [ 0, %bb1.i ]
+  -->  {0,+,1}<nuw><nsw><%bb3.i.i> U: [0,1000000) S: [0,1000000)		Exits: 999999		LoopDispositions: { %bb3.i.i: Computable }
+  %0 = add nuw nsw i64 %self.sroa.0.08.i.i, 1
+  -->  {1,+,1}<nuw><nsw><%bb3.i.i> U: [1,1000001) S: [1,1000001)		Exits: 1000000		LoopDispositions: { %bb3.i.i: Computable }
+  %_5.1.i.i.i.i.i = extractvalue { i64, i1 } %1, 1
+  -->  %_5.1.i.i.i.i.i U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i.i: Variant }
+  %_5.0.i.i.i.i.i = extractvalue { i64, i1 } %1, 0
+  -->  {0,+,1,+,2}<%bb3.i.i> U: full-set S: full-set		Exits: 999998000001		LoopDispositions: { %bb3.i.i: Computable }
+  %2 = load i64, ptr %_0.i.i.i.i.i.i.i, align 8, !noalias !52, !noundef !56
+  -->  %2 U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i.i: Variant }
+  %_4.0.i.i.i.i.i.i = add i64 %2, %accum.sroa.0.09.i.i
+  -->  (%2 + %accum.sroa.0.09.i.i) U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i.i: Variant }
+  %_0.sroa.0.0.i.i3.i.i = phi i64 [ %_4.0.i.i.i.i.i.i, %bb4.i.i.i.i ], [ %accum.sroa.0.09.i.i, %bb3.i.i ]
+  -->  %_0.sroa.0.0.i.i3.i.i U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i.i: Variant }
+  %accum.sroa.0.08.i.i = phi i64 [ %_0.sroa.0.0.i.i.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsjQ8WedNVfna_5probe8original0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2J_3Sum3sumINtB1Q_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB43_EB1d_EB2b_EE0E0E0B1h_.exit.i.i ], [ %_0.sroa.0.0.i.i3.i.i, %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsjQ8WedNVfna_5probe8original0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3i_3Sum3sumINtB2p_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4C_EB1M_EB2K_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i ]
+  -->  %accum.sroa.0.08.i.i U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i5.i: Variant }
+  %self.sroa.0.07.i.i = phi i64 [ %3, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsjQ8WedNVfna_5probe8original0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2J_3Sum3sumINtB1Q_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB43_EB1d_EB2b_EE0E0E0B1h_.exit.i.i ], [ 0, %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsjQ8WedNVfna_5probe8original0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3i_3Sum3sumINtB2p_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4C_EB1M_EB2K_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i ]
+  -->  {0,+,1}<nuw><nsw><%bb3.i5.i> U: [0,1000000) S: [0,1000000)		Exits: 999999		LoopDispositions: { %bb3.i5.i: Computable }
+  %3 = add nuw nsw i64 %self.sroa.0.07.i.i, 1
+  -->  {1,+,1}<nuw><nsw><%bb3.i5.i> U: [1,1000001) S: [1,1000001)		Exits: 1000000		LoopDispositions: { %bb3.i5.i: Computable }
+  %_5.1.i.i.i.i = extractvalue { i64, i1 } %4, 1
+  -->  %_5.1.i.i.i.i U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i5.i: Variant }
+  %_5.0.i.i.i.i = extractvalue { i64, i1 } %4, 0
+  -->  {0,+,1,+,2}<%bb3.i5.i> U: full-set S: full-set		Exits: 999998000001		LoopDispositions: { %bb3.i5.i: Computable }
+  %5 = load i64, ptr %_0.i.i.i.i.i.i, align 8, !noalias !52, !noundef !56
+  -->  %5 U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i5.i: Variant }
+  %_4.0.i.i.i.i.i = add i64 %5, %accum.sroa.0.08.i.i
+  -->  (%5 + %accum.sroa.0.08.i.i) U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i5.i: Variant }
+  %_0.sroa.0.0.i.i.i = phi i64 [ %_4.0.i.i.i.i.i, %bb4.i.i.i ], [ %accum.sroa.0.08.i.i, %bb3.i5.i ]
+  -->  %_0.sroa.0.0.i.i.i U: full-set S: full-set		Exits: <<Unknown>>		LoopDispositions: { %bb3.i5.i: Variant }
+Determining loop execution counts for: @original
+Loop %bb3.i5.i: backedge-taken count is i64 999999
+Loop %bb3.i5.i: constant max backedge-taken count is i64 999999
+Loop %bb3.i5.i: symbolic max backedge-taken count is i64 999999
+Loop %bb3.i5.i: Trip multiple is 1000000
+Loop %bb3.i.i: backedge-taken count is i64 999999
+Loop %bb3.i.i: constant max backedge-taken count is i64 999999
+Loop %bb3.i.i: symbolic max backedge-taken count is i64 999999
+Loop %bb3.i.i: Trip multiple is 1000000
+Printing analysis 'Scalar Evolution Analysis' for function 'original_dynamic':

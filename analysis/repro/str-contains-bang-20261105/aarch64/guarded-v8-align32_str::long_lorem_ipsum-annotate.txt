@@ -1,0 +1,1528 @@
+ Percent |	Source code & Disassembly of bang-benches-v8 for cycles:u (1085 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000011b54 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once>:
+         : 6     <bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once:
+    0.00 :   11b54:  stp     d9, d8, [sp, #-112]!
+    0.00 :   11b58:  stp     x29, x30, [sp, #16]
+    0.00 :   11b5c:  stp     x28, x27, [sp, #32]
+    0.00 :   11b60:  stp     x26, x25, [sp, #48]
+    0.00 :   11b64:  stp     x24, x23, [sp, #64]
+    0.00 :   11b68:  stp     x22, x21, [sp, #80]
+    0.00 :   11b6c:  stp     x20, x19, [sp, #96]
+    0.00 :   11b70:  add     x29, sp, #0x10
+    0.00 :   11b74:  sub     sp, sp, #0x2f0
+    0.00 :   11b78:  adrp    x9, 50000 <_fini+0x1c0c>
+    0.00 :   11b7c:  add     x9, x9, #0x93
+    0.00 :   11b80:  mov     w10, #0x9f7                     // #2551
+    0.00 :   11b84:  stp     x9, x10, [sp, #48]
+    0.00 :   11b88:  add     x9, sp, #0x30
+    0.00 :   11b8c:  add     x23, sp, #0xb0
+    0.00 :   11b90:  str     x9, [sp, #176]
+    0.00 :   11b94:  mov     x19, x8
+    0.00 :   11b98:  ldp     x22, x21, [sp, #48]
+    0.00 :   11b9c:  ldrb    w9, [x0, #128]
+    0.00 :   11ba0:  tbz     w9, #0, 11bd4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x80>
+    0.00 :   11ba4:  bl      d180 <<std::time::Instant>::now@plt>
+    0.00 :   11ba8:  stp     x22, x21, [sp, #176]
+    0.00 :   11bac:  add     x8, sp, #0xb0
+    0.00 :   11bb0:  stur    x0, [x29, #-176]
+    0.00 :   11bb4:  stur    w1, [x29, #-168]
+    0.00 :   11bb8:  ldp     x0, x1, [sp, #176]
+    0.00 :   11bbc:  bl      eea0 <bang_benches_v8::align32_scan64>
+    0.00 :   11bc0:  strb    w0, [sp, #64]
+    0.00 :   11bc4:  add     x8, sp, #0x40
+    0.00 :   11bc8:  sub     x0, x29, #0xb0
+    0.00 :   11bcc:  bl      cbf0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   11bd0:  b       122b4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x760>
+    0.00 :   11bd4:  mov     w20, #0xca00                    // #51712
+    0.00 :   11bd8:  stp     x0, x19, [sp]
+    0.00 :   11bdc:  movk    w20, #0x3b9a, lsl #16
+    0.00 :   11be0:  bl      d180 <<std::time::Instant>::now@plt>
+    0.00 :   11be4:  stp     x22, x21, [sp, #176]
+    0.00 :   11be8:  stur    x0, [x29, #-176]
+    0.00 :   11bec:  stur    w1, [x29, #-168]
+    0.00 :   11bf0:  ldp     x0, x1, [sp, #176]
+    0.00 :   11bf4:  bl      eea0 <bang_benches_v8::align32_scan64>
+    0.00 :   11bf8:  strb    w0, [sp, #64]
+    0.00 :   11bfc:  add     x8, sp, #0x40
+    0.00 :   11c00:  sub     x0, x29, #0xb0
+    0.00 :   11c04:  sub     x25, x29, #0xb0
+    0.00 :   11c08:  bl      cbf0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   11c0c:  mul     x8, x0, x20
+    0.00 :   11c10:  mov     w9, #0x4240                     // #16960
+    0.00 :   11c14:  movi    v0.2d, #0x0
+    0.00 :   11c18:  movk    w9, #0xf, lsl #16
+    0.00 :   11c1c:  fmov    d8, #1.000000000000000000e+00
+    0.00 :   11c20:  sub     x28, x29, #0x28
+    0.00 :   11c24:  sub     x19, x29, #0x40
+    0.00 :   11c28:  str     xzr, [sp, #24]
+    0.00 :   11c2c:  stp     q0, q0, [sp, #192]
+    0.00 :   11c30:  add     x8, x8, w1, uxtw
+    0.00 :   11c34:  stp     q0, q0, [sp, #224]
+    0.00 :   11c38:  stp     q0, q0, [sp, #256]
+    0.00 :   11c3c:  cmp     x8, #0x1
+    0.00 :   11c40:  stp     q0, q0, [sp, #288]
+    0.00 :   11c44:  csinc   x8, x8, xzr, hi // hi = pmore
+    0.00 :   11c48:  stp     q0, q0, [sp, #320]
+    0.00 :   11c4c:  udiv    x8, x9, x8
+    0.00 :   11c50:  sub     w9, w20, #0x1
+    0.00 :   11c54:  stp     q0, q0, [sp, #352]
+    0.00 :   11c58:  stp     w9, wzr, [sp, #16]
+    0.00 :   11c5c:  adrp    x9, 4e000 <compiler_builtins::math::libm_math::support::modular::linear_mul_reduction::<u64>+0xf4>
+    0.00 :   11c60:  sub     x20, x29, #0x2c
+    0.00 :   11c64:  stp     q0, q0, [sp, #384]
+    0.00 :   11c68:  stp     q0, q0, [sp, #416]
+    0.00 :   11c6c:  stp     q0, q0, [sp, #448]
+    0.00 :   11c70:  stp     q0, q0, [sp, #480]
+    0.00 :   11c74:  stp     q0, q0, [sp, #512]
+    0.00 :   11c78:  stp     q0, q0, [sp, #544]
+    0.00 :   11c7c:  str     q0, [sp, #176]
+    0.00 :   11c80:  ldr     q0, [x9, #1040]
+    0.00 :   11c84:  str     q0, [sp, #32]
+    0.00 :   11c88:  cmp     x8, #0x1
+    0.00 :   11c8c:  csinc   x27, x8, xzr, hi        // hi = pmore
+    0.00 :   11c90:  bl      d180 <<std::time::Instant>::now@plt>
+    0.00 :   11c94:  ucvtf   d9, x27
+    0.00 :   11c98:  stur    x0, [x29, #-192]
+    0.00 :   11c9c:  stur    w1, [x29, #-184]
+    0.00 :   11ca0:  cbz     x27, 11ecc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x378>
+    0.00 :   11ca4:  mov     x26, xzr
+    0.00 :   11ca8:  b       11ce0 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x18c>
+    0.00 :   11cac:  sub     x0, x29, #0x28
+    0.00 :   11cb0:  add     x24, x26, #0x8
+    0.00 :   11cb4:  bl      cbf0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   11cb8:  mov     w8, #0xca00                     // #51712
+    0.00 :   11cbc:  cmp     x24, #0x190
+    0.00 :   11cc0:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   11cc4:  mul     x8, x0, x8
+    0.00 :   11cc8:  add     x8, x8, w1, uxtw
+    0.00 :   11ccc:  ucvtf   d0, x8
+    0.00 :   11cd0:  fdiv    d0, d0, d9
+    0.00 :   11cd4:  str     d0, [x23, x26]
+    0.00 :   11cd8:  mov     x26, x24
+    0.00 :   11cdc:  b.eq    11f10 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3bc>  // b.none
+    0.00 :   11ce0:  bl      d180 <<std::time::Instant>::now@plt>
+    0.00 :   11ce4:  movi    v4.16b, #0x21
+    0.00 :   11ce8:  ldr     q5, [sp, #32]
+    0.00 :   11cec:  mov     x8, xzr
+    0.00 :   11cf0:  stur    x0, [x29, #-40]
+    0.00 :   11cf4:  stur    w1, [x29, #-32]
+    0.00 :   11cf8:  b       11d50 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1fc>
+    0.00 :   11cfc:  ldp     q0, q1, [x9]
+    0.00 :   11d00:  cmeq    v1.16b, v1.16b, v4.16b
+    0.00 :   11d04:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   11d08:  and     v1.16b, v1.16b, v5.16b
+    0.00 :   11d0c:  and     v0.16b, v0.16b, v5.16b
+    0.00 :   11d10:  addp    v1.16b, v1.16b, v1.16b
+    0.00 :   11d14:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   11d18:  addp    v1.16b, v1.16b, v1.16b
+    0.00 :   11d1c:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   11d20:  addp    v1.16b, v1.16b, v1.16b
+    0.00 :   11d24:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   11d28:  umov    w11, v1.h[0]
+    0.00 :   11d2c:  umov    w13, v0.h[0]
+    0.00 :   11d30:  orr     w11, w13, w11
+    0.00 :   11d34:  tst     w11, #0xffff
+    0.00 :   11d38:  b.eq    11de4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x290>  // b.none
+    0.00 :   11d3c:  mov     w9, #0x1                        // #1
+    0.00 :   11d40:  sturb   w9, [x29, #-64]
+    0.00 :   11d44:  add     x8, x8, #0x1
+    0.00 :   11d48:  cmp     x8, x27
+    0.00 :   11d4c:  b.eq    11cac <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x158>  // b.none
+    0.00 :   11d50:  stp     x22, x21, [x29, #-176]
+    0.00 :   11d54:  ldp     x9, x10, [x29, #-176]
+    0.00 :   11d58:  cmp     x10, #0x80
+    0.00 :   11d5c:  b.cs    11dd4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x280>  // b.hs, b.nlast
+    0.00 :   11d60:  cmp     x10, #0x40
+    0.00 :   11d64:  b.cs    11e6c <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x318>  // b.hs, b.nlast
+    0.00 :   11d68:  ands    x11, x10, #0x30
+    0.00 :   11d6c:  b.eq    11d98 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x244>  // b.none
+    0.00 :   11d70:  and     x12, x10, #0x30
+    0.00 :   11d74:  mov     x13, x9
+    0.00 :   11d78:  neg     x12, x12
+    0.00 :   11d7c:  ldr     q0, [x13], #16
+    0.00 :   11d80:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   11d84:  addp    d0, v0.2d
+    0.00 :   11d88:  fmov    x14, d0
+    0.00 :   11d8c:  cbnz    x14, 11d3c <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1e8>
+    0.00 :   11d90:  adds    x12, x12, #0x10
+    0.00 :   11d94:  b.ne    11d7c <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x228>  // b.any
+    0.00 :   11d98:  and     x12, x10, #0xf
+    0.00 :   11d9c:  cmp     x12, #0x0
+    0.00 :   11da0:  ccmp    x10, #0x10, #0x0, ne    // ne = any
+    0.00 :   11da4:  b.cs    11eac <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x358>  // b.hs, b.nlast
+    0.00 :   11da8:  cbz     x12, 11ea4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x350>
+    0.00 :   11dac:  add     x10, x9, x11
+    0.00 :   11db0:  sub     x11, x12, #0x1
+    0.00 :   11db4:  ldrb    w9, [x10], #1
+    0.00 :   11db8:  cmp     w9, #0x21
+    0.00 :   11dbc:  cset    w9, eq  // eq = none
+    0.00 :   11dc0:  b.eq    11d40 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1ec>  // b.none
+    0.00 :   11dc4:  mov     x12, x11
+    0.00 :   11dc8:  sub     x11, x11, #0x1
+    0.00 :   11dcc:  cbnz    x12, 11db4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x260>
+    0.00 :   11dd0:  b       11d40 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1ec>
+    0.00 :   11dd4:  add     x11, x9, #0x1f
+    0.00 :   11dd8:  and     x11, x11, #0xffffffffffffffe0
+    0.00 :   11ddc:  subs    x12, x11, x9
+    0.00 :   11de0:  b.ne    11cfc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1a8>  // b.any
+    0.83 :   11de4:  sub     x11, x10, x12
+    0.00 :   11de8:  tst     x11, #0xffffffffffffffc0
+    0.00 :   11dec:  b.eq    11e38 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2e4>  // b.none
+    0.00 :   11df0:  and     x13, x11, #0xffffffffffffffc0
+    0.00 :   11df4:  add     x12, x9, x12
+    0.00 :   11df8:  neg     x13, x13
+    0.09 :   11dfc:  ldp     q0, q1, [x12]
+    0.00 :   11e00:  ldp     q2, q3, [x12, #32]
+    0.00 :   11e04:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   11e08:  cmeq    v1.16b, v1.16b, v4.16b
+    0.00 :   11e0c:  cmeq    v2.16b, v2.16b, v4.16b
+    0.00 :   11e10:  cmeq    v3.16b, v3.16b, v4.16b
+    0.00 :   11e14:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   11e18:  orr     v1.16b, v2.16b, v3.16b
+    0.00 :   11e1c:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   11e20:  addp    d0, v0.2d
+    0.00 :   11e24:  fmov    x14, d0
+    0.00 :   11e28:  cbnz    x14, 11d3c <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1e8>
+   14.56 :   11e2c:  adds    x13, x13, #0x40
+    0.00 :   11e30:  add     x12, x12, #0x40
+    0.00 :   11e34:  b.ne    11dfc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2a8>  // b.any
+    0.00 :   11e38:  and     x11, x11, #0x3f
+    0.00 :   11e3c:  cbz     x11, 11ea4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x350>
+    0.00 :   11e40:  add     x9, x9, x10
+    0.00 :   11e44:  ldp     q0, q1, [x9, #-64]
+    0.00 :   11e48:  ldp     q2, q3, [x9, #-32]
+    0.00 :   11e4c:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   11e50:  cmeq    v1.16b, v1.16b, v4.16b
+    0.00 :   11e54:  cmeq    v2.16b, v2.16b, v4.16b
+    0.00 :   11e58:  cmeq    v3.16b, v3.16b, v4.16b
+    0.00 :   11e5c:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   11e60:  orr     v1.16b, v2.16b, v3.16b
+    0.00 :   11e64:  orr     v0.16b, v0.16b, v1.16b
+    0.09 :   11e68:  b       11eb8 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x364>
+    0.00 :   11e6c:  ldp     q0, q1, [x9]
+    0.00 :   11e70:  ldp     q2, q3, [x9, #32]
+    0.00 :   11e74:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   11e78:  cmeq    v1.16b, v1.16b, v4.16b
+    0.00 :   11e7c:  cmeq    v2.16b, v2.16b, v4.16b
+    0.00 :   11e80:  cmeq    v3.16b, v3.16b, v4.16b
+    0.00 :   11e84:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   11e88:  orr     v1.16b, v2.16b, v3.16b
+    0.00 :   11e8c:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   11e90:  addp    d0, v0.2d
+    0.00 :   11e94:  fmov    x11, d0
+    0.00 :   11e98:  cbnz    x11, 11d3c <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1e8>
+    0.00 :   11e9c:  tst     x10, #0x3f
+    0.00 :   11ea0:  b.ne    11e40 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2ec>  // b.any
+    0.00 :   11ea4:  mov     w9, wzr
+    0.00 :   11ea8:  b       11d40 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1ec>
+    0.00 :   11eac:  add     x9, x9, x10
+    0.00 :   11eb0:  ldur    q0, [x9, #-16]
+    0.00 :   11eb4:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   11eb8:  addp    d0, v0.2d
+    0.00 :   11ebc:  fmov    x9, d0
+    0.00 :   11ec0:  cmp     x9, #0x0
+    0.00 :   11ec4:  cset    w9, ne  // ne = any
+    0.00 :   11ec8:  b       11d40 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1ec>
+    0.00 :   11ecc:  mov     x24, xzr
+    0.00 :   11ed0:  mov     x26, x24
+    0.00 :   11ed4:  add     x24, x24, #0x8
+    0.00 :   11ed8:  bl      d180 <<std::time::Instant>::now@plt>
+    0.00 :   11edc:  stur    x0, [x29, #-40]
+    0.00 :   11ee0:  sub     x0, x29, #0x28
+    0.00 :   11ee4:  stur    w1, [x29, #-32]
+    0.00 :   11ee8:  bl      cbf0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   11eec:  mov     w8, #0xca00                     // #51712
+    0.00 :   11ef0:  cmp     x24, #0x190
+    0.00 :   11ef4:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   11ef8:  mul     x8, x0, x8
+    0.00 :   11efc:  add     x8, x8, w1, uxtw
+    0.00 :   11f00:  ucvtf   d0, x8
+    0.00 :   11f04:  fdiv    d0, d0, d9
+    0.00 :   11f08:  str     d0, [x23, x26]
+    0.00 :   11f0c:  b.ne    11ed0 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x37c>  // b.any
+    0.00 :   11f10:  fmov    d0, #5.000000000000000000e+00
+    0.00 :   11f14:  add     x0, sp, #0xb0
+    0.00 :   11f18:  mov     w1, #0x32                       // #50
+    0.00 :   11f1c:  bl      34f80 <test::stats::winsorize>
+    0.00 :   11f20:  sub     x8, x29, #0xb0
+    0.00 :   11f24:  add     x0, sp, #0xb0
+    0.00 :   11f28:  mov     w1, #0x32                       // #50
+    0.00 :   11f2c:  bl      28a2c <<test::stats::Summary>::new>
+    0.00 :   11f30:  add     x26, x27, x27, lsl #2
+    0.00 :   11f34:  mov     x23, xzr
+    0.00 :   11f38:  ucvtf   d9, x26
+    0.00 :   11f3c:  b       11f78 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x424>
+    0.00 :   11f40:  sub     x0, x29, #0x40
+    0.00 :   11f44:  add     x24, x23, #0x8
+    0.00 :   11f48:  bl      cbf0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   11f4c:  mov     w8, #0xca00                     // #51712
+    0.00 :   11f50:  cmp     x24, #0x190
+    0.00 :   11f54:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   11f58:  mul     x8, x0, x8
+    0.00 :   11f5c:  add     x8, x8, w1, uxtw
+    0.00 :   11f60:  ucvtf   d0, x8
+    0.00 :   11f64:  add     x8, sp, #0xb0
+    0.00 :   11f68:  fdiv    d0, d0, d9
+    0.00 :   11f6c:  str     d0, [x8, x23]
+    0.00 :   11f70:  mov     x23, x24
+    0.00 :   11f74:  b.eq    12168 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x614>  // b.none
+    0.00 :   11f78:  bl      d180 <<std::time::Instant>::now@plt>
+    0.00 :   11f7c:  movi    v4.16b, #0x21
+    0.00 :   11f80:  ldr     q5, [sp, #32]
+    0.00 :   11f84:  stur    x0, [x29, #-64]
+    0.00 :   11f88:  stur    w1, [x29, #-56]
+    0.00 :   11f8c:  cbz     x27, 11f40 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3ec>
+    0.00 :   11f90:  mov     x8, xzr
+    0.00 :   11f94:  b       11fec <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x498>
+    0.00 :   11f98:  ldp     q0, q1, [x9]
+    0.00 :   11f9c:  cmeq    v1.16b, v1.16b, v4.16b
+    0.00 :   11fa0:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   11fa4:  and     v1.16b, v1.16b, v5.16b
+    1.01 :   11fa8:  and     v0.16b, v0.16b, v5.16b
+    0.00 :   11fac:  addp    v1.16b, v1.16b, v1.16b
+    0.00 :   11fb0:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   11fb4:  addp    v1.16b, v1.16b, v1.16b
+    0.00 :   11fb8:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   11fbc:  addp    v1.16b, v1.16b, v1.16b
+    0.00 :   11fc0:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   11fc4:  umov    w11, v1.h[0]
+    0.00 :   11fc8:  umov    w13, v0.h[0]
+    0.00 :   11fcc:  orr     w11, w13, w11
+    0.00 :   11fd0:  tst     w11, #0xffff
+    0.00 :   11fd4:  b.eq    12080 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x52c>  // b.none
+    0.00 :   11fd8:  mov     w9, #0x1                        // #1
+    0.00 :   11fdc:  sturb   w9, [x29, #-44]
+    0.00 :   11fe0:  add     x8, x8, #0x1
+    0.00 :   11fe4:  cmp     x8, x26
+    0.00 :   11fe8:  b.eq    11f40 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3ec>  // b.none
+    0.00 :   11fec:  stp     x22, x21, [x29, #-40]
+    0.00 :   11ff0:  ldp     x9, x10, [x29, #-40]
+    0.00 :   11ff4:  cmp     x10, #0x80
+    0.00 :   11ff8:  b.cs    12070 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x51c>  // b.hs, b.nlast
+    0.00 :   11ffc:  cmp     x10, #0x40
+    0.00 :   12000:  b.cs    12108 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x5b4>  // b.hs, b.nlast
+    0.00 :   12004:  ands    x11, x10, #0x30
+    0.00 :   12008:  b.eq    12034 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4e0>  // b.none
+    0.00 :   1200c:  and     x12, x10, #0x30
+    0.00 :   12010:  mov     x13, x9
+    0.00 :   12014:  neg     x12, x12
+    0.00 :   12018:  ldr     q0, [x13], #16
+    0.00 :   1201c:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   12020:  addp    d0, v0.2d
+    0.00 :   12024:  fmov    x14, d0
+    0.00 :   12028:  cbnz    x14, 11fd8 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x484>
+    0.00 :   1202c:  adds    x12, x12, #0x10
+    0.00 :   12030:  b.ne    12018 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4c4>  // b.any
+    0.00 :   12034:  and     x12, x10, #0xf
+    0.00 :   12038:  cmp     x12, #0x0
+    0.00 :   1203c:  ccmp    x10, #0x10, #0x0, ne    // ne = any
+    0.00 :   12040:  b.cs    12148 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x5f4>  // b.hs, b.nlast
+    0.00 :   12044:  cbz     x12, 12140 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x5ec>
+    0.00 :   12048:  add     x10, x9, x11
+    0.00 :   1204c:  sub     x11, x12, #0x1
+    0.00 :   12050:  ldrb    w9, [x10], #1
+    0.00 :   12054:  cmp     w9, #0x21
+    0.00 :   12058:  cset    w9, eq  // eq = none
+    0.00 :   1205c:  b.eq    11fdc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x488>  // b.none
+    0.00 :   12060:  mov     x12, x11
+    0.00 :   12064:  sub     x11, x11, #0x1
+    0.00 :   12068:  cbnz    x12, 12050 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4fc>
+    0.00 :   1206c:  b       11fdc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x488>
+    0.65 :   12070:  add     x11, x9, #0x1f
+    0.00 :   12074:  and     x11, x11, #0xffffffffffffffe0
+    0.00 :   12078:  subs    x12, x11, x9
+    0.00 :   1207c:  b.ne    11f98 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x444>  // b.any
+    9.12 :   12080:  sub     x11, x10, x12
+    0.00 :   12084:  tst     x11, #0xffffffffffffffc0
+    0.00 :   12088:  b.eq    120d4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x580>  // b.none
+    0.00 :   1208c:  and     x13, x11, #0xffffffffffffffc0
+    0.00 :   12090:  add     x12, x9, x12
+    0.00 :   12094:  neg     x13, x13
+    1.01 :   12098:  ldp     q0, q1, [x12]
+    0.00 :   1209c:  ldp     q2, q3, [x12, #32]
+    0.00 :   120a0:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   120a4:  cmeq    v1.16b, v1.16b, v4.16b
+    0.00 :   120a8:  cmeq    v2.16b, v2.16b, v4.16b
+    0.00 :   120ac:  cmeq    v3.16b, v3.16b, v4.16b
+    0.00 :   120b0:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   120b4:  orr     v1.16b, v2.16b, v3.16b
+    0.00 :   120b8:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   120bc:  addp    d0, v0.2d
+    0.00 :   120c0:  fmov    x14, d0
+    0.00 :   120c4:  cbnz    x14, 11fd8 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x484>
+   72.26 :   120c8:  adds    x13, x13, #0x40
+    0.00 :   120cc:  add     x12, x12, #0x40
+    0.00 :   120d0:  b.ne    12098 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x544>  // b.any
+    0.00 :   120d4:  and     x11, x11, #0x3f
+    0.00 :   120d8:  cbz     x11, 12140 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x5ec>
+    0.00 :   120dc:  add     x9, x9, x10
+    0.00 :   120e0:  ldp     q0, q1, [x9, #-64]
+    0.00 :   120e4:  ldp     q2, q3, [x9, #-32]
+    0.00 :   120e8:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   120ec:  cmeq    v1.16b, v1.16b, v4.16b
+    0.00 :   120f0:  cmeq    v2.16b, v2.16b, v4.16b
+    0.00 :   120f4:  cmeq    v3.16b, v3.16b, v4.16b
+    0.00 :   120f8:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   120fc:  orr     v1.16b, v2.16b, v3.16b
+    0.00 :   12100:  orr     v0.16b, v0.16b, v1.16b
+    0.37 :   12104:  b       12154 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x600>
+    0.00 :   12108:  ldp     q0, q1, [x9]
+    0.00 :   1210c:  ldp     q2, q3, [x9, #32]
+    0.00 :   12110:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   12114:  cmeq    v1.16b, v1.16b, v4.16b
+    0.00 :   12118:  cmeq    v2.16b, v2.16b, v4.16b
+    0.00 :   1211c:  cmeq    v3.16b, v3.16b, v4.16b
+    0.00 :   12120:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   12124:  orr     v1.16b, v2.16b, v3.16b
+    0.00 :   12128:  orr     v0.16b, v0.16b, v1.16b
+    0.00 :   1212c:  addp    d0, v0.2d
+    0.00 :   12130:  fmov    x11, d0
+    0.00 :   12134:  cbnz    x11, 11fd8 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x484>
+    0.00 :   12138:  tst     x10, #0x3f
+    0.00 :   1213c:  b.ne    120dc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x588>  // b.any
+    0.00 :   12140:  mov     w9, wzr
+    0.00 :   12144:  b       11fdc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x488>
+    0.00 :   12148:  add     x9, x9, x10
+    0.00 :   1214c:  ldur    q0, [x9, #-16]
+    0.00 :   12150:  cmeq    v0.16b, v0.16b, v4.16b
+    0.00 :   12154:  addp    d0, v0.2d
+    0.00 :   12158:  fmov    x9, d0
+    0.00 :   1215c:  cmp     x9, #0x0
+    0.00 :   12160:  cset    w9, ne  // ne = any
+    0.00 :   12164:  b       11fdc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x488>
+    0.00 :   12168:  fmov    d0, #5.000000000000000000e+00
+    0.00 :   1216c:  add     x0, sp, #0xb0
+    0.00 :   12170:  mov     w1, #0x32                       // #50
+    0.00 :   12174:  bl      34f80 <test::stats::winsorize>
+    0.00 :   12178:  add     x8, sp, #0x40
+    0.00 :   1217c:  add     x0, sp, #0xb0
+    0.00 :   12180:  mov     w1, #0x32                       // #50
+    0.00 :   12184:  bl      28a2c <<test::stats::Summary>::new>
+    0.00 :   12188:  sub     x0, x29, #0xc0
+    0.00 :   1218c:  bl      cbf0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   12190:  mov     w8, #0xe100                     // #57600
+    0.00 :   12194:  ldr     x10, [sp, #24]
+    0.00 :   12198:  ldr     w11, [sp, #20]
+    0.00 :   1219c:  movk    w8, #0x5f5, lsl #16
+    0.00 :   121a0:  add     x23, sp, #0xb0
+    0.00 :   121a4:  cmp     w1, w8
+    0.00 :   121a8:  cset    w8, hi  // hi = pmore
+    0.00 :   121ac:  cmp     x0, #0x0
+    0.00 :   121b0:  cset    w9, ne  // ne = any
+    0.00 :   121b4:  csel    w8, w8, w9, eq  // eq = none
+    0.00 :   121b8:  cbz     w8, 121e0 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x68c>
+    0.00 :   121bc:  ldur    d0, [x29, #-104]
+    0.00 :   121c0:  fcmp    d0, d8
+    0.00 :   121c4:  b.pl    121e0 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x68c>  // b.nfrst
+    0.00 :   121c8:  ldur    d0, [x29, #-144]
+    0.00 :   121cc:  ldr     d1, [sp, #96]
+    0.00 :   121d0:  ldr     d2, [sp, #128]
+    0.00 :   121d4:  fsub    d0, d0, d1
+    0.00 :   121d8:  fcmp    d0, d2
+    0.00 :   121dc:  b.mi    1225c <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x708>  // b.first
+    0.00 :   121e0:  adds    x10, x0, x10
+    0.00 :   121e4:  b.cs    122e0 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x78c>  // b.hs, b.nlast
+    0.00 :   121e8:  ldr     w8, [sp, #16]
+    0.00 :   121ec:  add     w11, w1, w11
+    0.00 :   121f0:  cmp     w11, w8
+    0.00 :   121f4:  b.ls    12210 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x6bc>  // b.plast
+    0.00 :   121f8:  cmn     x10, #0x1
+    0.00 :   121fc:  b.eq    122e0 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x78c>  // b.none
+    0.00 :   12200:  mov     w8, #0x3600                     // #13824
+    0.00 :   12204:  add     x10, x10, #0x1
+    0.00 :   12208:  movk    w8, #0xc465, lsl #16
+    0.00 :   1220c:  add     w11, w11, w8
+    0.00 :   12210:  cmp     w11, #0x0
+    0.00 :   12214:  cset    w8, ne  // ne = any
+    0.00 :   12218:  cmp     x10, #0x3
+    0.00 :   1221c:  cset    w9, hi  // hi = pmore
+    0.00 :   12220:  csel    w8, w8, w9, eq  // eq = none
+    0.00 :   12224:  tbnz    w8, #0, 1225c <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x708>
+    0.00 :   12228:  mov     x8, #0x9999999999999999         // #-7378697629483820647
+    0.00 :   1222c:  movk    x8, #0x1999, lsl #48
+    0.00 :   12230:  cmp     x27, x8
+    0.00 :   12234:  b.hi    1225c <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x708>  // b.pmore
+    0.00 :   12238:  str     w11, [sp, #20]
+    0.00 :   1223c:  lsl     x27, x27, #1
+    0.00 :   12240:  str     x10, [sp, #24]
+    0.00 :   12244:  bl      d180 <<std::time::Instant>::now@plt>
+    0.00 :   12248:  ucvtf   d9, x27
+    0.00 :   1224c:  stur    x0, [x29, #-192]
+    0.00 :   12250:  stur    w1, [x29, #-184]
+    0.00 :   12254:  cbnz    x27, 11ca4 <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x150>
+    0.00 :   12258:  b       11ecc <<bang_benches_v8::str::align32_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x378>
+    0.00 :   1225c:  ldp     q0, q1, [sp, #128]
+    0.00 :   12260:  mov     w8, #0x1                        // #1
+    0.00 :   12264:  ldr     q2, [sp, #160]
+    0.00 :   12268:  ldp     x9, x19, [sp]
+    0.00 :   1226c:  stp     q0, q1, [sp, #240]
+    0.00 :   12270:  ldp     q0, q1, [sp, #64]
+    0.00 :   12274:  str     q2, [sp, #272]
+    0.00 :   12278:  str     x8, [x9]
+    0.00 :   1227c:  stp     q0, q1, [sp, #176]
+    0.00 :   12280:  ldp     q2, q0, [sp, #96]
+    0.00 :   12284:  stp     q2, q0, [sp, #208]
+    0.00 :   12288:  ldp     q1, q0, [sp, #240]
+    0.00 :   1228c:  stur    q1, [x9, #72]
+    0.00 :   12290:  ldr     q1, [sp, #272]
+    0.00 :   12294:  stur    q0, [x9, #88]
+    0.00 :   12298:  stur    q1, [x9, #104]
+    0.00 :   1229c:  ldp     q0, q1, [sp, #176]
+    0.00 :   122a0:  stur    q0, [x9, #8]
+    0.00 :   122a4:  stur    q1, [x9, #24]
+    0.00 :   122a8:  ldp     q0, q1, [sp, #208]
+    0.00 :   122ac:  stur    q0, [x9, #40]
+    0.00 :   122b0:  stur    q1, [x9, #56]
+    0.00 :   122b4:  mov     x8, #0xffffffffffffffff         // #-1
+    0.00 :   122b8:  str     x8, [x19]
+    0.00 :   122bc:  add     sp, sp, #0x2f0
+    0.00 :   122c0:  ldp     x20, x19, [sp, #96]
+    0.00 :   122c4:  ldp     x22, x21, [sp, #80]
+    0.00 :   122c8:  ldp     x24, x23, [sp, #64]
+    0.00 :   122cc:  ldp     x26, x25, [sp, #48]
+    0.00 :   122d0:  ldp     x28, x27, [sp, #32]
+    0.00 :   122d4:  ldp     x29, x30, [sp, #16]
+    0.00 :   122d8:  ldp     d9, d8, [sp], #112
+    0.00 :   122dc:  ret
+    0.00 :   122e0:  adrp    x0, 4e000 <compiler_builtins::math::libm_math::support::modular::linear_mul_reduction::<u64>+0xf4>
+    0.00 :   122e4:  add     x0, x0, #0x710
+    0.00 :   122e8:  adrp    x2, 69000 <GCC_except_table8+0x9068>
+    0.00 :   122ec:  add     x2, x2, #0x648
+    0.00 :   122f0:  mov     w1, #0x2b                       // #43
+    0.00 :   122f4:  bl      cf00 <core::option::expect_failed@plt>
+ Percent |	Source code & Disassembly of bang-benches-v8 for cycles:u (1 samples, percent: local period)
+------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000019210 <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>>:
+         : 6     core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>:
+  100.00 :   19210:  stp     x29, x30, [sp, #-64]!
+    0.00 :   19214:  str     x23, [sp, #16]
+    0.00 :   19218:  stp     x22, x21, [sp, #32]
+    0.00 :   1921c:  stp     x20, x19, [sp, #48]
+    0.00 :   19220:  mov     x29, sp
+    0.00 :   19224:  ldp     x19, x8, [x0, #8]
+    0.00 :   19228:  mov     x20, x0
+    0.00 :   1922c:  cbz     x8, 19270 <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>+0x60>
+    0.00 :   19230:  mov     w9, #0x1                        // #1
+    0.00 :   19234:  mov     x22, xzr
+    0.00 :   19238:  sub     x21, x9, x8
+    0.00 :   1923c:  add     x8, x19, x22
+    0.00 :   19240:  ldr     x1, [x8, #24]
+    0.00 :   19244:  cmp     x1, #0x1
+    0.00 :   19248:  b.lt    19258 <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>+0x48>  // b.tstop
+    0.00 :   1924c:  ldr     x0, [x8, #32]
+    0.00 :   19250:  mov     w2, #0x1                        // #1
+    0.00 :   19254:  bl      cf50 <__rustc::__rust_dealloc@plt>
+    0.00 :   19258:  add     x0, x19, x22
+    0.00 :   1925c:  bl      19210 <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>>
+    0.00 :   19260:  add     x21, x21, #0x1
+    0.00 :   19264:  add     x22, x22, #0x38
+    0.00 :   19268:  cmp     x21, #0x1
+    0.00 :   1926c:  b.ne    1923c <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>+0x2c>  // b.any
+    0.00 :   19270:  ldr     x8, [x20]
+    0.00 :   19274:  cbz     x8, 1929c <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>+0x8c>
+    0.00 :   19278:  lsl     x9, x8, #6
+    0.00 :   1927c:  mov     x0, x19
+    0.00 :   19280:  sub     x1, x9, x8, lsl #3
+    0.00 :   19284:  mov     w2, #0x8                        // #8
+    0.00 :   19288:  ldp     x20, x19, [sp, #48]
+    0.00 :   1928c:  ldr     x23, [sp, #16]
+    0.00 :   19290:  ldp     x22, x21, [sp, #32]
+    0.00 :   19294:  ldp     x29, x30, [sp], #64
+    0.00 :   19298:  b       cf50 <__rustc::__rust_dealloc@plt>
+    0.00 :   1929c:  ldp     x20, x19, [sp, #48]
+    0.00 :   192a0:  ldr     x23, [sp, #16]
+    0.00 :   192a4:  ldp     x22, x21, [sp, #32]
+    0.00 :   192a8:  ldp     x29, x30, [sp], #64
+    0.00 :   192ac:  ret
+    0.00 :   192b0:  mov     x9, x21
+    0.00 :   192b4:  mov     x21, x0
+    0.00 :   192b8:  cbz     x9, 192e0 <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>+0xd0>
+    0.00 :   192bc:  mov     x8, x9
+    0.00 :   192c0:  add     x9, x19, x22
+    0.00 :   192c4:  add     x22, x9, #0x38
+    0.00 :   192c8:  neg     x23, x8
+    0.00 :   192cc:  mov     x0, x22
+    0.00 :   192d0:  bl      1bc14 <core::ptr::drop_glue::<getopts::Opt>>
+    0.00 :   192d4:  subs    x23, x23, #0x1
+    0.00 :   192d8:  add     x22, x22, #0x38
+    0.00 :   192dc:  b.ne    192cc <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>+0xbc>  // b.any
+    0.00 :   192e0:  ldr     x8, [x20]
+    0.00 :   192e4:  cbz     x8, 192fc <core::ptr::drop_glue::<alloc::vec::Vec<getopts::Opt>>+0xec>
+    0.00 :   192e8:  lsl     x9, x8, #6
+    0.00 :   192ec:  mov     x0, x19
+    0.00 :   192f0:  mov     w2, #0x8                        // #8
+    0.00 :   192f4:  sub     x1, x9, x8, lsl #3
+    0.00 :   192f8:  bl      cf50 <__rustc::__rust_dealloc@plt>
+    0.00 :   192fc:  mov     x0, x21
+    0.00 :   19300:  bl      d2a0 <_Unwind_Resume@plt>
+    0.00 :   19304:  bl      cef0 <core::panicking::panic_in_cleanup@plt>
+ Percent |	Source code & Disassembly of bang-benches-v8 for cycles:u (1 samples, percent: local period)
+------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001fa78 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>>:
+         : 6     core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>:
+    0.00 :   1fa78:  stp     x29, x30, [sp, #-96]!
+    0.00 :   1fa7c:  stp     x28, x27, [sp, #16]
+    0.00 :   1fa80:  stp     x26, x25, [sp, #32]
+    0.00 :   1fa84:  stp     x24, x23, [sp, #48]
+    0.00 :   1fa88:  stp     x22, x21, [sp, #64]
+    0.00 :   1fa8c:  stp     x20, x19, [sp, #80]
+    0.00 :   1fa90:  mov     x29, sp
+    0.00 :   1fa94:  sub     sp, sp, #0x2e0
+    0.00 :   1fa98:  cmp     x1, #0x2
+    0.00 :   1fa9c:  str     w4, [sp, #28]
+    0.00 :   1faa0:  b.cc    1ffbc <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x544>  // b.lo, b.ul, b.last
+    0.00 :   1faa4:  mov     x8, #0x4000000000000000         // #4611686018427387904
+    0.00 :   1faa8:  mov     x26, x5
+    0.00 :   1faac:  mov     x19, x1
+    0.00 :   1fab0:  udiv    x9, x8, x1
+    0.00 :   1fab4:  mov     x23, x0
+    0.00 :   1fab8:  str     x3, [sp, #120]
+    0.00 :   1fabc:  str     x2, [sp, #104]
+    0.00 :   1fac0:  mul     x10, x9, x1
+    0.00 :   1fac4:  cmp     x10, x8
+    0.00 :   1fac8:  cinc    x8, x9, ne      // ne = any
+    0.00 :   1facc:  cmp     x1, #0x1, lsl #12
+    0.00 :   1fad0:  str     x8, [sp, #32]
+    0.00 :   1fad4:  b.hi    1faf0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x78>  // b.pmore
+    0.00 :   1fad8:  sub     x8, x19, x19, lsr #1
+    0.00 :   1fadc:  mov     w9, #0x40                       // #64
+    0.00 :   1fae0:  cmp     x8, #0x40
+    0.00 :   1fae4:  csel    x8, x8, x9, cc  // cc = lo, ul, last
+    0.00 :   1fae8:  str     x8, [sp, #56]
+    0.00 :   1faec:  b       1fb00 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x88>
+    0.00 :   1faf0:  mov     x0, x19
+    0.00 :   1faf4:  bl      ce10 <core::slice::sort::stable::drift::sqrt_approx@plt>
+    0.00 :   1faf8:  ldr     x3, [sp, #120]
+    0.00 :   1fafc:  str     x0, [sp, #56]
+    0.00 :   1fb00:  add     x9, x23, #0x10
+    0.00 :   1fb04:  sub     x8, x23, #0x10
+    0.00 :   1fb08:  mov     x22, xzr
+    0.00 :   1fb0c:  mov     x25, xzr
+    0.00 :   1fb10:  stp     x8, x9, [sp, #8]
+    0.00 :   1fb14:  sub     x8, x23, #0x8
+    0.00 :   1fb18:  mov     w24, #0x1                       // #1
+    0.00 :   1fb1c:  stp     x19, x8, [sp, #40]
+    0.00 :   1fb20:  stp     x23, x26, [sp, #80]
+    0.00 :   1fb24:  subs    x9, x19, xzr
+    0.00 :   1fb28:  b.ls    1fb80 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x108>  // b.plast
+    0.00 :   1fb2c:  ldr     x8, [sp, #56]
+    0.00 :   1fb30:  add     x0, x23, x22, lsl #3
+    0.00 :   1fb34:  cmp     x9, x8
+    0.00 :   1fb38:  b.cs    1fb94 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x11c>  // b.hs, b.nlast
+    0.00 :   1fb3c:  ldr     w8, [sp, #28]
+    0.00 :   1fb40:  tbz     w8, #0, 1fbac <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x134>
+    0.00 :   1fb44:  cmp     x9, #0x20
+    0.00 :   1fb48:  mov     w8, #0x20                       // #32
+    0.00 :   1fb4c:  ldr     x2, [sp, #104]
+    0.00 :   1fb50:  csel    x26, x9, x8, cc // cc = lo, ul, last
+    0.00 :   1fb54:  ldr     x3, [sp, #120]
+    0.00 :   1fb58:  ldr     x6, [sp, #88]
+    0.00 :   1fb5c:  mov     x1, x26
+    0.00 :   1fb60:  mov     w4, wzr
+    0.00 :   1fb64:  mov     x5, xzr
+    0.00 :   1fb68:  bl      20888 <core::slice::sort::stable::quicksort::quicksort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>>
+    0.00 :   1fb6c:  mov     w8, #0x1                        // #1
+    0.00 :   1fb70:  ldr     x3, [sp, #120]
+    0.00 :   1fb74:  orr     x11, x8, x26, lsl #1
+    0.00 :   1fb78:  ldr     x26, [sp, #88]
+    0.00 :   1fb7c:  b       1fbbc <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x144>
+    0.00 :   1fb80:  mov     w10, wzr
+    0.00 :   1fb84:  mov     w11, #0x1                       // #1
+    0.00 :   1fb88:  cmp     x25, #0x2
+    0.00 :   1fb8c:  b.cs    1fbe4 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x16c>  // b.hs, b.nlast
+    0.00 :   1fb90:  b       1fde0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x368>
+    0.00 :   1fb94:  cmp     x9, #0x2
+    0.00 :   1fb98:  b.cs    1fe10 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x398>  // b.hs, b.nlast
+    0.00 :   1fb9c:  mov     x8, x9
+    0.00 :   1fba0:  mov     w9, #0x1                        // #1
+    0.00 :   1fba4:  orr     x11, x9, x8, lsl #1
+    0.00 :   1fba8:  b       1fbbc <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x144>
+    0.00 :   1fbac:  ldr     x8, [sp, #56]
+    0.00 :   1fbb0:  cmp     x8, x9
+    0.00 :   1fbb4:  csel    x8, x8, x9, cc  // cc = lo, ul, last
+    0.00 :   1fbb8:  lsl     x11, x8, #1
+    0.00 :   1fbbc:  lsl     x8, x22, #1
+    0.00 :   1fbc0:  ldr     x10, [sp, #32]
+    0.00 :   1fbc4:  sub     x9, x8, x24, lsr #1
+    0.00 :   1fbc8:  add     x8, x8, x11, lsr #1
+    0.00 :   1fbcc:  mul     x9, x9, x10
+    0.00 :   1fbd0:  mul     x8, x8, x10
+    0.00 :   1fbd4:  eor     x8, x8, x9
+    0.00 :   1fbd8:  clz     x10, x8
+    0.00 :   1fbdc:  cmp     x25, #0x2
+    0.00 :   1fbe0:  b.cc    1fde0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x368>  // b.lo, b.ul, b.last
+    0.00 :   1fbe4:  lsl     x8, x22, #3
+    0.00 :   1fbe8:  ldr     x9, [sp, #48]
+    0.00 :   1fbec:  str     x10, [sp, #112]
+    0.00 :   1fbf0:  str     x22, [sp, #96]
+    0.00 :   1fbf4:  add     x19, x23, x8
+    0.00 :   1fbf8:  add     x8, x9, x8
+    0.00 :   1fbfc:  stp     x8, x11, [sp, #64]
+    0.00 :   1fc00:  b       1fc30 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x1b8>
+    0.00 :   1fc04:  ldr     x23, [sp, #80]
+    0.00 :   1fc08:  sub     x2, x8, x1
+    0.00 :   1fc0c:  mov     x0, x22
+    0.00 :   1fc10:  bl      ca90 <memcpy@plt>
+    0.00 :   1fc14:  ldp     x10, x3, [sp, #112]
+    0.00 :   1fc18:  ldr     x26, [sp, #88]
+    0.00 :   1fc1c:  mov     w8, #0x1                        // #1
+    0.00 :   1fc20:  ldr     x22, [sp, #96]
+    0.00 :   1fc24:  orr     x24, x8, x20, lsl #1
+    0.00 :   1fc28:  cmp     x21, #0x1
+    0.00 :   1fc2c:  b.ls    1fdd4 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x35c>  // b.plast
+    0.00 :   1fc30:  sub     x21, x25, #0x1
+    0.00 :   1fc34:  sub     x8, x29, #0x4a
+    0.00 :   1fc38:  ldrb    w8, [x8, x21]
+    0.00 :   1fc3c:  cmp     w8, w10
+    0.00 :   1fc40:  b.cc    1fdd8 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x360>  // b.lo, b.ul, b.last
+    0.00 :   1fc44:  add     x8, sp, #0x80
+    0.00 :   1fc48:  lsr     x28, x24, #1
+    0.00 :   1fc4c:  mov     x25, x21
+    0.00 :   1fc50:  ldr     x8, [x8, x21, lsl #3]
+    0.00 :   1fc54:  lsr     x27, x8, #1
+    0.00 :   1fc58:  add     x20, x27, x28
+    0.00 :   1fc5c:  cmp     x20, x3
+    0.00 :   1fc60:  b.hi    1fc7c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x204>  // b.pmore
+    0.00 :   1fc64:  orr     w9, w8, w24
+    0.00 :   1fc68:  tbnz    w9, #0, 1fc7c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x204>
+    0.00 :   1fc6c:  lsl     x24, x20, #1
+    0.00 :   1fc70:  cmp     x21, #0x1
+    0.00 :   1fc74:  b.hi    1fc30 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x1b8>  // b.pmore
+    0.00 :   1fc78:  b       1fdd4 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x35c>
+    0.00 :   1fc7c:  sub     x9, x22, x20
+    0.00 :   1fc80:  add     x22, x23, x9, lsl #3
+    0.00 :   1fc84:  tbz     w8, #0, 1fc94 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x21c>
+    0.00 :   1fc88:  tbz     w24, #0, 1fcc8 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x250>
+    0.00 :   1fc8c:  cbnz    x28, 1fcfc <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x284>
+    0.00 :   1fc90:  b       1fc1c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x1a4>
+    0.00 :   1fc94:  orr     x8, x27, #0x1
+    0.00 :   1fc98:  ldr     x2, [sp, #104]
+    0.00 :   1fc9c:  ldr     x3, [sp, #120]
+    0.00 :   1fca0:  clz     x8, x8
+    0.00 :   1fca4:  mov     x0, x22
+    0.00 :   1fca8:  mov     x1, x27
+    0.00 :   1fcac:  lsl     w8, w8, #1
+    0.00 :   1fcb0:  mov     x5, xzr
+    0.00 :   1fcb4:  mov     x6, x26
+    0.00 :   1fcb8:  eor     w4, w8, #0x7e
+    0.00 :   1fcbc:  bl      20888 <core::slice::sort::stable::quicksort::quicksort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>>
+    0.00 :   1fcc0:  ldp     x10, x3, [sp, #112]
+    0.00 :   1fcc4:  tbnz    w24, #0, 1fc8c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x214>
+    0.00 :   1fcc8:  orr     x8, x28, #0x1
+    0.00 :   1fccc:  add     x0, x22, x27, lsl #3
+    0.00 :   1fcd0:  ldr     x2, [sp, #104]
+    0.00 :   1fcd4:  clz     x8, x8
+    0.00 :   1fcd8:  ldr     x3, [sp, #120]
+    0.00 :   1fcdc:  mov     x1, x28
+    0.00 :   1fce0:  lsl     w8, w8, #1
+    0.00 :   1fce4:  mov     x5, xzr
+    0.00 :   1fce8:  mov     x6, x26
+    0.00 :   1fcec:  eor     w4, w8, #0x7e
+    0.00 :   1fcf0:  bl      20888 <core::slice::sort::stable::quicksort::quicksort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>>
+    0.00 :   1fcf4:  ldp     x10, x3, [sp, #112]
+    0.00 :   1fcf8:  cbz     x28, 1fc1c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x1a4>
+    0.00 :   1fcfc:  cbz     x27, 1fc1c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x1a4>
+    0.00 :   1fd00:  cmp     x27, x28
+    0.00 :   1fd04:  csel    x8, x27, x28, cc        // cc = lo, ul, last
+    0.00 :   1fd08:  cmp     x3, x8
+    0.00 :   1fd0c:  b.cc    1fc1c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x1a4>  // b.lo, b.ul, b.last
+    0.00 :   1fd10:  add     x26, x22, x27, lsl #3
+    0.00 :   1fd14:  lsl     x24, x8, #3
+    0.00 :   1fd18:  ldr     x23, [sp, #104]
+    0.00 :   1fd1c:  cmp     x27, x28
+    0.00 :   1fd20:  csel    x1, x26, x22, hi        // hi = pmore
+    0.00 :   1fd24:  mov     x0, x23
+    0.00 :   1fd28:  mov     x2, x24
+    0.00 :   1fd2c:  bl      ca90 <memcpy@plt>
+    0.00 :   1fd30:  cmp     x27, x28
+    0.00 :   1fd34:  add     x8, x23, x24
+    0.00 :   1fd38:  b.ls    1fd8c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x314>  // b.plast
+    0.00 :   1fd3c:  ldr     x9, [sp, #64]
+  100.00 :   1fd40:  ldr     x10, [x8, #-8]!
+    0.00 :   1fd44:  ldr     x11, [x26, #-8]!
+    0.00 :   1fd48:  asr     x12, x10, #63
+    0.00 :   1fd4c:  asr     x13, x11, #63
+    0.00 :   1fd50:  eor     x12, x10, x12, lsr #1
+    0.00 :   1fd54:  eor     x13, x11, x13, lsr #1
+    0.00 :   1fd58:  cmp     x12, x13
+    0.00 :   1fd5c:  cset    w12, ge // ge = tcont
+    0.00 :   1fd60:  cset    w13, lt // lt = tstop
+    0.00 :   1fd64:  csel    x10, x11, x10, lt       // lt = tstop
+    0.00 :   1fd68:  add     x26, x26, w12, uxtw #3
+    0.00 :   1fd6c:  add     x8, x8, w13, uxtw #3
+    0.00 :   1fd70:  str     x10, [x9], #-8
+    0.00 :   1fd74:  cmp     x22, x26
+    0.00 :   1fd78:  ccmp    x23, x8, #0x4, ne       // ne = any
+    0.00 :   1fd7c:  b.ne    1fd40 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x2c8>  // b.any
+    0.00 :   1fd80:  mov     x22, x26
+    0.00 :   1fd84:  mov     x1, x23
+    0.00 :   1fd88:  b       1fc04 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x18c>
+    0.00 :   1fd8c:  mov     x1, x23
+    0.00 :   1fd90:  ldr     x9, [x26]
+    0.00 :   1fd94:  ldr     x10, [x1]
+    0.00 :   1fd98:  asr     x11, x9, #63
+    0.00 :   1fd9c:  asr     x12, x10, #63
+    0.00 :   1fda0:  eor     x11, x9, x11, lsr #1
+    0.00 :   1fda4:  eor     x12, x10, x12, lsr #1
+    0.00 :   1fda8:  cmp     x11, x12
+    0.00 :   1fdac:  cset    w11, ge // ge = tcont
+    0.00 :   1fdb0:  cset    w12, lt // lt = tstop
+    0.00 :   1fdb4:  csel    x9, x9, x10, lt // lt = tstop
+    0.00 :   1fdb8:  add     x1, x1, w11, uxtw #3
+    0.00 :   1fdbc:  add     x26, x26, w12, uxtw #3
+    0.00 :   1fdc0:  str     x9, [x22], #8
+    0.00 :   1fdc4:  cmp     x1, x8
+    0.00 :   1fdc8:  ccmp    x19, x26, #0x4, ne      // ne = any
+    0.00 :   1fdcc:  b.ne    1fd90 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x318>  // b.any
+    0.00 :   1fdd0:  b       1fc04 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x18c>
+    0.00 :   1fdd4:  mov     w25, #0x1                       // #1
+    0.00 :   1fdd8:  ldr     x19, [sp, #40]
+    0.00 :   1fddc:  ldr     x11, [sp, #72]
+    0.00 :   1fde0:  add     x8, sp, #0x80
+    0.00 :   1fde4:  cmp     x19, x22
+    0.00 :   1fde8:  str     x24, [x8, x25, lsl #3]
+    0.00 :   1fdec:  sub     x8, x29, #0x4a
+    0.00 :   1fdf0:  strb    w10, [x8, x25]
+    0.00 :   1fdf4:  b.ls    1ff90 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x518>  // b.plast
+    0.00 :   1fdf8:  add     x22, x22, x11, lsr #1
+    0.00 :   1fdfc:  add     x25, x25, #0x1
+    0.00 :   1fe00:  mov     x24, x11
+    0.00 :   1fe04:  subs    x9, x19, x22
+    0.00 :   1fe08:  b.ls    1fb80 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x108>  // b.plast
+    0.00 :   1fe0c:  b       1fb2c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0xb4>
+    0.00 :   1fe10:  ldp     x8, x12, [x0]
+    0.00 :   1fe14:  asr     x10, x12, #63
+    0.00 :   1fe18:  asr     x11, x8, #63
+    0.00 :   1fe1c:  eor     x10, x12, x10, lsr #1
+    0.00 :   1fe20:  eor     x11, x8, x11, lsr #1
+    0.00 :   1fe24:  cmp     x10, x11
+    0.00 :   1fe28:  b.ge    1fe4c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x3d4>  // b.tcont
+    0.00 :   1fe2c:  cmp     x9, #0x2
+    0.00 :   1fe30:  b.ne    1fe68 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x3f0>  // b.any
+    0.00 :   1fe34:  ldr     x8, [sp, #56]
+    0.00 :   1fe38:  cmp     x8, #0x2
+    0.00 :   1fe3c:  b.hi    1fb3c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0xc4>  // b.pmore
+    0.00 :   1fe40:  mov     w9, #0x1                        // #1
+    0.00 :   1fe44:  mov     w8, #0x2                        // #2
+    0.00 :   1fe48:  b       1feec <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x474>
+    0.00 :   1fe4c:  cmp     x9, #0x2
+    0.00 :   1fe50:  b.ne    1fe9c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x424>  // b.any
+    0.00 :   1fe54:  ldr     x8, [sp, #56]
+    0.00 :   1fe58:  cmp     x8, #0x2
+    0.00 :   1fe5c:  b.hi    1fb3c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0xc4>  // b.pmore
+    0.00 :   1fe60:  mov     w8, #0x2                        // #2
+    0.00 :   1fe64:  b       1fba0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x128>
+    0.00 :   1fe68:  mov     w8, #0x2                        // #2
+    0.00 :   1fe6c:  ldr     x13, [x0, x8, lsl #3]
+    0.00 :   1fe70:  asr     x15, x12, #63
+    0.00 :   1fe74:  asr     x14, x13, #63
+    0.00 :   1fe78:  eor     x12, x12, x15, lsr #1
+    0.00 :   1fe7c:  eor     x14, x13, x14, lsr #1
+    0.00 :   1fe80:  cmp     x14, x12
+    0.00 :   1fe84:  b.ge    1fed0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x458>  // b.tcont
+    0.00 :   1fe88:  add     x8, x8, #0x1
+    0.00 :   1fe8c:  mov     x12, x13
+    0.00 :   1fe90:  cmp     x9, x8
+    0.00 :   1fe94:  b.ne    1fe6c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x3f4>  // b.any
+    0.00 :   1fe98:  b       1fecc <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x454>
+    0.00 :   1fe9c:  mov     w8, #0x2                        // #2
+    0.00 :   1fea0:  ldr     x13, [x0, x8, lsl #3]
+    0.00 :   1fea4:  asr     x15, x12, #63
+    0.00 :   1fea8:  asr     x14, x13, #63
+    0.00 :   1feac:  eor     x12, x12, x15, lsr #1
+    0.00 :   1feb0:  eor     x14, x13, x14, lsr #1
+    0.00 :   1feb4:  cmp     x14, x12
+    0.00 :   1feb8:  b.lt    1fed0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x458>  // b.tstop
+    0.00 :   1febc:  add     x8, x8, #0x1
+    0.00 :   1fec0:  mov     x12, x13
+    0.00 :   1fec4:  cmp     x9, x8
+    0.00 :   1fec8:  b.ne    1fea0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x428>  // b.any
+    0.00 :   1fecc:  mov     x8, x9
+    0.00 :   1fed0:  ldr     x12, [sp, #56]
+    0.00 :   1fed4:  cmp     x8, x12
+    0.00 :   1fed8:  b.cc    1fb3c <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0xc4>  // b.lo, b.ul, b.last
+    0.00 :   1fedc:  cmp     x10, x11
+    0.00 :   1fee0:  b.ge    1fba0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x128>  // b.tcont
+    0.00 :   1fee4:  lsr     x9, x8, #1
+    0.00 :   1fee8:  cbz     x9, 1fba0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x128>
+    0.00 :   1feec:  cmp     x9, #0x4
+    0.00 :   1fef0:  b.cs    1fefc <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x484>  // b.hs, b.nlast
+    0.00 :   1fef4:  mov     x10, xzr
+    0.00 :   1fef8:  b       1ff50 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x4d8>
+    0.00 :   1fefc:  lsl     x11, x22, #3
+    0.00 :   1ff00:  ldp     x13, x14, [sp, #8]
+    0.00 :   1ff04:  and     x10, x9, #0x7ffffffffffffffc
+    0.00 :   1ff08:  add     x12, x11, x8, lsl #3
+    0.00 :   1ff0c:  add     x11, x14, x11
+    0.00 :   1ff10:  add     x12, x13, x12
+    0.00 :   1ff14:  and     x13, x9, #0x7ffffffffffffffc
+    0.00 :   1ff18:  ldp     q1, q0, [x12, #-16]
+    0.00 :   1ff1c:  sub     x13, x13, #0x4
+    0.00 :   1ff20:  ldp     q2, q3, [x11, #-16]
+    0.00 :   1ff24:  ext     v0.16b, v0.16b, v0.16b, #8
+    0.00 :   1ff28:  ext     v1.16b, v1.16b, v1.16b, #8
+    0.00 :   1ff2c:  ext     v2.16b, v2.16b, v2.16b, #8
+    0.00 :   1ff30:  ext     v3.16b, v3.16b, v3.16b, #8
+    0.00 :   1ff34:  stp     q0, q1, [x11, #-16]
+    0.00 :   1ff38:  add     x11, x11, #0x20
+    0.00 :   1ff3c:  stp     q3, q2, [x12, #-16]
+    0.00 :   1ff40:  sub     x12, x12, #0x20
+    0.00 :   1ff44:  cbnz    x13, 1ff18 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x4a0>
+    0.00 :   1ff48:  cmp     x9, x10
+    0.00 :   1ff4c:  b.eq    1fba0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x128>  // b.none
+    0.00 :   1ff50:  lsl     x11, x22, #3
+    0.00 :   1ff54:  lsl     x12, x10, #3
+    0.00 :   1ff58:  sub     x9, x9, x10
+    0.00 :   1ff5c:  add     x13, x11, x8, lsl #3
+    0.00 :   1ff60:  add     x11, x11, x12
+    0.00 :   1ff64:  add     x10, x23, x11
+    0.00 :   1ff68:  ldr     x11, [sp, #48]
+    0.00 :   1ff6c:  sub     x12, x13, x12
+    0.00 :   1ff70:  add     x11, x11, x12
+    0.00 :   1ff74:  ldr     x12, [x11]
+    0.00 :   1ff78:  ldr     d0, [x10]
+    0.00 :   1ff7c:  subs    x9, x9, #0x1
+    0.00 :   1ff80:  str     x12, [x10], #8
+    0.00 :   1ff84:  str     d0, [x11], #-8
+    0.00 :   1ff88:  b.ne    1ff74 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x4fc>  // b.any
+    0.00 :   1ff8c:  b       1fba0 <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x128>
+    0.00 :   1ff90:  tbnz    w24, #0, 1ffbc <core::slice::sort::stable::drift::sort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>+0x544>
+    0.00 :   1ff94:  orr     x8, x19, #0x1
+    0.00 :   1ff98:  ldr     x2, [sp, #104]
+    0.00 :   1ff9c:  mov     x0, x23
+    0.00 :   1ffa0:  clz     x8, x8
+    0.00 :   1ffa4:  mov     x1, x19
+    0.00 :   1ffa8:  mov     x5, xzr
+    0.00 :   1ffac:  lsl     w8, w8, #1
+    0.00 :   1ffb0:  mov     x6, x26
+    0.00 :   1ffb4:  eor     w4, w8, #0x7e
+    0.00 :   1ffb8:  bl      20888 <core::slice::sort::stable::quicksort::quicksort::<f64, <[f64]>::sort_by<test::stats::local_sort::{closure#0}>::{closure#0}>>
+    0.00 :   1ffbc:  add     sp, sp, #0x2e0
+    0.00 :   1ffc0:  ldp     x20, x19, [sp, #80]
+    0.00 :   1ffc4:  ldp     x22, x21, [sp, #64]
+    0.00 :   1ffc8:  ldp     x24, x23, [sp, #48]
+    0.00 :   1ffcc:  ldp     x26, x25, [sp, #32]
+    0.00 :   1ffd0:  ldp     x28, x27, [sp, #16]
+    0.00 :   1ffd4:  ldp     x29, x30, [sp], #96
+    0.00 :   1ffd8:  ret
+ Percent |	Source code & Disassembly of ld-linux-aarch64.so.1 for cycles:u (1 samples, percent: local period)
+------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    0000000000008e54 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd74>:
+    0.00 :   8e54:   sub     sp, sp, #0x110
+    0.00 :   8e58:   stp     x29, x30, [sp, #32]
+    0.00 :   8e5c:   add     x29, sp, #0x20
+    0.00 :   8e60:   stp     x21, x22, [sp, #64]
+    0.00 :   8e64:   mov     x21, x2
+    0.00 :   8e68:   mov     x22, x7
+    0.00 :   8e6c:   stp     x23, x24, [sp, #80]
+    0.00 :   8e70:   mov     x23, x4
+    0.00 :   8e74:   mov     w24, w6
+    0.00 :   8e78:   stp     x25, x26, [sp, #96]
+    0.00 :   8e7c:   mov     x25, x1
+    0.00 :   8e80:   mov     w26, w5
+    0.00 :   8e84:   stp     x19, x20, [sp, #48]
+    0.00 :   8e88:   mov     x20, x0
+    0.00 :   8e8c:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   8e90:   add     x0, x0, #0x0
+    0.00 :   8e94:   stp     x27, x28, [sp, #112]
+    0.00 :   8e98:   stp     x3, x0, [sp, #152]
+    0.00 :   8e9c:   ldrb    w2, [x20]
+    0.00 :   8ea0:   cbz     w2, 906c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf8c>
+    0.00 :   8ea4:   mov     x3, x20
+    0.00 :   8ea8:   mov     w27, #0x1505                    // #5381
+    0.00 :   8eac:   mov     w6, #0x441                      // #1089
+  100.00 :   8eb0:   ldrb    w4, [x3, #1]
+    0.00 :   8eb4:   lsl     w0, w2, #5
+    0.00 :   8eb8:   add     w5, w4, w2
+    0.00 :   8ebc:   madd    w0, w27, w6, w0
+    0.00 :   8ec0:   cbz     w4, 9060 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf80>
+    0.00 :   8ec4:   ldrb    w2, [x3, #2]!
+    0.00 :   8ec8:   add     w27, w5, w0
+    0.00 :   8ecc:   cbnz    w2, 8eb0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdd0>
+    0.00 :   8ed0:   ldr     x1, [sp, #160]
+    0.00 :   8ed4:   mov     x2, #0xffffffff                 // #4294967295
+    0.00 :   8ed8:   str     x2, [sp, #216]
+    0.00 :   8edc:   stp     xzr, xzr, [sp, #224]
+    0.00 :   8ee0:   ldr     x0, [x1, #2864]
+    0.00 :   8ee4:   add     x0, x0, #0x1
+    0.00 :   8ee8:   str     x0, [x1, #2864]
+    0.00 :   8eec:   ldr     x0, [sp, #152]
+    0.00 :   8ef0:   ldr     x5, [x0]
+    0.00 :   8ef4:   cbnz    x22, 90fc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x101c>
+    0.00 :   8ef8:   cbz     x5, 9074 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf94>
+    0.00 :   8efc:   str     xzr, [sp, #144]
+    0.00 :   8f00:   ldp     x6, x19, [sp, #144]
+    0.00 :   8f04:   add     x0, sp, #0xd8
+    0.00 :   8f08:   add     x28, sp, #0xe0
+    0.00 :   8f0c:   str     x0, [sp, #136]
+    0.00 :   8f10:   b       8f20 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe40>
+    0.00 :   8f14:   ldr     x5, [x19, #8]!
+    0.00 :   8f18:   mov     x6, #0x0                        // #0
+    0.00 :   8f1c:   cbz     x5, 8f50 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe70>
+    0.00 :   8f20:   ldr     x3, [x21]
+    0.00 :   8f24:   str     w24, [sp]
+    0.00 :   8f28:   ldr     x2, [sp, #136]
+    0.00 :   8f2c:   str     x22, [sp, #8]
+    0.00 :   8f30:   str     w26, [sp, #16]
+    0.00 :   8f34:   mov     x7, x23
+    0.00 :   8f38:   str     x25, [sp, #24]
+    0.00 :   8f3c:   mov     x4, x28
+    0.00 :   8f40:   mov     w1, w27
+    0.00 :   8f44:   mov     x0, x20
+    0.00 :   8f48:   bl      8400 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x320>
+    0.00 :   8f4c:   cbz     w0, 8f14 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe34>
+    0.00 :   8f50:   ldr     x2, [sp, #224]
+    0.00 :   8f54:   ldr     x7, [x21]
+    0.00 :   8f58:   mov     x0, x7
+    0.00 :   8f5c:   cbz     x2, 9078 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf98>
+    0.00 :   8f60:   cbz     x7, 8f74 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe94>
+    0.00 :   8f64:   ldrb    w0, [x7, #5]
+    0.00 :   8f68:   and     w0, w0, #0x3
+    0.00 :   8f6c:   cmp     w0, #0x3
+    0.00 :   8f70:   b.eq    8fcc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeec>  // b.none
+    0.00 :   8f74:   ldr     x28, [sp, #232]
+    0.00 :   8f78:   mov     w19, #0x0                       // #0
+    0.00 :   8f7c:   ldrh    w0, [x28, #868]
+    0.00 :   8f80:   and     w0, w0, #0x3
+    0.00 :   8f84:   cmp     w0, #0x2
+    0.00 :   8f88:   b.eq    91c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x10e0>  // b.none
+    0.00 :   8f8c:   ldr     x7, [sp, #224]
+    0.00 :   8f90:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   8f94:   ldr     w0, [x28, #1068]
+    0.00 :   8f98:   cbz     w0, 912c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x104c>
+    0.00 :   8f9c:   ldr     w0, [x22, #2960]
+    0.00 :   8fa0:   tbnz    w0, #2, 9138 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1058>
+    0.00 :   8fa4:   ldp     x29, x30, [sp, #32]
+    0.00 :   8fa8:   mov     x0, x28
+    0.00 :   8fac:   ldp     x19, x20, [sp, #48]
+    0.00 :   8fb0:   ldp     x23, x24, [sp, #80]
+    0.00 :   8fb4:   ldp     x25, x26, [sp, #96]
+    0.00 :   8fb8:   ldp     x27, x28, [sp, #112]
+    0.00 :   8fbc:   str     x7, [x21]
+    0.00 :   8fc0:   ldp     x21, x22, [sp, #64]
+    0.00 :   8fc4:   add     sp, sp, #0x110
+    0.00 :   8fc8:   ret
+    0.00 :   8fcc:   cmp     w26, #0x1
+    0.00 :   8fd0:   b.eq    9334 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1254>  // b.none
+    0.00 :   8fd4:   ldr     x0, [sp, #152]
+    0.00 :   8fd8:   stp     xzr, xzr, [sp, #240]
+    0.00 :   8fdc:   add     x1, sp, #0xf0
+    0.00 :   8fe0:   str     x1, [sp, #168]
+    0.00 :   8fe4:   mov     x28, x0
+    0.00 :   8fe8:   ldr     x5, [x0]
+    0.00 :   8fec:   mov     w19, #0x1                       // #1
+    0.00 :   8ff0:   cbnz    x5, 9008 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf28>
+    0.00 :   8ff4:   b       9374 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1294>
+    0.00 :   8ff8:   ldr     x5, [x28, #8]!
+    0.00 :   8ffc:   str     xzr, [sp, #144]
+    0.00 :   9000:   cbz     x5, 9038 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf58>
+    0.00 :   9004:   ldr     x7, [x21]
+    0.00 :   9008:   str     w24, [sp]
+    0.00 :   900c:   ldp     x2, x6, [sp, #136]
+    0.00 :   9010:   str     x22, [sp, #8]
+    0.00 :   9014:   ldr     x4, [sp, #168]
+    0.00 :   9018:   str     w19, [sp, #16]
+    0.00 :   901c:   str     xzr, [sp, #24]
+    0.00 :   9020:   mov     x3, x7
+    0.00 :   9024:   mov     w1, w27
+    0.00 :   9028:   mov     x7, x23
+    0.00 :   902c:   mov     x0, x20
+    0.00 :   9030:   bl      8400 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x320>
+    0.00 :   9034:   cbz     w0, 8ff8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf18>
+    0.00 :   9038:   ldr     x0, [sp, #240]
+    0.00 :   903c:   cbz     x0, 9374 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1294>
+    0.00 :   9040:   ldr     x0, [sp, #248]
+    0.00 :   9044:   cmp     x0, x25
+    0.00 :   9048:   b.eq    9374 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1294>  // b.none
+    0.00 :   904c:   ldr     x0, [x21]
+    0.00 :   9050:   mov     x28, x25
+    0.00 :   9054:   mov     w19, #0x1                       // #1
+    0.00 :   9058:   stp     x0, x25, [sp, #224]
+    0.00 :   905c:   b       8f7c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe9c>
+    0.00 :   9060:   add     w2, w27, w2
+    0.00 :   9064:   add     w27, w2, w27, lsl #5
+    0.00 :   9068:   b       8ed0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdf0>
+    0.00 :   906c:   mov     w27, #0x1505                    // #5381
+    0.00 :   9070:   b       8ed0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdf0>
+    0.00 :   9074:   ldr     x0, [x21]
+    0.00 :   9078:   cbz     x0, 908c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfac>
+    0.00 :   907c:   ldrb    w0, [x0, #4]
+    0.00 :   9080:   lsr     w0, w0, #4
+    0.00 :   9084:   cmp     w0, #0x2
+    0.00 :   9088:   b.eq    90f0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1010>  // b.none
+    0.00 :   908c:   adrp    x0, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9090:   ldr     w0, [x0, #2960]
+    0.00 :   9094:   tbnz    w0, #8, 90f0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1010>
+    0.00 :   9098:   cbz     x25, 9398 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12b8>
+    0.00 :   909c:   ldr     x1, [x25, #8]
+    0.00 :   90a0:   ldrsb   w0, [x1]
+    0.00 :   90a4:   cbz     x23, 93cc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12ec>
+    0.00 :   90a8:   ldr     x5, [x23]
+    0.00 :   90ac:   adrp    x4, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   90b0:   cbz     x5, 93e4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1304>
+    0.00 :   90b4:   add     x4, x4, #0x590
+    0.00 :   90b8:   cbz     w0, 93ac <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12cc>
+    0.00 :   90bc:   add     x19, sp, #0xf0
+    0.00 :   90c0:   mov     x3, x20
+    0.00 :   90c4:   mov     x0, x19
+    0.00 :   90c8:   adrp    x2, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   90cc:   add     x2, x2, #0x5b8
+    0.00 :   90d0:   bl      3020 <_dl_exception_create_format@@GLIBC_PRIVATE>
+    0.00 :   90d4:   mov     x1, x19
+    0.00 :   90d8:   adrp    x2, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   90dc:   add     x2, x2, #0x5d8
+    0.00 :   90e0:   mov     w0, #0x0                        // #0
+    0.00 :   90e4:   bl      1000 <_dl_signal_error@@GLIBC_PRIVATE+0x6c>
+    0.00 :   90e8:   mov     x0, x19
+    0.00 :   90ec:   bl      3424 <_dl_exception_free@@GLIBC_PRIVATE>
+    0.00 :   90f0:   mov     x7, #0x0                        // #0
+    0.00 :   90f4:   mov     x28, #0x0                       // #0
+    0.00 :   90f8:   b       8fa4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xec4>
+    0.00 :   90fc:   ldr     x2, [x5]
+    0.00 :   9100:   str     xzr, [sp, #144]
+    0.00 :   9104:   ldr     x0, [x2]
+    0.00 :   9108:   cmp     x0, x22
+    0.00 :   910c:   b.eq    8f00 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe20>  // b.none
+    0.00 :   9110:   ldr     x0, [sp, #144]
+    0.00 :   9114:   add     x0, x0, #0x1
+    0.00 :   9118:   str     x0, [sp, #144]
+    0.00 :   911c:   ldr     x0, [x2, x0, lsl #3]
+    0.00 :   9120:   cmp     x0, x22
+    0.00 :   9124:   b.ne    9110 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1030>  // b.any
+    0.00 :   9128:   b       8f00 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe20>
+    0.00 :   912c:   mov     w0, #0x1                        // #1
+    0.00 :   9130:   str     w0, [x28, #1068]
+    0.00 :   9134:   b       8f9c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xebc>
+    0.00 :   9138:   ldr     x1, [x25, #8]
+    0.00 :   913c:   ldrsb   w0, [x1]
+    0.00 :   9140:   cbnz    w0, 9160 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1080>
+    0.00 :   9144:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9148:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   914c:   add     x0, x0, #0xa88
+    0.00 :   9150:   ldr     x1, [x1, #2928]
+    0.00 :   9154:   ldr     x1, [x1]
+    0.00 :   9158:   cmp     x1, #0x0
+    0.00 :   915c:   csel    x1, x0, x1, eq  // eq = none
+    0.00 :   9160:   ldr     x3, [x28, #8]
+    0.00 :   9164:   ldr     x2, [x25, #48]
+    0.00 :   9168:   ldrsb   w0, [x3]
+    0.00 :   916c:   cbz     w0, 9354 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1274>
+    0.00 :   9170:   ldr     x4, [x28, #48]
+    0.00 :   9174:   cmp     w19, #0x0
+    0.00 :   9178:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   917c:   adrp    x5, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9180:   add     x0, x0, #0x5a0
+    0.00 :   9184:   add     x5, x5, #0x5b0
+    0.00 :   9188:   csel    x5, x5, x0, eq  // eq = none
+    0.00 :   918c:   mov     x6, x20
+    0.00 :   9190:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9194:   add     x0, x0, #0x6f8
+    0.00 :   9198:   str     x7, [sp, #136]
+    0.00 :   919c:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   91a0:   ldr     x7, [sp, #136]
+    0.00 :   91a4:   cbz     x23, 9380 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12a0>
+    0.00 :   91a8:   ldr     x1, [x23]
+    0.00 :   91ac:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   91b0:   add     x0, x0, #0x730
+    0.00 :   91b4:   bl      bd04 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x15c4>
+    0.00 :   91b8:   ldr     x7, [sp, #136]
+    0.00 :   91bc:   b       8fa4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xec4>
+    0.00 :   91c0:   cmp     x25, x28
+    0.00 :   91c4:   mvn     w0, w24
+    0.00 :   91c8:   cset    w1, eq  // eq = none
+    0.00 :   91cc:   and     w0, w0, #0x1
+    0.00 :   91d0:   orr     w0, w1, w0
+    0.00 :   91d4:   cbnz    w0, 8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>
+    0.00 :   91d8:   ldrb    w0, [x28, #871]
+    0.00 :   91dc:   tbnz    w0, #0, 8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>
+    0.00 :   91e0:   and     w0, w24, #0x8
+    0.00 :   91e4:   str     w0, [sp, #200]
+    0.00 :   91e8:   tbz     w24, #3, 91f4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1114>
+    0.00 :   91ec:   ldrb    w0, [x28, #872]
+    0.00 :   91f0:   tbnz    w0, #0, 8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>
+    0.00 :   91f4:   ldr     x10, [x25, #1056]
+    0.00 :   91f8:   dmb     ish
+    0.00 :   91fc:   ldr     x4, [x25, #1040]
+    0.00 :   9200:   cbz     x4, 9224 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1144>
+    0.00 :   9204:   ldr     x0, [x4]
+    0.00 :   9208:   cbz     x0, 9224 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1144>
+    0.00 :   920c:   mov     w1, #0x0                        // #0
+    0.00 :   9210:   add     w1, w1, #0x1
+    0.00 :   9214:   cmp     x0, x28
+    0.00 :   9218:   b.eq    8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>  // b.none
+    0.00 :   921c:   ldr     x0, [x4, w1, uxtw #3]
+    0.00 :   9220:   cbnz    x0, 9210 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1130>
+    0.00 :   9224:   cbz     x10, 9450 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1370>
+    0.00 :   9228:   ldr     w7, [x10]
+    0.00 :   922c:   cbz     w7, 9250 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1170>
+    0.00 :   9230:   add     x0, x10, #0x8
+    0.00 :   9234:   add     x2, x0, w7, uxtw #3
+    0.00 :   9238:   ldr     x1, [x0]
+    0.00 :   923c:   add     x0, x0, #0x8
+    0.00 :   9240:   cmp     x1, x28
+    0.00 :   9244:   b.eq    8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>  // b.none
+    0.00 :   9248:   cmp     x2, x0
+    0.00 :   924c:   b.ne    9238 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1158>  // b.any
+    0.00 :   9250:   ldr     x0, [x28, #1224]
+    0.00 :   9254:   str     x0, [sp, #168]
+    0.00 :   9258:   and     w0, w24, #0x4
+    0.00 :   925c:   str     w0, [sp, #144]
+    0.00 :   9260:   tbnz    w24, #2, 94c8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13e8>
+    0.00 :   9264:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9268:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   926c:   str     x0, [sp, #136]
+    0.00 :   9270:   add     x0, x0, #0xa88
+    0.00 :   9274:   ldr     x1, [x1, #2888]
+    0.00 :   9278:   str     w7, [sp, #176]
+    0.00 :   927c:   mov     x27, x28
+    0.00 :   9280:   blr     x1
+    0.00 :   9284:   ldr     w7, [sp, #176]
+    0.00 :   9288:   ldr     x4, [x25, #48]
+    0.00 :   928c:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   9290:   add     x0, x0, #0x0
+    0.00 :   9294:   add     x1, x4, x4, lsl #2
+    0.00 :   9298:   add     x1, x4, x1, lsl #2
+    0.00 :   929c:   ldr     x0, [x0, x1, lsl #3]
+    0.00 :   92a0:   cmp     x0, #0x0
+    0.00 :   92a4:   ccmp    x0, x27, #0x4, ne       // ne = any
+    0.00 :   92a8:   b.eq    92bc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11dc>  // b.none
+    0.00 :   92ac:   ldr     x0, [x0, #24]
+    0.00 :   92b0:   cmp     x0, #0x0
+    0.00 :   92b4:   ccmp    x0, x27, #0x4, ne       // ne = any
+    0.00 :   92b8:   b.ne    92ac <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11cc>  // b.any
+    0.00 :   92bc:   cbz     x0, 9414 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1334>
+    0.00 :   92c0:   ldr     x1, [sp, #168]
+    0.00 :   92c4:   ldr     x0, [x27, #1224]
+    0.00 :   92c8:   cmp     x1, x0
+    0.00 :   92cc:   b.ne    9414 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1334>  // b.any
+    0.00 :   92d0:   ldrb    w0, [x27, #871]
+    0.00 :   92d4:   tbnz    w0, #0, 9458 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1378>
+    0.00 :   92d8:   ldr     w0, [sp, #200]
+    0.00 :   92dc:   and     w24, w0, #0x8
+    0.00 :   92e0:   cbz     w0, 947c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x139c>
+    0.00 :   92e4:   ldrb    w0, [x27, #872]
+    0.00 :   92e8:   tbnz    w0, #0, 9458 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1378>
+    0.00 :   92ec:   ldrh    w0, [x25, #868]
+    0.00 :   92f0:   and     w0, w0, #0x3
+    0.00 :   92f4:   cmp     w0, #0x2
+    0.00 :   92f8:   b.eq    95e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1500>  // b.none
+    0.00 :   92fc:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9300:   ldr     w0, [x22, #2960]
+    0.00 :   9304:   tbnz    w0, #2, 9498 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13b8>
+    0.00 :   9308:   mov     w0, #0x1                        // #1
+    0.00 :   930c:   strb    w0, [x27, #872]
+    0.00 :   9310:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9314:   ldr     x0, [sp, #136]
+    0.00 :   9318:   ldr     x1, [x1, #2896]
+    0.00 :   931c:   add     x0, x0, #0xa88
+    0.00 :   9320:   blr     x1
+    0.00 :   9324:   ldr     w0, [sp, #144]
+    0.00 :   9328:   cbnz    w0, 9460 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1380>
+    0.00 :   932c:   ldr     x7, [sp, #224]
+    0.00 :   9330:   b       8f94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeb4>
+    0.00 :   9334:   ldr     x0, [sp, #232]
+    0.00 :   9338:   cmp     x0, x25
+    0.00 :   933c:   b.eq    93dc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12fc>  // b.none
+    0.00 :   9340:   stp     x7, x25, [sp, #224]
+    0.00 :   9344:   mov     x28, x25
+    0.00 :   9348:   mov     w19, #0x1                       // #1
+    0.00 :   934c:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9350:   b       8f94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeb4>
+    0.00 :   9354:   adrp    x3, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9358:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   935c:   add     x0, x0, #0xa88
+    0.00 :   9360:   ldr     x3, [x3, #2928]
+    0.00 :   9364:   ldr     x3, [x3]
+    0.00 :   9368:   cmp     x3, #0x0
+    0.00 :   936c:   csel    x3, x0, x3, eq  // eq = none
+    0.00 :   9370:   b       9170 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1090>
+    0.00 :   9374:   ldr     x28, [sp, #232]
+    0.00 :   9378:   mov     w19, #0x1                       // #1
+    0.00 :   937c:   b       8f7c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe9c>
+    0.00 :   9380:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   9384:   add     x0, x0, #0x8d8
+    0.00 :   9388:   str     x7, [sp, #136]
+    0.00 :   938c:   bl      bd04 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x15c4>
+    0.00 :   9390:   ldr     x7, [sp, #136]
+    0.00 :   9394:   b       8fa4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xec4>
+    0.00 :   9398:   cbz     x23, 93f4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1314>
+    0.00 :   939c:   ldr     x5, [x23]
+    0.00 :   93a0:   adrp    x4, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   93a4:   cbz     x5, 9404 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1324>
+    0.00 :   93a8:   add     x4, x4, #0x590
+    0.00 :   93ac:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   93b0:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   93b4:   add     x0, x0, #0xa88
+    0.00 :   93b8:   ldr     x1, [x1, #2928]
+    0.00 :   93bc:   ldr     x1, [x1]
+    0.00 :   93c0:   cmp     x1, #0x0
+    0.00 :   93c4:   csel    x1, x0, x1, eq  // eq = none
+    0.00 :   93c8:   b       90bc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfdc>
+    0.00 :   93cc:   adrp    x4, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   93d0:   add     x4, x4, #0xda8
+    0.00 :   93d4:   mov     x5, x4
+    0.00 :   93d8:   b       90b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfd8>
+    0.00 :   93dc:   mov     x7, x2
+    0.00 :   93e0:   b       9344 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1264>
+    0.00 :   93e4:   adrp    x5, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   93e8:   add     x4, x4, #0x590
+    0.00 :   93ec:   add     x5, x5, #0xda8
+    0.00 :   93f0:   b       90b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfd8>
+    0.00 :   93f4:   adrp    x4, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   93f8:   add     x4, x4, #0xda8
+    0.00 :   93fc:   mov     x5, x4
+    0.00 :   9400:   b       93ac <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12cc>
+    0.00 :   9404:   adrp    x5, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   9408:   add     x4, x4, #0x590
+    0.00 :   940c:   add     x5, x5, #0xda8
+    0.00 :   9410:   b       93ac <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12cc>
+    0.00 :   9414:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9418:   ldr     x0, [sp, #136]
+    0.00 :   941c:   ldr     x1, [x1, #2896]
+    0.00 :   9420:   add     x0, x0, #0xa88
+    0.00 :   9424:   blr     x1
+    0.00 :   9428:   ldr     w0, [sp, #144]
+    0.00 :   942c:   cbz     w0, 8e9c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdbc>
+    0.00 :   9430:   mrs     x0, tpidr_el0
+    0.00 :   9434:   mov     w1, #0x1                        // #1
+    0.00 :   9438:   sub     x0, x0, #0x740
+    0.00 :   943c:   str     w1, [x0, #4]
+    0.00 :   9440:   dmb     ish
+    0.00 :   9444:   ldr     x0, [x25, #984]
+    0.00 :   9448:   str     x0, [sp, #152]
+    0.00 :   944c:   b       8e9c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdbc>
+    0.00 :   9450:   mov     w7, #0x0                        // #0
+    0.00 :   9454:   b       9250 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1170>
+    0.00 :   9458:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   945c:   b       9310 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   9460:   mrs     x0, tpidr_el0
+    0.00 :   9464:   mov     w1, #0x1                        // #1
+    0.00 :   9468:   sub     x0, x0, #0x740
+    0.00 :   946c:   str     w1, [x0, #4]
+    0.00 :   9470:   dmb     ish
+    0.00 :   9474:   ldr     x7, [sp, #224]
+    0.00 :   9478:   b       8f94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeb4>
+    0.00 :   947c:   ldrh    w0, [x25, #868]
+    0.00 :   9480:   and     w0, w0, #0x3
+    0.00 :   9484:   cmp     w0, #0x2
+    0.00 :   9488:   b.eq    95e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1500>  // b.none
+    0.00 :   948c:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9490:   ldr     w0, [x22, #2960]
+    0.00 :   9494:   tbz     w0, #2, 94bc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13dc>
+    0.00 :   9498:   ldr     x3, [x25, #8]
+    0.00 :   949c:   ldr     x1, [x27, #8]
+    0.00 :   94a0:   ldrsb   w0, [x3]
+    0.00 :   94a4:   ldr     x2, [x27, #48]
+    0.00 :   94a8:   cbnz    w0, 973c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x165c>
+    0.00 :   94ac:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   94b0:   add     x0, x0, #0x5f0
+    0.00 :   94b4:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   94b8:   cbnz    w24, 9308 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1228>
+    0.00 :   94bc:   mov     w0, #0x1                        // #1
+    0.00 :   94c0:   strb    w0, [x27, #871]
+    0.00 :   94c4:   b       9310 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   94c8:   mrs     x0, tpidr_el0
+    0.00 :   94cc:   str     x0, [sp, #176]
+    0.00 :   94d0:   sub     x0, x0, #0x73c
+    0.00 :   94d4:   ldxr    w1, [x0]
+    0.00 :   94d8:   stlxr   w2, wzr, [x0]
+    0.00 :   94dc:   cbnz    w2, 94d4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13f4>
+    0.00 :   94e0:   cmp     w1, #0x2
+    0.00 :   94e4:   b.ne    94fc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x141c>  // b.any
+    0.00 :   94e8:   mov     x1, #0x81                       // #129
+    0.00 :   94ec:   mov     x2, #0x1                        // #1
+    0.00 :   94f0:   mov     x3, #0x0                        // #0
+    0.00 :   94f4:   mov     x8, #0x62                       // #98
+    0.00 :   94f8:   svc     #0x0
+    0.00 :   94fc:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9500:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   9504:   str     x0, [sp, #136]
+    0.00 :   9508:   add     x0, x0, #0xa88
+    0.00 :   950c:   ldr     x1, [x1, #2888]
+    0.00 :   9510:   stp     x10, x4, [sp, #184]
+    0.00 :   9514:   mov     x27, x28
+    0.00 :   9518:   str     w7, [sp, #204]
+    0.00 :   951c:   blr     x1
+    0.00 :   9520:   ldp     x10, x4, [sp, #184]
+    0.00 :   9524:   ldr     x0, [x25, #1040]
+    0.00 :   9528:   ldr     w7, [sp, #204]
+    0.00 :   952c:   cmp     x0, #0x0
+    0.00 :   9530:   ccmp    x4, x0, #0x4, ne        // ne = any
+    0.00 :   9534:   b.eq    95a0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14c0>  // b.none
+    0.00 :   9538:   ldr     x1, [x0]
+    0.00 :   953c:   cbz     x1, 95a0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14c0>
+    0.00 :   9540:   mov     w2, #0x0                        // #0
+    0.00 :   9544:   b       9550 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1470>
+    0.00 :   9548:   ldr     x1, [x0, w2, uxtw #3]
+    0.00 :   954c:   cbz     x1, 95a0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14c0>
+    0.00 :   9550:   add     w2, w2, #0x1
+    0.00 :   9554:   cmp     x27, x1
+    0.00 :   9558:   b.ne    9548 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1468>  // b.any
+    0.00 :   955c:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9560:   ldr     x0, [sp, #136]
+    0.00 :   9564:   ldr     x1, [x1, #2896]
+    0.00 :   9568:   add     x0, x0, #0xa88
+    0.00 :   956c:   ldr     x27, [x27, #1224]
+    0.00 :   9570:   blr     x1
+    0.00 :   9574:   ldr     x0, [sp, #176]
+    0.00 :   9578:   sub     x1, x0, #0x740
+    0.00 :   957c:   mov     w0, #0x1                        // #1
+    0.00 :   9580:   str     w0, [x1, #4]
+    0.00 :   9584:   dmb     ish
+    0.00 :   9588:   ldr     x0, [sp, #168]
+    0.00 :   958c:   cmp     x27, x0
+    0.00 :   9590:   b.ne    9444 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1364>  // b.any
+    0.00 :   9594:   ldr     x7, [sp, #224]
+    0.00 :   9598:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   959c:   b       8f94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeb4>
+    0.00 :   95a0:   ldr     x0, [x25, #1056]
+    0.00 :   95a4:   cbz     x0, 9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>
+    0.00 :   95a8:   ldr     w1, [x0]
+    0.00 :   95ac:   cmp     x10, x0
+    0.00 :   95b0:   b.eq    9754 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1674>  // b.none
+    0.00 :   95b4:   cbz     w1, 974c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x166c>
+    0.00 :   95b8:   add     x0, x0, #0x8
+    0.00 :   95bc:   add     x2, x0, w1, uxtw #3
+    0.00 :   95c0:   b       95cc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14ec>
+    0.00 :   95c4:   cmp     x0, x2
+    0.00 :   95c8:   b.eq    9780 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x16a0>  // b.none
+    0.00 :   95cc:   ldr     x3, [x0]
+    0.00 :   95d0:   add     x0, x0, #0x8
+    0.00 :   95d4:   cmp     x27, x3
+    0.00 :   95d8:   b.ne    95c4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14e4>  // b.any
+    0.00 :   95dc:   b       955c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x147c>
+    0.00 :   95e0:   ldr     w0, [x25, #1064]
+    0.00 :   95e4:   cmp     w0, w7
+    0.00 :   95e8:   b.ls    9670 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1590>  // b.plast
+    0.00 :   95ec:   ldr     x0, [x25, #1056]
+    0.00 :   95f0:   add     x0, x0, w7, uxtw #3
+    0.00 :   95f4:   str     x27, [x0, #8]
+    0.00 :   95f8:   dmb     ish
+    0.00 :   95fc:   ldr     x0, [x25, #1056]
+    0.00 :   9600:   add     w7, w7, #0x1
+    0.00 :   9604:   str     w7, [x0]
+    0.00 :   9608:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   960c:   ldr     w0, [x22, #2960]
+    0.00 :   9610:   tbz     w0, #6, 9310 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   9614:   ldr     x1, [x27, #8]
+    0.00 :   9618:   ldrsb   w0, [x1]
+    0.00 :   961c:   cbnz    w0, 9630 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1550>
+    0.00 :   9620:   adrp    x0, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9624:   ldr     x0, [x0, #2928]
+    0.00 :   9628:   ldr     x1, [x0]
+    0.00 :   962c:   cbz     x1, 96dc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x15fc>
+    0.00 :   9630:   ldr     x3, [x25, #8]
+    0.00 :   9634:   ldr     x2, [x27, #48]
+    0.00 :   9638:   ldrsb   w0, [x3]
+    0.00 :   963c:   cbnz    w0, 9650 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1570>
+    0.00 :   9640:   adrp    x0, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9644:   ldr     x0, [x0, #2928]
+    0.00 :   9648:   ldr     x3, [x0]
+    0.00 :   964c:   cbz     x3, 9664 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1584>
+    0.00 :   9650:   ldr     x4, [x25, #48]
+    0.00 :   9654:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9658:   add     x0, x0, #0x6b8
+    0.00 :   965c:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   9660:   b       9310 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   9664:   adrp    x3, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   9668:   add     x3, x3, #0xa88
+    0.00 :   966c:   b       9650 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1570>
+    0.00 :   9670:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9674:   cmp     w0, #0x0
+    0.00 :   9678:   lsl     w0, w0, #1
+    0.00 :   967c:   mov     w2, #0xa                        // #10
+    0.00 :   9680:   ldr     x1, [x1, #2872]
+    0.00 :   9684:   csel    w22, w0, w2, ne // ne = any
+    0.00 :   9688:   mov     w0, w22
+    0.00 :   968c:   str     w7, [sp, #152]
+    0.00 :   9690:   add     x0, x0, #0x1
+    0.00 :   9694:   lsl     x0, x0, #3
+    0.00 :   9698:   blr     x1
+    0.00 :   969c:   ldr     w7, [sp, #152]
+    0.00 :   96a0:   mov     x26, x0
+    0.00 :   96a4:   cbz     x0, 970c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x162c>
+    0.00 :   96a8:   cbnz    w7, 96e8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1608>
+    0.00 :   96ac:   mov     x24, #0x0                       // #0
+    0.00 :   96b0:   add     x24, x26, x24, lsl #3
+    0.00 :   96b4:   add     w7, w7, #0x1
+    0.00 :   96b8:   str     x27, [x24, #8]
+    0.00 :   96bc:   str     w7, [x26]
+    0.00 :   96c0:   dmb     ish
+    0.00 :   96c4:   ldr     x0, [x25, #1056]
+    0.00 :   96c8:   str     x26, [x25, #1056]
+    0.00 :   96cc:   str     w22, [x25, #1064]
+    0.00 :   96d0:   cbz     x0, 9608 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1528>
+    0.00 :   96d4:   bl      ea00 <_dl_mcount@@GLIBC_2.17+0x23b0>
+    0.00 :   96d8:   b       9608 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1528>
+    0.00 :   96dc:   adrp    x1, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   96e0:   add     x1, x1, #0xa88
+    0.00 :   96e4:   b       9630 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1550>
+    0.00 :   96e8:   ldr     x1, [x25, #1056]
+    0.00 :   96ec:   mov     w24, w7
+    0.00 :   96f0:   ubfiz   x2, x7, #3, #32
+    0.00 :   96f4:   add     x0, x0, #0x8
+    0.00 :   96f8:   add     x1, x1, #0x8
+    0.00 :   96fc:   str     w7, [sp, #152]
+    0.00 :   9700:   bl      1b280 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x85a0>
+    0.00 :   9704:   ldr     w7, [sp, #152]
+    0.00 :   9708:   b       96b0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x15d0>
+    0.00 :   970c:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9710:   ldr     w0, [x22, #2960]
+    0.00 :   9714:   tbz     w0, #2, 94b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13d8>
+    0.00 :   9718:   ldrb    w0, [x27, #871]
+    0.00 :   971c:   tbnz    w0, #0, 94b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13d8>
+    0.00 :   9720:   cbnz    w24, 9788 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x16a8>
+    0.00 :   9724:   ldr     x1, [x27, #8]
+    0.00 :   9728:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   972c:   ldr     x2, [x27, #48]
+    0.00 :   9730:   add     x0, x0, #0x678
+    0.00 :   9734:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   9738:   b       94bc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13dc>
+    0.00 :   973c:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9740:   add     x0, x0, #0x638
+    0.00 :   9744:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   9748:   b       94b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13d8>
+    0.00 :   974c:   mov     w7, #0x0                        // #0
+    0.00 :   9750:   b       9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>
+    0.00 :   9754:   cmp     w7, w1
+    0.00 :   9758:   b.cs    9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>  // b.hs, b.nlast
+    0.00 :   975c:   add     x10, x10, w7, uxtw #3
+    0.00 :   9760:   b       976c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x168c>
+    0.00 :   9764:   cmp     w7, w1
+    0.00 :   9768:   b.eq    9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>  // b.none
+    0.00 :   976c:   ldr     x0, [x10, #8]!
+    0.00 :   9770:   add     w7, w7, #0x1
+    0.00 :   9774:   cmp     x27, x0
+    0.00 :   9778:   b.ne    9764 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1684>  // b.any
+    0.00 :   977c:   b       955c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x147c>
+    0.00 :   9780:   mov     w7, w1
+    0.00 :   9784:   b       9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>
+    0.00 :   9788:   ldrb    w0, [x27, #872]
+    0.00 :   978c:   tbnz    w0, #0, 9308 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1228>
+    0.00 :   9790:   ldr     x1, [x27, #8]
+    0.00 :   9794:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9798:   ldr     x2, [x27, #48]
+    0.00 :   979c:   add     x0, x0, #0x678
+    0.00 :   97a0:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   97a4:   b       9308 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1228>

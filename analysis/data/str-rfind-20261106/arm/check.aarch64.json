@@ -1,0 +1,87 @@
+[
+  {
+    "variant": "base",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+      "setarch",
+      "aarch64",
+      "-R",
+      "/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/probes-base",
+      "check"
+    ],
+    "stdout": "input=short_ascii bytes=64 chars=64 ptr_mod64=28\ninput=short_mixed bytes=65 chars=51 ptr_mod64=39\ninput=short_pile_of_poo bytes=65 chars=17 ptr_mod64=57\ninput=long_lorem_ipsum bytes=2551 chars=2551 ptr_mod64=58\nCHECK_OK cases=251168\n",
+    "stderr": ""
+  },
+  {
+    "variant": "nolsr",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+      "setarch",
+      "aarch64",
+      "-R",
+      "/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/probes-nolsr",
+      "check"
+    ],
+    "stdout": "input=short_ascii bytes=64 chars=64 ptr_mod64=60\ninput=short_mixed bytes=65 chars=51 ptr_mod64=7\ninput=short_pile_of_poo bytes=65 chars=17 ptr_mod64=25\ninput=long_lorem_ipsum bytes=2551 chars=2551 ptr_mod64=26\nCHECK_OK cases=251168\n",
+    "stderr": ""
+  },
+  {
+    "variant": "unroll4",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+      "setarch",
+      "aarch64",
+      "-R",
+      "/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/probes-unroll4",
+      "check"
+    ],
+    "stdout": "input=short_ascii bytes=64 chars=64 ptr_mod64=36\ninput=short_mixed bytes=65 chars=51 ptr_mod64=47\ninput=short_pile_of_poo bytes=65 chars=17 ptr_mod64=1\ninput=long_lorem_ipsum bytes=2551 chars=2551 ptr_mod64=2\nCHECK_OK cases=251168\n",
+    "stderr": ""
+  },
+  {
+    "variant": "noldst",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+      "setarch",
+      "aarch64",
+      "-R",
+      "/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/probes-noldst",
+      "check"
+    ],
+    "stdout": "input=short_ascii bytes=64 chars=64 ptr_mod64=60\ninput=short_mixed bytes=65 chars=51 ptr_mod64=7\ninput=short_pile_of_poo bytes=65 chars=17 ptr_mod64=25\ninput=long_lorem_ipsum bytes=2551 chars=2551 ptr_mod64=26\nCHECK_OK cases=251168\n",
+    "stderr": ""
+  },
+  {
+    "variant": "both",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+      "setarch",
+      "aarch64",
+      "-R",
+      "/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/probes-both",
+      "check"
+    ],
+    "stdout": "input=short_ascii bytes=64 chars=64 ptr_mod64=60\ninput=short_mixed bytes=65 chars=51 ptr_mod64=7\ninput=short_pile_of_poo bytes=65 chars=17 ptr_mod64=25\ninput=long_lorem_ipsum bytes=2551 chars=2551 ptr_mod64=26\nCHECK_OK cases=251168\n",
+    "stderr": ""
+  }
+]

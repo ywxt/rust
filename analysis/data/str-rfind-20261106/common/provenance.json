@@ -1,0 +1,36 @@
+{
+  "source_head": "dc55da5cca14a0aa773ecb7a0459756260b2ee5c",
+  "files": {
+    "library/alloctests/benches/str.rs": "437fd2b6a0b452233a1b0d36741a173499e04527b002d7011a8f5912b92ddf58",
+    "library/core/src/str/mod.rs": "11f358340886993d01a61ef48bfb6e00b58fe19a52ce858132142051ab2fd079",
+    "library/core/src/str/pattern.rs": "878333fb2b4371194f0853b93ff4fc53efe02be878f603b546ab5ae00fa3eefd",
+    "library/core/src/slice/memchr.rs": "c2bc761de734a9e25e02b45b199be8ec4cf3d8730da70b0d6847e4a02745eae7",
+    "library/core/src/slice/mod.rs": "8026ddec62fb732d01dc6fcb700fbf109aa5dd94d2391387db3202f405669d43"
+  },
+  "benchmarks": [
+    "str::rfind_underscore_char::short_ascii",
+    "str::rfind_underscore_char::short_mixed",
+    "str::rfind_underscore_char::short_pile_of_poo",
+    "str::rfind_underscore_char::long_lorem_ipsum",
+    "str::rfind_zzz_char::short_ascii",
+    "str::rfind_zzz_char::short_mixed",
+    "str::rfind_zzz_char::short_pile_of_poo",
+    "str::rfind_zzz_char::long_lorem_ipsum",
+    "str::find_underscore_char::short_ascii",
+    "str::find_underscore_char::short_mixed",
+    "str::find_underscore_char::short_pile_of_poo",
+    "str::find_underscore_char::long_lorem_ipsum",
+    "str::find_zzz_char::short_ascii",
+    "str::find_zzz_char::short_mixed",
+    "str::find_zzz_char::short_pile_of_poo",
+    "str::find_zzz_char::long_lorem_ipsum"
+  ],
+  "compiler": "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+  "sysroot": "/tmp/contains-bad-simd-20261105/sysroots/baseline",
+  "benchmark_macros_preserved": true,
+  "copied_memrchr_changes": [
+    "rename",
+    "noinline/export annotation",
+    "equivalent repeated-byte construction"
+  ]
+}

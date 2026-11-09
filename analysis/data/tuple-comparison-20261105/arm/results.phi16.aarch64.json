@@ -1,0 +1,602 @@
+[
+  {
+    "round": 0,
+    "binary": "probe-phi16",
+    "mode": "original",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "original",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":99673710,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "290051040,,cycles:u,101674470,100.00,,\n941131862,,instructions:u,101674470,100.00,3.24,insn per cycle\n90238992,,branches:u,101674470,100.00,,\n14805,,branch-misses:u,101674470,100.00,0.02,of all branches\n101.67,msec,task-clock,101674470,100.00,0.987,CPUs utilized\n5,,context-switches,101674470,100.00,49.177,/sec\n1,,cpu-migrations,101674470,100.00,9.835,/sec\n272,,minor-faults,101674470,100.00,2.675,K/sec\n2,,major-faults,101674470,100.00,19.671,/sec\n",
+    "metrics": {
+      "cycles": 290051040.0,
+      "instructions": 941131862.0,
+      "branches": 90238992.0,
+      "branch-misses": 14805.0,
+      "task-clock": 101.67,
+      "context-switches": 5.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 272.0,
+      "major-faults": 2.0
+    },
+    "loop": {
+      "elapsed_ns": 99673710,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 0,
+    "binary": "probe-phi16",
+    "mode": "two",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "two",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":86295750,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "251013318,,cycles:u,87755130,100.00,,\n831132451,,instructions:u,87755130,100.00,3.31,insn per cycle\n90239120,,branches:u,87755130,100.00,,\n14544,,branch-misses:u,87755130,100.00,0.02,of all branches\n87.76,msec,task-clock,87755130,100.00,0.995,CPUs utilized\n2,,context-switches,87755130,100.00,22.791,/sec\n1,,cpu-migrations,87755130,100.00,11.395,/sec\n272,,minor-faults,87755130,100.00,3.100,K/sec\n0,,major-faults,87755130,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 251013318.0,
+      "instructions": 831132451.0,
+      "branches": 90239120.0,
+      "branch-misses": 14544.0,
+      "task-clock": 87.76,
+      "context-switches": 2.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 272.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 86295750,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 0,
+    "binary": "probe-phi16",
+    "mode": "match",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "match",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":81275950,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "236312843,,cycles:u,82735720,100.00,,\n771132106,,instructions:u,82735720,100.00,3.26,insn per cycle\n90239044,,branches:u,82735720,100.00,,\n14219,,branch-misses:u,82735720,100.00,0.02,of all branches\n82.74,msec,task-clock,82735720,100.00,0.994,CPUs utilized\n3,,context-switches,82735720,100.00,36.260,/sec\n1,,cpu-migrations,82735720,100.00,12.087,/sec\n274,,minor-faults,82735720,100.00,3.312,K/sec\n0,,major-faults,82735720,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 236312843.0,
+      "instructions": 771132106.0,
+      "branches": 90239044.0,
+      "branch-misses": 14219.0,
+      "task-clock": 82.74,
+      "context-switches": 3.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 274.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 81275950,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 1,
+    "binary": "probe-phi16",
+    "mode": "two",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "two",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":88254450,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "256514995,,cycles:u,89626400,100.00,,\n831131938,,instructions:u,89626400,100.00,3.24,insn per cycle\n90239006,,branches:u,89626400,100.00,,\n14253,,branch-misses:u,89626400,100.00,0.02,of all branches\n89.63,msec,task-clock,89626400,100.00,0.995,CPUs utilized\n3,,context-switches,89626400,100.00,33.472,/sec\n1,,cpu-migrations,89626400,100.00,11.157,/sec\n273,,minor-faults,89626400,100.00,3.046,K/sec\n0,,major-faults,89626400,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 256514995.0,
+      "instructions": 831131938.0,
+      "branches": 90239006.0,
+      "branch-misses": 14253.0,
+      "task-clock": 89.63,
+      "context-switches": 3.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 273.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 88254450,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 1,
+    "binary": "probe-phi16",
+    "mode": "original",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "original",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":99434640,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "288913309,,cycles:u,100790610,100.00,,\n941132538,,instructions:u,100790610,100.00,3.26,insn per cycle\n90239142,,branches:u,100790610,100.00,,\n14141,,branch-misses:u,100790610,100.00,0.02,of all branches\n100.79,msec,task-clock,100790610,100.00,0.995,CPUs utilized\n2,,context-switches,100790610,100.00,19.843,/sec\n1,,cpu-migrations,100790610,100.00,9.922,/sec\n274,,minor-faults,100790610,100.00,2.719,K/sec\n0,,major-faults,100790610,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 288913309.0,
+      "instructions": 941132538.0,
+      "branches": 90239142.0,
+      "branch-misses": 14141.0,
+      "task-clock": 100.79,
+      "context-switches": 2.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 274.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 99434640,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 1,
+    "binary": "probe-phi16",
+    "mode": "match",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "match",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":80613720,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "234370881,,cycles:u,81958600,100.00,,\n771132407,,instructions:u,81958600,100.00,3.29,insn per cycle\n90239111,,branches:u,81958600,100.00,,\n14138,,branch-misses:u,81958600,100.00,0.02,of all branches\n81.96,msec,task-clock,81958600,100.00,0.994,CPUs utilized\n2,,context-switches,81958600,100.00,24.403,/sec\n1,,cpu-migrations,81958600,100.00,12.201,/sec\n273,,minor-faults,81958600,100.00,3.331,K/sec\n0,,major-faults,81958600,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 234370881.0,
+      "instructions": 771132407.0,
+      "branches": 90239111.0,
+      "branch-misses": 14138.0,
+      "task-clock": 81.96,
+      "context-switches": 2.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 273.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 80613720,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 2,
+    "binary": "probe-phi16",
+    "mode": "match",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "match",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":79343980,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "230662183,,cycles:u,80685850,100.00,,\n771131881,,instructions:u,80685850,100.00,3.34,insn per cycle\n90238994,,branches:u,80685850,100.00,,\n13932,,branch-misses:u,80685850,100.00,0.02,of all branches\n80.69,msec,task-clock,80685850,100.00,0.995,CPUs utilized\n3,,context-switches,80685850,100.00,37.181,/sec\n1,,cpu-migrations,80685850,100.00,12.394,/sec\n273,,minor-faults,80685850,100.00,3.383,K/sec\n0,,major-faults,80685850,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 230662183.0,
+      "instructions": 771131881.0,
+      "branches": 90238994.0,
+      "branch-misses": 13932.0,
+      "task-clock": 80.69,
+      "context-switches": 3.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 273.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 79343980,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 2,
+    "binary": "probe-phi16",
+    "mode": "two",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "two",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":86967950,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "252696862,,cycles:u,88266170,100.00,,\n831132325,,instructions:u,88266170,100.00,3.29,insn per cycle\n90239092,,branches:u,88266170,100.00,,\n14129,,branch-misses:u,88266170,100.00,0.02,of all branches\n88.27,msec,task-clock,88266170,100.00,0.995,CPUs utilized\n4,,context-switches,88266170,100.00,45.317,/sec\n1,,cpu-migrations,88266170,100.00,11.329,/sec\n273,,minor-faults,88266170,100.00,3.093,K/sec\n0,,major-faults,88266170,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 252696862.0,
+      "instructions": 831132325.0,
+      "branches": 90239092.0,
+      "branch-misses": 14129.0,
+      "task-clock": 88.27,
+      "context-switches": 4.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 273.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 86967950,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 2,
+    "binary": "probe-phi16",
+    "mode": "original",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "original",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":101190600,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "293991547,,cycles:u,102533340,100.00,,\n941132108,,instructions:u,102533340,100.00,3.20,insn per cycle\n90239046,,branches:u,102533340,100.00,,\n14016,,branch-misses:u,102533340,100.00,0.02,of all branches\n102.53,msec,task-clock,102533340,100.00,0.995,CPUs utilized\n2,,context-switches,102533340,100.00,19.506,/sec\n1,,cpu-migrations,102533340,100.00,9.753,/sec\n273,,minor-faults,102533340,100.00,2.663,K/sec\n0,,major-faults,102533340,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 293991547.0,
+      "instructions": 941132108.0,
+      "branches": 90239046.0,
+      "branch-misses": 14016.0,
+      "task-clock": 102.53,
+      "context-switches": 2.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 273.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 101190600,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 3,
+    "binary": "probe-phi16",
+    "mode": "original",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "original",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":99667200,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "289557752,,cycles:u,101030600,100.00,,\n941132128,,instructions:u,101030600,100.00,3.25,insn per cycle\n90239051,,branches:u,101030600,100.00,,\n14155,,branch-misses:u,101030600,100.00,0.02,of all branches\n101.03,msec,task-clock,101030600,100.00,0.996,CPUs utilized\n3,,context-switches,101030600,100.00,29.694,/sec\n1,,cpu-migrations,101030600,100.00,9.898,/sec\n274,,minor-faults,101030600,100.00,2.712,K/sec\n0,,major-faults,101030600,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 289557752.0,
+      "instructions": 941132128.0,
+      "branches": 90239051.0,
+      "branch-misses": 14155.0,
+      "task-clock": 101.03,
+      "context-switches": 3.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 274.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 99667200,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 3,
+    "binary": "probe-phi16",
+    "mode": "two",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "two",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":86661110,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "251859693,,cycles:u,87995880,100.00,,\n831132132,,instructions:u,87995880,100.00,3.30,insn per cycle\n90239049,,branches:u,87995880,100.00,,\n14086,,branch-misses:u,87995880,100.00,0.02,of all branches\n88.00,msec,task-clock,87995880,100.00,0.995,CPUs utilized\n3,,context-switches,87995880,100.00,34.093,/sec\n1,,cpu-migrations,87995880,100.00,11.364,/sec\n273,,minor-faults,87995880,100.00,3.102,K/sec\n0,,major-faults,87995880,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 251859693.0,
+      "instructions": 831132132.0,
+      "branches": 90239049.0,
+      "branch-misses": 14086.0,
+      "task-clock": 88.0,
+      "context-switches": 3.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 273.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 86661110,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 3,
+    "binary": "probe-phi16",
+    "mode": "match",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "match",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":79130020,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "230015399,,cycles:u,80453950,100.00,,\n771132493,,instructions:u,80453950,100.00,3.35,insn per cycle\n90239130,,branches:u,80453950,100.00,,\n14022,,branch-misses:u,80453950,100.00,0.02,of all branches\n80.45,msec,task-clock,80453950,100.00,0.994,CPUs utilized\n3,,context-switches,80453950,100.00,37.288,/sec\n1,,cpu-migrations,80453950,100.00,12.429,/sec\n274,,minor-faults,80453950,100.00,3.406,K/sec\n0,,major-faults,80453950,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 230015399.0,
+      "instructions": 771132493.0,
+      "branches": 90239130.0,
+      "branch-misses": 14022.0,
+      "task-clock": 80.45,
+      "context-switches": 3.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 274.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 79130020,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 4,
+    "binary": "probe-phi16",
+    "mode": "original",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "original",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":99791080,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "289860800,,cycles:u,101133520,100.00,,\n941132556,,instructions:u,101133520,100.00,3.25,insn per cycle\n90239146,,branches:u,101133520,100.00,,\n14030,,branch-misses:u,101133520,100.00,0.02,of all branches\n101.13,msec,task-clock,101133520,100.00,0.995,CPUs utilized\n4,,context-switches,101133520,100.00,39.552,/sec\n1,,cpu-migrations,101133520,100.00,9.888,/sec\n273,,minor-faults,101133520,100.00,2.699,K/sec\n0,,major-faults,101133520,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 289860800.0,
+      "instructions": 941132556.0,
+      "branches": 90239146.0,
+      "branch-misses": 14030.0,
+      "task-clock": 101.13,
+      "context-switches": 4.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 273.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 99791080,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 4,
+    "binary": "probe-phi16",
+    "mode": "match",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "match",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":81208920,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "236099838,,cycles:u,82585970,100.00,,\n771132214,,instructions:u,82585970,100.00,3.27,insn per cycle\n90239068,,branches:u,82585970,100.00,,\n14062,,branch-misses:u,82585970,100.00,0.02,of all branches\n82.59,msec,task-clock,82585970,100.00,0.994,CPUs utilized\n3,,context-switches,82585970,100.00,36.326,/sec\n1,,cpu-migrations,82585970,100.00,12.109,/sec\n272,,minor-faults,82585970,100.00,3.294,K/sec\n0,,major-faults,82585970,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 236099838.0,
+      "instructions": 771132214.0,
+      "branches": 90239068.0,
+      "branch-misses": 14062.0,
+      "task-clock": 82.59,
+      "context-switches": 3.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 272.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 81208920,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  },
+  {
+    "round": 4,
+    "binary": "probe-phi16",
+    "mode": "two",
+    "reps": 10000000,
+    "command": [
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/tuple-comparison-20261105/probe-phi16",
+      "two",
+      "10000000"
+    ],
+    "stdout": "{\"elapsed_ns\":88301540,\"reps\":10000000,\"checksum\":16777472}\n",
+    "stderr": "256606402,,cycles:u,89647120,100.00,,\n831132393,,instructions:u,89647120,100.00,3.24,insn per cycle\n90239107,,branches:u,89647120,100.00,,\n13793,,branch-misses:u,89647120,100.00,0.02,of all branches\n89.65,msec,task-clock,89647120,100.00,0.995,CPUs utilized\n3,,context-switches,89647120,100.00,33.465,/sec\n1,,cpu-migrations,89647120,100.00,11.155,/sec\n273,,minor-faults,89647120,100.00,3.045,K/sec\n0,,major-faults,89647120,100.00,0.000,/sec\n",
+    "metrics": {
+      "cycles": 256606402.0,
+      "instructions": 831132393.0,
+      "branches": 90239107.0,
+      "branch-misses": 13793.0,
+      "task-clock": 89.65,
+      "context-switches": 3.0,
+      "cpu-migrations": 1.0,
+      "minor-faults": 273.0,
+      "major-faults": 0.0
+    },
+    "loop": {
+      "elapsed_ns": 88301540,
+      "reps": 10000000,
+      "checksum": 16777472
+    }
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "baseline": "main contains implementation; unrelated preexisting changes fixed",
+  "change": "Preserve Option<usize> ABI, original alignment prefix and one shared scalar hit/tail block. Peel one 64B cache line using original eager word presence tests. SIMD64 long body only after those four word pairs miss; scalar word remainder; original memchr/find/split unaffected. No assert_unchecked in contains_index.",
+  "cpu_midr_el1": "0x00000000480fd020",
+  "cpu_model": "920B per user; hardware MIDR recorded",
+  "new_inline_attributes": 0,
+  "previous_candidate": "/tmp/contains-arm-short-main-20261106",
+  "acceptance": [
+    "no reproducible regression in tested scenarios",
+    "lower 920B/x86-main cycles ratio"
+  ],
+  "endianness_and_pointer_guard": "aarch64 + neon + little endian + 64bit",
+  "audit_method": "read-only Python ELF parser; no objcopy rewriting of measured artifacts",
+  "tail_change": "original word and scalar hit/tail paths; SIMD restricted to long body"
+}

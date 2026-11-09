@@ -1,0 +1,758 @@
+{
+  "aarch64": {
+    "matrix_change": {
+      "candidate": {
+        "min_pct": -95.3029046014808,
+        "max_pct": 25.21346800630857,
+        "regression_gt_5pct": 41
+      },
+      "mask": {
+        "min_pct": -34.42554424150865,
+        "max_pct": 23.014463334179112,
+        "regression_gt_5pct": 6
+      },
+      "combined": {
+        "min_pct": -95.7711542059635,
+        "max_pct": 42.409802586793724,
+        "regression_gt_5pct": 40
+      }
+    },
+    "minimum_pmu_running_percent": 100.0,
+    "ns_target": {
+      "arch": "aarch64",
+      "case": "str::bench_contains_bad_simd",
+      "baseline": 101.68,
+      "baseline_range": [
+        96.26,
+        101.87
+      ],
+      "candidate": 25.65,
+      "candidate_range": [
+        25.65,
+        25.65
+      ],
+      "mask": 98.03,
+      "mask_range": [
+        97.82,
+        101.19
+      ],
+      "combined": 25.59,
+      "combined_range": [
+        25.56,
+        25.62
+      ]
+    },
+    "counter_target": [
+      {
+        "arch": "aarch64",
+        "case": "str::bench_contains_bad_simd",
+        "variant": "baseline",
+        "cycles": 285.9816648,
+        "instructions": 1283.2638366,
+        "branches": 323.0555906,
+        "branch-misses": 2.0035164
+      },
+      {
+        "arch": "aarch64",
+        "case": "str::bench_contains_bad_simd",
+        "variant": "candidate",
+        "cycles": 28.2570096,
+        "instructions": 150.2638324,
+        "branches": 27.0555898,
+        "branch-misses": 0.0034764
+      },
+      {
+        "arch": "aarch64",
+        "case": "str::bench_contains_bad_simd",
+        "variant": "mask",
+        "cycles": 286.764187,
+        "instructions": 1283.2638168,
+        "branches": 323.0555858,
+        "branch-misses": 2.0035282
+      },
+      {
+        "arch": "aarch64",
+        "case": "str::bench_contains_bad_simd",
+        "variant": "combined",
+        "cycles": 24.9692566,
+        "instructions": 132.2638352,
+        "branches": 24.0555904,
+        "branch-misses": 0.0034812
+      }
+    ],
+    "matrix_worst": {
+      "candidate": [
+        {
+          "arch": "aarch64",
+          "tag": "dense-m8-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 8,
+          "offset": 0,
+          "hit": false,
+          "baseline": 3574.189,
+          "baseline_change_pct": 0.0,
+          "candidate": 4475.366,
+          "candidate_change_pct": 25.21346800630857,
+          "mask": 3570.414,
+          "mask_change_pct": -0.1056183654529641,
+          "combined": 4309.059,
+          "combined_change_pct": 20.560468402762154
+        },
+        {
+          "arch": "aarch64",
+          "tag": "dense-m16-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 16,
+          "offset": 0,
+          "hit": false,
+          "baseline": 3597.786,
+          "baseline_change_pct": 0.0,
+          "candidate": 4478.065,
+          "candidate_change_pct": 24.467241798150297,
+          "mask": 3595.861,
+          "mask_change_pct": -0.05350512787587469,
+          "combined": 4311.96,
+          "combined_change_pct": 19.85037464707462
+        },
+        {
+          "arch": "aarch64",
+          "tag": "dense-m32-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 3648.729,
+          "baseline_change_pct": 0.0,
+          "candidate": 4460.144,
+          "candidate_change_pct": 22.238291744878836,
+          "mask": 3644.528,
+          "mask_change_pct": -0.1151359829683174,
+          "combined": 4295.27,
+          "combined_change_pct": 17.719622367131137
+        },
+        {
+          "arch": "aarch64",
+          "tag": "dense-m8-len256-ab",
+          "hay_len": 256,
+          "needle_len": 8,
+          "offset": 0,
+          "hit": false,
+          "baseline": 258.8568,
+          "baseline_change_pct": 0.0,
+          "candidate": 299.4632,
+          "candidate_change_pct": 15.686819894242676,
+          "mask": 258.6076,
+          "mask_change_pct": -0.09626944318249508,
+          "combined": 290.3482,
+          "combined_change_pct": 12.165567989714777
+        },
+        {
+          "arch": "aarch64",
+          "tag": "probe-m32-pos31-len74",
+          "hay_len": 74,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 6.943,
+          "baseline_change_pct": 0.0,
+          "candidate": 8.015,
+          "candidate_change_pct": 15.440011522396668,
+          "mask": 6.9322,
+          "mask_change_pct": -0.15555235488980967,
+          "combined": 8.7798,
+          "combined_change_pct": 26.455422727927402
+        },
+        {
+          "arch": "aarch64",
+          "tag": "uniform-m1-len256-c",
+          "hay_len": 256,
+          "needle_len": 1,
+          "offset": 0,
+          "hit": false,
+          "baseline": 10.2466,
+          "baseline_change_pct": 0.0,
+          "candidate": 11.804,
+          "candidate_change_pct": 15.199188023344323,
+          "mask": 12.6048,
+          "mask_change_pct": 23.014463334179112,
+          "combined": 12.7106,
+          "combined_change_pct": 24.047000956414788
+        }
+      ],
+      "mask": [
+        {
+          "arch": "aarch64",
+          "tag": "uniform-m1-len256-c",
+          "hay_len": 256,
+          "needle_len": 1,
+          "offset": 0,
+          "hit": false,
+          "baseline": 10.2466,
+          "baseline_change_pct": 0.0,
+          "candidate": 11.804,
+          "candidate_change_pct": 15.199188023344323,
+          "mask": 12.6048,
+          "mask_change_pct": 23.014463334179112,
+          "combined": 12.7106,
+          "combined_change_pct": 24.047000956414788
+        },
+        {
+          "arch": "aarch64",
+          "tag": "position-m32-len32-first-off15",
+          "hay_len": 32,
+          "needle_len": 32,
+          "offset": 15,
+          "hit": true,
+          "baseline": 5.4342,
+          "baseline_change_pct": 0.0,
+          "candidate": 5.873,
+          "candidate_change_pct": 8.074785617018154,
+          "mask": 6.4876,
+          "mask_change_pct": 19.384638033197167,
+          "combined": 5.9298,
+          "combined_change_pct": 9.120017665893787
+        },
+        {
+          "arch": "aarch64",
+          "tag": "uniform-m2-len74-c",
+          "hay_len": 74,
+          "needle_len": 2,
+          "offset": 0,
+          "hit": false,
+          "baseline": 8.2264,
+          "baseline_change_pct": 0.0,
+          "candidate": 8.2394,
+          "candidate_change_pct": 0.1580278128950674,
+          "mask": 8.9838,
+          "mask_change_pct": 9.206943498978903,
+          "combined": 11.7152,
+          "combined_change_pct": 42.409802586793724
+        },
+        {
+          "arch": "aarch64",
+          "tag": "uniform-m1-len32-c",
+          "hay_len": 32,
+          "needle_len": 1,
+          "offset": 0,
+          "hit": false,
+          "baseline": 6.1006,
+          "baseline_change_pct": 0.0,
+          "candidate": 6.2162,
+          "candidate_change_pct": 1.894895584040901,
+          "mask": 6.561,
+          "mask_change_pct": 7.546798675540112,
+          "combined": 6.5658,
+          "combined_change_pct": 7.625479461036622
+        },
+        {
+          "arch": "aarch64",
+          "tag": "position-m32-len32-first-off0",
+          "hay_len": 32,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": true,
+          "baseline": 4.366,
+          "baseline_change_pct": 0.0,
+          "candidate": 4.7542,
+          "candidate_change_pct": 8.891433806688042,
+          "mask": 4.6144,
+          "mask_change_pct": 5.689418231791121,
+          "combined": 4.5642,
+          "combined_change_pct": 4.539624370132844
+        },
+        {
+          "arch": "aarch64",
+          "tag": "unicode-967-5",
+          "hay_len": 27,
+          "needle_len": 5,
+          "offset": 1,
+          "hit": false,
+          "baseline": 6.5934,
+          "baseline_change_pct": 0.0,
+          "candidate": 6.4992,
+          "candidate_change_pct": -1.4287014287014288,
+          "mask": 6.9256,
+          "mask_change_pct": 5.03837170503838,
+          "combined": 6.5346,
+          "combined_change_pct": -0.8918008918008868
+        }
+      ],
+      "combined": [
+        {
+          "arch": "aarch64",
+          "tag": "uniform-m2-len74-c",
+          "hay_len": 74,
+          "needle_len": 2,
+          "offset": 0,
+          "hit": false,
+          "baseline": 8.2264,
+          "baseline_change_pct": 0.0,
+          "candidate": 8.2394,
+          "candidate_change_pct": 0.1580278128950674,
+          "mask": 8.9838,
+          "mask_change_pct": 9.206943498978903,
+          "combined": 11.7152,
+          "combined_change_pct": 42.409802586793724
+        },
+        {
+          "arch": "aarch64",
+          "tag": "uniform-m1-len64-c",
+          "hay_len": 64,
+          "needle_len": 1,
+          "offset": 0,
+          "hit": false,
+          "baseline": 5.071,
+          "baseline_change_pct": 0.0,
+          "candidate": 5.0642,
+          "candidate_change_pct": -0.13409583908499112,
+          "mask": 5.0652,
+          "mask_change_pct": -0.11437586274896105,
+          "combined": 7.0718,
+          "combined_change_pct": 39.45572865312561
+        },
+        {
+          "arch": "aarch64",
+          "tag": "probe-m32-pos31-len74",
+          "hay_len": 74,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 6.943,
+          "baseline_change_pct": 0.0,
+          "candidate": 8.015,
+          "candidate_change_pct": 15.440011522396668,
+          "mask": 6.9322,
+          "mask_change_pct": -0.15555235488980967,
+          "combined": 8.7798,
+          "combined_change_pct": 26.455422727927402
+        },
+        {
+          "arch": "aarch64",
+          "tag": "uniform-m1-len256-c",
+          "hay_len": 256,
+          "needle_len": 1,
+          "offset": 0,
+          "hit": false,
+          "baseline": 10.2466,
+          "baseline_change_pct": 0.0,
+          "candidate": 11.804,
+          "candidate_change_pct": 15.199188023344323,
+          "mask": 12.6048,
+          "mask_change_pct": 23.014463334179112,
+          "combined": 12.7106,
+          "combined_change_pct": 24.047000956414788
+        },
+        {
+          "arch": "aarch64",
+          "tag": "dense-m8-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 8,
+          "offset": 0,
+          "hit": false,
+          "baseline": 3574.189,
+          "baseline_change_pct": 0.0,
+          "candidate": 4475.366,
+          "candidate_change_pct": 25.21346800630857,
+          "mask": 3570.414,
+          "mask_change_pct": -0.1056183654529641,
+          "combined": 4309.059,
+          "combined_change_pct": 20.560468402762154
+        },
+        {
+          "arch": "aarch64",
+          "tag": "dense-m16-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 16,
+          "offset": 0,
+          "hit": false,
+          "baseline": 3597.786,
+          "baseline_change_pct": 0.0,
+          "candidate": 4478.065,
+          "candidate_change_pct": 24.467241798150297,
+          "mask": 3595.861,
+          "mask_change_pct": -0.05350512787587469,
+          "combined": 4311.96,
+          "combined_change_pct": 19.85037464707462
+        }
+      ]
+    }
+  },
+  "x86_64": {
+    "matrix_change": {
+      "candidate": {
+        "min_pct": -95.56943307434881,
+        "max_pct": 42.58980544492985,
+        "regression_gt_5pct": 104
+      },
+      "mask": {
+        "min_pct": -19.66132368148914,
+        "max_pct": 72.83786544153112,
+        "regression_gt_5pct": 332
+      },
+      "combined": {
+        "min_pct": -95.61567625543124,
+        "max_pct": 41.794771895758245,
+        "regression_gt_5pct": 95
+      }
+    },
+    "minimum_pmu_running_percent": 100.0,
+    "ns_target": {
+      "arch": "x86_64",
+      "case": "str::bench_contains_bad_simd",
+      "baseline": 49.64,
+      "baseline_range": [
+        49.0,
+        49.84
+      ],
+      "candidate": 5.14,
+      "candidate_range": [
+        5.12,
+        5.14
+      ],
+      "mask": 54.78,
+      "mask_range": [
+        54.21,
+        55.08
+      ],
+      "combined": 5.13,
+      "combined_range": [
+        5.13,
+        5.13
+      ]
+    },
+    "counter_target": [
+      {
+        "arch": "x86_64",
+        "case": "str::bench_contains_bad_simd",
+        "variant": "baseline",
+        "cycles": 226.568256,
+        "instructions": 1229.6647086,
+        "branches": 310.1280306,
+        "branch-misses": 0.5062958
+      },
+      {
+        "arch": "x86_64",
+        "case": "str::bench_contains_bad_simd",
+        "variant": "candidate",
+        "cycles": 23.8324336,
+        "instructions": 153.6646246,
+        "branches": 27.1279736,
+        "branch-misses": 0.004988
+      },
+      {
+        "arch": "x86_64",
+        "case": "str::bench_contains_bad_simd",
+        "variant": "mask",
+        "cycles": 248.5054122,
+        "instructions": 1230.6646928,
+        "branches": 310.1280422,
+        "branch-misses": 0.6384138
+      },
+      {
+        "arch": "x86_64",
+        "case": "str::bench_contains_bad_simd",
+        "variant": "combined",
+        "cycles": 23.8269878,
+        "instructions": 149.664633,
+        "branches": 24.1279742,
+        "branch-misses": 0.0050514
+      }
+    ],
+    "matrix_worst": {
+      "candidate": [
+        {
+          "arch": "x86_64",
+          "tag": "dense-m8-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 8,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1583.3923,
+          "baseline_change_pct": 0.0,
+          "candidate": 2257.756,
+          "candidate_change_pct": 42.58980544492985,
+          "mask": 1599.8265,
+          "mask_change_pct": 1.037910819700194,
+          "combined": 2245.1675,
+          "combined_change_pct": 41.794771895758245
+        },
+        {
+          "arch": "x86_64",
+          "tag": "uniform-m1-len32-c",
+          "hay_len": 32,
+          "needle_len": 1,
+          "offset": 0,
+          "hit": false,
+          "baseline": 3.78188,
+          "baseline_change_pct": 0.0,
+          "candidate": 5.37524,
+          "candidate_change_pct": 42.13142669783281,
+          "mask": 4.73054,
+          "mask_change_pct": 25.084349582747212,
+          "combined": 4.90592,
+          "combined_change_pct": 29.72172570256062
+        },
+        {
+          "arch": "x86_64",
+          "tag": "dense-m16-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 16,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1613.2154,
+          "baseline_change_pct": 0.0,
+          "candidate": 2283.0968,
+          "candidate_change_pct": 41.52460979482342,
+          "mask": 1598.6299,
+          "mask_change_pct": -0.9041260082193747,
+          "combined": 2258.7759,
+          "combined_change_pct": 40.017005788563644
+        },
+        {
+          "arch": "x86_64",
+          "tag": "uniform-m1-len16-c",
+          "hay_len": 16,
+          "needle_len": 1,
+          "offset": 0,
+          "hit": false,
+          "baseline": 3.41232,
+          "baseline_change_pct": 0.0,
+          "candidate": 4.4008,
+          "candidate_change_pct": 28.967974867538814,
+          "mask": 3.97334,
+          "mask_change_pct": 16.441013738453613,
+          "combined": 3.92566,
+          "combined_change_pct": 15.043723918038188
+        },
+        {
+          "arch": "x86_64",
+          "tag": "dense-m32-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1848.2815,
+          "baseline_change_pct": 0.0,
+          "candidate": 2274.3299,
+          "candidate_change_pct": 23.051055805081646,
+          "mask": 3110.9048,
+          "mask_change_pct": 68.31336568590875,
+          "combined": 2215.9828,
+          "combined_change_pct": 19.89422606891862
+        },
+        {
+          "arch": "x86_64",
+          "tag": "uniform-m5-len4096-a",
+          "hay_len": 4096,
+          "needle_len": 5,
+          "offset": 0,
+          "hit": true,
+          "baseline": 17.7053,
+          "baseline_change_pct": 0.0,
+          "candidate": 21.5912,
+          "candidate_change_pct": 21.94766538833004,
+          "mask": 20.6842,
+          "mask_change_pct": 16.82490553676017,
+          "combined": 18.752,
+          "combined_change_pct": 5.911789125290157
+        }
+      ],
+      "mask": [
+        {
+          "arch": "x86_64",
+          "tag": "dense-m32-len4096-aaaaab",
+          "hay_len": 4096,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1394.7409,
+          "baseline_change_pct": 0.0,
+          "candidate": 1051.8517,
+          "candidate_change_pct": -24.584437152448892,
+          "mask": 2410.6404,
+          "mask_change_pct": 72.83786544153112,
+          "combined": 891.4844,
+          "combined_change_pct": -36.08243652996768
+        },
+        {
+          "arch": "x86_64",
+          "tag": "dense-m32-len4096-aaab",
+          "hay_len": 4096,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1622.0283,
+          "baseline_change_pct": 0.0,
+          "candidate": 1257.291,
+          "candidate_change_pct": -22.486494224545893,
+          "mask": 2735.5272,
+          "mask_change_pct": 68.64854947352028,
+          "combined": 1086.7404,
+          "combined_change_pct": -33.00114430802471
+        },
+        {
+          "arch": "x86_64",
+          "tag": "dense-m32-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1848.2815,
+          "baseline_change_pct": 0.0,
+          "candidate": 2274.3299,
+          "candidate_change_pct": 23.051055805081646,
+          "mask": 3110.9048,
+          "mask_change_pct": 68.31336568590875,
+          "combined": 2215.9828,
+          "combined_change_pct": 19.89422606891862
+        },
+        {
+          "arch": "x86_64",
+          "tag": "dense-m32-len256-ab",
+          "hay_len": 256,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 167.9985,
+          "baseline_change_pct": 0.0,
+          "candidate": 137.46362,
+          "candidate_change_pct": -18.175686092435363,
+          "mask": 251.29822,
+          "mask_change_pct": 49.58360937746467,
+          "combined": 135.76392,
+          "combined_change_pct": -19.187421316261744
+        },
+        {
+          "arch": "x86_64",
+          "tag": "probe-m32-pos6-len256",
+          "hay_len": 256,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 121.9511,
+          "baseline_change_pct": 0.0,
+          "candidate": 18.66254,
+          "candidate_change_pct": -84.69670220276817,
+          "mask": 179.60206,
+          "mask_change_pct": 47.27383352835686,
+          "combined": 17.06056,
+          "combined_change_pct": -86.01032709012055
+        },
+        {
+          "arch": "x86_64",
+          "tag": "probe-m32-pos4-len256",
+          "hay_len": 256,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 135.13146,
+          "baseline_change_pct": 0.0,
+          "candidate": 19.8574,
+          "candidate_change_pct": -85.30512435816205,
+          "mask": 185.51906,
+          "mask_change_pct": 37.28783808004441,
+          "combined": 15.16548,
+          "combined_change_pct": -88.77723958580778
+        }
+      ],
+      "combined": [
+        {
+          "arch": "x86_64",
+          "tag": "dense-m8-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 8,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1583.3923,
+          "baseline_change_pct": 0.0,
+          "candidate": 2257.756,
+          "candidate_change_pct": 42.58980544492985,
+          "mask": 1599.8265,
+          "mask_change_pct": 1.037910819700194,
+          "combined": 2245.1675,
+          "combined_change_pct": 41.794771895758245
+        },
+        {
+          "arch": "x86_64",
+          "tag": "dense-m16-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 16,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1613.2154,
+          "baseline_change_pct": 0.0,
+          "candidate": 2283.0968,
+          "candidate_change_pct": 41.52460979482342,
+          "mask": 1598.6299,
+          "mask_change_pct": -0.9041260082193747,
+          "combined": 2258.7759,
+          "combined_change_pct": 40.017005788563644
+        },
+        {
+          "arch": "x86_64",
+          "tag": "uniform-m1-len32-c",
+          "hay_len": 32,
+          "needle_len": 1,
+          "offset": 0,
+          "hit": false,
+          "baseline": 3.78188,
+          "baseline_change_pct": 0.0,
+          "candidate": 5.37524,
+          "candidate_change_pct": 42.13142669783281,
+          "mask": 4.73054,
+          "mask_change_pct": 25.084349582747212,
+          "combined": 4.90592,
+          "combined_change_pct": 29.72172570256062
+        },
+        {
+          "arch": "x86_64",
+          "tag": "uniform-m3-len63-c",
+          "hay_len": 63,
+          "needle_len": 3,
+          "offset": 0,
+          "hit": false,
+          "baseline": 25.76758,
+          "baseline_change_pct": 0.0,
+          "candidate": 22.52788,
+          "candidate_change_pct": -12.57277555750288,
+          "mask": 26.22172,
+          "mask_change_pct": 1.7624472302016914,
+          "combined": 32.37238,
+          "combined_change_pct": 25.63220915584623
+        },
+        {
+          "arch": "x86_64",
+          "tag": "uniform-m2-len15-a",
+          "hay_len": 15,
+          "needle_len": 2,
+          "offset": 0,
+          "hit": true,
+          "baseline": 2.96472,
+          "baseline_change_pct": 0.0,
+          "candidate": 3.58544,
+          "candidate_change_pct": 20.936884427534498,
+          "mask": 3.12162,
+          "mask_change_pct": 5.292236703634745,
+          "combined": 3.56702,
+          "combined_change_pct": 20.31557786232765
+        },
+        {
+          "arch": "x86_64",
+          "tag": "dense-m32-len4096-ab",
+          "hay_len": 4096,
+          "needle_len": 32,
+          "offset": 0,
+          "hit": false,
+          "baseline": 1848.2815,
+          "baseline_change_pct": 0.0,
+          "candidate": 2274.3299,
+          "candidate_change_pct": 23.051055805081646,
+          "mask": 3110.9048,
+          "mask_change_pct": 68.31336568590875,
+          "combined": 2215.9828,
+          "combined_change_pct": 19.89422606891862
+        }
+      ]
+    }
+  }
+}

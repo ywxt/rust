@@ -1,0 +1,2608 @@
+; *** IR Dump After MemProfRemoveInfo on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_13 = alloca [1 x i8], align 1
+  %_5 = alloca [16 x i8], align 8
+  %accum = alloca [8 x i8], align 8
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  call void @llvm.lifetime.start.p0(ptr %accum)
+  store i8 1, ptr %_13, align 1
+  store i64 %init, ptr %accum, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb4, %start
+  call void @llvm.lifetime.start.p0(ptr %_5)
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  store i64 %4, ptr %_5, align 8
+  %6 = getelementptr inbounds i8, ptr %_5, i64 8
+  store i64 %5, ptr %6, align 8
+  br label %bb2
+
+bb2:                                              ; preds = %bb1
+  %_7 = load i64, ptr %_5, align 8, !range !6, !noundef !5
+  %7 = getelementptr inbounds i8, ptr %_5, i64 8
+  %8 = load i64, ptr %7, align 8
+  %9 = trunc nuw i64 %_7 to i1
+  br i1 %9, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb2
+  %10 = getelementptr inbounds i8, ptr %_5, i64 8
+  %x = load i64, ptr %10, align 8, !noundef !5
+  store i8 0, ptr %_13, align 1
+  %_12 = load i64, ptr %accum, align 8, !noundef !5
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %_12, i64 noundef %x)
+  br label %bb4
+
+bb5:                                              ; preds = %bb2
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  %_0 = load i64, ptr %accum, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr %accum)
+  br label %bb6
+
+bb4:                                              ; preds = %bb3
+  store i8 1, ptr %_13, align 1
+  store i64 %_9, ptr %accum, align 8
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  br label %bb1
+
+bb6:                                              ; preds = %bb5
+  ret i64 %_0
+
+bb13:                                             ; No predecessors!
+  unreachable
+
+bb8:                                              ; No predecessors!
+  unreachable
+
+bb9:                                              ; No predecessors!
+  unreachable
+
+bb10:                                             ; No predecessors!
+  unreachable
+
+bb11:                                             ; No predecessors!
+  unreachable
+
+bb12:                                             ; No predecessors!
+  unreachable
+}
+; *** IR Dump After Annotation2MetadataPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_13 = alloca [1 x i8], align 1
+  %_5 = alloca [16 x i8], align 8
+  %accum = alloca [8 x i8], align 8
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  call void @llvm.lifetime.start.p0(ptr %accum)
+  store i8 1, ptr %_13, align 1
+  store i64 %init, ptr %accum, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb4, %start
+  call void @llvm.lifetime.start.p0(ptr %_5)
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  store i64 %4, ptr %_5, align 8
+  %6 = getelementptr inbounds i8, ptr %_5, i64 8
+  store i64 %5, ptr %6, align 8
+  br label %bb2
+
+bb2:                                              ; preds = %bb1
+  %_7 = load i64, ptr %_5, align 8, !range !6, !noundef !5
+  %7 = getelementptr inbounds i8, ptr %_5, i64 8
+  %8 = load i64, ptr %7, align 8
+  %9 = trunc nuw i64 %_7 to i1
+  br i1 %9, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb2
+  %10 = getelementptr inbounds i8, ptr %_5, i64 8
+  %x = load i64, ptr %10, align 8, !noundef !5
+  store i8 0, ptr %_13, align 1
+  %_12 = load i64, ptr %accum, align 8, !noundef !5
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %_12, i64 noundef %x)
+  br label %bb4
+
+bb5:                                              ; preds = %bb2
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  %_0 = load i64, ptr %accum, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr %accum)
+  br label %bb6
+
+bb4:                                              ; preds = %bb3
+  store i8 1, ptr %_13, align 1
+  store i64 %_9, ptr %accum, align 8
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  br label %bb1
+
+bb6:                                              ; preds = %bb5
+  ret i64 %_0
+
+bb13:                                             ; No predecessors!
+  unreachable
+
+bb8:                                              ; No predecessors!
+  unreachable
+
+bb9:                                              ; No predecessors!
+  unreachable
+
+bb10:                                             ; No predecessors!
+  unreachable
+
+bb11:                                             ; No predecessors!
+  unreachable
+
+bb12:                                             ; No predecessors!
+  unreachable
+}
+; *** IR Dump After ForceFunctionAttrsPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_13 = alloca [1 x i8], align 1
+  %_5 = alloca [16 x i8], align 8
+  %accum = alloca [8 x i8], align 8
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  call void @llvm.lifetime.start.p0(ptr %accum)
+  store i8 1, ptr %_13, align 1
+  store i64 %init, ptr %accum, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb4, %start
+  call void @llvm.lifetime.start.p0(ptr %_5)
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  store i64 %4, ptr %_5, align 8
+  %6 = getelementptr inbounds i8, ptr %_5, i64 8
+  store i64 %5, ptr %6, align 8
+  br label %bb2
+
+bb2:                                              ; preds = %bb1
+  %_7 = load i64, ptr %_5, align 8, !range !6, !noundef !5
+  %7 = getelementptr inbounds i8, ptr %_5, i64 8
+  %8 = load i64, ptr %7, align 8
+  %9 = trunc nuw i64 %_7 to i1
+  br i1 %9, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb2
+  %10 = getelementptr inbounds i8, ptr %_5, i64 8
+  %x = load i64, ptr %10, align 8, !noundef !5
+  store i8 0, ptr %_13, align 1
+  %_12 = load i64, ptr %accum, align 8, !noundef !5
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %_12, i64 noundef %x)
+  br label %bb4
+
+bb5:                                              ; preds = %bb2
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  %_0 = load i64, ptr %accum, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr %accum)
+  br label %bb6
+
+bb4:                                              ; preds = %bb3
+  store i8 1, ptr %_13, align 1
+  store i64 %_9, ptr %accum, align 8
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  br label %bb1
+
+bb6:                                              ; preds = %bb5
+  ret i64 %_0
+
+bb13:                                             ; No predecessors!
+  unreachable
+
+bb8:                                              ; No predecessors!
+  unreachable
+
+bb9:                                              ; No predecessors!
+  unreachable
+
+bb10:                                             ; No predecessors!
+  unreachable
+
+bb11:                                             ; No predecessors!
+  unreachable
+
+bb12:                                             ; No predecessors!
+  unreachable
+}
+; *** IR Dump After InferFunctionAttrsPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_13 = alloca [1 x i8], align 1
+  %_5 = alloca [16 x i8], align 8
+  %accum = alloca [8 x i8], align 8
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  call void @llvm.lifetime.start.p0(ptr %accum)
+  store i8 1, ptr %_13, align 1
+  store i64 %init, ptr %accum, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb4, %start
+  call void @llvm.lifetime.start.p0(ptr %_5)
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  store i64 %4, ptr %_5, align 8
+  %6 = getelementptr inbounds i8, ptr %_5, i64 8
+  store i64 %5, ptr %6, align 8
+  br label %bb2
+
+bb2:                                              ; preds = %bb1
+  %_7 = load i64, ptr %_5, align 8, !range !6, !noundef !5
+  %7 = getelementptr inbounds i8, ptr %_5, i64 8
+  %8 = load i64, ptr %7, align 8
+  %9 = trunc nuw i64 %_7 to i1
+  br i1 %9, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb2
+  %10 = getelementptr inbounds i8, ptr %_5, i64 8
+  %x = load i64, ptr %10, align 8, !noundef !5
+  store i8 0, ptr %_13, align 1
+  %_12 = load i64, ptr %accum, align 8, !noundef !5
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %_12, i64 noundef %x)
+  br label %bb4
+
+bb5:                                              ; preds = %bb2
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  %_0 = load i64, ptr %accum, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr %accum)
+  br label %bb6
+
+bb4:                                              ; preds = %bb3
+  store i8 1, ptr %_13, align 1
+  store i64 %_9, ptr %accum, align 8
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  br label %bb1
+
+bb6:                                              ; preds = %bb5
+  ret i64 %_0
+
+bb13:                                             ; No predecessors!
+  unreachable
+
+bb8:                                              ; No predecessors!
+  unreachable
+
+bb9:                                              ; No predecessors!
+  unreachable
+
+bb10:                                             ; No predecessors!
+  unreachable
+
+bb11:                                             ; No predecessors!
+  unreachable
+
+bb12:                                             ; No predecessors!
+  unreachable
+}
+; *** IR Dump After CoroEarlyPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_13 = alloca [1 x i8], align 1
+  %_5 = alloca [16 x i8], align 8
+  %accum = alloca [8 x i8], align 8
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  call void @llvm.lifetime.start.p0(ptr %accum)
+  store i8 1, ptr %_13, align 1
+  store i64 %init, ptr %accum, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb4, %start
+  call void @llvm.lifetime.start.p0(ptr %_5)
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  store i64 %4, ptr %_5, align 8
+  %6 = getelementptr inbounds i8, ptr %_5, i64 8
+  store i64 %5, ptr %6, align 8
+  br label %bb2
+
+bb2:                                              ; preds = %bb1
+  %_7 = load i64, ptr %_5, align 8, !range !6, !noundef !5
+  %7 = getelementptr inbounds i8, ptr %_5, i64 8
+  %8 = load i64, ptr %7, align 8
+  %9 = trunc nuw i64 %_7 to i1
+  br i1 %9, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb2
+  %10 = getelementptr inbounds i8, ptr %_5, i64 8
+  %x = load i64, ptr %10, align 8, !noundef !5
+  store i8 0, ptr %_13, align 1
+  %_12 = load i64, ptr %accum, align 8, !noundef !5
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %_12, i64 noundef %x)
+  br label %bb4
+
+bb5:                                              ; preds = %bb2
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  %_0 = load i64, ptr %accum, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr %accum)
+  br label %bb6
+
+bb4:                                              ; preds = %bb3
+  store i8 1, ptr %_13, align 1
+  store i64 %_9, ptr %accum, align 8
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  br label %bb1
+
+bb6:                                              ; preds = %bb5
+  ret i64 %_0
+
+bb13:                                             ; No predecessors!
+  unreachable
+
+bb8:                                              ; No predecessors!
+  unreachable
+
+bb9:                                              ; No predecessors!
+  unreachable
+
+bb10:                                             ; No predecessors!
+  unreachable
+
+bb11:                                             ; No predecessors!
+  unreachable
+
+bb12:                                             ; No predecessors!
+  unreachable
+}
+; *** IR Dump After EntryExitInstrumenterPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_13 = alloca [1 x i8], align 1
+  %_5 = alloca [16 x i8], align 8
+  %accum = alloca [8 x i8], align 8
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  call void @llvm.lifetime.start.p0(ptr %accum)
+  store i8 1, ptr %_13, align 1
+  store i64 %init, ptr %accum, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb4, %start
+  call void @llvm.lifetime.start.p0(ptr %_5)
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  store i64 %4, ptr %_5, align 8
+  %6 = getelementptr inbounds i8, ptr %_5, i64 8
+  store i64 %5, ptr %6, align 8
+  br label %bb2
+
+bb2:                                              ; preds = %bb1
+  %_7 = load i64, ptr %_5, align 8, !range !6, !noundef !5
+  %7 = getelementptr inbounds i8, ptr %_5, i64 8
+  %8 = load i64, ptr %7, align 8
+  %9 = trunc nuw i64 %_7 to i1
+  br i1 %9, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb2
+  %10 = getelementptr inbounds i8, ptr %_5, i64 8
+  %x = load i64, ptr %10, align 8, !noundef !5
+  store i8 0, ptr %_13, align 1
+  %_12 = load i64, ptr %accum, align 8, !noundef !5
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %_12, i64 noundef %x)
+  br label %bb4
+
+bb5:                                              ; preds = %bb2
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  %_0 = load i64, ptr %accum, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr %accum)
+  br label %bb6
+
+bb4:                                              ; preds = %bb3
+  store i8 1, ptr %_13, align 1
+  store i64 %_9, ptr %accum, align 8
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  br label %bb1
+
+bb6:                                              ; preds = %bb5
+  ret i64 %_0
+
+bb13:                                             ; No predecessors!
+  unreachable
+
+bb8:                                              ; No predecessors!
+  unreachable
+
+bb9:                                              ; No predecessors!
+  unreachable
+
+bb10:                                             ; No predecessors!
+  unreachable
+
+bb11:                                             ; No predecessors!
+  unreachable
+
+bb12:                                             ; No predecessors!
+  unreachable
+}
+; *** IR Dump After LowerExpectIntrinsicPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_13 = alloca [1 x i8], align 1
+  %_5 = alloca [16 x i8], align 8
+  %accum = alloca [8 x i8], align 8
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  call void @llvm.lifetime.start.p0(ptr %accum)
+  store i8 1, ptr %_13, align 1
+  store i64 %init, ptr %accum, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb4, %start
+  call void @llvm.lifetime.start.p0(ptr %_5)
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  store i64 %4, ptr %_5, align 8
+  %6 = getelementptr inbounds i8, ptr %_5, i64 8
+  store i64 %5, ptr %6, align 8
+  br label %bb2
+
+bb2:                                              ; preds = %bb1
+  %_7 = load i64, ptr %_5, align 8, !range !6, !noundef !5
+  %7 = getelementptr inbounds i8, ptr %_5, i64 8
+  %8 = load i64, ptr %7, align 8
+  %9 = trunc nuw i64 %_7 to i1
+  br i1 %9, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb2
+  %10 = getelementptr inbounds i8, ptr %_5, i64 8
+  %x = load i64, ptr %10, align 8, !noundef !5
+  store i8 0, ptr %_13, align 1
+  %_12 = load i64, ptr %accum, align 8, !noundef !5
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %_12, i64 noundef %x)
+  br label %bb4
+
+bb5:                                              ; preds = %bb2
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  %_0 = load i64, ptr %accum, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr %accum)
+  br label %bb6
+
+bb4:                                              ; preds = %bb3
+  store i8 1, ptr %_13, align 1
+  store i64 %_9, ptr %accum, align 8
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  br label %bb1
+
+bb6:                                              ; preds = %bb5
+  ret i64 %_0
+
+bb13:                                             ; No predecessors!
+  unreachable
+
+bb8:                                              ; No predecessors!
+  unreachable
+
+bb9:                                              ; No predecessors!
+  unreachable
+
+bb10:                                             ; No predecessors!
+  unreachable
+
+bb11:                                             ; No predecessors!
+  unreachable
+
+bb12:                                             ; No predecessors!
+  unreachable
+}
+; *** IR Dump After SimplifyCFGPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_13 = alloca [1 x i8], align 1
+  %_5 = alloca [16 x i8], align 8
+  %accum = alloca [8 x i8], align 8
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  call void @llvm.lifetime.start.p0(ptr %accum)
+  store i8 1, ptr %_13, align 1
+  store i64 %init, ptr %accum, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  call void @llvm.lifetime.start.p0(ptr %_5)
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  store i64 %4, ptr %_5, align 8
+  %6 = getelementptr inbounds i8, ptr %_5, i64 8
+  store i64 %5, ptr %6, align 8
+  %_7 = load i64, ptr %_5, align 8, !range !6, !noundef !5
+  %7 = getelementptr inbounds i8, ptr %_5, i64 8
+  %8 = load i64, ptr %7, align 8
+  %9 = trunc nuw i64 %_7 to i1
+  br i1 %9, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %10 = getelementptr inbounds i8, ptr %_5, i64 8
+  %x = load i64, ptr %10, align 8, !noundef !5
+  store i8 0, ptr %_13, align 1
+  %_12 = load i64, ptr %accum, align 8, !noundef !5
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %_12, i64 noundef %x)
+  store i8 1, ptr %_13, align 1
+  store i64 %_9, ptr %accum, align 8
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  call void @llvm.lifetime.end.p0(ptr %_5)
+  %_0 = load i64, ptr %accum, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr %accum)
+  ret i64 %_0
+}
+; *** IR Dump After SROAPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ %init, %start ], [ %_9, %bb3 ]
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  %6 = trunc nuw i64 %4 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After EarlyCSEPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ %init, %start ], [ %_9, %bb3 ]
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  %6 = trunc nuw i64 %4 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After CallSiteSplittingPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ %init, %start ], [ %_9, %bb3 ]
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  %6 = trunc nuw i64 %4 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After OpenMPOptPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 %0, ptr %self, align 8
+  %2 = getelementptr inbounds i8, ptr %self, i64 8
+  store i64 %1, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ %init, %start ], [ %_9, %bb3 ]
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  %6 = trunc nuw i64 %4 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After IPSCCPPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_9, %bb3 ]
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  %6 = trunc nuw i64 %4 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After CalledValuePropagationPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_9, %bb3 ]
+  %3 = call { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  %6 = trunc nuw i64 %4 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %_9 = call noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After GlobalOptPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_9, %bb3 ]
+  %3 = call fastcc { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  %6 = trunc nuw i64 %4 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %_9 = call fastcc noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After PromotePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_9, %bb3 ]
+  %3 = call fastcc { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = extractvalue { i64, i64 } %3, 1
+  %6 = trunc nuw i64 %4 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %_9 = call fastcc noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %5)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After InstCombinePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_9, %bb3 ]
+  %3 = call fastcc { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = trunc nuw i64 %4 to i1
+  br i1 %5, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %6 = extractvalue { i64, i64 } %3, 1
+  %_9 = call fastcc noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %6)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After SimplifyCFGPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_9, %bb3 ]
+  %3 = call fastcc { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = trunc nuw i64 %4 to i1
+  br i1 %5, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %6 = extractvalue { i64, i64 } %3, 1
+  %_9 = call fastcc noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %6)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After AlwaysInlinerPass on [module] ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %f = alloca [0 x i8], align 1
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_9, %bb3 ]
+  %3 = call fastcc { i64, i64 } @_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape(ptr noalias nofree noundef align 8 dereferenceable(16) %self)
+  %4 = extractvalue { i64, i64 } %3, 0
+  %5 = trunc nuw i64 %4 to i1
+  br i1 %5, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %6 = extractvalue { i64, i64 } %3, 1
+  %_9 = call fastcc noundef i64 @_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_(ptr noalias nofree noundef nonnull %f, i64 noundef %accum.sroa.0.0, i64 noundef %6)
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After InlinerPass on (_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_) ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  %_4.i.i = getelementptr inbounds nuw i8, ptr %self, i64 8
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_3.i.i.i = load i64, ptr %self, align 8, !alias.scope !12, !noalias !10, !noundef !15
+  %_4.i.i.i = load i64, ptr %_4.i.i, align 8, !alias.scope !16, !noalias !7, !noundef !15
+  %_0.i.i.i = icmp slt i64 %_3.i.i.i, %_4.i.i.i
+  br i1 %_0.i.i.i, label %bb2.i.i, label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+bb2.i.i:                                          ; preds = %bb1
+  %3 = add nsw i64 %_3.i.i.i, 1
+  store i64 %3, ptr %self, align 8, !alias.scope !17
+  br label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit: ; preds = %bb1, %bb2.i.i
+  %_0.sroa.0.0.i.i = phi i64 [ 1, %bb2.i.i ], [ 0, %bb1 ]
+  %4 = insertvalue { i64, i64 } poison, i64 %_0.sroa.0.0.i.i, 0
+  %5 = insertvalue { i64, i64 } %4, i64 %_3.i.i.i, 1
+  %6 = extractvalue { i64, i64 } %5, 0
+  %7 = trunc nuw i64 %6 to i1
+  br i1 %7, label %bb3, label %bb5
+
+bb3:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  %8 = extractvalue { i64, i64 } %5, 1
+  %9 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %8, i64 %8)
+  %_5.1.i.i = extractvalue { i64, i1 } %9, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %9, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !18
+  %10 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !15
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %10, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After PostOrderFunctionAttrsPass on (_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_) ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  %_4.i.i = getelementptr inbounds nuw i8, ptr %self, i64 8
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_3.i.i.i = load i64, ptr %self, align 8, !alias.scope !12, !noalias !10, !noundef !15
+  %_4.i.i.i = load i64, ptr %_4.i.i, align 8, !alias.scope !16, !noalias !7, !noundef !15
+  %_0.i.i.i = icmp slt i64 %_3.i.i.i, %_4.i.i.i
+  br i1 %_0.i.i.i, label %bb2.i.i, label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+bb2.i.i:                                          ; preds = %bb1
+  %3 = add nsw i64 %_3.i.i.i, 1
+  store i64 %3, ptr %self, align 8, !alias.scope !17
+  br label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit: ; preds = %bb1, %bb2.i.i
+  %_0.sroa.0.0.i.i = phi i64 [ 1, %bb2.i.i ], [ 0, %bb1 ]
+  %4 = insertvalue { i64, i64 } poison, i64 %_0.sroa.0.0.i.i, 0
+  %5 = insertvalue { i64, i64 } %4, i64 %_3.i.i.i, 1
+  %6 = extractvalue { i64, i64 } %5, 0
+  %7 = trunc nuw i64 %6 to i1
+  br i1 %7, label %bb3, label %bb5
+
+bb3:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  %8 = extractvalue { i64, i64 } %5, 1
+  %9 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %8, i64 %8)
+  %_5.1.i.i = extractvalue { i64, i1 } %9, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %9, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !18
+  %10 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !15
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %10, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After ArgumentPromotionPass on (_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_) ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  %_4.i.i = getelementptr inbounds nuw i8, ptr %self, i64 8
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_3.i.i.i = load i64, ptr %self, align 8, !alias.scope !12, !noalias !10, !noundef !15
+  %_4.i.i.i = load i64, ptr %_4.i.i, align 8, !alias.scope !16, !noalias !7, !noundef !15
+  %_0.i.i.i = icmp slt i64 %_3.i.i.i, %_4.i.i.i
+  br i1 %_0.i.i.i, label %bb2.i.i, label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+bb2.i.i:                                          ; preds = %bb1
+  %3 = add nsw i64 %_3.i.i.i, 1
+  store i64 %3, ptr %self, align 8, !alias.scope !17
+  br label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit: ; preds = %bb1, %bb2.i.i
+  %_0.sroa.0.0.i.i = phi i64 [ 1, %bb2.i.i ], [ 0, %bb1 ]
+  %4 = insertvalue { i64, i64 } poison, i64 %_0.sroa.0.0.i.i, 0
+  %5 = insertvalue { i64, i64 } %4, i64 %_3.i.i.i, 1
+  %6 = extractvalue { i64, i64 } %5, 0
+  %7 = trunc nuw i64 %6 to i1
+  br i1 %7, label %bb3, label %bb5
+
+bb3:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  %8 = extractvalue { i64, i64 } %5, 1
+  %9 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %8, i64 %8)
+  %_5.1.i.i = extractvalue { i64, i1 } %9, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %9, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !18
+  %10 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !15
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %10, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After OpenMPOptCGSCCPass on (_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_) ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  %self = alloca [16 x i8], align 8
+  store i64 0, ptr %self, align 8
+  %2 = getelementptr inbounds nuw i8, ptr %self, i64 8
+  store i64 1000000, ptr %2, align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  %_4.i.i = getelementptr inbounds nuw i8, ptr %self, i64 8
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_3.i.i.i = load i64, ptr %self, align 8, !alias.scope !12, !noalias !10, !noundef !15
+  %_4.i.i.i = load i64, ptr %_4.i.i, align 8, !alias.scope !16, !noalias !7, !noundef !15
+  %_0.i.i.i = icmp slt i64 %_3.i.i.i, %_4.i.i.i
+  br i1 %_0.i.i.i, label %bb2.i.i, label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+bb2.i.i:                                          ; preds = %bb1
+  %3 = add nsw i64 %_3.i.i.i, 1
+  store i64 %3, ptr %self, align 8, !alias.scope !17
+  br label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit: ; preds = %bb1, %bb2.i.i
+  %_0.sroa.0.0.i.i = phi i64 [ 1, %bb2.i.i ], [ 0, %bb1 ]
+  %4 = insertvalue { i64, i64 } poison, i64 %_0.sroa.0.0.i.i, 0
+  %5 = insertvalue { i64, i64 } %4, i64 %_3.i.i.i, 1
+  %6 = extractvalue { i64, i64 } %5, 0
+  %7 = trunc nuw i64 %6 to i1
+  br i1 %7, label %bb3, label %bb5
+
+bb3:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  %8 = extractvalue { i64, i64 } %5, 1
+  %9 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %8, i64 %8)
+  %_5.1.i.i = extractvalue { i64, i1 } %9, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %9, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !18
+  %10 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !15
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %10, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After SROAPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %self.sroa.0.1, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_0.i.i.i = icmp slt i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb2.i.i, label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+bb2.i.i:                                          ; preds = %bb1
+  %2 = add nsw i64 %self.sroa.0.0, 1
+  br label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit: ; preds = %bb1, %bb2.i.i
+  %self.sroa.0.1 = phi i64 [ %2, %bb2.i.i ], [ %self.sroa.0.0, %bb1 ]
+  %_0.sroa.0.0.i.i = phi i64 [ 1, %bb2.i.i ], [ 0, %bb1 ]
+  %3 = insertvalue { i64, i64 } poison, i64 %_0.sroa.0.0.i.i, 0
+  %4 = insertvalue { i64, i64 } %3, i64 %self.sroa.0.0, 1
+  %5 = extractvalue { i64, i64 } %4, 0
+  %6 = trunc nuw i64 %5 to i1
+  br i1 %6, label %bb3, label %bb5
+
+bb3:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  %7 = extractvalue { i64, i64 } %4, 1
+  %8 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %7, i64 %7)
+  %_5.1.i.i = extractvalue { i64, i1 } %8, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %8, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !12
+  %9 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !13
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %9, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After EarlyCSEPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %self.sroa.0.1, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_0.i.i.i = icmp slt i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb2.i.i, label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+bb2.i.i:                                          ; preds = %bb1
+  %2 = add nsw i64 %self.sroa.0.0, 1
+  br label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit: ; preds = %bb1, %bb2.i.i
+  %self.sroa.0.1 = phi i64 [ %2, %bb2.i.i ], [ %self.sroa.0.0, %bb1 ]
+  %_0.sroa.0.0.i.i = phi i64 [ 1, %bb2.i.i ], [ 0, %bb1 ]
+  %3 = insertvalue { i64, i64 } poison, i64 %_0.sroa.0.0.i.i, 0
+  %4 = insertvalue { i64, i64 } %3, i64 %self.sroa.0.0, 1
+  %5 = trunc nuw i64 %_0.sroa.0.0.i.i to i1
+  br i1 %5, label %bb3, label %bb5
+
+bb3:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  %6 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %self.sroa.0.0, i64 %self.sroa.0.0)
+  %_5.1.i.i = extractvalue { i64, i1 } %6, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %6, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !12
+  %7 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !13
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %7, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After SpeculativeExecutionPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %self.sroa.0.1, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_0.i.i.i = icmp slt i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb2.i.i, label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+bb2.i.i:                                          ; preds = %bb1
+  %2 = add nsw i64 %self.sroa.0.0, 1
+  br label %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+
+_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit: ; preds = %bb1, %bb2.i.i
+  %self.sroa.0.1 = phi i64 [ %2, %bb2.i.i ], [ %self.sroa.0.0, %bb1 ]
+  %_0.sroa.0.0.i.i = phi i64 [ 1, %bb2.i.i ], [ 0, %bb1 ]
+  %3 = insertvalue { i64, i64 } poison, i64 %_0.sroa.0.0.i.i, 0
+  %4 = insertvalue { i64, i64 } %3, i64 %self.sroa.0.0, 1
+  %5 = trunc nuw i64 %_0.sroa.0.0.i.i to i1
+  br i1 %5, label %bb3, label %bb5
+
+bb3:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  %6 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %self.sroa.0.0, i64 %self.sroa.0.0)
+  %_5.1.i.i = extractvalue { i64, i1 } %6, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %6, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !12
+  %7 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !13
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %7, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %_RNvXs4_NtNtCs6knCYbIatyh_4core4iter5rangeINtNtNtB9_3ops5range5RangexENtNtNtB7_6traits8iterator8Iterator4nextCsiVlEIo5dfo6_5shape.exit
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After JumpThreadingPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_0.i.i.i = icmp slt i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nsw i64 %self.sroa.0.0, 1
+  %3 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %self.sroa.0.0, i64 %self.sroa.0.0)
+  %_5.1.i.i = extractvalue { i64, i1 } %3, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %3, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !12
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !13
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  %self.sroa.0.1 = phi i64 [ %self.sroa.0.0, %bb1 ]
+  %_0.sroa.0.0.i.i = phi i64 [ 0, %bb1 ]
+  %5 = insertvalue { i64, i64 } poison, i64 %_0.sroa.0.0.i.i, 0
+  %6 = insertvalue { i64, i64 } %5, i64 %self.sroa.0.0, 1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After CorrelatedValuePropagationPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_0.i.i.i = icmp slt i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nsw i64 %self.sroa.0.0, 1
+  %3 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %self.sroa.0.0, i64 %self.sroa.0.0)
+  %_5.1.i.i = extractvalue { i64, i1 } %3, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %3, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !12
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !13
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  %5 = insertvalue { i64, i64 } poison, i64 0, 0
+  %6 = insertvalue { i64, i64 } %5, i64 %self.sroa.0.0, 1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After JumpTableToSwitchPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_0.i.i.i = icmp slt i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nsw i64 %self.sroa.0.0, 1
+  %3 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %self.sroa.0.0, i64 %self.sroa.0.0)
+  %_5.1.i.i = extractvalue { i64, i1 } %3, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %3, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !12
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !13
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  %5 = insertvalue { i64, i64 } poison, i64 0, 0
+  %6 = insertvalue { i64, i64 } %5, i64 %self.sroa.0.0, 1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After SimplifyCFGPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  call void @llvm.experimental.noalias.scope.decl(metadata !10)
+  %_0.i.i.i = icmp slt i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nsw i64 %self.sroa.0.0, 1
+  %3 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %self.sroa.0.0, i64 %self.sroa.0.0)
+  %_5.1.i.i = extractvalue { i64, i1 } %3, 1
+  br i1 %_5.1.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %_5.0.i.i = extractvalue { i64, i1 } %3, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %_5.0.i.i, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !12
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !13
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ %accum.sroa.0.0, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  %5 = insertvalue { i64, i64 } poison, i64 0, 0
+  %6 = insertvalue { i64, i64 } %5, i64 %self.sroa.0.0, 1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After InstCombinePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  br i1 false, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ poison, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After AggressiveInstCombinePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  br i1 false, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ poison, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After LibCallsShrinkWrapPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  br i1 false, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ poison, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After TailCallElimPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  br i1 false, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ poison, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After SimplifyCFGPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After ReassociatePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After ConstraintEliminationPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After LoopSimplifyPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}
+; *** IR Dump After LCSSAPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %bb3, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  %accum.sroa.0.0.lcssa = phi i64 [ %accum.sroa.0.0, %bb1 ]
+  ret i64 %accum.sroa.0.0.lcssa
+}
+; *** IR Dump After LoopInstSimplifyPass on loop %bb1 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+; Loop:
+bb1:                                              ; preds = %bb3, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %bb1
+
+; Exit blocks
+bb5:                                              ; preds = %bb1
+  %accum.sroa.0.0.lcssa = phi i64 [ %accum.sroa.0.0, %bb1 ]
+  ret i64 %accum.sroa.0.0.lcssa
+; *** IR Dump After LoopSimplifyCFGPass on loop %bb1 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+; Loop:
+bb1:                                              ; preds = %bb3, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %bb1
+
+; Exit blocks
+bb5:                                              ; preds = %bb1
+  %accum.sroa.0.0.lcssa = phi i64 [ %accum.sroa.0.0, %bb1 ]
+  ret i64 %accum.sroa.0.0.lcssa
+; *** IR Dump After LICMPass on loop %bb1 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+; Loop:
+bb1:                                              ; preds = %bb3, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %bb1
+
+; Exit blocks
+bb5:                                              ; preds = %bb1
+  %accum.sroa.0.0.lcssa = phi i64 [ %accum.sroa.0.0, %bb1 ]
+  ret i64 %accum.sroa.0.0.lcssa
+; *** IR Dump After LoopRotatePass on loop %bb1 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+; Loop:
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %_0.i.i.i = icmp samesign ult i64 %2, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+; Exit blocks
+bb5:                                              ; preds = %bb3
+  %accum.sroa.0.0.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %accum.sroa.0.0.lcssa
+; *** IR Dump After LICMPass on loop %bb3 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+; Loop:
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %_0.i.i.i = icmp samesign ult i64 %2, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+; Exit blocks
+bb5:                                              ; preds = %bb3
+  %accum.sroa.0.0.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %accum.sroa.0.0.lcssa
+; *** IR Dump After SimpleLoopUnswitchPass on loop %bb3 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+; Loop:
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %_0.i.i.i = icmp samesign ult i64 %2, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+; Exit blocks
+bb5:                                              ; preds = %bb3
+  %accum.sroa.0.0.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %accum.sroa.0.0.lcssa
+; *** IR Dump After SimplifyCFGPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %_0.i.i.i = icmp samesign ult i64 %2, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  %accum.sroa.0.0.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %accum.sroa.0.0.lcssa
+}
+; *** IR Dump After InstCombinePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.06, 999999
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After LoopSimplifyPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.06, 999999
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After LCSSAPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.06, 999999
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+}
+; *** IR Dump After LoopIdiomRecognizePass on loop %bb3 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+; Loop:
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.06, 999999
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+; Exit blocks
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+; *** IR Dump After IndVarSimplifyPass on loop %bb3 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+; Loop:
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+; Exit blocks
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+; *** IR Dump After LoopDeletionPass on loop %bb3 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+; Loop:
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+; Exit blocks
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+; *** IR Dump After LoopFullUnrollPass on loop %bb3 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+; Loop:
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+; Exit blocks
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+; *** IR Dump After SROAPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+}
+; *** IR Dump After VectorCombinePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+}
+; *** IR Dump After MergedLoadStoreMotionPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+}
+; *** IR Dump After GVNPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After SCCPPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After BDCEPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond = icmp ne i64 %2, 1000000
+  br i1 %exitcond, label %bb3, label %bb5
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After InstCombinePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After DFAJumpThreadingPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After JumpThreadingPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After CorrelatedValuePropagationPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After ADCEPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After MemCpyOptPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After DSEPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After MoveAutoInitPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After LoopSimplifyPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After LCSSAPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+}
+; *** IR Dump After LICMPass on loop %bb3 in function _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+
+; Preheader:
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+; Loop:
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+; Exit blocks
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+; *** IR Dump After CoroElidePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+}
+; *** IR Dump After SimplifyCFGPass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  %_4.0.i.i.i.lcssa = phi i64 [ %_4.0.i.i.i, %bb3 ]
+  ret i64 %_4.0.i.i.i.lcssa
+}
+; *** IR Dump After InstCombinePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***
+; Function Attrs: inlinehint nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After PostOrderFunctionAttrsPass on (_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_) ***
+; Function Attrs: inlinehint nounwind nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After CoroSplitPass on (_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_) ***
+; Function Attrs: inlinehint nounwind nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}
+; *** IR Dump After CoroAnnotationElidePass on (_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_) ***
+; Function Attrs: inlinehint nounwind nonlazybind uwtable
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #0 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb3
+
+bb3:                                              ; preds = %start, %bb3
+  %accum.sroa.0.07 = phi i64 [ 0, %start ], [ %_4.0.i.i.i, %bb3 ]
+  %self.sroa.0.06 = phi i64 [ 0, %start ], [ %2, %bb3 ]
+  %2 = add nuw nsw i64 %self.sroa.0.06, 1
+  %3 = mul nuw nsw i64 %self.sroa.0.06, %self.sroa.0.06
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.07
+  %exitcond.not = icmp eq i64 %2, 1000000
+  br i1 %exitcond.not, label %bb5, label %bb3
+
+bb5:                                              ; preds = %bb3
+  ret i64 %_4.0.i.i.i
+}

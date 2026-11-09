@@ -1,0 +1,95 @@
+define noundef i64 @chained() unnamed_addr #6 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i.i.i = alloca [8 x i8], align 8
+  %_0.i.i.i.i.i.i.i = alloca [8 x i8], align 8
+  %_1 = alloca [48 x i8], align 8
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  store i64 1, ptr %_1, align 8, !alias.scope !4
+  %_5.sroa.4.0._0.sroa_idx.i = getelementptr inbounds nuw i8, ptr %_1, i64 8
+  store i64 0, ptr %_5.sroa.4.0._0.sroa_idx.i, align 8, !alias.scope !4
+  %_5.sroa.5.0._0.sroa_idx.i = getelementptr inbounds nuw i8, ptr %_1, i64 16
+  store i64 1000000, ptr %_5.sroa.5.0._0.sroa_idx.i, align 8, !alias.scope !4
+  %0 = getelementptr inbounds nuw i8, ptr %_1, i64 24
+  store i64 1, ptr %0, align 8, !alias.scope !4
+  %_6.sroa.4.0..sroa_idx.i = getelementptr inbounds nuw i8, ptr %_1, i64 32
+  store i64 0, ptr %_6.sroa.4.0..sroa_idx.i, align 8, !alias.scope !4
+  %_6.sroa.5.0..sroa_idx.i = getelementptr inbounds nuw i8, ptr %_1, i64 40
+  store i64 1000000, ptr %_6.sroa.5.0..sroa_idx.i, align 8, !alias.scope !4
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  %_4.i = load i64, ptr %_1, align 8, !range !10, !alias.scope !7, !noundef !11
+  %1 = trunc nuw i64 %_4.i to i1
+  br i1 %1, label %bb1.i, label %bb3.i
+
+bb1.i:                                            ; preds = %start
+  %2 = getelementptr inbounds nuw i8, ptr %_1, i64 8
+  %a.0.i = load i64, ptr %2, align 8, !alias.scope !7, !noundef !11
+  %3 = getelementptr inbounds nuw i8, ptr %_1, i64 16
+  %a.1.i = load i64, ptr %3, align 8, !alias.scope !7, !noundef !11
+  %_0.i.i.i7.i.i = icmp slt i64 %a.0.i, %a.1.i
+  br i1 %_0.i.i.i7.i.i, label %bb3.i.i, label %bb3.i
+
+bb3.i.i:                                          ; preds = %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i, %bb1.i
+  %accum.sroa.0.09.i.i = phi i64 [ %_0.sroa.0.0.i.i3.i.i, %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i ], [ 0, %bb1.i ]
+  %self.sroa.0.08.i.i = phi i64 [ %4, %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i ], [ %a.0.i, %bb1.i ]
+  %4 = add i64 %self.sroa.0.08.i.i, 1
+  %5 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %self.sroa.0.08.i.i, i64 %self.sroa.0.08.i.i)
+  %_5.1.i.i.i.i.i = extractvalue { i64, i1 } %5, 1
+  br i1 %_5.1.i.i.i.i.i, label %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i, label %bb4.i.i.i.i
+
+bb4.i.i.i.i:                                      ; preds = %bb3.i.i
+  %_5.0.i.i.i.i.i = extractvalue { i64, i1 } %5, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i.i.i.i), !noalias !7
+  store i64 %_5.0.i.i.i.i.i, ptr %_0.i.i.i.i.i.i.i, align 8, !noalias !7
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i.i.i.i) #11, !noalias !7, !srcloc !12
+  %6 = load i64, ptr %_0.i.i.i.i.i.i.i, align 8, !noalias !7, !noundef !11
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i.i.i.i), !noalias !7
+  %_4.0.i.i.i.i.i.i = add i64 %6, %accum.sroa.0.09.i.i
+  br label %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i
+
+_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i: ; preds = %bb4.i.i.i.i, %bb3.i.i
+  %_0.sroa.0.0.i.i3.i.i = phi i64 [ %_4.0.i.i.i.i.i.i, %bb4.i.i.i.i ], [ %accum.sroa.0.09.i.i, %bb3.i.i ]
+  %exitcond.not.i.i = icmp eq i64 %4, %a.1.i
+  br i1 %exitcond.not.i.i, label %bb3.i, label %bb3.i.i
+
+bb3.i:                                            ; preds = %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i, %bb1.i, %start
+  %acc.sroa.0.0.i = phi i64 [ 0, %start ], [ 0, %bb1.i ], [ %_0.sroa.0.0.i.i3.i.i, %_RNvXs1_NtNtNtCs6knCYbIatyh_4core3ops8function5implsQNCINvNtNtNtBb_4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtBV_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtNtBX_6traits5accumxNtB3h_3Sum3sumINtB2o_3MapINtBT_9FilterMapINtNtBV_5chain5ChainINtNtB9_5range5RangexEB4B_EB1M_EB2J_EE0E0E0INtB7_5FnMutTxxEE8call_mutB1Q_.exit.i.i ]
+  %7 = getelementptr inbounds nuw i8, ptr %_1, i64 24
+  %_8.i = load i64, ptr %7, align 8, !range !10, !alias.scope !7, !noundef !11
+  %8 = trunc nuw i64 %_8.i to i1
+  br i1 %8, label %bb4.i, label %_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_.exit
+
+bb4.i:                                            ; preds = %bb3.i
+  %9 = getelementptr inbounds nuw i8, ptr %_1, i64 32
+  %b.0.i = load i64, ptr %9, align 8, !alias.scope !7, !noundef !11
+  %10 = getelementptr inbounds nuw i8, ptr %_1, i64 40
+  %b.1.i = load i64, ptr %10, align 8, !alias.scope !7, !noundef !11
+  %_0.i.i.i6.i.i = icmp slt i64 %b.0.i, %b.1.i
+  br i1 %_0.i.i.i6.i.i, label %bb3.i5.i, label %_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_.exit
+
+bb3.i5.i:                                         ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_.exit.i.i, %bb4.i
+  %accum.sroa.0.08.i.i = phi i64 [ %_0.sroa.0.0.i.i.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_.exit.i.i ], [ %acc.sroa.0.0.i, %bb4.i ]
+  %self.sroa.0.07.i.i = phi i64 [ %11, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_.exit.i.i ], [ %b.0.i, %bb4.i ]
+  %11 = add i64 %self.sroa.0.07.i.i, 1
+  %12 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %self.sroa.0.07.i.i, i64 %self.sroa.0.07.i.i)
+  %_5.1.i.i.i.i = extractvalue { i64, i1 } %12, 1
+  br i1 %_5.1.i.i.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_.exit.i.i, label %bb4.i.i.i
+
+bb4.i.i.i:                                        ; preds = %bb3.i5.i
+  %_5.0.i.i.i.i = extractvalue { i64, i1 } %12, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i.i.i), !noalias !7
+  store i64 %_5.0.i.i.i.i, ptr %_0.i.i.i.i.i.i, align 8, !noalias !7
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i.i.i) #11, !noalias !7, !srcloc !12
+  %13 = load i64, ptr %_0.i.i.i.i.i.i, align 8, !noalias !7, !noundef !11
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i.i.i), !noalias !7
+  %_4.0.i.i.i.i.i = add i64 %13, %accum.sroa.0.08.i.i
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_.exit.i.i
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_.exit.i.i: ; preds = %bb4.i.i.i, %bb3.i5.i
+  %_0.sroa.0.0.i.i.i = phi i64 [ %_4.0.i.i.i.i.i, %bb4.i.i.i ], [ %accum.sroa.0.08.i.i, %bb3.i5.i ]
+  %exitcond.not.i6.i = icmp eq i64 %11, %b.1.i
+  br i1 %exitcond.not.i6.i, label %_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_.exit, label %bb3.i5.i
+
+_RINvXs_NtNtNtCs6knCYbIatyh_4core4iter8adapters5chainINtB5_5ChainINtNtNtBb_3ops5range5RangexEB10_ENtNtNtB9_6traits8iterator8Iterator4foldxNCINvNtB7_10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB7_3map8map_foldxxxINvNtBb_4hint9black_boxxENCINvXse_NtB1B_5accumxNtB4m_3Sum3sumINtB3t_3MapINtB2g_9FilterMapBO_B2R_EB3O_EE0E0E0EB2V_.exit: ; preds = %bb3.i, %bb4.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_.exit.i.i
+  %_0.sroa.0.0.i = phi i64 [ %acc.sroa.0.0.i, %bb3.i ], [ %acc.sroa.0.0.i, %bb4.i ], [ %_0.sroa.0.0.i.i.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape7chained0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2I_3Sum3sumINtB1P_3MapINtB4_9FilterMapINtNtB6_5chain5ChainINtNtNtBa_3ops5range5RangexEB42_EB1d_EB2a_EE0E0E0B1h_.exit.i.i ]
+  ret i64 %_0.sroa.0.0.i
+}

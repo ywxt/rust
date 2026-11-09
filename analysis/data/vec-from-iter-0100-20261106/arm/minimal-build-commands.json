@@ -1,0 +1,32 @@
+[
+  [
+    "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+    "--sysroot",
+    "/tmp/contains-bad-simd-20261105/sysroots/baseline",
+    "--target",
+    "aarch64-unknown-linux-gnu",
+    "--crate-type=lib",
+    "--edition=2024",
+    "-O",
+    "-Ccodegen-units=1",
+    "--emit=asm,llvm-ir",
+    "/tmp/vec-from-iter-20261106/minimal.rs",
+    "-o",
+    "/tmp/vec-from-iter-20261106/aarch64-unknown-linux-gnu/minimal"
+  ],
+  [
+    "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+    "--sysroot",
+    "/tmp/contains-bad-simd-20261105/sysroots/baseline",
+    "--target",
+    "x86_64-unknown-linux-gnu",
+    "--crate-type=lib",
+    "--edition=2024",
+    "-O",
+    "-Ccodegen-units=1",
+    "--emit=asm,llvm-ir",
+    "/tmp/vec-from-iter-20261106/minimal.rs",
+    "-o",
+    "/tmp/vec-from-iter-20261106/x86_64-unknown-linux-gnu/minimal"
+  ]
+]

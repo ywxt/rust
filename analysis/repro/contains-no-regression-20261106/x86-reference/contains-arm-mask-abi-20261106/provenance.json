@@ -1,0 +1,15 @@
+{
+  "baseline": "main contains implementation; unrelated preexisting changes fixed",
+  "change": "Portable SIMD existence mask returned as usize (0 or1), caller tests !=0. This retains integer-result normalization at call sites while avoiding both unnecessary index recovery and bool-result layout changes. Main memchr/find/split untouched; original16B cutoff reused, vector16 overlapping tail.",
+  "cpu_midr_el1": "0x00000000480fd020",
+  "cpu_model": "920B per user; hardware MIDR recorded",
+  "new_inline_attributes": 0,
+  "previous_candidate": "/tmp/contains-arm-shared-tail-20261106",
+  "acceptance": [
+    "no reproducible regression in tested scenarios",
+    "lower 920B/x86-main cycles ratio"
+  ],
+  "endianness_and_pointer_guard": "unsigned byte SliceContains: aarch64 + neon + little endian +64bit; helper aarch64+neon+64bit",
+  "audit_method": "read-only Python ELF parser; no objcopy rewriting of measured artifacts",
+  "tail_change": "original word and scalar hit/tail paths; SIMD restricted to long body"
+}

@@ -1,0 +1,3122 @@
+ Percent |	Source code & Disassembly of libstd-7a2f7be1a1e543fc.so for cycles:u (1787 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     00000000000d70dc <core::str::pattern::contains_byte_simd>:
+         : 6     core::str::pattern::contains_byte_simd:
+    0.00 :   d70dc:  stp     x29, x30, [sp, #-16]!
+    0.00 :   d70e0:  mov     x29, sp
+    0.00 :   d70e4:  cbz     x1, d7224 <core::str::pattern::contains_byte_simd+0x148>
+    0.00 :   d70e8:  ldrb    w8, [x0]
+    0.00 :   d70ec:  cmp     w8, w2, uxtb
+    0.00 :   d70f0:  b.ne    d7100 <core::str::pattern::contains_byte_simd+0x24>  // b.any
+    0.00 :   d70f4:  mov     w0, #0x1                        // #1
+    0.00 :   d70f8:  ldp     x29, x30, [sp], #16
+    0.00 :   d70fc:  ret
+    1.06 :   d7100:  dup     v0.16b, w2
+    0.00 :   d7104:  cmp     x1, #0x80
+    0.00 :   d7108:  b.cc    d715c <core::str::pattern::contains_byte_simd+0x80>  // b.lo, b.ul, b.last
+    0.39 :   d710c:  add     x8, x0, #0x3f
+    0.00 :   d7110:  and     x8, x8, #0xffffffffffffffc0
+    0.00 :   d7114:  subs    x9, x8, x0
+    0.00 :   d7118:  b.eq    d714c <core::str::pattern::contains_byte_simd+0x70>  // b.none
+    0.00 :   d711c:  ldp     q1, q2, [x0]
+    0.28 :   d7120:  ldp     q3, q4, [x0, #32]
+    0.00 :   d7124:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   d7128:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   d712c:  cmeq    v3.16b, v3.16b, v0.16b
+    0.73 :   d7130:  cmeq    v4.16b, v4.16b, v0.16b
+    0.00 :   d7134:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   d7138:  orr     v2.16b, v3.16b, v4.16b
+    0.00 :   d713c:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   d7140:  addp    d1, v1.2d
+    0.00 :   d7144:  fmov    x8, d1
+    0.00 :   d7148:  cbnz    x8, d70f4 <core::str::pattern::contains_byte_simd+0x18>
+    8.67 :   d714c:  sub     x8, x1, x9
+    0.00 :   d7150:  tst     x8, #0x7fffffffffffffc0
+    0.00 :   d7154:  b.ne    d716c <core::str::pattern::contains_byte_simd+0x90>  // b.any
+    0.00 :   d7158:  b       d71b4 <core::str::pattern::contains_byte_simd+0xd8>
+    0.00 :   d715c:  mov     x9, xzr
+    0.00 :   d7160:  sub     x8, x1, xzr
+    0.00 :   d7164:  tst     x8, #0x7fffffffffffffc0
+    0.00 :   d7168:  b.eq    d71b4 <core::str::pattern::contains_byte_simd+0xd8>  // b.none
+    0.00 :   d716c:  and     x10, x8, #0x7fffffffffffffc0
+    0.00 :   d7170:  add     x9, x0, x9
+    0.00 :   d7174:  neg     x10, x10
+    1.12 :   d7178:  ldp     q1, q2, [x9]
+    0.11 :   d717c:  ldp     q3, q4, [x9, #32]
+    0.00 :   d7180:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   d7184:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   d7188:  cmeq    v3.16b, v3.16b, v0.16b
+    0.06 :   d718c:  cmeq    v4.16b, v4.16b, v0.16b
+    0.00 :   d7190:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   d7194:  orr     v2.16b, v3.16b, v4.16b
+    0.00 :   d7198:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   d719c:  addp    d1, v1.2d
+    0.00 :   d71a0:  fmov    x11, d1
+    0.00 :   d71a4:  cbnz    x11, d70f4 <core::str::pattern::contains_byte_simd+0x18>
+   86.57 :   d71a8:  adds    x10, x10, #0x40
+    0.00 :   d71ac:  add     x9, x9, #0x40
+    0.00 :   d71b0:  b.ne    d7178 <core::str::pattern::contains_byte_simd+0x9c>  // b.any
+    0.06 :   d71b4:  and     x8, x8, #0x3f
+    0.00 :   d71b8:  cbz     x8, d7204 <core::str::pattern::contains_byte_simd+0x128>
+    0.00 :   d71bc:  subs    x8, x1, #0x40
+    0.00 :   d71c0:  b.cc    d7210 <core::str::pattern::contains_byte_simd+0x134>  // b.lo, b.ul, b.last
+    0.00 :   d71c4:  add     x8, x0, x8
+    0.00 :   d71c8:  ldp     q1, q2, [x8]
+    0.00 :   d71cc:  ldp     q3, q4, [x8, #32]
+    0.00 :   d71d0:  cmeq    v1.16b, v1.16b, v0.16b
+    0.00 :   d71d4:  cmeq    v2.16b, v2.16b, v0.16b
+    0.00 :   d71d8:  cmeq    v3.16b, v3.16b, v0.16b
+    0.95 :   d71dc:  cmeq    v0.16b, v4.16b, v0.16b
+    0.00 :   d71e0:  orr     v1.16b, v1.16b, v2.16b
+    0.00 :   d71e4:  orr     v0.16b, v3.16b, v0.16b
+    0.00 :   d71e8:  orr     v0.16b, v1.16b, v0.16b
+    0.00 :   d71ec:  addp    d0, v0.2d
+    0.00 :   d71f0:  fmov    x8, d0
+    0.00 :   d71f4:  cmp     x8, #0x0
+    0.00 :   d71f8:  cset    w0, ne  // ne = any
+    0.00 :   d71fc:  ldp     x29, x30, [sp], #16
+    0.00 :   d7200:  ret
+    0.00 :   d7204:  mov     w0, wzr
+    0.00 :   d7208:  ldp     x29, x30, [sp], #16
+    0.00 :   d720c:  ret
+    0.00 :   d7210:  adrp    x3, 13d000 <std::panicking::EMPTY_PANIC+0x4c60>
+    0.00 :   d7214:  add     x3, x3, #0xe20
+    0.00 :   d7218:  mov     x0, x8
+    0.00 :   d721c:  mov     x2, x1
+    0.00 :   d7220:  bl      45210 <core::slice::index::slice_index_fail@plt>
+    0.00 :   d7224:  adrp    x2, 13d000 <std::panicking::EMPTY_PANIC+0x4c60>
+    0.00 :   d7228:  add     x2, x2, #0xe08
+    0.00 :   d722c:  mov     x0, xzr
+    0.00 :   d7230:  bl      45100 <core::panicking::panic_bounds_check@plt>
+ Percent |	Source code & Disassembly of benches for cycles:u (41 samples, percent: local period)
+-----------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000010560 <<&str as core::str::pattern::Pattern>::is_contained_in>:
+         : 6     <&str as core::str::pattern::Pattern>::is_contained_in:
+    0.00 :   10560:  sub     sp, sp, #0x170
+    0.00 :   10564:  stp     x29, x30, [sp, #272]
+    0.00 :   10568:  stp     x28, x27, [sp, #288]
+    0.00 :   1056c:  stp     x26, x25, [sp, #304]
+   39.02 :   10570:  stp     x24, x23, [sp, #320]
+    2.44 :   10574:  stp     x22, x21, [sp, #336]
+    0.00 :   10578:  stp     x20, x19, [sp, #352]
+    0.00 :   1057c:  add     x29, sp, #0x110
+    0.00 :   10580:  cbz     x1, 10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>
+    0.00 :   10584:  mov     x20, x1
+    0.00 :   10588:  cmp     x1, x3
+    0.00 :   1058c:  b.cs    105d0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x70>  // b.hs, b.nlast
+    0.00 :   10590:  subs    x24, x20, #0x1
+    0.00 :   10594:  b.ne    105ec <<&str as core::str::pattern::Pattern>::is_contained_in+0x8c>  // b.any
+    2.44 :   10598:  ldrb    w8, [x0]
+    0.00 :   1059c:  cmp     x3, #0x3f
+    0.00 :   105a0:  b.ls    10620 <<&str as core::str::pattern::Pattern>::is_contained_in+0xc0>  // b.plast
+   39.02 :   105a4:  mov     x0, x2
+    0.00 :   105a8:  mov     x1, x3
+    0.00 :   105ac:  mov     w2, w8
+    0.00 :   105b0:  ldp     x20, x19, [sp, #352]
+    0.00 :   105b4:  ldp     x22, x21, [sp, #336]
+    0.00 :   105b8:  ldp     x24, x23, [sp, #320]
+    0.00 :   105bc:  ldp     x26, x25, [sp, #304]
+    0.00 :   105c0:  ldp     x28, x27, [sp, #288]
+   17.07 :   105c4:  ldp     x29, x30, [sp, #272]
+    0.00 :   105c8:  add     sp, sp, #0x170
+    0.00 :   105cc:  b       d100 <core::str::pattern::contains_byte_simd@plt>
+    0.00 :   105d0:  b.ne    10820 <<&str as core::str::pattern::Pattern>::is_contained_in+0x2c0>  // b.any
+    0.00 :   105d4:  mov     x1, x2
+    0.00 :   105d8:  mov     x2, x20
+    0.00 :   105dc:  bl      d370 <bcmp@plt>
+    0.00 :   105e0:  cmp     w0, #0x0
+    0.00 :   105e4:  cset    w19, eq // eq = none
+    0.00 :   105e8:  b       10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>
+    0.00 :   105ec:  cmp     x20, #0x21
+    0.00 :   105f0:  b.cs    10680 <<&str as core::str::pattern::Pattern>::is_contained_in+0x120>  // b.hs, b.nlast
+    0.00 :   105f4:  ldrb    w8, [x0]
+    0.00 :   105f8:  cmp     x20, #0x2
+    0.00 :   105fc:  mov     x26, x2
+    0.00 :   10600:  stur    x3, [x29, #-120]
+    0.00 :   10604:  b.ne    1064c <<&str as core::str::pattern::Pattern>::is_contained_in+0xec>  // b.any
+    0.00 :   10608:  cmp     x3, #0x11
+    0.00 :   1060c:  b.cc    10834 <<&str as core::str::pattern::Pattern>::is_contained_in+0x2d4>  // b.lo, b.ul, b.last
+    0.00 :   10610:  ldrb    w9, [x0, #1]
+    0.00 :   10614:  dup     v2.16b, w8
+    0.00 :   10618:  mov     w21, #0x1                       // #1
+    0.00 :   1061c:  b       109e0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x480>
+    0.00 :   10620:  cmp     x3, #0xf
+    0.00 :   10624:  b.hi    10710 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1b0>  // b.pmore
+    0.00 :   10628:  sub     x9, x3, #0x1
+    0.00 :   1062c:  ldrb    w10, [x2], #1
+    0.00 :   10630:  cmp     w10, w8
+    0.00 :   10634:  cset    w19, eq // eq = none
+    0.00 :   10638:  b.eq    10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>  // b.none
+    0.00 :   1063c:  mov     x10, x9
+    0.00 :   10640:  sub     x9, x9, #0x1
+    0.00 :   10644:  cbnz    x10, 1062c <<&str as core::str::pattern::Pattern>::is_contained_in+0xcc>
+    0.00 :   10648:  b       10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>
+    0.00 :   1064c:  subs    x9, x20, #0x4
+    0.00 :   10650:  csel    x10, xzr, x9, cc        // cc = lo, ul, last
+    0.00 :   10654:  cmp     x10, x20
+    0.00 :   10658:  b.cs    10680 <<&str as core::str::pattern::Pattern>::is_contained_in+0x120>  // b.hs, b.nlast
+    0.00 :   1065c:  mov     x21, x24
+    0.00 :   10660:  cmp     x21, x20
+    0.00 :   10664:  b.cs    10db4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>  // b.hs, b.nlast
+    0.00 :   10668:  ldrb    w9, [x0, x21]
+    0.00 :   1066c:  cmp     w9, w8
+    0.00 :   10670:  b.ne    10828 <<&str as core::str::pattern::Pattern>::is_contained_in+0x2c8>  // b.any
+    0.00 :   10674:  cmp     x10, x21
+    0.00 :   10678:  sub     x21, x21, #0x1
+    0.00 :   1067c:  b.cc    10660 <<&str as core::str::pattern::Pattern>::is_contained_in+0x100>  // b.lo, b.ul, b.last
+    0.00 :   10680:  mov     x9, x0
+    0.00 :   10684:  sub     x8, x29, #0x70
+    0.00 :   10688:  mov     x0, x2
+    0.00 :   1068c:  mov     x1, x3
+    0.00 :   10690:  mov     x2, x9
+    0.00 :   10694:  mov     x3, x20
+    0.00 :   10698:  bl      d7a0 <<core::str::pattern::StrSearcher>::new@plt>
+    0.00 :   1069c:  ldur    w8, [x29, #-112]
+    0.00 :   106a0:  tbz     w8, #0, 106e0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x180>
+    0.00 :   106a4:  ldp     x13, x1, [x29, #-24]
+    0.00 :   106a8:  ldur    x11, [x29, #-56]
+    0.00 :   106ac:  ldp     x8, x9, [x29, #-40]
+    0.00 :   106b0:  cmn     x11, #0x1
+    0.00 :   106b4:  sub     x10, x1, #0x1
+    0.00 :   106b8:  b.eq    107dc <<&str as core::str::pattern::Pattern>::is_contained_in+0x27c>  // b.none
+    0.00 :   106bc:  ldur    x17, [x29, #-72]
+    0.00 :   106c0:  add     x0, x17, x10
+    0.00 :   106c4:  cmp     x0, x9
+    0.00 :   106c8:  b.cs    10820 <<&str as core::str::pattern::Pattern>::is_contained_in+0x2c0>  // b.hs, b.nlast
+    0.00 :   106cc:  ldur    x12, [x29, #-104]
+    0.00 :   106d0:  ldp     x15, x14, [x29, #-88]
+    0.00 :   106d4:  mov     w16, #0x1                       // #1
+    0.00 :   106d8:  sub     x16, x16, x12
+    0.00 :   106dc:  b       10748 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1e8>
+    0.00 :   106e0:  ldurb   w8, [x29, #-86]
+    0.00 :   106e4:  tbnz    w8, #0, 10820 <<&str as core::str::pattern::Pattern>::is_contained_in+0x2c0>
+    0.00 :   106e8:  ldp     x0, x1, [x29, #-40]
+    0.00 :   106ec:  ldur    x2, [x29, #-104]
+    0.00 :   106f0:  ldurb   w19, [x29, #-88]
+    0.00 :   106f4:  cbz     x2, 10888 <<&str as core::str::pattern::Pattern>::is_contained_in+0x328>
+    0.00 :   106f8:  cmp     x2, x1
+    0.00 :   106fc:  b.cs    10884 <<&str as core::str::pattern::Pattern>::is_contained_in+0x324>  // b.hs, b.nlast
+    0.00 :   10700:  ldrsb   w8, [x0, x2]
+    0.00 :   10704:  cmn     w8, #0x40
+    0.00 :   10708:  b.ge    10888 <<&str as core::str::pattern::Pattern>::is_contained_in+0x328>  // b.tcont
+    0.00 :   1070c:  b       10d60 <<&str as core::str::pattern::Pattern>::is_contained_in+0x800>
+    0.00 :   10710:  mov     w0, w8
+    0.00 :   10714:  mov     x1, x2
+    0.00 :   10718:  mov     x2, x3
+    0.00 :   1071c:  bl      d340 <core::slice::memchr::memchr_aligned@plt>
+    0.00 :   10720:  cmp     x0, #0x1
+    0.00 :   10724:  cset    w19, eq // eq = none
+    0.00 :   10728:  b       10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>
+    0.00 :   1072c:  mov     x11, xzr
+    0.00 :   10730:  add     x18, x17, x1
+    0.00 :   10734:  add     x0, x18, x10
+    0.00 :   10738:  mov     w19, wzr
+    0.00 :   1073c:  mov     x17, x18
+    0.00 :   10740:  cmp     x0, x9
+    0.00 :   10744:  b.cs    10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>  // b.hs, b.nlast
+    0.00 :   10748:  ldrb    w18, [x8, x0]
+    0.00 :   1074c:  lsr     x18, x14, x18
+    0.00 :   10750:  tbz     w18, #0, 1072c <<&str as core::str::pattern::Pattern>::is_contained_in+0x1cc>
+    0.00 :   10754:  cmp     x11, x12
+    0.00 :   10758:  csel    x0, x11, x12, hi        // hi = pmore
+    0.00 :   1075c:  cmp     x0, x1
+    0.00 :   10760:  b.cs    10790 <<&str as core::str::pattern::Pattern>::is_contained_in+0x230>  // b.hs, b.nlast
+    0.00 :   10764:  add     x2, x17, x0
+    0.00 :   10768:  add     x18, x2, x16
+    0.00 :   1076c:  ldrb    w3, [x13, x0]
+    0.00 :   10770:  ldrb    w4, [x8, x2]
+    0.00 :   10774:  cmp     w3, w4
+    0.00 :   10778:  b.ne    107d4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x274>  // b.any
+    0.00 :   1077c:  add     x0, x0, #0x1
+    0.00 :   10780:  add     x18, x18, #0x1
+    0.00 :   10784:  add     x2, x2, #0x1
+    0.00 :   10788:  cmp     x0, x1
+    0.00 :   1078c:  b.cc    1076c <<&str as core::str::pattern::Pattern>::is_contained_in+0x20c>  // b.lo, b.ul, b.last
+    0.00 :   10790:  cmp     x11, x12
+    0.00 :   10794:  b.cs    10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>  // b.hs, b.nlast
+    0.00 :   10798:  add     x18, x8, x17
+    0.00 :   1079c:  sub     x0, x12, #0x1
+    0.00 :   107a0:  cmp     x0, x1
+    0.00 :   107a4:  b.cs    10cf8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x798>  // b.hs, b.nlast
+    0.00 :   107a8:  ldrb    w2, [x13, x0]
+    0.00 :   107ac:  ldrb    w3, [x18, x0]
+    0.00 :   107b0:  cmp     w2, w3
+    0.00 :   107b4:  b.ne    107c8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x268>  // b.any
+    0.00 :   107b8:  cmp     x11, x0
+    0.00 :   107bc:  sub     x0, x0, #0x1
+    0.00 :   107c0:  b.cc    107a0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x240>  // b.lo, b.ul, b.last
+    0.00 :   107c4:  b       10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>
+    0.00 :   107c8:  add     x18, x17, x15
+    0.00 :   107cc:  sub     x11, x1, x15
+    0.00 :   107d0:  b       10734 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1d4>
+    0.00 :   107d4:  mov     x11, xzr
+    0.00 :   107d8:  b       10734 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1d4>
+    0.00 :   107dc:  ldur    x14, [x29, #-72]
+    0.00 :   107e0:  add     x2, x14, x10
+    0.00 :   107e4:  cmp     x2, x9
+    0.00 :   107e8:  b.cs    10820 <<&str as core::str::pattern::Pattern>::is_contained_in+0x2c0>  // b.hs, b.nlast
+    0.00 :   107ec:  ldur    x11, [x29, #-104]
+    0.00 :   107f0:  ldur    x12, [x29, #-80]
+    0.00 :   107f4:  cmp     x11, x1
+    0.00 :   107f8:  sub     x0, x11, #0x1
+    0.00 :   107fc:  csel    x17, x11, x1, hi        // hi = pmore
+    0.00 :   10800:  cmp     x0, x1
+    0.00 :   10804:  b.cs    1096c <<&str as core::str::pattern::Pattern>::is_contained_in+0x40c>  // b.hs, b.nlast
+    0.00 :   10808:  ldur    x15, [x29, #-88]
+    0.00 :   1080c:  add     x16, x13, x11
+    0.00 :   10810:  sub     x17, x17, x11
+    0.00 :   10814:  sub     x18, x8, #0x1
+    0.00 :   10818:  sub     x13, x13, #0x1
+    0.00 :   1081c:  b       108f0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x390>
+    0.00 :   10820:  mov     w19, wzr
+    0.00 :   10824:  b       10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>
+    0.00 :   10828:  add     x10, x20, #0xf
+    0.00 :   1082c:  cmp     x3, x10
+    0.00 :   10830:  b.cs    109dc <<&str as core::str::pattern::Pattern>::is_contained_in+0x47c>  // b.hs, b.nlast
+    0.00 :   10834:  mov     x1, x0
+    0.00 :   10838:  mov     x0, x2
+    0.00 :   1083c:  mov     x2, x20
+    0.00 :   10840:  mov     x21, x1
+    0.00 :   10844:  bl      d370 <bcmp@plt>
+    0.00 :   10848:  cbz     w0, 10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>
+    0.00 :   1084c:  ldur    x8, [x29, #-120]
+    0.00 :   10850:  add     x22, x26, #0x1
+    0.00 :   10854:  sub     x23, x8, #0x1
+    0.00 :   10858:  cmp     x20, x23
+    0.00 :   1085c:  cset    w19, ls // ls = plast
+    0.00 :   10860:  b.hi    10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>  // b.pmore
+    0.00 :   10864:  mov     x0, x22
+    0.00 :   10868:  mov     x1, x21
+    0.00 :   1086c:  mov     x2, x20
+    0.00 :   10870:  bl      d370 <bcmp@plt>
+    0.00 :   10874:  add     x22, x22, #0x1
+    0.00 :   10878:  sub     x23, x23, #0x1
+    0.00 :   1087c:  cbnz    w0, 10858 <<&str as core::str::pattern::Pattern>::is_contained_in+0x2f8>
+    0.00 :   10880:  b       10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>
+    0.00 :   10884:  b.ne    10d60 <<&str as core::str::pattern::Pattern>::is_contained_in+0x800>  // b.any
+    0.00 :   10888:  cmp     x2, x1
+    0.00 :   1088c:  b.eq    10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>  // b.none
+    0.00 :   10890:  add     x9, x0, x2
+    0.00 :   10894:  ldrsb   w10, [x9]
+    0.00 :   10898:  and     w8, w10, #0xff
+    0.00 :   1089c:  tbz     w10, #31, 10d14 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7b4>
+    0.00 :   108a0:  ldrb    w10, [x9, #1]
+    0.00 :   108a4:  cmp     w8, #0xe0
+    0.00 :   108a8:  and     w10, w10, #0x3f
+    0.00 :   108ac:  b.cc    10d04 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7a4>  // b.lo, b.ul, b.last
+    0.00 :   108b0:  ldrb    w11, [x9, #2]
+    0.00 :   108b4:  cmp     w8, #0xf0
+    0.00 :   108b8:  and     w11, w11, #0x3f
+    0.00 :   108bc:  orr     w11, w11, w10, lsl #6
+    0.00 :   108c0:  and     w10, w8, #0x1f
+    0.00 :   108c4:  b.cc    10d10 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7b0>  // b.lo, b.ul, b.last
+    0.00 :   108c8:  ldrb    w8, [x9, #3]
+    0.00 :   108cc:  and     w8, w8, #0x3f
+    0.00 :   108d0:  orr     w8, w8, w11, lsl #6
+    0.00 :   108d4:  bfi     w8, w10, #18, #3
+    0.00 :   108d8:  b       10d14 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7b4>
+    0.00 :   108dc:  add     x14, x14, x1
+    0.00 :   108e0:  add     x2, x14, x10
+    0.00 :   108e4:  mov     w19, wzr
+    0.00 :   108e8:  cmp     x2, x9
+    0.00 :   108ec:  b.cs    10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>  // b.hs, b.nlast
+    0.00 :   108f0:  ldrb    w0, [x8, x2]
+    0.00 :   108f4:  lsr     x0, x12, x0
+    0.00 :   108f8:  tbz     w0, #0, 108dc <<&str as core::str::pattern::Pattern>::is_contained_in+0x37c>
+    0.00 :   108fc:  cmp     x11, x1
+    0.00 :   10900:  b.cs    10934 <<&str as core::str::pattern::Pattern>::is_contained_in+0x3d4>  // b.hs, b.nlast
+    0.00 :   10904:  mvn     x0, x14
+    0.00 :   10908:  add     x2, x11, x14
+    0.00 :   1090c:  mov     x3, x17
+    0.00 :   10910:  mov     x4, x16
+    0.00 :   10914:  ldrb    w5, [x4], #1
+    0.00 :   10918:  ldrb    w6, [x8, x2]
+    0.00 :   1091c:  cmp     w5, w6
+    0.00 :   10920:  b.ne    10964 <<&str as core::str::pattern::Pattern>::is_contained_in+0x404>  // b.any
+    0.00 :   10924:  subs    x3, x3, #0x1
+    0.00 :   10928:  sub     x0, x0, #0x1
+    0.00 :   1092c:  add     x2, x2, #0x1
+    0.00 :   10930:  b.ne    10914 <<&str as core::str::pattern::Pattern>::is_contained_in+0x3b4>  // b.any
+    0.00 :   10934:  cbz     x11, 10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>
+    0.00 :   10938:  add     x0, x18, x14
+    0.00 :   1093c:  mov     x2, x11
+    0.00 :   10940:  ldrb    w3, [x13, x2]
+    0.00 :   10944:  ldrb    w4, [x0, x2]
+    0.00 :   10948:  cmp     w3, w4
+    0.00 :   1094c:  b.ne    1095c <<&str as core::str::pattern::Pattern>::is_contained_in+0x3fc>  // b.any
+    0.00 :   10950:  sub     x2, x2, #0x1
+    0.00 :   10954:  cbnz    x2, 10940 <<&str as core::str::pattern::Pattern>::is_contained_in+0x3e0>
+    0.00 :   10958:  b       10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>
+    0.00 :   1095c:  add     x14, x14, x15
+    0.00 :   10960:  b       108e0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x380>
+    0.00 :   10964:  neg     x14, x0
+    0.00 :   10968:  b       108e0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x380>
+    0.00 :   1096c:  add     x13, x13, x11
+    0.00 :   10970:  sub     x15, x17, x11
+    0.00 :   10974:  ldrb    w16, [x8, x2]
+    0.00 :   10978:  lsr     x16, x12, x16
+    0.00 :   1097c:  tbz     w16, #0, 109bc <<&str as core::str::pattern::Pattern>::is_contained_in+0x45c>
+    0.00 :   10980:  cmp     x11, x1
+    0.00 :   10984:  b.cs    10cf4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x794>  // b.hs, b.nlast
+    0.00 :   10988:  mvn     x16, x14
+    0.00 :   1098c:  add     x14, x11, x14
+    0.00 :   10990:  mov     x17, x15
+    0.00 :   10994:  mov     x18, x13
+    0.00 :   10998:  ldrb    w2, [x18], #1
+    0.00 :   1099c:  ldrb    w3, [x8, x14]
+    0.00 :   109a0:  cmp     w2, w3
+    0.00 :   109a4:  b.ne    109c4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x464>  // b.any
+    0.00 :   109a8:  subs    x17, x17, #0x1
+    0.00 :   109ac:  sub     x16, x16, #0x1
+    0.00 :   109b0:  add     x14, x14, #0x1
+    0.00 :   109b4:  b.ne    10998 <<&str as core::str::pattern::Pattern>::is_contained_in+0x438>  // b.any
+    0.00 :   109b8:  b       10cf4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x794>
+    0.00 :   109bc:  add     x14, x14, x1
+    0.00 :   109c0:  b       109c8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x468>
+    0.00 :   109c4:  neg     x14, x16
+    0.00 :   109c8:  add     x2, x14, x10
+    0.00 :   109cc:  mov     w19, wzr
+    0.00 :   109d0:  cmp     x2, x9
+    0.00 :   109d4:  b.cc    10974 <<&str as core::str::pattern::Pattern>::is_contained_in+0x414>  // b.lo, b.ul, b.last
+    0.00 :   109d8:  b       10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>
+    0.00 :   109dc:  dup     v2.16b, w8
+    0.00 :   109e0:  dup     v3.16b, w9
+    0.00 :   109e4:  add     x9, x20, #0x3f
+    0.00 :   109e8:  add     x8, x0, #0x1
+    0.00 :   109ec:  cmp     x9, x3
+    0.00 :   109f0:  adrp    x9, 4e000 <<alloc::string::String as core::fmt::Display>::fmt+0x10>
+    0.00 :   109f4:  stp     x2, x3, [x29, #-112]
+    0.00 :   109f8:  stp     x8, x24, [x29, #-96]
+    0.00 :   109fc:  stp     q3, q2, [sp, #112]
+    0.00 :   10a00:  b.cs    10be8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x688>  // b.hs, b.nlast
+    0.00 :   10a04:  add     x8, x21, x2
+    0.00 :   10a08:  ldr     q4, [x9, #3184]
+    0.00 :   10a0c:  mov     x22, xzr
+    0.00 :   10a10:  add     x28, x20, #0x7f
+    0.00 :   10a14:  add     x27, x8, #0x20
+    0.00 :   10a18:  add     x25, x2, #0x30
+    0.00 :   10a1c:  str     q4, [sp, #64]
+    0.00 :   10a20:  add     x8, x25, x22
+    0.00 :   10a24:  add     x9, x27, x22
+    0.00 :   10a28:  ldp     q0, q18, [x9, #-32]
+    0.00 :   10a2c:  ldp     q1, q17, [x8, #-48]
+    0.00 :   10a30:  ldp     q7, q5, [x8, #-16]
+    0.00 :   10a34:  cmeq    v0.16b, v0.16b, v3.16b
+    0.00 :   10a38:  ldp     q16, q6, [x9]
+    0.00 :   10a3c:  cmeq    v1.16b, v1.16b, v2.16b
+    0.00 :   10a40:  and     v0.16b, v1.16b, v0.16b
+    0.00 :   10a44:  addp    d1, v0.2d
+    0.00 :   10a48:  fmov    x8, d1
+    0.00 :   10a4c:  cbnz    x8, 10ae8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x588>
+    0.00 :   10a50:  mov     w19, wzr
+    0.00 :   10a54:  cmeq    v0.16b, v17.16b, v2.16b
+    0.00 :   10a58:  cmeq    v1.16b, v18.16b, v3.16b
+    0.00 :   10a5c:  and     v0.16b, v0.16b, v1.16b
+    0.00 :   10a60:  and     v0.16b, v0.16b, v4.16b
+    0.00 :   10a64:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10a68:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10a6c:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10a70:  umov    w8, v0.h[0]
+    0.00 :   10a74:  tst     w8, #0xffff
+    0.00 :   10a78:  b.ne    10b3c <<&str as core::str::pattern::Pattern>::is_contained_in+0x5dc>  // b.any
+    0.00 :   10a7c:  cmeq    v0.16b, v7.16b, v2.16b
+    0.00 :   10a80:  cmeq    v1.16b, v16.16b, v3.16b
+    0.00 :   10a84:  and     v0.16b, v0.16b, v1.16b
+    0.00 :   10a88:  and     v0.16b, v0.16b, v4.16b
+    0.00 :   10a8c:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10a90:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10a94:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10a98:  umov    w8, v0.h[0]
+    0.00 :   10a9c:  tst     w8, #0xffff
+    0.00 :   10aa0:  b.ne    10b78 <<&str as core::str::pattern::Pattern>::is_contained_in+0x618>  // b.any
+    0.00 :   10aa4:  cmeq    v0.16b, v5.16b, v2.16b
+    0.00 :   10aa8:  cmeq    v1.16b, v6.16b, v3.16b
+    0.00 :   10aac:  and     v0.16b, v0.16b, v1.16b
+    0.00 :   10ab0:  and     v0.16b, v0.16b, v4.16b
+    0.00 :   10ab4:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10ab8:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10abc:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10ac0:  umov    w8, v0.h[0]
+    0.00 :   10ac4:  tst     w8, #0xffff
+    0.00 :   10ac8:  b.ne    10bac <<&str as core::str::pattern::Pattern>::is_contained_in+0x64c>  // b.any
+    0.00 :   10acc:  add     x8, x28, x22
+    0.00 :   10ad0:  add     x23, x22, #0x40
+    0.00 :   10ad4:  cmp     x8, x3
+    0.00 :   10ad8:  b.cs    10bf0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x690>  // b.hs, b.nlast
+    0.00 :   10adc:  mov     x22, x23
+    0.00 :   10ae0:  tbz     w19, #0, 10a20 <<&str as core::str::pattern::Pattern>::is_contained_in+0x4c0>
+    0.00 :   10ae4:  b       10bf0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x690>
+    0.00 :   10ae8:  and     v0.16b, v0.16b, v4.16b
+    0.00 :   10aec:  sub     x0, x29, #0x70
+    0.00 :   10af0:  mov     x1, x22
+    0.00 :   10af4:  mov     w3, wzr
+    0.00 :   10af8:  stp     q18, q17, [sp]
+    0.00 :   10afc:  stp     q16, q7, [sp, #32]
+    0.00 :   10b00:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10b04:  stp     q6, q5, [sp, #80]
+    0.00 :   10b08:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10b0c:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10b10:  umov    w2, v0.h[0]
+    0.00 :   10b14:  bl      d834 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   10b18:  ldp     q18, q17, [sp]
+    0.00 :   10b1c:  mov     x2, x26
+    0.00 :   10b20:  ldp     q16, q7, [sp, #32]
+    0.00 :   10b24:  mov     w19, w0
+    0.00 :   10b28:  ldp     q6, q5, [sp, #80]
+    0.00 :   10b2c:  ldr     q4, [sp, #64]
+    0.00 :   10b30:  ldp     q3, q2, [sp, #112]
+    0.00 :   10b34:  ldur    x3, [x29, #-120]
+    0.00 :   10b38:  b       10a54 <<&str as core::str::pattern::Pattern>::is_contained_in+0x4f4>
+    0.00 :   10b3c:  sub     x0, x29, #0x70
+    0.00 :   10b40:  add     x1, x22, #0x10
+    0.00 :   10b44:  mov     w2, w8
+    0.00 :   10b48:  mov     w3, w19
+    0.00 :   10b4c:  stp     q16, q7, [sp, #32]
+    0.00 :   10b50:  stp     q6, q5, [sp, #80]
+    0.00 :   10b54:  bl      d834 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   10b58:  ldp     q16, q7, [sp, #32]
+    0.00 :   10b5c:  mov     x2, x26
+    0.00 :   10b60:  ldp     q6, q5, [sp, #80]
+    0.00 :   10b64:  orr     w19, w19, w0
+    0.00 :   10b68:  ldp     q3, q2, [sp, #112]
+    0.00 :   10b6c:  ldr     q4, [sp, #64]
+    0.00 :   10b70:  ldur    x3, [x29, #-120]
+    0.00 :   10b74:  b       10a7c <<&str as core::str::pattern::Pattern>::is_contained_in+0x51c>
+    0.00 :   10b78:  sub     x0, x29, #0x70
+    0.00 :   10b7c:  add     x1, x22, #0x20
+    0.00 :   10b80:  mov     w2, w8
+    0.00 :   10b84:  mov     w3, w19
+    0.00 :   10b88:  stp     q6, q5, [sp, #80]
+    0.00 :   10b8c:  bl      d834 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   10b90:  ldp     q6, q5, [sp, #80]
+    0.00 :   10b94:  mov     x2, x26
+    0.00 :   10b98:  ldp     q3, q2, [sp, #112]
+    0.00 :   10b9c:  orr     w19, w19, w0
+    0.00 :   10ba0:  ldr     q4, [sp, #64]
+    0.00 :   10ba4:  ldur    x3, [x29, #-120]
+    0.00 :   10ba8:  b       10aa4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x544>
+    0.00 :   10bac:  sub     x0, x29, #0x70
+    0.00 :   10bb0:  add     x1, x22, #0x30
+    0.00 :   10bb4:  mov     w2, w8
+    0.00 :   10bb8:  mov     w3, w19
+    0.00 :   10bbc:  bl      d834 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   10bc0:  ldp     q3, q2, [sp, #112]
+    0.00 :   10bc4:  mov     x2, x26
+    0.00 :   10bc8:  ldr     q4, [sp, #64]
+    0.00 :   10bcc:  ldur    x3, [x29, #-120]
+    0.00 :   10bd0:  orr     w19, w19, w0
+    0.00 :   10bd4:  add     x8, x28, x22
+    0.00 :   10bd8:  add     x23, x22, #0x40
+    0.00 :   10bdc:  cmp     x8, x3
+    0.00 :   10be0:  b.cc    10adc <<&str as core::str::pattern::Pattern>::is_contained_in+0x57c>  // b.lo, b.ul, b.last
+    0.00 :   10be4:  b       10bf0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x690>
+    0.00 :   10be8:  mov     x23, xzr
+    0.00 :   10bec:  mov     w19, wzr
+    0.00 :   10bf0:  add     x8, x20, x23
+    0.00 :   10bf4:  adrp    x25, 4e000 <<alloc::string::String as core::fmt::Display>::fmt+0x10>
+    0.00 :   10bf8:  add     x8, x8, #0xf
+    0.00 :   10bfc:  cmp     x8, x3
+    0.00 :   10c00:  csinc   w8, w19, wzr, cc        // cc = lo, ul, last
+    0.00 :   10c04:  tbz     w8, #0, 10c60 <<&str as core::str::pattern::Pattern>::is_contained_in+0x700>
+    0.00 :   10c08:  sub     x8, x3, x24
+    0.00 :   10c0c:  sub     x1, x8, #0x10
+    0.00 :   10c10:  add     x8, x2, x1
+    0.00 :   10c14:  ldr     q0, [x8]
+    0.00 :   10c18:  ldr     q1, [x8, x21]
+    0.00 :   10c1c:  cmeq    v0.16b, v0.16b, v2.16b
+    0.00 :   10c20:  cmeq    v1.16b, v1.16b, v3.16b
+    0.00 :   10c24:  and     v0.16b, v0.16b, v1.16b
+    0.00 :   10c28:  addp    d1, v0.2d
+    0.00 :   10c2c:  fmov    x8, d1
+    0.00 :   10c30:  cbz     x8, 10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>
+    0.00 :   10c34:  ldr     q1, [x25, #3184]
+    0.00 :   10c38:  sub     x0, x29, #0x70
+    0.00 :   10c3c:  mov     w3, w19
+    0.00 :   10c40:  and     v0.16b, v0.16b, v1.16b
+    0.00 :   10c44:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10c48:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10c4c:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10c50:  umov    w2, v0.h[0]
+    0.00 :   10c54:  bl      d834 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   10c58:  orr     w19, w19, w0
+    0.00 :   10c5c:  b       10d90 <<&str as core::str::pattern::Pattern>::is_contained_in+0x830>
+    0.00 :   10c60:  add     x8, x23, x20
+    0.00 :   10c64:  ldr     q0, [x25, #3184]
+    0.00 :   10c68:  add     x22, x2, x21
+    0.00 :   10c6c:  add     x20, x8, #0x1f
+    0.00 :   10c70:  str     q0, [sp, #96]
+    0.00 :   10c74:  ldr     q0, [x2, x23]
+    0.00 :   10c78:  ldr     q1, [x22, x23]
+    0.00 :   10c7c:  cmeq    v0.16b, v0.16b, v2.16b
+    0.00 :   10c80:  cmeq    v1.16b, v1.16b, v3.16b
+    0.00 :   10c84:  and     v0.16b, v0.16b, v1.16b
+    0.00 :   10c88:  addp    d1, v0.2d
+    0.00 :   10c8c:  fmov    x8, d1
+    0.00 :   10c90:  cbnz    x8, 10cb0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x750>
+    0.00 :   10c94:  mov     w19, wzr
+    0.00 :   10c98:  cmp     x20, x3
+    0.00 :   10c9c:  b.cs    10c08 <<&str as core::str::pattern::Pattern>::is_contained_in+0x6a8>  // b.hs, b.nlast
+    0.00 :   10ca0:  add     x23, x23, #0x10
+    0.00 :   10ca4:  add     x20, x20, #0x10
+    0.00 :   10ca8:  tbz     w19, #0, 10c74 <<&str as core::str::pattern::Pattern>::is_contained_in+0x714>
+    0.00 :   10cac:  b       10c08 <<&str as core::str::pattern::Pattern>::is_contained_in+0x6a8>
+    0.00 :   10cb0:  ldr     q1, [sp, #96]
+    0.00 :   10cb4:  sub     x0, x29, #0x70
+    0.00 :   10cb8:  mov     x1, x23
+    0.00 :   10cbc:  mov     w3, wzr
+    0.00 :   10cc0:  and     v0.16b, v0.16b, v1.16b
+    0.00 :   10cc4:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10cc8:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10ccc:  addp    v0.16b, v0.16b, v0.16b
+    0.00 :   10cd0:  umov    w2, v0.h[0]
+    0.00 :   10cd4:  bl      d834 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   10cd8:  ldp     q3, q2, [sp, #112]
+    0.00 :   10cdc:  mov     x2, x26
+    0.00 :   10ce0:  ldur    x3, [x29, #-120]
+    0.00 :   10ce4:  mov     w19, w0
+    0.00 :   10ce8:  cmp     x20, x3
+    0.00 :   10cec:  b.cc    10ca0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x740>  // b.lo, b.ul, b.last
+    0.00 :   10cf0:  b       10c08 <<&str as core::str::pattern::Pattern>::is_contained_in+0x6a8>
+    0.00 :   10cf4:  cbz     x11, 10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>
+    0.00 :   10cf8:  adrp    x2, 79000 <GCC_except_table8+0x17d14>
+    0.00 :   10cfc:  add     x2, x2, #0x658
+    0.00 :   10d00:  bl      d080 <core::panicking::panic_bounds_check@plt>
+    0.00 :   10d04:  bfi     w10, w8, #6, #5
+    0.00 :   10d08:  mov     w8, w10
+    0.00 :   10d0c:  b       10d14 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7b4>
+    0.00 :   10d10:  orr     w8, w11, w10, lsl #12
+    0.00 :   10d14:  tbnz    w19, #0, 10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>
+    0.00 :   10d18:  cmp     w8, #0x80
+    0.00 :   10d1c:  b.cs    10d28 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7c8>  // b.hs, b.nlast
+    0.00 :   10d20:  mov     w8, #0x1                        // #1
+    0.00 :   10d24:  b       10d44 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7e4>
+    0.00 :   10d28:  cmp     w8, #0x800
+    0.00 :   10d2c:  b.cs    10d38 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7d8>  // b.hs, b.nlast
+    0.00 :   10d30:  mov     w8, #0x2                        // #2
+    0.00 :   10d34:  b       10d44 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7e4>
+    0.00 :   10d38:  cmp     w8, #0x10, lsl #12
+    0.00 :   10d3c:  mov     w8, #0x3                        // #3
+    0.00 :   10d40:  cinc    x8, x8, cs      // cs = hs, nlast
+    0.00 :   10d44:  adds    x2, x8, x2
+    0.00 :   10d48:  b.eq    10d74 <<&str as core::str::pattern::Pattern>::is_contained_in+0x814>  // b.none
+    0.00 :   10d4c:  cmp     x2, x1
+    0.00 :   10d50:  b.cs    10d70 <<&str as core::str::pattern::Pattern>::is_contained_in+0x810>  // b.hs, b.nlast
+    0.00 :   10d54:  ldrsb   w8, [x0, x2]
+    0.00 :   10d58:  cmn     w8, #0x40
+    0.00 :   10d5c:  b.ge    10d74 <<&str as core::str::pattern::Pattern>::is_contained_in+0x814>  // b.tcont
+    0.00 :   10d60:  adrp    x4, 7a000 <__do_global_dtors_aux_fini_array_entry+0x9b0>
+    0.00 :   10d64:  add     x4, x4, #0x910
+    0.00 :   10d68:  mov     x3, x1
+    0.00 :   10d6c:  bl      d550 <core::str::slice_error_fail@plt>
+    0.00 :   10d70:  b.ne    10d60 <<&str as core::str::pattern::Pattern>::is_contained_in+0x800>  // b.any
+    0.00 :   10d74:  cmp     x2, x1
+    0.00 :   10d78:  b.eq    10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>  // b.none
+    0.00 :   10d7c:  ldrsb   w8, [x0, x2]
+    0.00 :   10d80:  tbz     w8, #31, 10d8c <<&str as core::str::pattern::Pattern>::is_contained_in+0x82c>
+    0.00 :   10d84:  and     w8, w8, #0xff
+    0.00 :   10d88:  cmp     w8, #0xe0
+    0.00 :   10d8c:  mov     w19, #0x1                       // #1
+    0.00 :   10d90:  and     w0, w19, #0x1
+    0.00 :   10d94:  ldp     x20, x19, [sp, #352]
+    0.00 :   10d98:  ldp     x22, x21, [sp, #336]
+    0.00 :   10d9c:  ldp     x24, x23, [sp, #320]
+    0.00 :   10da0:  ldp     x26, x25, [sp, #304]
+    0.00 :   10da4:  ldp     x28, x27, [sp, #288]
+    0.00 :   10da8:  ldp     x29, x30, [sp, #272]
+    0.00 :   10dac:  add     sp, sp, #0x170
+    0.00 :   10db0:  ret
+    0.00 :   10db4:  adrp    x2, 79000 <GCC_except_table8+0x17d14>
+    0.00 :   10db8:  add     x2, x2, #0x778
+    0.00 :   10dbc:  mov     x0, x21
+    0.00 :   10dc0:  mov     x1, x20
+    0.00 :   10dc4:  bl      d080 <core::panicking::panic_bounds_check@plt>
+ Percent |	Source code & Disassembly of benches for cycles:u (16 samples, percent: local period)
+-----------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001795c <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once>:
+         : 6     <benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once:
+    0.00 :   1795c:  stp     d9, d8, [sp, #-112]!
+    0.00 :   17960:  stp     x29, x30, [sp, #16]
+    0.00 :   17964:  stp     x28, x27, [sp, #32]
+    0.00 :   17968:  stp     x26, x25, [sp, #48]
+    0.00 :   1796c:  stp     x24, x23, [sp, #64]
+    0.00 :   17970:  stp     x22, x21, [sp, #80]
+    0.00 :   17974:  stp     x20, x19, [sp, #96]
+    0.00 :   17978:  add     x29, sp, #0x10
+    0.00 :   1797c:  sub     sp, sp, #0x2e0
+    0.00 :   17980:  ldrb    w9, [x0, #128]
+    0.00 :   17984:  mov     x19, x8
+    0.00 :   17988:  tbz     w9, #0, 179e0 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x84>
+    0.00 :   1798c:  bl      d640 <<std::time::Instant>::now@plt>
+    0.00 :   17990:  adrp    x8, 51000 <_fini+0x23ac>
+    0.00 :   17994:  add     x8, x8, #0x7b6
+    0.00 :   17998:  mov     w9, #0x9f7                      // #2551
+    0.00 :   1799c:  str     x0, [sp, #32]
+    0.00 :   179a0:  sub     x10, x29, #0xb8
+    0.00 :   179a4:  str     w1, [sp, #40]
+    0.00 :   179a8:  stp     x8, x9, [x29, #-184]
+    0.00 :   179ac:  adrp    x8, 50000 <_fini+0x13ac>
+    0.00 :   179b0:  add     x8, x8, #0x876
+    0.00 :   179b4:  mov     w9, #0x1                        // #1
+    0.00 :   179b8:  stp     x8, x9, [sp, #144]
+    0.00 :   179bc:  add     x8, sp, #0x90
+    0.00 :   179c0:  ldp     x0, x1, [sp, #144]
+    0.00 :   179c4:  ldp     x2, x3, [x29, #-184]
+    0.00 :   179c8:  bl      10560 <<&str as core::str::pattern::Pattern>::is_contained_in>
+    0.00 :   179cc:  strb    w0, [sp, #144]
+    0.00 :   179d0:  add     x8, sp, #0x90
+    0.00 :   179d4:  add     x0, sp, #0x20
+    0.00 :   179d8:  bl      d6c0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   179dc:  b       17d64 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x408>
+    0.00 :   179e0:  stp     x0, x19, [sp]
+    0.00 :   179e4:  mov     w19, #0xca00                    // #51712
+    0.00 :   179e8:  movk    w19, #0x3b9a, lsl #16
+    0.00 :   179ec:  bl      d640 <<std::time::Instant>::now@plt>
+    0.00 :   179f0:  adrp    x22, 51000 <_fini+0x23ac>
+    0.00 :   179f4:  add     x22, x22, #0x7b6
+    0.00 :   179f8:  mov     w23, #0x9f7                     // #2551
+    0.00 :   179fc:  str     x0, [sp, #32]
+    0.00 :   17a00:  adrp    x25, 50000 <_fini+0x13ac>
+    0.00 :   17a04:  add     x25, x25, #0x876
+    0.00 :   17a08:  str     w1, [sp, #40]
+    0.00 :   17a0c:  mov     w26, #0x1                       // #1
+    0.00 :   17a10:  sub     x24, x29, #0xb8
+    0.00 :   17a14:  stp     x22, x23, [x29, #-184]
+    0.00 :   17a18:  add     x8, sp, #0x90
+    0.00 :   17a1c:  stp     x25, x26, [sp, #144]
+    0.00 :   17a20:  ldp     x0, x1, [sp, #144]
+    0.00 :   17a24:  ldp     x2, x3, [x29, #-184]
+    0.00 :   17a28:  bl      10560 <<&str as core::str::pattern::Pattern>::is_contained_in>
+    0.00 :   17a2c:  strb    w0, [sp, #144]
+    0.00 :   17a30:  add     x8, sp, #0x90
+    0.00 :   17a34:  add     x0, sp, #0x20
+    0.00 :   17a38:  bl      d6c0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   17a3c:  mul     x8, x0, x19
+    0.00 :   17a40:  mov     w9, #0x4240                     // #16960
+    0.00 :   17a44:  movi    v0.2d, #0x0
+    0.00 :   17a48:  movk    w9, #0xf, lsl #16
+    0.00 :   17a4c:  fmov    d8, #1.000000000000000000e+00
+    0.00 :   17a50:  sub     x20, x29, #0x38
+    0.00 :   17a54:  sub     x28, x29, #0x28
+    0.00 :   17a58:  str     xzr, [sp, #24]
+    0.00 :   17a5c:  stp     q0, q0, [sp, #160]
+    0.00 :   17a60:  add     x8, x8, w1, uxtw
+    0.00 :   17a64:  stp     q0, q0, [sp, #192]
+    0.00 :   17a68:  stp     q0, q0, [sp, #224]
+    0.00 :   17a6c:  cmp     x8, #0x1
+    0.00 :   17a70:  stp     q0, q0, [sp, #256]
+    0.00 :   17a74:  csinc   x8, x8, xzr, hi // hi = pmore
+    0.00 :   17a78:  stp     q0, q0, [sp, #288]
+    0.00 :   17a7c:  udiv    x8, x9, x8
+    0.00 :   17a80:  sub     w9, w19, #0x1
+    0.00 :   17a84:  stp     q0, q0, [sp, #320]
+    0.00 :   17a88:  stp     q0, q0, [sp, #352]
+    0.00 :   17a8c:  stp     q0, q0, [sp, #384]
+    0.00 :   17a90:  stp     q0, q0, [sp, #416]
+    0.00 :   17a94:  stp     q0, q0, [sp, #448]
+    0.00 :   17a98:  stp     q0, q0, [sp, #480]
+    0.00 :   17a9c:  stp     q0, q0, [sp, #512]
+    0.00 :   17aa0:  str     q0, [sp, #144]
+    0.00 :   17aa4:  stp     w9, wzr, [sp, #16]
+    0.00 :   17aa8:  cmp     x8, #0x1
+    0.00 :   17aac:  csinc   x19, x8, xzr, hi        // hi = pmore
+    0.00 :   17ab0:  bl      d640 <<std::time::Instant>::now@plt>
+    0.00 :   17ab4:  ucvtf   d9, x19
+    0.00 :   17ab8:  mov     x21, xzr
+    0.00 :   17abc:  stur    x0, [x29, #-200]
+    0.00 :   17ac0:  stur    w1, [x29, #-192]
+    0.00 :   17ac4:  cbz     x19, 17b34 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1d8>
+    0.00 :   17ac8:  bl      d640 <<std::time::Instant>::now@plt>
+    0.00 :   17acc:  mov     x27, x19
+    0.00 :   17ad0:  stur    x0, [x29, #-56]
+    0.00 :   17ad4:  stur    w1, [x29, #-48]
+    0.00 :   17ad8:  stp     x22, x23, [x29, #-40]
+    0.00 :   17adc:  stp     x25, x26, [x29, #-184]
+   25.00 :   17ae0:  ldp     x0, x1, [x29, #-184]
+   25.00 :   17ae4:  ldp     x2, x3, [x29, #-40]
+    0.00 :   17ae8:  bl      10560 <<&str as core::str::pattern::Pattern>::is_contained_in>
+    0.00 :   17aec:  sturb   w0, [x29, #-184]
+    0.00 :   17af0:  subs    x27, x27, #0x1
+    0.00 :   17af4:  b.ne    17ad8 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x17c>  // b.any
+    0.00 :   17af8:  sub     x0, x29, #0x38
+    0.00 :   17afc:  add     x27, x21, #0x8
+    0.00 :   17b00:  bl      d6c0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   17b04:  mov     w8, #0xca00                     // #51712
+    0.00 :   17b08:  cmp     x27, #0x190
+    0.00 :   17b0c:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   17b10:  mul     x8, x0, x8
+    0.00 :   17b14:  add     x8, x8, w1, uxtw
+    0.00 :   17b18:  ucvtf   d0, x8
+    0.00 :   17b1c:  add     x8, sp, #0x90
+    0.00 :   17b20:  fdiv    d0, d0, d9
+    0.00 :   17b24:  str     d0, [x8, x21]
+    0.00 :   17b28:  mov     x21, x27
+    0.00 :   17b2c:  b.ne    17ac8 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x16c>  // b.any
+    0.00 :   17b30:  b       17b78 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x21c>
+    0.00 :   17b34:  mov     x27, x21
+    0.00 :   17b38:  add     x21, x21, #0x8
+    0.00 :   17b3c:  bl      d640 <<std::time::Instant>::now@plt>
+    0.00 :   17b40:  stur    x0, [x29, #-56]
+    0.00 :   17b44:  sub     x0, x29, #0x38
+    0.00 :   17b48:  stur    w1, [x29, #-48]
+    0.00 :   17b4c:  bl      d6c0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   17b50:  mov     w8, #0xca00                     // #51712
+    0.00 :   17b54:  cmp     x21, #0x190
+    0.00 :   17b58:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   17b5c:  mul     x8, x0, x8
+    0.00 :   17b60:  add     x8, x8, w1, uxtw
+    0.00 :   17b64:  ucvtf   d0, x8
+    0.00 :   17b68:  add     x8, sp, #0x90
+    0.00 :   17b6c:  fdiv    d0, d0, d9
+    0.00 :   17b70:  str     d0, [x8, x27]
+    0.00 :   17b74:  b.ne    17b34 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1d8>  // b.any
+    0.00 :   17b78:  fmov    d0, #5.000000000000000000e+00
+    0.00 :   17b7c:  add     x0, sp, #0x90
+    0.00 :   17b80:  mov     w1, #0x32                       // #50
+    0.00 :   17b84:  bl      363f0 <test::stats::winsorize>
+    0.00 :   17b88:  sub     x8, x29, #0xb8
+    0.00 :   17b8c:  add     x0, sp, #0x90
+    0.00 :   17b90:  mov     w1, #0x32                       // #50
+    0.00 :   17b94:  bl      29d18 <<test::stats::Summary>::new>
+    0.00 :   17b98:  add     x8, x19, x19, lsl #2
+    0.00 :   17b9c:  mov     x27, xzr
+    0.00 :   17ba0:  ucvtf   d9, x8
+    0.00 :   17ba4:  b       17be0 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x284>
+    0.00 :   17ba8:  sub     x0, x29, #0x48
+    0.00 :   17bac:  add     x21, x27, #0x8
+    0.00 :   17bb0:  bl      d6c0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   17bb4:  mov     w8, #0xca00                     // #51712
+    0.00 :   17bb8:  cmp     x21, #0x190
+    0.00 :   17bbc:  movk    w8, #0x3b9a, lsl #16
+    0.00 :   17bc0:  mul     x8, x0, x8
+    0.00 :   17bc4:  add     x8, x8, w1, uxtw
+    0.00 :   17bc8:  ucvtf   d0, x8
+    0.00 :   17bcc:  add     x8, sp, #0x90
+    0.00 :   17bd0:  fdiv    d0, d0, d9
+    0.00 :   17bd4:  str     d0, [x8, x27]
+    0.00 :   17bd8:  mov     x27, x21
+    0.00 :   17bdc:  b.eq    17c18 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2bc>  // b.none
+    0.00 :   17be0:  bl      d640 <<std::time::Instant>::now@plt>
+    0.00 :   17be4:  stur    x0, [x29, #-72]
+    0.00 :   17be8:  stur    w1, [x29, #-64]
+    0.00 :   17bec:  cbz     x19, 17ba8 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x24c>
+    0.00 :   17bf0:  add     x21, x19, x19, lsl #2
+    0.00 :   17bf4:  stp     x22, x23, [x29, #-56]
+    0.00 :   17bf8:  stp     x25, x26, [x29, #-40]
+   50.00 :   17bfc:  ldp     x0, x1, [x29, #-40]
+    0.00 :   17c00:  ldp     x2, x3, [x29, #-56]
+    0.00 :   17c04:  bl      10560 <<&str as core::str::pattern::Pattern>::is_contained_in>
+    0.00 :   17c08:  sturb   w0, [x29, #-40]
+    0.00 :   17c0c:  subs    x21, x21, #0x1
+    0.00 :   17c10:  b.ne    17bf4 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x298>  // b.any
+    0.00 :   17c14:  b       17ba8 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x24c>
+    0.00 :   17c18:  fmov    d0, #5.000000000000000000e+00
+    0.00 :   17c1c:  add     x0, sp, #0x90
+    0.00 :   17c20:  mov     w1, #0x32                       // #50
+    0.00 :   17c24:  bl      363f0 <test::stats::winsorize>
+    0.00 :   17c28:  add     x8, sp, #0x20
+    0.00 :   17c2c:  add     x0, sp, #0x90
+    0.00 :   17c30:  mov     w1, #0x32                       // #50
+    0.00 :   17c34:  bl      29d18 <<test::stats::Summary>::new>
+    0.00 :   17c38:  sub     x0, x29, #0xc8
+    0.00 :   17c3c:  bl      d6c0 <<std::time::Instant>::elapsed@plt>
+    0.00 :   17c40:  mov     w8, #0xe100                     // #57600
+    0.00 :   17c44:  ldr     x10, [sp, #24]
+    0.00 :   17c48:  ldr     w11, [sp, #20]
+    0.00 :   17c4c:  movk    w8, #0x5f5, lsl #16
+    0.00 :   17c50:  cmp     w1, w8
+    0.00 :   17c54:  cset    w8, hi  // hi = pmore
+    0.00 :   17c58:  cmp     x0, #0x0
+    0.00 :   17c5c:  cset    w9, ne  // ne = any
+    0.00 :   17c60:  csel    w8, w8, w9, eq  // eq = none
+    0.00 :   17c64:  cbz     w8, 17c8c <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x330>
+    0.00 :   17c68:  ldur    d0, [x29, #-112]
+    0.00 :   17c6c:  fcmp    d0, d8
+    0.00 :   17c70:  b.pl    17c8c <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x330>  // b.nfrst
+    0.00 :   17c74:  ldur    d0, [x29, #-152]
+    0.00 :   17c78:  ldr     d1, [sp, #64]
+    0.00 :   17c7c:  ldr     d2, [sp, #96]
+    0.00 :   17c80:  fsub    d0, d0, d1
+    0.00 :   17c84:  fcmp    d0, d2
+    0.00 :   17c88:  b.mi    17d0c <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3b0>  // b.first
+    0.00 :   17c8c:  adds    x10, x0, x10
+    0.00 :   17c90:  b.cs    17d90 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x434>  // b.hs, b.nlast
+    0.00 :   17c94:  ldr     w8, [sp, #16]
+    0.00 :   17c98:  add     w11, w1, w11
+    0.00 :   17c9c:  cmp     w11, w8
+    0.00 :   17ca0:  b.ls    17cbc <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x360>  // b.plast
+    0.00 :   17ca4:  cmn     x10, #0x1
+    0.00 :   17ca8:  b.eq    17d90 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x434>  // b.none
+    0.00 :   17cac:  mov     w8, #0x3600                     // #13824
+    0.00 :   17cb0:  add     x10, x10, #0x1
+    0.00 :   17cb4:  movk    w8, #0xc465, lsl #16
+    0.00 :   17cb8:  add     w11, w11, w8
+    0.00 :   17cbc:  cmp     w11, #0x0
+    0.00 :   17cc0:  cset    w8, ne  // ne = any
+    0.00 :   17cc4:  cmp     x10, #0x3
+    0.00 :   17cc8:  cset    w9, hi  // hi = pmore
+    0.00 :   17ccc:  csel    w8, w8, w9, eq  // eq = none
+    0.00 :   17cd0:  tbnz    w8, #0, 17d0c <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3b0>
+    0.00 :   17cd4:  mov     x8, #0x9999999999999999         // #-7378697629483820647
+    0.00 :   17cd8:  movk    x8, #0x1999, lsl #48
+    0.00 :   17cdc:  cmp     x19, x8
+    0.00 :   17ce0:  b.hi    17d0c <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3b0>  // b.pmore
+    0.00 :   17ce4:  str     w11, [sp, #20]
+    0.00 :   17ce8:  lsl     x19, x19, #1
+    0.00 :   17cec:  str     x10, [sp, #24]
+    0.00 :   17cf0:  bl      d640 <<std::time::Instant>::now@plt>
+    0.00 :   17cf4:  ucvtf   d9, x19
+    0.00 :   17cf8:  mov     x21, xzr
+    0.00 :   17cfc:  stur    x0, [x29, #-200]
+    0.00 :   17d00:  stur    w1, [x29, #-192]
+    0.00 :   17d04:  cbnz    x19, 17ac8 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x16c>
+    0.00 :   17d08:  b       17b34 <<benches::str::contains_bang_str_long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1d8>
+    0.00 :   17d0c:  ldp     q0, q1, [sp, #96]
+    0.00 :   17d10:  mov     w8, #0x1                        // #1
+    0.00 :   17d14:  ldr     q2, [sp, #128]
+    0.00 :   17d18:  ldp     x9, x19, [sp]
+    0.00 :   17d1c:  stp     q0, q1, [sp, #208]
+    0.00 :   17d20:  ldp     q0, q1, [sp, #32]
+    0.00 :   17d24:  str     q2, [sp, #240]
+    0.00 :   17d28:  str     x8, [x9]
+    0.00 :   17d2c:  stp     q0, q1, [sp, #144]
+    0.00 :   17d30:  ldp     q2, q0, [sp, #64]
+    0.00 :   17d34:  stp     q2, q0, [sp, #176]
+    0.00 :   17d38:  ldp     q1, q0, [sp, #208]
+    0.00 :   17d3c:  stur    q1, [x9, #72]
+    0.00 :   17d40:  ldr     q1, [sp, #240]
+    0.00 :   17d44:  stur    q0, [x9, #88]
+    0.00 :   17d48:  stur    q1, [x9, #104]
+    0.00 :   17d4c:  ldp     q0, q1, [sp, #144]
+    0.00 :   17d50:  stur    q0, [x9, #8]
+    0.00 :   17d54:  stur    q1, [x9, #24]
+    0.00 :   17d58:  ldp     q0, q1, [sp, #176]
+    0.00 :   17d5c:  stur    q0, [x9, #40]
+    0.00 :   17d60:  stur    q1, [x9, #56]
+    0.00 :   17d64:  mov     x8, #0xffffffffffffffff         // #-1
+    0.00 :   17d68:  str     x8, [x19]
+    0.00 :   17d6c:  add     sp, sp, #0x2e0
+    0.00 :   17d70:  ldp     x20, x19, [sp, #96]
+    0.00 :   17d74:  ldp     x22, x21, [sp, #80]
+    0.00 :   17d78:  ldp     x24, x23, [sp, #64]
+    0.00 :   17d7c:  ldp     x26, x25, [sp, #48]
+    0.00 :   17d80:  ldp     x28, x27, [sp, #32]
+    0.00 :   17d84:  ldp     x29, x30, [sp, #16]
+    0.00 :   17d88:  ldp     d9, d8, [sp], #112
+    0.00 :   17d8c:  ret
+    0.00 :   17d90:  adrp    x0, 50000 <_fini+0x13ac>
+    0.00 :   17d94:  add     x0, x0, #0x7b2
+    0.00 :   17d98:  adrp    x2, 79000 <GCC_except_table8+0x17d14>
+    0.00 :   17d9c:  add     x2, x2, #0x6a0
+    0.00 :   17da0:  mov     w1, #0x1e                       // #30
+    0.00 :   17da4:  bl      ced0 <core::option::expect_failed@plt>
+ Percent |	Source code & Disassembly of benches for cycles:u (1 samples, percent: local period)
+----------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .plt:
+         :
+         : 5    000000000000d100 <core::str::pattern::contains_byte_simd@plt>:
+  100.00 :   d100:   adrp    x16, 7f000 <__do_global_dtors_aux_fini_array_entry+0x59b0>
+    0.00 :   d104:   ldr     x17, [x16, #3000]
+    0.00 :   d108:   add     x16, x16, #0xbb8
+    0.00 :   d10c:   br      x17
+ Percent |	Source code & Disassembly of ld-linux-aarch64.so.1 for cycles:u (1 samples, percent: local period)
+------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    0000000000008e54 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd74>:
+    0.00 :   8e54:   sub     sp, sp, #0x110
+    0.00 :   8e58:   stp     x29, x30, [sp, #32]
+    0.00 :   8e5c:   add     x29, sp, #0x20
+    0.00 :   8e60:   stp     x21, x22, [sp, #64]
+    0.00 :   8e64:   mov     x21, x2
+    0.00 :   8e68:   mov     x22, x7
+    0.00 :   8e6c:   stp     x23, x24, [sp, #80]
+    0.00 :   8e70:   mov     x23, x4
+    0.00 :   8e74:   mov     w24, w6
+    0.00 :   8e78:   stp     x25, x26, [sp, #96]
+    0.00 :   8e7c:   mov     x25, x1
+    0.00 :   8e80:   mov     w26, w5
+    0.00 :   8e84:   stp     x19, x20, [sp, #48]
+    0.00 :   8e88:   mov     x20, x0
+    0.00 :   8e8c:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   8e90:   add     x0, x0, #0x0
+    0.00 :   8e94:   stp     x27, x28, [sp, #112]
+    0.00 :   8e98:   stp     x3, x0, [sp, #152]
+    0.00 :   8e9c:   ldrb    w2, [x20]
+    0.00 :   8ea0:   cbz     w2, 906c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf8c>
+  100.00 :   8ea4:   mov     x3, x20
+    0.00 :   8ea8:   mov     w27, #0x1505                    // #5381
+    0.00 :   8eac:   mov     w6, #0x441                      // #1089
+    0.00 :   8eb0:   ldrb    w4, [x3, #1]
+    0.00 :   8eb4:   lsl     w0, w2, #5
+    0.00 :   8eb8:   add     w5, w4, w2
+    0.00 :   8ebc:   madd    w0, w27, w6, w0
+    0.00 :   8ec0:   cbz     w4, 9060 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf80>
+    0.00 :   8ec4:   ldrb    w2, [x3, #2]!
+    0.00 :   8ec8:   add     w27, w5, w0
+    0.00 :   8ecc:   cbnz    w2, 8eb0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdd0>
+    0.00 :   8ed0:   ldr     x1, [sp, #160]
+    0.00 :   8ed4:   mov     x2, #0xffffffff                 // #4294967295
+    0.00 :   8ed8:   str     x2, [sp, #216]
+    0.00 :   8edc:   stp     xzr, xzr, [sp, #224]
+    0.00 :   8ee0:   ldr     x0, [x1, #2864]
+    0.00 :   8ee4:   add     x0, x0, #0x1
+    0.00 :   8ee8:   str     x0, [x1, #2864]
+    0.00 :   8eec:   ldr     x0, [sp, #152]
+    0.00 :   8ef0:   ldr     x5, [x0]
+    0.00 :   8ef4:   cbnz    x22, 90fc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x101c>
+    0.00 :   8ef8:   cbz     x5, 9074 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf94>
+    0.00 :   8efc:   str     xzr, [sp, #144]
+    0.00 :   8f00:   ldp     x6, x19, [sp, #144]
+    0.00 :   8f04:   add     x0, sp, #0xd8
+    0.00 :   8f08:   add     x28, sp, #0xe0
+    0.00 :   8f0c:   str     x0, [sp, #136]
+    0.00 :   8f10:   b       8f20 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe40>
+    0.00 :   8f14:   ldr     x5, [x19, #8]!
+    0.00 :   8f18:   mov     x6, #0x0                        // #0
+    0.00 :   8f1c:   cbz     x5, 8f50 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe70>
+    0.00 :   8f20:   ldr     x3, [x21]
+    0.00 :   8f24:   str     w24, [sp]
+    0.00 :   8f28:   ldr     x2, [sp, #136]
+    0.00 :   8f2c:   str     x22, [sp, #8]
+    0.00 :   8f30:   str     w26, [sp, #16]
+    0.00 :   8f34:   mov     x7, x23
+    0.00 :   8f38:   str     x25, [sp, #24]
+    0.00 :   8f3c:   mov     x4, x28
+    0.00 :   8f40:   mov     w1, w27
+    0.00 :   8f44:   mov     x0, x20
+    0.00 :   8f48:   bl      8400 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x320>
+    0.00 :   8f4c:   cbz     w0, 8f14 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe34>
+    0.00 :   8f50:   ldr     x2, [sp, #224]
+    0.00 :   8f54:   ldr     x7, [x21]
+    0.00 :   8f58:   mov     x0, x7
+    0.00 :   8f5c:   cbz     x2, 9078 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf98>
+    0.00 :   8f60:   cbz     x7, 8f74 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe94>
+    0.00 :   8f64:   ldrb    w0, [x7, #5]
+    0.00 :   8f68:   and     w0, w0, #0x3
+    0.00 :   8f6c:   cmp     w0, #0x3
+    0.00 :   8f70:   b.eq    8fcc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeec>  // b.none
+    0.00 :   8f74:   ldr     x28, [sp, #232]
+    0.00 :   8f78:   mov     w19, #0x0                       // #0
+    0.00 :   8f7c:   ldrh    w0, [x28, #868]
+    0.00 :   8f80:   and     w0, w0, #0x3
+    0.00 :   8f84:   cmp     w0, #0x2
+    0.00 :   8f88:   b.eq    91c0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x10e0>  // b.none
+    0.00 :   8f8c:   ldr     x7, [sp, #224]
+    0.00 :   8f90:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   8f94:   ldr     w0, [x28, #1068]
+    0.00 :   8f98:   cbz     w0, 912c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x104c>
+    0.00 :   8f9c:   ldr     w0, [x22, #2960]
+    0.00 :   8fa0:   tbnz    w0, #2, 9138 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1058>
+    0.00 :   8fa4:   ldp     x29, x30, [sp, #32]
+    0.00 :   8fa8:   mov     x0, x28
+    0.00 :   8fac:   ldp     x19, x20, [sp, #48]
+    0.00 :   8fb0:   ldp     x23, x24, [sp, #80]
+    0.00 :   8fb4:   ldp     x25, x26, [sp, #96]
+    0.00 :   8fb8:   ldp     x27, x28, [sp, #112]
+    0.00 :   8fbc:   str     x7, [x21]
+    0.00 :   8fc0:   ldp     x21, x22, [sp, #64]
+    0.00 :   8fc4:   add     sp, sp, #0x110
+    0.00 :   8fc8:   ret
+    0.00 :   8fcc:   cmp     w26, #0x1
+    0.00 :   8fd0:   b.eq    9334 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1254>  // b.none
+    0.00 :   8fd4:   ldr     x0, [sp, #152]
+    0.00 :   8fd8:   stp     xzr, xzr, [sp, #240]
+    0.00 :   8fdc:   add     x1, sp, #0xf0
+    0.00 :   8fe0:   str     x1, [sp, #168]
+    0.00 :   8fe4:   mov     x28, x0
+    0.00 :   8fe8:   ldr     x5, [x0]
+    0.00 :   8fec:   mov     w19, #0x1                       // #1
+    0.00 :   8ff0:   cbnz    x5, 9008 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf28>
+    0.00 :   8ff4:   b       9374 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1294>
+    0.00 :   8ff8:   ldr     x5, [x28, #8]!
+    0.00 :   8ffc:   str     xzr, [sp, #144]
+    0.00 :   9000:   cbz     x5, 9038 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf58>
+    0.00 :   9004:   ldr     x7, [x21]
+    0.00 :   9008:   str     w24, [sp]
+    0.00 :   900c:   ldp     x2, x6, [sp, #136]
+    0.00 :   9010:   str     x22, [sp, #8]
+    0.00 :   9014:   ldr     x4, [sp, #168]
+    0.00 :   9018:   str     w19, [sp, #16]
+    0.00 :   901c:   str     xzr, [sp, #24]
+    0.00 :   9020:   mov     x3, x7
+    0.00 :   9024:   mov     w1, w27
+    0.00 :   9028:   mov     x7, x23
+    0.00 :   902c:   mov     x0, x20
+    0.00 :   9030:   bl      8400 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x320>
+    0.00 :   9034:   cbz     w0, 8ff8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xf18>
+    0.00 :   9038:   ldr     x0, [sp, #240]
+    0.00 :   903c:   cbz     x0, 9374 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1294>
+    0.00 :   9040:   ldr     x0, [sp, #248]
+    0.00 :   9044:   cmp     x0, x25
+    0.00 :   9048:   b.eq    9374 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1294>  // b.none
+    0.00 :   904c:   ldr     x0, [x21]
+    0.00 :   9050:   mov     x28, x25
+    0.00 :   9054:   mov     w19, #0x1                       // #1
+    0.00 :   9058:   stp     x0, x25, [sp, #224]
+    0.00 :   905c:   b       8f7c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe9c>
+    0.00 :   9060:   add     w2, w27, w2
+    0.00 :   9064:   add     w27, w2, w27, lsl #5
+    0.00 :   9068:   b       8ed0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdf0>
+    0.00 :   906c:   mov     w27, #0x1505                    // #5381
+    0.00 :   9070:   b       8ed0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdf0>
+    0.00 :   9074:   ldr     x0, [x21]
+    0.00 :   9078:   cbz     x0, 908c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfac>
+    0.00 :   907c:   ldrb    w0, [x0, #4]
+    0.00 :   9080:   lsr     w0, w0, #4
+    0.00 :   9084:   cmp     w0, #0x2
+    0.00 :   9088:   b.eq    90f0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1010>  // b.none
+    0.00 :   908c:   adrp    x0, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9090:   ldr     w0, [x0, #2960]
+    0.00 :   9094:   tbnz    w0, #8, 90f0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1010>
+    0.00 :   9098:   cbz     x25, 9398 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12b8>
+    0.00 :   909c:   ldr     x1, [x25, #8]
+    0.00 :   90a0:   ldrsb   w0, [x1]
+    0.00 :   90a4:   cbz     x23, 93cc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12ec>
+    0.00 :   90a8:   ldr     x5, [x23]
+    0.00 :   90ac:   adrp    x4, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   90b0:   cbz     x5, 93e4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1304>
+    0.00 :   90b4:   add     x4, x4, #0x590
+    0.00 :   90b8:   cbz     w0, 93ac <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12cc>
+    0.00 :   90bc:   add     x19, sp, #0xf0
+    0.00 :   90c0:   mov     x3, x20
+    0.00 :   90c4:   mov     x0, x19
+    0.00 :   90c8:   adrp    x2, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   90cc:   add     x2, x2, #0x5b8
+    0.00 :   90d0:   bl      3020 <_dl_exception_create_format@@GLIBC_PRIVATE>
+    0.00 :   90d4:   mov     x1, x19
+    0.00 :   90d8:   adrp    x2, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   90dc:   add     x2, x2, #0x5d8
+    0.00 :   90e0:   mov     w0, #0x0                        // #0
+    0.00 :   90e4:   bl      1000 <_dl_signal_error@@GLIBC_PRIVATE+0x6c>
+    0.00 :   90e8:   mov     x0, x19
+    0.00 :   90ec:   bl      3424 <_dl_exception_free@@GLIBC_PRIVATE>
+    0.00 :   90f0:   mov     x7, #0x0                        // #0
+    0.00 :   90f4:   mov     x28, #0x0                       // #0
+    0.00 :   90f8:   b       8fa4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xec4>
+    0.00 :   90fc:   ldr     x2, [x5]
+    0.00 :   9100:   str     xzr, [sp, #144]
+    0.00 :   9104:   ldr     x0, [x2]
+    0.00 :   9108:   cmp     x0, x22
+    0.00 :   910c:   b.eq    8f00 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe20>  // b.none
+    0.00 :   9110:   ldr     x0, [sp, #144]
+    0.00 :   9114:   add     x0, x0, #0x1
+    0.00 :   9118:   str     x0, [sp, #144]
+    0.00 :   911c:   ldr     x0, [x2, x0, lsl #3]
+    0.00 :   9120:   cmp     x0, x22
+    0.00 :   9124:   b.ne    9110 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1030>  // b.any
+    0.00 :   9128:   b       8f00 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe20>
+    0.00 :   912c:   mov     w0, #0x1                        // #1
+    0.00 :   9130:   str     w0, [x28, #1068]
+    0.00 :   9134:   b       8f9c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xebc>
+    0.00 :   9138:   ldr     x1, [x25, #8]
+    0.00 :   913c:   ldrsb   w0, [x1]
+    0.00 :   9140:   cbnz    w0, 9160 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1080>
+    0.00 :   9144:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9148:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   914c:   add     x0, x0, #0xa88
+    0.00 :   9150:   ldr     x1, [x1, #2928]
+    0.00 :   9154:   ldr     x1, [x1]
+    0.00 :   9158:   cmp     x1, #0x0
+    0.00 :   915c:   csel    x1, x0, x1, eq  // eq = none
+    0.00 :   9160:   ldr     x3, [x28, #8]
+    0.00 :   9164:   ldr     x2, [x25, #48]
+    0.00 :   9168:   ldrsb   w0, [x3]
+    0.00 :   916c:   cbz     w0, 9354 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1274>
+    0.00 :   9170:   ldr     x4, [x28, #48]
+    0.00 :   9174:   cmp     w19, #0x0
+    0.00 :   9178:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   917c:   adrp    x5, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9180:   add     x0, x0, #0x5a0
+    0.00 :   9184:   add     x5, x5, #0x5b0
+    0.00 :   9188:   csel    x5, x5, x0, eq  // eq = none
+    0.00 :   918c:   mov     x6, x20
+    0.00 :   9190:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9194:   add     x0, x0, #0x6f8
+    0.00 :   9198:   str     x7, [sp, #136]
+    0.00 :   919c:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   91a0:   ldr     x7, [sp, #136]
+    0.00 :   91a4:   cbz     x23, 9380 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12a0>
+    0.00 :   91a8:   ldr     x1, [x23]
+    0.00 :   91ac:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   91b0:   add     x0, x0, #0x730
+    0.00 :   91b4:   bl      bd04 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x15c4>
+    0.00 :   91b8:   ldr     x7, [sp, #136]
+    0.00 :   91bc:   b       8fa4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xec4>
+    0.00 :   91c0:   cmp     x25, x28
+    0.00 :   91c4:   mvn     w0, w24
+    0.00 :   91c8:   cset    w1, eq  // eq = none
+    0.00 :   91cc:   and     w0, w0, #0x1
+    0.00 :   91d0:   orr     w0, w1, w0
+    0.00 :   91d4:   cbnz    w0, 8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>
+    0.00 :   91d8:   ldrb    w0, [x28, #871]
+    0.00 :   91dc:   tbnz    w0, #0, 8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>
+    0.00 :   91e0:   and     w0, w24, #0x8
+    0.00 :   91e4:   str     w0, [sp, #200]
+    0.00 :   91e8:   tbz     w24, #3, 91f4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1114>
+    0.00 :   91ec:   ldrb    w0, [x28, #872]
+    0.00 :   91f0:   tbnz    w0, #0, 8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>
+    0.00 :   91f4:   ldr     x10, [x25, #1056]
+    0.00 :   91f8:   dmb     ish
+    0.00 :   91fc:   ldr     x4, [x25, #1040]
+    0.00 :   9200:   cbz     x4, 9224 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1144>
+    0.00 :   9204:   ldr     x0, [x4]
+    0.00 :   9208:   cbz     x0, 9224 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1144>
+    0.00 :   920c:   mov     w1, #0x0                        // #0
+    0.00 :   9210:   add     w1, w1, #0x1
+    0.00 :   9214:   cmp     x0, x28
+    0.00 :   9218:   b.eq    8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>  // b.none
+    0.00 :   921c:   ldr     x0, [x4, w1, uxtw #3]
+    0.00 :   9220:   cbnz    x0, 9210 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1130>
+    0.00 :   9224:   cbz     x10, 9450 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1370>
+    0.00 :   9228:   ldr     w7, [x10]
+    0.00 :   922c:   cbz     w7, 9250 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1170>
+    0.00 :   9230:   add     x0, x10, #0x8
+    0.00 :   9234:   add     x2, x0, w7, uxtw #3
+    0.00 :   9238:   ldr     x1, [x0]
+    0.00 :   923c:   add     x0, x0, #0x8
+    0.00 :   9240:   cmp     x1, x28
+    0.00 :   9244:   b.eq    8f8c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeac>  // b.none
+    0.00 :   9248:   cmp     x2, x0
+    0.00 :   924c:   b.ne    9238 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1158>  // b.any
+    0.00 :   9250:   ldr     x0, [x28, #1224]
+    0.00 :   9254:   str     x0, [sp, #168]
+    0.00 :   9258:   and     w0, w24, #0x4
+    0.00 :   925c:   str     w0, [sp, #144]
+    0.00 :   9260:   tbnz    w24, #2, 94c8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13e8>
+    0.00 :   9264:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9268:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   926c:   str     x0, [sp, #136]
+    0.00 :   9270:   add     x0, x0, #0xa88
+    0.00 :   9274:   ldr     x1, [x1, #2888]
+    0.00 :   9278:   str     w7, [sp, #176]
+    0.00 :   927c:   mov     x27, x28
+    0.00 :   9280:   blr     x1
+    0.00 :   9284:   ldr     w7, [sp, #176]
+    0.00 :   9288:   ldr     x4, [x25, #48]
+    0.00 :   928c:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   9290:   add     x0, x0, #0x0
+    0.00 :   9294:   add     x1, x4, x4, lsl #2
+    0.00 :   9298:   add     x1, x4, x1, lsl #2
+    0.00 :   929c:   ldr     x0, [x0, x1, lsl #3]
+    0.00 :   92a0:   cmp     x0, #0x0
+    0.00 :   92a4:   ccmp    x0, x27, #0x4, ne       // ne = any
+    0.00 :   92a8:   b.eq    92bc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11dc>  // b.none
+    0.00 :   92ac:   ldr     x0, [x0, #24]
+    0.00 :   92b0:   cmp     x0, #0x0
+    0.00 :   92b4:   ccmp    x0, x27, #0x4, ne       // ne = any
+    0.00 :   92b8:   b.ne    92ac <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11cc>  // b.any
+    0.00 :   92bc:   cbz     x0, 9414 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1334>
+    0.00 :   92c0:   ldr     x1, [sp, #168]
+    0.00 :   92c4:   ldr     x0, [x27, #1224]
+    0.00 :   92c8:   cmp     x1, x0
+    0.00 :   92cc:   b.ne    9414 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1334>  // b.any
+    0.00 :   92d0:   ldrb    w0, [x27, #871]
+    0.00 :   92d4:   tbnz    w0, #0, 9458 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1378>
+    0.00 :   92d8:   ldr     w0, [sp, #200]
+    0.00 :   92dc:   and     w24, w0, #0x8
+    0.00 :   92e0:   cbz     w0, 947c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x139c>
+    0.00 :   92e4:   ldrb    w0, [x27, #872]
+    0.00 :   92e8:   tbnz    w0, #0, 9458 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1378>
+    0.00 :   92ec:   ldrh    w0, [x25, #868]
+    0.00 :   92f0:   and     w0, w0, #0x3
+    0.00 :   92f4:   cmp     w0, #0x2
+    0.00 :   92f8:   b.eq    95e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1500>  // b.none
+    0.00 :   92fc:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9300:   ldr     w0, [x22, #2960]
+    0.00 :   9304:   tbnz    w0, #2, 9498 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13b8>
+    0.00 :   9308:   mov     w0, #0x1                        // #1
+    0.00 :   930c:   strb    w0, [x27, #872]
+    0.00 :   9310:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9314:   ldr     x0, [sp, #136]
+    0.00 :   9318:   ldr     x1, [x1, #2896]
+    0.00 :   931c:   add     x0, x0, #0xa88
+    0.00 :   9320:   blr     x1
+    0.00 :   9324:   ldr     w0, [sp, #144]
+    0.00 :   9328:   cbnz    w0, 9460 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1380>
+    0.00 :   932c:   ldr     x7, [sp, #224]
+    0.00 :   9330:   b       8f94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeb4>
+    0.00 :   9334:   ldr     x0, [sp, #232]
+    0.00 :   9338:   cmp     x0, x25
+    0.00 :   933c:   b.eq    93dc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12fc>  // b.none
+    0.00 :   9340:   stp     x7, x25, [sp, #224]
+    0.00 :   9344:   mov     x28, x25
+    0.00 :   9348:   mov     w19, #0x1                       // #1
+    0.00 :   934c:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9350:   b       8f94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeb4>
+    0.00 :   9354:   adrp    x3, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9358:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   935c:   add     x0, x0, #0xa88
+    0.00 :   9360:   ldr     x3, [x3, #2928]
+    0.00 :   9364:   ldr     x3, [x3]
+    0.00 :   9368:   cmp     x3, #0x0
+    0.00 :   936c:   csel    x3, x0, x3, eq  // eq = none
+    0.00 :   9370:   b       9170 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1090>
+    0.00 :   9374:   ldr     x28, [sp, #232]
+    0.00 :   9378:   mov     w19, #0x1                       // #1
+    0.00 :   937c:   b       8f7c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xe9c>
+    0.00 :   9380:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   9384:   add     x0, x0, #0x8d8
+    0.00 :   9388:   str     x7, [sp, #136]
+    0.00 :   938c:   bl      bd04 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x15c4>
+    0.00 :   9390:   ldr     x7, [sp, #136]
+    0.00 :   9394:   b       8fa4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xec4>
+    0.00 :   9398:   cbz     x23, 93f4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1314>
+    0.00 :   939c:   ldr     x5, [x23]
+    0.00 :   93a0:   adrp    x4, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   93a4:   cbz     x5, 9404 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1324>
+    0.00 :   93a8:   add     x4, x4, #0x590
+    0.00 :   93ac:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   93b0:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   93b4:   add     x0, x0, #0xa88
+    0.00 :   93b8:   ldr     x1, [x1, #2928]
+    0.00 :   93bc:   ldr     x1, [x1]
+    0.00 :   93c0:   cmp     x1, #0x0
+    0.00 :   93c4:   csel    x1, x0, x1, eq  // eq = none
+    0.00 :   93c8:   b       90bc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfdc>
+    0.00 :   93cc:   adrp    x4, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   93d0:   add     x4, x4, #0xda8
+    0.00 :   93d4:   mov     x5, x4
+    0.00 :   93d8:   b       90b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfd8>
+    0.00 :   93dc:   mov     x7, x2
+    0.00 :   93e0:   b       9344 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1264>
+    0.00 :   93e4:   adrp    x5, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   93e8:   add     x4, x4, #0x590
+    0.00 :   93ec:   add     x5, x5, #0xda8
+    0.00 :   93f0:   b       90b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xfd8>
+    0.00 :   93f4:   adrp    x4, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   93f8:   add     x4, x4, #0xda8
+    0.00 :   93fc:   mov     x5, x4
+    0.00 :   9400:   b       93ac <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12cc>
+    0.00 :   9404:   adrp    x5, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   9408:   add     x4, x4, #0x590
+    0.00 :   940c:   add     x5, x5, #0xda8
+    0.00 :   9410:   b       93ac <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x12cc>
+    0.00 :   9414:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9418:   ldr     x0, [sp, #136]
+    0.00 :   941c:   ldr     x1, [x1, #2896]
+    0.00 :   9420:   add     x0, x0, #0xa88
+    0.00 :   9424:   blr     x1
+    0.00 :   9428:   ldr     w0, [sp, #144]
+    0.00 :   942c:   cbz     w0, 8e9c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdbc>
+    0.00 :   9430:   mrs     x0, tpidr_el0
+    0.00 :   9434:   mov     w1, #0x1                        // #1
+    0.00 :   9438:   sub     x0, x0, #0x740
+    0.00 :   943c:   str     w1, [x0, #4]
+    0.00 :   9440:   dmb     ish
+    0.00 :   9444:   ldr     x0, [x25, #984]
+    0.00 :   9448:   str     x0, [sp, #152]
+    0.00 :   944c:   b       8e9c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xdbc>
+    0.00 :   9450:   mov     w7, #0x0                        // #0
+    0.00 :   9454:   b       9250 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1170>
+    0.00 :   9458:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   945c:   b       9310 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   9460:   mrs     x0, tpidr_el0
+    0.00 :   9464:   mov     w1, #0x1                        // #1
+    0.00 :   9468:   sub     x0, x0, #0x740
+    0.00 :   946c:   str     w1, [x0, #4]
+    0.00 :   9470:   dmb     ish
+    0.00 :   9474:   ldr     x7, [sp, #224]
+    0.00 :   9478:   b       8f94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeb4>
+    0.00 :   947c:   ldrh    w0, [x25, #868]
+    0.00 :   9480:   and     w0, w0, #0x3
+    0.00 :   9484:   cmp     w0, #0x2
+    0.00 :   9488:   b.eq    95e0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1500>  // b.none
+    0.00 :   948c:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9490:   ldr     w0, [x22, #2960]
+    0.00 :   9494:   tbz     w0, #2, 94bc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13dc>
+    0.00 :   9498:   ldr     x3, [x25, #8]
+    0.00 :   949c:   ldr     x1, [x27, #8]
+    0.00 :   94a0:   ldrsb   w0, [x3]
+    0.00 :   94a4:   ldr     x2, [x27, #48]
+    0.00 :   94a8:   cbnz    w0, 973c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x165c>
+    0.00 :   94ac:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   94b0:   add     x0, x0, #0x5f0
+    0.00 :   94b4:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   94b8:   cbnz    w24, 9308 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1228>
+    0.00 :   94bc:   mov     w0, #0x1                        // #1
+    0.00 :   94c0:   strb    w0, [x27, #871]
+    0.00 :   94c4:   b       9310 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   94c8:   mrs     x0, tpidr_el0
+    0.00 :   94cc:   str     x0, [sp, #176]
+    0.00 :   94d0:   sub     x0, x0, #0x73c
+    0.00 :   94d4:   ldxr    w1, [x0]
+    0.00 :   94d8:   stlxr   w2, wzr, [x0]
+    0.00 :   94dc:   cbnz    w2, 94d4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13f4>
+    0.00 :   94e0:   cmp     w1, #0x2
+    0.00 :   94e4:   b.ne    94fc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x141c>  // b.any
+    0.00 :   94e8:   mov     x1, #0x81                       // #129
+    0.00 :   94ec:   mov     x2, #0x1                        // #1
+    0.00 :   94f0:   mov     x3, #0x0                        // #0
+    0.00 :   94f4:   mov     x8, #0x62                       // #98
+    0.00 :   94f8:   svc     #0x0
+    0.00 :   94fc:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9500:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   9504:   str     x0, [sp, #136]
+    0.00 :   9508:   add     x0, x0, #0xa88
+    0.00 :   950c:   ldr     x1, [x1, #2888]
+    0.00 :   9510:   stp     x10, x4, [sp, #184]
+    0.00 :   9514:   mov     x27, x28
+    0.00 :   9518:   str     w7, [sp, #204]
+    0.00 :   951c:   blr     x1
+    0.00 :   9520:   ldp     x10, x4, [sp, #184]
+    0.00 :   9524:   ldr     x0, [x25, #1040]
+    0.00 :   9528:   ldr     w7, [sp, #204]
+    0.00 :   952c:   cmp     x0, #0x0
+    0.00 :   9530:   ccmp    x4, x0, #0x4, ne        // ne = any
+    0.00 :   9534:   b.eq    95a0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14c0>  // b.none
+    0.00 :   9538:   ldr     x1, [x0]
+    0.00 :   953c:   cbz     x1, 95a0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14c0>
+    0.00 :   9540:   mov     w2, #0x0                        // #0
+    0.00 :   9544:   b       9550 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1470>
+    0.00 :   9548:   ldr     x1, [x0, w2, uxtw #3]
+    0.00 :   954c:   cbz     x1, 95a0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14c0>
+    0.00 :   9550:   add     w2, w2, #0x1
+    0.00 :   9554:   cmp     x27, x1
+    0.00 :   9558:   b.ne    9548 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1468>  // b.any
+    0.00 :   955c:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9560:   ldr     x0, [sp, #136]
+    0.00 :   9564:   ldr     x1, [x1, #2896]
+    0.00 :   9568:   add     x0, x0, #0xa88
+    0.00 :   956c:   ldr     x27, [x27, #1224]
+    0.00 :   9570:   blr     x1
+    0.00 :   9574:   ldr     x0, [sp, #176]
+    0.00 :   9578:   sub     x1, x0, #0x740
+    0.00 :   957c:   mov     w0, #0x1                        // #1
+    0.00 :   9580:   str     w0, [x1, #4]
+    0.00 :   9584:   dmb     ish
+    0.00 :   9588:   ldr     x0, [sp, #168]
+    0.00 :   958c:   cmp     x27, x0
+    0.00 :   9590:   b.ne    9444 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1364>  // b.any
+    0.00 :   9594:   ldr     x7, [sp, #224]
+    0.00 :   9598:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   959c:   b       8f94 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xeb4>
+    0.00 :   95a0:   ldr     x0, [x25, #1056]
+    0.00 :   95a4:   cbz     x0, 9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>
+    0.00 :   95a8:   ldr     w1, [x0]
+    0.00 :   95ac:   cmp     x10, x0
+    0.00 :   95b0:   b.eq    9754 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1674>  // b.none
+    0.00 :   95b4:   cbz     w1, 974c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x166c>
+    0.00 :   95b8:   add     x0, x0, #0x8
+    0.00 :   95bc:   add     x2, x0, w1, uxtw #3
+    0.00 :   95c0:   b       95cc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14ec>
+    0.00 :   95c4:   cmp     x0, x2
+    0.00 :   95c8:   b.eq    9780 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x16a0>  // b.none
+    0.00 :   95cc:   ldr     x3, [x0]
+    0.00 :   95d0:   add     x0, x0, #0x8
+    0.00 :   95d4:   cmp     x27, x3
+    0.00 :   95d8:   b.ne    95c4 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x14e4>  // b.any
+    0.00 :   95dc:   b       955c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x147c>
+    0.00 :   95e0:   ldr     w0, [x25, #1064]
+    0.00 :   95e4:   cmp     w0, w7
+    0.00 :   95e8:   b.ls    9670 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1590>  // b.plast
+    0.00 :   95ec:   ldr     x0, [x25, #1056]
+    0.00 :   95f0:   add     x0, x0, w7, uxtw #3
+    0.00 :   95f4:   str     x27, [x0, #8]
+    0.00 :   95f8:   dmb     ish
+    0.00 :   95fc:   ldr     x0, [x25, #1056]
+    0.00 :   9600:   add     w7, w7, #0x1
+    0.00 :   9604:   str     w7, [x0]
+    0.00 :   9608:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   960c:   ldr     w0, [x22, #2960]
+    0.00 :   9610:   tbz     w0, #6, 9310 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   9614:   ldr     x1, [x27, #8]
+    0.00 :   9618:   ldrsb   w0, [x1]
+    0.00 :   961c:   cbnz    w0, 9630 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1550>
+    0.00 :   9620:   adrp    x0, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9624:   ldr     x0, [x0, #2928]
+    0.00 :   9628:   ldr     x1, [x0]
+    0.00 :   962c:   cbz     x1, 96dc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x15fc>
+    0.00 :   9630:   ldr     x3, [x25, #8]
+    0.00 :   9634:   ldr     x2, [x27, #48]
+    0.00 :   9638:   ldrsb   w0, [x3]
+    0.00 :   963c:   cbnz    w0, 9650 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1570>
+    0.00 :   9640:   adrp    x0, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9644:   ldr     x0, [x0, #2928]
+    0.00 :   9648:   ldr     x3, [x0]
+    0.00 :   964c:   cbz     x3, 9664 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1584>
+    0.00 :   9650:   ldr     x4, [x25, #48]
+    0.00 :   9654:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9658:   add     x0, x0, #0x6b8
+    0.00 :   965c:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   9660:   b       9310 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1230>
+    0.00 :   9664:   adrp    x3, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   9668:   add     x3, x3, #0xa88
+    0.00 :   966c:   b       9650 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1570>
+    0.00 :   9670:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9674:   cmp     w0, #0x0
+    0.00 :   9678:   lsl     w0, w0, #1
+    0.00 :   967c:   mov     w2, #0xa                        // #10
+    0.00 :   9680:   ldr     x1, [x1, #2872]
+    0.00 :   9684:   csel    w22, w0, w2, ne // ne = any
+    0.00 :   9688:   mov     w0, w22
+    0.00 :   968c:   str     w7, [sp, #152]
+    0.00 :   9690:   add     x0, x0, #0x1
+    0.00 :   9694:   lsl     x0, x0, #3
+    0.00 :   9698:   blr     x1
+    0.00 :   969c:   ldr     w7, [sp, #152]
+    0.00 :   96a0:   mov     x26, x0
+    0.00 :   96a4:   cbz     x0, 970c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x162c>
+    0.00 :   96a8:   cbnz    w7, 96e8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1608>
+    0.00 :   96ac:   mov     x24, #0x0                       // #0
+    0.00 :   96b0:   add     x24, x26, x24, lsl #3
+    0.00 :   96b4:   add     w7, w7, #0x1
+    0.00 :   96b8:   str     x27, [x24, #8]
+    0.00 :   96bc:   str     w7, [x26]
+    0.00 :   96c0:   dmb     ish
+    0.00 :   96c4:   ldr     x0, [x25, #1056]
+    0.00 :   96c8:   str     x26, [x25, #1056]
+    0.00 :   96cc:   str     w22, [x25, #1064]
+    0.00 :   96d0:   cbz     x0, 9608 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1528>
+    0.00 :   96d4:   bl      ea00 <_dl_mcount@@GLIBC_2.17+0x23b0>
+    0.00 :   96d8:   b       9608 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1528>
+    0.00 :   96dc:   adrp    x1, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   96e0:   add     x1, x1, #0xa88
+    0.00 :   96e4:   b       9630 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1550>
+    0.00 :   96e8:   ldr     x1, [x25, #1056]
+    0.00 :   96ec:   mov     w24, w7
+    0.00 :   96f0:   ubfiz   x2, x7, #3, #32
+    0.00 :   96f4:   add     x0, x0, #0x8
+    0.00 :   96f8:   add     x1, x1, #0x8
+    0.00 :   96fc:   str     w7, [sp, #152]
+    0.00 :   9700:   bl      1b280 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x85a0>
+    0.00 :   9704:   ldr     w7, [sp, #152]
+    0.00 :   9708:   b       96b0 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x15d0>
+    0.00 :   970c:   adrp    x22, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   9710:   ldr     w0, [x22, #2960]
+    0.00 :   9714:   tbz     w0, #2, 94b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13d8>
+    0.00 :   9718:   ldrb    w0, [x27, #871]
+    0.00 :   971c:   tbnz    w0, #0, 94b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13d8>
+    0.00 :   9720:   cbnz    w24, 9788 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x16a8>
+    0.00 :   9724:   ldr     x1, [x27, #8]
+    0.00 :   9728:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   972c:   ldr     x2, [x27, #48]
+    0.00 :   9730:   add     x0, x0, #0x678
+    0.00 :   9734:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   9738:   b       94bc <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13dc>
+    0.00 :   973c:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9740:   add     x0, x0, #0x638
+    0.00 :   9744:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   9748:   b       94b8 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x13d8>
+    0.00 :   974c:   mov     w7, #0x0                        // #0
+    0.00 :   9750:   b       9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>
+    0.00 :   9754:   cmp     w7, w1
+    0.00 :   9758:   b.cs    9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>  // b.hs, b.nlast
+    0.00 :   975c:   add     x10, x10, w7, uxtw #3
+    0.00 :   9760:   b       976c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x168c>
+    0.00 :   9764:   cmp     w7, w1
+    0.00 :   9768:   b.eq    9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>  // b.none
+    0.00 :   976c:   ldr     x0, [x10, #8]!
+    0.00 :   9770:   add     w7, w7, #0x1
+    0.00 :   9774:   cmp     x27, x0
+    0.00 :   9778:   b.ne    9764 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1684>  // b.any
+    0.00 :   977c:   b       955c <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x147c>
+    0.00 :   9780:   mov     w7, w1
+    0.00 :   9784:   b       9288 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x11a8>
+    0.00 :   9788:   ldrb    w0, [x27, #872]
+    0.00 :   978c:   tbnz    w0, #0, 9308 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1228>
+    0.00 :   9790:   ldr     x1, [x27, #8]
+    0.00 :   9794:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   9798:   ldr     x2, [x27, #48]
+    0.00 :   979c:   add     x0, x0, #0x678
+    0.00 :   97a0:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   97a4:   b       9308 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1228>
+ Percent |	Source code & Disassembly of ld-linux-aarch64.so.1 for cycles:u (1 samples, percent: local period)
+------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    000000000000cb60 <_dl_mcount@@GLIBC_2.17+0x510>:
+    0.00 :   cb60:   stp     x29, x30, [sp, #-320]!
+    0.00 :   cb64:   mov     x29, sp
+    0.00 :   cb68:   stp     x19, x20, [sp, #16]
+    0.00 :   cb6c:   mov     x20, x0
+    0.00 :   cb70:   stp     x21, x22, [sp, #32]
+    0.00 :   cb74:   mov     w22, w2
+    0.00 :   cb78:   stp     x23, x24, [sp, #48]
+    0.00 :   cb7c:   mov     w23, w3
+    0.00 :   cb80:   stp     x25, x26, [sp, #64]
+    0.00 :   cb84:   stp     x27, x28, [sp, #80]
+    0.00 :   cb88:   sub     sp, sp, #0x10
+    0.00 :   cb8c:   str     x1, [x29, #200]
+    0.00 :   cb90:   tbnz    w22, #27, ce90 <_dl_mcount@@GLIBC_2.17+0x840>
+    0.00 :   cb94:   adrp    x11, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   cb98:   add     x0, x11, #0xb90
+    0.00 :   cb9c:   ldr     w4, [x0, #672]
+    0.00 :   cba0:   ldr     x0, [x0, #664]
+    0.00 :   cba4:   cbz     w4, de04 <_dl_mcount@@GLIBC_2.17+0x17b4>
+    0.00 :   cba8:   mov     w1, #0x0                        // #0
+    0.00 :   cbac:   mov     w27, #0x0                       // #0
+    0.00 :   cbb0:   mov     w2, #0x1                        // #1
+    0.00 :   cbb4:   b       cbd8 <_dl_mcount@@GLIBC_2.17+0x588>
+    0.00 :   cbb8:   ldr     x3, [x0, #32]
+    0.00 :   cbbc:   add     w1, w1, #0x1
+    0.00 :   cbc0:   ldr     x0, [x0, #64]
+    0.00 :   cbc4:   cmp     x3, #0x0
+    0.00 :   cbc8:   csel    w27, w27, w2, eq        // eq = none
+    0.00 :   cbcc:   mov     w23, #0x1                       // #1
+    0.00 :   cbd0:   cmp     w4, w1
+    0.00 :   cbd4:   b.eq    cc08 <_dl_mcount@@GLIBC_2.17+0x5b8>  // b.none
+    0.00 :   cbd8:   ldr     x3, [x0, #40]
+    0.00 :   cbdc:   cbnz    x3, cbb8 <_dl_mcount@@GLIBC_2.17+0x568>
+    0.00 :   cbe0:   ldr     x3, [x0, #48]
+    0.00 :   cbe4:   add     w1, w1, #0x1
+    0.00 :   cbe8:   cmp     x3, #0x0
+    0.00 :   cbec:   ldr     x3, [x0, #32]
+    0.00 :   cbf0:   csel    w23, w23, w2, eq        // eq = none
+    0.00 :   cbf4:   ldr     x0, [x0, #64]
+    0.00 :   cbf8:   cmp     x3, #0x0
+    0.00 :   cbfc:   csel    w27, w27, w2, eq        // eq = none
+    0.00 :   cc00:   cmp     w4, w1
+    0.00 :   cc04:   b.ne    cbd8 <_dl_mcount@@GLIBC_2.17+0x588>  // b.any
+    0.00 :   cc08:   cbnz    w23, cc14 <_dl_mcount@@GLIBC_2.17+0x5c4>
+    0.00 :   cc0c:   ldr     x0, [x20, #256]
+    0.00 :   cc10:   cbnz    x0, de0c <_dl_mcount@@GLIBC_2.17+0x17bc>
+    0.00 :   cc14:   and     w21, w22, #0x1
+    0.00 :   cc18:   ldr     w0, [x11, #2960]
+    0.00 :   cc1c:   tbnz    w0, #5, e014 <_dl_mcount@@GLIBC_2.17+0x19c4>
+    0.00 :   cc20:   ldr     x19, [x20, #240]
+    0.00 :   cc24:   cbnz    x19, dedc <_dl_mcount@@GLIBC_2.17+0x188c>
+    0.00 :   cc28:   ldr     x1, [x20, #248]
+    0.00 :   cc2c:   and     w24, w21, #0x1
+    0.00 :   cc30:   ldrb    w0, [x20, #870]
+    0.00 :   cc34:   cmp     x1, #0x0
+    0.00 :   cc38:   cset    w1, ne  // ne = any
+    0.00 :   cc3c:   tst     w1, w21
+    0.00 :   cc40:   b.ne    d814 <_dl_mcount@@GLIBC_2.17+0x11c4>  // b.any
+    0.00 :   cc44:   and     w4, w0, #0x20
+    0.00 :   cc48:   adrp    x6, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   cc4c:   add     x2, x6, #0xb48
+    0.00 :   cc50:   mov     w1, w4
+    0.00 :   cc54:   ldr     x26, [x20]
+    0.00 :   cc58:   cmp     x20, x2
+    0.00 :   cc5c:   b.eq    cd04 <_dl_mcount@@GLIBC_2.17+0x6b4>  // b.none
+    0.00 :   cc60:   ldr     x0, [x20, #352]
+    0.00 :   cc64:   cbz     x0, cd04 <_dl_mcount@@GLIBC_2.17+0x6b4>
+    0.00 :   cc68:   ldr     x2, [x20, #344]
+    0.00 :   cc6c:   cmp     w4, #0x0
+    0.00 :   cc70:   ldr     x0, [x0, #8]
+    0.00 :   cc74:   ldr     x2, [x2, #8]
+    0.00 :   cc78:   add     x3, x0, x26
+    0.00 :   cc7c:   csel    x3, x3, x0, ne  // ne = any
+    0.00 :   cc80:   add     x2, x3, x2
+    0.00 :   cc84:   cmp     x3, x2
+    0.00 :   cc88:   b.cs    cd04 <_dl_mcount@@GLIBC_2.17+0x6b4>  // b.hs, b.nlast
+    0.00 :   cc8c:   mov     x5, #0x0                        // #0
+    0.00 :   cc90:   b       ccb4 <_dl_mcount@@GLIBC_2.17+0x664>
+    0.00 :   cc94:   ldr     x1, [x0, x26]
+    0.00 :   cc98:   add     x5, x0, x26
+    0.00 :   cc9c:   add     x3, x3, #0x8
+    0.00 :   cca0:   add     x5, x5, #0x8
+    0.00 :   cca4:   add     x1, x1, x26
+    0.00 :   cca8:   str     x1, [x0, x26]
+    0.00 :   ccac:   cmp     x2, x3
+    0.00 :   ccb0:   b.ls    ccf4 <_dl_mcount@@GLIBC_2.17+0x6a4>  // b.plast
+    0.00 :   ccb4:   ldr     x0, [x3]
+    0.00 :   ccb8:   tbz     w0, #0, cc94 <_dl_mcount@@GLIBC_2.17+0x644>
+    0.00 :   ccbc:   lsr     x0, x0, #1
+    0.00 :   ccc0:   mov     x1, x5
+    0.00 :   ccc4:   cbz     x0, cce4 <_dl_mcount@@GLIBC_2.17+0x694>
+    0.00 :   ccc8:   tbz     w0, #0, ccd8 <_dl_mcount@@GLIBC_2.17+0x688>
+    0.00 :   cccc:   ldr     x4, [x1]
+    0.00 :   ccd0:   add     x4, x4, x26
+    0.00 :   ccd4:   str     x4, [x1]
+    0.00 :   ccd8:   lsr     x0, x0, #1
+    0.00 :   ccdc:   add     x1, x1, #0x8
+    0.00 :   cce0:   cbnz    x0, ccc8 <_dl_mcount@@GLIBC_2.17+0x678>
+    0.00 :   cce4:   add     x3, x3, #0x8
+    0.00 :   cce8:   add     x5, x5, #0x1f8
+    0.00 :   ccec:   cmp     x2, x3
+    0.00 :   ccf0:   b.hi    ccb4 <_dl_mcount@@GLIBC_2.17+0x664>  // b.pmore
+    0.00 :   ccf4:   ldrb    w0, [x20, #870]
+    0.00 :   ccf8:   ldr     x26, [x20]
+    0.00 :   ccfc:   and     w4, w0, #0x20
+    0.00 :   cd00:   mov     w1, w4
+    0.00 :   cd04:   movi    v0.4s, #0x0
+    0.00 :   cd08:   add     x7, x29, #0x100
+    0.00 :   cd0c:   ldr     x0, [x20, #120]
+    0.00 :   cd10:   stp     q0, q0, [x7]
+    0.00 :   cd14:   stp     q0, q0, [x7, #32]
+    0.00 :   cd18:   cbz     x0, d880 <_dl_mcount@@GLIBC_2.17+0x1230>
+    0.00 :   cd1c:   ldr     x0, [x0, #8]
+    0.00 :   cd20:   mov     x2, #0x0                        // #0
+    0.00 :   cd24:   cbz     x0, cd50 <_dl_mcount@@GLIBC_2.17+0x700>
+    0.00 :   cd28:   ldr     x2, [x20, #128]
+    0.00 :   cd2c:   cmp     w1, #0x0
+    0.00 :   cd30:   ldr     x3, [x20, #464]
+    0.00 :   cd34:   add     x5, x0, x26
+    0.00 :   cd38:   ldr     x2, [x2, #8]
+    0.00 :   cd3c:   csel    x0, x5, x0, ne  // ne = any
+    0.00 :   cd40:   stp     x0, x2, [x29, #256]
+    0.00 :   cd44:   cbz     x3, cd50 <_dl_mcount@@GLIBC_2.17+0x700>
+    0.00 :   cd48:   ldr     x3, [x3, #8]
+    0.00 :   cd4c:   str     x3, [x29, #272]
+    0.00 :   cd50:   ldr     x3, [x20, #224]
+    0.00 :   cd54:   cbz     x3, cda4 <_dl_mcount@@GLIBC_2.17+0x754>
+    0.00 :   cd58:   ldr     x5, [x20, #248]
+    0.00 :   cd5c:   cmp     w1, #0x0
+    0.00 :   cd60:   ldr     x3, [x20, #80]
+    0.00 :   cd64:   ldr     x1, [x5, #8]
+    0.00 :   cd68:   ldr     x3, [x3, #8]
+    0.00 :   cd6c:   add     x5, x1, x26
+    0.00 :   cd70:   csel    x1, x5, x1, ne  // ne = any
+    0.00 :   cd74:   cmp     x0, #0x0
+    0.00 :   cd78:   csel    x0, x0, x1, ne  // ne = any
+    0.00 :   cd7c:   add     x8, x3, x1
+    0.00 :   cd80:   add     x5, x0, x2
+    0.00 :   cd84:   str     x0, [x29, #256]
+    0.00 :   cd88:   cmp     x5, x8
+    0.00 :   cd8c:   b.eq    ce9c <_dl_mcount@@GLIBC_2.17+0x84c>  // b.none
+    0.00 :   cd90:   cbnz    w24, cd9c <_dl_mcount@@GLIBC_2.17+0x74c>
+    0.00 :   cd94:   cmp     x1, x5
+    0.00 :   cd98:   b.eq    ded0 <_dl_mcount@@GLIBC_2.17+0x1880>  // b.none
+    0.00 :   cd9c:   stp     x1, x3, [x29, #288]
+    0.00 :   cda0:   str     w21, [x29, #312]
+    0.00 :   cda4:   and     w0, w22, #0x2000000
+    0.00 :   cda8:   adrp    x25, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   cdac:   str     w0, [x29, #192]
+    0.00 :   cdb0:   add     x0, x6, #0xb48
+    0.00 :   cdb4:   mov     w5, #0x2                        // #2
+    0.00 :   cdb8:   mov     x3, x7
+    0.00 :   cdbc:   mov     w21, w5
+    0.00 :   cdc0:   stp     w23, w27, [x29, #152]
+    0.00 :   cdc4:   mov     x27, x20
+    0.00 :   cdc8:   str     x0, [x29, #160]
+    0.00 :   cdcc:   add     x0, x25, #0x930
+    0.00 :   cdd0:   mov     x25, x19
+    0.00 :   cdd4:   mov     x19, x26
+    0.00 :   cdd8:   str     x0, [x29, #176]
+    0.00 :   cddc:   str     x11, [x29, #184]
+    0.00 :   cde0:   ldr     x1, [x27, #112]
+    0.00 :   cde4:   cmp     w4, #0x0
+    0.00 :   cde8:   ldp     x0, x9, [x3]
+    0.00 :   cdec:   ldr     x20, [x3, #16]
+    0.00 :   cdf0:   ldr     x28, [x1, #8]
+    0.00 :   cdf4:   ldr     w1, [x3, #24]
+    0.00 :   cdf8:   add     x20, x20, x20, lsl #1
+    0.00 :   cdfc:   add     x2, x28, x19
+    0.00 :   ce00:   add     x24, x0, x9
+    0.00 :   ce04:   add     x20, x0, x20, lsl #3
+    0.00 :   ce08:   csel    x28, x2, x28, ne        // ne = any
+    0.00 :   ce0c:   cbz     w1, d0d4 <_dl_mcount@@GLIBC_2.17+0xa84>
+    0.00 :   ce10:   add     x23, x29, #0xe0
+    0.00 :   ce14:   mov     x26, x3
+    0.00 :   ce18:   cmp     x20, x24
+    0.00 :   ce1c:   b.cc    ce3c <_dl_mcount@@GLIBC_2.17+0x7ec>  // b.lo, b.ul, b.last
+    0.00 :   ce20:   b       ce70 <_dl_mcount@@GLIBC_2.17+0x820>
+    0.00 :   ce24:   ldr     x0, [x22]
+    0.00 :   ce28:   add     x0, x0, x19
+    0.00 :   ce2c:   str     x0, [x22]
+    0.00 :   ce30:   add     x20, x20, #0x18
+    0.00 :   ce34:   cmp     x24, x20
+    0.00 :   ce38:   b.ls    ce6c <_dl_mcount@@GLIBC_2.17+0x81c>  // b.plast
+    0.00 :   ce3c:   ldp     x22, x1, [x20]
+    0.00 :   ce40:   add     x22, x19, x22
+    0.00 :   ce44:   cmp     w1, #0x402
+    0.00 :   ce48:   b.ne    ceac <_dl_mcount@@GLIBC_2.17+0x85c>  // b.any
+    0.00 :   ce4c:   ldr     x0, [x27, #408]
+    0.00 :   ce50:   cbnz    x0, cfd4 <_dl_mcount@@GLIBC_2.17+0x984>
+    0.00 :   ce54:   ldr     x0, [x27, #1088]
+    0.00 :   ce58:   cbz     x0, ce24 <_dl_mcount@@GLIBC_2.17+0x7d4>
+    0.00 :   ce5c:   str     x0, [x22]
+    0.00 :   ce60:   add     x20, x20, #0x18
+    0.00 :   ce64:   cmp     x24, x20
+    0.00 :   ce68:   b.hi    ce3c <_dl_mcount@@GLIBC_2.17+0x7ec>  // b.pmore
+    0.00 :   ce6c:   mov     x3, x26
+    0.00 :   ce70:   cmp     w21, #0x1
+    0.00 :   ce74:   b.eq    d2e8 <_dl_mcount@@GLIBC_2.17+0xc98>  // b.none
+    0.00 :   ce78:   ldrb    w4, [x27, #870]
+    0.00 :   ce7c:   add     x3, x3, #0x20
+    0.00 :   ce80:   ldr     x19, [x27]
+    0.00 :   ce84:   and     w4, w4, #0x20
+    0.00 :   ce88:   mov     w21, #0x1                       // #1
+    0.00 :   ce8c:   b       cde0 <_dl_mcount@@GLIBC_2.17+0x790>
+    0.00 :   ce90:   mov     w27, #0x0                       // #0
+    0.00 :   ce94:   adrp    x11, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   ce98:   b       cc08 <_dl_mcount@@GLIBC_2.17+0x5b8>
+    0.00 :   ce9c:   sub     x2, x2, x3
+    0.00 :   cea0:   str     x2, [x29, #264]
+    0.00 :   cea4:   add     x5, x2, x0
+    0.00 :   cea8:   b       cd90 <_dl_mcount@@GLIBC_2.17+0x740>
+    0.00 :   ceac:   cmp     w1, #0x407
+    0.00 :   ceb0:   b.ne    ddc4 <_dl_mcount@@GLIBC_2.17+0x1774>  // b.any
+    0.00 :   ceb4:   ldr     x4, [x27, #112]
+    0.00 :   ceb8:   lsr     x2, x1, #32
+    0.00 :   cebc:   ldrb    w3, [x27, #870]
+    0.00 :   cec0:   mov     x0, #0x0                        // #0
+    0.00 :   cec4:   ldr     x5, [x4, #8]
+    0.00 :   cec8:   tbz     w3, #5, ced4 <_dl_mcount@@GLIBC_2.17+0x884>
+    0.00 :   cecc:   ldr     x0, [x27]
+    0.00 :   ced0:   add     x5, x5, x0
+    0.00 :   ced4:   ldr     x4, [x27, #536]
+    0.00 :   ced8:   lsl     x3, x2, #1
+    0.00 :   cedc:   add     x2, x3, x2
+    0.00 :   cee0:   add     x2, x5, x2, lsl #3
+    0.00 :   cee4:   cbz     x4, cf04 <_dl_mcount@@GLIBC_2.17+0x8b4>
+    0.00 :   cee8:   ldr     x4, [x4, #8]
+    0.00 :   ceec:   add     x3, x3, x0
+    0.00 :   cef0:   ldr     x5, [x27, #816]
+    0.00 :   cef4:   mov     w6, #0x18                       // #24
+    0.00 :   cef8:   ldrh    w4, [x3, x4]
+    0.00 :   cefc:   and     w4, w4, #0x7fff
+    0.00 :   cf00:   umaddl  x4, w4, w6, x5
+    0.00 :   cf04:   str     x2, [x29, #224]
+    0.00 :   cf08:   ldrb    w3, [x2, #4]
+    0.00 :   cf0c:   cmp     wzr, w3, lsr #4
+    0.00 :   cf10:   b.eq    d65c <_dl_mcount@@GLIBC_2.17+0x100c>  // b.none
+    0.00 :   cf14:   ldrb    w5, [x2, #5]
+    0.00 :   cf18:   and     w5, w5, #0x3
+    0.00 :   cf1c:   sub     w5, w5, #0x1
+    0.00 :   cf20:   cmp     w5, #0x1
+    0.00 :   cf24:   b.ls    d65c <_dl_mcount@@GLIBC_2.17+0x100c>  // b.plast
+    0.00 :   cf28:   ldr     x3, [x27, #1112]
+    0.00 :   cf2c:   and     x1, x1, #0xffffffff
+    0.00 :   cf30:   sub     x1, x1, #0x400
+    0.00 :   cf34:   cmp     x2, x3
+    0.00 :   cf38:   b.eq    e0b0 <_dl_mcount@@GLIBC_2.17+0x1a60>  // b.none
+    0.00 :   cf3c:   mov     w5, #0x0                        // #0
+    0.00 :   cf40:   cmp     x1, #0x7
+    0.00 :   cf44:   b.hi    cf64 <_dl_mcount@@GLIBC_2.17+0x914>  // b.pmore
+    0.00 :   cf48:   adrp    x5, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   cf4c:   adrp    x3, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   cf50:   add     x5, x5, #0x910
+    0.00 :   cf54:   add     x3, x3, #0x930
+    0.00 :   cf58:   ldr     w5, [x5, x1, lsl #2]
+    0.00 :   cf5c:   ldr     w1, [x3, x1, lsl #2]
+    0.00 :   cf60:   orr     w5, w5, w1
+    0.00 :   cf64:   ldr     x3, [x27, #104]
+    0.00 :   cf68:   ldr     w1, [x2]
+    0.00 :   cf6c:   str     x2, [x27, #1112]
+    0.00 :   cf70:   ldr     x2, [x3, #8]
+    0.00 :   cf74:   str     w5, [x27, #1120]
+    0.00 :   cf78:   add     x0, x0, x2
+    0.00 :   cf7c:   add     x0, x0, x1
+    0.00 :   cf80:   cbz     x4, cf90 <_dl_mcount@@GLIBC_2.17+0x940>
+    0.00 :   cf84:   ldr     w1, [x4, #8]
+    0.00 :   cf88:   cmp     w1, #0x0
+    0.00 :   cf8c:   csel    x4, x4, xzr, ne // ne = any
+    0.00 :   cf90:   ldr     x3, [x29, #200]
+    0.00 :   cf94:   mov     x2, x23
+    0.00 :   cf98:   mov     x1, x27
+    0.00 :   cf9c:   mov     x7, #0x0                        // #0
+    0.00 :   cfa0:   mov     w6, #0x9                        // #9
+    0.00 :   cfa4:   bl      8e54 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd74>
+    0.00 :   cfa8:   mov     x28, x0
+    0.00 :   cfac:   ldr     x2, [x29, #224]
+    0.00 :   cfb0:   str     x0, [x27, #1128]
+    0.00 :   cfb4:   str     x2, [x27, #1136]
+    0.00 :   cfb8:   cbnz    x2, d79c <_dl_mcount@@GLIBC_2.17+0x114c>
+    0.00 :   cfbc:   ldr     x0, [x20, #16]
+    0.00 :   cfc0:   str     x0, [x22, #8]
+    0.00 :   cfc4:   adrp    x0, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   cfc8:   add     x0, x0, #0x76c
+    0.00 :   cfcc:   str     x0, [x22]
+    0.00 :   cfd0:   b       ce60 <_dl_mcount@@GLIBC_2.17+0x810>
+    0.00 :   cfd4:   ldr     x2, [x27, #112]
+    0.00 :   cfd8:   lsr     x0, x1, #32
+    0.00 :   cfdc:   ldrb    w3, [x27, #870]
+    0.00 :   cfe0:   mov     x6, #0x0                        // #0
+    0.00 :   cfe4:   ldr     x2, [x2, #8]
+    0.00 :   cfe8:   tbz     w3, #5, cff4 <_dl_mcount@@GLIBC_2.17+0x9a4>
+    0.00 :   cfec:   ldr     x6, [x27]
+    0.00 :   cff0:   add     x2, x2, x6
+    0.00 :   cff4:   lsl     x5, x0, #1
+    0.00 :   cff8:   add     x0, x5, x0
+    0.00 :   cffc:   add     x2, x2, x0, lsl #3
+    0.00 :   d000:   ldrb    w3, [x2, #5]
+    0.00 :   d004:   tbz     w3, #7, ce54 <_dl_mcount@@GLIBC_2.17+0x804>
+    0.00 :   d008:   ldr     x4, [x27, #536]
+    0.00 :   d00c:   cbz     x4, d02c <_dl_mcount@@GLIBC_2.17+0x9dc>
+    0.00 :   d010:   ldr     x4, [x4, #8]
+    0.00 :   d014:   add     x5, x5, x6
+    0.00 :   d018:   ldr     x0, [x27, #816]
+    0.00 :   d01c:   mov     w7, #0x18                       // #24
+    0.00 :   d020:   ldrh    w4, [x5, x4]
+    0.00 :   d024:   and     w4, w4, #0x7fff
+    0.00 :   d028:   umaddl  x4, w4, w7, x0
+    0.00 :   d02c:   str     x2, [x29, #224]
+    0.00 :   d030:   ldrb    w5, [x2, #4]
+    0.00 :   d034:   cmp     wzr, w5, lsr #4
+    0.00 :   d038:   b.eq    e158 <_dl_mcount@@GLIBC_2.17+0x1b08>  // b.none
+    0.00 :   d03c:   and     w3, w3, #0x3
+    0.00 :   d040:   sub     w3, w3, #0x1
+    0.00 :   d044:   cmp     w3, #0x1
+    0.00 :   d048:   b.ls    e158 <_dl_mcount@@GLIBC_2.17+0x1b08>  // b.plast
+    0.00 :   d04c:   ldr     x3, [x27, #1112]
+    0.00 :   d050:   and     x0, x1, #0xffffffff
+    0.00 :   d054:   sub     x0, x0, #0x400
+    0.00 :   d058:   cmp     x2, x3
+    0.00 :   d05c:   b.eq    e330 <_dl_mcount@@GLIBC_2.17+0x1ce0>  // b.none
+    0.00 :   d060:   mov     w5, #0x0                        // #0
+    0.00 :   d064:   cmp     x0, #0x7
+    0.00 :   d068:   b.ls    e1d4 <_dl_mcount@@GLIBC_2.17+0x1b84>  // b.plast
+    0.00 :   d06c:   ldr     x0, [x27, #104]
+    0.00 :   d070:   ldr     w1, [x2]
+    0.00 :   d074:   ldr     x0, [x0, #8]
+    0.00 :   d078:   str     x2, [x27, #1112]
+    0.00 :   d07c:   str     w5, [x27, #1120]
+    0.00 :   d080:   add     x0, x6, x0
+    0.00 :   d084:   add     x0, x0, x1
+    0.00 :   d088:   cbz     x4, d098 <_dl_mcount@@GLIBC_2.17+0xa48>
+    0.00 :   d08c:   ldr     w1, [x4, #8]
+    0.00 :   d090:   cmp     w1, #0x0
+    0.00 :   d094:   csel    x4, x4, xzr, ne // ne = any
+    0.00 :   d098:   ldr     x3, [x29, #200]
+    0.00 :   d09c:   add     x2, x29, #0xe0
+    0.00 :   d0a0:   mov     x1, x27
+    0.00 :   d0a4:   mov     x7, #0x0                        // #0
+    0.00 :   d0a8:   mov     w6, #0x9                        // #9
+    0.00 :   d0ac:   bl      8e54 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd74>
+    0.00 :   d0b0:   str     x0, [x27, #1128]
+    0.00 :   d0b4:   ldr     x2, [x29, #224]
+    0.00 :   d0b8:   str     x2, [x27, #1136]
+    0.00 :   d0bc:   mov     x3, #0x0                        // #0
+    0.00 :   d0c0:   cbnz    x2, e1cc <_dl_mcount@@GLIBC_2.17+0x1b7c>
+    0.00 :   d0c4:   ldr     x0, [x20, #16]
+    0.00 :   d0c8:   add     x0, x0, x3
+    0.00 :   d0cc:   str     x0, [x22]
+    0.00 :   d0d0:   b       ce30 <_dl_mcount@@GLIBC_2.17+0x7e0>
+    0.00 :   d0d4:   ldr     x1, [x29, #160]
+    0.00 :   d0d8:   cmp     x27, x1
+    0.00 :   d0dc:   b.eq    d104 <_dl_mcount@@GLIBC_2.17+0xab4>  // b.none
+    0.00 :   d0e0:   cmp     x20, x0
+    0.00 :   d0e4:   b.ls    d104 <_dl_mcount@@GLIBC_2.17+0xab4>  // b.plast
+    0.00 :   d0e8:   ldr     x2, [x0]
+    0.00 :   d0ec:   add     x0, x0, #0x18
+  100.00 :   d0f0:   ldur    x1, [x0, #-8]
+    0.00 :   d0f4:   add     x1, x1, x19
+    0.00 :   d0f8:   str     x1, [x2, x19]
+    0.00 :   d0fc:   cmp     x20, x0
+    0.00 :   d100:   b.hi    d0e8 <_dl_mcount@@GLIBC_2.17+0xa98>  // b.pmore
+    0.00 :   d104:   ldr     x0, [x27, #536]
+    0.00 :   d108:   cbz     x0, d8a8 <_dl_mcount@@GLIBC_2.17+0x1258>
+    0.00 :   d10c:   ldrb    w1, [x27, #870]
+    0.00 :   d110:   ldr     x26, [x0, #8]
+    0.00 :   d114:   tbz     w1, #5, d120 <_dl_mcount@@GLIBC_2.17+0xad0>
+    0.00 :   d118:   ldr     x0, [x27]
+    0.00 :   d11c:   add     x26, x26, x0
+    0.00 :   d120:   cmp     x20, x24
+    0.00 :   d124:   b.cs    ce70 <_dl_mcount@@GLIBC_2.17+0x820>  // b.hs, b.nlast
+    0.00 :   d128:   adrp    x23, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   d12c:   add     x1, x23, #0x760
+    0.00 :   d130:   mov     x23, x20
+    0.00 :   d134:   stp     x3, x25, [x29, #128]
+    0.00 :   d138:   mov     x25, x27
+    0.00 :   d13c:   adrp    x0, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   d140:   add     x0, x0, #0x910
+    0.00 :   d144:   str     w21, [x29, #124]
+    0.00 :   d148:   str     x1, [x29, #144]
+    0.00 :   d14c:   str     x0, [x29, #168]
+    0.00 :   d150:   ldp     x2, x0, [x23]
+    0.00 :   d154:   ldr     x3, [x25, #816]
+    0.00 :   d158:   lsr     x1, x0, #32
+    0.00 :   d15c:   mov     w27, w0
+    0.00 :   d160:   add     x20, x19, x2
+    0.00 :   d164:   add     x8, x1, x1, lsl #1
+    0.00 :   d168:   ldrh    w12, [x26, x1, lsl #1]
+    0.00 :   d16c:   mov     w1, #0x18                       // #24
+    0.00 :   d170:   add     x22, x28, x8, lsl #3
+    0.00 :   d174:   stp     x22, x22, [x29, #216]
+    0.00 :   d178:   and     w12, w12, #0x7fff
+    0.00 :   d17c:   umaddl  x21, w12, w1, x3
+    0.00 :   d180:   cmp     w0, #0x403
+    0.00 :   d184:   b.eq    d644 <_dl_mcount@@GLIBC_2.17+0xff4>  // b.none
+    0.00 :   d188:   cbz     w0, d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   d18c:   ldrb    w1, [x22, #4]
+    0.00 :   d190:   cmp     wzr, w1, lsr #4
+    0.00 :   d194:   b.eq    d530 <_dl_mcount@@GLIBC_2.17+0xee0>  // b.none
+    0.00 :   d198:   ldrb    w2, [x22, #5]
+    0.00 :   d19c:   and     w2, w2, #0x3
+    0.00 :   d1a0:   sub     w2, w2, #0x1
+    0.00 :   d1a4:   cmp     w2, #0x1
+    0.00 :   d1a8:   b.ls    d530 <_dl_mcount@@GLIBC_2.17+0xee0>  // b.plast
+    0.00 :   d1ac:   ldr     x1, [x25, #1112]
+    0.00 :   d1b0:   and     x0, x0, #0xffffffff
+    0.00 :   d1b4:   sub     x0, x0, #0x400
+    0.00 :   d1b8:   cmp     x22, x1
+    0.00 :   d1bc:   b.eq    d728 <_dl_mcount@@GLIBC_2.17+0x10d8>  // b.none
+    0.00 :   d1c0:   mov     w5, #0x0                        // #0
+    0.00 :   d1c4:   cmp     x0, #0x7
+    0.00 :   d1c8:   b.hi    d1e0 <_dl_mcount@@GLIBC_2.17+0xb90>  // b.pmore
+    0.00 :   d1cc:   ldr     x1, [x29, #168]
+    0.00 :   d1d0:   ldr     w5, [x1, x0, lsl #2]
+    0.00 :   d1d4:   ldr     x1, [x29, #176]
+    0.00 :   d1d8:   ldr     w0, [x1, x0, lsl #2]
+    0.00 :   d1dc:   orr     w5, w5, w0
+    0.00 :   d1e0:   ldr     x0, [x25, #104]
+    0.00 :   d1e4:   mov     x1, #0x0                        // #0
+    0.00 :   d1e8:   ldrb    w3, [x25, #870]
+    0.00 :   d1ec:   ldr     x2, [x0, #8]
+    0.00 :   d1f0:   ldr     w0, [x22]
+    0.00 :   d1f4:   str     x22, [x25, #1112]
+    0.00 :   d1f8:   str     w5, [x25, #1120]
+    0.00 :   d1fc:   tbz     w3, #5, d204 <_dl_mcount@@GLIBC_2.17+0xbb4>
+    0.00 :   d200:   ldr     x1, [x25]
+    0.00 :   d204:   add     x0, x0, x2
+    0.00 :   d208:   add     x0, x0, x1
+    0.00 :   d20c:   mov     x4, #0x0                        // #0
+    0.00 :   d210:   cbz     x21, d220 <_dl_mcount@@GLIBC_2.17+0xbd0>
+    0.00 :   d214:   ldr     w1, [x21, #8]
+    0.00 :   d218:   cmp     w1, #0x0
+    0.00 :   d21c:   csel    x4, x21, xzr, ne        // ne = any
+    0.00 :   d220:   ldr     x3, [x29, #200]
+    0.00 :   d224:   add     x2, x29, #0xe0
+    0.00 :   d228:   mov     x1, x25
+    0.00 :   d22c:   mov     x7, #0x0                        // #0
+    0.00 :   d230:   mov     w6, #0x9                        // #9
+    0.00 :   d234:   bl      8e54 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd74>
+    0.00 :   d238:   mov     x3, x0
+    0.00 :   d23c:   ldr     x2, [x29, #224]
+    0.00 :   d240:   str     x0, [x25, #1128]
+    0.00 :   d244:   str     x2, [x25, #1136]
+    0.00 :   d248:   cbz     x2, d5dc <_dl_mcount@@GLIBC_2.17+0xf8c>
+    0.00 :   d24c:   ldrh    w0, [x2, #6]
+    0.00 :   d250:   mov     w4, #0xfff1                     // #65521
+    0.00 :   d254:   ldrb    w1, [x2, #4]
+    0.00 :   d258:   cmp     w0, w4
+    0.00 :   d25c:   b.eq    d548 <_dl_mcount@@GLIBC_2.17+0xef8>  // b.none
+    0.00 :   d260:   ldr     x4, [x3]
+    0.00 :   d264:   cmp     w0, #0x0
+    0.00 :   d268:   ldr     x2, [x2, #8]
+    0.00 :   d26c:   and     w1, w1, #0xf
+    0.00 :   d270:   ldr     w0, [x29, #192]
+    0.00 :   d274:   ccmp    w1, #0xa, #0x0, ne      // ne = any
+    0.00 :   d278:   add     x4, x4, x2
+    0.00 :   d27c:   ccmp    w0, #0x0, #0x0, eq      // eq = none
+    0.00 :   d280:   b.eq    d570 <_dl_mcount@@GLIBC_2.17+0xf20>  // b.none
+    0.00 :   d284:   cmp     w27, #0x405
+    0.00 :   d288:   b.eq    d700 <_dl_mcount@@GLIBC_2.17+0x10b0>  // b.none
+    0.00 :   d28c:   b.hi    d370 <_dl_mcount@@GLIBC_2.17+0xd20>  // b.pmore
+    0.00 :   d290:   cmp     w27, #0x402
+    0.00 :   d294:   b.hi    d630 <_dl_mcount@@GLIBC_2.17+0xfe0>  // b.pmore
+    0.00 :   d298:   cmp     w27, #0x400
+    0.00 :   d29c:   b.hi    d2b0 <_dl_mcount@@GLIBC_2.17+0xc60>  // b.pmore
+    0.00 :   d2a0:   cmp     w27, #0x102
+    0.00 :   d2a4:   b.hi    d4dc <_dl_mcount@@GLIBC_2.17+0xe8c>  // b.pmore
+    0.00 :   d2a8:   cmp     w27, #0x100
+    0.00 :   d2ac:   b.ls    d600 <_dl_mcount@@GLIBC_2.17+0xfb0>  // b.plast
+    0.00 :   d2b0:   ldr     x0, [x23, #16]
+    0.00 :   d2b4:   add     x0, x0, x4
+    0.00 :   d2b8:   str     x0, [x20]
+    0.00 :   d2bc:   ldr     x0, [x23, #8]
+    0.00 :   d2c0:   cmp     w0, #0x402
+    0.00 :   d2c4:   b.eq    d3d0 <_dl_mcount@@GLIBC_2.17+0xd80>  // b.none
+    0.00 :   d2c8:   add     x23, x23, #0x18
+    0.00 :   d2cc:   cmp     x24, x23
+    0.00 :   d2d0:   b.hi    d150 <_dl_mcount@@GLIBC_2.17+0xb00>  // b.pmore
+    0.00 :   d2d4:   ldr     w21, [x29, #124]
+    0.00 :   d2d8:   mov     x27, x25
+    0.00 :   d2dc:   ldp     x3, x25, [x29, #128]
+    0.00 :   d2e0:   cmp     w21, #0x1
+    0.00 :   d2e4:   b.ne    ce78 <_dl_mcount@@GLIBC_2.17+0x828>  // b.any
+    0.00 :   d2e8:   mov     x20, x27
+    0.00 :   d2ec:   mov     x19, x25
+    0.00 :   d2f0:   ldp     w23, w27, [x29, #152]
+    0.00 :   d2f4:   cmp     w23, #0x0
+    0.00 :   d2f8:   ccmp    w27, #0x0, #0x0, eq     // eq = none
+    0.00 :   d2fc:   b.eq    d340 <_dl_mcount@@GLIBC_2.17+0xcf0>  // b.none
+    0.00 :   d300:   ldr     x0, [x20, #80]
+    0.00 :   d304:   cbz     x0, d340 <_dl_mcount@@GLIBC_2.17+0xcf0>
+    0.00 :   d308:   ldr     x2, [x20, #224]
+    0.00 :   d30c:   mov     x4, #0x18                       // #24
+    0.00 :   d310:   ldr     x3, [x0, #8]
+    0.00 :   d314:   mov     x1, #0x10                       // #16
+    0.00 :   d318:   ldr     x5, [x2, #8]
+    0.00 :   d31c:   adrp    x2, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   d320:   mov     x0, #0x20                       // #32
+    0.00 :   d324:   cmp     x5, #0x7
+    0.00 :   d328:   csel    x1, x1, x4, ne  // ne = any
+    0.00 :   d32c:   ldr     x2, [x2, #2856]
+    0.00 :   d330:   udiv    x1, x3, x1
+    0.00 :   d334:   blr     x2
+    0.00 :   d338:   str     x0, [x20, #896]
+    0.00 :   d33c:   cbz     x0, e3c0 <_dl_mcount@@GLIBC_2.17+0x1d70>
+    0.00 :   d340:   ldrh    w0, [x20, #868]
+    0.00 :   d344:   orr     w0, w0, #0x8
+    0.00 :   d348:   strh    w0, [x20, #868]
+    0.00 :   d34c:   cbnz    x19, de14 <_dl_mcount@@GLIBC_2.17+0x17c4>
+    0.00 :   d350:   mov     sp, x29
+    0.00 :   d354:   ldp     x19, x20, [sp, #16]
+    0.00 :   d358:   ldp     x21, x22, [sp, #32]
+    0.00 :   d35c:   ldp     x23, x24, [sp, #48]
+    0.00 :   d360:   ldp     x25, x26, [sp, #64]
+    0.00 :   d364:   ldp     x27, x28, [sp, #80]
+    0.00 :   d368:   ldp     x29, x30, [sp], #320
+    0.00 :   d36c:   ret
+    0.00 :   d370:   cmp     w27, #0x407
+    0.00 :   d374:   b.eq    d6c8 <_dl_mcount@@GLIBC_2.17+0x1078>  // b.none
+    0.00 :   d378:   cmp     w27, #0x408
+    0.00 :   d37c:   b.ne    d4a0 <_dl_mcount@@GLIBC_2.17+0xe50>  // b.any
+    0.00 :   d380:   ldr     x2, [x25]
+    0.00 :   d384:   ldr     x0, [x23, #16]
+    0.00 :   d388:   add     x2, x2, x0
+    0.00 :   d38c:   ldr     w0, [x29, #192]
+    0.00 :   d390:   cbnz    w0, d3c0 <_dl_mcount@@GLIBC_2.17+0xd70>
+    0.00 :   d394:   add     x1, x29, #0xe8
+    0.00 :   d398:   ldr     x0, [x29, #184]
+    0.00 :   d39c:   add     x3, x0, #0xb90
+    0.00 :   d3a0:   mov     x0, #0x18                       // #24
+    0.00 :   d3a4:   str     x0, [x29, #232]
+    0.00 :   d3a8:   ldr     x0, [x3, #96]
+    0.00 :   d3ac:   ldr     x3, [x3, #560]
+    0.00 :   d3b0:   stp     x0, x3, [x29, #240]
+    0.00 :   d3b4:   orr     x0, x0, #0x4000000000000000
+    0.00 :   d3b8:   blr     x2
+    0.00 :   d3bc:   mov     x2, x0
+    0.00 :   d3c0:   str     x2, [x20]
+    0.00 :   d3c4:   ldr     x0, [x23, #8]
+    0.00 :   d3c8:   cmp     w0, #0x402
+    0.00 :   d3cc:   b.ne    d2c8 <_dl_mcount@@GLIBC_2.17+0xc78>  // b.any
+    0.00 :   d3d0:   ldr     x0, [x29, #184]
+    0.00 :   d3d4:   add     x0, x0, #0xb90
+    0.00 :   d3d8:   ldr     w0, [x0, #672]
+    0.00 :   d3dc:   cbz     w0, d2c8 <_dl_mcount@@GLIBC_2.17+0xc78>
+    0.00 :   d3e0:   ldr     x3, [x29, #216]
+    0.00 :   d3e4:   ldrb    w0, [x3, #4]
+    0.00 :   d3e8:   cmp     wzr, w0, lsr #4
+    0.00 :   d3ec:   b.eq    d720 <_dl_mcount@@GLIBC_2.17+0x10d0>  // b.none
+    0.00 :   d3f0:   ldrb    w0, [x3, #5]
+    0.00 :   d3f4:   and     w0, w0, #0x3
+    0.00 :   d3f8:   sub     w0, w0, #0x1
+    0.00 :   d3fc:   cmp     w0, #0x1
+    0.00 :   d400:   b.ls    d720 <_dl_mcount@@GLIBC_2.17+0x10d0>  // b.plast
+    0.00 :   d404:   ldr     x0, [x25, #1112]
+    0.00 :   d408:   cmp     x3, x0
+    0.00 :   d40c:   b.eq    e06c <_dl_mcount@@GLIBC_2.17+0x1a1c>  // b.none
+    0.00 :   d410:   ldr     x0, [x25, #104]
+    0.00 :   d414:   mov     w2, #0x1                        // #1
+    0.00 :   d418:   ldrb    w4, [x25, #870]
+    0.00 :   d41c:   mov     x1, #0x0                        // #0
+    0.00 :   d420:   str     x3, [x25, #1112]
+    0.00 :   d424:   str     w2, [x25, #1120]
+    0.00 :   d428:   ldr     x2, [x0, #8]
+    0.00 :   d42c:   ldr     w0, [x3]
+    0.00 :   d430:   tbz     w4, #5, d438 <_dl_mcount@@GLIBC_2.17+0xde8>
+    0.00 :   d434:   ldr     x1, [x25]
+    0.00 :   d438:   add     x0, x0, x2
+    0.00 :   d43c:   add     x0, x0, x1
+    0.00 :   d440:   cbz     x21, d450 <_dl_mcount@@GLIBC_2.17+0xe00>
+    0.00 :   d444:   ldr     w1, [x21, #8]
+    0.00 :   d448:   cmp     w1, #0x0
+    0.00 :   d44c:   csel    x21, x21, xzr, ne       // ne = any
+    0.00 :   d450:   ldr     x3, [x29, #200]
+    0.00 :   d454:   mov     w5, #0x1                        // #1
+    0.00 :   d458:   mov     x4, x21
+    0.00 :   d45c:   add     x2, x29, #0xd8
+    0.00 :   d460:   mov     x1, x25
+    0.00 :   d464:   mov     x7, #0x0                        // #0
+    0.00 :   d468:   mov     w6, #0x9                        // #9
+    0.00 :   d46c:   bl      8e54 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd74>
+    0.00 :   d470:   ldr     x3, [x29, #216]
+    0.00 :   d474:   mov     x5, x0
+    0.00 :   d478:   str     x0, [x25, #1128]
+    0.00 :   d47c:   str     x3, [x25, #1136]
+    0.00 :   d480:   cbz     x3, d2c8 <_dl_mcount@@GLIBC_2.17+0xc78>
+    0.00 :   d484:   mov     x4, x20
+    0.00 :   d488:   mov     x2, x23
+    0.00 :   d48c:   mov     x0, x25
+    0.00 :   d490:   mov     w6, #0x0                        // #0
+    0.00 :   d494:   mov     x1, #0x0                        // #0
+    0.00 :   d498:   bl      12ea0 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x1c0>
+    0.00 :   d49c:   b       d2c8 <_dl_mcount@@GLIBC_2.17+0xc78>
+    0.00 :   d4a0:   cmp     w27, #0x406
+    0.00 :   d4a4:   b.ne    d600 <_dl_mcount@@GLIBC_2.17+0xfb0>  // b.any
+    0.00 :   d4a8:   ldr     x1, [x29, #224]
+    0.00 :   d4ac:   cbz     x1, d3c4 <_dl_mcount@@GLIBC_2.17+0xd74>
+    0.00 :   d4b0:   ldr     x0, [x3, #1184]
+    0.00 :   d4b4:   add     x2, x0, #0x1
+    0.00 :   d4b8:   cmp     x2, #0x1
+    0.00 :   d4bc:   b.ls    e13c <_dl_mcount@@GLIBC_2.17+0x1aec>  // b.plast
+    0.00 :   d4c0:   ldr     x2, [x23, #16]
+    0.00 :   d4c4:   ldr     x1, [x1, #8]
+    0.00 :   d4c8:   add     x0, x0, x2
+    0.00 :   d4cc:   add     x0, x0, x1
+    0.00 :   d4d0:   str     x0, [x20]
+    0.00 :   d4d4:   ldr     x0, [x23, #8]
+    0.00 :   d4d8:   b       d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   d4dc:   cmp     w27, #0x400
+    0.00 :   d4e0:   b.ne    d600 <_dl_mcount@@GLIBC_2.17+0xfb0>  // b.any
+    0.00 :   d4e4:   ldr     x0, [x29, #224]
+    0.00 :   d4e8:   ldr     x1, [x0, #16]
+    0.00 :   d4ec:   ldr     x2, [x22, #16]
+    0.00 :   d4f0:   cmp     x1, x2
+    0.00 :   d4f4:   b.hi    d7b8 <_dl_mcount@@GLIBC_2.17+0x1168>  // b.pmore
+    0.00 :   d4f8:   ldr     x3, [x29, #184]
+    0.00 :   d4fc:   add     x3, x3, #0xb90
+    0.00 :   d500:   ldr     w3, [x3, #68]
+    0.00 :   d504:   cmp     w3, #0x0
+    0.00 :   d508:   ccmp    x1, x2, #0x2, ne        // ne = any
+    0.00 :   d50c:   b.cc    d7b8 <_dl_mcount@@GLIBC_2.17+0x1168>  // b.lo, b.ul, b.last
+    0.00 :   d510:   ldr     x3, [x0, #16]
+    0.00 :   d514:   mov     x1, x4
+    0.00 :   d518:   mov     x0, x20
+    0.00 :   d51c:   cmp     x3, x2
+    0.00 :   d520:   csel    x2, x3, x2, ls  // ls = plast
+    0.00 :   d524:   bl      1b280 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x85a0>
+    0.00 :   d528:   ldr     x0, [x23, #8]
+    0.00 :   d52c:   b       d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   d530:   mov     x2, x22
+    0.00 :   d534:   mov     x3, x25
+    0.00 :   d538:   mov     w4, #0xfff1                     // #65521
+    0.00 :   d53c:   ldrh    w0, [x2, #6]
+    0.00 :   d540:   cmp     w0, w4
+    0.00 :   d544:   b.ne    d260 <_dl_mcount@@GLIBC_2.17+0xc10>  // b.any
+    0.00 :   d548:   ldr     x2, [x2, #8]
+    0.00 :   d54c:   cmp     w0, #0x0
+    0.00 :   d550:   and     w1, w1, #0xf
+    0.00 :   d554:   ldr     w0, [x29, #192]
+    0.00 :   d558:   ccmp    w1, #0xa, #0x0, ne      // ne = any
+    0.00 :   d55c:   mov     x4, #0x0                        // #0
+    0.00 :   d560:   ccmp    w0, #0x0, #0x0, eq      // eq = none
+    0.00 :   d564:   add     x4, x4, x2
+    0.00 :   d568:   b.ne    d284 <_dl_mcount@@GLIBC_2.17+0xc34>  // b.any
+    0.00 :   d56c:   nop
+    0.00 :   d570:   ldr     x0, [x29, #184]
+    0.00 :   d574:   add     x1, x29, #0xe8
+    0.00 :   d578:   stp     x3, x1, [x29, #104]
+    0.00 :   d57c:   add     x2, x0, #0xb90
+    0.00 :   d580:   mov     x0, #0x18                       // #24
+    0.00 :   d584:   str     x0, [x29, #232]
+    0.00 :   d588:   ldr     x0, [x2, #96]
+    0.00 :   d58c:   ldr     x2, [x2, #560]
+    0.00 :   d590:   stp     x0, x2, [x29, #240]
+    0.00 :   d594:   orr     x0, x0, #0x4000000000000000
+    0.00 :   d598:   blr     x4
+    0.00 :   d59c:   mov     x4, x0
+    0.00 :   d5a0:   cmp     w27, #0x405
+    0.00 :   d5a4:   b.eq    d700 <_dl_mcount@@GLIBC_2.17+0x10b0>  // b.none
+    0.00 :   d5a8:   ldp     x3, x1, [x29, #104]
+    0.00 :   d5ac:   b.hi    d77c <_dl_mcount@@GLIBC_2.17+0x112c>  // b.pmore
+    0.00 :   d5b0:   cmp     w27, #0x402
+    0.00 :   d5b4:   b.hi    d630 <_dl_mcount@@GLIBC_2.17+0xfe0>  // b.pmore
+    0.00 :   d5b8:   cmp     w27, #0x400
+    0.00 :   d5bc:   b.hi    d2b0 <_dl_mcount@@GLIBC_2.17+0xc60>  // b.pmore
+    0.00 :   d5c0:   cmp     w27, #0x102
+    0.00 :   d5c4:   b.ls    d2a8 <_dl_mcount@@GLIBC_2.17+0xc58>  // b.plast
+    0.00 :   d5c8:   cmp     w27, #0x400
+    0.00 :   d5cc:   b.ne    d600 <_dl_mcount@@GLIBC_2.17+0xfb0>  // b.any
+    0.00 :   d5d0:   ldr     x0, [x29, #224]
+    0.00 :   d5d4:   cbnz    x0, d4e8 <_dl_mcount@@GLIBC_2.17+0xe98>
+    0.00 :   d5d8:   b       d3c4 <_dl_mcount@@GLIBC_2.17+0xd74>
+    0.00 :   d5dc:   cmp     w27, #0x404
+    0.00 :   d5e0:   b.eq    d630 <_dl_mcount@@GLIBC_2.17+0xfe0>  // b.none
+    0.00 :   d5e4:   b.ls    d610 <_dl_mcount@@GLIBC_2.17+0xfc0>  // b.plast
+    0.00 :   d5e8:   cmp     w27, #0x407
+    0.00 :   d5ec:   b.eq    d88c <_dl_mcount@@GLIBC_2.17+0x123c>  // b.none
+    0.00 :   d5f0:   b.ls    d3c4 <_dl_mcount@@GLIBC_2.17+0xd74>  // b.plast
+    0.00 :   d5f4:   cmp     w27, #0x408
+    0.00 :   d5f8:   b.eq    d380 <_dl_mcount@@GLIBC_2.17+0xd30>  // b.none
+    0.00 :   d5fc:   nop
+    0.00 :   d600:   mov     w1, w27
+    0.00 :   d604:   mov     x0, x25
+    0.00 :   d608:   mov     w2, #0x0                        // #0
+    0.00 :   d60c:   bl      ca90 <_dl_mcount@@GLIBC_2.17+0x440>
+    0.00 :   d610:   cmp     w27, #0x400
+    0.00 :   d614:   b.eq    d3c4 <_dl_mcount@@GLIBC_2.17+0xd74>  // b.none
+    0.00 :   d618:   mov     x4, #0x0                        // #0
+    0.00 :   d61c:   b.hi    d2b0 <_dl_mcount@@GLIBC_2.17+0xc60>  // b.pmore
+    0.00 :   d620:   sub     w0, w27, #0x101
+    0.00 :   d624:   cmp     w0, #0x1
+    0.00 :   d628:   b.ls    d2b0 <_dl_mcount@@GLIBC_2.17+0xc60>  // b.plast
+    0.00 :   d62c:   b       d600 <_dl_mcount@@GLIBC_2.17+0xfb0>
+    0.00 :   d630:   cbz     x3, d3c4 <_dl_mcount@@GLIBC_2.17+0xd74>
+    0.00 :   d634:   ldr     x0, [x3, #1192]
+    0.00 :   d638:   str     x0, [x20]
+    0.00 :   d63c:   ldr     x0, [x23, #8]
+    0.00 :   d640:   b       d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   d644:   ldr     x0, [x25]
+    0.00 :   d648:   ldr     x1, [x23, #16]
+    0.00 :   d64c:   add     x0, x0, x1
+    0.00 :   d650:   str     x0, [x19, x2]
+    0.00 :   d654:   ldr     x0, [x23, #8]
+    0.00 :   d658:   b       d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   d65c:   ldrh    w0, [x2, #6]
+    0.00 :   d660:   mov     x28, x27
+    0.00 :   d664:   mov     w1, #0xfff1                     // #65521
+    0.00 :   d668:   cmp     w0, w1
+    0.00 :   d66c:   b.eq    d7b0 <_dl_mcount@@GLIBC_2.17+0x1160>  // b.none
+    0.00 :   d670:   ldr     x1, [x28]
+    0.00 :   d674:   cmp     w0, #0x0
+    0.00 :   d678:   ldr     x0, [x2, #8]
+    0.00 :   d67c:   and     w3, w3, #0xf
+    0.00 :   d680:   ldr     w2, [x29, #192]
+    0.00 :   d684:   ccmp    w3, #0xa, #0x0, ne      // ne = any
+    0.00 :   d688:   ccmp    w2, #0x0, #0x0, eq      // eq = none
+    0.00 :   d68c:   b.eq    e104 <_dl_mcount@@GLIBC_2.17+0x1ab4>  // b.none
+    0.00 :   d690:   ldr     x0, [x28, #1184]
+    0.00 :   d694:   cmn     x0, #0x1
+    0.00 :   d698:   b.eq    e2fc <_dl_mcount@@GLIBC_2.17+0x1cac>  // b.none
+    0.00 :   d69c:   cbz     x0, e244 <_dl_mcount@@GLIBC_2.17+0x1bf4>
+    0.00 :   d6a0:   ldr     x1, [x29, #224]
+    0.00 :   d6a4:   adrp    x2, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   d6a8:   ldr     x3, [x20, #16]
+    0.00 :   d6ac:   add     x2, x2, #0x760
+    0.00 :   d6b0:   ldr     x1, [x1, #8]
+    0.00 :   d6b4:   add     x1, x1, x3
+    0.00 :   d6b8:   add     x0, x1, x0
+    0.00 :   d6bc:   str     x0, [x22, #8]
+    0.00 :   d6c0:   str     x2, [x22]
+    0.00 :   d6c4:   b       ce30 <_dl_mcount@@GLIBC_2.17+0x7e0>
+    0.00 :   d6c8:   ldr     x1, [x29, #224]
+    0.00 :   d6cc:   cbz     x1, d88c <_dl_mcount@@GLIBC_2.17+0x123c>
+    0.00 :   d6d0:   ldr     x0, [x3, #1184]
+    0.00 :   d6d4:   cmn     x0, #0x1
+    0.00 :   d6d8:   b.eq    dfe8 <_dl_mcount@@GLIBC_2.17+0x1998>  // b.none
+    0.00 :   d6dc:   cbz     x0, dfcc <_dl_mcount@@GLIBC_2.17+0x197c>
+    0.00 :   d6e0:   ldr     x1, [x1, #8]
+    0.00 :   d6e4:   add     x1, x0, x1
+    0.00 :   d6e8:   ldp     x0, x2, [x23, #8]
+    0.00 :   d6ec:   add     x1, x1, x2
+    0.00 :   d6f0:   str     x1, [x20, #8]
+    0.00 :   d6f4:   ldr     x1, [x29, #144]
+    0.00 :   d6f8:   str     x1, [x20]
+    0.00 :   d6fc:   b       d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   d700:   ldr     x0, [x29, #224]
+    0.00 :   d704:   cbz     x0, d3c4 <_dl_mcount@@GLIBC_2.17+0xd74>
+    0.00 :   d708:   ldr     x0, [x0, #8]
+    0.00 :   d70c:   ldr     x1, [x23, #16]
+    0.00 :   d710:   add     x0, x0, x1
+    0.00 :   d714:   str     x0, [x20]
+    0.00 :   d718:   ldr     x0, [x23, #8]
+    0.00 :   d71c:   b       d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   d720:   mov     x5, x25
+    0.00 :   d724:   b       d484 <_dl_mcount@@GLIBC_2.17+0xe34>
+    0.00 :   d728:   ldr     w2, [x25, #1120]
+    0.00 :   d72c:   cmp     x0, #0x7
+    0.00 :   d730:   b.hi    ddb8 <_dl_mcount@@GLIBC_2.17+0x1768>  // b.pmore
+    0.00 :   d734:   adrp    x1, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   d738:   add     x1, x1, #0x8c0
+    0.00 :   d73c:   add     x3, x1, #0x50
+    0.00 :   d740:   add     x1, x1, #0x70
+    0.00 :   d744:   ldr     w3, [x3, x0, lsl #2]
+    0.00 :   d748:   ldr     w1, [x1, x0, lsl #2]
+    0.00 :   d74c:   orr     w1, w3, w1
+    0.00 :   d750:   cmp     w1, w2
+    0.00 :   d754:   b.ne    d1cc <_dl_mcount@@GLIBC_2.17+0xb7c>  // b.any
+    0.00 :   d758:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   d75c:   add     x0, x0, #0x0
+    0.00 :   d760:   ldr     x2, [x25, #1136]
+    0.00 :   d764:   str     x2, [x29, #224]
+    0.00 :   d768:   ldr     x1, [x0, #2872]
+    0.00 :   d76c:   ldr     x3, [x25, #1128]
+    0.00 :   d770:   add     x1, x1, #0x1
+    0.00 :   d774:   str     x1, [x0, #2872]
+    0.00 :   d778:   b       d248 <_dl_mcount@@GLIBC_2.17+0xbf8>
+    0.00 :   d77c:   cmp     w27, #0x407
+    0.00 :   d780:   b.eq    d6c8 <_dl_mcount@@GLIBC_2.17+0x1078>  // b.none
+    0.00 :   d784:   cmp     w27, #0x408
+    0.00 :   d788:   b.ne    d4a0 <_dl_mcount@@GLIBC_2.17+0xe50>  // b.any
+    0.00 :   d78c:   ldr     x0, [x25]
+    0.00 :   d790:   ldr     x2, [x23, #16]
+    0.00 :   d794:   add     x2, x2, x0
+    0.00 :   d798:   b       d398 <_dl_mcount@@GLIBC_2.17+0xd48>
+    0.00 :   d79c:   ldrh    w0, [x2, #6]
+    0.00 :   d7a0:   mov     w1, #0xfff1                     // #65521
+    0.00 :   d7a4:   ldrb    w3, [x2, #4]
+    0.00 :   d7a8:   cmp     w0, w1
+    0.00 :   d7ac:   b.ne    d670 <_dl_mcount@@GLIBC_2.17+0x1020>  // b.any
+    0.00 :   d7b0:   mov     x1, #0x0                        // #0
+    0.00 :   d7b4:   b       d674 <_dl_mcount@@GLIBC_2.17+0x1024>
+    0.00 :   d7b8:   ldr     x0, [x25, #104]
+    0.00 :   d7bc:   ldrb    w1, [x25, #870]
+    0.00 :   d7c0:   ldr     x0, [x0, #8]
+    0.00 :   d7c4:   tbz     w1, #5, d7d0 <_dl_mcount@@GLIBC_2.17+0x1180>
+    0.00 :   d7c8:   ldr     x1, [x25]
+    0.00 :   d7cc:   add     x0, x0, x1
+    0.00 :   d7d0:   adrp    x3, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   d7d4:   ldr     w2, [x22]
+    0.00 :   d7d8:   adrp    x1, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   d7dc:   add     x1, x1, #0x8e0
+    0.00 :   d7e0:   ldr     x3, [x3, #2928]
+    0.00 :   d7e4:   add     x2, x0, x2
+    0.00 :   d7e8:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   d7ec:   add     x0, x0, #0xac8
+    0.00 :   d7f0:   str     x4, [x29, #112]
+    0.00 :   d7f4:   ldr     x3, [x3]
+    0.00 :   d7f8:   cmp     x3, #0x0
+    0.00 :   d7fc:   csel    x1, x1, x3, eq  // eq = none
+    0.00 :   d800:   bl      be90 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1750>
+    0.00 :   d804:   ldr     x2, [x22, #16]
+    0.00 :   d808:   ldr     x4, [x29, #112]
+    0.00 :   d80c:   ldr     x0, [x29, #224]
+    0.00 :   d810:   b       d510 <_dl_mcount@@GLIBC_2.17+0xec0>
+    0.00 :   d814:   ldr     x1, [x20, #88]
+    0.00 :   d818:   ldr     x1, [x1, #8]
+    0.00 :   d81c:   tbz     w0, #5, d828 <_dl_mcount@@GLIBC_2.17+0x11d8>
+    0.00 :   d820:   ldr     x0, [x20]
+    0.00 :   d824:   add     x1, x1, x0
+    0.00 :   d828:   ldr     x0, [x1, #8]
+    0.00 :   d82c:   cbz     x0, d83c <_dl_mcount@@GLIBC_2.17+0x11ec>
+    0.00 :   d830:   ldr     x2, [x20]
+    0.00 :   d834:   add     x0, x2, x0
+    0.00 :   d838:   str     x0, [x20, #1088]
+    0.00 :   d83c:   str     x20, [x1, #8]
+    0.00 :   d840:   cbz     w23, ddd8 <_dl_mcount@@GLIBC_2.17+0x1788>
+    0.00 :   d844:   add     x0, x11, #0xb90
+    0.00 :   d848:   adrp    x2, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   d84c:   ldr     x2, [x2, #4088]
+    0.00 :   d850:   ldr     x0, [x0, #496]
+    0.00 :   d854:   str     x2, [x1, #16]
+    0.00 :   d858:   cbz     x0, dde4 <_dl_mcount@@GLIBC_2.17+0x1794>
+    0.00 :   d85c:   mov     x1, x20
+    0.00 :   d860:   str     x11, [x29, #192]
+    0.00 :   d864:   bl      9d00 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0x1c20>
+    0.00 :   d868:   ldr     x11, [x29, #192]
+    0.00 :   d86c:   cbz     w0, dde4 <_dl_mcount@@GLIBC_2.17+0x1794>
+    0.00 :   d870:   adrp    x1, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   d874:   ldrb    w0, [x20, #870]
+    0.00 :   d878:   str     x20, [x1, #2856]
+    0.00 :   d87c:   b       cc44 <_dl_mcount@@GLIBC_2.17+0x5f4>
+    0.00 :   d880:   mov     x2, #0x0                        // #0
+    0.00 :   d884:   mov     x0, #0x0                        // #0
+    0.00 :   d888:   b       cd50 <_dl_mcount@@GLIBC_2.17+0x700>
+    0.00 :   d88c:   ldr     x0, [x23, #16]
+    0.00 :   d890:   str     x0, [x20, #8]
+    0.00 :   d894:   adrp    x0, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   d898:   add     x0, x0, #0x76c
+    0.00 :   d89c:   str     x0, [x20]
+    0.00 :   d8a0:   ldr     x0, [x23, #8]
+    0.00 :   d8a4:   b       d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   d8a8:   cmp     x20, x24
+    0.00 :   d8ac:   b.cs    ce70 <_dl_mcount@@GLIBC_2.17+0x820>  // b.hs, b.nlast
+    0.00 :   d8b0:   adrp    x26, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   d8b4:   adrp    x23, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   d8b8:   add     x22, x26, #0x760
+    0.00 :   d8bc:   add     x23, x23, #0x910
+    0.00 :   d8c0:   str     x22, [x29, #144]
+    0.00 :   d8c4:   mov     x26, x27
+    0.00 :   d8c8:   ldr     w22, [x29, #192]
+    0.00 :   d8cc:   str     x23, [x29, #168]
+    0.00 :   d8d0:   ldr     x23, [x29, #184]
+    0.00 :   d8d4:   stp     x3, x25, [x29, #128]
+    0.00 :   d8d8:   mov     x25, x20
+    0.00 :   d8dc:   str     w21, [x29, #124]
+    0.00 :   d8e0:   ldp     x1, x0, [x25]
+    0.00 :   d8e4:   lsr     x8, x0, #32
+    0.00 :   d8e8:   mov     w27, w0
+    0.00 :   d8ec:   add     x21, x19, x1
+    0.00 :   d8f0:   add     x8, x8, x8, lsl #1
+    0.00 :   d8f4:   add     x20, x28, x8, lsl #3
+    0.00 :   d8f8:   stp     x20, x20, [x29, #216]
+    0.00 :   d8fc:   cmp     w0, #0x403
+    0.00 :   d900:   b.eq    dd48 <_dl_mcount@@GLIBC_2.17+0x16f8>  // b.none
+    0.00 :   d904:   cbz     w0, da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   d908:   ldrb    w1, [x20, #4]
+    0.00 :   d90c:   cmp     wzr, w1, lsr #4
+    0.00 :   d910:   b.eq    dc30 <_dl_mcount@@GLIBC_2.17+0x15e0>  // b.none
+    0.00 :   d914:   ldrb    w2, [x20, #5]
+    0.00 :   d918:   and     w2, w2, #0x3
+    0.00 :   d91c:   sub     w2, w2, #0x1
+    0.00 :   d920:   cmp     w2, #0x1
+    0.00 :   d924:   b.ls    dc30 <_dl_mcount@@GLIBC_2.17+0x15e0>  // b.plast
+    0.00 :   d928:   ldr     x1, [x26, #1112]
+    0.00 :   d92c:   and     x0, x0, #0xffffffff
+    0.00 :   d930:   sub     x0, x0, #0x400
+    0.00 :   d934:   cmp     x20, x1
+    0.00 :   d938:   b.eq    de30 <_dl_mcount@@GLIBC_2.17+0x17e0>  // b.none
+    0.00 :   d93c:   mov     w5, #0x0                        // #0
+    0.00 :   d940:   cmp     x0, #0x7
+    0.00 :   d944:   b.hi    d95c <_dl_mcount@@GLIBC_2.17+0x130c>  // b.pmore
+    0.00 :   d948:   ldr     x1, [x29, #168]
+    0.00 :   d94c:   ldr     w5, [x1, x0, lsl #2]
+    0.00 :   d950:   ldr     x1, [x29, #176]
+    0.00 :   d954:   ldr     w0, [x1, x0, lsl #2]
+    0.00 :   d958:   orr     w5, w5, w0
+    0.00 :   d95c:   ldr     x0, [x26, #104]
+    0.00 :   d960:   mov     x1, #0x0                        // #0
+    0.00 :   d964:   ldrb    w3, [x26, #870]
+    0.00 :   d968:   ldr     x2, [x0, #8]
+    0.00 :   d96c:   ldr     w0, [x20]
+    0.00 :   d970:   str     x20, [x26, #1112]
+    0.00 :   d974:   str     w5, [x26, #1120]
+    0.00 :   d978:   tbz     w3, #5, d980 <_dl_mcount@@GLIBC_2.17+0x1330>
+    0.00 :   d97c:   ldr     x1, [x26]
+    0.00 :   d980:   add     x0, x0, x2
+    0.00 :   d984:   ldr     x3, [x29, #200]
+    0.00 :   d988:   add     x0, x0, x1
+    0.00 :   d98c:   add     x2, x29, #0xe0
+    0.00 :   d990:   mov     x1, x26
+    0.00 :   d994:   mov     x7, #0x0                        // #0
+    0.00 :   d998:   mov     w6, #0x9                        // #9
+    0.00 :   d99c:   mov     x4, #0x0                        // #0
+    0.00 :   d9a0:   bl      8e54 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd74>
+    0.00 :   d9a4:   ldr     x2, [x29, #224]
+    0.00 :   d9a8:   mov     x3, x0
+    0.00 :   d9ac:   str     x0, [x26, #1128]
+    0.00 :   d9b0:   str     x2, [x26, #1136]
+    0.00 :   d9b4:   cbz     x2, dd10 <_dl_mcount@@GLIBC_2.17+0x16c0>
+    0.00 :   d9b8:   ldrh    w0, [x2, #6]
+    0.00 :   d9bc:   mov     w4, #0xfff1                     // #65521
+    0.00 :   d9c0:   ldrb    w1, [x2, #4]
+    0.00 :   d9c4:   cmp     w0, w4
+    0.00 :   d9c8:   b.eq    dc48 <_dl_mcount@@GLIBC_2.17+0x15f8>  // b.none
+    0.00 :   d9cc:   ldr     x4, [x3]
+    0.00 :   d9d0:   and     w1, w1, #0xf
+    0.00 :   d9d4:   ldr     x2, [x2, #8]
+    0.00 :   d9d8:   cmp     w0, #0x0
+    0.00 :   d9dc:   ccmp    w1, #0xa, #0x0, ne      // ne = any
+    0.00 :   d9e0:   ccmp    w22, #0x0, #0x0, eq     // eq = none
+    0.00 :   d9e4:   add     x4, x4, x2
+    0.00 :   d9e8:   b.eq    dc68 <_dl_mcount@@GLIBC_2.17+0x1618>  // b.none
+    0.00 :   d9ec:   cmp     w27, #0x405
+    0.00 :   d9f0:   b.eq    dcc0 <_dl_mcount@@GLIBC_2.17+0x1670>  // b.none
+    0.00 :   d9f4:   b.hi    da4c <_dl_mcount@@GLIBC_2.17+0x13fc>  // b.pmore
+    0.00 :   d9f8:   cmp     w27, #0x402
+    0.00 :   d9fc:   b.hi    dd34 <_dl_mcount@@GLIBC_2.17+0x16e4>  // b.pmore
+    0.00 :   da00:   cmp     w27, #0x400
+    0.00 :   da04:   b.hi    da18 <_dl_mcount@@GLIBC_2.17+0x13c8>  // b.pmore
+    0.00 :   da08:   cmp     w27, #0x102
+    0.00 :   da0c:   b.hi    db9c <_dl_mcount@@GLIBC_2.17+0x154c>  // b.pmore
+    0.00 :   da10:   cmp     w27, #0x100
+    0.00 :   da14:   b.ls    dd00 <_dl_mcount@@GLIBC_2.17+0x16b0>  // b.plast
+    0.00 :   da18:   ldr     x0, [x25, #16]
+    0.00 :   da1c:   add     x0, x0, x4
+    0.00 :   da20:   str     x0, [x21]
+    0.00 :   da24:   ldr     x0, [x25, #8]
+    0.00 :   da28:   cmp     w0, #0x402
+    0.00 :   da2c:   b.eq    daa4 <_dl_mcount@@GLIBC_2.17+0x1454>  // b.none
+    0.00 :   da30:   add     x25, x25, #0x18
+    0.00 :   da34:   cmp     x24, x25
+    0.00 :   da38:   b.hi    d8e0 <_dl_mcount@@GLIBC_2.17+0x1290>  // b.pmore
+    0.00 :   da3c:   ldp     x3, x25, [x29, #128]
+    0.00 :   da40:   mov     x27, x26
+    0.00 :   da44:   ldr     w21, [x29, #124]
+    0.00 :   da48:   b       ce70 <_dl_mcount@@GLIBC_2.17+0x820>
+    0.00 :   da4c:   cmp     w27, #0x407
+    0.00 :   da50:   b.eq    dd60 <_dl_mcount@@GLIBC_2.17+0x1710>  // b.none
+    0.00 :   da54:   cmp     w27, #0x408
+    0.00 :   da58:   b.ne    db60 <_dl_mcount@@GLIBC_2.17+0x1510>  // b.any
+    0.00 :   da5c:   ldr     x2, [x26]
+    0.00 :   da60:   ldr     x0, [x25, #16]
+    0.00 :   da64:   add     x2, x2, x0
+    0.00 :   da68:   cbnz    w22, da94 <_dl_mcount@@GLIBC_2.17+0x1444>
+    0.00 :   da6c:   add     x1, x29, #0xe8
+    0.00 :   da70:   add     x3, x23, #0xb90
+    0.00 :   da74:   mov     x0, #0x18                       // #24
+    0.00 :   da78:   str     x0, [x29, #232]
+    0.00 :   da7c:   ldr     x0, [x3, #96]
+    0.00 :   da80:   ldr     x3, [x3, #560]
+    0.00 :   da84:   stp     x0, x3, [x29, #240]
+    0.00 :   da88:   orr     x0, x0, #0x4000000000000000
+    0.00 :   da8c:   blr     x2
+    0.00 :   da90:   mov     x2, x0
+    0.00 :   da94:   str     x2, [x21]
+    0.00 :   da98:   ldr     x0, [x25, #8]
+    0.00 :   da9c:   cmp     w0, #0x402
+    0.00 :   daa0:   b.ne    da30 <_dl_mcount@@GLIBC_2.17+0x13e0>  // b.any
+    0.00 :   daa4:   add     x0, x23, #0xb90
+    0.00 :   daa8:   ldr     w0, [x0, #672]
+    0.00 :   daac:   cbz     w0, da30 <_dl_mcount@@GLIBC_2.17+0x13e0>
+    0.00 :   dab0:   ldr     x3, [x29, #216]
+    0.00 :   dab4:   ldrb    w0, [x3, #4]
+    0.00 :   dab8:   cmp     wzr, w0, lsr #4
+    0.00 :   dabc:   b.eq    dd98 <_dl_mcount@@GLIBC_2.17+0x1748>  // b.none
+    0.00 :   dac0:   ldrb    w0, [x3, #5]
+    0.00 :   dac4:   and     w0, w0, #0x3
+    0.00 :   dac8:   sub     w0, w0, #0x1
+    0.00 :   dacc:   cmp     w0, #0x1
+    0.00 :   dad0:   b.ls    dd98 <_dl_mcount@@GLIBC_2.17+0x1748>  // b.plast
+    0.00 :   dad4:   ldr     x0, [x26, #1112]
+    0.00 :   dad8:   cmp     x3, x0
+    0.00 :   dadc:   b.eq    e25c <_dl_mcount@@GLIBC_2.17+0x1c0c>  // b.none
+    0.00 :   dae0:   ldr     x0, [x26, #104]
+    0.00 :   dae4:   mov     w2, #0x1                        // #1
+    0.00 :   dae8:   ldrb    w4, [x26, #870]
+    0.00 :   daec:   mov     x1, #0x0                        // #0
+    0.00 :   daf0:   str     x3, [x26, #1112]
+    0.00 :   daf4:   str     w2, [x26, #1120]
+    0.00 :   daf8:   ldr     x2, [x0, #8]
+    0.00 :   dafc:   ldr     w0, [x3]
+    0.00 :   db00:   tbz     w4, #5, db08 <_dl_mcount@@GLIBC_2.17+0x14b8>
+    0.00 :   db04:   ldr     x1, [x26]
+    0.00 :   db08:   add     x0, x0, x2
+    0.00 :   db0c:   ldr     x3, [x29, #200]
+    0.00 :   db10:   add     x0, x0, x1
+    0.00 :   db14:   mov     w5, #0x1                        // #1
+    0.00 :   db18:   add     x2, x29, #0xd8
+    0.00 :   db1c:   mov     x1, x26
+    0.00 :   db20:   mov     x7, #0x0                        // #0
+    0.00 :   db24:   mov     w6, #0x9                        // #9
+    0.00 :   db28:   mov     x4, #0x0                        // #0
+    0.00 :   db2c:   bl      8e54 <_dl_rtld_di_serinfo@@GLIBC_PRIVATE+0xd74>
+    0.00 :   db30:   str     x0, [x26, #1128]
+    0.00 :   db34:   ldr     x3, [x29, #216]
+    0.00 :   db38:   str     x3, [x26, #1136]
+    0.00 :   db3c:   mov     x5, x0
+    0.00 :   db40:   cbz     x3, da30 <_dl_mcount@@GLIBC_2.17+0x13e0>
+    0.00 :   db44:   mov     x4, x21
+    0.00 :   db48:   mov     x2, x25
+    0.00 :   db4c:   mov     x0, x26
+    0.00 :   db50:   mov     w6, #0x0                        // #0
+    0.00 :   db54:   mov     x1, #0x0                        // #0
+    0.00 :   db58:   bl      12ea0 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x1c0>
+    0.00 :   db5c:   b       da30 <_dl_mcount@@GLIBC_2.17+0x13e0>
+    0.00 :   db60:   cmp     w27, #0x406
+    0.00 :   db64:   b.ne    dd00 <_dl_mcount@@GLIBC_2.17+0x16b0>  // b.any
+    0.00 :   db68:   ldr     x1, [x29, #224]
+    0.00 :   db6c:   cbz     x1, da98 <_dl_mcount@@GLIBC_2.17+0x1448>
+    0.00 :   db70:   ldr     x0, [x3, #1184]
+    0.00 :   db74:   add     x2, x0, #0x1
+    0.00 :   db78:   cmp     x2, #0x1
+    0.00 :   db7c:   b.ls    e2bc <_dl_mcount@@GLIBC_2.17+0x1c6c>  // b.plast
+    0.00 :   db80:   ldr     x2, [x25, #16]
+    0.00 :   db84:   ldr     x1, [x1, #8]
+    0.00 :   db88:   add     x0, x0, x2
+    0.00 :   db8c:   add     x0, x0, x1
+    0.00 :   db90:   str     x0, [x21]
+    0.00 :   db94:   ldr     x0, [x25, #8]
+    0.00 :   db98:   b       da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   db9c:   cmp     w27, #0x400
+    0.00 :   dba0:   b.ne    dd00 <_dl_mcount@@GLIBC_2.17+0x16b0>  // b.any
+    0.00 :   dba4:   ldr     x0, [x29, #224]
+    0.00 :   dba8:   ldr     x1, [x0, #16]
+    0.00 :   dbac:   ldr     x2, [x20, #16]
+    0.00 :   dbb0:   cmp     x1, x2
+    0.00 :   dbb4:   b.ls    ddec <_dl_mcount@@GLIBC_2.17+0x179c>  // b.plast
+    0.00 :   dbb8:   ldr     x0, [x26, #104]
+    0.00 :   dbbc:   ldrb    w1, [x26, #870]
+    0.00 :   dbc0:   ldr     x0, [x0, #8]
+    0.00 :   dbc4:   tbz     w1, #5, dbd0 <_dl_mcount@@GLIBC_2.17+0x1580>
+    0.00 :   dbc8:   ldr     x1, [x26]
+    0.00 :   dbcc:   add     x0, x0, x1
+    0.00 :   dbd0:   adrp    x3, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   dbd4:   ldr     w2, [x20]
+    0.00 :   dbd8:   adrp    x1, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   dbdc:   add     x1, x1, #0x8e0
+    0.00 :   dbe0:   ldr     x3, [x3, #2928]
+    0.00 :   dbe4:   add     x2, x0, x2
+    0.00 :   dbe8:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   dbec:   add     x0, x0, #0xac8
+    0.00 :   dbf0:   str     x4, [x29, #112]
+    0.00 :   dbf4:   ldr     x3, [x3]
+    0.00 :   dbf8:   cmp     x3, #0x0
+    0.00 :   dbfc:   csel    x1, x1, x3, eq  // eq = none
+    0.00 :   dc00:   bl      be90 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1750>
+    0.00 :   dc04:   ldr     x2, [x20, #16]
+    0.00 :   dc08:   ldr     x4, [x29, #112]
+    0.00 :   dc0c:   ldr     x0, [x29, #224]
+    0.00 :   dc10:   mov     x1, x4
+    0.00 :   dc14:   ldr     x3, [x0, #16]
+    0.00 :   dc18:   mov     x0, x21
+    0.00 :   dc1c:   cmp     x3, x2
+    0.00 :   dc20:   csel    x2, x3, x2, ls  // ls = plast
+    0.00 :   dc24:   bl      1b280 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x85a0>
+    0.00 :   dc28:   ldr     x0, [x25, #8]
+    0.00 :   dc2c:   b       da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   dc30:   mov     x2, x20
+    0.00 :   dc34:   mov     x3, x26
+    0.00 :   dc38:   mov     w4, #0xfff1                     // #65521
+    0.00 :   dc3c:   ldrh    w0, [x2, #6]
+    0.00 :   dc40:   cmp     w0, w4
+    0.00 :   dc44:   b.ne    d9cc <_dl_mcount@@GLIBC_2.17+0x137c>  // b.any
+    0.00 :   dc48:   ldr     x2, [x2, #8]
+    0.00 :   dc4c:   and     w1, w1, #0xf
+    0.00 :   dc50:   cmp     w0, #0x0
+    0.00 :   dc54:   mov     x4, #0x0                        // #0
+    0.00 :   dc58:   ccmp    w1, #0xa, #0x0, ne      // ne = any
+    0.00 :   dc5c:   add     x4, x4, x2
+    0.00 :   dc60:   ccmp    w22, #0x0, #0x0, eq     // eq = none
+    0.00 :   dc64:   b.ne    d9ec <_dl_mcount@@GLIBC_2.17+0x139c>  // b.any
+    0.00 :   dc68:   add     x2, x23, #0xb90
+    0.00 :   dc6c:   mov     x0, #0x18                       // #24
+    0.00 :   dc70:   str     x0, [x29, #232]
+    0.00 :   dc74:   add     x1, x29, #0xe8
+    0.00 :   dc78:   stp     x3, x1, [x29, #104]
+    0.00 :   dc7c:   ldr     x0, [x2, #96]
+    0.00 :   dc80:   ldr     x2, [x2, #560]
+    0.00 :   dc84:   stp     x0, x2, [x29, #240]
+    0.00 :   dc88:   orr     x0, x0, #0x4000000000000000
+    0.00 :   dc8c:   blr     x4
+    0.00 :   dc90:   mov     x4, x0
+    0.00 :   dc94:   ldr     x3, [x29, #104]
+    0.00 :   dc98:   cmp     w27, #0x404
+    0.00 :   dc9c:   b.eq    dd34 <_dl_mcount@@GLIBC_2.17+0x16e4>  // b.none
+    0.00 :   dca0:   ldr     x1, [x29, #112]
+    0.00 :   dca4:   b.ls    de9c <_dl_mcount@@GLIBC_2.17+0x184c>  // b.plast
+    0.00 :   dca8:   cmp     w27, #0x407
+    0.00 :   dcac:   b.eq    dd60 <_dl_mcount@@GLIBC_2.17+0x1710>  // b.none
+    0.00 :   dcb0:   b.hi    de84 <_dl_mcount@@GLIBC_2.17+0x1834>  // b.pmore
+    0.00 :   dcb4:   cmp     w27, #0x405
+    0.00 :   dcb8:   b.ne    db68 <_dl_mcount@@GLIBC_2.17+0x1518>  // b.any
+    0.00 :   dcbc:   nop
+    0.00 :   dcc0:   ldr     x0, [x29, #224]
+    0.00 :   dcc4:   cbz     x0, da98 <_dl_mcount@@GLIBC_2.17+0x1448>
+    0.00 :   dcc8:   ldr     x0, [x0, #8]
+    0.00 :   dccc:   ldr     x1, [x25, #16]
+    0.00 :   dcd0:   add     x0, x0, x1
+    0.00 :   dcd4:   str     x0, [x21]
+    0.00 :   dcd8:   ldr     x0, [x25, #8]
+    0.00 :   dcdc:   b       da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   dce0:   cmp     w27, #0x400
+    0.00 :   dce4:   b.eq    da98 <_dl_mcount@@GLIBC_2.17+0x1448>  // b.none
+    0.00 :   dce8:   mov     x4, #0x0                        // #0
+    0.00 :   dcec:   b.hi    da18 <_dl_mcount@@GLIBC_2.17+0x13c8>  // b.pmore
+    0.00 :   dcf0:   sub     w0, w27, #0x101
+    0.00 :   dcf4:   cmp     w0, #0x1
+    0.00 :   dcf8:   b.ls    da18 <_dl_mcount@@GLIBC_2.17+0x13c8>  // b.plast
+    0.00 :   dcfc:   nop
+    0.00 :   dd00:   mov     w1, w27
+    0.00 :   dd04:   mov     x0, x26
+    0.00 :   dd08:   mov     w2, #0x0                        // #0
+    0.00 :   dd0c:   bl      ca90 <_dl_mcount@@GLIBC_2.17+0x440>
+    0.00 :   dd10:   cmp     w27, #0x404
+    0.00 :   dd14:   b.eq    dd34 <_dl_mcount@@GLIBC_2.17+0x16e4>  // b.none
+    0.00 :   dd18:   b.ls    dce0 <_dl_mcount@@GLIBC_2.17+0x1690>  // b.plast
+    0.00 :   dd1c:   cmp     w27, #0x407
+    0.00 :   dd20:   b.eq    deb4 <_dl_mcount@@GLIBC_2.17+0x1864>  // b.none
+    0.00 :   dd24:   b.ls    da98 <_dl_mcount@@GLIBC_2.17+0x1448>  // b.plast
+    0.00 :   dd28:   cmp     w27, #0x408
+    0.00 :   dd2c:   b.eq    da5c <_dl_mcount@@GLIBC_2.17+0x140c>  // b.none
+    0.00 :   dd30:   b       dd00 <_dl_mcount@@GLIBC_2.17+0x16b0>
+    0.00 :   dd34:   cbz     x3, da98 <_dl_mcount@@GLIBC_2.17+0x1448>
+    0.00 :   dd38:   ldr     x0, [x3, #1192]
+    0.00 :   dd3c:   str     x0, [x21]
+    0.00 :   dd40:   ldr     x0, [x25, #8]
+    0.00 :   dd44:   b       da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   dd48:   ldr     x0, [x26]
+    0.00 :   dd4c:   ldr     x2, [x25, #16]
+    0.00 :   dd50:   add     x0, x0, x2
+    0.00 :   dd54:   str     x0, [x19, x1]
+    0.00 :   dd58:   ldr     x0, [x25, #8]
+    0.00 :   dd5c:   b       da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   dd60:   ldr     x1, [x29, #224]
+    0.00 :   dd64:   cbz     x1, deb4 <_dl_mcount@@GLIBC_2.17+0x1864>
+    0.00 :   dd68:   ldr     x0, [x3, #1184]
+    0.00 :   dd6c:   cmn     x0, #0x1
+    0.00 :   dd70:   b.eq    e290 <_dl_mcount@@GLIBC_2.17+0x1c40>  // b.none
+    0.00 :   dd74:   cbz     x0, e2d8 <_dl_mcount@@GLIBC_2.17+0x1c88>
+    0.00 :   dd78:   ldr     x1, [x1, #8]
+    0.00 :   dd7c:   add     x1, x0, x1
+    0.00 :   dd80:   ldp     x0, x2, [x25, #8]
+    0.00 :   dd84:   add     x1, x1, x2
+    0.00 :   dd88:   str     x1, [x21, #8]
+    0.00 :   dd8c:   ldr     x1, [x29, #144]
+    0.00 :   dd90:   str     x1, [x21]
+    0.00 :   dd94:   b       da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   dd98:   mov     x5, x26
+    0.00 :   dd9c:   mov     x4, x21
+    0.00 :   dda0:   mov     x2, x25
+    0.00 :   dda4:   mov     x0, x26
+    0.00 :   dda8:   mov     w6, #0x0                        // #0
+    0.00 :   ddac:   mov     x1, #0x0                        // #0
+    0.00 :   ddb0:   bl      12ea0 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x1c0>
+    0.00 :   ddb4:   b       da30 <_dl_mcount@@GLIBC_2.17+0x13e0>
+    0.00 :   ddb8:   mov     w5, #0x0                        // #0
+    0.00 :   ddbc:   cbnz    w2, d1e0 <_dl_mcount@@GLIBC_2.17+0xb90>
+    0.00 :   ddc0:   b       d758 <_dl_mcount@@GLIBC_2.17+0x1108>
+    0.00 :   ddc4:   cmp     w1, #0x408
+    0.00 :   ddc8:   b.eq    e1fc <_dl_mcount@@GLIBC_2.17+0x1bac>  // b.none
+    0.00 :   ddcc:   mov     x0, x27
+    0.00 :   ddd0:   mov     w2, #0x1                        // #1
+    0.00 :   ddd4:   bl      ca90 <_dl_mcount@@GLIBC_2.17+0x440>
+    0.00 :   ddd8:   adrp    x0, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   dddc:   ldr     x0, [x0, #4080]
+    0.00 :   dde0:   str     x0, [x1, #16]
+    0.00 :   dde4:   ldrb    w0, [x20, #870]
+    0.00 :   dde8:   b       cc44 <_dl_mcount@@GLIBC_2.17+0x5f4>
+    0.00 :   ddec:   add     x3, x23, #0xb90
+    0.00 :   ddf0:   ldr     w3, [x3, #68]
+    0.00 :   ddf4:   cmp     w3, #0x0
+    0.00 :   ddf8:   ccmp    x1, x2, #0x2, ne        // ne = any
+    0.00 :   ddfc:   b.cs    dc10 <_dl_mcount@@GLIBC_2.17+0x15c0>  // b.hs, b.nlast
+    0.00 :   de00:   b       dbb8 <_dl_mcount@@GLIBC_2.17+0x1568>
+    0.00 :   de04:   mov     w27, #0x0                       // #0
+    0.00 :   de08:   b       cc08 <_dl_mcount@@GLIBC_2.17+0x5b8>
+    0.00 :   de0c:   mov     w21, #0x0                       // #0
+    0.00 :   de10:   b       cc18 <_dl_mcount@@GLIBC_2.17+0x5c8>
+    0.00 :   de14:   ldp     x0, x1, [x19]
+    0.00 :   de18:   ldr     w2, [x19, #16]
+    0.00 :   de1c:   bl      1a240 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x7560>
+    0.00 :   de20:   tbnz    w0, #31, e398 <_dl_mcount@@GLIBC_2.17+0x1d48>
+    0.00 :   de24:   ldr     x19, [x19, #24]
+    0.00 :   de28:   cbz     x19, d350 <_dl_mcount@@GLIBC_2.17+0xd00>
+    0.00 :   de2c:   b       de14 <_dl_mcount@@GLIBC_2.17+0x17c4>
+    0.00 :   de30:   ldr     w2, [x26, #1120]
+    0.00 :   de34:   cmp     x0, #0x7
+    0.00 :   de38:   b.hi    dfc0 <_dl_mcount@@GLIBC_2.17+0x1970>  // b.pmore
+    0.00 :   de3c:   adrp    x1, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   de40:   add     x1, x1, #0x8c0
+    0.00 :   de44:   add     x3, x1, #0x50
+    0.00 :   de48:   add     x1, x1, #0x70
+    0.00 :   de4c:   ldr     w3, [x3, x0, lsl #2]
+    0.00 :   de50:   ldr     w1, [x1, x0, lsl #2]
+    0.00 :   de54:   orr     w1, w3, w1
+    0.00 :   de58:   cmp     w1, w2
+    0.00 :   de5c:   b.ne    d948 <_dl_mcount@@GLIBC_2.17+0x12f8>  // b.any
+    0.00 :   de60:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   de64:   add     x0, x0, #0x0
+    0.00 :   de68:   ldr     x2, [x26, #1136]
+    0.00 :   de6c:   str     x2, [x29, #224]
+    0.00 :   de70:   ldr     x1, [x0, #2872]
+    0.00 :   de74:   ldr     x3, [x26, #1128]
+    0.00 :   de78:   add     x1, x1, #0x1
+    0.00 :   de7c:   str     x1, [x0, #2872]
+    0.00 :   de80:   b       d9b4 <_dl_mcount@@GLIBC_2.17+0x1364>
+    0.00 :   de84:   cmp     w27, #0x408
+    0.00 :   de88:   b.ne    dd00 <_dl_mcount@@GLIBC_2.17+0x16b0>  // b.any
+    0.00 :   de8c:   ldr     x2, [x26]
+    0.00 :   de90:   ldr     x0, [x25, #16]
+    0.00 :   de94:   add     x2, x2, x0
+    0.00 :   de98:   b       da70 <_dl_mcount@@GLIBC_2.17+0x1420>
+    0.00 :   de9c:   cmp     w27, #0x400
+    0.00 :   dea0:   b.ne    dcec <_dl_mcount@@GLIBC_2.17+0x169c>  // b.any
+    0.00 :   dea4:   ldr     x0, [x29, #224]
+    0.00 :   dea8:   cbnz    x0, dba8 <_dl_mcount@@GLIBC_2.17+0x1558>
+    0.00 :   deac:   ldr     x0, [x25, #8]
+    0.00 :   deb0:   b       da9c <_dl_mcount@@GLIBC_2.17+0x144c>
+    0.00 :   deb4:   ldr     x0, [x25, #16]
+    0.00 :   deb8:   str     x0, [x21, #8]
+    0.00 :   debc:   adrp    x0, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   dec0:   add     x0, x0, #0x76c
+    0.00 :   dec4:   str     x0, [x21]
+    0.00 :   dec8:   ldr     x0, [x25, #8]
+    0.00 :   decc:   b       da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   ded0:   add     x3, x3, x2
+    0.00 :   ded4:   str     x3, [x29, #264]
+    0.00 :   ded8:   b       cda4 <_dl_mcount@@GLIBC_2.17+0x754>
+    0.00 :   dedc:   ldr     x1, [x20, #752]
+    0.00 :   dee0:   mov     w25, #0x38                      // #56
+    0.00 :   dee4:   ldrh    w2, [x20, #768]
+    0.00 :   dee8:   mov     x24, x1
+    0.00 :   deec:   umaddl  x0, w2, w25, x1
+    0.00 :   def0:   cmp     x1, x0
+    0.00 :   def4:   b.cs    e384 <_dl_mcount@@GLIBC_2.17+0x1d34>  // b.hs, b.nlast
+    0.00 :   def8:   add     x3, x11, #0xb90
+    0.00 :   defc:   mov     x26, #0xffff0002ffffffff        // #-281462091808769
+    0.00 :   df00:   mov     x19, #0x0                       // #0
+    0.00 :   df04:   mov     x28, x11
+    0.00 :   df08:   movk    x26, #0x0, lsl #48
+    0.00 :   df0c:   str     w22, [x29, #184]
+    0.00 :   df10:   mov     x22, x3
+    0.00 :   df14:   str     w21, [x29, #192]
+    0.00 :   df18:   mov     x21, x19
+    0.00 :   df1c:   b       df30 <_dl_mcount@@GLIBC_2.17+0x18e0>
+    0.00 :   df20:   umaddl  x0, w2, w25, x1
+    0.00 :   df24:   add     x24, x24, #0x38
+    0.00 :   df28:   cmp     x24, x0
+    0.00 :   df2c:   b.cs    e09c <_dl_mcount@@GLIBC_2.17+0x1a4c>  // b.hs, b.nlast
+    0.00 :   df30:   ldr     x0, [x24]
+    0.00 :   df34:   and     x0, x0, x26
+    0.00 :   df38:   cmp     x0, #0x1
+    0.00 :   df3c:   b.ne    df20 <_dl_mcount@@GLIBC_2.17+0x18d0>  // b.any
+    0.00 :   df40:   sub     sp, sp, #0x20
+    0.00 :   df44:   str     xzr, [sp, #8]
+    0.00 :   df48:   ldr     x0, [x24, #16]
+    0.00 :   df4c:   add     x19, sp, #0x10
+    0.00 :   df50:   ldr     x2, [x22, #24]
+    0.00 :   df54:   ldr     x1, [x24, #40]
+    0.00 :   df58:   sub     x7, x2, #0x1
+    0.00 :   df5c:   ldr     x6, [x20]
+    0.00 :   df60:   add     x1, x0, x1
+    0.00 :   df64:   neg     x2, x2
+    0.00 :   df68:   ldr     w5, [x24, #4]
+    0.00 :   df6c:   add     x1, x1, x7
+    0.00 :   df70:   and     x0, x0, x2
+    0.00 :   df74:   and     x1, x1, x2
+    0.00 :   df78:   sub     x1, x1, x0
+    0.00 :   df7c:   add     x0, x0, x6
+    0.00 :   df80:   stp     x0, x1, [x19]
+    0.00 :   df84:   ubfx    x2, x5, #2, #1
+    0.00 :   df88:   tbz     w5, #1, df90 <_dl_mcount@@GLIBC_2.17+0x1940>
+    0.00 :   df8c:   orr     w2, w2, #0x2
+    0.00 :   df90:   str     w2, [x19, #16]
+    0.00 :   df94:   tbz     w5, #0, dfa0 <_dl_mcount@@GLIBC_2.17+0x1950>
+    0.00 :   df98:   orr     w2, w2, #0x4
+    0.00 :   df9c:   str     w2, [x19, #16]
+    0.00 :   dfa0:   orr     w2, w2, #0x2
+    0.00 :   dfa4:   bl      1a240 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x7560>
+    0.00 :   dfa8:   tbnz    w0, #31, e3b4 <_dl_mcount@@GLIBC_2.17+0x1d64>
+    0.00 :   dfac:   ldr     x1, [x20, #752]
+    0.00 :   dfb0:   str     x21, [x19, #24]
+    0.00 :   dfb4:   ldrh    w2, [x20, #768]
+    0.00 :   dfb8:   mov     x21, x19
+    0.00 :   dfbc:   b       df20 <_dl_mcount@@GLIBC_2.17+0x18d0>
+    0.00 :   dfc0:   mov     w5, #0x0                        // #0
+    0.00 :   dfc4:   cbnz    w2, d95c <_dl_mcount@@GLIBC_2.17+0x130c>
+    0.00 :   dfc8:   b       de60 <_dl_mcount@@GLIBC_2.17+0x1810>
+    0.00 :   dfcc:   mov     x0, x3
+    0.00 :   dfd0:   mov     w1, #0x1                        // #1
+    0.00 :   dfd4:   str     x3, [x29, #112]
+    0.00 :   dfd8:   bl      c8b0 <_dl_mcount@@GLIBC_2.17+0x260>
+    0.00 :   dfdc:   ldr     x3, [x29, #112]
+    0.00 :   dfe0:   ldr     x1, [x29, #224]
+    0.00 :   dfe4:   cbz     w0, e1f4 <_dl_mcount@@GLIBC_2.17+0x1ba4>
+    0.00 :   dfe8:   ldr     x2, [x1, #8]
+    0.00 :   dfec:   mov     x0, x3
+    0.00 :   dff0:   ldr     x1, [x23, #16]
+    0.00 :   dff4:   add     x1, x2, x1
+    0.00 :   dff8:   bl      12410 <__tunable_get_val@@GLIBC_PRIVATE+0x15e0>
+    0.00 :   dffc:   str     x0, [x20, #8]
+    0.00 :   e000:   adrp    x1, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   e004:   ldr     x0, [x23, #8]
+    0.00 :   e008:   add     x1, x1, #0x788
+    0.00 :   e00c:   str     x1, [x20]
+    0.00 :   e010:   b       d2c0 <_dl_mcount@@GLIBC_2.17+0xc70>
+    0.00 :   e014:   ldr     x1, [x20, #8]
+    0.00 :   e018:   ldrsb   w0, [x1]
+    0.00 :   e01c:   cbnz    w0, e03c <_dl_mcount@@GLIBC_2.17+0x19ec>
+    0.00 :   e020:   adrp    x1, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   e024:   adrp    x0, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   e028:   add     x0, x0, #0xa88
+    0.00 :   e02c:   ldr     x1, [x1, #2928]
+    0.00 :   e030:   ldr     x1, [x1]
+    0.00 :   e034:   cmp     x1, #0x0
+    0.00 :   e038:   csel    x1, x0, x1, eq  // eq = none
+    0.00 :   e03c:   cmp     w21, #0x0
+    0.00 :   e040:   adrp    x0, 1e000 <__rtld_version_placeholder@GLIBC_2.34+0x2800>
+    0.00 :   e044:   adrp    x2, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   e048:   add     x0, x0, #0xda8
+    0.00 :   e04c:   add     x2, x2, #0xa48
+    0.00 :   e050:   str     x11, [x29, #192]
+    0.00 :   e054:   csel    x2, x2, x0, ne  // ne = any
+    0.00 :   e058:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   e05c:   add     x0, x0, #0xaa8
+    0.00 :   e060:   bl      bc80 <_dl_find_dso_for_object@@GLIBC_PRIVATE+0x1540>
+    0.00 :   e064:   ldr     x11, [x29, #192]
+    0.00 :   e068:   b       cc20 <_dl_mcount@@GLIBC_2.17+0x5d0>
+    0.00 :   e06c:   ldr     w0, [x25, #1120]
+    0.00 :   e070:   cmp     w0, #0x1
+    0.00 :   e074:   b.ne    d410 <_dl_mcount@@GLIBC_2.17+0xdc0>  // b.any
+    0.00 :   e078:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   e07c:   add     x0, x0, #0x0
+    0.00 :   e080:   ldr     x3, [x25, #1136]
+    0.00 :   e084:   str     x3, [x29, #216]
+    0.00 :   e088:   ldr     x1, [x0, #2872]
+    0.00 :   e08c:   ldr     x5, [x25, #1128]
+    0.00 :   e090:   add     x1, x1, #0x1
+    0.00 :   e094:   str     x1, [x0, #2872]
+    0.00 :   e098:   b       d480 <_dl_mcount@@GLIBC_2.17+0xe30>
+    0.00 :   e09c:   mov     x19, x21
+    0.00 :   e0a0:   ldr     w22, [x29, #184]
+    0.00 :   e0a4:   ldr     w21, [x29, #192]
+    0.00 :   e0a8:   mov     x11, x28
+    0.00 :   e0ac:   b       cc28 <_dl_mcount@@GLIBC_2.17+0x5d8>
+    0.00 :   e0b0:   ldr     w6, [x27, #1120]
+    0.00 :   e0b4:   cmp     x1, #0x7
+    0.00 :   e0b8:   b.hi    e1c0 <_dl_mcount@@GLIBC_2.17+0x1b70>  // b.pmore
+    0.00 :   e0bc:   adrp    x3, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   e0c0:   add     x3, x3, #0x8c0
+    0.00 :   e0c4:   add     x5, x3, #0x50
+    0.00 :   e0c8:   add     x3, x3, #0x70
+    0.00 :   e0cc:   ldr     w5, [x5, x1, lsl #2]
+    0.00 :   e0d0:   ldr     w3, [x3, x1, lsl #2]
+    0.00 :   e0d4:   orr     w3, w5, w3
+    0.00 :   e0d8:   cmp     w3, w6
+    0.00 :   e0dc:   b.ne    cf48 <_dl_mcount@@GLIBC_2.17+0x8f8>  // b.any
+    0.00 :   e0e0:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   e0e4:   add     x0, x0, #0x0
+    0.00 :   e0e8:   ldr     x2, [x27, #1136]
+    0.00 :   e0ec:   str     x2, [x29, #224]
+    0.00 :   e0f0:   ldr     x1, [x0, #2872]
+    0.00 :   e0f4:   ldr     x28, [x27, #1128]
+    0.00 :   e0f8:   add     x1, x1, #0x1
+    0.00 :   e0fc:   str     x1, [x0, #2872]
+    0.00 :   e100:   b       cfb8 <_dl_mcount@@GLIBC_2.17+0x968>
+    0.00 :   e104:   ldr     x2, [x29, #184]
+    0.00 :   e108:   add     x3, x2, #0xb90
+    0.00 :   e10c:   mov     x2, #0x18                       // #24
+    0.00 :   e110:   str     x2, [x29, #232]
+    0.00 :   e114:   add     x2, x0, x1
+    0.00 :   e118:   add     x1, x29, #0xe8
+    0.00 :   e11c:   ldr     x0, [x3, #96]
+    0.00 :   e120:   ldr     x3, [x3, #560]
+    0.00 :   e124:   stp     x0, x3, [x29, #240]
+    0.00 :   e128:   orr     x0, x0, #0x4000000000000000
+    0.00 :   e12c:   blr     x2
+    0.00 :   e130:   ldr     x0, [x29, #224]
+    0.00 :   e134:   cbz     x0, cfbc <_dl_mcount@@GLIBC_2.17+0x96c>
+    0.00 :   e138:   b       d690 <_dl_mcount@@GLIBC_2.17+0x1040>
+    0.00 :   e13c:   mov     x0, x3
+    0.00 :   e140:   str     x3, [x29, #112]
+    0.00 :   e144:   bl      c9c0 <_dl_mcount@@GLIBC_2.17+0x370>
+    0.00 :   e148:   ldr     x3, [x29, #112]
+    0.00 :   e14c:   ldr     x1, [x29, #224]
+    0.00 :   e150:   ldr     x0, [x3, #1184]
+    0.00 :   e154:   b       d4c0 <_dl_mcount@@GLIBC_2.17+0xe70>
+    0.00 :   e158:   mov     x0, x27
+    0.00 :   e15c:   ldrh    w1, [x2, #6]
+    0.00 :   e160:   mov     w3, #0xfff1                     // #65521
+    0.00 :   e164:   cmp     w1, w3
+    0.00 :   e168:   b.eq    e328 <_dl_mcount@@GLIBC_2.17+0x1cd8>  // b.none
+    0.00 :   e16c:   ldr     x3, [x0]
+    0.00 :   e170:   and     w5, w5, #0xf
+    0.00 :   e174:   ldr     x0, [x2, #8]
+    0.00 :   e178:   cmp     w1, #0x0
+    0.00 :   e17c:   ccmp    w5, #0xa, #0x0, ne      // ne = any
+    0.00 :   e180:   add     x3, x3, x0
+    0.00 :   e184:   ldr     w0, [x29, #192]
+    0.00 :   e188:   ccmp    w0, #0x0, #0x0, eq      // eq = none
+    0.00 :   e18c:   b.ne    d0c4 <_dl_mcount@@GLIBC_2.17+0xa74>  // b.any
+    0.00 :   e190:   ldr     x0, [x29, #184]
+    0.00 :   e194:   add     x1, x29, #0xe8
+    0.00 :   e198:   add     x2, x0, #0xb90
+    0.00 :   e19c:   mov     x0, #0x18                       // #24
+    0.00 :   e1a0:   str     x0, [x29, #232]
+    0.00 :   e1a4:   ldr     x0, [x2, #96]
+    0.00 :   e1a8:   ldr     x2, [x2, #560]
+    0.00 :   e1ac:   stp     x0, x2, [x29, #240]
+    0.00 :   e1b0:   orr     x0, x0, #0x4000000000000000
+    0.00 :   e1b4:   blr     x3
+    0.00 :   e1b8:   mov     x3, x0
+    0.00 :   e1bc:   b       d0c4 <_dl_mcount@@GLIBC_2.17+0xa74>
+    0.00 :   e1c0:   mov     w5, #0x0                        // #0
+    0.00 :   e1c4:   cbnz    w6, cf64 <_dl_mcount@@GLIBC_2.17+0x914>
+    0.00 :   e1c8:   b       e0e0 <_dl_mcount@@GLIBC_2.17+0x1a90>
+    0.00 :   e1cc:   ldrb    w5, [x2, #4]
+    0.00 :   e1d0:   b       e15c <_dl_mcount@@GLIBC_2.17+0x1b0c>
+    0.00 :   e1d4:   adrp    x3, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   e1d8:   adrp    x1, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   e1dc:   add     x3, x3, #0x910
+    0.00 :   e1e0:   add     x1, x1, #0x930
+    0.00 :   e1e4:   ldr     w5, [x3, x0, lsl #2]
+    0.00 :   e1e8:   ldr     w0, [x1, x0, lsl #2]
+    0.00 :   e1ec:   orr     w5, w5, w0
+    0.00 :   e1f0:   b       d06c <_dl_mcount@@GLIBC_2.17+0xa1c>
+    0.00 :   e1f4:   ldr     x0, [x3, #1184]
+    0.00 :   e1f8:   b       d6e0 <_dl_mcount@@GLIBC_2.17+0x1090>
+    0.00 :   e1fc:   ldr     x2, [x27]
+    0.00 :   e200:   ldr     x0, [x20, #16]
+    0.00 :   e204:   add     x2, x2, x0
+    0.00 :   e208:   ldr     w0, [x29, #192]
+    0.00 :   e20c:   cbnz    w0, e23c <_dl_mcount@@GLIBC_2.17+0x1bec>
+    0.00 :   e210:   ldr     x0, [x29, #184]
+    0.00 :   e214:   add     x1, x29, #0xe8
+    0.00 :   e218:   add     x3, x0, #0xb90
+    0.00 :   e21c:   mov     x0, #0x18                       // #24
+    0.00 :   e220:   str     x0, [x29, #232]
+    0.00 :   e224:   ldr     x0, [x3, #96]
+    0.00 :   e228:   ldr     x3, [x3, #560]
+    0.00 :   e22c:   stp     x0, x3, [x29, #240]
+    0.00 :   e230:   orr     x0, x0, #0x4000000000000000
+    0.00 :   e234:   blr     x2
+    0.00 :   e238:   mov     x2, x0
+    0.00 :   e23c:   str     x2, [x22]
+    0.00 :   e240:   b       ce30 <_dl_mcount@@GLIBC_2.17+0x7e0>
+    0.00 :   e244:   mov     x0, x28
+    0.00 :   e248:   mov     w1, #0x1                        // #1
+    0.00 :   e24c:   bl      c8b0 <_dl_mcount@@GLIBC_2.17+0x260>
+    0.00 :   e250:   cbnz    w0, e2fc <_dl_mcount@@GLIBC_2.17+0x1cac>
+    0.00 :   e254:   ldr     x0, [x28, #1184]
+    0.00 :   e258:   b       d6a0 <_dl_mcount@@GLIBC_2.17+0x1050>
+    0.00 :   e25c:   ldr     w0, [x26, #1120]
+    0.00 :   e260:   cmp     w0, #0x1
+    0.00 :   e264:   b.ne    dae0 <_dl_mcount@@GLIBC_2.17+0x1490>  // b.any
+    0.00 :   e268:   adrp    x0, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   e26c:   add     x0, x0, #0x0
+    0.00 :   e270:   ldr     x3, [x26, #1136]
+    0.00 :   e274:   str     x3, [x29, #216]
+    0.00 :   e278:   ldr     x1, [x0, #2872]
+    0.00 :   e27c:   ldr     x5, [x26, #1128]
+    0.00 :   e280:   add     x1, x1, #0x1
+    0.00 :   e284:   str     x1, [x0, #2872]
+    0.00 :   e288:   cbz     x3, da30 <_dl_mcount@@GLIBC_2.17+0x13e0>
+    0.00 :   e28c:   b       db44 <_dl_mcount@@GLIBC_2.17+0x14f4>
+    0.00 :   e290:   ldr     x2, [x1, #8]
+    0.00 :   e294:   mov     x0, x3
+    0.00 :   e298:   ldr     x1, [x25, #16]
+    0.00 :   e29c:   add     x1, x2, x1
+    0.00 :   e2a0:   bl      12410 <__tunable_get_val@@GLIBC_PRIVATE+0x15e0>
+    0.00 :   e2a4:   str     x0, [x21, #8]
+    0.00 :   e2a8:   adrp    x1, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   e2ac:   ldr     x0, [x25, #8]
+    0.00 :   e2b0:   add     x1, x1, #0x788
+    0.00 :   e2b4:   str     x1, [x21]
+    0.00 :   e2b8:   b       da28 <_dl_mcount@@GLIBC_2.17+0x13d8>
+    0.00 :   e2bc:   mov     x0, x3
+    0.00 :   e2c0:   str     x3, [x29, #112]
+    0.00 :   e2c4:   bl      c9c0 <_dl_mcount@@GLIBC_2.17+0x370>
+    0.00 :   e2c8:   ldr     x3, [x29, #112]
+    0.00 :   e2cc:   ldr     x1, [x29, #224]
+    0.00 :   e2d0:   ldr     x0, [x3, #1184]
+    0.00 :   e2d4:   b       db80 <_dl_mcount@@GLIBC_2.17+0x1530>
+    0.00 :   e2d8:   mov     x0, x3
+    0.00 :   e2dc:   mov     w1, #0x1                        // #1
+    0.00 :   e2e0:   str     x3, [x29, #112]
+    0.00 :   e2e4:   bl      c8b0 <_dl_mcount@@GLIBC_2.17+0x260>
+    0.00 :   e2e8:   ldr     x3, [x29, #112]
+    0.00 :   e2ec:   ldr     x1, [x29, #224]
+    0.00 :   e2f0:   cbnz    w0, e290 <_dl_mcount@@GLIBC_2.17+0x1c40>
+    0.00 :   e2f4:   ldr     x0, [x3, #1184]
+    0.00 :   e2f8:   b       dd78 <_dl_mcount@@GLIBC_2.17+0x1728>
+    0.00 :   e2fc:   ldr     x2, [x29, #224]
+    0.00 :   e300:   mov     x0, x28
+    0.00 :   e304:   ldr     x1, [x20, #16]
+    0.00 :   e308:   ldr     x2, [x2, #8]
+    0.00 :   e30c:   add     x1, x2, x1
+    0.00 :   e310:   bl      12410 <__tunable_get_val@@GLIBC_PRIVATE+0x15e0>
+    0.00 :   e314:   str     x0, [x22, #8]
+    0.00 :   e318:   adrp    x1, 12000 <__tunable_get_val@@GLIBC_PRIVATE+0x11d0>
+    0.00 :   e31c:   add     x1, x1, #0x788
+    0.00 :   e320:   str     x1, [x22]
+    0.00 :   e324:   b       ce30 <_dl_mcount@@GLIBC_2.17+0x7e0>
+    0.00 :   e328:   mov     x3, #0x0                        // #0
+    0.00 :   e32c:   b       e170 <_dl_mcount@@GLIBC_2.17+0x1b20>
+    0.00 :   e330:   ldr     w7, [x27, #1120]
+    0.00 :   e334:   cmp     x0, #0x7
+    0.00 :   e338:   b.hi    e38c <_dl_mcount@@GLIBC_2.17+0x1d3c>  // b.pmore
+    0.00 :   e33c:   adrp    x1, 1b000 <_dl_audit_symbind_alt@@GLIBC_PRIVATE+0x8320>
+    0.00 :   e340:   add     x1, x1, #0x8c0
+    0.00 :   e344:   add     x3, x1, #0x50
+    0.00 :   e348:   add     x1, x1, #0x70
+    0.00 :   e34c:   ldr     w3, [x3, x0, lsl #2]
+    0.00 :   e350:   ldr     w1, [x1, x0, lsl #2]
+    0.00 :   e354:   orr     w1, w3, w1
+    0.00 :   e358:   cmp     w1, w7
+    0.00 :   e35c:   b.ne    e1d4 <_dl_mcount@@GLIBC_2.17+0x1b84>  // b.any
+    0.00 :   e360:   adrp    x1, 40000 <_rtld_global@@GLIBC_PRIVATE>
+    0.00 :   e364:   add     x1, x1, #0x0
+    0.00 :   e368:   ldr     x2, [x27, #1136]
+    0.00 :   e36c:   str     x2, [x29, #224]
+    0.00 :   e370:   ldr     x3, [x1, #2872]
+    0.00 :   e374:   ldr     x0, [x27, #1128]
+    0.00 :   e378:   add     x3, x3, #0x1
+    0.00 :   e37c:   str     x3, [x1, #2872]
+    0.00 :   e380:   b       d0bc <_dl_mcount@@GLIBC_2.17+0xa6c>
+    0.00 :   e384:   mov     x19, #0x0                       // #0
+    0.00 :   e388:   b       cc28 <_dl_mcount@@GLIBC_2.17+0x5d8>
+    0.00 :   e38c:   mov     w5, #0x0                        // #0
+    0.00 :   e390:   cbnz    w7, d06c <_dl_mcount@@GLIBC_2.17+0xa1c>
+    0.00 :   e394:   b       e360 <_dl_mcount@@GLIBC_2.17+0x1d10>
+    0.00 :   e398:   adrp    x3, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   e39c:   add     x3, x3, #0xa80
+    0.00 :   e3a0:   adrp    x0, 41000 <_rtld_global@@GLIBC_PRIVATE+0x1000>
+    0.00 :   e3a4:   mov     x2, #0x0                        // #0
+    0.00 :   e3a8:   ldr     x1, [x20, #8]
+    0.00 :   e3ac:   ldr     w0, [x0, #800]
+    0.00 :   e3b0:   bl      f94 <_dl_signal_error@@GLIBC_PRIVATE>
+    0.00 :   e3b4:   adrp    x3, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   e3b8:   add     x3, x3, #0xa50
+    0.00 :   e3bc:   b       e3a0 <_dl_mcount@@GLIBC_2.17+0x1d50>
+    0.00 :   e3c0:   adrp    x0, 3f000 <__rseq_flags@@GLIBC_2.35+0x1faec>
+    0.00 :   e3c4:   ldr     x0, [x0, #2928]
+    0.00 :   e3c8:   ldr     x1, [x0]
+    0.00 :   e3cc:   cbz     x1, e3e0 <_dl_mcount@@GLIBC_2.17+0x1d90>
+    0.00 :   e3d0:   ldr     x2, [x20, #8]
+    0.00 :   e3d4:   adrp    x0, 1d000 <__rtld_version_placeholder@GLIBC_2.34+0x1800>
+    0.00 :   e3d8:   add     x0, x0, #0xb18
+    0.00 :   e3dc:   bl      bf10 <_dl_fatal_printf@@GLIBC_PRIVATE>
+    0.00 :   e3e0:   adrp    x1, 1c000 <__rtld_version_placeholder@GLIBC_2.34+0x800>
+    0.00 :   e3e4:   add     x1, x1, #0x8e0
+    0.00 :   e3e8:   b       e3d0 <_dl_mcount@@GLIBC_2.17+0x1d80>

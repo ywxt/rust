@@ -1,0 +1,15 @@
+{
+  "baseline": "main contains implementation; unrelated preexisting changes fixed",
+  "change": "Word4 scalar loop: handle exhausted input at each range exit, including end of full unrolled group; shared tail is provably nonempty. Communicate existing >=16B private caller precondition after alignment prefix, and nonempty tail invariant; removes exit jump/empty-tail checks without changing prefix semantics.",
+  "cpu_midr_el1": "0x00000000480fd020",
+  "cpu_model": "920B per user; hardware MIDR recorded",
+  "new_inline_attributes": 0,
+  "previous_candidate": "/tmp/contains-arm-word4-20261106",
+  "acceptance": [
+    "no reproducible regression in tested scenarios",
+    "lower 920B/x86-main cycles ratio"
+  ],
+  "endianness_and_pointer_guard": "unsigned byte SliceContains: aarch64 + neon + little endian +64bit; helper aarch64+neon+64bit",
+  "audit_method": "read-only Python ELF parser; no objcopy rewriting of measured artifacts",
+  "tail_change": "original word and scalar hit/tail paths; SIMD restricted to long body"
+}

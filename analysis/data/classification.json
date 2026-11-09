@@ -4144,5 +4144,32 @@
    "L05-lsr-dup-udiv",
    "B6-unaligned"
   ]
+ },
+ {
+  "id": "c93",
+  "title": "slice::swap_with_slice_usize_30 結論",
+  "interfaces": [
+   "[T]::swap_with_slice",
+   "ptr::swap_nonoverlapping"
+  ],
+  "benches": [
+   {
+    "name": "slice::swap_with_slice_usize_30",
+    "a64_cyc": 1171.5,
+    "x86_cyc": 798.5,
+    "ratio": 1.47
+   }
+  ],
+  "tags": [
+   "B1",
+   "N4",
+   "B6"
+  ],
+  "primary": "B1",
+  "x86_cause": "bench 的 black_box(skip+1) 讓迴圈攜帶索引經棧往返,本機同址 store→load 7 cycles 對 x86 約 1,佔每次交換差距 9.8 cycles;索引留在暫存器後比值 1.14",
+  "confidence": "high",
+  "repro": [
+   "B1b-blackbox-loop-index"
+  ]
  }
 ]

@@ -420,6 +420,16 @@ pub fn iter_1m(b: &mut Bencher) {
     bench_iter(b, 1_000, 1_000_000);
 }
 
+#[bench]
+pub fn range_fold_100000(b: &mut Bencher) {
+    let map: BTreeMap<_, _> = (0..100_000).map(|i| (i, i)).collect();
+    b.iter(|| {
+        map.range(10_000..90_000).for_each(|entry| {
+            black_box(entry);
+        })
+    });
+}
+
 const FAT: usize = 256;
 
 // The returned map has small keys and values.

@@ -321,3 +321,37 @@ fn test_write_short_works() {
     h2.write(&[0xFFu8, 0x01u8]);
     assert_eq!(h1.finish(), h2.finish());
 }
+
+#[test]
+fn test_write_str_matches_bytes() {
+    fn check<H: Hasher + Clone>(initial: H) {
+        for prefix_len in 0..8 {
+            for len in 0..128 {
+                let ascii = "a".repeat(len);
+                let unicode = "é".repeat(len);
+                let mut state = initial.clone();
+                let mut bytes = vec![0xa5; prefix_len];
+                state.write(&bytes);
+                for text in [ascii.as_str(), "", unicode.as_str(), "🙂"] {
+                    text.hash(&mut state);
+                    bytes.extend_from_slice(text.as_bytes());
+                    bytes.push(0xff);
+                    assert_eq!(state.finish(), hash_with(initial.clone(), &Bytes(&bytes)));
+                    let mut with_suffix = state.clone();
+                    let mut bytes_suffix = bytes.clone();
+                    with_suffix.write(&[0x5a; 9]);
+                    bytes_suffix.extend_from_slice(&[0x5a; 9]);
+                    assert_eq!(
+                        with_suffix.finish(),
+                        hash_with(initial.clone(), &Bytes(&bytes_suffix))
+                    );
+                }
+            }
+        }
+    }
+    check(SipHasher::new());
+    check(SipHasher::new_with_keys(0x0123456789abcdef, 0xfedcba9876543210));
+    check(SipHasher13::new());
+    check(SipHasher13::new_with_keys(0x0123456789abcdef, 0xfedcba9876543210));
+    check(std::hash::DefaultHasher::new());
+}

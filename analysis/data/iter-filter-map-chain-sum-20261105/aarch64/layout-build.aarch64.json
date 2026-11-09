@@ -1,0 +1,130 @@
+[
+  {
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "-C",
+      "link-arg=-Wl,-Ttext=65536",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/layout-base-0"
+    ],
+    "check": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n"
+  },
+  {
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "-C",
+      "link-arg=-Wl,-Ttext=65536",
+      "-C",
+      "llvm-args=-unroll-count=4",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/layout-u4-0"
+    ],
+    "check": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n"
+  },
+  {
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "-C",
+      "link-arg=-Wl,-Ttext=65552",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/layout-base-16"
+    ],
+    "check": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n"
+  },
+  {
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "-C",
+      "link-arg=-Wl,-Ttext=65552",
+      "-C",
+      "llvm-args=-unroll-count=4",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/layout-u4-16"
+    ],
+    "check": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n"
+  },
+  {
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "-C",
+      "link-arg=-Wl,-Ttext=65568",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/layout-base-32"
+    ],
+    "check": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n"
+  },
+  {
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "-C",
+      "link-arg=-Wl,-Ttext=65568",
+      "-C",
+      "llvm-args=-unroll-count=4",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/layout-u4-32"
+    ],
+    "check": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n"
+  },
+  {
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "-C",
+      "link-arg=-Wl,-Ttext=65584",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/layout-base-48"
+    ],
+    "check": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n"
+  },
+  {
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "-C",
+      "link-arg=-Wl,-Ttext=65584",
+      "-C",
+      "llvm-args=-unroll-count=4",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/layout-u4-48"
+    ],
+    "check": "boundary, 1000000 random scalars, ranges and all dataset/length cases passed\n"
+  }
+]

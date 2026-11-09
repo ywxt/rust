@@ -1,0 +1,168 @@
+
+/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib/libstd-582c472e6e6781a0.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+00000000000dba54 <core::slice::memchr::memchr_aligned>:
+   dba54:	91001c28 	add	x8, x1, #0x7
+   dba58:	12001c09 	and	w9, w0, #0xff
+   dba5c:	927df108 	and	x8, x8, #0xfffffffffffffff8
+   dba60:	eb010108 	subs	x8, x8, x1
+   dba64:	54000081 	b.ne	dba74 <core::slice::memchr::memchr_aligned+0x20>  // b.any
+   dba68:	aa1f03ea 	mov	x10, xzr
+   dba6c:	d100404b 	sub	x11, x2, #0x10
+   dba70:	14000010 	b	dbab0 <core::slice::memchr::memchr_aligned+0x5c>
+   dba74:	eb02011f 	cmp	x8, x2
+   dba78:	9a82310a 	csel	x10, x8, x2, cc	// cc = lo, ul, last
+   dba7c:	b4000122 	cbz	x2, dbaa0 <core::slice::memchr::memchr_aligned+0x4c>
+   dba80:	aa1f03e8 	mov	x8, xzr
+   dba84:	52800020 	mov	w0, #0x1                   	// #1
+   dba88:	3868682b 	ldrb	w11, [x1, x8]
+   dba8c:	6b0b013f 	cmp	w9, w11
+   dba90:	540004c0 	b.eq	dbb28 <core::slice::memchr::memchr_aligned+0xd4>  // b.none
+   dba94:	91000508 	add	x8, x8, #0x1
+   dba98:	eb08015f 	cmp	x10, x8
+   dba9c:	54ffff61 	b.ne	dba88 <core::slice::memchr::memchr_aligned+0x34>  // b.any
+   dbaa0:	d100404b 	sub	x11, x2, #0x10
+   dbaa4:	aa0a03e8 	mov	x8, x10
+   dbaa8:	eb0b015f 	cmp	x10, x11
+   dbaac:	540002a8 	b.hi	dbb00 <core::slice::memchr::memchr_aligned+0xac>  // b.pmore
+   dbab0:	b200c3e8 	mov	x8, #0x101010101010101     	// #72340172838076673
+   dbab4:	b200c3ed 	mov	x13, #0x101010101010101     	// #72340172838076673
+   dbab8:	b201c3ee 	mov	x14, #0x8080808080808080    	// #-9187201950435737472
+   dbabc:	9b087d2c 	mul	x12, x9, x8
+   dbac0:	f280200d 	movk	x13, #0x100
+   dbac4:	aa0a03e8 	mov	x8, x10
+   dbac8:	8b08002a 	add	x10, x1, x8
+   dbacc:	a940294f 	ldp	x15, x10, [x10]
+   dbad0:	ca0c01ef 	eor	x15, x15, x12
+   dbad4:	ca0c014a 	eor	x10, x10, x12
+   dbad8:	cb0f01b0 	sub	x16, x13, x15
+   dbadc:	cb0a01b1 	sub	x17, x13, x10
+   dbae0:	aa0f020f 	orr	x15, x16, x15
+   dbae4:	aa0a022a 	orr	x10, x17, x10
+   dbae8:	8a0a01ea 	and	x10, x15, x10
+   dbaec:	ea2a01df 	bics	xzr, x14, x10
+   dbaf0:	54000081 	b.ne	dbb00 <core::slice::memchr::memchr_aligned+0xac>  // b.any
+   dbaf4:	91004108 	add	x8, x8, #0x10
+   dbaf8:	eb0b011f 	cmp	x8, x11
+   dbafc:	54fffe69 	b.ls	dbac8 <core::slice::memchr::memchr_aligned+0x74>  // b.plast
+   dbb00:	eb08005f 	cmp	x2, x8
+   dbb04:	54000100 	b.eq	dbb24 <core::slice::memchr::memchr_aligned+0xd0>  // b.none
+   dbb08:	52800020 	mov	w0, #0x1                   	// #1
+   dbb0c:	3868682a 	ldrb	w10, [x1, x8]
+   dbb10:	6b0a013f 	cmp	w9, w10
+   dbb14:	540000a0 	b.eq	dbb28 <core::slice::memchr::memchr_aligned+0xd4>  // b.none
+   dbb18:	91000508 	add	x8, x8, #0x1
+   dbb1c:	eb08005f 	cmp	x2, x8
+   dbb20:	54ffff61 	b.ne	dbb0c <core::slice::memchr::memchr_aligned+0xb8>  // b.any
+   dbb24:	aa1f03e0 	mov	x0, xzr
+   dbb28:	aa0803e1 	mov	x1, x8
+   dbb2c:	d65f03c0 	ret
+
+00000000000dbb30 <core::slice::memchr::memrchr_aligned>:
+   dbb30:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+   dbb34:	910003fd 	mov	x29, sp
+   dbb38:	91001c28 	add	x8, x1, #0x7
+   dbb3c:	aa0203e9 	mov	x9, x2
+   dbb40:	aa0203eb 	mov	x11, x2
+   dbb44:	927df108 	and	x8, x8, #0xfffffffffffffff8
+   dbb48:	cb010108 	sub	x8, x8, x1
+   dbb4c:	eb08005f 	cmp	x2, x8
+   dbb50:	540000c3 	b.cc	dbb68 <core::slice::memchr::memrchr_aligned+0x38>  // b.lo, b.ul, b.last
+   dbb54:	4b080049 	sub	w9, w2, w8
+   dbb58:	92400d29 	and	x9, x9, #0xf
+   dbb5c:	eb090049 	subs	x9, x2, x9
+   dbb60:	54000703 	b.cc	dbc40 <core::slice::memchr::memrchr_aligned+0x110>  // b.lo, b.ul, b.last
+   dbb64:	aa0803eb 	mov	x11, x8
+   dbb68:	eb02013f 	cmp	x9, x2
+   dbb6c:	12001c0a 	and	w10, w0, #0xff
+   dbb70:	54000160 	b.eq	dbb9c <core::slice::memchr::memrchr_aligned+0x6c>  // b.none
+   dbb74:	d1000448 	sub	x8, x2, #0x1
+   dbb78:	cb0903ec 	neg	x12, x9
+   dbb7c:	52800020 	mov	w0, #0x1                   	// #1
+   dbb80:	3868682d 	ldrb	w13, [x1, x8]
+   dbb84:	6b0a01bf 	cmp	w13, w10
+   dbb88:	540004c0 	b.eq	dbc20 <core::slice::memchr::memrchr_aligned+0xf0>  // b.none
+   dbb8c:	d1000508 	sub	x8, x8, #0x1
+   dbb90:	8b08018d 	add	x13, x12, x8
+   dbb94:	b10005bf 	cmn	x13, #0x1
+   dbb98:	54ffff41 	b.ne	dbb80 <core::slice::memchr::memrchr_aligned+0x50>  // b.any
+   dbb9c:	b200c3e8 	mov	x8, #0x101010101010101     	// #72340172838076673
+   dbba0:	b200c3ed 	mov	x13, #0x101010101010101     	// #72340172838076673
+   dbba4:	d100202e 	sub	x14, x1, #0x8
+   dbba8:	9b087d4c 	mul	x12, x10, x8
+   dbbac:	f280200d 	movk	x13, #0x100
+   dbbb0:	b201c3ef 	mov	x15, #0x8080808080808080    	// #-9187201950435737472
+   dbbb4:	aa0903e8 	mov	x8, x9
+   dbbb8:	eb0b013f 	cmp	x9, x11
+   dbbbc:	540001a9 	b.ls	dbbf0 <core::slice::memchr::memrchr_aligned+0xc0>  // b.plast
+   dbbc0:	8b0801c9 	add	x9, x14, x8
+   dbbc4:	a97fa530 	ldp	x16, x9, [x9, #-8]
+   dbbc8:	ca0c0210 	eor	x16, x16, x12
+   dbbcc:	ca0c0129 	eor	x9, x9, x12
+   dbbd0:	cb1001b1 	sub	x17, x13, x16
+   dbbd4:	cb0901b2 	sub	x18, x13, x9
+   dbbd8:	aa100230 	orr	x16, x17, x16
+   dbbdc:	aa090249 	orr	x9, x18, x9
+   dbbe0:	8a090209 	and	x9, x16, x9
+   dbbe4:	ea2901ff 	bics	xzr, x15, x9
+   dbbe8:	d1004109 	sub	x9, x8, #0x10
+   dbbec:	54fffe40 	b.eq	dbbb4 <core::slice::memchr::memrchr_aligned+0x84>  // b.none
+   dbbf0:	eb02011f 	cmp	x8, x2
+   dbbf4:	540001c8 	b.hi	dbc2c <core::slice::memchr::memrchr_aligned+0xfc>  // b.pmore
+   dbbf8:	b4000128 	cbz	x8, dbc1c <core::slice::memchr::memrchr_aligned+0xec>
+   dbbfc:	d1000508 	sub	x8, x8, #0x1
+   dbc00:	52800020 	mov	w0, #0x1                   	// #1
+   dbc04:	38686829 	ldrb	w9, [x1, x8]
+   dbc08:	6b0a013f 	cmp	w9, w10
+   dbc0c:	540000a0 	b.eq	dbc20 <core::slice::memchr::memrchr_aligned+0xf0>  // b.none
+   dbc10:	d1000508 	sub	x8, x8, #0x1
+   dbc14:	b100051f 	cmn	x8, #0x1
+   dbc18:	54ffff61 	b.ne	dbc04 <core::slice::memchr::memrchr_aligned+0xd4>  // b.any
+   dbc1c:	aa1f03e0 	mov	x0, xzr
+   dbc20:	aa0803e1 	mov	x1, x8
+   dbc24:	a8c17bfd 	ldp	x29, x30, [sp], #16
+   dbc28:	d65f03c0 	ret
+   dbc2c:	d0000303 	adrp	x3, 13d000 <std::panicking::EMPTY_PANIC+0x4fa8>
+   dbc30:	912fe063 	add	x3, x3, #0xbf8
+   dbc34:	aa1f03e0 	mov	x0, xzr
+   dbc38:	aa0803e1 	mov	x1, x8
+   dbc3c:	97fdae61 	bl	475c0 <core::slice::index::slice_index_fail@plt>
+   dbc40:	d0000303 	adrp	x3, 13d000 <std::panicking::EMPTY_PANIC+0x4fa8>
+   dbc44:	91304063 	add	x3, x3, #0xc10
+   dbc48:	aa0903e0 	mov	x0, x9
+   dbc4c:	aa0203e1 	mov	x1, x2
+   dbc50:	97fdae5c 	bl	475c0 <core::slice::index::slice_index_fail@plt>
+
+00000000000dbc54 <core::io::error::os_functions::get_os_functions>:
+   dbc54:	90000328 	adrp	x8, 13f000 <ftruncate64@GLIBC_2.17>
+   dbc58:	f947c108 	ldr	x8, [x8, #3968]
+   dbc5c:	f9400100 	ldr	x0, [x8]
+   dbc60:	d65f03c0 	ret
+
+00000000000dbc64 <core::fmt::num::imp::exp_u64>:
+   dbc64:	d10243ff 	sub	sp, sp, #0x90
+   dbc68:	a9087bfd 	stp	x29, x30, [sp, #128]
+   dbc6c:	910203fd 	add	x29, sp, #0x80
+   dbc70:	b40007c1 	cbz	x1, dbd68 <core::fmt::num::imp::exp_u64+0x104>
+   dbc74:	d29ab7e8 	mov	x8, #0xd5bf                	// #54719
+   dbc78:	d29c7fe9 	mov	x9, #0xe3ff                	// #58367
+   dbc7c:	f2b7bda8 	movk	x8, #0xbded, lsl #16
+   dbc80:	f2aa8169 	movk	x9, #0x540b, lsl #16
+   dbc84:	f2dfd9c8 	movk	x8, #0xfece, lsl #32
+   dbc88:	f2c00049 	movk	x9, #0x2, lsl #32
+   dbc8c:	f2fb7cc8 	movk	x8, #0xdbe6, lsl #48
+   dbc90:	eb09003f 	cmp	x1, x9
+   dbc94:	9bc87c28 	umulh	x8, x1, x8
+   dbc98:	d361fd08 	lsr	x8, x8, #33
+   dbc9c:	9a818109 	csel	x9, x8, x1, hi	// hi = pmore
+   dbca0:	52800148 	mov	w8, #0xa                   	// #10
+   dbca4:	d345fd2a 	lsr	x10, x9, #5
+   dbca8:	1a9f8108 	csel	w8, w8, wzr, hi	// hi = pmore
+   dbcac:	f130d55f 	cmp	x10, #0xc35
+   dbcb0:	54000123 	b.cc	dbcd4 <core::fmt::num::imp::exp_u64+0x70>  // b.lo, b.ul, b.last
+   dbcb4:	d28f0869 	mov	x9, #0x7843                	// #30787
+   dbcb8:	f2ae3689 	movk	x9, #0x71b4, lsl #16
+   dbcbc:	f2cb5889 	movk	x9, #0x5ac4, lsl #32

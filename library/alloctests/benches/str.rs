@@ -1,5 +1,7 @@
 use test::{Bencher, black_box};
 
+mod utf8_validation;
+
 #[bench]
 fn char_iterator(b: &mut Bencher) {
     let s = "ศไทย中华Việt Nam; Mary had a little lamb, Little lamb";

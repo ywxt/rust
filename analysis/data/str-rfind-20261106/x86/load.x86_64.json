@@ -1,0 +1,2882 @@
+[
+  {
+    "trial": 0,
+    "mode": "mov-chain",
+    "alignment": 24,
+    "ops": 20000000,
+    "ns": 1.1369907,
+    "loop": {
+      "elapsed_ns": 22739814,
+      "ops": 20000000,
+      "alignment": 24
+    },
+    "per_call": {
+      "cycles": 5.14487705,
+      "instructions": 3.1508984,
+      "branches": 1.02880795,
+      "branch-misses": 0.00107225
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "24",
+      "20000000"
+    ],
+    "started": 1793949303.4239414,
+    "stdout": "{\"elapsed_ns\":22739814,\"ops\":20000000,\"alignment\":24}\n",
+    "stderr": "102897541,,cpu_core/cycles/u,24610931,100.00,,\n63017968,,cpu_core/instructions/u,24610931,100.00,,\n20576159,,cpu_core/branches/u,24610931,100.00,,\n21445,,cpu_core/branch-misses/u,24610931,100.00,,\n24.61,msec,task-clock,24610931,100.00,,\n0,,context-switches,24610931,100.00,,\n0,,cpu-migrations,24610931,100.00,,\n439,,minor-faults,24610931,100.00,,\n0,,major-faults,24610931,100.00,,\n",
+    "metrics": {
+      "cycles": 102897541.0,
+      "instructions": 63017968.0,
+      "branches": 20576159.0,
+      "branch-misses": 21445.0,
+      "task-clock": 24.61,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 47454656,
+    "cpu_wall_ratio": 0.5186003244866004
+  },
+  {
+    "trial": 0,
+    "mode": "mov-chain",
+    "alignment": 40,
+    "ops": 20000000,
+    "ns": 1.1240602,
+    "loop": {
+      "elapsed_ns": 22481204,
+      "ops": 20000000,
+      "alignment": 40
+    },
+    "per_call": {
+      "cycles": 5.12388805,
+      "instructions": 3.1508968,
+      "branches": 1.02880725,
+      "branch-misses": 0.00106845
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "40",
+      "20000000"
+    ],
+    "started": 1793949303.4714768,
+    "stdout": "{\"elapsed_ns\":22481204,\"ops\":20000000,\"alignment\":40}\n",
+    "stderr": "102477761,,cpu_core/cycles/u,24219909,100.00,,\n63017936,,cpu_core/instructions/u,24219909,100.00,,\n20576145,,cpu_core/branches/u,24219909,100.00,,\n21369,,cpu_core/branch-misses/u,24219909,100.00,,\n24.22,msec,task-clock,24219909,100.00,,\n0,,context-switches,24219909,100.00,,\n0,,cpu-migrations,24219909,100.00,,\n437,,minor-faults,24219909,100.00,,\n0,,major-faults,24219909,100.00,,\n",
+    "metrics": {
+      "cycles": 102477761.0,
+      "instructions": 63017936.0,
+      "branches": 20576145.0,
+      "branch-misses": 21369.0,
+      "task-clock": 24.22,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35920827,
+    "cpu_wall_ratio": 0.674260645502399
+  },
+  {
+    "trial": 0,
+    "mode": "mov",
+    "alignment": 40,
+    "ops": 160000000,
+    "ns": 0.15024015625,
+    "loop": {
+      "elapsed_ns": 24038425,
+      "ops": 160000000,
+      "alignment": 40
+    },
+    "per_call": {
+      "cycles": 0.6832086375,
+      "instructions": 2.2688637,
+      "branches": 0.1286013125,
+      "branch-misses": 0.0001291625
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "40",
+      "20000000"
+    ],
+    "started": 1793949303.507475,
+    "stdout": "{\"elapsed_ns\":24038425,\"ops\":160000000,\"alignment\":40}\n",
+    "stderr": "109313382,,cpu_core/cycles/u,25692443,100.00,,\n363018192,,cpu_core/instructions/u,25692443,100.00,,\n20576210,,cpu_core/branches/u,25692443,100.00,,\n20666,,cpu_core/branch-misses/u,25692443,100.00,,\n25.69,msec,task-clock,25692443,100.00,,\n0,,context-switches,25692443,100.00,,\n0,,cpu-migrations,25692443,100.00,,\n442,,minor-faults,25692443,100.00,,\n0,,major-faults,25692443,100.00,,\n",
+    "metrics": {
+      "cycles": 109313382.0,
+      "instructions": 363018192.0,
+      "branches": 20576210.0,
+      "branch-misses": 20666.0,
+      "task-clock": 25.69,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 442.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37489376,
+    "cpu_wall_ratio": 0.6852608056213045
+  },
+  {
+    "trial": 0,
+    "mode": "mov",
+    "alignment": 56,
+    "ops": 160000000,
+    "ns": 0.15061115,
+    "loop": {
+      "elapsed_ns": 24097784,
+      "ops": 160000000,
+      "alignment": 56
+    },
+    "per_call": {
+      "cycles": 0.68297338125,
+      "instructions": 2.2688633375,
+      "branches": 0.12860125625,
+      "branch-misses": 0.00013246875
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "56",
+      "20000000"
+    ],
+    "started": 1793949303.5450358,
+    "stdout": "{\"elapsed_ns\":24097784,\"ops\":160000000,\"alignment\":56}\n",
+    "stderr": "109275741,,cpu_core/cycles/u,25772825,100.00,,\n363018134,,cpu_core/instructions/u,25772825,100.00,,\n20576201,,cpu_core/branches/u,25772825,100.00,,\n21195,,cpu_core/branch-misses/u,25772825,100.00,,\n25.77,msec,task-clock,25772825,100.00,,\n0,,context-switches,25772825,100.00,,\n0,,cpu-migrations,25772825,100.00,,\n437,,minor-faults,25772825,100.00,,\n0,,major-faults,25772825,100.00,,\n",
+    "metrics": {
+      "cycles": 109275741.0,
+      "instructions": 363018134.0,
+      "branches": 20576201.0,
+      "branch-misses": 21195.0,
+      "task-clock": 25.77,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37292178,
+    "cpu_wall_ratio": 0.6910296309322561
+  },
+  {
+    "trial": 0,
+    "mode": "mov",
+    "alignment": 0,
+    "ops": 160000000,
+    "ns": 0.1512718125,
+    "loop": {
+      "elapsed_ns": 24203490,
+      "ops": 160000000,
+      "alignment": 0
+    },
+    "per_call": {
+      "cycles": 0.68591231875,
+      "instructions": 2.26886415,
+      "branches": 0.12860144375,
+      "branch-misses": 0.00013239375
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "0",
+      "20000000"
+    ],
+    "started": 1793949303.5823932,
+    "stdout": "{\"elapsed_ns\":24203490,\"ops\":160000000,\"alignment\":0}\n",
+    "stderr": "109745971,,cpu_core/cycles/u,25802744,100.00,,\n363018264,,cpu_core/instructions/u,25802744,100.00,,\n20576231,,cpu_core/branches/u,25802744,100.00,,\n21183,,cpu_core/branch-misses/u,25802744,100.00,,\n25.80,msec,task-clock,25802744,100.00,,\n1,,context-switches,25802744,100.00,,\n0,,cpu-migrations,25802744,100.00,,\n437,,minor-faults,25802744,100.00,,\n0,,major-faults,25802744,100.00,,\n",
+    "metrics": {
+      "cycles": 109745971.0,
+      "instructions": 363018264.0,
+      "branches": 20576231.0,
+      "branch-misses": 21183.0,
+      "task-clock": 25.8,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 36970548,
+    "cpu_wall_ratio": 0.6978527881166381
+  },
+  {
+    "trial": 0,
+    "mode": "mov-chain",
+    "alignment": 0,
+    "ops": 20000000,
+    "ns": 1.12933785,
+    "loop": {
+      "elapsed_ns": 22586757,
+      "ops": 20000000,
+      "alignment": 0
+    },
+    "per_call": {
+      "cycles": 5.1201208,
+      "instructions": 3.15089555,
+      "branches": 1.02880755,
+      "branch-misses": 0.00105605
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "0",
+      "20000000"
+    ],
+    "started": 1793949303.6194322,
+    "stdout": "{\"elapsed_ns\":22586757,\"ops\":20000000,\"alignment\":0}\n",
+    "stderr": "102402416,,cpu_core/cycles/u,24183777,100.00,,\n63017911,,cpu_core/instructions/u,24183777,100.00,,\n20576151,,cpu_core/branches/u,24183777,100.00,,\n21121,,cpu_core/branch-misses/u,24183777,100.00,,\n24.18,msec,task-clock,24183777,100.00,,\n1,,context-switches,24183777,100.00,,\n0,,cpu-migrations,24183777,100.00,,\n439,,minor-faults,24183777,100.00,,\n0,,major-faults,24183777,100.00,,\n",
+    "metrics": {
+      "cycles": 102402416.0,
+      "instructions": 63017911.0,
+      "branches": 20576151.0,
+      "branch-misses": 21121.0,
+      "task-clock": 24.18,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35194922,
+    "cpu_wall_ratio": 0.6870309302006693
+  },
+  {
+    "trial": 0,
+    "mode": "mov",
+    "alignment": 48,
+    "ops": 160000000,
+    "ns": 0.1507887,
+    "loop": {
+      "elapsed_ns": 24126192,
+      "ops": 160000000,
+      "alignment": 48
+    },
+    "per_call": {
+      "cycles": 0.68276228125,
+      "instructions": 2.2688618875,
+      "branches": 0.12860094375,
+      "branch-misses": 0.0001365
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "48",
+      "20000000"
+    ],
+    "started": 1793949303.6546957,
+    "stdout": "{\"elapsed_ns\":24126192,\"ops\":160000000,\"alignment\":48}\n",
+    "stderr": "109241965,,cpu_core/cycles/u,25682862,100.00,,\n363017902,,cpu_core/instructions/u,25682862,100.00,,\n20576151,,cpu_core/branches/u,25682862,100.00,,\n21840,,cpu_core/branch-misses/u,25682862,100.00,,\n25.68,msec,task-clock,25682862,100.00,,\n2,,context-switches,25682862,100.00,,\n0,,cpu-migrations,25682862,100.00,,\n435,,minor-faults,25682862,100.00,,\n0,,major-faults,25682862,100.00,,\n",
+    "metrics": {
+      "cycles": 109241965.0,
+      "instructions": 363017902.0,
+      "branches": 20576151.0,
+      "branch-misses": 21840.0,
+      "task-clock": 25.68,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 435.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 36912418,
+    "cpu_wall_ratio": 0.6957008343371057
+  },
+  {
+    "trial": 0,
+    "mode": "mov-chain",
+    "alignment": 48,
+    "ops": 20000000,
+    "ns": 1.1263199,
+    "loop": {
+      "elapsed_ns": 22526398,
+      "ops": 20000000,
+      "alignment": 48
+    },
+    "per_call": {
+      "cycles": 5.11966735,
+      "instructions": 3.15091755,
+      "branches": 1.02881235,
+      "branch-misses": 0.00106215
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "48",
+      "20000000"
+    ],
+    "started": 1793949303.6916773,
+    "stdout": "{\"elapsed_ns\":22526398,\"ops\":20000000,\"alignment\":48}\n",
+    "stderr": "102393347,,cpu_core/cycles/u,24086855,100.00,,\n63018351,,cpu_core/instructions/u,24086855,100.00,,\n20576247,,cpu_core/branches/u,24086855,100.00,,\n21243,,cpu_core/branch-misses/u,24086855,100.00,,\n24.09,msec,task-clock,24086855,100.00,,\n2,,context-switches,24086855,100.00,,\n0,,cpu-migrations,24086855,100.00,,\n436,,minor-faults,24086855,100.00,,\n0,,major-faults,24086855,100.00,,\n",
+    "metrics": {
+      "cycles": 102393347.0,
+      "instructions": 63018351.0,
+      "branches": 20576247.0,
+      "branch-misses": 21243.0,
+      "task-clock": 24.09,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 436.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35233398,
+    "cpu_wall_ratio": 0.6837262758477056
+  },
+  {
+    "trial": 0,
+    "mode": "mov-chain",
+    "alignment": 32,
+    "ops": 20000000,
+    "ns": 1.1292094,
+    "loop": {
+      "elapsed_ns": 22584188,
+      "ops": 20000000,
+      "alignment": 32
+    },
+    "per_call": {
+      "cycles": 5.12098965,
+      "instructions": 3.15090915,
+      "branches": 1.0288106,
+      "branch-misses": 0.00104335
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "32",
+      "20000000"
+    ],
+    "started": 1793949303.7269802,
+    "stdout": "{\"elapsed_ns\":22584188,\"ops\":20000000,\"alignment\":32}\n",
+    "stderr": "102419793,,cpu_core/cycles/u,24163685,100.00,,\n63018183,,cpu_core/instructions/u,24163685,100.00,,\n20576212,,cpu_core/branches/u,24163685,100.00,,\n20867,,cpu_core/branch-misses/u,24163685,100.00,,\n24.16,msec,task-clock,24163685,100.00,,\n1,,context-switches,24163685,100.00,,\n0,,cpu-migrations,24163685,100.00,,\n439,,minor-faults,24163685,100.00,,\n0,,major-faults,24163685,100.00,,\n",
+    "metrics": {
+      "cycles": 102419793.0,
+      "instructions": 63018183.0,
+      "branches": 20576212.0,
+      "branch-misses": 20867.0,
+      "task-clock": 24.16,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35219421,
+    "cpu_wall_ratio": 0.6859851557468818
+  },
+  {
+    "trial": 0,
+    "mode": "mov-chain",
+    "alignment": 56,
+    "ops": 20000000,
+    "ns": 1.1278253,
+    "loop": {
+      "elapsed_ns": 22556506,
+      "ops": 20000000,
+      "alignment": 56
+    },
+    "per_call": {
+      "cycles": 5.1219378,
+      "instructions": 3.1509065,
+      "branches": 1.02881,
+      "branch-misses": 0.0010592
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "56",
+      "20000000"
+    ],
+    "started": 1793949303.7622745,
+    "stdout": "{\"elapsed_ns\":22556506,\"ops\":20000000,\"alignment\":56}\n",
+    "stderr": "102438756,,cpu_core/cycles/u,24181037,100.00,,\n63018130,,cpu_core/instructions/u,24181037,100.00,,\n20576200,,cpu_core/branches/u,24181037,100.00,,\n21184,,cpu_core/branch-misses/u,24181037,100.00,,\n24.18,msec,task-clock,24181037,100.00,,\n4,,context-switches,24181037,100.00,,\n0,,cpu-migrations,24181037,100.00,,\n434,,minor-faults,24181037,100.00,,\n0,,major-faults,24181037,100.00,,\n",
+    "metrics": {
+      "cycles": 102438756.0,
+      "instructions": 63018130.0,
+      "branches": 20576200.0,
+      "branch-misses": 21184.0,
+      "task-clock": 24.18,
+      "context-switches": 4.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 434.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35821325,
+    "cpu_wall_ratio": 0.6750169068285442
+  },
+  {
+    "trial": 0,
+    "mode": "mov",
+    "alignment": 16,
+    "ops": 160000000,
+    "ns": 0.1501638375,
+    "loop": {
+      "elapsed_ns": 24026214,
+      "ops": 160000000,
+      "alignment": 16
+    },
+    "per_call": {
+      "cycles": 0.6830892,
+      "instructions": 2.2688626375,
+      "branches": 0.1286010875,
+      "branch-misses": 0.00013346875
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "16",
+      "20000000"
+    ],
+    "started": 1793949303.798162,
+    "stdout": "{\"elapsed_ns\":24026214,\"ops\":160000000,\"alignment\":16}\n",
+    "stderr": "109294272,,cpu_core/cycles/u,25646406,100.00,,\n363018022,,cpu_core/instructions/u,25646406,100.00,,\n20576174,,cpu_core/branches/u,25646406,100.00,,\n21355,,cpu_core/branch-misses/u,25646406,100.00,,\n25.65,msec,task-clock,25646406,100.00,,\n1,,context-switches,25646406,100.00,,\n0,,cpu-migrations,25646406,100.00,,\n436,,minor-faults,25646406,100.00,,\n0,,major-faults,25646406,100.00,,\n",
+    "metrics": {
+      "cycles": 109294272.0,
+      "instructions": 363018022.0,
+      "branches": 20576174.0,
+      "branch-misses": 21355.0,
+      "task-clock": 25.65,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 436.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37174267,
+    "cpu_wall_ratio": 0.6899934301327313
+  },
+  {
+    "trial": 0,
+    "mode": "mov-chain",
+    "alignment": 8,
+    "ops": 20000000,
+    "ns": 1.1232106,
+    "loop": {
+      "elapsed_ns": 22464212,
+      "ops": 20000000,
+      "alignment": 8
+    },
+    "per_call": {
+      "cycles": 5.1202191,
+      "instructions": 3.15091845,
+      "branches": 1.02881255,
+      "branch-misses": 0.0010443
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "8",
+      "20000000"
+    ],
+    "started": 1793949303.8354049,
+    "stdout": "{\"elapsed_ns\":22464212,\"ops\":20000000,\"alignment\":8}\n",
+    "stderr": "102404382,,cpu_core/cycles/u,24127980,100.00,,\n63018369,,cpu_core/instructions/u,24127980,100.00,,\n20576251,,cpu_core/branches/u,24127980,100.00,,\n20886,,cpu_core/branch-misses/u,24127980,100.00,,\n24.13,msec,task-clock,24127980,100.00,,\n0,,context-switches,24127980,100.00,,\n0,,cpu-migrations,24127980,100.00,,\n437,,minor-faults,24127980,100.00,,\n0,,major-faults,24127980,100.00,,\n",
+    "metrics": {
+      "cycles": 102404382.0,
+      "instructions": 63018369.0,
+      "branches": 20576251.0,
+      "branch-misses": 20886.0,
+      "task-clock": 24.13,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35168257,
+    "cpu_wall_ratio": 0.6861301087511957
+  },
+  {
+    "trial": 0,
+    "mode": "mov-chain",
+    "alignment": 16,
+    "ops": 20000000,
+    "ns": 1.131028,
+    "loop": {
+      "elapsed_ns": 22620560,
+      "ops": 20000000,
+      "alignment": 16
+    },
+    "per_call": {
+      "cycles": 5.12383035,
+      "instructions": 3.1509088,
+      "branches": 1.0288105,
+      "branch-misses": 0.00106065
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "16",
+      "20000000"
+    ],
+    "started": 1793949303.8706417,
+    "stdout": "{\"elapsed_ns\":22620560,\"ops\":20000000,\"alignment\":16}\n",
+    "stderr": "102476607,,cpu_core/cycles/u,24257225,100.00,,\n63018176,,cpu_core/instructions/u,24257225,100.00,,\n20576210,,cpu_core/branches/u,24257225,100.00,,\n21213,,cpu_core/branch-misses/u,24257225,100.00,,\n24.26,msec,task-clock,24257225,100.00,,\n1,,context-switches,24257225,100.00,,\n0,,cpu-migrations,24257225,100.00,,\n438,,minor-faults,24257225,100.00,,\n0,,major-faults,24257225,100.00,,\n",
+    "metrics": {
+      "cycles": 102476607.0,
+      "instructions": 63018176.0,
+      "branches": 20576210.0,
+      "branch-misses": 21213.0,
+      "task-clock": 24.26,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 438.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35503338,
+    "cpu_wall_ratio": 0.6833160307349129
+  },
+  {
+    "trial": 0,
+    "mode": "mov",
+    "alignment": 32,
+    "ops": 160000000,
+    "ns": 0.1504395,
+    "loop": {
+      "elapsed_ns": 24070320,
+      "ops": 160000000,
+      "alignment": 32
+    },
+    "per_call": {
+      "cycles": 0.68303903125,
+      "instructions": 2.268866975,
+      "branches": 0.12860205625,
+      "branch-misses": 0.0001317
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "32",
+      "20000000"
+    ],
+    "started": 1793949303.9062195,
+    "stdout": "{\"elapsed_ns\":24070320,\"ops\":160000000,\"alignment\":32}\n",
+    "stderr": "109286245,,cpu_core/cycles/u,25718988,100.00,,\n363018716,,cpu_core/instructions/u,25718988,100.00,,\n20576329,,cpu_core/branches/u,25718988,100.00,,\n21072,,cpu_core/branch-misses/u,25718988,100.00,,\n25.72,msec,task-clock,25718988,100.00,,\n1,,context-switches,25718988,100.00,,\n0,,cpu-migrations,25718988,100.00,,\n437,,minor-faults,25718988,100.00,,\n0,,major-faults,25718988,100.00,,\n",
+    "metrics": {
+      "cycles": 109286245.0,
+      "instructions": 363018716.0,
+      "branches": 20576329.0,
+      "branch-misses": 21072.0,
+      "task-clock": 25.72,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37341829,
+    "cpu_wall_ratio": 0.6887718327883725
+  },
+  {
+    "trial": 0,
+    "mode": "mov",
+    "alignment": 8,
+    "ops": 160000000,
+    "ns": 0.15059245,
+    "loop": {
+      "elapsed_ns": 24094792,
+      "ops": 160000000,
+      "alignment": 8
+    },
+    "per_call": {
+      "cycles": 0.68279591875,
+      "instructions": 2.2688612875,
+      "branches": 0.128600775,
+      "branch-misses": 0.000132625
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "8",
+      "20000000"
+    ],
+    "started": 1793949303.94363,
+    "stdout": "{\"elapsed_ns\":24094792,\"ops\":160000000,\"alignment\":8}\n",
+    "stderr": "109247347,,cpu_core/cycles/u,25673010,100.00,,\n363017806,,cpu_core/instructions/u,25673010,100.00,,\n20576124,,cpu_core/branches/u,25673010,100.00,,\n21220,,cpu_core/branch-misses/u,25673010,100.00,,\n25.67,msec,task-clock,25673010,100.00,,\n2,,context-switches,25673010,100.00,,\n0,,cpu-migrations,25673010,100.00,,\n436,,minor-faults,25673010,100.00,,\n0,,major-faults,25673010,100.00,,\n",
+    "metrics": {
+      "cycles": 109247347.0,
+      "instructions": 363017806.0,
+      "branches": 20576124.0,
+      "branch-misses": 21220.0,
+      "task-clock": 25.67,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 436.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 36765245,
+    "cpu_wall_ratio": 0.698213761393403
+  },
+  {
+    "trial": 0,
+    "mode": "mov",
+    "alignment": 24,
+    "ops": 160000000,
+    "ns": 0.1515173,
+    "loop": {
+      "elapsed_ns": 24242768,
+      "ops": 160000000,
+      "alignment": 24
+    },
+    "per_call": {
+      "cycles": 0.686287825,
+      "instructions": 2.26886254375,
+      "branches": 0.12860108125,
+      "branch-misses": 0.00013169375
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "24",
+      "20000000"
+    ],
+    "started": 1793949303.9804702,
+    "stdout": "{\"elapsed_ns\":24242768,\"ops\":160000000,\"alignment\":24}\n",
+    "stderr": "109806052,,cpu_core/cycles/u,26020581,100.00,,\n363018007,,cpu_core/instructions/u,26020581,100.00,,\n20576173,,cpu_core/branches/u,26020581,100.00,,\n21071,,cpu_core/branch-misses/u,26020581,100.00,,\n26.02,msec,task-clock,26020581,100.00,,\n1,,context-switches,26020581,100.00,,\n0,,cpu-migrations,26020581,100.00,,\n435,,minor-faults,26020581,100.00,,\n0,,major-faults,26020581,100.00,,\n",
+    "metrics": {
+      "cycles": 109806052.0,
+      "instructions": 363018007.0,
+      "branches": 20576173.0,
+      "branch-misses": 21071.0,
+      "task-clock": 26.02,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 435.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37786066,
+    "cpu_wall_ratio": 0.6886136281030155
+  },
+  {
+    "trial": 1,
+    "mode": "mov",
+    "alignment": 48,
+    "ops": 160000000,
+    "ns": 0.150974225,
+    "loop": {
+      "elapsed_ns": 24155876,
+      "ops": 160000000,
+      "alignment": 48
+    },
+    "per_call": {
+      "cycles": 0.68484535,
+      "instructions": 2.2688633125,
+      "branches": 0.12860128125,
+      "branch-misses": 0.0001342625
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "48",
+      "20000000"
+    ],
+    "started": 1793949304.0186899,
+    "stdout": "{\"elapsed_ns\":24155876,\"ops\":160000000,\"alignment\":48}\n",
+    "stderr": "109575256,,cpu_core/cycles/u,25808159,100.00,,\n363018130,,cpu_core/instructions/u,25808159,100.00,,\n20576205,,cpu_core/branches/u,25808159,100.00,,\n21482,,cpu_core/branch-misses/u,25808159,100.00,,\n25.81,msec,task-clock,25808159,100.00,,\n3,,context-switches,25808159,100.00,,\n0,,cpu-migrations,25808159,100.00,,\n439,,minor-faults,25808159,100.00,,\n0,,major-faults,25808159,100.00,,\n",
+    "metrics": {
+      "cycles": 109575256.0,
+      "instructions": 363018130.0,
+      "branches": 20576205.0,
+      "branch-misses": 21482.0,
+      "task-clock": 25.81,
+      "context-switches": 3.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37649540,
+    "cpu_wall_ratio": 0.6855329440944032
+  },
+  {
+    "trial": 1,
+    "mode": "mov-chain",
+    "alignment": 48,
+    "ops": 20000000,
+    "ns": 1.12772405,
+    "loop": {
+      "elapsed_ns": 22554481,
+      "ops": 20000000,
+      "alignment": 48
+    },
+    "per_call": {
+      "cycles": 5.11916435,
+      "instructions": 3.1509022,
+      "branches": 1.02880885,
+      "branch-misses": 0.00106455
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "48",
+      "20000000"
+    ],
+    "started": 1793949304.0564091,
+    "stdout": "{\"elapsed_ns\":22554481,\"ops\":20000000,\"alignment\":48}\n",
+    "stderr": "102383287,,cpu_core/cycles/u,24154986,100.00,,\n63018044,,cpu_core/instructions/u,24154986,100.00,,\n20576177,,cpu_core/branches/u,24154986,100.00,,\n21291,,cpu_core/branch-misses/u,24154986,100.00,,\n24.15,msec,task-clock,24154986,100.00,,\n1,,context-switches,24154986,100.00,,\n0,,cpu-migrations,24154986,100.00,,\n433,,minor-faults,24154986,100.00,,\n0,,major-faults,24154986,100.00,,\n",
+    "metrics": {
+      "cycles": 102383287.0,
+      "instructions": 63018044.0,
+      "branches": 20576177.0,
+      "branch-misses": 21291.0,
+      "task-clock": 24.15,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 433.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35475393,
+    "cpu_wall_ratio": 0.680753557825279
+  },
+  {
+    "trial": 1,
+    "mode": "mov",
+    "alignment": 24,
+    "ops": 160000000,
+    "ns": 0.15000400625,
+    "loop": {
+      "elapsed_ns": 24000641,
+      "ops": 160000000,
+      "alignment": 24
+    },
+    "per_call": {
+      "cycles": 0.68194015625,
+      "instructions": 2.26886465625,
+      "branches": 0.12860153125,
+      "branch-misses": 0.00013095625
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "24",
+      "20000000"
+    ],
+    "started": 1793949304.0919538,
+    "stdout": "{\"elapsed_ns\":24000641,\"ops\":160000000,\"alignment\":24}\n",
+    "stderr": "109110425,,cpu_core/cycles/u,25670476,100.00,,\n363018345,,cpu_core/instructions/u,25670476,100.00,,\n20576245,,cpu_core/branches/u,25670476,100.00,,\n20953,,cpu_core/branch-misses/u,25670476,100.00,,\n25.67,msec,task-clock,25670476,100.00,,\n1,,context-switches,25670476,100.00,,\n0,,cpu-migrations,25670476,100.00,,\n436,,minor-faults,25670476,100.00,,\n0,,major-faults,25670476,100.00,,\n",
+    "metrics": {
+      "cycles": 109110425.0,
+      "instructions": 363018345.0,
+      "branches": 20576245.0,
+      "branch-misses": 20953.0,
+      "task-clock": 25.67,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 436.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37151167,
+    "cpu_wall_ratio": 0.6909607980820629
+  },
+  {
+    "trial": 1,
+    "mode": "mov-chain",
+    "alignment": 32,
+    "ops": 20000000,
+    "ns": 1.1285369,
+    "loop": {
+      "elapsed_ns": 22570738,
+      "ops": 20000000,
+      "alignment": 32
+    },
+    "per_call": {
+      "cycles": 5.1207801,
+      "instructions": 3.1508992,
+      "branches": 1.02880805,
+      "branch-misses": 0.0010429
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "32",
+      "20000000"
+    ],
+    "started": 1793949304.12917,
+    "stdout": "{\"elapsed_ns\":22570738,\"ops\":20000000,\"alignment\":32}\n",
+    "stderr": "102415602,,cpu_core/cycles/u,24181162,100.00,,\n63017984,,cpu_core/instructions/u,24181162,100.00,,\n20576161,,cpu_core/branches/u,24181162,100.00,,\n20858,,cpu_core/branch-misses/u,24181162,100.00,,\n24.18,msec,task-clock,24181162,100.00,,\n0,,context-switches,24181162,100.00,,\n0,,cpu-migrations,24181162,100.00,,\n437,,minor-faults,24181162,100.00,,\n0,,major-faults,24181162,100.00,,\n",
+    "metrics": {
+      "cycles": 102415602.0,
+      "instructions": 63017984.0,
+      "branches": 20576161.0,
+      "branch-misses": 20858.0,
+      "task-clock": 24.18,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35938042,
+    "cpu_wall_ratio": 0.6728246352430663
+  },
+  {
+    "trial": 1,
+    "mode": "mov-chain",
+    "alignment": 0,
+    "ops": 20000000,
+    "ns": 1.1269682,
+    "loop": {
+      "elapsed_ns": 22539364,
+      "ops": 20000000,
+      "alignment": 0
+    },
+    "per_call": {
+      "cycles": 5.12167765,
+      "instructions": 3.1509012,
+      "branches": 1.02880885,
+      "branch-misses": 0.001056
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "0",
+      "20000000"
+    ],
+    "started": 1793949304.165651,
+    "stdout": "{\"elapsed_ns\":22539364,\"ops\":20000000,\"alignment\":0}\n",
+    "stderr": "102433553,,cpu_core/cycles/u,24172445,100.00,,\n63018024,,cpu_core/instructions/u,24172445,100.00,,\n20576177,,cpu_core/branches/u,24172445,100.00,,\n21120,,cpu_core/branch-misses/u,24172445,100.00,,\n24.17,msec,task-clock,24172445,100.00,,\n0,,context-switches,24172445,100.00,,\n0,,cpu-migrations,24172445,100.00,,\n437,,minor-faults,24172445,100.00,,\n0,,major-faults,24172445,100.00,,\n",
+    "metrics": {
+      "cycles": 102433553.0,
+      "instructions": 63018024.0,
+      "branches": 20576177.0,
+      "branch-misses": 21120.0,
+      "task-clock": 24.17,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35597049,
+    "cpu_wall_ratio": 0.6789888678693562
+  },
+  {
+    "trial": 1,
+    "mode": "mov-chain",
+    "alignment": 56,
+    "ops": 20000000,
+    "ns": 1.12978055,
+    "loop": {
+      "elapsed_ns": 22595611,
+      "ops": 20000000,
+      "alignment": 56
+    },
+    "per_call": {
+      "cycles": 5.1206788,
+      "instructions": 3.15089705,
+      "branches": 1.0288079,
+      "branch-misses": 0.00106535
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "56",
+      "20000000"
+    ],
+    "started": 1793949304.2013168,
+    "stdout": "{\"elapsed_ns\":22595611,\"ops\":20000000,\"alignment\":56}\n",
+    "stderr": "102413576,,cpu_core/cycles/u,24273398,100.00,,\n63017941,,cpu_core/instructions/u,24273398,100.00,,\n20576158,,cpu_core/branches/u,24273398,100.00,,\n21307,,cpu_core/branch-misses/u,24273398,100.00,,\n24.27,msec,task-clock,24273398,100.00,,\n1,,context-switches,24273398,100.00,,\n0,,cpu-migrations,24273398,100.00,,\n438,,minor-faults,24273398,100.00,,\n0,,major-faults,24273398,100.00,,\n",
+    "metrics": {
+      "cycles": 102413576.0,
+      "instructions": 63017941.0,
+      "branches": 20576158.0,
+      "branch-misses": 21307.0,
+      "task-clock": 24.27,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 438.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35499608,
+    "cpu_wall_ratio": 0.6836695210831624
+  },
+  {
+    "trial": 1,
+    "mode": "mov-chain",
+    "alignment": 40,
+    "ops": 20000000,
+    "ns": 1.1281428,
+    "loop": {
+      "elapsed_ns": 22562856,
+      "ops": 20000000,
+      "alignment": 40
+    },
+    "per_call": {
+      "cycles": 5.1219933,
+      "instructions": 3.15089835,
+      "branches": 1.0288082,
+      "branch-misses": 0.00106825
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "40",
+      "20000000"
+    ],
+    "started": 1793949304.2368867,
+    "stdout": "{\"elapsed_ns\":22562856,\"ops\":20000000,\"alignment\":40}\n",
+    "stderr": "102439866,,cpu_core/cycles/u,24202049,100.00,,\n63017967,,cpu_core/instructions/u,24202049,100.00,,\n20576164,,cpu_core/branches/u,24202049,100.00,,\n21365,,cpu_core/branch-misses/u,24202049,100.00,,\n24.20,msec,task-clock,24202049,100.00,,\n2,,context-switches,24202049,100.00,,\n0,,cpu-migrations,24202049,100.00,,\n439,,minor-faults,24202049,100.00,,\n0,,major-faults,24202049,100.00,,\n",
+    "metrics": {
+      "cycles": 102439866.0,
+      "instructions": 63017967.0,
+      "branches": 20576164.0,
+      "branch-misses": 21365.0,
+      "task-clock": 24.2,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35565246,
+    "cpu_wall_ratio": 0.6804395504532712
+  },
+  {
+    "trial": 1,
+    "mode": "mov",
+    "alignment": 40,
+    "ops": 160000000,
+    "ns": 0.152846275,
+    "loop": {
+      "elapsed_ns": 24455404,
+      "ops": 160000000,
+      "alignment": 40
+    },
+    "per_call": {
+      "cycles": 0.69184226875,
+      "instructions": 2.2688631375,
+      "branches": 0.12860123125,
+      "branch-misses": 0.0001328125
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "40",
+      "20000000"
+    ],
+    "started": 1793949304.2725239,
+    "stdout": "{\"elapsed_ns\":24455404,\"ops\":160000000,\"alignment\":40}\n",
+    "stderr": "110694763,,cpu_core/cycles/u,26064060,100.00,,\n363018102,,cpu_core/instructions/u,26064060,100.00,,\n20576197,,cpu_core/branches/u,26064060,100.00,,\n21250,,cpu_core/branch-misses/u,26064060,100.00,,\n26.06,msec,task-clock,26064060,100.00,,\n2,,context-switches,26064060,100.00,,\n0,,cpu-migrations,26064060,100.00,,\n437,,minor-faults,26064060,100.00,,\n0,,major-faults,26064060,100.00,,\n",
+    "metrics": {
+      "cycles": 110694763.0,
+      "instructions": 363018102.0,
+      "branches": 20576197.0,
+      "branch-misses": 21250.0,
+      "task-clock": 26.06,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37033849,
+    "cpu_wall_ratio": 0.7036805707124852
+  },
+  {
+    "trial": 1,
+    "mode": "mov-chain",
+    "alignment": 16,
+    "ops": 20000000,
+    "ns": 1.12698105,
+    "loop": {
+      "elapsed_ns": 22539621,
+      "ops": 20000000,
+      "alignment": 16
+    },
+    "per_call": {
+      "cycles": 5.12126215,
+      "instructions": 3.1509054,
+      "branches": 1.0288094,
+      "branch-misses": 0.0010467
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "16",
+      "20000000"
+    ],
+    "started": 1793949304.3096342,
+    "stdout": "{\"elapsed_ns\":22539621,\"ops\":20000000,\"alignment\":16}\n",
+    "stderr": "102425243,,cpu_core/cycles/u,24184533,100.00,,\n63018108,,cpu_core/instructions/u,24184533,100.00,,\n20576188,,cpu_core/branches/u,24184533,100.00,,\n20934,,cpu_core/branch-misses/u,24184533,100.00,,\n24.18,msec,task-clock,24184533,100.00,,\n1,,context-switches,24184533,100.00,,\n0,,cpu-migrations,24184533,100.00,,\n435,,minor-faults,24184533,100.00,,\n0,,major-faults,24184533,100.00,,\n",
+    "metrics": {
+      "cycles": 102425243.0,
+      "instructions": 63018108.0,
+      "branches": 20576188.0,
+      "branch-misses": 20934.0,
+      "task-clock": 24.18,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 435.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35172929,
+    "cpu_wall_ratio": 0.687460518286663
+  },
+  {
+    "trial": 1,
+    "mode": "mov",
+    "alignment": 56,
+    "ops": 160000000,
+    "ns": 0.15031025625,
+    "loop": {
+      "elapsed_ns": 24049641,
+      "ops": 160000000,
+      "alignment": 56
+    },
+    "per_call": {
+      "cycles": 0.68362368125,
+      "instructions": 2.26886214375,
+      "branches": 0.1286009875,
+      "branch-misses": 0.000131175
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "56",
+      "20000000"
+    ],
+    "started": 1793949304.3448796,
+    "stdout": "{\"elapsed_ns\":24049641,\"ops\":160000000,\"alignment\":56}\n",
+    "stderr": "109379789,,cpu_core/cycles/u,25643839,100.00,,\n363017943,,cpu_core/instructions/u,25643839,100.00,,\n20576158,,cpu_core/branches/u,25643839,100.00,,\n20988,,cpu_core/branch-misses/u,25643839,100.00,,\n25.64,msec,task-clock,25643839,100.00,,\n1,,context-switches,25643839,100.00,,\n0,,cpu-migrations,25643839,100.00,,\n438,,minor-faults,25643839,100.00,,\n0,,major-faults,25643839,100.00,,\n",
+    "metrics": {
+      "cycles": 109379789.0,
+      "instructions": 363017943.0,
+      "branches": 20576158.0,
+      "branch-misses": 20988.0,
+      "task-clock": 25.64,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 438.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37248459,
+    "cpu_wall_ratio": 0.688350624115752
+  },
+  {
+    "trial": 1,
+    "mode": "mov-chain",
+    "alignment": 8,
+    "ops": 20000000,
+    "ns": 1.135239,
+    "loop": {
+      "elapsed_ns": 22704780,
+      "ops": 20000000,
+      "alignment": 8
+    },
+    "per_call": {
+      "cycles": 5.1460405,
+      "instructions": 3.15092575,
+      "branches": 1.02881445,
+      "branch-misses": 0.00106175
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "8",
+      "20000000"
+    ],
+    "started": 1793949304.3822014,
+    "stdout": "{\"elapsed_ns\":22704780,\"ops\":20000000,\"alignment\":8}\n",
+    "stderr": "102920810,,cpu_core/cycles/u,24456706,100.00,,\n63018515,,cpu_core/instructions/u,24456706,100.00,,\n20576289,,cpu_core/branches/u,24456706,100.00,,\n21235,,cpu_core/branch-misses/u,24456706,100.00,,\n24.46,msec,task-clock,24456706,100.00,,\n1,,context-switches,24456706,100.00,,\n0,,cpu-migrations,24456706,100.00,,\n437,,minor-faults,24456706,100.00,,\n0,,major-faults,24456706,100.00,,\n",
+    "metrics": {
+      "cycles": 102920810.0,
+      "instructions": 63018515.0,
+      "branches": 20576289.0,
+      "branch-misses": 21235.0,
+      "task-clock": 24.46,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 36388279,
+    "cpu_wall_ratio": 0.6721944722914761
+  },
+  {
+    "trial": 1,
+    "mode": "mov",
+    "alignment": 0,
+    "ops": 160000000,
+    "ns": 0.1508571,
+    "loop": {
+      "elapsed_ns": 24137136,
+      "ops": 160000000,
+      "alignment": 0
+    },
+    "per_call": {
+      "cycles": 0.68500911875,
+      "instructions": 2.26886446875,
+      "branches": 0.1286015,
+      "branch-misses": 0.00013329375
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "0",
+      "20000000"
+    ],
+    "started": 1793949304.4186618,
+    "stdout": "{\"elapsed_ns\":24137136,\"ops\":160000000,\"alignment\":0}\n",
+    "stderr": "109601459,,cpu_core/cycles/u,25992937,100.00,,\n363018315,,cpu_core/instructions/u,25992937,100.00,,\n20576240,,cpu_core/branches/u,25992937,100.00,,\n21327,,cpu_core/branch-misses/u,25992937,100.00,,\n25.99,msec,task-clock,25992937,100.00,,\n1,,context-switches,25992937,100.00,,\n0,,cpu-migrations,25992937,100.00,,\n437,,minor-faults,25992937,100.00,,\n0,,major-faults,25992937,100.00,,\n",
+    "metrics": {
+      "cycles": 109601459.0,
+      "instructions": 363018315.0,
+      "branches": 20576240.0,
+      "branch-misses": 21327.0,
+      "task-clock": 25.99,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37978222,
+    "cpu_wall_ratio": 0.684339567028704
+  },
+  {
+    "trial": 1,
+    "mode": "mov",
+    "alignment": 8,
+    "ops": 160000000,
+    "ns": 0.1506257875,
+    "loop": {
+      "elapsed_ns": 24100126,
+      "ops": 160000000,
+      "alignment": 8
+    },
+    "per_call": {
+      "cycles": 0.6839033625,
+      "instructions": 2.2688658125,
+      "branches": 0.1286018,
+      "branch-misses": 0.0001331625
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "8",
+      "20000000"
+    ],
+    "started": 1793949304.4567153,
+    "stdout": "{\"elapsed_ns\":24100126,\"ops\":160000000,\"alignment\":8}\n",
+    "stderr": "109424538,,cpu_core/cycles/u,25795687,100.00,,\n363018530,,cpu_core/instructions/u,25795687,100.00,,\n20576288,,cpu_core/branches/u,25795687,100.00,,\n21306,,cpu_core/branch-misses/u,25795687,100.00,,\n25.80,msec,task-clock,25795687,100.00,,\n2,,context-switches,25795687,100.00,,\n0,,cpu-migrations,25795687,100.00,,\n439,,minor-faults,25795687,100.00,,\n0,,major-faults,25795687,100.00,,\n",
+    "metrics": {
+      "cycles": 109424538.0,
+      "instructions": 363018530.0,
+      "branches": 20576288.0,
+      "branch-misses": 21306.0,
+      "task-clock": 25.8,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37498243,
+    "cpu_wall_ratio": 0.6880322366037257
+  },
+  {
+    "trial": 1,
+    "mode": "mov",
+    "alignment": 32,
+    "ops": 160000000,
+    "ns": 0.21449700625,
+    "loop": {
+      "elapsed_ns": 34319521,
+      "ops": 160000000,
+      "alignment": 32
+    },
+    "per_call": {
+      "cycles": 0.9801255375,
+      "instructions": 2.26886319375,
+      "branches": 0.1286012875,
+      "branch-misses": 0.0001311125
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "32",
+      "20000000"
+    ],
+    "started": 1793949304.4942887,
+    "stdout": "{\"elapsed_ns\":34319521,\"ops\":160000000,\"alignment\":32}\n",
+    "stderr": "156820086,,cpu_core/cycles/u,37628823,100.00,,\n363018111,,cpu_core/instructions/u,37628823,100.00,,\n20576206,,cpu_core/branches/u,37628823,100.00,,\n20978,,cpu_core/branch-misses/u,37628823,100.00,,\n37.63,msec,task-clock,37628823,100.00,,\n0,,context-switches,37628823,100.00,,\n0,,cpu-migrations,37628823,100.00,,\n441,,minor-faults,37628823,100.00,,\n0,,major-faults,37628823,100.00,,\n",
+    "metrics": {
+      "cycles": 156820086.0,
+      "instructions": 363018111.0,
+      "branches": 20576206.0,
+      "branch-misses": 20978.0,
+      "task-clock": 37.63,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 441.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 50121260,
+    "cpu_wall_ratio": 0.7507792102592792
+  },
+  {
+    "trial": 1,
+    "mode": "mov-chain",
+    "alignment": 24,
+    "ops": 20000000,
+    "ns": 1.1247233,
+    "loop": {
+      "elapsed_ns": 22494466,
+      "ops": 20000000,
+      "alignment": 24
+    },
+    "per_call": {
+      "cycles": 5.1292804,
+      "instructions": 3.1509175,
+      "branches": 1.0288123,
+      "branch-misses": 0.001045
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "24",
+      "20000000"
+    ],
+    "started": 1793949304.5445366,
+    "stdout": "{\"elapsed_ns\":22494466,\"ops\":20000000,\"alignment\":24}\n",
+    "stderr": "102585608,,cpu_core/cycles/u,24342783,100.00,,\n63018350,,cpu_core/instructions/u,24342783,100.00,,\n20576246,,cpu_core/branches/u,24342783,100.00,,\n20900,,cpu_core/branch-misses/u,24342783,100.00,,\n24.34,msec,task-clock,24342783,100.00,,\n0,,context-switches,24342783,100.00,,\n0,,cpu-migrations,24342783,100.00,,\n437,,minor-faults,24342783,100.00,,\n0,,major-faults,24342783,100.00,,\n",
+    "metrics": {
+      "cycles": 102585608.0,
+      "instructions": 63018350.0,
+      "branches": 20576246.0,
+      "branch-misses": 20900.0,
+      "task-clock": 24.34,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 39365487,
+    "cpu_wall_ratio": 0.6183081133989273
+  },
+  {
+    "trial": 1,
+    "mode": "mov",
+    "alignment": 16,
+    "ops": 160000000,
+    "ns": 0.1500619625,
+    "loop": {
+      "elapsed_ns": 24009914,
+      "ops": 160000000,
+      "alignment": 16
+    },
+    "per_call": {
+      "cycles": 0.6834180375,
+      "instructions": 2.26887149375,
+      "branches": 0.1286030375,
+      "branch-misses": 0.0001320375
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "16",
+      "20000000"
+    ],
+    "started": 1793949304.5839763,
+    "stdout": "{\"elapsed_ns\":24009914,\"ops\":160000000,\"alignment\":16}\n",
+    "stderr": "109346886,,cpu_core/cycles/u,25830261,100.00,,\n363019439,,cpu_core/instructions/u,25830261,100.00,,\n20576486,,cpu_core/branches/u,25830261,100.00,,\n21126,,cpu_core/branch-misses/u,25830261,100.00,,\n25.83,msec,task-clock,25830261,100.00,,\n0,,context-switches,25830261,100.00,,\n0,,cpu-migrations,25830261,100.00,,\n436,,minor-faults,25830261,100.00,,\n0,,major-faults,25830261,100.00,,\n",
+    "metrics": {
+      "cycles": 109346886.0,
+      "instructions": 363019439.0,
+      "branches": 20576486.0,
+      "branch-misses": 21126.0,
+      "task-clock": 25.83,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 436.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37448169,
+    "cpu_wall_ratio": 0.6897533494895305
+  },
+  {
+    "trial": 2,
+    "mode": "mov",
+    "alignment": 32,
+    "ops": 160000000,
+    "ns": 0.14997238125,
+    "loop": {
+      "elapsed_ns": 23995581,
+      "ops": 160000000,
+      "alignment": 32
+    },
+    "per_call": {
+      "cycles": 0.6826842875,
+      "instructions": 2.26886328125,
+      "branches": 0.12860125,
+      "branch-misses": 0.00013236875
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "32",
+      "20000000"
+    ],
+    "started": 1793949304.622145,
+    "stdout": "{\"elapsed_ns\":23995581,\"ops\":160000000,\"alignment\":32}\n",
+    "stderr": "109229486,,cpu_core/cycles/u,25722373,100.00,,\n363018125,,cpu_core/instructions/u,25722373,100.00,,\n20576200,,cpu_core/branches/u,25722373,100.00,,\n21179,,cpu_core/branch-misses/u,25722373,100.00,,\n25.72,msec,task-clock,25722373,100.00,,\n0,,context-switches,25722373,100.00,,\n0,,cpu-migrations,25722373,100.00,,\n439,,minor-faults,25722373,100.00,,\n0,,major-faults,25722373,100.00,,\n",
+    "metrics": {
+      "cycles": 109229486.0,
+      "instructions": 363018125.0,
+      "branches": 20576200.0,
+      "branch-misses": 21179.0,
+      "task-clock": 25.72,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37819721,
+    "cpu_wall_ratio": 0.6800684753861617
+  },
+  {
+    "trial": 2,
+    "mode": "mov",
+    "alignment": 24,
+    "ops": 160000000,
+    "ns": 0.1502592625,
+    "loop": {
+      "elapsed_ns": 24041482,
+      "ops": 160000000,
+      "alignment": 24
+    },
+    "per_call": {
+      "cycles": 0.682080625,
+      "instructions": 2.26888695625,
+      "branches": 0.12860543125,
+      "branch-misses": 0.00013275625
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "24",
+      "20000000"
+    ],
+    "started": 1793949304.6600406,
+    "stdout": "{\"elapsed_ns\":24041482,\"ops\":160000000,\"alignment\":24}\n",
+    "stderr": "109132900,,cpu_core/cycles/u,25697854,100.00,,\n363021913,,cpu_core/instructions/u,25697854,100.00,,\n20576869,,cpu_core/branches/u,25697854,100.00,,\n21241,,cpu_core/branch-misses/u,25697854,100.00,,\n25.70,msec,task-clock,25697854,100.00,,\n0,,context-switches,25697854,100.00,,\n0,,cpu-migrations,25697854,100.00,,\n437,,minor-faults,25697854,100.00,,\n0,,major-faults,25697854,100.00,,\n",
+    "metrics": {
+      "cycles": 109132900.0,
+      "instructions": 363021913.0,
+      "branches": 20576869.0,
+      "branch-misses": 21241.0,
+      "task-clock": 25.7,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37383373,
+    "cpu_wall_ratio": 0.6874714060713569
+  },
+  {
+    "trial": 2,
+    "mode": "mov-chain",
+    "alignment": 16,
+    "ops": 20000000,
+    "ns": 1.12782275,
+    "loop": {
+      "elapsed_ns": 22556455,
+      "ops": 20000000,
+      "alignment": 16
+    },
+    "per_call": {
+      "cycles": 5.125576,
+      "instructions": 3.15091635,
+      "branches": 1.0288119,
+      "branch-misses": 0.00105365
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "16",
+      "20000000"
+    ],
+    "started": 1793949304.6975012,
+    "stdout": "{\"elapsed_ns\":22556455,\"ops\":20000000,\"alignment\":16}\n",
+    "stderr": "102511520,,cpu_core/cycles/u,24272560,100.00,,\n63018327,,cpu_core/instructions/u,24272560,100.00,,\n20576238,,cpu_core/branches/u,24272560,100.00,,\n21073,,cpu_core/branch-misses/u,24272560,100.00,,\n24.27,msec,task-clock,24272560,100.00,,\n0,,context-switches,24272560,100.00,,\n0,,cpu-migrations,24272560,100.00,,\n438,,minor-faults,24272560,100.00,,\n0,,major-faults,24272560,100.00,,\n",
+    "metrics": {
+      "cycles": 102511520.0,
+      "instructions": 63018327.0,
+      "branches": 20576238.0,
+      "branch-misses": 21073.0,
+      "task-clock": 24.27,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 438.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 36127330,
+    "cpu_wall_ratio": 0.6717905807044141
+  },
+  {
+    "trial": 2,
+    "mode": "mov-chain",
+    "alignment": 32,
+    "ops": 20000000,
+    "ns": 1.12767015,
+    "loop": {
+      "elapsed_ns": 22553403,
+      "ops": 20000000,
+      "alignment": 32
+    },
+    "per_call": {
+      "cycles": 5.12821815,
+      "instructions": 3.150904,
+      "branches": 1.0288093,
+      "branch-misses": 0.0010606
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "32",
+      "20000000"
+    ],
+    "started": 1793949304.7337012,
+    "stdout": "{\"elapsed_ns\":22553403,\"ops\":20000000,\"alignment\":32}\n",
+    "stderr": "102564363,,cpu_core/cycles/u,24332199,100.00,,\n63018080,,cpu_core/instructions/u,24332199,100.00,,\n20576186,,cpu_core/branches/u,24332199,100.00,,\n21212,,cpu_core/branch-misses/u,24332199,100.00,,\n24.33,msec,task-clock,24332199,100.00,,\n1,,context-switches,24332199,100.00,,\n0,,cpu-migrations,24332199,100.00,,\n435,,minor-faults,24332199,100.00,,\n0,,major-faults,24332199,100.00,,\n",
+    "metrics": {
+      "cycles": 102564363.0,
+      "instructions": 63018080.0,
+      "branches": 20576186.0,
+      "branch-misses": 21212.0,
+      "task-clock": 24.33,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 435.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35826172,
+    "cpu_wall_ratio": 0.6791124656019627
+  },
+  {
+    "trial": 2,
+    "mode": "mov-chain",
+    "alignment": 48,
+    "ops": 20000000,
+    "ns": 1.12484665,
+    "loop": {
+      "elapsed_ns": 22496933,
+      "ops": 20000000,
+      "alignment": 48
+    },
+    "per_call": {
+      "cycles": 5.1257371,
+      "instructions": 3.1509179,
+      "branches": 1.0288123,
+      "branch-misses": 0.0010643
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "48",
+      "20000000"
+    ],
+    "started": 1793949304.7696,
+    "stdout": "{\"elapsed_ns\":22496933,\"ops\":20000000,\"alignment\":48}\n",
+    "stderr": "102514742,,cpu_core/cycles/u,24236080,100.00,,\n63018358,,cpu_core/instructions/u,24236080,100.00,,\n20576246,,cpu_core/branches/u,24236080,100.00,,\n21286,,cpu_core/branch-misses/u,24236080,100.00,,\n24.24,msec,task-clock,24236080,100.00,,\n0,,context-switches,24236080,100.00,,\n0,,cpu-migrations,24236080,100.00,,\n434,,minor-faults,24236080,100.00,,\n0,,major-faults,24236080,100.00,,\n",
+    "metrics": {
+      "cycles": 102514742.0,
+      "instructions": 63018358.0,
+      "branches": 20576246.0,
+      "branch-misses": 21286.0,
+      "task-clock": 24.24,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 434.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 36113982,
+    "cpu_wall_ratio": 0.6712081763788884
+  },
+  {
+    "trial": 2,
+    "mode": "mov",
+    "alignment": 56,
+    "ops": 160000000,
+    "ns": 0.151304875,
+    "loop": {
+      "elapsed_ns": 24208780,
+      "ops": 160000000,
+      "alignment": 56
+    },
+    "per_call": {
+      "cycles": 0.68831359375,
+      "instructions": 2.26886393125,
+      "branches": 0.128601375,
+      "branch-misses": 0.0001328625
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "56",
+      "20000000"
+    ],
+    "started": 1793949304.805785,
+    "stdout": "{\"elapsed_ns\":24208780,\"ops\":160000000,\"alignment\":56}\n",
+    "stderr": "110130175,,cpu_core/cycles/u,25963362,100.00,,\n363018229,,cpu_core/instructions/u,25963362,100.00,,\n20576220,,cpu_core/branches/u,25963362,100.00,,\n21258,,cpu_core/branch-misses/u,25963362,100.00,,\n25.96,msec,task-clock,25963362,100.00,,\n0,,context-switches,25963362,100.00,,\n0,,cpu-migrations,25963362,100.00,,\n438,,minor-faults,25963362,100.00,,\n0,,major-faults,25963362,100.00,,\n",
+    "metrics": {
+      "cycles": 110130175.0,
+      "instructions": 363018229.0,
+      "branches": 20576220.0,
+      "branch-misses": 21258.0,
+      "task-clock": 25.96,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 438.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37665919,
+    "cpu_wall_ratio": 0.689217220479872
+  },
+  {
+    "trial": 2,
+    "mode": "mov",
+    "alignment": 48,
+    "ops": 160000000,
+    "ns": 0.15034979375,
+    "loop": {
+      "elapsed_ns": 24055967,
+      "ops": 160000000,
+      "alignment": 48
+    },
+    "per_call": {
+      "cycles": 0.68290564375,
+      "instructions": 2.26886461875,
+      "branches": 0.12860154375,
+      "branch-misses": 0.00013258125
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "48",
+      "20000000"
+    ],
+    "started": 1793949304.843529,
+    "stdout": "{\"elapsed_ns\":24055967,\"ops\":160000000,\"alignment\":48}\n",
+    "stderr": "109264903,,cpu_core/cycles/u,25853990,100.00,,\n363018339,,cpu_core/instructions/u,25853990,100.00,,\n20576247,,cpu_core/branches/u,25853990,100.00,,\n21213,,cpu_core/branch-misses/u,25853990,100.00,,\n25.85,msec,task-clock,25853990,100.00,,\n5,,context-switches,25853990,100.00,,\n0,,cpu-migrations,25853990,100.00,,\n437,,minor-faults,25853990,100.00,,\n0,,major-faults,25853990,100.00,,\n",
+    "metrics": {
+      "cycles": 109264903.0,
+      "instructions": 363018339.0,
+      "branches": 20576247.0,
+      "branch-misses": 21213.0,
+      "task-clock": 25.85,
+      "context-switches": 5.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37560350,
+    "cpu_wall_ratio": 0.6882257486951
+  },
+  {
+    "trial": 2,
+    "mode": "mov-chain",
+    "alignment": 40,
+    "ops": 20000000,
+    "ns": 1.1286267,
+    "loop": {
+      "elapsed_ns": 22572534,
+      "ops": 20000000,
+      "alignment": 40
+    },
+    "per_call": {
+      "cycles": 5.1261545,
+      "instructions": 3.1509059,
+      "branches": 1.0288098,
+      "branch-misses": 0.00104735
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "40",
+      "20000000"
+    ],
+    "started": 1793949304.8811624,
+    "stdout": "{\"elapsed_ns\":22572534,\"ops\":20000000,\"alignment\":40}\n",
+    "stderr": "102523090,,cpu_core/cycles/u,24321532,100.00,,\n63018118,,cpu_core/instructions/u,24321532,100.00,,\n20576196,,cpu_core/branches/u,24321532,100.00,,\n20947,,cpu_core/branch-misses/u,24321532,100.00,,\n24.32,msec,task-clock,24321532,100.00,,\n2,,context-switches,24321532,100.00,,\n0,,cpu-migrations,24321532,100.00,,\n437,,minor-faults,24321532,100.00,,\n0,,major-faults,24321532,100.00,,\n",
+    "metrics": {
+      "cycles": 102523090.0,
+      "instructions": 63018118.0,
+      "branches": 20576196.0,
+      "branch-misses": 20947.0,
+      "task-clock": 24.32,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35798742,
+    "cpu_wall_ratio": 0.6793534811921603
+  },
+  {
+    "trial": 2,
+    "mode": "mov-chain",
+    "alignment": 56,
+    "ops": 20000000,
+    "ns": 1.1270092,
+    "loop": {
+      "elapsed_ns": 22540184,
+      "ops": 20000000,
+      "alignment": 56
+    },
+    "per_call": {
+      "cycles": 5.13314435,
+      "instructions": 3.1509094,
+      "branches": 1.02881055,
+      "branch-misses": 0.0010561
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "56",
+      "20000000"
+    ],
+    "started": 1793949304.9177406,
+    "stdout": "{\"elapsed_ns\":22540184,\"ops\":20000000,\"alignment\":56}\n",
+    "stderr": "102662887,,cpu_core/cycles/u,24391044,100.00,,\n63018188,,cpu_core/instructions/u,24391044,100.00,,\n20576211,,cpu_core/branches/u,24391044,100.00,,\n21122,,cpu_core/branch-misses/u,24391044,100.00,,\n24.39,msec,task-clock,24391044,100.00,,\n2,,context-switches,24391044,100.00,,\n0,,cpu-migrations,24391044,100.00,,\n439,,minor-faults,24391044,100.00,,\n0,,major-faults,24391044,100.00,,\n",
+    "metrics": {
+      "cycles": 102662887.0,
+      "instructions": 63018188.0,
+      "branches": 20576211.0,
+      "branch-misses": 21122.0,
+      "task-clock": 24.39,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35921991,
+    "cpu_wall_ratio": 0.6789712741701873
+  },
+  {
+    "trial": 2,
+    "mode": "mov",
+    "alignment": 40,
+    "ops": 160000000,
+    "ns": 0.1505166125,
+    "loop": {
+      "elapsed_ns": 24082658,
+      "ops": 160000000,
+      "alignment": 40
+    },
+    "per_call": {
+      "cycles": 0.6835181,
+      "instructions": 2.26886474375,
+      "branches": 0.12860156875,
+      "branch-misses": 0.0001315
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "40",
+      "20000000"
+    ],
+    "started": 1793949304.9537363,
+    "stdout": "{\"elapsed_ns\":24082658,\"ops\":160000000,\"alignment\":40}\n",
+    "stderr": "109362896,,cpu_core/cycles/u,25795641,100.00,,\n363018359,,cpu_core/instructions/u,25795641,100.00,,\n20576251,,cpu_core/branches/u,25795641,100.00,,\n21040,,cpu_core/branch-misses/u,25795641,100.00,,\n25.80,msec,task-clock,25795641,100.00,,\n1,,context-switches,25795641,100.00,,\n0,,cpu-migrations,25795641,100.00,,\n438,,minor-faults,25795641,100.00,,\n0,,major-faults,25795641,100.00,,\n",
+    "metrics": {
+      "cycles": 109362896.0,
+      "instructions": 363018359.0,
+      "branches": 20576251.0,
+      "branch-misses": 21040.0,
+      "task-clock": 25.8,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 438.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37624158,
+    "cpu_wall_ratio": 0.685729631477733
+  },
+  {
+    "trial": 2,
+    "mode": "mov-chain",
+    "alignment": 0,
+    "ops": 20000000,
+    "ns": 1.12790135,
+    "loop": {
+      "elapsed_ns": 22558027,
+      "ops": 20000000,
+      "alignment": 0
+    },
+    "per_call": {
+      "cycles": 5.1226084,
+      "instructions": 3.1508954,
+      "branches": 1.0288074,
+      "branch-misses": 0.00107695
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "0",
+      "20000000"
+    ],
+    "started": 1793949304.9914315,
+    "stdout": "{\"elapsed_ns\":22558027,\"ops\":20000000,\"alignment\":0}\n",
+    "stderr": "102452168,,cpu_core/cycles/u,24212687,100.00,,\n63017908,,cpu_core/instructions/u,24212687,100.00,,\n20576148,,cpu_core/branches/u,24212687,100.00,,\n21539,,cpu_core/branch-misses/u,24212687,100.00,,\n24.21,msec,task-clock,24212687,100.00,,\n1,,context-switches,24212687,100.00,,\n0,,cpu-migrations,24212687,100.00,,\n436,,minor-faults,24212687,100.00,,\n0,,major-faults,24212687,100.00,,\n",
+    "metrics": {
+      "cycles": 102452168.0,
+      "instructions": 63017908.0,
+      "branches": 20576148.0,
+      "branch-misses": 21539.0,
+      "task-clock": 24.21,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 436.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35861917,
+    "cpu_wall_ratio": 0.6750893991528674
+  },
+  {
+    "trial": 2,
+    "mode": "mov-chain",
+    "alignment": 8,
+    "ops": 20000000,
+    "ns": 1.1273757,
+    "loop": {
+      "elapsed_ns": 22547514,
+      "ops": 20000000,
+      "alignment": 8
+    },
+    "per_call": {
+      "cycles": 5.12294425,
+      "instructions": 3.1509265,
+      "branches": 1.02881455,
+      "branch-misses": 0.00106495
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "8",
+      "20000000"
+    ],
+    "started": 1793949305.027365,
+    "stdout": "{\"elapsed_ns\":22547514,\"ops\":20000000,\"alignment\":8}\n",
+    "stderr": "102458885,,cpu_core/cycles/u,24213313,100.00,,\n63018530,,cpu_core/instructions/u,24213313,100.00,,\n20576291,,cpu_core/branches/u,24213313,100.00,,\n21299,,cpu_core/branch-misses/u,24213313,100.00,,\n24.21,msec,task-clock,24213313,100.00,,\n1,,context-switches,24213313,100.00,,\n0,,cpu-migrations,24213313,100.00,,\n436,,minor-faults,24213313,100.00,,\n0,,major-faults,24213313,100.00,,\n",
+    "metrics": {
+      "cycles": 102458885.0,
+      "instructions": 63018530.0,
+      "branches": 20576291.0,
+      "branch-misses": 21299.0,
+      "task-clock": 24.21,
+      "context-switches": 1.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 436.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35672994,
+    "cpu_wall_ratio": 0.6786646503514675
+  },
+  {
+    "trial": 2,
+    "mode": "mov-chain",
+    "alignment": 24,
+    "ops": 20000000,
+    "ns": 1.12956315,
+    "loop": {
+      "elapsed_ns": 22591263,
+      "ops": 20000000,
+      "alignment": 24
+    },
+    "per_call": {
+      "cycles": 5.12292965,
+      "instructions": 3.1509029,
+      "branches": 1.02880915,
+      "branch-misses": 0.00106405
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov-chain",
+      "24",
+      "20000000"
+    ],
+    "started": 1793949305.0631104,
+    "stdout": "{\"elapsed_ns\":22591263,\"ops\":20000000,\"alignment\":24}\n",
+    "stderr": "102458593,,cpu_core/cycles/u,24248857,100.00,,\n63018058,,cpu_core/instructions/u,24248857,100.00,,\n20576183,,cpu_core/branches/u,24248857,100.00,,\n21281,,cpu_core/branch-misses/u,24248857,100.00,,\n24.25,msec,task-clock,24248857,100.00,,\n2,,context-switches,24248857,100.00,,\n0,,cpu-migrations,24248857,100.00,,\n437,,minor-faults,24248857,100.00,,\n0,,major-faults,24248857,100.00,,\n",
+    "metrics": {
+      "cycles": 102458593.0,
+      "instructions": 63018058.0,
+      "branches": 20576183.0,
+      "branch-misses": 21281.0,
+      "task-clock": 24.25,
+      "context-switches": 2.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 437.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 35653748,
+    "cpu_wall_ratio": 0.6801528972494
+  },
+  {
+    "trial": 2,
+    "mode": "mov",
+    "alignment": 8,
+    "ops": 160000000,
+    "ns": 0.15006091875,
+    "loop": {
+      "elapsed_ns": 24009747,
+      "ops": 160000000,
+      "alignment": 8
+    },
+    "per_call": {
+      "cycles": 0.6834587625,
+      "instructions": 2.26886394375,
+      "branches": 0.1286014,
+      "branch-misses": 0.0001326375
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "8",
+      "20000000"
+    ],
+    "started": 1793949305.0988352,
+    "stdout": "{\"elapsed_ns\":24009747,\"ops\":160000000,\"alignment\":8}\n",
+    "stderr": "109353402,,cpu_core/cycles/u,25902255,100.00,,\n363018231,,cpu_core/instructions/u,25902255,100.00,,\n20576224,,cpu_core/branches/u,25902255,100.00,,\n21222,,cpu_core/branch-misses/u,25902255,100.00,,\n25.90,msec,task-clock,25902255,100.00,,\n0,,context-switches,25902255,100.00,,\n0,,cpu-migrations,25902255,100.00,,\n438,,minor-faults,25902255,100.00,,\n0,,major-faults,25902255,100.00,,\n",
+    "metrics": {
+      "cycles": 109353402.0,
+      "instructions": 363018231.0,
+      "branches": 20576224.0,
+      "branch-misses": 21222.0,
+      "task-clock": 25.9,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 438.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37338742,
+    "cpu_wall_ratio": 0.6936495075275969
+  },
+  {
+    "trial": 2,
+    "mode": "mov",
+    "alignment": 16,
+    "ops": 160000000,
+    "ns": 0.1506306375,
+    "loop": {
+      "elapsed_ns": 24100902,
+      "ops": 160000000,
+      "alignment": 16
+    },
+    "per_call": {
+      "cycles": 0.683644475,
+      "instructions": 2.26886341875,
+      "branches": 0.12860125,
+      "branch-misses": 0.000131975
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "16",
+      "20000000"
+    ],
+    "started": 1793949305.1362495,
+    "stdout": "{\"elapsed_ns\":24100902,\"ops\":160000000,\"alignment\":16}\n",
+    "stderr": "109383116,,cpu_core/cycles/u,25821783,100.00,,\n363018147,,cpu_core/instructions/u,25821783,100.00,,\n20576200,,cpu_core/branches/u,25821783,100.00,,\n21116,,cpu_core/branch-misses/u,25821783,100.00,,\n25.82,msec,task-clock,25821783,100.00,,\n0,,context-switches,25821783,100.00,,\n0,,cpu-migrations,25821783,100.00,,\n436,,minor-faults,25821783,100.00,,\n0,,major-faults,25821783,100.00,,\n",
+    "metrics": {
+      "cycles": 109383116.0,
+      "instructions": 363018147.0,
+      "branches": 20576200.0,
+      "branch-misses": 21116.0,
+      "task-clock": 25.82,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 436.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37208913,
+    "cpu_wall_ratio": 0.6939197605691948
+  },
+  {
+    "trial": 2,
+    "mode": "mov",
+    "alignment": 0,
+    "ops": 160000000,
+    "ns": 0.15092419375,
+    "loop": {
+      "elapsed_ns": 24147871,
+      "ops": 160000000,
+      "alignment": 0
+    },
+    "per_call": {
+      "cycles": 0.68546571875,
+      "instructions": 2.26886228125,
+      "branches": 0.12860101875,
+      "branch-misses": 0.00013210625
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "perf",
+      "stat",
+      "-x,",
+      "-e",
+      "cpu_core/cycles/u,cpu_core/instructions/u,cpu_core/branches/u,cpu_core/branch-misses/u,task-clock,context-switches,cpu-migrations,minor-faults,major-faults",
+      "--",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "setarch",
+      "x86_64",
+      "-R",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/load",
+      "mov",
+      "0",
+      "20000000"
+    ],
+    "started": 1793949305.1735399,
+    "stdout": "{\"elapsed_ns\":24147871,\"ops\":160000000,\"alignment\":0}\n",
+    "stderr": "109674515,,cpu_core/cycles/u,25893618,100.00,,\n363017965,,cpu_core/instructions/u,25893618,100.00,,\n20576163,,cpu_core/branches/u,25893618,100.00,,\n21137,,cpu_core/branch-misses/u,25893618,100.00,,\n25.89,msec,task-clock,25893618,100.00,,\n0,,context-switches,25893618,100.00,,\n0,,cpu-migrations,25893618,100.00,,\n439,,minor-faults,25893618,100.00,,\n0,,major-faults,25893618,100.00,,\n",
+    "metrics": {
+      "cycles": 109674515.0,
+      "instructions": 363017965.0,
+      "branches": 20576163.0,
+      "branch-misses": 21137.0,
+      "task-clock": 25.89,
+      "context-switches": 0.0,
+      "cpu-migrations": 0.0,
+      "minor-faults": 439.0,
+      "major-faults": 0.0
+    },
+    "running": {
+      "cycles": 100.0,
+      "instructions": 100.0,
+      "branches": 100.0,
+      "branch-misses": 100.0
+    },
+    "wall_ns": 37643206,
+    "cpu_wall_ratio": 0.6877735121710941
+  }
+]

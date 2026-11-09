@@ -1,0 +1,27 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 68  of event 'cpu_core/cycles/u'
+# Event count (approx.): 234397095
+#
+# Overhead  Command  Shared Object         Symbol                                                    
+# ........  .......  ....................  ..........................................................
+#
+    89.15%  counted  counted               [.] <&str as core::str::pattern::Pattern>::is_contained_in
+            |
+            ---<&str as core::str::pattern::Pattern>::is_contained_in
+               |          
+                --15.89%--0
+
+     9.98%  counted  counted               [.] counted::str::bench_contains_bad_simd
+            |
+            ---counted::str::bench_contains_bad_simd
+               0
+
+
+
+#
+# (Tip: To change sampling frequency to 100 Hz: perf record -F 100)
+#

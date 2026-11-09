@@ -1,0 +1,137 @@
+--- a/library/core/src/slice/memchr.rs
++++ b/library/core/src/slice/memchr.rs
+@@ -159,3 +159,117 @@
+     // Find the byte before the point the body loop stopped.
+     text[..offset].iter().rposition(|elt| *elt == x)
+ }
++
++#[cfg(all(
++    target_arch = "aarch64",
++    target_feature = "neon",
++    target_endian = "little",
++    target_pointer_width = "64"
++))]
++fn matching_nibbles(needle: u8, block: &[u8]) -> u64 {
++    use crate::simd::cmp::SimdPartialEq;
++    use crate::simd::num::SimdUint;
++    use crate::simd::{u8x16, u16x8};
++
++    let mask = u8x16::from_slice(block).simd_eq(u8x16::splat(needle));
++    // SAFETY: Both vectors contain 16 initialized bytes; all u16 lane values are valid.
++    let pairs: u16x8 = unsafe { crate::mem::transmute(mask.to_simd()) };
++    let packed = (pairs >> u16x8::splat(4)).cast::<u8>();
++    u64::from_le_bytes(packed.to_array())
++}
++
++#[cfg(all(
++    target_arch = "aarch64",
++    target_feature = "neon",
++    target_endian = "little",
++    target_pointer_width = "64"
++))]
++#[rustc_allow_const_fn_unstable(const_eval_select)]
++pub(super) const fn contains_index(x: u8, text: &[u8]) -> Option<usize> {
++    const_eval_select!(
++        @capture { x: u8, text: &[u8] } -> Option<usize>:
++        if const {
++            memchr_naive(x, text)
++        } else {
++            // SAFETY: memchr checks for two words before calling this runtime path.
++            unsafe { crate::hint::assert_unchecked(text.len() >= 16) };
++            let len = text.len();
++            let ptr = text.as_ptr();
++            let mut offset = ptr.align_offset(USIZE_BYTES);
++            if offset > 0 {
++                offset = offset.min(len);
++                if let Some(index) = memchr_naive(x, &text[..offset]) {
++                    return Some(index);
++                }
++            }
++            if len - offset < 16 {
++                // SAFETY: the alignment prefix never exceeds len.
++                let tail = unsafe { super::from_raw_parts(ptr.add(offset), len - offset) };
++                return memchr_naive(x, tail).map(|i| offset + i);
++            }
++            let repeated_x = usize::repeat_u8(x);
++            macro_rules! scan_words {
++                ($pointer:expr, $index:expr) => {{
++                    let pointer = $pointer.cast::<usize>();
++                    // SAFETY: each call has a word-aligned, readable 16-byte block.
++                    let (a, b) = unsafe { (*pointer, *pointer.add(1)) };
++                    let first = contains_zero_byte(a ^ repeated_x);
++                    let second = contains_zero_byte(b ^ repeated_x);
++                    let found = first | second;
++                    if found {
++                        // SAFETY: the checked word block starts at this in-bounds index.
++                        let tail = unsafe {
++                            super::from_raw_parts(ptr.add($index), len - $index)
++                        };
++                        return memchr_naive(x, tail).map(|i| $index + i);
++                    }
++                }};
++            }
++            macro_rules! peel_words {
++                () => {{
++                    // SAFETY: the preceding range check covers this aligned block.
++                    scan_words!(unsafe { ptr.add(offset) }, offset);
++                    offset += 16;
++                    if len - offset < 16 {
++                        // SAFETY: the scanned block ends within the slice.
++                        let tail = unsafe { super::from_raw_parts(ptr.add(offset), len - offset) };
++                        return memchr_naive(x, tail).map(|i| offset + i);
++                    }
++                }};
++            }
++            peel_words!();
++            peel_words!();
++            peel_words!();
++            peel_words!();
++
++            // SAFETY: the peeled blocks and their range checks keep offset in bounds.
++            let rest = unsafe { super::from_raw_parts(ptr.add(offset), len - offset) };
++            let mut chunks = rest.chunks_exact(64);
++            for block in &mut chunks {
++                let a = matching_nibbles(x, &block[..16]);
++                let b = matching_nibbles(x, &block[16..32]);
++                let c = matching_nibbles(x, &block[32..48]);
++                let d = matching_nibbles(x, &block[48..]);
++                if a | b | c | d != 0 {
++                    let (bits, start) = if a != 0 {
++                        (a, offset)
++                    } else if b != 0 {
++                        (b, offset + 16)
++                    } else if c != 0 {
++                        (c, offset + 32)
++                    } else {
++                        (d, offset + 48)
++                    };
++                    return Some(start + bits.trailing_zeros() as usize / 4);
++                }
++                offset += 64;
++            }
++            let mut tail = chunks.remainder().chunks_exact(16);
++            for block in &mut tail {
++                scan_words!(block.as_ptr(), offset);
++                offset += 16;
++            }
++            memchr_naive(x, tail.remainder()).map(|i| offset + i)
++        }
++    )
++}
+--- a/library/core/src/slice/cmp.rs
++++ b/library/core/src/slice/cmp.rs
+@@ -400,6 +400,14 @@
+         let (byte, bytes) = unsafe {
+             (*(self as *const Self).cast::<u8>(), from_raw_parts(x.as_ptr().cast::<u8>(), x.len()))
+         };
++        #[cfg(all(target_arch = "aarch64", target_feature = "neon", target_endian = "little", target_pointer_width = "64"))]
++        {
++            if bytes.len() < 16 {
++                return memchr::memchr(byte, bytes).is_some();
++            }
++            return memchr::contains_index(byte, bytes).is_some();
++        }
++        #[cfg(not(all(target_arch = "aarch64", target_feature = "neon", target_endian = "little", target_pointer_width = "64")))]
+         memchr::memchr(byte, bytes).is_some()
+     }
+ }

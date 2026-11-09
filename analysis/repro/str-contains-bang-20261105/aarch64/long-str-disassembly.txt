@@ -1,0 +1,316 @@
+
+/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/alloctests/b48d0ecb0c6d7898/out/allocbenches-b48d0ecb0c6d7898:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+000000000019f0bc <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once>:
+  19f0bc:	6db923e9 	stp	d9, d8, [sp, #-112]!
+  19f0c0:	a9017bfd 	stp	x29, x30, [sp, #16]
+  19f0c4:	a9026ffc 	stp	x28, x27, [sp, #32]
+  19f0c8:	a90367fa 	stp	x26, x25, [sp, #48]
+  19f0cc:	a9045ff8 	stp	x24, x23, [sp, #64]
+  19f0d0:	a90557f6 	stp	x22, x21, [sp, #80]
+  19f0d4:	a9064ff4 	stp	x20, x19, [sp, #96]
+  19f0d8:	910043fd 	add	x29, sp, #0x10
+  19f0dc:	d10b43ff 	sub	sp, sp, #0x2d0
+  19f0e0:	f00008e9 	adrp	x9, 2be000 <_fini+0xbae4>
+  19f0e4:	910bc929 	add	x9, x9, #0x2f2
+  19f0e8:	52813eea 	mov	w10, #0x9f7                 	// #2551
+  19f0ec:	a9022be9 	stp	x9, x10, [sp, #32]
+  19f0f0:	910083e9 	add	x9, sp, #0x20
+  19f0f4:	910283f7 	add	x23, sp, #0xa0
+  19f0f8:	f90053e9 	str	x9, [sp, #160]
+  19f0fc:	aa0803f3 	mov	x19, x8
+  19f100:	a9425bf5 	ldp	x21, x22, [sp, #32]
+  19f104:	39420009 	ldrb	w9, [x0, #128]
+  19f108:	360000c9 	tbz	w9, #0, 19f120 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x64>
+  19f10c:	aa1503e0 	mov	x0, x21
+  19f110:	aa1603e1 	mov	x1, x22
+  19f114:	52800022 	mov	w2, #0x1                   	// #1
+  19f118:	97fc56b4 	bl	b4be8 <test::bench::ns_iter_inner::<(), allocbenches::str::contains_bang_str::short_ascii::{closure#0}>>
+  19f11c:	1400010c 	b	19f54c <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x490>
+  19f120:	a90003f3 	stp	x19, x0, [sp]
+  19f124:	52994018 	mov	w24, #0xca00                	// #51712
+  19f128:	aa1503e0 	mov	x0, x21
+  19f12c:	aa1603e1 	mov	x1, x22
+  19f130:	52800022 	mov	w2, #0x1                   	// #1
+  19f134:	72a77358 	movk	w24, #0x3b9a, lsl #16
+  19f138:	97fc56ac 	bl	b4be8 <test::bench::ns_iter_inner::<(), allocbenches::str::contains_bang_str::short_ascii::{closure#0}>>
+  19f13c:	f100041f 	cmp	x0, #0x1
+  19f140:	52884809 	mov	w9, #0x4240                	// #16960
+  19f144:	6f00e400 	movi	v0.2d, #0x0
+  19f148:	9a9f8408 	csinc	x8, x0, xzr, hi	// hi = pmore
+  19f14c:	72a001e9 	movk	w9, #0xf, lsl #16
+  19f150:	1e6e1008 	fmov	d8, #1.000000000000000000e+00
+  19f154:	9ac80928 	udiv	x8, x9, x8
+  19f158:	d100c3bc 	sub	x28, x29, #0x30
+  19f15c:	d10073b4 	sub	x20, x29, #0x1c
+  19f160:	f9000fff 	str	xzr, [sp, #24]
+  19f164:	b90017ff 	str	wzr, [sp, #20]
+  19f168:	ad0583e0 	stp	q0, q0, [sp, #176]
+  19f16c:	ad0683e0 	stp	q0, q0, [sp, #208]
+  19f170:	ad0783e0 	stp	q0, q0, [sp, #240]
+  19f174:	ad0883e0 	stp	q0, q0, [sp, #272]
+  19f178:	ad0983e0 	stp	q0, q0, [sp, #304]
+  19f17c:	ad0a83e0 	stp	q0, q0, [sp, #336]
+  19f180:	ad0b83e0 	stp	q0, q0, [sp, #368]
+  19f184:	ad0c83e0 	stp	q0, q0, [sp, #400]
+  19f188:	ad0d83e0 	stp	q0, q0, [sp, #432]
+  19f18c:	ad0e83e0 	stp	q0, q0, [sp, #464]
+  19f190:	ad0f83e0 	stp	q0, q0, [sp, #496]
+  19f194:	ad1083e0 	stp	q0, q0, [sp, #528]
+  19f198:	3d802be0 	str	q0, [sp, #160]
+  19f19c:	f100051f 	cmp	x8, #0x1
+  19f1a0:	9a9f851b 	csinc	x27, x8, xzr, hi	// hi = pmore
+  19f1a4:	97fb6c27 	bl	7a240 <<std::time::Instant>::now@plt>
+  19f1a8:	9e630369 	ucvtf	d9, x27
+  19f1ac:	aa1f03f3 	mov	x19, xzr
+  19f1b0:	f81503a0 	stur	x0, [x29, #-176]
+  19f1b4:	b81583a1 	stur	w1, [x29, #-168]
+  19f1b8:	b5000c5b 	cbnz	x27, 19f340 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x284>
+  19f1bc:	aa1303f9 	mov	x25, x19
+  19f1c0:	91002273 	add	x19, x19, #0x8
+  19f1c4:	97fb6c1f 	bl	7a240 <<std::time::Instant>::now@plt>
+  19f1c8:	f81603a0 	stur	x0, [x29, #-160]
+  19f1cc:	d10283a0 	sub	x0, x29, #0xa0
+  19f1d0:	b81683a1 	stur	w1, [x29, #-152]
+  19f1d4:	97fb6d9b 	bl	7a840 <<std::time::Instant>::elapsed@plt>
+  19f1d8:	9b187c08 	mul	x8, x0, x24
+  19f1dc:	f106427f 	cmp	x19, #0x190
+  19f1e0:	8b214108 	add	x8, x8, w1, uxtw
+  19f1e4:	9e630100 	ucvtf	d0, x8
+  19f1e8:	1e691800 	fdiv	d0, d0, d9
+  19f1ec:	fc396ae0 	str	d0, [x23, x25]
+  19f1f0:	54fffe61 	b.ne	19f1bc <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x100>  // b.any
+  19f1f4:	1e629000 	fmov	d0, #5.000000000000000000e+00
+  19f1f8:	910283e0 	add	x0, sp, #0xa0
+  19f1fc:	52800641 	mov	w1, #0x32                  	// #50
+  19f200:	9403e7aa 	bl	2990a8 <test::stats::winsorize>
+  19f204:	d10283a8 	sub	x8, x29, #0xa0
+  19f208:	910283e0 	add	x0, sp, #0xa0
+  19f20c:	52800641 	mov	w1, #0x32                  	// #50
+  19f210:	9403b651 	bl	28cb54 <<test::stats::Summary>::new>
+  19f214:	8b1b0b79 	add	x25, x27, x27, lsl #2
+  19f218:	aa1f03fa 	mov	x26, xzr
+  19f21c:	9e630329 	ucvtf	d9, x25
+  19f220:	1400000c 	b	19f250 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x194>
+  19f224:	d100c3a0 	sub	x0, x29, #0x30
+  19f228:	91002353 	add	x19, x26, #0x8
+  19f22c:	97fb6d85 	bl	7a840 <<std::time::Instant>::elapsed@plt>
+  19f230:	9b187c08 	mul	x8, x0, x24
+  19f234:	f106427f 	cmp	x19, #0x190
+  19f238:	8b214108 	add	x8, x8, w1, uxtw
+  19f23c:	9e630100 	ucvtf	d0, x8
+  19f240:	1e691800 	fdiv	d0, d0, d9
+  19f244:	fc3a6ae0 	str	d0, [x23, x26]
+  19f248:	aa1303fa 	mov	x26, x19
+  19f24c:	54000da0 	b.eq	19f400 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x344>  // b.none
+  19f250:	97fb6bfc 	bl	7a240 <<std::time::Instant>::now@plt>
+  19f254:	f81d03a0 	stur	x0, [x29, #-48]
+  19f258:	b81d83a1 	stur	w1, [x29, #-40]
+  19f25c:	b4fffe5b 	cbz	x27, 19f224 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x168>
+  19f260:	f1000adf 	cmp	x22, #0x2
+  19f264:	540003a3 	b.cc	19f2d8 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x21c>  // b.lo, b.ul, b.last
+  19f268:	f10042df 	cmp	x22, #0x10
+  19f26c:	aa1903f3 	mov	x19, x25
+  19f270:	54000062 	b.cs	19f27c <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1c0>  // b.hs, b.nlast
+  19f274:	aa1f03e8 	mov	x8, xzr
+  19f278:	1400000f 	b	19f2b4 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1f8>
+  19f27c:	52800420 	mov	w0, #0x21                  	// #33
+  19f280:	aa1503e1 	mov	x1, x21
+  19f284:	aa1603e2 	mov	x2, x22
+  19f288:	97fb6cd6 	bl	7a5e0 <core::slice::memchr::memchr_aligned@plt>
+  19f28c:	12000008 	and	w8, w0, #0x1
+  19f290:	f1000673 	subs	x19, x19, #0x1
+  19f294:	381e43a8 	sturb	w8, [x29, #-28]
+  19f298:	54ffff21 	b.ne	19f27c <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1c0>  // b.any
+  19f29c:	17ffffe2 	b	19f224 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x168>
+  19f2a0:	7100855f 	cmp	w10, #0x21
+  19f2a4:	1a9f17e9 	cset	w9, eq	// eq = none
+  19f2a8:	eb19011f 	cmp	x8, x25
+  19f2ac:	381e43a9 	sturb	w9, [x29, #-28]
+  19f2b0:	54fffba0 	b.eq	19f224 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x168>  // b.none
+  19f2b4:	aa1f03e9 	mov	x9, xzr
+  19f2b8:	91000508 	add	x8, x8, #0x1
+  19f2bc:	38696aaa 	ldrb	w10, [x21, x9]
+  19f2c0:	7100855f 	cmp	w10, #0x21
+  19f2c4:	54fffee0 	b.eq	19f2a0 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1e4>  // b.none
+  19f2c8:	91000529 	add	x9, x9, #0x1
+  19f2cc:	eb0902df 	cmp	x22, x9
+  19f2d0:	54ffff61 	b.ne	19f2bc <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x200>  // b.any
+  19f2d4:	17fffff3 	b	19f2a0 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x1e4>
+  19f2d8:	f10006df 	cmp	x22, #0x1
+  19f2dc:	aa1903e8 	mov	x8, x25
+  19f2e0:	54000121 	b.ne	19f304 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x248>  // b.any
+  19f2e4:	394002a8 	ldrb	w8, [x21]
+  19f2e8:	aa1903e9 	mov	x9, x25
+  19f2ec:	7100851f 	cmp	w8, #0x21
+  19f2f0:	1a9f17e8 	cset	w8, eq	// eq = none
+  19f2f4:	381e43a8 	sturb	w8, [x29, #-28]
+  19f2f8:	f1000529 	subs	x9, x9, #0x1
+  19f2fc:	54ffffc1 	b.ne	19f2f4 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x238>  // b.any
+  19f300:	17ffffc9 	b	19f224 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x168>
+  19f304:	381e43bf 	sturb	wzr, [x29, #-28]
+  19f308:	f1000508 	subs	x8, x8, #0x1
+  19f30c:	54ffffc1 	b.ne	19f304 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x248>  // b.any
+  19f310:	17ffffc5 	b	19f224 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x168>
+  19f314:	d10283a0 	sub	x0, x29, #0xa0
+  19f318:	91002279 	add	x25, x19, #0x8
+  19f31c:	97fb6d49 	bl	7a840 <<std::time::Instant>::elapsed@plt>
+  19f320:	9b187c08 	mul	x8, x0, x24
+  19f324:	f106433f 	cmp	x25, #0x190
+  19f328:	8b214108 	add	x8, x8, w1, uxtw
+  19f32c:	9e630100 	ucvtf	d0, x8
+  19f330:	1e691800 	fdiv	d0, d0, d9
+  19f334:	fc336ae0 	str	d0, [x23, x19]
+  19f338:	aa1903f3 	mov	x19, x25
+  19f33c:	54fff5c0 	b.eq	19f1f4 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x138>  // b.none
+  19f340:	97fb6bc0 	bl	7a240 <<std::time::Instant>::now@plt>
+  19f344:	f1000adf 	cmp	x22, #0x2
+  19f348:	f81603a0 	stur	x0, [x29, #-160]
+  19f34c:	b81683a1 	stur	w1, [x29, #-152]
+  19f350:	540003a3 	b.cc	19f3c4 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x308>  // b.lo, b.ul, b.last
+  19f354:	f10042df 	cmp	x22, #0x10
+  19f358:	aa1b03fa 	mov	x26, x27
+  19f35c:	54000062 	b.cs	19f368 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2ac>  // b.hs, b.nlast
+  19f360:	aa1f03e8 	mov	x8, xzr
+  19f364:	1400000f 	b	19f3a0 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2e4>
+  19f368:	52800420 	mov	w0, #0x21                  	// #33
+  19f36c:	aa1503e1 	mov	x1, x21
+  19f370:	aa1603e2 	mov	x2, x22
+  19f374:	97fb6c9b 	bl	7a5e0 <core::slice::memchr::memchr_aligned@plt>
+  19f378:	12000008 	and	w8, w0, #0x1
+  19f37c:	f100075a 	subs	x26, x26, #0x1
+  19f380:	381d03a8 	sturb	w8, [x29, #-48]
+  19f384:	54ffff21 	b.ne	19f368 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2ac>  // b.any
+  19f388:	17ffffe3 	b	19f314 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x258>
+  19f38c:	7100855f 	cmp	w10, #0x21
+  19f390:	1a9f17e9 	cset	w9, eq	// eq = none
+  19f394:	eb1b011f 	cmp	x8, x27
+  19f398:	381d03a9 	sturb	w9, [x29, #-48]
+  19f39c:	54fffbc0 	b.eq	19f314 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x258>  // b.none
+  19f3a0:	aa1f03e9 	mov	x9, xzr
+  19f3a4:	91000508 	add	x8, x8, #0x1
+  19f3a8:	38696aaa 	ldrb	w10, [x21, x9]
+  19f3ac:	7100855f 	cmp	w10, #0x21
+  19f3b0:	54fffee0 	b.eq	19f38c <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2d0>  // b.none
+  19f3b4:	91000529 	add	x9, x9, #0x1
+  19f3b8:	eb0902df 	cmp	x22, x9
+  19f3bc:	54ffff61 	b.ne	19f3a8 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2ec>  // b.any
+  19f3c0:	17fffff3 	b	19f38c <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x2d0>
+  19f3c4:	f10006df 	cmp	x22, #0x1
+  19f3c8:	aa1b03e8 	mov	x8, x27
+  19f3cc:	54000121 	b.ne	19f3f0 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x334>  // b.any
+  19f3d0:	394002a8 	ldrb	w8, [x21]
+  19f3d4:	aa1b03e9 	mov	x9, x27
+  19f3d8:	7100851f 	cmp	w8, #0x21
+  19f3dc:	1a9f17e8 	cset	w8, eq	// eq = none
+  19f3e0:	381d03a8 	sturb	w8, [x29, #-48]
+  19f3e4:	f1000529 	subs	x9, x9, #0x1
+  19f3e8:	54ffffc1 	b.ne	19f3e0 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x324>  // b.any
+  19f3ec:	17ffffca 	b	19f314 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x258>
+  19f3f0:	381d03bf 	sturb	wzr, [x29, #-48]
+  19f3f4:	f1000508 	subs	x8, x8, #0x1
+  19f3f8:	54ffffc1 	b.ne	19f3f0 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x334>  // b.any
+  19f3fc:	17ffffc6 	b	19f314 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x258>
+  19f400:	1e629000 	fmov	d0, #5.000000000000000000e+00
+  19f404:	910283e0 	add	x0, sp, #0xa0
+  19f408:	52800641 	mov	w1, #0x32                  	// #50
+  19f40c:	9403e727 	bl	2990a8 <test::stats::winsorize>
+  19f410:	9100c3e8 	add	x8, sp, #0x30
+  19f414:	910283e0 	add	x0, sp, #0xa0
+  19f418:	52800641 	mov	w1, #0x32                  	// #50
+  19f41c:	9403b5ce 	bl	28cb54 <<test::stats::Summary>::new>
+  19f420:	d102c3a0 	sub	x0, x29, #0xb0
+  19f424:	97fb6d07 	bl	7a840 <<std::time::Instant>::elapsed@plt>
+  19f428:	529c2008 	mov	w8, #0xe100                	// #57600
+  19f42c:	f9400fea 	ldr	x10, [sp, #24]
+  19f430:	b94017eb 	ldr	w11, [sp, #20]
+  19f434:	72a0bea8 	movk	w8, #0x5f5, lsl #16
+  19f438:	6b08003f 	cmp	w1, w8
+  19f43c:	1a9f97e8 	cset	w8, hi	// hi = pmore
+  19f440:	f100001f 	cmp	x0, #0x0
+  19f444:	1a9f07e9 	cset	w9, ne	// ne = any
+  19f448:	1a890108 	csel	w8, w8, w9, eq	// eq = none
+  19f44c:	34000148 	cbz	w8, 19f474 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3b8>
+  19f450:	fc5a83a0 	ldur	d0, [x29, #-88]
+  19f454:	1e682000 	fcmp	d0, d8
+  19f458:	540000e5 	b.pl	19f474 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3b8>  // b.nfrst
+  19f45c:	fc5803a0 	ldur	d0, [x29, #-128]
+  19f460:	fd402be1 	ldr	d1, [sp, #80]
+  19f464:	fd403be2 	ldr	d2, [sp, #112]
+  19f468:	1e613800 	fsub	d0, d0, d1
+  19f46c:	1e622000 	fcmp	d0, d2
+  19f470:	54000424 	b.mi	19f4f4 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x438>  // b.first
+  19f474:	ab0a000a 	adds	x10, x0, x10
+  19f478:	54000802 	b.cs	19f578 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4bc>  // b.hs, b.nlast
+  19f47c:	0b0b002b 	add	w11, w1, w11
+  19f480:	51000708 	sub	w8, w24, #0x1
+  19f484:	6b08017f 	cmp	w11, w8
+  19f488:	540000e9 	b.ls	19f4a4 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x3e8>  // b.plast
+  19f48c:	b100055f 	cmn	x10, #0x1
+  19f490:	54000740 	b.eq	19f578 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x4bc>  // b.none
+  19f494:	5286c008 	mov	w8, #0x3600                	// #13824
+  19f498:	9100054a 	add	x10, x10, #0x1
+  19f49c:	72b88ca8 	movk	w8, #0xc465, lsl #16
+  19f4a0:	0b08016b 	add	w11, w11, w8
+  19f4a4:	7100017f 	cmp	w11, #0x0
+  19f4a8:	1a9f07e8 	cset	w8, ne	// ne = any
+  19f4ac:	f1000d5f 	cmp	x10, #0x3
+  19f4b0:	1a9f97e9 	cset	w9, hi	// hi = pmore
+  19f4b4:	1a890108 	csel	w8, w8, w9, eq	// eq = none
+  19f4b8:	370001e8 	tbnz	w8, #0, 19f4f4 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x438>
+  19f4bc:	b201e7e8 	mov	x8, #0x9999999999999999    	// #-7378697629483820647
+  19f4c0:	f2e33328 	movk	x8, #0x1999, lsl #48
+  19f4c4:	eb08037f 	cmp	x27, x8
+  19f4c8:	54000168 	b.hi	19f4f4 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x438>  // b.pmore
+  19f4cc:	b90017eb 	str	w11, [sp, #20]
+  19f4d0:	d37ffb7b 	lsl	x27, x27, #1
+  19f4d4:	f9000fea 	str	x10, [sp, #24]
+  19f4d8:	97fb6b5a 	bl	7a240 <<std::time::Instant>::now@plt>
+  19f4dc:	9e630369 	ucvtf	d9, x27
+  19f4e0:	aa1f03f3 	mov	x19, xzr
+  19f4e4:	f81503a0 	stur	x0, [x29, #-176]
+  19f4e8:	b81583a1 	stur	w1, [x29, #-168]
+  19f4ec:	b5fff2bb 	cbnz	x27, 19f340 <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x284>
+  19f4f0:	17ffff33 	b	19f1bc <<allocbenches::str::contains_bang_str::long_lorem_ipsum::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once+0x100>
+  19f4f4:	ad4387e0 	ldp	q0, q1, [sp, #112]
+  19f4f8:	52800028 	mov	w8, #0x1                   	// #1
+  19f4fc:	3dc027e2 	ldr	q2, [sp, #144]
+  19f500:	a94027f3 	ldp	x19, x9, [sp]
+  19f504:	ad0707e0 	stp	q0, q1, [sp, #224]
+  19f508:	ad4187e0 	ldp	q0, q1, [sp, #48]
+  19f50c:	3d8043e2 	str	q2, [sp, #256]
+  19f510:	f9000128 	str	x8, [x9]
+  19f514:	ad0507e0 	stp	q0, q1, [sp, #160]
+  19f518:	ad4283e2 	ldp	q2, q0, [sp, #80]
+  19f51c:	ad0603e2 	stp	q2, q0, [sp, #192]
+  19f520:	ad4703e1 	ldp	q1, q0, [sp, #224]
+  19f524:	3c848121 	stur	q1, [x9, #72]
+  19f528:	3dc043e1 	ldr	q1, [sp, #256]
+  19f52c:	3c858120 	stur	q0, [x9, #88]
+  19f530:	3c868121 	stur	q1, [x9, #104]
+  19f534:	ad4507e0 	ldp	q0, q1, [sp, #160]
+  19f538:	3c808120 	stur	q0, [x9, #8]
+  19f53c:	3c818121 	stur	q1, [x9, #24]
+  19f540:	ad4607e0 	ldp	q0, q1, [sp, #192]
+  19f544:	3c828120 	stur	q0, [x9, #40]
+  19f548:	3c838121 	stur	q1, [x9, #56]
+  19f54c:	92800008 	mov	x8, #0xffffffffffffffff    	// #-1
+  19f550:	f9000268 	str	x8, [x19]
+  19f554:	910b43ff 	add	sp, sp, #0x2d0
+  19f558:	a9464ff4 	ldp	x20, x19, [sp, #96]
+  19f55c:	a94557f6 	ldp	x22, x21, [sp, #80]
+  19f560:	a9445ff8 	ldp	x24, x23, [sp, #64]
+  19f564:	a94367fa 	ldp	x26, x25, [sp, #48]
+  19f568:	a9426ffc 	ldp	x28, x27, [sp, #32]
+  19f56c:	a9417bfd 	ldp	x29, x30, [sp, #16]
+  19f570:	6cc723e9 	ldp	d9, d8, [sp], #112
+  19f574:	d65f03c0 	ret
+  19f578:	b00008a0 	adrp	x0, 2b4000 <_fini+0x1ae4>
+  19f57c:	91350400 	add	x0, x0, #0xd41
+  19f580:	d0001b22 	adrp	x2, 505000 <GCC_except_table8+0x14910>
+  19f584:	910dc042 	add	x2, x2, #0x370
+  19f588:	52800561 	mov	w1, #0x2b                  	// #43
+  19f58c:	97fb6c71 	bl	7a750 <core::option::expect_failed@plt>

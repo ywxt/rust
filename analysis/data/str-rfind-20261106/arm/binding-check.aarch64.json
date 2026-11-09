@@ -1,0 +1,44 @@
+[
+  {
+    "variant": "0000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "setarch",
+      "aarch64",
+      "-R",
+      "env",
+      "LD_DEBUG=bindings",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+      "LD_PRELOAD=/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/shim-0000.so",
+      "/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/benches-base",
+      "--list"
+    ],
+    "bindings": [
+      "   1033206:\tbinding file /tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib/libstd-7a2f7be1a1e543fc.so [0] to /tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/shim-0000.so [0]: normal symbol `_RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr'",
+      "   1033206:\tbinding file /tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/benches-base [0] to /tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/shim-0000.so [0]: normal symbol `_RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr'"
+    ]
+  },
+  {
+    "variant": "0016",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "setarch",
+      "aarch64",
+      "-R",
+      "env",
+      "LD_DEBUG=bindings",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib",
+      "LD_PRELOAD=/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/shim-0016.so",
+      "/tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/benches-base",
+      "--list"
+    ],
+    "bindings": [
+      "   1033207:\tbinding file /tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/aarch64-unknown-linux-gnu/lib/libstd-7a2f7be1a1e543fc.so [0] to /tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/shim-0016.so [0]: normal symbol `_RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr'",
+      "   1033207:\tbinding file /tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/benches-base [0] to /tmp/str-rfind-20261106/aarch64-unknown-linux-gnu/shim-0016.so [0]: normal symbol `_RNvNtNtCshp6Wxz1DwXO_4core5slice6memchr7memrchr'"
+    ]
+  }
+]

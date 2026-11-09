@@ -1,0 +1,67 @@
+{
+  "aarch64-unknown-linux-gnu": {
+    "baseline": {
+      "instruction_count_static": 86,
+      "instruction_histogram": {
+        "ldp": 9,
+        "ldr": 0,
+        "cmeq": 12,
+        "orr": 9,
+        "addp": 3,
+        "fmov": 3,
+        "movdqu": 0,
+        "pcmpeqb": 0,
+        "por": 0,
+        "pmovmskb": 0
+      }
+    },
+    "optimized": {
+      "instruction_count_static": 89,
+      "instruction_histogram": {
+        "ldp": 6,
+        "ldr": 6,
+        "cmeq": 12,
+        "orr": 9,
+        "addp": 3,
+        "fmov": 3,
+        "movdqu": 0,
+        "pcmpeqb": 0,
+        "por": 0,
+        "pmovmskb": 0
+      }
+    }
+  },
+  "x86_64-unknown-linux-gnu": {
+    "baseline": {
+      "instruction_count_static": 98,
+      "instruction_histogram": {
+        "ldp": 0,
+        "ldr": 0,
+        "cmeq": 0,
+        "orr": 0,
+        "addp": 0,
+        "fmov": 0,
+        "movdqu": 12,
+        "pcmpeqb": 12,
+        "por": 9,
+        "pmovmskb": 3
+      }
+    },
+    "optimized": {
+      "instruction_count_static": 98,
+      "instruction_histogram": {
+        "ldp": 0,
+        "ldr": 0,
+        "cmeq": 0,
+        "orr": 0,
+        "addp": 0,
+        "fmov": 0,
+        "movdqu": 12,
+        "pcmpeqb": 12,
+        "por": 9,
+        "pmovmskb": 3
+      }
+    }
+  },
+  "source_sha256": "dd6596ebd4a4a8a2a3dd29c341bc49f45b0c7f896d331215aed63ff522795ee6"
+}

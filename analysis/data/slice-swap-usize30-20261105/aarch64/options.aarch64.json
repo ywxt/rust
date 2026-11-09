@@ -1,0 +1,92 @@
+[
+  {
+    "name": "interleave1",
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-force-vector-interleave=1",
+      "/tmp/slice-swap-usize30-20261105/probe.rs",
+      "-o",
+      "/tmp/slice-swap-usize30-20261105/interleave1"
+    ],
+    "check": "usize lengths 0..257, 64 offset pairs, five methods, repeated batch states and ZST passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  },
+  {
+    "name": "interleave4",
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-force-vector-interleave=4",
+      "/tmp/slice-swap-usize30-20261105/probe.rs",
+      "-o",
+      "/tmp/slice-swap-usize30-20261105/interleave4"
+    ],
+    "check": "usize lengths 0..257, 64 offset pairs, five methods, repeated batch states and ZST passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  },
+  {
+    "name": "u4",
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-unroll-count=4",
+      "/tmp/slice-swap-usize30-20261105/probe.rs",
+      "-o",
+      "/tmp/slice-swap-usize30-20261105/u4"
+    ],
+    "check": "usize lengths 0..257, 64 offset pairs, five methods, repeated batch states and ZST passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  },
+  {
+    "name": "nosched",
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-enable-misched=false",
+      "/tmp/slice-swap-usize30-20261105/probe.rs",
+      "-o",
+      "/tmp/slice-swap-usize30-20261105/nosched"
+    ],
+    "check": "usize lengths 0..257, 64 offset pairs, five methods, repeated batch states and ZST passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  },
+  {
+    "name": "noldst",
+    "command": [
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=link,asm,llvm-ir",
+      "-C",
+      "llvm-args=-aarch64-enable-ldst-opt=false",
+      "/tmp/slice-swap-usize30-20261105/probe.rs",
+      "-o",
+      "/tmp/slice-swap-usize30-20261105/noldst"
+    ],
+    "check": "usize lengths 0..257, 64 offset pairs, five methods, repeated batch states and ZST passed\n",
+    "stderr": "warning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+  }
+]

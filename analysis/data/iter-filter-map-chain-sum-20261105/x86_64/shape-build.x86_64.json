@@ -1,0 +1,44 @@
+[
+  {
+    "tag": "base",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "--crate-type=lib",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=llvm-ir,asm",
+      "/tmp/iter-filter-map-chain-sum-20261105/shape.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/shape-base"
+    ],
+    "functions": {
+      "single": 0,
+      "single_ref": 1,
+      "chained": 2
+    }
+  },
+  {
+    "tag": "prellvm",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "--edition=2024",
+      "--crate-type=lib",
+      "-O",
+      "-C",
+      "codegen-units=1",
+      "--emit=llvm-ir,asm",
+      "-C",
+      "no-prepopulate-passes",
+      "/tmp/iter-filter-map-chain-sum-20261105/shape.rs",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/shape-prellvm"
+    ],
+    "functions": {
+      "single": 0,
+      "single_ref": 0,
+      "chained": 0
+    }
+  }
+]

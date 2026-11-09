@@ -1,0 +1,45 @@
+define noundef i64 @single_ref() unnamed_addr #6 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i.i = alloca [8 x i8], align 8
+  %_1 = alloca [16 x i8], align 8
+  call void @llvm.lifetime.start.p0(ptr nonnull %_1)
+  store i64 0, ptr %_1, align 8
+  %0 = getelementptr inbounds nuw i8, ptr %_1, i64 8
+  store i64 1000000, ptr %0, align 8
+  %_4 = getelementptr inbounds nuw i8, ptr %_1, i64 16
+  call void @llvm.experimental.noalias.scope.decl(metadata !4)
+  %_4.i.i.i = getelementptr inbounds nuw i8, ptr %_1, i64 8
+  %_4.i.i.i.i = load i64, ptr %_4.i.i.i, align 8, !alias.scope !7, !noalias !14, !noundef !16
+  %self.promoted.i = load i64, ptr %_1, align 8, !alias.scope !17
+  %_0.i.i.i5.i = icmp slt i64 %self.promoted.i, %_4.i.i.i.i
+  br i1 %_0.i.i.i5.i, label %bb3.i, label %_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_.exit
+
+bb3.i:                                            ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_.exit.i, %start
+  %accum.sroa.0.06.i = phi i64 [ %_0.sroa.0.0.i.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_.exit.i ], [ 0, %start ]
+  %1 = phi i64 [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_.exit.i ], [ %self.promoted.i, %start ]
+  %2 = add i64 %1, 1
+  store i64 %2, ptr %_1, align 8, !alias.scope !17
+  %3 = call { i64, i1 } @llvm.smul.with.overflow.i64(i64 %1, i64 %1)
+  %_5.1.i.i.i = extractvalue { i64, i1 } %3, 1
+  br i1 %_5.1.i.i.i, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_.exit.i, label %bb4.i.i
+
+bb4.i.i:                                          ; preds = %bb3.i
+  %_5.0.i.i.i = extractvalue { i64, i1 } %3, 0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i.i), !noalias !4
+  store i64 %_5.0.i.i.i, ptr %_0.i.i.i.i.i, align 8, !noalias !4
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i.i) #11, !noalias !4, !srcloc !18
+  %4 = load i64, ptr %_0.i.i.i.i.i, align 8, !noalias !4, !noundef !16
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i.i), !noalias !4
+  %_4.0.i.i.i.i.i = add i64 %4, %accum.sroa.0.06.i
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_.exit.i
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_.exit.i: ; preds = %bb4.i.i, %bb3.i
+  %_0.sroa.0.0.i.i = phi i64 [ %_4.0.i.i.i.i.i, %bb4.i.i ], [ %accum.sroa.0.06.i, %bb3.i ]
+  %exitcond.not.i = icmp eq i64 %2, %_4.i.i.i.i
+  br i1 %exitcond.not.i, label %_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_.exit, label %bb3.i
+
+_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator8try_foldxNCINvNtNtBR_8adapters10filter_map19filter_map_try_foldxxxINtNtB8_9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB1H_3map12map_try_foldxxxB2v_INvNtBa_4hint9black_boxxENCINvMB2y_B2v_10wrap_mut_2xxNCINvXse_NtBP_5accumxNtB5j_3Sum3sumQINtB3O_3MapINtB1F_9FilterMapB3_B38_EB4j_EE0E0E0E0B2v_EB3c_.exit: ; preds = %start, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_.exit.i
+  %accum.sroa.0.0.lcssa.i = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map19filter_map_try_foldxxxINtNtNtBa_3ops9try_trait17NeverShortCircuitxENCNvCsiVlEIo5dfo6_5shape10single_ref0NCINvNtB6_3map12map_try_foldxxxB1h_INvNtBa_4hint9black_boxxENCINvMB1k_B1h_10wrap_mut_2xxNCINvXse_NtNtB8_6traits5accumxNtB4a_3Sum3sumQINtB2G_3MapINtB4_9FilterMapINtNtB1m_5range5RangexEB20_EB3a_EE0E0E0E0B24_.exit.i ]
+  call void @llvm.lifetime.end.p0(ptr nonnull %_1)
+  ret i64 %accum.sroa.0.0.lcssa.i
+}

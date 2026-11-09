@@ -1,0 +1,59 @@
+[
+  {
+    "command": [
+      "/tmp/kernel-file-copy-20261105/reflink-probe",
+      "std",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":3,\"loop_ns\":6019500,\"ns_per_call\":2006500}\n",
+    "files": {
+      "src": [
+        {
+          "logical": 0,
+          "physical": 2168709120,
+          "length": 131072,
+          "flags": 8201
+        }
+      ],
+      "dst": [
+        {
+          "logical": 0,
+          "physical": 2168709120,
+          "length": 131072,
+          "flags": 8201
+        }
+      ]
+    }
+  },
+  {
+    "command": [
+      "/tmp/kernel-file-copy-20261105/reflink-probe",
+      "std",
+      "131072",
+      "3",
+      "/tmp",
+      "pattern"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":3,\"loop_ns\":617699,\"ns_per_call\":205899.66666666666}\n",
+    "files": {
+      "src": [
+        {
+          "logical": 0,
+          "physical": 1638686720,
+          "length": 131072,
+          "flags": 8201
+        }
+      ],
+      "dst": [
+        {
+          "logical": 0,
+          "physical": 1638686720,
+          "length": 131072,
+          "flags": 8201
+        }
+      ]
+    }
+  }
+]

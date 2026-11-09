@@ -1,0 +1,25 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 930  of event 'cpu_core/cycles/u'
+# Event count (approx.): 4153786433
+#
+# Overhead  Command  Shared Object         Symbol                          
+# ........  .......  ....................  ................................
+#
+    62.07%  probe    probe                 [.] two_run
+            |
+            ---two_run
+
+    37.89%  probe    libc.so.6             [.] __memcmp_avx2_movbe
+            |
+            ---__memcmp_avx2_movbe
+
+
+
+#
+# (Tip: Compare performance results with: perf diff [<old file> <new file>])
+#
+

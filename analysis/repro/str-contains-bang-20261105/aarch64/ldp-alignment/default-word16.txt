@@ -1,0 +1,39 @@
+<bang_probe_v7::word16>:
+    4770:	f27cec28 	ands	x8, x1, #0xfffffffffffffff0
+    4774:	540002a0 	b.eq	47c8 <bang_probe_v7::word16+0x58>  // b.none
+    4778:	b203c3e9 	mov	x9, #0x2020202020202020    	// #2314885530818453536
+    477c:	b200c3ea 	mov	x10, #0x101010101010101     	// #72340172838076673
+    4780:	927cec2b 	and	x11, x1, #0xfffffffffffffff0
+    4784:	b200c129 	orr	x9, x9, #0x101010101010101
+    4788:	f280200a 	movk	x10, #0x100
+    478c:	cb0b03eb 	neg	x11, x11
+    4790:	b201c3ec 	mov	x12, #0x8080808080808080    	// #-9187201950435737472
+    4794:	aa0003ed 	mov	x13, x0
+    4798:	a8c13dae 	ldp	x14, x15, [x13], #16
+    479c:	ca0901d0 	eor	x16, x14, x9
+    47a0:	ca0901f1 	eor	x17, x15, x9
+    47a4:	cb100150 	sub	x16, x10, x16
+    47a8:	cb110151 	sub	x17, x10, x17
+    47ac:	aa0e020e 	orr	x14, x16, x14
+    47b0:	aa0f022f 	orr	x15, x17, x15
+    47b4:	8a0f01ce 	and	x14, x14, x15
+    47b8:	ea2e019f 	bics	xzr, x12, x14
+    47bc:	540001e1 	b.ne	47f8 <bang_probe_v7::word16+0x88>  // b.any
+    47c0:	b100416b 	adds	x11, x11, #0x10
+    47c4:	54fffea1 	b.ne	4798 <bang_probe_v7::word16+0x28>  // b.any
+    47c8:	92400c29 	and	x9, x1, #0xf
+    47cc:	b40001a9 	cbz	x9, 4800 <bang_probe_v7::word16+0x90>
+    47d0:	8b080008 	add	x8, x0, x8
+    47d4:	d1000529 	sub	x9, x9, #0x1
+    47d8:	3840150a 	ldrb	w10, [x8], #1
+    47dc:	7100855f 	cmp	w10, #0x21
+    47e0:	1a9f17e0 	cset	w0, eq	// eq = none
+    47e4:	54000080 	b.eq	47f4 <bang_probe_v7::word16+0x84>  // b.none
+    47e8:	aa0903ea 	mov	x10, x9
+    47ec:	d1000529 	sub	x9, x9, #0x1
+    47f0:	b5ffff4a 	cbnz	x10, 47d8 <bang_probe_v7::word16+0x68>
+    47f4:	d65f03c0 	ret
+    47f8:	52800020 	mov	w0, #0x1                   	// #1
+    47fc:	d65f03c0 	ret
+    4800:	2a1f03e0 	mov	w0, wzr
+    4804:	d65f03c0 	ret

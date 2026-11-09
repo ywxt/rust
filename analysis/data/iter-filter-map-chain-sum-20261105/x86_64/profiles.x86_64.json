@@ -1,0 +1,72 @@
+[
+  {
+    "mode": "original",
+    "command": [
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "997",
+      "-e",
+      "cpu_core/cycles/u",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/profile-original.x86_64.data",
+      "--",
+      "taskset",
+      "-c",
+      "12",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/lib/rustlib/x86_64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/c9f6899463cab7b6/out:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib:/nix/store/s21axjr25zw6x9g6ripn7kamgbvw0y69-curl-8.22.0/lib:/nix/store/lw86vj9kfwgvlivg3p8qg2nibpmhmsl9-zlib-1.3.2/lib",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe",
+      "original",
+      "1000"
+    ],
+    "stdout": "{\"elapsed_ns\":609157155,\"reps\":1000}\n",
+    "stderr": "",
+    "report": [
+      "perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "--percent-limit",
+      "1",
+      "-i",
+      "/tmp/iter-filter-map-chain-sum-20261105/profile-original.x86_64.data"
+    ]
+  },
+  {
+    "mode": "guarded",
+    "command": [
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "997",
+      "-e",
+      "cpu_core/cycles/u",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/profile-guarded.x86_64.data",
+      "--",
+      "taskset",
+      "-c",
+      "12",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/lib/rustlib/x86_64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/c9f6899463cab7b6/out:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib:/nix/store/s21axjr25zw6x9g6ripn7kamgbvw0y69-curl-8.22.0/lib:/nix/store/lw86vj9kfwgvlivg3p8qg2nibpmhmsl9-zlib-1.3.2/lib",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe",
+      "guarded",
+      "1000"
+    ],
+    "stdout": "{\"elapsed_ns\":532799444,\"reps\":1000}\n",
+    "stderr": "",
+    "report": [
+      "perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "--percent-limit",
+      "1",
+      "-i",
+      "/tmp/iter-filter-map-chain-sum-20261105/profile-guarded.x86_64.data"
+    ]
+  }
+]

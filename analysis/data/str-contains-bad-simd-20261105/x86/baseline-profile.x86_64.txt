@@ -1,0 +1,52 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 9K of event 'cpu_core/cycles/u'
+# Event count (approx.): 21758282142
+#
+# Overhead  Command  Shared Object               Symbol                                                                                                                          
+# ........  .......  ..........................  ................................................................................................................................
+#
+    55.62%  benches  benches                     [.] <&str as core::str::pattern::Pattern>::is_contained_in
+            |
+            ---<&str as core::str::pattern::Pattern>::is_contained_in
+               |          
+               |--6.47%--0x6161616161616161
+               |          
+                --6.35%--0x4a
+                          0x6161616161616161
+
+    30.68%  benches  libstd-320fe7036dd8354d.so  [.] <core::str::pattern::StrSearcher>::new
+            |
+            ---<core::str::pattern::StrSearcher>::new
+               |          
+               |--29.86%--<&str as core::str::pattern::Pattern>::is_contained_in
+               |          |          
+               |           --24.79%--0x4a
+               |                     0x6161616161616161
+               |          
+                --0.62%--0x4a
+                          0x6161616161616161
+
+    10.18%  benches  libc.so.6                   [.] __memcmp_avx2_movbe
+            |
+            ---__memcmp_avx2_movbe
+               <&str as core::str::pattern::Pattern>::is_contained_in
+               |          
+                --8.40%--0x4a
+                          0x6161616161616161
+
+     3.45%  benches  benches                     [.] <benches::str::bench_contains_bad_simd::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+            |
+            ---<benches::str::bench_contains_bad_simd::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+               |          
+                --2.88%--0x4a
+                          0x6161616161616161
+
+
+
+#
+# (Tip: To add Node.js USDT(User-Level Statically Defined Tracing): perf buildid-cache --add `which node`)
+#

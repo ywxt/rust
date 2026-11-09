@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+    "--edition=2024",
+    "--crate-type=lib",
+    "-O",
+    "-C",
+    "codegen-units=1",
+    "-C",
+    "llvm-args=-print-after-all -filter-print-funcs=_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_",
+    "--emit=llvm-ir",
+    "/tmp/iter-filter-map-chain-sum-20261105/shape.rs",
+    "-o",
+    "/tmp/iter-filter-map-chain-sum-20261105/shape-helper-trace.ll"
+  ],
+  "transitions": [
+    {
+      "function": "_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_",
+      "header": "*** IR Dump After MemProfRemoveInfo on [module] ***",
+      "checked_muls": 0
+    },
+    {
+      "function": "_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_",
+      "header": "*** IR Dump After InlinerPass on (_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_) ***",
+      "checked_muls": 1
+    },
+    {
+      "function": "_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_",
+      "header": "*** IR Dump After InstCombinePass on _RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_ ***",
+      "checked_muls": 0
+    }
+  ]
+}

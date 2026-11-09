@@ -86,7 +86,7 @@ mod testing;
 
 use realalloc::*;
 
-// We are directly including collections, raw_vec, and wtf8 here as they use non-public
+// We are directly including collections, raw_vec, wtf8 and utf16_decode here as they use non-public
 // methods and fields in tests and as such need to have the types to test in the same
 // crate as the tests themself.
 #[path = "../alloc/src/collections/mod.rs"]
@@ -94,6 +94,9 @@ mod collections;
 
 #[path = "../alloc/src/raw_vec/mod.rs"]
 mod raw_vec;
+
+#[path = "../alloc/src/utf16_decode.rs"]
+mod utf16_decode;
 
 #[path = "../alloc/src/wtf8/mod.rs"]
 mod wtf8;

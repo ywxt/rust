@@ -1,0 +1,51 @@
+<bang_probe_v7::simd64>:
+    498c:	f101003f 	cmp	x1, #0x40
+    4990:	54000042 	b.cs	4998 <bang_probe_v7::simd64+0xc>  // b.hs, b.nlast
+    4994:	17ffff8e 	b	47cc <bang_probe_v7::fold16>
+    4998:	f27ae43f 	tst	x1, #0xffffffffffffffc0
+    499c:	540002c0 	b.eq	49f4 <bang_probe_v7::simd64+0x68>  // b.none
+    49a0:	4f01e420 	movi	v0.16b, #0x21
+    49a4:	927ae428 	and	x8, x1, #0xffffffffffffffc0
+    49a8:	aa0003e9 	mov	x9, x0
+    49ac:	cb0803e8 	neg	x8, x8
+    49b0:	3dc00121 	ldr	q1, [x9]
+    49b4:	3dc00522 	ldr	q2, [x9, #16]
+    49b8:	3dc00923 	ldr	q3, [x9, #32]
+    49bc:	3dc00d24 	ldr	q4, [x9, #48]
+    49c0:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    49c4:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    49c8:	6e208c63 	cmeq	v3.16b, v3.16b, v0.16b
+    49cc:	6e208c84 	cmeq	v4.16b, v4.16b, v0.16b
+    49d0:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    49d4:	4ea41c62 	orr	v2.16b, v3.16b, v4.16b
+    49d8:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    49dc:	5ef1b821 	addp	d1, v1.2d
+    49e0:	9e66002a 	fmov	x10, d1
+    49e4:	b500030a 	cbnz	x10, 4a44 <bang_probe_v7::simd64+0xb8>
+    49e8:	b1010108 	adds	x8, x8, #0x40
+    49ec:	91010129 	add	x9, x9, #0x40
+    49f0:	54fffe01 	b.ne	49b0 <bang_probe_v7::simd64+0x24>  // b.any
+    49f4:	92401428 	and	x8, x1, #0x3f
+    49f8:	b40002a8 	cbz	x8, 4a4c <bang_probe_v7::simd64+0xc0>
+    49fc:	4f01e420 	movi	v0.16b, #0x21
+    4a00:	8b010008 	add	x8, x0, x1
+    4a04:	3cdc0101 	ldur	q1, [x8, #-64]
+    4a08:	3cdd0102 	ldur	q2, [x8, #-48]
+    4a0c:	3cde0103 	ldur	q3, [x8, #-32]
+    4a10:	3cdf0104 	ldur	q4, [x8, #-16]
+    4a14:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    4a18:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    4a1c:	6e208c63 	cmeq	v3.16b, v3.16b, v0.16b
+    4a20:	6e208c80 	cmeq	v0.16b, v4.16b, v0.16b
+    4a24:	4ea21c21 	orr	v1.16b, v1.16b, v2.16b
+    4a28:	4ea01c60 	orr	v0.16b, v3.16b, v0.16b
+    4a2c:	4ea01c20 	orr	v0.16b, v1.16b, v0.16b
+    4a30:	5ef1b800 	addp	d0, v0.2d
+    4a34:	9e660008 	fmov	x8, d0
+    4a38:	f100011f 	cmp	x8, #0x0
+    4a3c:	1a9f07e0 	cset	w0, ne	// ne = any
+    4a40:	d65f03c0 	ret
+    4a44:	52800020 	mov	w0, #0x1                   	// #1
+    4a48:	d65f03c0 	ret
+    4a4c:	2a1f03e0 	mov	w0, wzr
+    4a50:	d65f03c0 	ret

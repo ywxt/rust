@@ -1,0 +1,74 @@
+--- a/library/core/src/str/pattern.rs
++++ b/library/core/src/str/pattern.rs
+@@ -1848,7 +1848,7 @@
+     } else {
+         // try a few bytes in case first and last byte of the needle are the same
+         let Some(second_probe_offset) =
+-            (needle.len().saturating_sub(4)..needle.len()).rfind(|&idx| needle[idx] != first_probe)
++            (1..needle.len()).rfind(|&idx| needle[idx] != first_probe)
+         else {
+             // fall back to other search methods if we can't find any different bytes
+             // since we could otherwise hit some degenerate cases
+@@ -1894,7 +1894,7 @@
+         false
+     };
+ 
+-    let test_chunk = |idx| -> u16 {
++    let test_chunk = |idx| -> Mask {
+         // SAFETY: this requires at least LANES bytes being readable at idx
+         // that is ensured by the loop ranges (see comments below)
+         let a: Block = unsafe { haystack.as_ptr().add(idx).cast::<Block>().read_unaligned() };
+@@ -1905,9 +1905,7 @@
+         let eq_first: Mask = a.simd_eq(first_probe);
+         let eq_last: Mask = b.simd_eq(second_probe);
+         let both = eq_first.bitand(eq_last);
+-        let mask = both.to_bitmask() as u16;
+-
+-        mask
++        both
+     };
+ 
+     let mut i = 0;
+@@ -1916,22 +1914,24 @@
+     // and not only at the current index but also at the index shifted by block_offset
+     const UNROLL: usize = 4;
+     while i + last_byte_offset + UNROLL * Block::LEN < haystack.len() && !result {
+-        let mut masks = [0u16; UNROLL];
++        let mut masks = [Mask::splat(false); UNROLL];
+         for j in 0..UNROLL {
+             masks[j] = test_chunk(i + j * Block::LEN);
+         }
+-        for j in 0..UNROLL {
+-            let mask = masks[j];
+-            if mask != 0 {
+-                result |= check_mask(i + j * Block::LEN, mask, result);
++        if (masks[0] | masks[1] | masks[2] | masks[3]).any() {
++            for j in 0..UNROLL {
++                let mask = masks[j].to_bitmask() as u16;
++                if mask != 0 {
++                    result |= check_mask(i + j * Block::LEN, mask, result);
++                }
+             }
+         }
+         i += UNROLL * Block::LEN;
+     }
+     while i + last_byte_offset + Block::LEN < haystack.len() && !result {
+         let mask = test_chunk(i);
+-        if mask != 0 {
+-            result |= check_mask(i, mask, result);
++        if mask.any() {
++            result |= check_mask(i, mask.to_bitmask() as u16, result);
+         }
+         i += Block::LEN;
+     }
+@@ -1942,8 +1942,8 @@
+     // we don't miss a single byte or read out of bounds.
+     let i = haystack.len() - last_byte_offset - Block::LEN;
+     let mask = test_chunk(i);
+-    if mask != 0 {
+-        result |= check_mask(i, mask, result);
++    if mask.any() {
++        result |= check_mask(i, mask.to_bitmask() as u16, result);
+     }
+ 
+     Some(result)

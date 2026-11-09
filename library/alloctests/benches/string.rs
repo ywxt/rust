@@ -1,3 +1,4 @@
+use alloc::wtf8::Wtf8Buf;
 use std::iter::repeat;
 
 use test::{Bencher, black_box};
@@ -158,4 +159,134 @@ fn bench_insert_str_long(b: &mut Bencher) {
         black_box(&mut x).insert_str(black_box(6), black_box(" rustic "));
         x
     })
+}
+
+/// `n` ASCII letters, except that every `every`-th is `c` (none if `every == 0`).
+fn utf16_input(n: usize, every: usize, c: char) -> Vec<u16> {
+    let s: String = (0..n)
+        .map(|i| if every != 0 && i % every == 0 { c } else { (b'a' + (i % 26) as u8) as char })
+        .collect();
+    s.encode_utf16().collect()
+}
+
+/// `piece`, which has no surrogates, repeated to `n` units.
+fn utf16_text(n: usize, piece: &str) -> Vec<u16> {
+    piece.encode_utf16().cycle().take(n).collect()
+}
+
+/// `n` ASCII letters, except that `per_mille` of them, at random positions, are `c`.
+fn utf16_random(n: usize, per_mille: u32, c: char) -> Vec<u16> {
+    let mut state = 0x2545_F491u32;
+    let s: String = (0..n)
+        .map(|i| {
+            state = state.wrapping_mul(1_664_525).wrapping_add(1_013_904_223);
+            if (state >> 8) % 1000 < per_mille { c } else { (b'a' + (i % 26) as u8) as char }
+        })
+        .collect();
+    s.encode_utf16().collect()
+}
+
+/// `n` CJK characters, every 20th of which is an emoji instead.
+fn utf16_cjk_emoji(n: usize) -> Vec<u16> {
+    (0..n)
+        .map(|i| if i % 20 == 0 { '😀' } else { '中' })
+        .collect::<String>()
+        .encode_utf16()
+        .collect()
+}
+
+/// Like `utf16_input(n, 0, _)`, but every 10th unit is an unpaired surrogate.
+fn utf16_lone(n: usize) -> Vec<u16> {
+    let mut v = utf16_input(n, 0, 'é');
+    for i in (0..n).step_by(10) {
+        v[i] = 0xD800;
+    }
+    v
+}
+
+const CYRILLIC_WORDS: &str = "Привет мир, ";
+const FRENCH: &str =
+    "Le cœur a ses raisons que la raison ne connaît point. Où êtes-vous allé hier soir ? ";
+const GERMAN: &str = "Die Würde des Menschen ist unantastbar. Sie zu achten und zu schützen ist Verpflichtung aller staatlichen Gewalt. ";
+
+/// `v` with the unit at `at`, or the last one if `at` is past the end, replaced by an unpaired
+/// surrogate.
+fn with_lone(mut v: Vec<u16>, at: usize) -> Vec<u16> {
+    let at = at.min(v.len() - 1);
+    v[at] = 0xD800;
+    v
+}
+
+const START: usize = 0;
+const MIDDLE: usize = 50_000;
+const END: usize = usize::MAX;
+
+macro_rules! utf16_bench {
+    ($($name:ident: $f:expr, $input:expr;)*) => {$(
+        #[bench]
+        fn $name(b: &mut Bencher) {
+            let v: Vec<u16> = $input;
+            b.iter(|| $f(black_box(&v[..])));
+        }
+    )*};
+}
+
+fn from_utf16(v: &[u16]) -> String {
+    String::from_utf16(v).unwrap()
+}
+utf16_bench! {
+    bench_from_utf16_ascii_0040: from_utf16, utf16_input(40, 0, 'é');
+    bench_from_utf16_ascii_1000: from_utf16, utf16_input(1000, 0, 'é');
+    bench_from_utf16_ascii_100000: from_utf16, utf16_input(100_000, 0, 'é');
+    bench_from_utf16_latin1pct_1000: from_utf16, utf16_input(1000, 100, 'é');
+    bench_from_utf16_latin1pct_100000: from_utf16, utf16_input(100_000, 100, 'é');
+    bench_from_utf16_rand3pct_100000: from_utf16, utf16_random(100_000, 30, 'é');
+    bench_from_utf16_latin10pct_1000: from_utf16, utf16_input(1000, 10, 'é');
+    bench_from_utf16_latin10pct_100000: from_utf16, utf16_input(100_000, 10, 'é');
+    bench_from_utf16_french_100000: from_utf16, utf16_text(100_000, FRENCH);
+    bench_from_utf16_german_100000: from_utf16, utf16_text(100_000, GERMAN);
+    bench_from_utf16_cyrillic_1000: from_utf16, utf16_input(1000, 1, 'Ж');
+    bench_from_utf16_cyrillic_100000: from_utf16, utf16_input(100_000, 1, 'Ж');
+    bench_from_utf16_cyrillic_words_100000: from_utf16, utf16_text(100_000, CYRILLIC_WORDS);
+    bench_from_utf16_cjk_1000: from_utf16, utf16_input(1000, 1, '中');
+    bench_from_utf16_cjk_100000: from_utf16, utf16_input(100_000, 1, '中');
+    bench_from_utf16_emoji_1000: from_utf16, utf16_input(1000, 1, '😀');
+    bench_from_utf16_emoji_100000: from_utf16, utf16_input(100_000, 1, '😀');
+    bench_from_utf16_cjk_emoji5pct_100000: from_utf16, utf16_cjk_emoji(100_000);
+
+    bench_from_utf16_lossy_ascii_100000: String::from_utf16_lossy, utf16_input(100_000, 0, 'é');
+    bench_from_utf16_lossy_latin10pct_100000: String::from_utf16_lossy, utf16_input(100_000, 10, 'é');
+    bench_from_utf16_lossy_cyrillic_words_100000: String::from_utf16_lossy, utf16_text(100_000, CYRILLIC_WORDS);
+    bench_from_utf16_lossy_cjk_100000: String::from_utf16_lossy, utf16_input(100_000, 1, '中');
+    bench_from_utf16_lossy_lone10pct_100000: String::from_utf16_lossy, utf16_lone(100_000);
+
+    bench_from_wide_ascii_100000: Wtf8Buf::from_wide, utf16_input(100_000, 0, 'é');
+    bench_from_wide_latin10pct_100000: Wtf8Buf::from_wide, utf16_input(100_000, 10, 'é');
+    bench_from_wide_cyrillic_words_100000: Wtf8Buf::from_wide, utf16_text(100_000, CYRILLIC_WORDS);
+    bench_from_wide_cjk_100000: Wtf8Buf::from_wide, utf16_input(100_000, 1, '中');
+    bench_from_wide_lone10pct_100000: Wtf8Buf::from_wide, utf16_lone(100_000);
+
+    bench_from_utf16_err_ascii_start_100000: String::from_utf16, with_lone(utf16_input(100_000, 0, 'é'), START);
+    bench_from_utf16_err_ascii_middle_100000: String::from_utf16, with_lone(utf16_input(100_000, 0, 'é'), MIDDLE);
+    bench_from_utf16_err_ascii_end_100000: String::from_utf16, with_lone(utf16_input(100_000, 0, 'é'), END);
+    bench_from_utf16_err_cjk_start_100000: String::from_utf16, with_lone(utf16_input(100_000, 1, '中'), START);
+    bench_from_utf16_err_cjk_middle_100000: String::from_utf16, with_lone(utf16_input(100_000, 1, '中'), MIDDLE);
+    bench_from_utf16_err_cjk_end_100000: String::from_utf16, with_lone(utf16_input(100_000, 1, '中'), END);
+    bench_from_utf16_err_cyrillic_words_start_100000: String::from_utf16, with_lone(utf16_text(100_000, CYRILLIC_WORDS), START);
+    bench_from_utf16_err_cyrillic_words_middle_100000: String::from_utf16, with_lone(utf16_text(100_000, CYRILLIC_WORDS), MIDDLE);
+    bench_from_utf16_err_cyrillic_words_end_100000: String::from_utf16, with_lone(utf16_text(100_000, CYRILLIC_WORDS), END);
+
+    bench_from_utf16_lossy_err_ascii_start_100000: String::from_utf16_lossy, with_lone(utf16_input(100_000, 0, 'é'), START);
+    bench_from_utf16_lossy_err_ascii_middle_100000: String::from_utf16_lossy, with_lone(utf16_input(100_000, 0, 'é'), MIDDLE);
+    bench_from_utf16_lossy_err_ascii_end_100000: String::from_utf16_lossy, with_lone(utf16_input(100_000, 0, 'é'), END);
+    bench_from_utf16_lossy_err_cjk_start_100000: String::from_utf16_lossy, with_lone(utf16_input(100_000, 1, '中'), START);
+    bench_from_utf16_lossy_err_cjk_middle_100000: String::from_utf16_lossy, with_lone(utf16_input(100_000, 1, '中'), MIDDLE);
+    bench_from_utf16_lossy_err_cjk_end_100000: String::from_utf16_lossy, with_lone(utf16_input(100_000, 1, '中'), END);
+
+    bench_from_wide_err_ascii_start_100000: Wtf8Buf::from_wide, with_lone(utf16_input(100_000, 0, 'é'), START);
+    bench_from_wide_err_ascii_middle_100000: Wtf8Buf::from_wide, with_lone(utf16_input(100_000, 0, 'é'), MIDDLE);
+    bench_from_wide_err_ascii_end_100000: Wtf8Buf::from_wide, with_lone(utf16_input(100_000, 0, 'é'), END);
+    bench_from_wide_err_cjk_start_100000: Wtf8Buf::from_wide, with_lone(utf16_input(100_000, 1, '中'), START);
+    bench_from_wide_err_cjk_middle_100000: Wtf8Buf::from_wide, with_lone(utf16_input(100_000, 1, '中'), MIDDLE);
+    bench_from_wide_err_cjk_end_100000: Wtf8Buf::from_wide, with_lone(utf16_input(100_000, 1, '中'), END);
 }

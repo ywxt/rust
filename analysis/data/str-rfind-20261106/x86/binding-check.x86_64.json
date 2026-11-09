@@ -1,0 +1,44 @@
+[
+  {
+    "variant": "0000",
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "setarch",
+      "x86_64",
+      "-R",
+      "env",
+      "LD_DEBUG=bindings",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "LD_PRELOAD=/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/shim-0000.so",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/benches-base",
+      "--list"
+    ],
+    "bindings": [
+      "         6:\tbinding file /tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib/libstd-320fe7036dd8354d.so [0] to /tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/shim-0000.so [0]: normal symbol `_RNvNtNtCsc9NCSoc2doQ_4core5slice6memchr7memrchr'",
+      "         6:\tbinding file /tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/benches-base [0] to /tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/shim-0000.so [0]: normal symbol `_RNvNtNtCsc9NCSoc2doQ_4core5slice6memchr7memrchr'"
+    ]
+  },
+  {
+    "variant": "0016",
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "setarch",
+      "x86_64",
+      "-R",
+      "env",
+      "LD_DEBUG=bindings",
+      "LD_LIBRARY_PATH=/tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib:/nix/store/604gsr59rj7dzd0nrhp143rpvf7gyiaz-gcc-15.3.0-lib/lib",
+      "LD_PRELOAD=/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/shim-0016.so",
+      "/tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/benches-base",
+      "--list"
+    ],
+    "bindings": [
+      "         7:\tbinding file /tmp/contains-bad-simd-20261105/sysroots/baseline/lib/rustlib/x86_64-unknown-linux-gnu/lib/libstd-320fe7036dd8354d.so [0] to /tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/shim-0016.so [0]: normal symbol `_RNvNtNtCsc9NCSoc2doQ_4core5slice6memchr7memrchr'",
+      "         7:\tbinding file /tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/benches-base [0] to /tmp/str-rfind-20261106/x86_64-unknown-linux-gnu/shim-0016.so [0]: normal symbol `_RNvNtNtCsc9NCSoc2doQ_4core5slice6memchr7memrchr'"
+    ]
+  }
+]

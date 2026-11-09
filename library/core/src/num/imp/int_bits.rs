@@ -123,8 +123,19 @@ macro_rules! uint_impl {
                     // In effect, the upper run of data is swapped with the
                     // group of `n` zeros below it.
                     let q = x & masks[stage];
-                    x ^= q;
-                    x ^= q >> n;
+                    if cfg!(target_arch = "aarch64") && $U::BITS <= 64 {
+                        // The bits moved by this stage land on positions that are already
+                        // zero, so `(x ^ q) ^ (q >> n)` equals `(x & !m) + (q >> n)`. The
+                        // add form lowers to `bic` + `usra` (shift right and accumulate) on
+                        // AArch64 NEON, one instruction fewer per stage. Other targets keep
+                        // the xor form: x86 has no shift-and-accumulate, and SSE2's
+                        // destructive `pandn` adds a register copy per stage. u128 is
+                        // excluded: its add is an `adds`/`adc` carry chain.
+                        x = (x & !masks[stage]).wrapping_add(q >> n);
+                    } else {
+                        x ^= q;
+                        x ^= q >> n;
+                    }
 
                     stage += 1;
                 }

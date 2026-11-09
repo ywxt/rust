@@ -1,0 +1,2270 @@
+[
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_usize_3000 ... bench:      37,033.30 ns/iter (+/- 100.61)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 37033.3
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_4x_usize_30 ... bench:       1,628.41 ns/iter (+/- 5.79)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.21s\n\n",
+    "stderr": "",
+    "ns_per_call": 1628.41
+  },
+  {
+    "round": 0,
+    "method": "vec",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "vec_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest vec_swap_with_slice_usize_30 ... bench:         359.80 ns/iter (+/- 1.49)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.12s\n\n",
+    "stderr": "",
+    "ns_per_call": 359.8
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_5x_usize_30 ... bench:       2,006.64 ns/iter (+/- 3.75)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.24s\n\n",
+    "stderr": "",
+    "ns_per_call": 2006.64
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_u8_30 ... bench:         216.92 ns/iter (+/- 2.36)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.11s\n\n",
+    "stderr": "",
+    "ns_per_call": 216.92
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_4x_usize_3000 ... bench:     119,944.38 ns/iter (+/- 217.46)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 119944.38
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_usize_30 ... bench:         401.99 ns/iter (+/- 6.24)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.16s\n\n",
+    "stderr": "",
+    "ns_per_call": 401.99
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_usize_3000 ... bench:      42,075.26 ns/iter (+/- 80.59)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 42075.26
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_rgb_3000 ... bench:      14,694.48 ns/iter (+/- 25.95)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.89s\n\n",
+    "stderr": "",
+    "ns_per_call": 14694.48
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_4x_usize_30 ... bench:       1,604.69 ns/iter (+/- 2.21)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.79s\n\n",
+    "stderr": "",
+    "ns_per_call": 1604.69
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_u8_3000 ... bench:       3,841.51 ns/iter (+/- 26.57)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.87s\n\n",
+    "stderr": "",
+    "ns_per_call": 3841.51
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_rgb_3000 ... bench:      25,928.42 ns/iter (+/- 43.18)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 25928.42
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_u8_3000 ... bench:       3,807.06 ns/iter (+/- 34.14)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.28s\n\n",
+    "stderr": "",
+    "ns_per_call": 3807.06
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_u8_3000 ... bench:       3,772.96 ns/iter (+/- 25.86)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.28s\n\n",
+    "stderr": "",
+    "ns_per_call": 3772.96
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_4x_usize_3000 ... bench:     119,892.38 ns/iter (+/- 175.43)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 119892.38
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_rgb_30 ... bench:         254.97 ns/iter (+/- 0.59)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.25s\n\n",
+    "stderr": "",
+    "ns_per_call": 254.97
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_4x_usize_30 ... bench:         984.44 ns/iter (+/- 1.01)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.82s\n\n",
+    "stderr": "",
+    "ns_per_call": 984.44
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_5x_usize_3000 ... bench:     212,978.75 ns/iter (+/- 253.23)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 212978.75
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_u8_3000 ... bench:       3,780.12 ns/iter (+/- 22.35)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 3780.12
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_usize_30 ... bench:         404.94 ns/iter (+/- 6.71)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.33s\n\n",
+    "stderr": "",
+    "ns_per_call": 404.94
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_5x_usize_30 ... bench:       1,987.78 ns/iter (+/- 2.68)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.23s\n\n",
+    "stderr": "",
+    "ns_per_call": 1987.78
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_5x_usize_3000 ... bench:     196,445.25 ns/iter (+/- 474.45)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.24s\n\n",
+    "stderr": "",
+    "ns_per_call": 196445.25
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_5x_usize_3000 ... bench:     196,366.40 ns/iter (+/- 344.94)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 196366.4
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_u8_30 ... bench:         230.16 ns/iter (+/- 1.59)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.24s\n\n",
+    "stderr": "",
+    "ns_per_call": 230.16
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_rgb_30 ... bench:         363.30 ns/iter (+/- 1.86)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.12s\n\n",
+    "stderr": "",
+    "ns_per_call": 363.3
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_usize_30 ... bench:         499.03 ns/iter (+/- 1.52)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.14s\n\n",
+    "stderr": "",
+    "ns_per_call": 499.03
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_usize_3000 ... bench:      37,357.88 ns/iter (+/- 87.26)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 37357.88
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_5x_usize_30 ... bench:       1,757.49 ns/iter (+/- 3.86)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 1757.49
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_rgb_30 ... bench:         255.73 ns/iter (+/- 0.65)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 255.73
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_usize_30 ... bench:         476.02 ns/iter (+/- 2.04)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.14s\n\n",
+    "stderr": "",
+    "ns_per_call": 476.02
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_5x_usize_30 ... bench:       1,249.43 ns/iter (+/- 3.31)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.24s\n\n",
+    "stderr": "",
+    "ns_per_call": 1249.43
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_rgb_30 ... bench:         319.18 ns/iter (+/- 1.83)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 319.18
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_u8_30 ... bench:         190.78 ns/iter (+/- 0.43)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 190.78
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_4x_usize_3000 ... bench:     170,179.60 ns/iter (+/- 212.42)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 170179.6
+  },
+  {
+    "round": 0,
+    "method": "vec",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "vec_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest vec_swap_with_slice_usize_3000 ... bench:      28,629.53 ns/iter (+/- 57.33)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 28629.53
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_4x_usize_30 ... bench:         983.33 ns/iter (+/- 2.27)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 983.33
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_usize_3000 ... bench:      27,424.58 ns/iter (+/- 52.99)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 27424.58
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_5x_usize_3000 ... bench:     212,362.25 ns/iter (+/- 536.25)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 212362.25
+  },
+  {
+    "round": 0,
+    "method": "original",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_rgb_3000 ... bench:      14,687.24 ns/iter (+/- 44.97)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 14687.24
+  },
+  {
+    "round": 0,
+    "method": "prebuilt",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_u8_30 ... bench:         192.28 ns/iter (+/- 0.55)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 192.28
+  },
+  {
+    "round": 0,
+    "method": "chunk8",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_rgb_3000 ... bench:      13,268.01 ns/iter (+/- 105.76)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 13268.01
+  },
+  {
+    "round": 0,
+    "method": "chunk4",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_4x_usize_3000 ... bench:     169,861.60 ns/iter (+/- 164.92)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 169861.6
+  },
+  {
+    "round": 1,
+    "method": "vec",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "vec_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest vec_swap_with_slice_usize_30 ... bench:         360.52 ns/iter (+/- 1.72)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.13s\n\n",
+    "stderr": "",
+    "ns_per_call": 360.52
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_5x_usize_3000 ... bench:     213,081.25 ns/iter (+/- 534.82)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 213081.25
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_u8_3000 ... bench:       3,782.68 ns/iter (+/- 27.18)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 3782.68
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_usize_30 ... bench:         402.47 ns/iter (+/- 7.41)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.18s\n\n",
+    "stderr": "",
+    "ns_per_call": 402.47
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_usize_3000 ... bench:      37,416.96 ns/iter (+/- 115.50)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 37416.96
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_rgb_30 ... bench:         255.51 ns/iter (+/- 0.52)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 255.51
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_4x_usize_30 ... bench:       1,624.94 ns/iter (+/- 4.71)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.20s\n\n",
+    "stderr": "",
+    "ns_per_call": 1624.94
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_usize_30 ... bench:         403.70 ns/iter (+/- 6.62)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.20s\n\n",
+    "stderr": "",
+    "ns_per_call": 403.7
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_5x_usize_30 ... bench:       1,757.90 ns/iter (+/- 3.23)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.28s\n\n",
+    "stderr": "",
+    "ns_per_call": 1757.9
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_u8_3000 ... bench:       3,815.38 ns/iter (+/- 29.76)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 3815.38
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_4x_usize_3000 ... bench:     119,945.88 ns/iter (+/- 286.12)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 119945.88
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_4x_usize_3000 ... bench:     170,147.40 ns/iter (+/- 185.36)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 170147.4
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_rgb_30 ... bench:         255.93 ns/iter (+/- 1.09)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.25s\n\n",
+    "stderr": "",
+    "ns_per_call": 255.93
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_4x_usize_30 ... bench:         981.93 ns/iter (+/- 1.10)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 981.93
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_5x_usize_3000 ... bench:     196,444.00 ns/iter (+/- 397.12)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 196444.0
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_5x_usize_30 ... bench:       1,992.72 ns/iter (+/- 8.67)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.23s\n\n",
+    "stderr": "",
+    "ns_per_call": 1992.72
+  },
+  {
+    "round": 1,
+    "method": "vec",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "vec_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest vec_swap_with_slice_usize_3000 ... bench:      28,635.50 ns/iter (+/- 48.48)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 28635.5
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_rgb_3000 ... bench:      13,285.84 ns/iter (+/- 79.61)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 13285.84
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_5x_usize_30 ... bench:       1,255.74 ns/iter (+/- 4.28)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 1255.74
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_u8_30 ... bench:         192.48 ns/iter (+/- 0.43)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 192.48
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_usize_30 ... bench:         476.19 ns/iter (+/- 1.10)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.47s\n\n",
+    "stderr": "",
+    "ns_per_call": 476.19
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_rgb_3000 ... bench:      14,659.25 ns/iter (+/- 52.95)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 14659.25
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_usize_3000 ... bench:      27,422.03 ns/iter (+/- 158.35)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 27422.03
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_u8_30 ... bench:         218.53 ns/iter (+/- 2.93)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.12s\n\n",
+    "stderr": "",
+    "ns_per_call": 218.53
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_5x_usize_3000 ... bench:     212,361.75 ns/iter (+/- 248.73)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 212361.75
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_4x_usize_30 ... bench:         982.33 ns/iter (+/- 4.28)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.85s\n\n",
+    "stderr": "",
+    "ns_per_call": 982.33
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_usize_3000 ... bench:      37,002.85 ns/iter (+/- 94.99)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 37002.85
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_rgb_30 ... bench:         358.62 ns/iter (+/- 3.11)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.13s\n\n",
+    "stderr": "",
+    "ns_per_call": 358.62
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_rgb_30 ... bench:         319.54 ns/iter (+/- 4.17)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.11s\n\n",
+    "stderr": "",
+    "ns_per_call": 319.54
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_4x_usize_30 ... bench:       1,604.94 ns/iter (+/- 2.33)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 1604.94
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_usize_30 ... bench:         498.96 ns/iter (+/- 2.38)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.15s\n\n",
+    "stderr": "",
+    "ns_per_call": 498.96
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_rgb_3000 ... bench:      14,655.49 ns/iter (+/- 56.79)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 14655.49
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_5x_usize_30 ... bench:       2,012.54 ns/iter (+/- 7.68)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.24s\n\n",
+    "stderr": "",
+    "ns_per_call": 2012.54
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_u8_3000 ... bench:       3,838.58 ns/iter (+/- 55.79)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 3838.58
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_4x_usize_3000 ... bench:     119,923.25 ns/iter (+/- 173.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 119923.25
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_5x_usize_3000 ... bench:     196,353.00 ns/iter (+/- 391.08)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 196353.0
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_rgb_3000 ... bench:      25,943.18 ns/iter (+/- 65.85)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 25943.18
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_u8_30 ... bench:         229.98 ns/iter (+/- 1.30)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.24s\n\n",
+    "stderr": "",
+    "ns_per_call": 229.98
+  },
+  {
+    "round": 1,
+    "method": "chunk8",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_usize_3000 ... bench:      42,066.09 ns/iter (+/- 67.24)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 42066.09
+  },
+  {
+    "round": 1,
+    "method": "chunk4",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_4x_usize_3000 ... bench:     169,857.40 ns/iter (+/- 163.68)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 169857.4
+  },
+  {
+    "round": 1,
+    "method": "prebuilt",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_u8_3000 ... bench:       3,774.57 ns/iter (+/- 27.92)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 3774.57
+  },
+  {
+    "round": 1,
+    "method": "original",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_u8_30 ... bench:         190.92 ns/iter (+/- 0.42)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.23s\n\n",
+    "stderr": "",
+    "ns_per_call": 190.92
+  },
+  {
+    "round": 2,
+    "method": "vec",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "vec_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest vec_swap_with_slice_usize_30 ... bench:         359.39 ns/iter (+/- 1.42)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.14s\n\n",
+    "stderr": "",
+    "ns_per_call": 359.39
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_usize_3000 ... bench:      37,068.04 ns/iter (+/- 130.39)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 37068.04
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_u8_3000 ... bench:       3,770.88 ns/iter (+/- 25.42)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 3770.88
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_5x_usize_3000 ... bench:     196,487.80 ns/iter (+/- 758.02)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 196487.8
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_u8_3000 ... bench:       3,810.31 ns/iter (+/- 34.73)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 3810.31
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_rgb_30 ... bench:         255.62 ns/iter (+/- 0.50)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 255.62
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_rgb_3000 ... bench:      13,243.93 ns/iter (+/- 90.33)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 13243.93
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_u8_30 ... bench:         219.77 ns/iter (+/- 2.39)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 219.77
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_usize_30 ... bench:         406.52 ns/iter (+/- 8.42)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.15s\n\n",
+    "stderr": "",
+    "ns_per_call": 406.52
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_usize_3000 ... bench:      37,386.77 ns/iter (+/- 102.84)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 37386.77
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_u8_30 ... bench:         231.51 ns/iter (+/- 2.13)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.24s\n\n",
+    "stderr": "",
+    "ns_per_call": 231.51
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_rgb_3000 ... bench:      14,663.34 ns/iter (+/- 53.82)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 14663.34
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_4x_usize_3000 ... bench:     119,885.88 ns/iter (+/- 200.57)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 119885.88
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_u8_3000 ... bench:       3,836.39 ns/iter (+/- 19.73)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.85s\n\n",
+    "stderr": "",
+    "ns_per_call": 3836.39
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_4x_usize_30 ... bench:         979.84 ns/iter (+/- 1.33)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 979.84
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_5x_usize_3000 ... bench:     196,387.60 ns/iter (+/- 473.50)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 196387.6
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_5x_usize_30 ... bench:       1,756.83 ns/iter (+/- 2.26)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.28s\n\n",
+    "stderr": "",
+    "ns_per_call": 1756.83
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_rgb_30 ... bench:         363.23 ns/iter (+/- 2.71)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.13s\n\n",
+    "stderr": "",
+    "ns_per_call": 363.23
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_5x_usize_30 ... bench:       2,007.21 ns/iter (+/- 4.45)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.23s\n\n",
+    "stderr": "",
+    "ns_per_call": 2007.21
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_rgb_3000 ... bench:      14,675.51 ns/iter (+/- 52.21)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.89s\n\n",
+    "stderr": "",
+    "ns_per_call": 14675.51
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_usize_30 ... bench:         402.54 ns/iter (+/- 7.27)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.18s\n\n",
+    "stderr": "",
+    "ns_per_call": 402.54
+  },
+  {
+    "round": 2,
+    "method": "vec",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "vec_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest vec_swap_with_slice_usize_3000 ... bench:      28,631.38 ns/iter (+/- 48.20)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 28631.38
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_5x_usize_3000 ... bench:     213,059.75 ns/iter (+/- 294.05)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 213059.75
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_4x_usize_3000 ... bench:     169,851.40 ns/iter (+/- 371.82)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 169851.4
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_u8_30 ... bench:         192.52 ns/iter (+/- 0.48)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.22s\n\n",
+    "stderr": "",
+    "ns_per_call": 192.52
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_usize_30 ... bench:         477.89 ns/iter (+/- 2.86)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.15s\n\n",
+    "stderr": "",
+    "ns_per_call": 477.89
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_usize_3000 ... bench:      27,407.53 ns/iter (+/- 48.30)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 27407.53
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_usize_30 ... bench:         498.91 ns/iter (+/- 1.57)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.18s\n\n",
+    "stderr": "",
+    "ns_per_call": 498.91
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_rgb_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_rgb_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_rgb_3000 ... bench:      25,933.79 ns/iter (+/- 78.31)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 25933.79
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_5x_usize_30 ... bench:       1,253.31 ns/iter (+/- 6.02)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.24s\n\n",
+    "stderr": "",
+    "ns_per_call": 1253.31
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_u8_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_u8_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_u8_3000 ... bench:       3,776.47 ns/iter (+/- 24.61)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.30s\n\n",
+    "stderr": "",
+    "ns_per_call": 3776.47
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_rgb_30 ... bench:         319.97 ns/iter (+/- 1.74)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.11s\n\n",
+    "stderr": "",
+    "ns_per_call": 319.97
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_5x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_5x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_5x_usize_30 ... bench:       1,987.68 ns/iter (+/- 4.80)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.22s\n\n",
+    "stderr": "",
+    "ns_per_call": 1987.68
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_4x_usize_3000 ... bench:     170,166.20 ns/iter (+/- 249.12)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 170166.2
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_usize_3000 ... bench:      42,087.39 ns/iter (+/- 106.18)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 42087.39
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_4x_usize_30 ... bench:         985.44 ns/iter (+/- 3.29)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.28s\n\n",
+    "stderr": "",
+    "ns_per_call": 985.44
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_5x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_5x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_5x_usize_3000 ... bench:     212,366.50 ns/iter (+/- 261.02)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 212366.5
+  },
+  {
+    "round": 2,
+    "method": "chunk4",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk4_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk4_swap_with_slice_4x_usize_30 ... bench:       1,614.56 ns/iter (+/- 4.17)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.27s\n\n",
+    "stderr": "",
+    "ns_per_call": 1614.56
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_rgb_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_rgb_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_rgb_30 ... bench:         255.35 ns/iter (+/- 0.59)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 255.35
+  },
+  {
+    "round": 2,
+    "method": "chunk8",
+    "name": "swap_with_slice_4x_usize_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "chunk8_swap_with_slice_4x_usize_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest chunk8_swap_with_slice_4x_usize_30 ... bench:       1,621.52 ns/iter (+/- 6.18)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.19s\n\n",
+    "stderr": "",
+    "ns_per_call": 1621.52
+  },
+  {
+    "round": 2,
+    "method": "original",
+    "name": "swap_with_slice_u8_30",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/slice-swap-usize30-20261105/harness",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "original_swap_with_slice_u8_30"
+    ],
+    "stdout": "\nrunning 1 test\ntest original_swap_with_slice_u8_30 ... bench:         190.90 ns/iter (+/- 0.39)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 31 filtered out; finished in 0.25s\n\n",
+    "stderr": "",
+    "ns_per_call": 190.9
+  },
+  {
+    "round": 2,
+    "method": "prebuilt",
+    "name": "swap_with_slice_4x_usize_3000",
+    "command": [
+      "taskset",
+      "-c",
+      "52",
+      "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/coretests/c8805e1d516f63c4/out/corebenches-c8805e1d516f63c4",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "slice::swap_with_slice_4x_usize_3000"
+    ],
+    "stdout": "\nrunning 1 test\ntest slice::swap_with_slice_4x_usize_3000 ... bench:     119,918.00 ns/iter (+/- 157.43)\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 595 filtered out; finished in 0.29s\n\n",
+    "stderr": "",
+    "ns_per_call": 119918.0
+  }
+]

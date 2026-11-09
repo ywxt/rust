@@ -1,0 +1,32 @@
+define internal fastcc noundef i64 @_RINvYINtNtNtCs6knCYbIatyh_4core3ops5range5RangexENtNtNtNtBa_4iter6traits8iterator8Iterator4foldxNCINvNtNtBR_8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB1D_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtBP_5accumxNtB3S_3Sum3sumINtB2Y_3MapINtB1B_9FilterMapB3_B2n_EB3k_EE0E0E0EB2r_(i64 noundef %0, i64 noundef %1, i64 noundef %init) unnamed_addr #2 personality ptr @_RNvCsbOwsw4zHH1Z_7___rustc19rust_eh_personality {
+start:
+  %_0.i.i.i.i = alloca [8 x i8], align 8
+  br label %bb1
+
+bb1:                                              ; preds = %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, %start
+  %self.sroa.0.0 = phi i64 [ 0, %start ], [ %2, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %accum.sroa.0.0 = phi i64 [ 0, %start ], [ %_0.sroa.0.0.i, %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit ]
+  %_0.i.i.i = icmp samesign ult i64 %self.sroa.0.0, 1000000
+  br i1 %_0.i.i.i, label %bb3, label %bb5
+
+bb3:                                              ; preds = %bb1
+  %2 = add nuw nsw i64 %self.sroa.0.0, 1
+  br i1 false, label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit, label %bb4.i
+
+bb4.i:                                            ; preds = %bb3
+  %3 = mul nuw nsw i64 %self.sroa.0.0, %self.sroa.0.0
+  call void @llvm.lifetime.start.p0(ptr nonnull %_0.i.i.i.i)
+  store i64 %3, ptr %_0.i.i.i.i, align 8
+  call void asm sideeffect "", "r,~{memory}"(ptr nonnull %_0.i.i.i.i) #12, !srcloc !4
+  %4 = load i64, ptr %_0.i.i.i.i, align 8, !noundef !5
+  call void @llvm.lifetime.end.p0(ptr nonnull %_0.i.i.i.i)
+  %_4.0.i.i.i = add i64 %4, %accum.sroa.0.0
+  br label %_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit
+
+_RNCINvNtNtNtCs6knCYbIatyh_4core4iter8adapters10filter_map15filter_map_foldxxxNCNvCsiVlEIo5dfo6_5shape6single0NCINvNtB6_3map8map_foldxxxINvNtBa_4hint9black_boxxENCINvXse_NtNtB8_6traits5accumxNtB2H_3Sum3sumINtB1O_3MapINtB4_9FilterMapINtNtNtBa_3ops5range5RangexEB1d_EB29_EE0E0E0B1h_.exit: ; preds = %bb3, %bb4.i
+  %_0.sroa.0.0.i = phi i64 [ %_4.0.i.i.i, %bb4.i ], [ poison, %bb3 ]
+  br label %bb1
+
+bb5:                                              ; preds = %bb1
+  ret i64 %accum.sroa.0.0
+}

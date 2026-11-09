@@ -1,0 +1,2 @@
+include!("compare.rs");
+fn main(){let a:Vec<_>=std::env::args().collect();let reps:usize=a[2].parse().unwrap();let x=std::hint::black_box(("core::iter::adapters::Chain",123));let y=std::hint::black_box(("core::iter::adapters::Clone",456));let f:fn(&Item<'_>,&Item<'_>)->[bool;4]=match a[1].as_str(){"original"=>leaf_original,"fused"=>leaf_fused,_=>leaf_once};let t=std::time::Instant::now();for _ in 0..reps{std::hint::black_box(f(&x,&y));}println!("{{\"elapsed_ns\":{},\"reps\":{}}}",t.elapsed().as_nanos(),reps);}

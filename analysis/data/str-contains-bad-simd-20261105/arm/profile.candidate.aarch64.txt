@@ -1,0 +1,41 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 74  of event 'cycles:u'
+# Event count (approx.): 279873202
+#
+# Overhead  Command  Shared Object          Symbol                                                                         
+# ........  .......  .....................  ...............................................................................
+#
+    96.42%  counted  counted                [.] _RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in
+            |
+            ---_RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in
+               _RNvNtCs7Com3XUV1E3_7counted3str23bench_contains_bad_simd
+               _RNvCs7Com3XUV1E3_7counted4main
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECs7Com3XUV1E3_7counted
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Cs7Com3XUV1E3_7counted
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     3.41%  counted  counted                [.] _RNvNtCs7Com3XUV1E3_7counted3str23bench_contains_bad_simd
+            |
+            ---_RNvNtCs7Com3XUV1E3_7counted3str23bench_contains_bad_simd
+               _RNvCs7Com3XUV1E3_7counted4main
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECs7Com3XUV1E3_7counted
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0Cs7Com3XUV1E3_7counted
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: Save output of perf stat using: perf stat record <target workload>)
+#

@@ -1,0 +1,190 @@
+*** IR Dump Before Loop Strength Reduction (loop-reduce) ***
+; Preheader:
+21:                                               ; preds = %19
+  br label %24
+
+; Loop:
+24:                                               ; preds = %21, %22
+  %25 = phi ptr [ %26, %22 ], [ %15, %21 ]
+  %26 = getelementptr inbounds i8, ptr %25, i64 -8
+  %27 = load i64, ptr %26, align 8, !alias.scope !59, !noalias !56, !noundef !61
+  %28 = icmp ult i64 %16, %27
+  br i1 %28, label %22, label %29
+
+22:                                               ; preds = %24
+  store i64 %27, ptr %25, align 8
+  %23 = icmp eq ptr %26, %0
+  br i1 %23, label %29, label %24
+
+; Exit blocks
+29:                                               ; preds = %24, %22
+  %30 = phi ptr [ %25, %24 ], [ %0, %22 ]
+  br label %31
+
+29:                                               ; preds = %24, %22
+  %30 = phi ptr [ %25, %24 ], [ %0, %22 ]
+  br label %31
+*** IR Dump After Loop Strength Reduction (loop-reduce) ***
+; Preheader:
+23:                                               ; preds = %21
+  br label %27
+
+; Loop:
+27:                                               ; preds = %23, %24
+  %28 = phi i64 [ %15, %23 ], [ %25, %24 ]
+  %29 = getelementptr i8, ptr %0, i64 %28
+  %30 = getelementptr i8, ptr %29, i64 -8
+  %31 = getelementptr i8, ptr %0, i64 %28
+  %32 = getelementptr i8, ptr %31, i64 -16
+  %33 = load i64, ptr %32, align 8, !alias.scope !59, !noalias !56, !noundef !61
+  %34 = icmp ult i64 %18, %33
+  br i1 %34, label %24, label %36
+
+24:                                               ; preds = %27
+  store i64 %33, ptr %30, align 8
+  %25 = add i64 %28, -8
+  %26 = icmp eq i64 %25, 8
+  br i1 %26, label %35, label %27
+
+; Exit blocks
+36:                                               ; preds = %27
+  %37 = getelementptr i8, ptr %0, i64 %28
+  %38 = getelementptr i8, ptr %37, i64 -8
+  br label %39
+
+35:                                               ; preds = %24
+  br label %39
+*** IR Dump Before Loop Strength Reduction (loop-reduce) ***
+; Preheader:
+9:                                                ; preds = %6
+  %10 = getelementptr inbounds nuw [8 x i8], ptr %0, i64 %2
+  %11 = shl nuw nsw i64 %2, 3
+  br label %14
+
+; Loop:
+14:                                               ; preds = %9, %43
+  %15 = phi i64 [ %11, %9 ], [ %46, %43 ]
+  %16 = phi ptr [ %44, %43 ], [ %10, %9 ]
+  %17 = getelementptr inbounds i8, ptr %16, i64 -8
+  %18 = load i64, ptr %16, align 8, !alias.scope !56, !noalias !59, !noundef !61
+  %19 = load i64, ptr %17, align 8, !alias.scope !59, !noalias !56, !noundef !61
+  %20 = icmp ult i64 %18, %19
+  br i1 %20, label %21, label %43
+
+21:                                               ; preds = %14
+  store i64 %19, ptr %16, align 8
+  %22 = icmp eq ptr %17, %0
+  br i1 %22, label %41, label %23
+
+27:                                               ; preds = %23, %24
+  %28 = phi i64 [ %15, %23 ], [ %25, %24 ]
+  %29 = getelementptr i8, ptr %0, i64 %28
+  %30 = getelementptr i8, ptr %29, i64 -8
+  %31 = getelementptr i8, ptr %0, i64 %28
+  %32 = getelementptr i8, ptr %31, i64 -16
+  %33 = load i64, ptr %32, align 8, !alias.scope !59, !noalias !56, !noundef !61
+  %34 = icmp ult i64 %18, %33
+  br i1 %34, label %24, label %36
+
+24:                                               ; preds = %27
+  store i64 %33, ptr %30, align 8
+  %25 = add i64 %28, -8
+  %26 = icmp eq i64 %25, 8
+  br i1 %26, label %35, label %27
+
+41:                                               ; preds = %39, %21
+  %42 = phi ptr [ %0, %21 ], [ %40, %39 ]
+  store i64 %18, ptr %42, align 8, !noalias !62
+  br label %43
+
+43:                                               ; preds = %14, %41
+  %44 = getelementptr inbounds nuw i8, ptr %16, i64 8
+  %45 = icmp eq ptr %44, %7
+  %46 = add i64 %15, 8
+  br i1 %45, label %12, label %14
+
+23:                                               ; preds = %21
+  br label %27
+
+39:                                               ; preds = %35, %36
+  %40 = phi ptr [ %38, %36 ], [ %0, %35 ]
+  br label %41
+
+36:                                               ; preds = %27
+  %37 = getelementptr i8, ptr %0, i64 %28
+  %38 = getelementptr i8, ptr %37, i64 -8
+  br label %39
+
+35:                                               ; preds = %24
+  br label %39
+
+; Exit blocks
+12:                                               ; preds = %43
+  br label %13
+*** IR Dump After Loop Strength Reduction (loop-reduce) ***
+; Preheader:
+9:                                                ; preds = %6
+  %10 = getelementptr inbounds nuw [8 x i8], ptr %0, i64 %2
+  %11 = shl nuw nsw i64 %2, 3
+  br label %14
+
+; Loop:
+14:                                               ; preds = %9, %43
+  %15 = phi i64 [ %11, %9 ], [ %45, %43 ]
+  %16 = phi ptr [ %44, %43 ], [ %10, %9 ]
+  %17 = getelementptr inbounds i8, ptr %16, i64 -8
+  %18 = load i64, ptr %16, align 8, !alias.scope !56, !noalias !59, !noundef !61
+  %19 = load i64, ptr %17, align 8, !alias.scope !59, !noalias !56, !noundef !61
+  %20 = icmp ult i64 %18, %19
+  br i1 %20, label %21, label %43
+
+21:                                               ; preds = %14
+  store i64 %19, ptr %16, align 8
+  %22 = icmp eq ptr %17, %0
+  br i1 %22, label %41, label %23
+
+27:                                               ; preds = %23, %24
+  %28 = phi i64 [ %15, %23 ], [ %25, %24 ]
+  %29 = getelementptr i8, ptr %0, i64 %28
+  %30 = getelementptr i8, ptr %29, i64 -8
+  %31 = getelementptr i8, ptr %0, i64 %28
+  %32 = getelementptr i8, ptr %31, i64 -16
+  %33 = load i64, ptr %32, align 8, !alias.scope !59, !noalias !56, !noundef !61
+  %34 = icmp ult i64 %18, %33
+  br i1 %34, label %24, label %36
+
+24:                                               ; preds = %27
+  store i64 %33, ptr %30, align 8
+  %25 = add i64 %28, -8
+  %26 = icmp eq i64 %25, 8
+  br i1 %26, label %35, label %27
+
+41:                                               ; preds = %39, %21
+  %42 = phi ptr [ %0, %21 ], [ %40, %39 ]
+  store i64 %18, ptr %42, align 8, !noalias !62
+  br label %43
+
+43:                                               ; preds = %14, %41
+  %44 = getelementptr inbounds nuw i8, ptr %16, i64 8
+  %45 = add i64 %15, 8
+  %46 = icmp eq ptr %44, %7
+  br i1 %46, label %12, label %14
+
+23:                                               ; preds = %21
+  br label %27
+
+39:                                               ; preds = %35, %36
+  %40 = phi ptr [ %38, %36 ], [ %0, %35 ]
+  br label %41
+
+36:                                               ; preds = %27
+  %37 = getelementptr i8, ptr %0, i64 %28
+  %38 = getelementptr i8, ptr %37, i64 -8
+  br label %39
+
+35:                                               ; preds = %24
+  br label %39
+
+; Exit blocks
+12:                                               ; preds = %43
+  br label %13

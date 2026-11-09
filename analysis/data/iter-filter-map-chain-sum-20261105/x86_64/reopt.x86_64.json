@@ -1,0 +1,58 @@
+[
+  {
+    "case": "indvars",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/opt",
+      "-S",
+      "-passes=function(loop-simplify,lcssa,loop(indvars),instcombine,simplifycfg)",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.ll",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/reopt-indvars.ll"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "original_checked_muls": 2
+  },
+  {
+    "case": "correlated",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/opt",
+      "-S",
+      "-passes=function(correlated-propagation,instcombine,simplifycfg)",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.ll",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/reopt-correlated.ll"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "original_checked_muls": 2
+  },
+  {
+    "case": "constraints",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/opt",
+      "-S",
+      "-passes=function(constraint-elimination,instcombine,simplifycfg)",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.ll",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/reopt-constraints.ll"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "original_checked_muls": 2
+  },
+  {
+    "case": "o3",
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/ci-llvm/bin/opt",
+      "-S",
+      "-passes=default<O3>",
+      "/tmp/iter-filter-map-chain-sum-20261105/probe.ll",
+      "-o",
+      "/tmp/iter-filter-map-chain-sum-20261105/reopt-o3.ll"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "original_checked_muls": 2
+  }
+]

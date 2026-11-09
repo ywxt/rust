@@ -1,0 +1,166 @@
+[
+  {
+    "target": "aarch64-unknown-linux-gnu",
+    "name": "check",
+    "command": [
+      "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "/tmp/contains-main-compare-20261106/check.rs",
+      "--sysroot",
+      "/tmp/contains-main-compare-20261106/sysroots/simd16",
+      "--target",
+      "aarch64-unknown-linux-gnu",
+      "-O",
+      "--edition=2024",
+      "-Cprefer-dynamic",
+      "-Zinline-mir",
+      "-Cllvm-args=-import-instr-limit=10",
+      "--emit=link,llvm-ir,asm",
+      "-o",
+      "/tmp/contains-main-compare-20261106/simd16/aarch64-unknown-linux-gnu/check"
+    ]
+  },
+  {
+    "target": "aarch64-unknown-linux-gnu",
+    "name": "custom-check",
+    "command": [
+      "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "/tmp/contains-main-compare-20261106/custom-check.rs",
+      "--sysroot",
+      "/tmp/contains-main-compare-20261106/sysroots/simd16",
+      "--target",
+      "aarch64-unknown-linux-gnu",
+      "-O",
+      "--edition=2024",
+      "-Cprefer-dynamic",
+      "-Zinline-mir",
+      "-Cllvm-args=-import-instr-limit=10",
+      "--emit=link,llvm-ir,asm",
+      "-o",
+      "/tmp/contains-main-compare-20261106/simd16/aarch64-unknown-linux-gnu/custom-check"
+    ]
+  },
+  {
+    "target": "aarch64-unknown-linux-gnu",
+    "name": "counted",
+    "command": [
+      "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "/tmp/contains-main-compare-20261106/counted.rs",
+      "--sysroot",
+      "/tmp/contains-main-compare-20261106/sysroots/simd16",
+      "--target",
+      "aarch64-unknown-linux-gnu",
+      "-O",
+      "--edition=2024",
+      "-Cprefer-dynamic",
+      "-Zinline-mir",
+      "-Cllvm-args=-import-instr-limit=10",
+      "--emit=link,llvm-ir,asm",
+      "-o",
+      "/tmp/contains-main-compare-20261106/simd16/aarch64-unknown-linux-gnu/counted"
+    ]
+  },
+  {
+    "target": "aarch64-unknown-linux-gnu",
+    "name": "matrix",
+    "command": [
+      "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "/tmp/contains-main-compare-20261106/matrix.rs",
+      "--sysroot",
+      "/tmp/contains-main-compare-20261106/sysroots/simd16",
+      "--target",
+      "aarch64-unknown-linux-gnu",
+      "-O",
+      "--edition=2024",
+      "-Cprefer-dynamic",
+      "-Zinline-mir",
+      "-Cllvm-args=-import-instr-limit=10",
+      "--emit=link,llvm-ir,asm",
+      "-o",
+      "/tmp/contains-main-compare-20261106/simd16/aarch64-unknown-linux-gnu/matrix"
+    ]
+  },
+  {
+    "target": "x86_64-unknown-linux-gnu",
+    "name": "check",
+    "command": [
+      "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "/tmp/contains-main-compare-20261106/check.rs",
+      "--sysroot",
+      "/tmp/contains-main-compare-20261106/sysroots/simd16",
+      "--target",
+      "x86_64-unknown-linux-gnu",
+      "-O",
+      "--edition=2024",
+      "-Cprefer-dynamic",
+      "-Zinline-mir",
+      "-Cllvm-args=-import-instr-limit=10",
+      "--emit=link,llvm-ir,asm",
+      "-o",
+      "/tmp/contains-main-compare-20261106/simd16/x86_64-unknown-linux-gnu/check",
+      "-Clinker=/tmp/contains-main-compare-20261106/x86-cc"
+    ]
+  },
+  {
+    "target": "x86_64-unknown-linux-gnu",
+    "name": "custom-check",
+    "command": [
+      "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "/tmp/contains-main-compare-20261106/custom-check.rs",
+      "--sysroot",
+      "/tmp/contains-main-compare-20261106/sysroots/simd16",
+      "--target",
+      "x86_64-unknown-linux-gnu",
+      "-O",
+      "--edition=2024",
+      "-Cprefer-dynamic",
+      "-Zinline-mir",
+      "-Cllvm-args=-import-instr-limit=10",
+      "--emit=link,llvm-ir,asm",
+      "-o",
+      "/tmp/contains-main-compare-20261106/simd16/x86_64-unknown-linux-gnu/custom-check",
+      "-Clinker=/tmp/contains-main-compare-20261106/x86-cc"
+    ]
+  },
+  {
+    "target": "x86_64-unknown-linux-gnu",
+    "name": "counted",
+    "command": [
+      "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "/tmp/contains-main-compare-20261106/counted.rs",
+      "--sysroot",
+      "/tmp/contains-main-compare-20261106/sysroots/simd16",
+      "--target",
+      "x86_64-unknown-linux-gnu",
+      "-O",
+      "--edition=2024",
+      "-Cprefer-dynamic",
+      "-Zinline-mir",
+      "-Cllvm-args=-import-instr-limit=10",
+      "--emit=link,llvm-ir,asm",
+      "-o",
+      "/tmp/contains-main-compare-20261106/simd16/x86_64-unknown-linux-gnu/counted",
+      "-Clinker=/tmp/contains-main-compare-20261106/x86-cc"
+    ]
+  },
+  {
+    "target": "x86_64-unknown-linux-gnu",
+    "name": "matrix",
+    "command": [
+      "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+      "/tmp/contains-main-compare-20261106/matrix.rs",
+      "--sysroot",
+      "/tmp/contains-main-compare-20261106/sysroots/simd16",
+      "--target",
+      "x86_64-unknown-linux-gnu",
+      "-O",
+      "--edition=2024",
+      "-Cprefer-dynamic",
+      "-Zinline-mir",
+      "-Cllvm-args=-import-instr-limit=10",
+      "--emit=link,llvm-ir,asm",
+      "-o",
+      "/tmp/contains-main-compare-20261106/simd16/x86_64-unknown-linux-gnu/matrix",
+      "-Clinker=/tmp/contains-main-compare-20261106/x86-cc"
+    ]
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "cpu": {
+    "command": [
+      "lscpu"
+    ],
+    "stdout": "Architecture:                         aarch64\nCPU op-mode(s):                       64-bit\nByte Order:                           Little Endian\nCPU(s):                               320\nOn-line CPU(s) list:                  0-319\nVendor ID:                            HiSilicon\nModel name:                           unknown\nModel:                                0\nThread(s) per core:                   2\nCore(s) per socket:                   80\nSocket(s):                            2\nStepping:                             0x0\nFrequency boost:                      disabled\nCPU(s) scaling MHz:                   100%\nCPU max MHz:                          2900.0000\nCPU min MHz:                          400.0000\nBogoMIPS:                             200.00\nFlags:                                fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs sb dcpodp flagm2 frint svei8mm svef32mm svef64mm svebf16 i8mm bf16 dgh rng ecv\nL1d cache:                            10 MiB (160 instances)\nL1i cache:                            10 MiB (160 instances)\nL2 cache:                             200 MiB (160 instances)\nL3 cache:                             280 MiB (4 instances)\nNUMA node(s):                         4\nNUMA node0 CPU(s):                    0-79\nNUMA node1 CPU(s):                    80-159\nNUMA node2 CPU(s):                    160-239\nNUMA node3 CPU(s):                    240-319\nVulnerability Gather data sampling:   Not affected\nVulnerability Itlb multihit:          Not affected\nVulnerability L1tf:                   Not affected\nVulnerability Mds:                    Not affected\nVulnerability Meltdown:               Not affected\nVulnerability Mmio stale data:        Not affected\nVulnerability Reg file data sampling: Not affected\nVulnerability Retbleed:               Not affected\nVulnerability Spec rstack overflow:   Not affected\nVulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:             Mitigation; __user pointer sanitization\nVulnerability Spectre v2:             Mitigation; CSV2, but not BHB\nVulnerability Srbds:                  Not affected\nVulnerability Tsa:                    Not affected\nVulnerability Tsx async abort:        Not affected\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "kernel": {
+    "command": [
+      "uname",
+      "-a"
+    ],
+    "stdout": "Linux localhost.localdomain 6.6.0-132.0.0.111.oe2403sp3.aarch64 #1 SMP Mon Dec 29 23:09:17 CST 2025 aarch64 aarch64 aarch64 GNU/Linux\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "libc": {
+    "command": [
+      "ldd",
+      "--version"
+    ],
+    "stdout": "ldd (GNU libc) 2.38\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\nWritten by Roland McGrath and Ulrich Drepper.\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "perf": {
+    "command": [
+      "perf",
+      "--version"
+    ],
+    "stdout": "perf version 6.6.0-132.0.0.111.oe2403sp3.aarch64\n",
+    "stderr": "",
+    "exit": 0
+  },
+  "sources": {
+    "stack-probe.rs": "e869db9490d3d82c6f92261234cb0da8b37f392e9faf2f1708ab81b7ddb662d4",
+    "pattern.combined.rs": "2b7127b20acc058d9131caf28d027b0e5e1fe933bd1c21d93403ea35ab7f331a",
+    "pattern.mask.rs": "f7438cb1490129ee3bced9b94fe88f54d4db7aaeaf5b8dfda5c351eb12d1e48d",
+    "probe-selection.rs": "1bfa9bc3c21f22c45bf14e791cb54eef94ab5b230b592fb7c8286862726b97f7",
+    "pattern.candidate.rs": "2f37bf876bfbbae455e0b8dfb8dd1061b00ef8b6ead0e543677d1b26742cde66",
+    "scenarios.rs": "f7d2eaeb35236bf585d25da4cc5068845bc92ccab6aa1ea239f7f05791e37218",
+    "pattern.baseline.rs": "d37940d1114992bec9162974ae82ae1383bf403c99e749524c574a74966a02d0",
+    "counted.rs": "4652cfc3ca52bf937ba4c9cf264ceefb489c6a754094b50980d2f191eb95d69e",
+    "fixtures.rs": "2737f318272d13623d98874a4224eb2bd775c2c4583d6b647b94cefb10c017e9",
+    "benches.rs": "0d2e3c258409f4bcc5e341d4d5a5798471923ad18329f3281eb701440cba8171"
+  },
+  "binaries": {
+    "baseline/aarch64-unknown-linux-gnu/scenarios": "d76379468389e62271adcc8f87d3a4086c509ee1e3b28d057fd875a72b2194f7",
+    "baseline/aarch64-unknown-linux-gnu/counted": "64b7228abdf72106ee36798e393860b724f55431441839f8e15ee734a200ee8e",
+    "baseline/aarch64-unknown-linux-gnu/benches": "4210f8bb2626601e201374c8381eed2a9223db9ef872e2693910db8fde60fd65",
+    "candidate/aarch64-unknown-linux-gnu/scenarios": "e0c50096c15e501de1f57c43e1dfe2c46eef8f321f86619e166d94adc6495483",
+    "candidate/aarch64-unknown-linux-gnu/counted": "bd837270dc2b7179904d23a1d5a7fce1a761ffb89a5eb4eb532019448d67a935",
+    "candidate/aarch64-unknown-linux-gnu/benches": "6648696076f312ed6001cd31862bcd52bc39be3ec8d53975f220321fda8c5cc9"
+  }
+}

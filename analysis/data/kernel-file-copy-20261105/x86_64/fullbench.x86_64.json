@@ -1,0 +1,104 @@
+[
+  {
+    "round": 0,
+    "TMPDIR": "/tmp",
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/0a8d55422ce22f87/out/std-0a8d55422ce22f87",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "sys::io::kernel_copy::linux::tests::bench_file_to_file_copy"
+    ],
+    "stdout": "\nrunning 1 test\ntest sys::io::kernel_copy::linux::tests::bench_file_to_file_copy ... bench:       3,448.54 ns/iter (+/- 154.82) = 38013 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 473 filtered out; finished in 3.21s\n\n",
+    "stderr": "",
+    "ns_per_call": 3448.54
+  },
+  {
+    "round": 0,
+    "TMPDIR": "/dev/shm/kernel-file-copy-20261105",
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/0a8d55422ce22f87/out/std-0a8d55422ce22f87",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "sys::io::kernel_copy::linux::tests::bench_file_to_file_copy"
+    ],
+    "stdout": "\nrunning 1 test\ntest sys::io::kernel_copy::linux::tests::bench_file_to_file_copy ... bench:       5,603.89 ns/iter (+/- 101.49) = 23393 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 473 filtered out; finished in 0.41s\n\n",
+    "stderr": "",
+    "ns_per_call": 5603.89
+  },
+  {
+    "round": 1,
+    "TMPDIR": "/tmp",
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/0a8d55422ce22f87/out/std-0a8d55422ce22f87",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "sys::io::kernel_copy::linux::tests::bench_file_to_file_copy"
+    ],
+    "stdout": "\nrunning 1 test\ntest sys::io::kernel_copy::linux::tests::bench_file_to_file_copy ... bench:       3,400.78 ns/iter (+/- 202.10) = 38550 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 473 filtered out; finished in 4.20s\n\n",
+    "stderr": "",
+    "ns_per_call": 3400.78
+  },
+  {
+    "round": 1,
+    "TMPDIR": "/dev/shm/kernel-file-copy-20261105",
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/0a8d55422ce22f87/out/std-0a8d55422ce22f87",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "sys::io::kernel_copy::linux::tests::bench_file_to_file_copy"
+    ],
+    "stdout": "\nrunning 1 test\ntest sys::io::kernel_copy::linux::tests::bench_file_to_file_copy ... bench:       5,869.59 ns/iter (+/- 473.97) = 22332 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 473 filtered out; finished in 0.19s\n\n",
+    "stderr": "",
+    "ns_per_call": 5869.59
+  },
+  {
+    "round": 2,
+    "TMPDIR": "/tmp",
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/0a8d55422ce22f87/out/std-0a8d55422ce22f87",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "sys::io::kernel_copy::linux::tests::bench_file_to_file_copy"
+    ],
+    "stdout": "\nrunning 1 test\ntest sys::io::kernel_copy::linux::tests::bench_file_to_file_copy ... bench:       3,424.73 ns/iter (+/- 129.08) = 38280 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 473 filtered out; finished in 0.26s\n\n",
+    "stderr": "",
+    "ns_per_call": 3424.73
+  },
+  {
+    "round": 2,
+    "TMPDIR": "/dev/shm/kernel-file-copy-20261105",
+    "command": [
+      "taskset",
+      "-c",
+      "12",
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/std/0a8d55422ce22f87/out/std-0a8d55422ce22f87",
+      "--bench",
+      "--exact",
+      "--test-threads=1",
+      "sys::io::kernel_copy::linux::tests::bench_file_to_file_copy"
+    ],
+    "stdout": "\nrunning 1 test\ntest sys::io::kernel_copy::linux::tests::bench_file_to_file_copy ... bench:       5,666.28 ns/iter (+/- 314.76) = 23133 MB/s\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 1 measured; 473 filtered out; finished in 3.34s\n\n",
+    "stderr": "",
+    "ns_per_call": 5666.28
+  }
+]

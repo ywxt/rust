@@ -1,0 +1,19 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu_core/cycles/u'
+# Event count (approx.): 1038506231
+#
+# Overhead  Symbol                                                                                                                               IPC   [IPC Coverage]
+# ........  ...................................................................................................................................  ....................
+#
+    65.77%  [.] <&str as core::str::pattern::Pattern>::is_contained_in                                                                           -      -            
+    27.64%  [.] core::str::pattern::simd_contains::{closure#2}                                                                                   -      -            
+     6.36%  [.] <benches::str::bench_contains_short_short::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once  -      -            
+
+
+#
+# (Tip: To see call chains by final symbol taking CPU time (bottom up) use perf report -G)
+#

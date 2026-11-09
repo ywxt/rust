@@ -1,0 +1,54 @@
+{
+  "source": "/home/wheel/c00936152/rust-contains-stdlib",
+  "repository": "/home/wheel/c00936152/rust-analysis",
+  "head": "dc55da5cca14a0aa773ecb7a0459756260b2ee5c",
+  "library_snapshot": "current working tree including existing changes",
+  "pattern_sha256": "878333fb2b4371194f0853b93ff4fc53efe02be878f603b546ab5ae00fa3eefd",
+  "rustc_vV": "rustc 1.99.0-dev\nbinary: rustc\ncommit-hash: unknown\ncommit-date: unknown\nhost: aarch64-unknown-linux-gnu\nrelease: 1.99.0-dev\nLLVM version: 23.1.0\n",
+  "cargo_v": "cargo 1.99.0-nightly (b07e5a086 2026-08-07)\n",
+  "stdlib_build_command": [
+    "./x",
+    "build",
+    "--stage",
+    "0",
+    "library/std",
+    "library/test",
+    "--target",
+    "aarch64-unknown-linux-gnu,x86_64-unknown-linux-gnu"
+  ],
+  "app_compile_flags": [
+    "-O",
+    "--edition=2024",
+    "-Cprefer-dynamic",
+    "-Zinline-mir",
+    "-Cllvm-args=-import-instr-limit=10"
+  ],
+  "new_inline_attributes": 0,
+  "host_target": "aarch64-unknown-linux-gnu",
+  "execution_targets": [
+    "aarch64-unknown-linux-gnu",
+    "x86_64-unknown-linux-gnu"
+  ],
+  "arm_target": "builtin; custom JSON attempt was not used",
+  "bootstrap_patch_scope": "isolated worktree only; permit native stage0 local-rebuild and install rebuilt outputs",
+  "standard_library_patch_sha256": "aa71e59e0dbc9febe85b486299caee43a162b93cda451c135a33091bdeadb2b7",
+  "bootstrap_patch_sha256": "18ec149fbc7dcc99d9cd0da0bbc6380741e435b6fae6d3b56740658f83cfd146",
+  "pattern_after_sha256": "d37940d1114992bec9162974ae82ae1383bf403c99e749524c574a74966a02d0",
+  "standard_library_version": 2,
+  "simd_minimum_haystack_bytes": 64,
+  "first_byte_fast_return": true,
+  "comparison": "baseline=intrinsics v2; optimized=core::simd u8x64",
+  "portable_provenance": {
+    "previous_experiment": "/tmp/contains-stdlib-20261105",
+    "repository": "/home/wheel/c00936152/rust-analysis",
+    "isolated_source": "/home/wheel/c00936152/rust-contains-stdlib",
+    "compiler": "/home/wheel/c00936152/rust-analysis/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+    "head": "dc55da5cca14a0aa773ecb7a0459756260b2ee5c",
+    "before_sha256": "d37940d1114992bec9162974ae82ae1383bf403c99e749524c574a74966a02d0",
+    "after_unformatted_sha256": "dd6596ebd4a4a8a2a3dd29c341bc49f45b0c7f896d331215aed63ff522795ee6",
+    "change": "only contains_byte_64 implementation, same length/alignment/tail logic",
+    "baseline": "actual intrinsics stdlib v2, rebuilt in preceding task"
+  },
+  "previous_portable16_experiment": "/tmp/contains-portable-simd-20261105",
+  "portable_sha256": "3b730531dc1dbc5df8701364b67d70d35379ecc55ce15d3f8eb483e4bad165c4"
+}

@@ -1770,6 +1770,13 @@ impl<'a, T> Iterator for Iter<'a, T> {
         self.iter.size_hint()
     }
 
+    fn fold<B, F>(self, init: B, f: F) -> B
+    where
+        F: FnMut(B, Self::Item) -> B,
+    {
+        self.iter.fold(init, f)
+    }
+
     fn last(mut self) -> Option<&'a T> {
         self.next_back()
     }

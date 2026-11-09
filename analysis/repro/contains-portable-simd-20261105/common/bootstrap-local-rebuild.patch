@@ -1,0 +1,30 @@
+--- a/src/bootstrap/src/core/build_steps/compile.rs
++++ b/src/bootstrap/src/core/build_steps/compile.rs
+@@ -161,7 +161,7 @@
+         // library even on stage 0), and we're cross-compiling (so the stage0 standard library for
+         // *target* is not available), we still allow the stdlib to be built here.
+         if self.build_compiler.stage == 0
+-            && !(builder.local_rebuild && target != builder.host_target)
++            && !builder.local_rebuild
+         {
+             let compiler = self.build_compiler;
+             builder.ensure(StdLink::from_std(self, compiler));
+@@ -808,7 +808,7 @@
+             if stage0_codegen_backends.exists() {
+                 builder.cp_link_r(&stage0_codegen_backends, &sysroot_codegen_backends);
+             }
+-        } else if compiler.stage == 0 {
++        } else if compiler.stage == 0 && !builder.local_rebuild {
+             let sysroot = builder.out.join(compiler.host.triple).join("stage0-sysroot");
+ 
+             if builder.local_rebuild {
+@@ -820,6 +820,9 @@
+ 
+             builder.cp_link_r(&builder.initial_sysroot.join("lib"), &sysroot.join("lib"));
+         } else {
++            if compiler.stage == 0 && builder.local_rebuild {
++                let _ = fs::remove_dir_all(&libdir);
++            }
+             if builder.download_rustc() {
+                 // Ensure there are no CI-rustc std artifacts.
+                 let _ = fs::remove_dir_all(&libdir);

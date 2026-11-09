@@ -1,0 +1,154 @@
+[
+  {
+    "root": "/tmp",
+    "mode": "std",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-0-std.aarch64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "std",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":3,\"loop_ns\":383710,\"ns_per_call\":127903.33333333333}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/tmp",
+    "mode": "take",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-0-take.aarch64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "take",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"take\",\"bytes\":131072,\"reps\":3,\"loop_ns\":359060,\"ns_per_call\":119686.66666666667}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/tmp",
+    "mode": "cfr",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-0-cfr.aarch64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "cfr",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"cfr\",\"bytes\":131072,\"reps\":3,\"loop_ns\":248660,\"ns_per_call\":82886.66666666667}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/tmp",
+    "mode": "rw128",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-0-rw128.aarch64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "rw128",
+      "131072",
+      "3",
+      "/tmp"
+    ],
+    "stdout": "{\"mode\":\"rw128\",\"bytes\":131072,\"reps\":3,\"loop_ns\":331730,\"ns_per_call\":110576.66666666667}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/home/wheel/copy-bench-20261105",
+    "mode": "std",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-1-std.aarch64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "std",
+      "131072",
+      "3",
+      "/home/wheel/copy-bench-20261105"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":3,\"loop_ns\":391840,\"ns_per_call\":130613.33333333333}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/home/wheel/copy-bench-20261105",
+    "mode": "take",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-1-take.aarch64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "take",
+      "131072",
+      "3",
+      "/home/wheel/copy-bench-20261105"
+    ],
+    "stdout": "{\"mode\":\"take\",\"bytes\":131072,\"reps\":3,\"loop_ns\":316390,\"ns_per_call\":105463.33333333333}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/home/wheel/copy-bench-20261105",
+    "mode": "cfr",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-1-cfr.aarch64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "cfr",
+      "131072",
+      "3",
+      "/home/wheel/copy-bench-20261105"
+    ],
+    "stdout": "{\"mode\":\"cfr\",\"bytes\":131072,\"reps\":3,\"loop_ns\":224680,\"ns_per_call\":74893.33333333333}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "root": "/home/wheel/copy-bench-20261105",
+    "mode": "rw128",
+    "command": [
+      "strace",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/trace-1-rw128.aarch64.txt",
+      "-e",
+      "trace=copy_file_range,sendfile,splice,read,write,lseek,fstat,newfstatat,statx",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "rw128",
+      "131072",
+      "3",
+      "/home/wheel/copy-bench-20261105"
+    ],
+    "stdout": "{\"mode\":\"rw128\",\"bytes\":131072,\"reps\":3,\"loop_ns\":312160,\"ns_per_call\":104053.33333333333}\n",
+    "stderr": "",
+    "exit_code": 0
+  }
+]

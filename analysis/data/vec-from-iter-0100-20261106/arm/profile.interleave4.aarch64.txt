@@ -1,0 +1,128 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 314  of event 'cycles:u'
+# Event count (approx.): 436818009
+#
+# Overhead  Command          Shared Object               Symbol                                                                   
+# ........  ...............  ..........................  .........................................................................
+#
+    54.11%  benches-interle  benches-interleave4         [.] _RNvNtCscmX2qrehp8H_7benches3vec18do_bench_from_iter
+            |
+            ---_RNvNtCscmX2qrehp8H_7benches3vec18do_bench_from_iter
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3vec20bench_from_iter_01000INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    18.60%  benches-interle  libc.so.6                   [.] _int_free
+            |
+            ---_int_free
+               cfree@GLIBC_2.17
+               _RNvNtCscmX2qrehp8H_7benches3vec18do_bench_from_iter
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3vec20bench_from_iter_01000INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+    12.48%  benches-interle  libc.so.6                   [.] cfree@GLIBC_2.17
+            |
+            ---cfree@GLIBC_2.17
+               _RNvNtCscmX2qrehp8H_7benches3vec18do_bench_from_iter
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3vec20bench_from_iter_01000INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     9.93%  benches-interle  libc.so.6                   [.] malloc
+            |
+            ---malloc
+               _RNvNtCscmX2qrehp8H_7benches3vec18do_bench_from_iter
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3vec20bench_from_iter_01000INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     1.93%  benches-interle  benches-interleave4         [.] _RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2@plt
+            |
+            ---_RNvCshVjSbrpHdcL_7___rustc35___rust_no_alloc_shim_is_unstable_v2@plt
+               _RNvNtCscmX2qrehp8H_7benches3vec18do_bench_from_iter
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3vec20bench_from_iter_01000INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     1.65%  benches-interle  libstd-7a2f7be1a1e543fc.so  [.] free@plt
+            |
+            ---free@plt
+               _RNvNtCscmX2qrehp8H_7benches3vec18do_bench_from_iter
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3vec20bench_from_iter_01000INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+     0.99%  benches-interle  libstd-7a2f7be1a1e543fc.so  [.] _RNvCshVjSbrpHdcL_7___rustc11___rdl_alloc
+            |
+            ---_RNvCshVjSbrpHdcL_7___rustc11___rdl_alloc
+               _RNvNtCscmX2qrehp8H_7benches3vec18do_bench_from_iter
+               _RNvYNCNvNtCscmX2qrehp8H_7benches3vec20bench_from_iter_01000INtNtNtCshp6Wxz1DwXO_4core3ops8function6FnOnceTQNtNtCs8okFKGt2BSQ_4test5bench7BencherEE9call_onceB8_
+               _RNvCs8okFKGt2BSQ_4test8run_test
+               _RNvNtCs8okFKGt2BSQ_4test7console17run_tests_console
+               _RNvCs8okFKGt2BSQ_4test16test_main_static
+               _RINvNtNtCs68fcPop4ROg_3std3sys9backtrace28___rust_begin_short_backtraceFEuuECscmX2qrehp8H_7benches
+               _RNCINvNtCs68fcPop4ROg_3std2rt10lang_startuE0CscmX2qrehp8H_7benches
+               _RNvNtCs68fcPop4ROg_3std2rt19lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main@@GLIBC_2.34
+               _start
+
+
+
+#
+# (Tip: Limit to show entries above 5% only: perf report --percent-limit 5)
+#

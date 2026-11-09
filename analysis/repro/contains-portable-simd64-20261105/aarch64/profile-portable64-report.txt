@@ -1,0 +1,22 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 5K of event 'cycles:u'
+# Event count (approx.): 2694516167
+#
+# Overhead  Command  Shared Object               Symbol                                                                         
+# ........  .......  ..........................  ...............................................................................
+#
+    98.96%  counted  libstd-7a2f7be1a1e543fc.so  [.] _RNvNtNtCshp6Wxz1DwXO_4core3str7pattern18contains_byte_simd
+     0.50%  counted  counted                     [.] _RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in
+     0.32%  counted  counted                     [.] _RNvNtCs7Com3XUV1E3_7counted3str34contains_bang_str_long_lorem_ipsum
+     0.19%  counted  counted                     [.] _RNvNtNtCshp6Wxz1DwXO_4core3str7pattern18contains_byte_simd@plt
+     0.02%  counted  counted                     [.] _start
+     0.02%  counted  ld-linux-aarch64.so.1       [.] _dl_relocate_object_no_relro
+
+
+#
+# (Tip: To record callchains for each sample: perf record -g)
+#

@@ -1,0 +1,122 @@
+ Percent |	Source code & Disassembly of libc.so.6 for cycles:u (136 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000092cc0 <__memcmpeq@@GLIBC_2.35>:
+    0.00 :   92cc0:  nop
+    0.00 :   92cc4:  cmp     x2, #0x10
+    0.00 :   92cc8:  b.cc    92d70 <__memcmpeq@@GLIBC_2.35+0xb0>  // b.lo, b.ul, b.last
+   19.10 :   92ccc:  ldp     x3, x5, [x0]
+    8.84 :   92cd0:  ldp     x4, x6, [x1]
+    0.00 :   92cd4:  ccmp    x3, x4, #0x0, ne        // ne = any
+    0.00 :   92cd8:  ccmp    x5, x6, #0x0, eq        // eq = none
+    0.00 :   92cdc:  b.ne    92d48 <__memcmpeq@@GLIBC_2.35+0x88>  // b.any
+   45.55 :   92ce0:  add     x7, x0, x2
+    0.00 :   92ce4:  add     x8, x1, x2
+    0.00 :   92ce8:  cmp     x2, #0x20
+    0.00 :   92cec:  b.ls    92d40 <__memcmpeq@@GLIBC_2.35+0x80>  // b.plast
+    0.00 :   92cf0:  cmp     x2, #0xa0
+    0.00 :   92cf4:  b.cs    92dd4 <__memcmpeq@@GLIBC_2.35+0x114>  // b.hs, b.nlast
+    0.00 :   92cf8:  sub     x2, x2, #0x20
+    0.00 :   92cfc:  nop
+    0.00 :   92d00:  ldp     x3, x5, [x0, #16]
+    0.00 :   92d04:  ldp     x4, x6, [x1, #16]
+    0.00 :   92d08:  cmp     x3, x4
+    0.00 :   92d0c:  ccmp    x5, x6, #0x0, eq        // eq = none
+    0.00 :   92d10:  b.ne    92d48 <__memcmpeq@@GLIBC_2.35+0x88>  // b.any
+    0.00 :   92d14:  cmp     x2, #0x10
+    0.00 :   92d18:  b.ls    92d40 <__memcmpeq@@GLIBC_2.35+0x80>  // b.plast
+    0.00 :   92d1c:  ldp     x3, x5, [x0, #32]
+    0.00 :   92d20:  ldp     x4, x6, [x1, #32]
+    0.00 :   92d24:  cmp     x3, x4
+    0.00 :   92d28:  ccmp    x5, x6, #0x0, eq        // eq = none
+    0.00 :   92d2c:  b.ne    92d48 <__memcmpeq@@GLIBC_2.35+0x88>  // b.any
+    0.00 :   92d30:  add     x0, x0, #0x20
+    0.00 :   92d34:  add     x1, x1, #0x20
+    0.00 :   92d38:  subs    x2, x2, #0x20
+    0.00 :   92d3c:  b.hi    92d00 <__memcmpeq@@GLIBC_2.35+0x40>  // b.pmore
+    0.00 :   92d40:  ldp     x3, x5, [x7, #-16]
+   17.67 :   92d44:  ldp     x4, x6, [x8, #-16]
+    0.00 :   92d48:  cmp     x3, x4
+    0.00 :   92d4c:  csel    x3, x3, x5, ne  // ne = any
+    0.00 :   92d50:  csel    x4, x4, x6, ne  // ne = any
+    8.83 :   92d54:  rev     x3, x3
+    0.00 :   92d58:  rev     x4, x4
+    0.00 :   92d5c:  cmp     x3, x4
+    0.00 :   92d60:  cset    w0, ne  // ne = any
+    0.00 :   92d64:  cneg    w0, w0, cc      // cc = lo, ul, last
+    0.00 :   92d68:  ret
+    0.00 :   92d6c:  nop
+    0.00 :   92d70:  add     x7, x0, x2
+    0.00 :   92d74:  add     x8, x1, x2
+    0.00 :   92d78:  tbz     w2, #3, 92d90 <__memcmpeq@@GLIBC_2.35+0xd0>
+    0.00 :   92d7c:  ldr     x3, [x0]
+    0.00 :   92d80:  ldr     x4, [x1]
+    0.00 :   92d84:  ldur    x5, [x7, #-8]
+    0.00 :   92d88:  ldur    x6, [x8, #-8]
+    0.00 :   92d8c:  b       92d48 <__memcmpeq@@GLIBC_2.35+0x88>
+    0.00 :   92d90:  tbz     w2, #2, 92da8 <__memcmpeq@@GLIBC_2.35+0xe8>
+    0.00 :   92d94:  ldr     w3, [x0]
+    0.00 :   92d98:  ldr     w4, [x1]
+    0.00 :   92d9c:  ldur    w5, [x7, #-4]
+    0.00 :   92da0:  ldur    w6, [x8, #-4]
+    0.00 :   92da4:  b       92d48 <__memcmpeq@@GLIBC_2.35+0x88>
+    0.00 :   92da8:  tbz     w2, #1, 92dbc <__memcmpeq@@GLIBC_2.35+0xfc>
+    0.00 :   92dac:  ldrh    w3, [x0]
+    0.00 :   92db0:  ldrh    w4, [x1]
+    0.00 :   92db4:  cmp     w3, w4
+    0.00 :   92db8:  b.ne    92d54 <__memcmpeq@@GLIBC_2.35+0x94>  // b.any
+    0.00 :   92dbc:  mov     w0, #0x0                        // #0
+    0.00 :   92dc0:  tbz     w2, #0, 92dd0 <__memcmpeq@@GLIBC_2.35+0x110>
+    0.00 :   92dc4:  ldurb   w3, [x7, #-1]
+    0.00 :   92dc8:  ldurb   w4, [x8, #-1]
+    0.00 :   92dcc:  sub     w0, w3, w4
+    0.00 :   92dd0:  ret
+    0.00 :   92dd4:  ldp     x3, x5, [x0, #16]
+    0.00 :   92dd8:  ldp     x4, x6, [x1, #16]
+    0.00 :   92ddc:  cmp     x3, x4
+    0.00 :   92de0:  ccmp    x5, x6, #0x0, eq        // eq = none
+    0.00 :   92de4:  b.ne    92d48 <__memcmpeq@@GLIBC_2.35+0x88>  // b.any
+    0.00 :   92de8:  and     x6, x1, #0xf
+    0.00 :   92dec:  sub     x6, x6, #0x10
+    0.00 :   92df0:  sub     x1, x1, x6
+    0.00 :   92df4:  add     x2, x2, x6
+    0.00 :   92df8:  sub     x0, x0, x6
+    0.00 :   92dfc:  sub     x2, x2, #0x50
+    0.00 :   92e00:  ldr     q0, [x0, #16]
+    0.00 :   92e04:  ldr     q1, [x1, #16]
+    0.00 :   92e08:  subs    x2, x2, #0x40
+    0.00 :   92e0c:  ldr     q2, [x0, #32]
+    0.00 :   92e10:  ldr     q3, [x1, #32]
+    0.00 :   92e14:  eor     v0.16b, v0.16b, v1.16b
+    0.00 :   92e18:  eor     v1.16b, v2.16b, v3.16b
+    0.00 :   92e1c:  ldr     q2, [x0, #48]
+    0.00 :   92e20:  ldr     q3, [x1, #48]
+    0.00 :   92e24:  umaxp   v0.16b, v0.16b, v1.16b
+    0.00 :   92e28:  ldr     q4, [x0, #64]!
+    0.00 :   92e2c:  ldr     q5, [x1, #64]!
+    0.00 :   92e30:  eor     v1.16b, v2.16b, v3.16b
+    0.00 :   92e34:  eor     v2.16b, v4.16b, v5.16b
+    0.00 :   92e38:  umaxp   v1.16b, v1.16b, v2.16b
+    0.00 :   92e3c:  umaxp   v0.16b, v0.16b, v1.16b
+    0.00 :   92e40:  umaxp   v0.16b, v0.16b, v0.16b
+    0.00 :   92e44:  fmov    x6, d0
+    0.00 :   92e48:  ccmp    x6, #0x0, #0x0, hi      // hi = pmore
+    0.00 :   92e4c:  b.eq    92e00 <__memcmpeq@@GLIBC_2.35+0x140>  // b.none
+    0.00 :   92e50:  add     x2, x2, #0x50
+    0.00 :   92e54:  cbz     x6, 92d38 <__memcmpeq@@GLIBC_2.35+0x78>
+    0.00 :   92e58:  rev     x6, x6
+    0.00 :   92e5c:  clz     x6, x6
+    0.00 :   92e60:  and     x6, x6, #0xfffffffffffffff8
+    0.00 :   92e64:  sub     x6, x6, #0x30
+    0.00 :   92e68:  ldr     x3, [x0, x6]
+    0.00 :   92e6c:  ldr     x4, [x1, x6]
+    0.00 :   92e70:  rev     x3, x3
+    0.00 :   92e74:  rev     x4, x4
+    0.00 :   92e78:  mov     w0, #0x1                        // #1
+    0.00 :   92e7c:  cmp     x3, x4
+    0.00 :   92e80:  cneg    w0, w0, cc      // cc = lo, ul, last
+    0.00 :   92e84:  ret

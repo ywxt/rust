@@ -1,0 +1,80 @@
+[
+  {
+    "root": "/tmp",
+    "record": [
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "997",
+      "-e",
+      "cycles",
+      "-g",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/profile-0.aarch64.data",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "std",
+      "131072",
+      "200000",
+      "/tmp"
+    ],
+    "report": [
+      "perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "--percent-limit",
+      "0.5",
+      "-i",
+      "/tmp/kernel-file-copy-20261105/profile-0.aarch64.data"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":200000,\"loop_ns\":2324270790,\"ns_per_call\":11621.35395}\n",
+    "stderr": "",
+    "report_stderr": ""
+  },
+  {
+    "root": "/home/wheel/copy-bench-20261105",
+    "record": [
+      "perf",
+      "record",
+      "-q",
+      "-F",
+      "997",
+      "-e",
+      "cycles",
+      "-g",
+      "-o",
+      "/tmp/kernel-file-copy-20261105/profile-1.aarch64.data",
+      "--",
+      "taskset",
+      "-c",
+      "52",
+      "env",
+      "LD_LIBRARY_PATH=/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/lib/rustlib/aarch64-unknown-linux-gnu/lib:/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1-std/aarch64-unknown-linux-gnu/dist/build/std/15ca45a29cbf28c7/out:",
+      "/tmp/kernel-file-copy-20261105/probe",
+      "std",
+      "131072",
+      "200000",
+      "/home/wheel/copy-bench-20261105"
+    ],
+    "report": [
+      "perf",
+      "report",
+      "--stdio",
+      "--no-children",
+      "--percent-limit",
+      "0.5",
+      "-i",
+      "/tmp/kernel-file-copy-20261105/profile-1.aarch64.data"
+    ],
+    "stdout": "{\"mode\":\"std\",\"bytes\":131072,\"reps\":200000,\"loop_ns\":1227587330,\"ns_per_call\":6137.93665}\n",
+    "stderr": "",
+    "report_stderr": ""
+  }
+]

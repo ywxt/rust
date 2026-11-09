@@ -1,0 +1,44 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 6K of event 'cpu_core/cycles/u'
+# Event count (approx.): 14017058446
+#
+# Overhead  Command          Shared Object               Symbol                                                                                                                
+# ........  ...............  ..........................  ......................................................................................................................
+#
+    50.78%  benches-interle  benches-interleave8         [.] benches::vec::do_bench_from_iter
+            |
+            ---benches::vec::do_bench_from_iter
+
+    26.31%  benches-interle  libc.so.6                   [.] malloc
+            |
+            ---malloc
+
+    15.99%  benches-interle  libc.so.6                   [.] cfree@GLIBC_2.2.5
+            |
+            ---cfree@GLIBC_2.2.5
+
+     2.08%  benches-interle  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_no_alloc_shim_is_unstable_v2
+            |
+            ---__rustc::__rust_no_alloc_shim_is_unstable_v2
+
+     1.70%  benches-interle  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_alloc
+            |
+            ---__rustc::__rust_alloc
+
+     1.56%  benches-interle  libstd-320fe7036dd8354d.so  [.] __rustc::__rdl_alloc
+            |
+            ---__rustc::__rdl_alloc
+
+     1.54%  benches-interle  libstd-320fe7036dd8354d.so  [.] __rustc::__rust_dealloc
+            |
+            ---__rustc::__rust_dealloc
+
+
+
+#
+# (Tip: Search options using a keyword: perf report -h <keyword>)
+#

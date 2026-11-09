@@ -1,0 +1,3474 @@
+
+/tmp/str-contains-bang-20261105/bang-probe-v3:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000003ce0 <_start>:
+    3ce0:	f3 0f 1e fa          	endbr64
+    3ce4:	31 ed                	xor    %ebp,%ebp
+    3ce6:	49 89 d1             	mov    %rdx,%r9
+    3ce9:	5e                   	pop    %rsi
+    3cea:	48 89 e2             	mov    %rsp,%rdx
+    3ced:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+    3cf1:	50                   	push   %rax
+    3cf2:	54                   	push   %rsp
+    3cf3:	45 31 c0             	xor    %r8d,%r8d
+    3cf6:	31 c9                	xor    %ecx,%ecx
+    3cf8:	48 8d 3d f1 31 00 00 	lea    0x31f1(%rip),%rdi        # 6ef0 <main>
+    3cff:	ff 15 93 47 00 00    	call   *0x4793(%rip)        # 8498 <__libc_start_main@GLIBC_2.34>
+    3d05:	f4                   	hlt
+    3d06:	cc                   	int3
+    3d07:	cc                   	int3
+    3d08:	cc                   	int3
+    3d09:	cc                   	int3
+    3d0a:	cc                   	int3
+    3d0b:	cc                   	int3
+    3d0c:	cc                   	int3
+    3d0d:	cc                   	int3
+    3d0e:	cc                   	int3
+    3d0f:	cc                   	int3
+
+0000000000003d10 <deregister_tm_clones>:
+    3d10:	48 8d 3d e1 58 00 00 	lea    0x58e1(%rip),%rdi        # 95f8 <__TMC_END__>
+    3d17:	48 8d 05 da 58 00 00 	lea    0x58da(%rip),%rax        # 95f8 <__TMC_END__>
+    3d1e:	48 39 f8             	cmp    %rdi,%rax
+    3d21:	74 15                	je     3d38 <deregister_tm_clones+0x28>
+    3d23:	48 8b 05 7e 47 00 00 	mov    0x477e(%rip),%rax        # 84a8 <_ITM_deregisterTMCloneTable>
+    3d2a:	48 85 c0             	test   %rax,%rax
+    3d2d:	74 09                	je     3d38 <deregister_tm_clones+0x28>
+    3d2f:	ff e0                	jmp    *%rax
+    3d31:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+    3d38:	c3                   	ret
+    3d39:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000003d40 <register_tm_clones>:
+    3d40:	48 8d 3d b1 58 00 00 	lea    0x58b1(%rip),%rdi        # 95f8 <__TMC_END__>
+    3d47:	48 8d 35 aa 58 00 00 	lea    0x58aa(%rip),%rsi        # 95f8 <__TMC_END__>
+    3d4e:	48 29 fe             	sub    %rdi,%rsi
+    3d51:	48 89 f0             	mov    %rsi,%rax
+    3d54:	48 c1 ee 3f          	shr    $0x3f,%rsi
+    3d58:	48 c1 f8 03          	sar    $0x3,%rax
+    3d5c:	48 01 c6             	add    %rax,%rsi
+    3d5f:	48 d1 fe             	sar    $1,%rsi
+    3d62:	74 14                	je     3d78 <register_tm_clones+0x38>
+    3d64:	48 8b 05 45 47 00 00 	mov    0x4745(%rip),%rax        # 84b0 <_ITM_registerTMCloneTable>
+    3d6b:	48 85 c0             	test   %rax,%rax
+    3d6e:	74 08                	je     3d78 <register_tm_clones+0x38>
+    3d70:	ff e0                	jmp    *%rax
+    3d72:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+    3d78:	c3                   	ret
+    3d79:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000003d80 <__do_global_dtors_aux>:
+    3d80:	f3 0f 1e fa          	endbr64
+    3d84:	80 3d 7d 58 00 00 00 	cmpb   $0x0,0x587d(%rip)        # 9608 <completed.0>
+    3d8b:	75 2b                	jne    3db8 <__do_global_dtors_aux+0x38>
+    3d8d:	55                   	push   %rbp
+    3d8e:	48 83 3d 22 47 00 00 	cmpq   $0x0,0x4722(%rip)        # 84b8 <__cxa_finalize@GLIBC_2.2.5>
+    3d95:	00 
+    3d96:	48 89 e5             	mov    %rsp,%rbp
+    3d99:	74 0c                	je     3da7 <__do_global_dtors_aux+0x27>
+    3d9b:	48 8b 3d 56 58 00 00 	mov    0x5856(%rip),%rdi        # 95f8 <__TMC_END__>
+    3da2:	e8 b9 31 00 00       	call   6f60 <__cxa_finalize@plt>
+    3da7:	e8 64 ff ff ff       	call   3d10 <deregister_tm_clones>
+    3dac:	c6 05 55 58 00 00 01 	movb   $0x1,0x5855(%rip)        # 9608 <completed.0>
+    3db3:	5d                   	pop    %rbp
+    3db4:	c3                   	ret
+    3db5:	0f 1f 00             	nopl   (%rax)
+    3db8:	c3                   	ret
+    3db9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000003dc0 <frame_dummy>:
+    3dc0:	f3 0f 1e fa          	endbr64
+    3dc4:	e9 77 ff ff ff       	jmp    3d40 <register_tm_clones>
+    3dc9:	cc                   	int3
+    3dca:	cc                   	int3
+    3dcb:	cc                   	int3
+    3dcc:	cc                   	int3
+    3dcd:	cc                   	int3
+    3dce:	cc                   	int3
+    3dcf:	cc                   	int3
+
+0000000000003dd0 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>>:
+    3dd0:	41 57                	push   %r15
+    3dd2:	41 56                	push   %r14
+    3dd4:	41 55                	push   %r13
+    3dd6:	41 54                	push   %r12
+    3dd8:	53                   	push   %rbx
+    3dd9:	49 89 fe             	mov    %rdi,%r14
+    3ddc:	48 8b 5f 08          	mov    0x8(%rdi),%rbx
+    3de0:	4c 8b 7f 10          	mov    0x10(%rdi),%r15
+    3de4:	4d 85 ff             	test   %r15,%r15
+    3de7:	74 38                	je     3e21 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x51>
+    3de9:	4c 8d 63 08          	lea    0x8(%rbx),%r12
+    3ded:	4c 8b 2d cc 46 00 00 	mov    0x46cc(%rip),%r13        # 84c0 <__rustc::__rust_dealloc@Base>
+    3df4:	eb 13                	jmp    3e09 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x39>
+    3df6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+    3dfd:	00 00 00 
+    3e00:	49 83 c4 18          	add    $0x18,%r12
+    3e04:	49 ff cf             	dec    %r15
+    3e07:	74 18                	je     3e21 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x51>
+    3e09:	49 8b 74 24 f8       	mov    -0x8(%r12),%rsi
+    3e0e:	48 85 f6             	test   %rsi,%rsi
+    3e11:	74 ed                	je     3e00 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x30>
+    3e13:	49 8b 3c 24          	mov    (%r12),%rdi
+    3e17:	ba 01 00 00 00       	mov    $0x1,%edx
+    3e1c:	41 ff d5             	call   *%r13
+    3e1f:	eb df                	jmp    3e00 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x30>
+    3e21:	49 8b 06             	mov    (%r14),%rax
+    3e24:	48 85 c0             	test   %rax,%rax
+    3e27:	74 1f                	je     3e48 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x78>
+    3e29:	48 c1 e0 03          	shl    $0x3,%rax
+    3e2d:	48 8d 34 40          	lea    (%rax,%rax,2),%rsi
+    3e31:	ba 08 00 00 00       	mov    $0x8,%edx
+    3e36:	48 89 df             	mov    %rbx,%rdi
+    3e39:	5b                   	pop    %rbx
+    3e3a:	41 5c                	pop    %r12
+    3e3c:	41 5d                	pop    %r13
+    3e3e:	41 5e                	pop    %r14
+    3e40:	41 5f                	pop    %r15
+    3e42:	ff 25 78 46 00 00    	jmp    *0x4678(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    3e48:	5b                   	pop    %rbx
+    3e49:	41 5c                	pop    %r12
+    3e4b:	41 5d                	pop    %r13
+    3e4d:	41 5e                	pop    %r14
+    3e4f:	41 5f                	pop    %r15
+    3e51:	c3                   	ret
+    3e52:	cc                   	int3
+    3e53:	cc                   	int3
+    3e54:	cc                   	int3
+    3e55:	cc                   	int3
+    3e56:	cc                   	int3
+    3e57:	cc                   	int3
+    3e58:	cc                   	int3
+    3e59:	cc                   	int3
+    3e5a:	cc                   	int3
+    3e5b:	cc                   	int3
+    3e5c:	cc                   	int3
+    3e5d:	cc                   	int3
+    3e5e:	cc                   	int3
+    3e5f:	cc                   	int3
+
+0000000000003e60 <core::ptr::drop_glue::<std::env::Args>>:
+    3e60:	41 57                	push   %r15
+    3e62:	41 56                	push   %r14
+    3e64:	41 54                	push   %r12
+    3e66:	53                   	push   %rbx
+    3e67:	50                   	push   %rax
+    3e68:	48 89 fb             	mov    %rdi,%rbx
+    3e6b:	4c 8b 7f 08          	mov    0x8(%rdi),%r15
+    3e6f:	48 8b 4f 18          	mov    0x18(%rdi),%rcx
+    3e73:	48 89 c8             	mov    %rcx,%rax
+    3e76:	4c 29 f8             	sub    %r15,%rax
+    3e79:	48 ba ab aa aa aa aa 	movabs $0xaaaaaaaaaaaaaaab,%rdx
+    3e80:	aa aa aa 
+    3e83:	48 f7 e2             	mul    %rdx
+    3e86:	4c 39 f9             	cmp    %r15,%rcx
+    3e89:	74 34                	je     3ebf <core::ptr::drop_glue::<std::env::Args>+0x5f>
+    3e8b:	49 89 d6             	mov    %rdx,%r14
+    3e8e:	49 c1 ee 04          	shr    $0x4,%r14
+    3e92:	49 83 c7 08          	add    $0x8,%r15
+    3e96:	4c 8b 25 23 46 00 00 	mov    0x4623(%rip),%r12        # 84c0 <__rustc::__rust_dealloc@Base>
+    3e9d:	eb 0a                	jmp    3ea9 <core::ptr::drop_glue::<std::env::Args>+0x49>
+    3e9f:	90                   	nop
+    3ea0:	49 83 c7 18          	add    $0x18,%r15
+    3ea4:	49 ff ce             	dec    %r14
+    3ea7:	74 16                	je     3ebf <core::ptr::drop_glue::<std::env::Args>+0x5f>
+    3ea9:	49 8b 77 f8          	mov    -0x8(%r15),%rsi
+    3ead:	48 85 f6             	test   %rsi,%rsi
+    3eb0:	74 ee                	je     3ea0 <core::ptr::drop_glue::<std::env::Args>+0x40>
+    3eb2:	49 8b 3f             	mov    (%r15),%rdi
+    3eb5:	ba 01 00 00 00       	mov    $0x1,%edx
+    3eba:	41 ff d4             	call   *%r12
+    3ebd:	eb e1                	jmp    3ea0 <core::ptr::drop_glue::<std::env::Args>+0x40>
+    3ebf:	48 8b 43 10          	mov    0x10(%rbx),%rax
+    3ec3:	48 85 c0             	test   %rax,%rax
+    3ec6:	74 21                	je     3ee9 <core::ptr::drop_glue::<std::env::Args>+0x89>
+    3ec8:	48 8b 3b             	mov    (%rbx),%rdi
+    3ecb:	48 c1 e0 03          	shl    $0x3,%rax
+    3ecf:	48 8d 34 40          	lea    (%rax,%rax,2),%rsi
+    3ed3:	ba 08 00 00 00       	mov    $0x8,%edx
+    3ed8:	48 83 c4 08          	add    $0x8,%rsp
+    3edc:	5b                   	pop    %rbx
+    3edd:	41 5c                	pop    %r12
+    3edf:	41 5e                	pop    %r14
+    3ee1:	41 5f                	pop    %r15
+    3ee3:	ff 25 d7 45 00 00    	jmp    *0x45d7(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    3ee9:	48 83 c4 08          	add    $0x8,%rsp
+    3eed:	5b                   	pop    %rbx
+    3eee:	41 5c                	pop    %r12
+    3ef0:	41 5e                	pop    %r14
+    3ef2:	41 5f                	pop    %r15
+    3ef4:	c3                   	ret
+    3ef5:	cc                   	int3
+    3ef6:	cc                   	int3
+    3ef7:	cc                   	int3
+    3ef8:	cc                   	int3
+    3ef9:	cc                   	int3
+    3efa:	cc                   	int3
+    3efb:	cc                   	int3
+    3efc:	cc                   	int3
+    3efd:	cc                   	int3
+    3efe:	cc                   	int3
+    3eff:	cc                   	int3
+
+0000000000003f00 <core::result::unwrap_failed::<core::num::error::ParseIntError>>:
+    3f00:	50                   	push   %rax
+    3f01:	49 89 f0             	mov    %rsi,%r8
+    3f04:	40 88 7c 24 07       	mov    %dil,0x7(%rsp)
+    3f09:	48 8d 3d 40 e6 ff ff 	lea    -0x19c0(%rip),%rdi        # 2550 <__abi_tag+0x2254>
+    3f10:	48 8d 0d 91 40 00 00 	lea    0x4091(%rip),%rcx        # 7fa8 <__frame_dummy_init_array_entry+0x20>
+    3f17:	48 8d 54 24 07       	lea    0x7(%rsp),%rdx
+    3f1c:	be 2b 00 00 00       	mov    $0x2b,%esi
+    3f21:	ff 15 a1 45 00 00    	call   *0x45a1(%rip)        # 84c8 <core::result::unwrap_failed::unwrap_failed_inner@Base>
+    3f27:	cc                   	int3
+    3f28:	cc                   	int3
+    3f29:	cc                   	int3
+    3f2a:	cc                   	int3
+    3f2b:	cc                   	int3
+    3f2c:	cc                   	int3
+    3f2d:	cc                   	int3
+    3f2e:	cc                   	int3
+    3f2f:	cc                   	int3
+
+0000000000003f30 <core::result::unwrap_failed::<core::str::error::Utf8Error>>:
+    3f30:	50                   	push   %rax
+    3f31:	48 89 fa             	mov    %rdi,%rdx
+    3f34:	48 8d 3d 15 e6 ff ff 	lea    -0x19eb(%rip),%rdi        # 2550 <__abi_tag+0x2254>
+    3f3b:	48 8d 0d 86 40 00 00 	lea    0x4086(%rip),%rcx        # 7fc8 <__frame_dummy_init_array_entry+0x40>
+    3f42:	4c 8d 05 47 42 00 00 	lea    0x4247(%rip),%r8        # 8190 <__frame_dummy_init_array_entry+0x208>
+    3f49:	be 2b 00 00 00       	mov    $0x2b,%esi
+    3f4e:	ff 15 74 45 00 00    	call   *0x4574(%rip)        # 84c8 <core::result::unwrap_failed::unwrap_failed_inner@Base>
+
+0000000000003f54 <core::panicking::assert_failed::<bool, bool>>:
+    3f54:	48 83 ec 18          	sub    $0x18,%rsp
+    3f58:	4c 89 c0             	mov    %r8,%rax
+    3f5b:	49 89 ca             	mov    %rcx,%r10
+    3f5e:	49 89 d1             	mov    %rdx,%r9
+    3f61:	48 8d 54 24 08       	lea    0x8(%rsp),%rdx
+    3f66:	48 89 3a             	mov    %rdi,(%rdx)
+    3f69:	48 8d 4c 24 10       	lea    0x10(%rsp),%rcx
+    3f6e:	48 89 31             	mov    %rsi,(%rcx)
+    3f71:	4c 8d 05 70 40 00 00 	lea    0x4070(%rip),%r8        # 7fe8 <__frame_dummy_init_array_entry+0x60>
+    3f78:	31 ff                	xor    %edi,%edi
+    3f7a:	48 89 d6             	mov    %rdx,%rsi
+    3f7d:	4c 89 c2             	mov    %r8,%rdx
+    3f80:	50                   	push   %rax
+    3f81:	41 52                	push   %r10
+    3f83:	ff 15 47 45 00 00    	call   *0x4547(%rip)        # 84d0 <core::panicking::assert_failed_inner@Base>
+    3f89:	cc                   	int3
+    3f8a:	cc                   	int3
+    3f8b:	cc                   	int3
+    3f8c:	cc                   	int3
+    3f8d:	cc                   	int3
+    3f8e:	cc                   	int3
+    3f8f:	cc                   	int3
+
+0000000000003f90 <std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>>:
+    3f90:	50                   	push   %rax
+    3f91:	ff d7                	call   *%rdi
+    3f93:	58                   	pop    %rax
+    3f94:	c3                   	ret
+    3f95:	cc                   	int3
+    3f96:	cc                   	int3
+    3f97:	cc                   	int3
+    3f98:	cc                   	int3
+    3f99:	cc                   	int3
+    3f9a:	cc                   	int3
+    3f9b:	cc                   	int3
+    3f9c:	cc                   	int3
+    3f9d:	cc                   	int3
+    3f9e:	cc                   	int3
+    3f9f:	cc                   	int3
+
+0000000000003fa0 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>:
+    3fa0:	41 56                	push   %r14
+    3fa2:	53                   	push   %rbx
+    3fa3:	48 83 ec 18          	sub    $0x18,%rsp
+    3fa7:	48 89 f3             	mov    %rsi,%rbx
+    3faa:	48 01 d3             	add    %rdx,%rbx
+    3fad:	72 58                	jb     4007 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>+0x67>
+    3faf:	4d 89 c1             	mov    %r8,%r9
+    3fb2:	49 89 c8             	mov    %rcx,%r8
+    3fb5:	49 89 fe             	mov    %rdi,%r14
+    3fb8:	48 8b 37             	mov    (%rdi),%rsi
+    3fbb:	48 8d 04 36          	lea    (%rsi,%rsi,1),%rax
+    3fbf:	48 39 d8             	cmp    %rbx,%rax
+    3fc2:	48 0f 47 d8          	cmova  %rax,%rbx
+    3fc6:	31 c0                	xor    %eax,%eax
+    3fc8:	49 83 f9 01          	cmp    $0x1,%r9
+    3fcc:	0f 94 c0             	sete   %al
+    3fcf:	48 8d 04 85 04 00 00 	lea    0x4(,%rax,4),%rax
+    3fd6:	00 
+    3fd7:	48 39 d8             	cmp    %rbx,%rax
+    3fda:	48 0f 47 d8          	cmova  %rax,%rbx
+    3fde:	48 8b 57 08          	mov    0x8(%rdi),%rdx
+    3fe2:	48 89 e7             	mov    %rsp,%rdi
+    3fe5:	48 89 d9             	mov    %rbx,%rcx
+    3fe8:	e8 f3 29 00 00       	call   69e0 <<alloc::raw_vec::RawVecInner>::finish_grow>
+    3fed:	83 3c 24 01          	cmpl   $0x1,(%rsp)
+    3ff1:	74 1c                	je     400f <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>+0x6f>
+    3ff3:	48 8b 44 24 08       	mov    0x8(%rsp),%rax
+    3ff8:	49 89 46 08          	mov    %rax,0x8(%r14)
+    3ffc:	49 89 1e             	mov    %rbx,(%r14)
+    3fff:	48 83 c4 18          	add    $0x18,%rsp
+    4003:	5b                   	pop    %rbx
+    4004:	41 5e                	pop    %r14
+    4006:	c3                   	ret
+    4007:	31 ff                	xor    %edi,%edi
+    4009:	ff 15 d1 44 00 00    	call   *0x44d1(%rip)        # 84e0 <alloc::raw_vec::handle_error@Base>
+    400f:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+    4014:	48 8b 74 24 10       	mov    0x10(%rsp),%rsi
+    4019:	ff 15 c1 44 00 00    	call   *0x44c1(%rip)        # 84e0 <alloc::raw_vec::handle_error@Base>
+    401f:	cc                   	int3
+
+0000000000004020 <std::rt::lang_start::<()>::{closure#0}>:
+    4020:	50                   	push   %rax
+    4021:	48 8b 3f             	mov    (%rdi),%rdi
+    4024:	e8 67 ff ff ff       	call   3f90 <std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>>
+    4029:	31 c0                	xor    %eax,%eax
+    402b:	59                   	pop    %rcx
+    402c:	c3                   	ret
+    402d:	cc                   	int3
+    402e:	cc                   	int3
+    402f:	cc                   	int3
+
+0000000000004030 <<std::rt::lang_start<()>::{closure#0} as core::ops::function::FnOnce<()>>::call_once::{shim:vtable#0}>:
+    4030:	50                   	push   %rax
+    4031:	48 8b 3f             	mov    (%rdi),%rdi
+    4034:	e8 57 ff ff ff       	call   3f90 <std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>>
+    4039:	31 c0                	xor    %eax,%eax
+    403b:	59                   	pop    %rcx
+    403c:	c3                   	ret
+    403d:	cc                   	int3
+    403e:	cc                   	int3
+    403f:	cc                   	int3
+
+0000000000004040 <bang_probe_v3::main>:
+    4040:	55                   	push   %rbp
+    4041:	41 57                	push   %r15
+    4043:	41 56                	push   %r14
+    4045:	41 55                	push   %r13
+    4047:	41 54                	push   %r12
+    4049:	53                   	push   %rbx
+    404a:	48 81 ec 98 01 00 00 	sub    $0x198,%rsp
+    4051:	48 8d 9c 24 20 01 00 	lea    0x120(%rsp),%rbx
+    4058:	00 
+    4059:	48 89 df             	mov    %rbx,%rdi
+    405c:	ff 15 86 44 00 00    	call   *0x4486(%rip)        # 84e8 <std::env::args@Base>
+    4062:	48 8d bc 24 a0 00 00 	lea    0xa0(%rsp),%rdi
+    4069:	00 
+    406a:	48 89 de             	mov    %rbx,%rsi
+    406d:	ff 15 7d 44 00 00    	call   *0x447d(%rip)        # 84f0 <<std::env::Args as core::iter::traits::iterator::Iterator>::next@Base>
+    4073:	4c 8b b4 24 a0 00 00 	mov    0xa0(%rsp),%r14
+    407a:	00 
+    407b:	49 83 fe ff          	cmp    $0xffffffffffffffff,%r14
+    407f:	0f 84 7e 1e 00 00    	je     5f03 <bang_probe_v3::main+0x1ec3>
+    4085:	48 ba e0 ff ff ff ff 	movabs $0x7fffffffffffffe0,%rdx
+    408c:	ff ff 7f 
+    408f:	48 8b ac 24 a8 00 00 	mov    0xa8(%rsp),%rbp
+    4096:	00 
+    4097:	48 8b 84 24 38 01 00 	mov    0x138(%rsp),%rax
+    409e:	00 
+    409f:	48 2b 84 24 28 01 00 	sub    0x128(%rsp),%rax
+    40a6:	00 
+    40a7:	48 89 c1             	mov    %rax,%rcx
+    40aa:	48 c1 e9 03          	shr    $0x3,%rcx
+    40ae:	48 be ab aa aa aa aa 	movabs $0xaaaaaaaaaaaaaaab,%rsi
+    40b5:	aa aa aa 
+    40b8:	48 0f af ce          	imul   %rsi,%rcx
+    40bc:	48 83 f9 04          	cmp    $0x4,%rcx
+    40c0:	41 bc 03 00 00 00    	mov    $0x3,%r12d
+    40c6:	4c 0f 43 e1          	cmovae %rcx,%r12
+    40ca:	48 39 d0             	cmp    %rdx,%rax
+    40cd:	76 14                	jbe    40e3 <bang_probe_v3::main+0xa3>
+    40cf:	45 31 ed             	xor    %r13d,%r13d
+    40d2:	4c 89 ef             	mov    %r13,%rdi
+    40d5:	4c 89 fe             	mov    %r15,%rsi
+    40d8:	ff 15 02 44 00 00    	call   *0x4402(%rip)        # 84e0 <alloc::raw_vec::handle_error@Base>
+    40de:	e9 26 1f 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    40e3:	48 8b 8c 24 b0 00 00 	mov    0xb0(%rsp),%rcx
+    40ea:	00 
+    40eb:	4a 8d 04 e5 08 00 00 	lea    0x8(,%r12,8),%rax
+    40f2:	00 
+    40f3:	4c 8d 3c 40          	lea    (%rax,%rax,2),%r15
+    40f7:	4d 85 ff             	test   %r15,%r15
+    40fa:	74 37                	je     4133 <bang_probe_v3::main+0xf3>
+    40fc:	48 89 8c 24 78 01 00 	mov    %rcx,0x178(%rsp)
+    4103:	00 
+    4104:	ff 15 ee 43 00 00    	call   *0x43ee(%rip)        # 84f8 <__rustc::__rust_no_alloc_shim_is_unstable_v2@Base>
+    410a:	41 bd 08 00 00 00    	mov    $0x8,%r13d
+    4110:	be 08 00 00 00       	mov    $0x8,%esi
+    4115:	4c 89 ff             	mov    %r15,%rdi
+    4118:	ff 15 e2 43 00 00    	call   *0x43e2(%rip)        # 8500 <__rustc::__rust_alloc@Base>
+    411e:	48 85 c0             	test   %rax,%rax
+    4121:	74 af                	je     40d2 <bang_probe_v3::main+0x92>
+    4123:	48 89 c3             	mov    %rax,%rbx
+    4126:	49 ff c4             	inc    %r12
+    4129:	48 8b 8c 24 78 01 00 	mov    0x178(%rsp),%rcx
+    4130:	00 
+    4131:	eb 08                	jmp    413b <bang_probe_v3::main+0xfb>
+    4133:	bb 08 00 00 00       	mov    $0x8,%ebx
+    4138:	45 31 e4             	xor    %r12d,%r12d
+    413b:	4c 89 33             	mov    %r14,(%rbx)
+    413e:	48 89 6b 08          	mov    %rbp,0x8(%rbx)
+    4142:	48 89 4b 10          	mov    %rcx,0x10(%rbx)
+    4146:	4c 89 64 24 20       	mov    %r12,0x20(%rsp)
+    414b:	48 89 5c 24 28       	mov    %rbx,0x28(%rsp)
+    4150:	48 c7 44 24 30 01 00 	movq   $0x1,0x30(%rsp)
+    4157:	00 00 
+    4159:	0f 10 84 24 20 01 00 	movups 0x120(%rsp),%xmm0
+    4160:	00 
+    4161:	0f 10 8c 24 30 01 00 	movups 0x130(%rsp),%xmm1
+    4168:	00 
+    4169:	0f 29 8c 24 b0 00 00 	movaps %xmm1,0xb0(%rsp)
+    4170:	00 
+    4171:	0f 29 84 24 a0 00 00 	movaps %xmm0,0xa0(%rsp)
+    4178:	00 
+    4179:	41 bd 01 00 00 00    	mov    $0x1,%r13d
+    417f:	bd 02 00 00 00       	mov    $0x2,%ebp
+    4184:	41 bc 28 00 00 00    	mov    $0x28,%r12d
+    418a:	eb 36                	jmp    41c2 <bang_probe_v3::main+0x182>
+    418c:	0f 1f 40 00          	nopl   0x0(%rax)
+    4190:	48 8b 5c 24 28       	mov    0x28(%rsp),%rbx
+    4195:	4e 89 7c 23 f0       	mov    %r15,-0x10(%rbx,%r12,1)
+    419a:	4a 89 6c 23 f8       	mov    %rbp,-0x8(%rbx,%r12,1)
+    419f:	4e 89 2c 23          	mov    %r13,(%rbx,%r12,1)
+    41a3:	4c 8b ac 24 78 01 00 	mov    0x178(%rsp),%r13
+    41aa:	00 
+    41ab:	49 ff c5             	inc    %r13
+    41ae:	48 8b ac 24 70 01 00 	mov    0x170(%rsp),%rbp
+    41b5:	00 
+    41b6:	48 89 6c 24 30       	mov    %rbp,0x30(%rsp)
+    41bb:	48 ff c5             	inc    %rbp
+    41be:	49 83 c4 18          	add    $0x18,%r12
+    41c2:	48 8d 7c 24 70       	lea    0x70(%rsp),%rdi
+    41c7:	48 8d b4 24 a0 00 00 	lea    0xa0(%rsp),%rsi
+    41ce:	00 
+    41cf:	ff 15 1b 43 00 00    	call   *0x431b(%rip)        # 84f0 <<std::env::Args as core::iter::traits::iterator::Iterator>::next@Base>
+    41d5:	4c 8d 75 ff          	lea    -0x1(%rbp),%r14
+    41d9:	4c 8b 7c 24 70       	mov    0x70(%rsp),%r15
+    41de:	49 83 ff ff          	cmp    $0xffffffffffffffff,%r15
+    41e2:	4c 89 ac 24 78 01 00 	mov    %r13,0x178(%rsp)
+    41e9:	00 
+    41ea:	74 5e                	je     424a <bang_probe_v3::main+0x20a>
+    41ec:	48 89 ac 24 70 01 00 	mov    %rbp,0x170(%rsp)
+    41f3:	00 
+    41f4:	48 8b 6c 24 78       	mov    0x78(%rsp),%rbp
+    41f9:	4c 8b ac 24 80 00 00 	mov    0x80(%rsp),%r13
+    4200:	00 
+    4201:	4c 3b 74 24 20       	cmp    0x20(%rsp),%r14
+    4206:	75 8d                	jne    4195 <bang_probe_v3::main+0x155>
+    4208:	48 8b 94 24 b8 00 00 	mov    0xb8(%rsp),%rdx
+    420f:	00 
+    4210:	48 2b 94 24 a8 00 00 	sub    0xa8(%rsp),%rdx
+    4217:	00 
+    4218:	48 c1 ea 03          	shr    $0x3,%rdx
+    421c:	48 b8 ab aa aa aa aa 	movabs $0xaaaaaaaaaaaaaaab,%rax
+    4223:	aa aa aa 
+    4226:	48 0f af d0          	imul   %rax,%rdx
+    422a:	48 ff c2             	inc    %rdx
+    422d:	b9 08 00 00 00       	mov    $0x8,%ecx
+    4232:	41 b8 18 00 00 00    	mov    $0x18,%r8d
+    4238:	48 8d 7c 24 20       	lea    0x20(%rsp),%rdi
+    423d:	4c 89 f6             	mov    %r14,%rsi
+    4240:	e8 5b fd ff ff       	call   3fa0 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>
+    4245:	e9 46 ff ff ff       	jmp    4190 <bang_probe_v3::main+0x150>
+    424a:	4c 8b bc 24 a8 00 00 	mov    0xa8(%rsp),%r15
+    4251:	00 
+    4252:	48 8b 8c 24 b8 00 00 	mov    0xb8(%rsp),%rcx
+    4259:	00 
+    425a:	48 89 c8             	mov    %rcx,%rax
+    425d:	4c 29 f8             	sub    %r15,%rax
+    4260:	48 ba ab aa aa aa aa 	movabs $0xaaaaaaaaaaaaaaab,%rdx
+    4267:	aa aa aa 
+    426a:	48 f7 e2             	mul    %rdx
+    426d:	4c 39 f9             	cmp    %r15,%rcx
+    4270:	74 3d                	je     42af <bang_probe_v3::main+0x26f>
+    4272:	48 89 d3             	mov    %rdx,%rbx
+    4275:	48 c1 eb 04          	shr    $0x4,%rbx
+    4279:	49 83 c7 08          	add    $0x8,%r15
+    427d:	4c 8b 25 3c 42 00 00 	mov    0x423c(%rip),%r12        # 84c0 <__rustc::__rust_dealloc@Base>
+    4284:	eb 13                	jmp    4299 <bang_probe_v3::main+0x259>
+    4286:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+    428d:	00 00 00 
+    4290:	49 83 c7 18          	add    $0x18,%r15
+    4294:	48 ff cb             	dec    %rbx
+    4297:	74 16                	je     42af <bang_probe_v3::main+0x26f>
+    4299:	49 8b 77 f8          	mov    -0x8(%r15),%rsi
+    429d:	48 85 f6             	test   %rsi,%rsi
+    42a0:	74 ee                	je     4290 <bang_probe_v3::main+0x250>
+    42a2:	49 8b 3f             	mov    (%r15),%rdi
+    42a5:	ba 01 00 00 00       	mov    $0x1,%edx
+    42aa:	41 ff d4             	call   *%r12
+    42ad:	eb e1                	jmp    4290 <bang_probe_v3::main+0x250>
+    42af:	48 89 eb             	mov    %rbp,%rbx
+    42b2:	48 8b 84 24 b0 00 00 	mov    0xb0(%rsp),%rax
+    42b9:	00 
+    42ba:	48 85 c0             	test   %rax,%rax
+    42bd:	74 1b                	je     42da <bang_probe_v3::main+0x29a>
+    42bf:	48 8b bc 24 a0 00 00 	mov    0xa0(%rsp),%rdi
+    42c6:	00 
+    42c7:	48 c1 e0 03          	shl    $0x3,%rax
+    42cb:	48 8d 34 40          	lea    (%rax,%rax,2),%rsi
+    42cf:	ba 08 00 00 00       	mov    $0x8,%edx
+    42d4:	ff 15 e6 41 00 00    	call   *0x41e6(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    42da:	48 8b 44 24 20       	mov    0x20(%rsp),%rax
+    42df:	48 89 84 24 70 01 00 	mov    %rax,0x170(%rsp)
+    42e6:	00 
+    42e7:	48 8b 6c 24 28       	mov    0x28(%rsp),%rbp
+    42ec:	49 83 fe 02          	cmp    $0x2,%r14
+    42f0:	0f 82 a9 1c 00 00    	jb     5f9f <bang_probe_v3::main+0x1f5f>
+    42f6:	48 8b 45 28          	mov    0x28(%rbp),%rax
+    42fa:	48 83 f8 05          	cmp    $0x5,%rax
+    42fe:	74 48                	je     4348 <bang_probe_v3::main+0x308>
+    4300:	48 83 f8 08          	cmp    $0x8,%rax
+    4304:	75 5c                	jne    4362 <bang_probe_v3::main+0x322>
+    4306:	48 8b 45 20          	mov    0x20(%rbp),%rax
+    430a:	48 b9 6d 65 74 61 64 	movabs $0x617461646174656d,%rcx
+    4311:	61 74 61 
+    4314:	48 39 08             	cmp    %rcx,(%rax)
+    4317:	75 49                	jne    4362 <bang_probe_v3::main+0x322>
+    4319:	48 8d 05 50 d7 ff ff 	lea    -0x28b0(%rip),%rax        # 1a70 <__abi_tag+0x1774>
+    4320:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+    4325:	48 c7 44 24 28 0b 00 	movq   $0xb,0x28(%rsp)
+    432c:	00 00 
+    432e:	48 c7 44 24 08 40 00 	movq   $0x40,0x8(%rsp)
+    4335:	00 00 
+    4337:	31 db                	xor    %ebx,%ebx
+    4339:	4c 8d 25 3b d7 ff ff 	lea    -0x28c5(%rip),%r12        # 1a7b <__abi_tag+0x177f>
+    4340:	45 31 ed             	xor    %r13d,%r13d
+    4343:	e9 cb 02 00 00       	jmp    4613 <bang_probe_v3::main+0x5d3>
+    4348:	48 8b 45 20          	mov    0x20(%rbp),%rax
+    434c:	b9 63 68 65 63       	mov    $0x63656863,%ecx
+    4351:	33 08                	xor    (%rax),%ecx
+    4353:	0f b6 40 04          	movzbl 0x4(%rax),%eax
+    4357:	83 f0 6b             	xor    $0x6b,%eax
+    435a:	09 c8                	or     %ecx,%eax
+    435c:	0f 84 91 03 00 00    	je     46f3 <bang_probe_v3::main+0x6b3>
+    4362:	48 83 fb 03          	cmp    $0x3,%rbx
+    4366:	0f 84 53 1c 00 00    	je     5fbf <bang_probe_v3::main+0x1f7f>
+    436c:	48 8b 4d 38          	mov    0x38(%rbp),%rcx
+    4370:	4c 8b 45 40          	mov    0x40(%rbp),%r8
+    4374:	48 8d 35 b5 3d 00 00 	lea    0x3db5(%rip),%rsi        # 8130 <__frame_dummy_init_array_entry+0x1a8>
+    437b:	49 83 f8 01          	cmp    $0x1,%r8
+    437f:	74 0e                	je     438f <bang_probe_v3::main+0x34f>
+    4381:	4d 85 c0             	test   %r8,%r8
+    4384:	0f 84 54 1c 00 00    	je     5fde <bang_probe_v3::main+0x1f9e>
+    438a:	0f b6 11             	movzbl (%rcx),%edx
+    438d:	eb 17                	jmp    43a6 <bang_probe_v3::main+0x366>
+    438f:	0f b6 11             	movzbl (%rcx),%edx
+    4392:	b0 01                	mov    $0x1,%al
+    4394:	83 fa 2b             	cmp    $0x2b,%edx
+    4397:	0f 84 d8 19 00 00    	je     5d75 <bang_probe_v3::main+0x1d35>
+    439d:	83 fa 2d             	cmp    $0x2d,%edx
+    43a0:	0f 84 cf 19 00 00    	je     5d75 <bang_probe_v3::main+0x1d35>
+    43a6:	31 c0                	xor    %eax,%eax
+    43a8:	80 fa 2b             	cmp    $0x2b,%dl
+    43ab:	0f 94 c0             	sete   %al
+    43ae:	4c 89 c2             	mov    %r8,%rdx
+    43b1:	48 29 c2             	sub    %rax,%rdx
+    43b4:	48 01 c1             	add    %rax,%rcx
+    43b7:	48 f7 d8             	neg    %rax
+    43ba:	48 83 fa 11          	cmp    $0x11,%rdx
+    43be:	73 47                	jae    4407 <bang_probe_v3::main+0x3c7>
+    43c0:	48 85 d2             	test   %rdx,%rdx
+    43c3:	0f 84 d9 02 00 00    	je     46a2 <bang_probe_v3::main+0x662>
+    43c9:	49 01 c0             	add    %rax,%r8
+    43cc:	49 f7 d8             	neg    %r8
+    43cf:	31 ff                	xor    %edi,%edi
+    43d1:	31 c0                	xor    %eax,%eax
+    43d3:	66 66 66 66 2e 0f 1f 	data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    43da:	84 00 00 00 00 00 
+    43e0:	0f b6 14 01          	movzbl (%rcx,%rax,1),%edx
+    43e4:	83 c2 d0             	add    $0xffffffd0,%edx
+    43e7:	83 fa 09             	cmp    $0x9,%edx
+    43ea:	0f 87 67 1a 00 00    	ja     5e57 <bang_probe_v3::main+0x1e17>
+    43f0:	48 8d 3c bf          	lea    (%rdi,%rdi,4),%rdi
+    43f4:	89 d2                	mov    %edx,%edx
+    43f6:	48 8d 3c 7a          	lea    (%rdx,%rdi,2),%rdi
+    43fa:	48 ff c0             	inc    %rax
+    43fd:	4c 89 c2             	mov    %r8,%rdx
+    4400:	48 01 c2             	add    %rax,%rdx
+    4403:	75 db                	jne    43e0 <bang_probe_v3::main+0x3a0>
+    4405:	eb 4f                	jmp    4456 <bang_probe_v3::main+0x416>
+    4407:	49 01 c0             	add    %rax,%r8
+    440a:	49 f7 d8             	neg    %r8
+    440d:	31 ff                	xor    %edi,%edi
+    440f:	41 b9 0a 00 00 00    	mov    $0xa,%r9d
+    4415:	45 31 d2             	xor    %r10d,%r10d
+    4418:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+    441f:	00 
+    4420:	48 89 f8             	mov    %rdi,%rax
+    4423:	49 f7 e1             	mul    %r9
+    4426:	42 0f b6 14 11       	movzbl (%rcx,%r10,1),%edx
+    442b:	0f 80 36 19 00 00    	jo     5d67 <bang_probe_v3::main+0x1d27>
+    4431:	83 c2 d0             	add    $0xffffffd0,%edx
+    4434:	83 fa 0a             	cmp    $0xa,%edx
+    4437:	0f 83 1a 1a 00 00    	jae    5e57 <bang_probe_v3::main+0x1e17>
+    443d:	48 89 c7             	mov    %rax,%rdi
+    4440:	89 d0                	mov    %edx,%eax
+    4442:	48 01 c7             	add    %rax,%rdi
+    4445:	0f 82 28 19 00 00    	jb     5d73 <bang_probe_v3::main+0x1d33>
+    444b:	49 ff c2             	inc    %r10
+    444e:	4c 89 c0             	mov    %r8,%rax
+    4451:	4c 01 d0             	add    %r10,%rax
+    4454:	75 ca                	jne    4420 <bang_probe_v3::main+0x3e0>
+    4456:	49 83 fe 04          	cmp    $0x4,%r14
+    445a:	0f 82 4e 02 00 00    	jb     46ae <bang_probe_v3::main+0x66e>
+    4460:	48 8b 4d 50          	mov    0x50(%rbp),%rcx
+    4464:	4c 8b 45 58          	mov    0x58(%rbp),%r8
+    4468:	48 8d 35 a9 3c 00 00 	lea    0x3ca9(%rip),%rsi        # 8118 <__frame_dummy_init_array_entry+0x190>
+    446f:	49 83 f8 01          	cmp    $0x1,%r8
+    4473:	74 0e                	je     4483 <bang_probe_v3::main+0x443>
+    4475:	4d 85 c0             	test   %r8,%r8
+    4478:	0f 84 60 1b 00 00    	je     5fde <bang_probe_v3::main+0x1f9e>
+    447e:	0f b6 11             	movzbl (%rcx),%edx
+    4481:	eb 17                	jmp    449a <bang_probe_v3::main+0x45a>
+    4483:	0f b6 11             	movzbl (%rcx),%edx
+    4486:	b0 01                	mov    $0x1,%al
+    4488:	83 fa 2b             	cmp    $0x2b,%edx
+    448b:	0f 84 e4 18 00 00    	je     5d75 <bang_probe_v3::main+0x1d35>
+    4491:	83 fa 2d             	cmp    $0x2d,%edx
+    4494:	0f 84 db 18 00 00    	je     5d75 <bang_probe_v3::main+0x1d35>
+    449a:	31 c0                	xor    %eax,%eax
+    449c:	80 fa 2b             	cmp    $0x2b,%dl
+    449f:	0f 94 c0             	sete   %al
+    44a2:	4c 89 c2             	mov    %r8,%rdx
+    44a5:	48 29 c2             	sub    %rax,%rdx
+    44a8:	48 01 c1             	add    %rax,%rcx
+    44ab:	48 f7 d8             	neg    %rax
+    44ae:	48 83 fa 11          	cmp    $0x11,%rdx
+    44b2:	73 43                	jae    44f7 <bang_probe_v3::main+0x4b7>
+    44b4:	48 85 d2             	test   %rdx,%rdx
+    44b7:	0f 84 13 02 00 00    	je     46d0 <bang_probe_v3::main+0x690>
+    44bd:	49 01 c0             	add    %rax,%r8
+    44c0:	49 f7 d8             	neg    %r8
+    44c3:	31 db                	xor    %ebx,%ebx
+    44c5:	31 c0                	xor    %eax,%eax
+    44c7:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+    44ce:	00 00 
+    44d0:	0f b6 14 01          	movzbl (%rcx,%rax,1),%edx
+    44d4:	83 c2 d0             	add    $0xffffffd0,%edx
+    44d7:	83 fa 09             	cmp    $0x9,%edx
+    44da:	0f 87 77 19 00 00    	ja     5e57 <bang_probe_v3::main+0x1e17>
+    44e0:	4c 8d 0c 9b          	lea    (%rbx,%rbx,4),%r9
+    44e4:	89 d2                	mov    %edx,%edx
+    44e6:	4a 8d 1c 4a          	lea    (%rdx,%r9,2),%rbx
+    44ea:	48 ff c0             	inc    %rax
+    44ed:	4c 89 c2             	mov    %r8,%rdx
+    44f0:	48 01 c2             	add    %rax,%rdx
+    44f3:	75 db                	jne    44d0 <bang_probe_v3::main+0x490>
+    44f5:	eb 4f                	jmp    4546 <bang_probe_v3::main+0x506>
+    44f7:	49 01 c0             	add    %rax,%r8
+    44fa:	49 f7 d8             	neg    %r8
+    44fd:	31 db                	xor    %ebx,%ebx
+    44ff:	41 b9 0a 00 00 00    	mov    $0xa,%r9d
+    4505:	45 31 d2             	xor    %r10d,%r10d
+    4508:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+    450f:	00 
+    4510:	48 89 d8             	mov    %rbx,%rax
+    4513:	49 f7 e1             	mul    %r9
+    4516:	42 0f b6 14 11       	movzbl (%rcx,%r10,1),%edx
+    451b:	0f 80 46 18 00 00    	jo     5d67 <bang_probe_v3::main+0x1d27>
+    4521:	83 c2 d0             	add    $0xffffffd0,%edx
+    4524:	83 fa 0a             	cmp    $0xa,%edx
+    4527:	0f 83 2a 19 00 00    	jae    5e57 <bang_probe_v3::main+0x1e17>
+    452d:	48 89 c3             	mov    %rax,%rbx
+    4530:	89 d0                	mov    %edx,%eax
+    4532:	48 01 c3             	add    %rax,%rbx
+    4535:	0f 82 38 18 00 00    	jb     5d73 <bang_probe_v3::main+0x1d33>
+    453b:	49 ff c2             	inc    %r10
+    453e:	4c 89 c0             	mov    %r8,%rax
+    4541:	4c 01 d0             	add    %r10,%rax
+    4544:	75 ca                	jne    4510 <bang_probe_v3::main+0x4d0>
+    4546:	48 83 ff 03          	cmp    $0x3,%rdi
+    454a:	0f 87 8c 01 00 00    	ja     46dc <bang_probe_v3::main+0x69c>
+    4550:	48 c1 e7 05          	shl    $0x5,%rdi
+    4554:	48 8d 05 25 3b 00 00 	lea    0x3b25(%rip),%rax        # 8080 <__frame_dummy_init_array_entry+0xf8>
+    455b:	0f 10 44 07 10       	movups 0x10(%rdi,%rax,1),%xmm0
+    4560:	0f 11 84 24 a0 00 00 	movups %xmm0,0xa0(%rsp)
+    4567:	00 
+    4568:	48 8d 84 24 a0 00 00 	lea    0xa0(%rsp),%rax
+    456f:	00 
+    4570:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    4577:	00 
+    4578:	48 8d 84 24 20 01 00 	lea    0x120(%rsp),%rax
+    457f:	00 
+    4580:	48 8b 7d 20          	mov    0x20(%rbp),%rdi
+    4584:	48 8b 75 28          	mov    0x28(%rbp),%rsi
+    4588:	e8 63 1d 00 00       	call   62f0 <bang_probe_v3::choose>
+    458d:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    4594:	00 
+    4595:	48 8d 84 24 20 01 00 	lea    0x120(%rsp),%rax
+    459c:	00 
+    459d:	48 85 db             	test   %rbx,%rbx
+    45a0:	74 2e                	je     45d0 <bang_probe_v3::main+0x590>
+    45a2:	4c 8d 7c 24 70       	lea    0x70(%rsp),%r15
+    45a7:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+    45ae:	00 00 
+    45b0:	48 8b bc 24 a0 00 00 	mov    0xa0(%rsp),%rdi
+    45b7:	00 
+    45b8:	48 8b b4 24 a8 00 00 	mov    0xa8(%rsp),%rsi
+    45bf:	00 
+    45c0:	ff 94 24 20 01 00 00 	call   *0x120(%rsp)
+    45c7:	88 44 24 70          	mov    %al,0x70(%rsp)
+    45cb:	48 ff cb             	dec    %rbx
+    45ce:	75 e0                	jne    45b0 <bang_probe_v3::main+0x570>
+    45d0:	48 8d 5d 08          	lea    0x8(%rbp),%rbx
+    45d4:	45 31 ff             	xor    %r15d,%r15d
+    45d7:	4c 8b 25 e2 3e 00 00 	mov    0x3ee2(%rip),%r12        # 84c0 <__rustc::__rust_dealloc@Base>
+    45de:	eb 10                	jmp    45f0 <bang_probe_v3::main+0x5b0>
+    45e0:	49 ff c7             	inc    %r15
+    45e3:	48 83 c3 18          	add    $0x18,%rbx
+    45e7:	4d 39 fe             	cmp    %r15,%r14
+    45ea:	0f 84 f2 07 00 00    	je     4de2 <bang_probe_v3::main+0xda2>
+    45f0:	48 8b 73 f8          	mov    -0x8(%rbx),%rsi
+    45f4:	48 85 f6             	test   %rsi,%rsi
+    45f7:	74 e7                	je     45e0 <bang_probe_v3::main+0x5a0>
+    45f9:	48 8b 3b             	mov    (%rbx),%rdi
+    45fc:	ba 01 00 00 00       	mov    $0x1,%edx
+    4601:	41 ff d4             	call   *%r12
+    4604:	eb da                	jmp    45e0 <bang_probe_v3::main+0x5a0>
+    4606:	49 89 cd             	mov    %rcx,%r13
+    4609:	48 83 f9 40          	cmp    $0x40,%rcx
+    460d:	0f 87 6f 17 00 00    	ja     5d82 <bang_probe_v3::main+0x1d42>
+    4613:	49 83 fd 31          	cmp    $0x31,%r13
+    4617:	72 37                	jb     4650 <bang_probe_v3::main+0x610>
+    4619:	49 83 fd 40          	cmp    $0x40,%r13
+    461d:	0f 84 05 02 00 00    	je     4828 <bang_probe_v3::main+0x7e8>
+    4623:	31 d2                	xor    %edx,%edx
+    4625:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+    462c:	00 00 00 00 
+    4630:	4a 8d 04 2a          	lea    (%rdx,%r13,1),%rax
+    4634:	41 80 3c 04 21       	cmpb   $0x21,(%r12,%rax,1)
+    4639:	74 34                	je     466f <bang_probe_v3::main+0x62f>
+    463b:	4a 8d 04 2a          	lea    (%rdx,%r13,1),%rax
+    463f:	48 ff c0             	inc    %rax
+    4642:	48 ff c2             	inc    %rdx
+    4645:	48 83 f8 40          	cmp    $0x40,%rax
+    4649:	75 e5                	jne    4630 <bang_probe_v3::main+0x5f0>
+    464b:	e9 d8 01 00 00       	jmp    4828 <bang_probe_v3::main+0x7e8>
+    4650:	ba 40 00 00 00       	mov    $0x40,%edx
+    4655:	4c 29 ea             	sub    %r13,%rdx
+    4658:	4b 8d 34 2c          	lea    (%r12,%r13,1),%rsi
+    465c:	bf 21 00 00 00       	mov    $0x21,%edi
+    4661:	ff 15 a1 3e 00 00    	call   *0x3ea1(%rip)        # 8508 <core::slice::memchr::memchr_aligned@Base>
+    4667:	a8 01                	test   $0x1,%al
+    4669:	0f 84 b9 01 00 00    	je     4828 <bang_probe_v3::main+0x7e8>
+    466f:	4a 8d 0c 2a          	lea    (%rdx,%r13,1),%rcx
+    4673:	48 ff c1             	inc    %rcx
+    4676:	4c 01 ea             	add    %r13,%rdx
+    4679:	48 83 fa 40          	cmp    $0x40,%rdx
+    467d:	73 87                	jae    4606 <bang_probe_v3::main+0x5c6>
+    467f:	48 83 fa 3f          	cmp    $0x3f,%rdx
+    4683:	0f 94 c0             	sete   %al
+    4686:	48 83 f9 40          	cmp    $0x40,%rcx
+    468a:	0f 87 f4 16 00 00    	ja     5d84 <bang_probe_v3::main+0x1d44>
+    4690:	49 89 cd             	mov    %rcx,%r13
+    4693:	48 83 fa 3f          	cmp    $0x3f,%rdx
+    4697:	0f 85 76 ff ff ff    	jne    4613 <bang_probe_v3::main+0x5d3>
+    469d:	e9 e2 16 00 00       	jmp    5d84 <bang_probe_v3::main+0x1d44>
+    46a2:	31 ff                	xor    %edi,%edi
+    46a4:	49 83 fe 04          	cmp    $0x4,%r14
+    46a8:	0f 83 b2 fd ff ff    	jae    4460 <bang_probe_v3::main+0x420>
+    46ae:	41 bd 03 00 00 00    	mov    $0x3,%r13d
+    46b4:	48 8d 15 ad 39 00 00 	lea    0x39ad(%rip),%rdx        # 8068 <__frame_dummy_init_array_entry+0xe0>
+    46bb:	bf 03 00 00 00       	mov    $0x3,%edi
+    46c0:	be 03 00 00 00       	mov    $0x3,%esi
+    46c5:	ff 15 45 3e 00 00    	call   *0x3e45(%rip)        # 8510 <core::panicking::panic_bounds_check@Base>
+    46cb:	e9 39 19 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    46d0:	31 db                	xor    %ebx,%ebx
+    46d2:	48 83 ff 03          	cmp    $0x3,%rdi
+    46d6:	0f 86 74 fe ff ff    	jbe    4550 <bang_probe_v3::main+0x510>
+    46dc:	48 8d 15 1d 3a 00 00 	lea    0x3a1d(%rip),%rdx        # 8100 <__frame_dummy_init_array_entry+0x178>
+    46e3:	be 04 00 00 00       	mov    $0x4,%esi
+    46e8:	ff 15 22 3e 00 00    	call   *0x3e22(%rip)        # 8510 <core::panicking::panic_bounds_check@Base>
+    46ee:	e9 16 19 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    46f3:	c7 44 24 18 00 00 00 	movl   $0x0,0x18(%rsp)
+    46fa:	00 
+    46fb:	48 c7 84 24 f0 00 00 	movq   $0x0,0xf0(%rsp)
+    4702:	00 00 00 00 00 
+    4707:	48 c7 84 24 f8 00 00 	movq   $0x46,0xf8(%rsp)
+    470e:	00 46 00 00 00 
+    4713:	c6 84 24 00 01 00 00 	movb   $0x0,0x100(%rsp)
+    471a:	00 
+    471b:	48 c7 84 24 08 01 00 	movq   $0x5f,0x108(%rsp)
+    4722:	00 5f 00 00 00 
+    4727:	48 c7 84 24 10 01 00 	movq   $0x82,0x110(%rsp)
+    472e:	00 82 00 00 00 
+    4733:	c6 84 24 18 01 00 00 	movb   $0x0,0x118(%rsp)
+    473a:	00 
+    473b:	48 c7 84 24 a0 00 00 	movq   $0x1,0xa0(%rsp)
+    4742:	00 01 00 00 00 
+    4747:	48 c7 84 24 a8 00 00 	movq   $0x0,0xa8(%rsp)
+    474e:	00 00 00 00 00 
+    4753:	48 c7 84 24 b0 00 00 	movq   $0x7,0xb0(%rsp)
+    475a:	00 07 00 00 00 
+    475f:	48 c7 84 24 b8 00 00 	movq   $0xff,0xb8(%rsp)
+    4766:	00 ff 00 00 00 
+    476b:	48 c7 84 24 c0 00 00 	movq   $0x100,0xc0(%rsp)
+    4772:	00 00 01 00 00 
+    4777:	48 c7 84 24 c8 00 00 	movq   $0x101,0xc8(%rsp)
+    477e:	00 01 01 00 00 
+    4783:	48 c7 84 24 d0 00 00 	movq   $0x3ff,0xd0(%rsp)
+    478a:	00 ff 03 00 00 
+    478f:	48 c7 84 24 d8 00 00 	movq   $0x400,0xd8(%rsp)
+    4796:	00 00 04 00 00 
+    479b:	48 c7 84 24 e0 00 00 	movq   $0x9f7,0xe0(%rsp)
+    47a2:	00 f7 09 00 00 
+    47a7:	48 c7 84 24 e8 00 00 	movq   $0x1000,0xe8(%rsp)
+    47ae:	00 00 10 00 00 
+    47b3:	48 8d bc 24 20 01 00 	lea    0x120(%rsp),%rdi
+    47ba:	00 
+    47bb:	48 8d b4 24 a0 00 00 	lea    0xa0(%rsp),%rsi
+    47c2:	00 
+    47c3:	e8 c8 24 00 00       	call   6c90 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint>
+    47c8:	83 bc 24 28 01 00 00 	cmpl   $0x1,0x128(%rsp)
+    47cf:	01 
+    47d0:	0f 85 d4 15 00 00    	jne    5daa <bang_probe_v3::main+0x1d6a>
+    47d6:	4c 8b ac 24 30 01 00 	mov    0x130(%rsp),%r13
+    47dd:	00 
+    47de:	4e 8d 3c ed 00 00 00 	lea    0x0(,%r13,8),%r15
+    47e5:	00 
+    47e6:	4c 89 e8             	mov    %r13,%rax
+    47e9:	48 c1 e8 3d          	shr    $0x3d,%rax
+    47ed:	0f 95 c0             	setne  %al
+    47f0:	48 b9 e0 ff ff ff ff 	movabs $0x7fffffffffffffe0,%rcx
+    47f7:	ff ff 7f 
+    47fa:	48 83 c1 18          	add    $0x18,%rcx
+    47fe:	49 39 cf             	cmp    %rcx,%r15
+    4801:	0f 97 c1             	seta   %cl
+    4804:	08 c1                	or     %al,%cl
+    4806:	0f 84 0b 06 00 00    	je     4e17 <bang_probe_v3::main+0xdd7>
+    480c:	45 31 e4             	xor    %r12d,%r12d
+    480f:	4c 89 e7             	mov    %r12,%rdi
+    4812:	4c 89 fe             	mov    %r15,%rsi
+    4815:	4c 8b ac 24 78 01 00 	mov    0x178(%rsp),%r13
+    481c:	00 
+    481d:	ff 15 bd 3c 00 00    	call   *0x3cbd(%rip)        # 84e0 <alloc::raw_vec::handle_error@Base>
+    4823:	e9 e1 17 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    4828:	48 89 5c 24 70       	mov    %rbx,0x70(%rsp)
+    482d:	48 89 54 24 78       	mov    %rdx,0x78(%rsp)
+    4832:	ba 40 00 00 00       	mov    $0x40,%edx
+    4837:	48 8d 1d 3d d2 ff ff 	lea    -0x2dc3(%rip),%rbx        # 1a7b <__abi_tag+0x177f>
+    483e:	4c 8b 25 d3 3c 00 00 	mov    0x3cd3(%rip),%r12        # 8518 <core::slice::memchr::memrchr_aligned@Base>
+    4845:	45 31 ff             	xor    %r15d,%r15d
+    4848:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+    484f:	00 
+    4850:	bf 21 00 00 00       	mov    $0x21,%edi
+    4855:	48 89 de             	mov    %rbx,%rsi
+    4858:	41 ff d4             	call   *%r12
+    485b:	48 83 f8 01          	cmp    $0x1,%rax
+    485f:	75 0c                	jne    486d <bang_probe_v3::main+0x82d>
+    4861:	48 83 fa 3f          	cmp    $0x3f,%rdx
+    4865:	75 e9                	jne    4850 <bang_probe_v3::main+0x810>
+    4867:	41 bf 01 00 00 00    	mov    $0x1,%r15d
+    486d:	4c 89 bc 24 20 01 00 	mov    %r15,0x120(%rsp)
+    4874:	00 
+    4875:	48 c7 84 24 28 01 00 	movq   $0x3f,0x128(%rsp)
+    487c:	00 3f 00 00 00 
+    4881:	48 8d 44 24 20       	lea    0x20(%rsp),%rax
+    4886:	48 89 84 24 a0 00 00 	mov    %rax,0xa0(%rsp)
+    488d:	00 
+    488e:	48 8d 05 eb 22 00 00 	lea    0x22eb(%rip),%rax        # 6b80 <<&str as core::fmt::Display>::fmt>
+    4895:	48 89 84 24 a8 00 00 	mov    %rax,0xa8(%rsp)
+    489c:	00 
+    489d:	48 8d 44 24 08       	lea    0x8(%rsp),%rax
+    48a2:	48 89 84 24 b0 00 00 	mov    %rax,0xb0(%rsp)
+    48a9:	00 
+    48aa:	48 8b 05 6f 3c 00 00 	mov    0x3c6f(%rip),%rax        # 8520 <<usize as core::fmt::Display>::fmt@Base>
+    48b1:	48 89 84 24 b8 00 00 	mov    %rax,0xb8(%rsp)
+    48b8:	00 
+    48b9:	48 8d 44 24 70       	lea    0x70(%rsp),%rax
+    48be:	48 89 84 24 c0 00 00 	mov    %rax,0xc0(%rsp)
+    48c5:	00 
+    48c6:	4c 8d 2d 43 23 00 00 	lea    0x2343(%rip),%r13        # 6c10 <<core::option::Option<usize> as core::fmt::Debug>::fmt>
+    48cd:	4c 89 ac 24 c8 00 00 	mov    %r13,0xc8(%rsp)
+    48d4:	00 
+    48d5:	48 8d 84 24 20 01 00 	lea    0x120(%rsp),%rax
+    48dc:	00 
+    48dd:	48 89 84 24 d0 00 00 	mov    %rax,0xd0(%rsp)
+    48e4:	00 
+    48e5:	4c 89 ac 24 d8 00 00 	mov    %r13,0xd8(%rsp)
+    48ec:	00 
+    48ed:	48 8d 3d fc d0 ff ff 	lea    -0x2f04(%rip),%rdi        # 19f0 <__abi_tag+0x16f4>
+    48f4:	48 8d b4 24 a0 00 00 	lea    0xa0(%rsp),%rsi
+    48fb:	00 
+    48fc:	ff 15 26 3c 00 00    	call   *0x3c26(%rip)        # 8528 <std::io::stdio::_print@Base>
+    4902:	48 89 2c 24          	mov    %rbp,(%rsp)
+    4906:	48 8d 05 ae d1 ff ff 	lea    -0x2e52(%rip),%rax        # 1abb <__abi_tag+0x17bf>
+    490d:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+    4912:	48 c7 44 24 28 0b 00 	movq   $0xb,0x28(%rsp)
+    4919:	00 00 
+    491b:	48 c7 44 24 08 41 00 	movq   $0x41,0x8(%rsp)
+    4922:	00 00 
+    4924:	31 db                	xor    %ebx,%ebx
+    4926:	48 8d 2d 99 d1 ff ff 	lea    -0x2e67(%rip),%rbp        # 1ac6 <__abi_tag+0x17ca>
+    492d:	45 31 ff             	xor    %r15d,%r15d
+    4930:	eb 0d                	jmp    493f <bang_probe_v3::main+0x8ff>
+    4932:	49 89 cf             	mov    %rcx,%r15
+    4935:	48 83 f9 41          	cmp    $0x41,%rcx
+    4939:	0f 87 4d 14 00 00    	ja     5d8c <bang_probe_v3::main+0x1d4c>
+    493f:	49 83 ff 31          	cmp    $0x31,%r15
+    4943:	76 28                	jbe    496d <bang_probe_v3::main+0x92d>
+    4945:	49 83 ff 41          	cmp    $0x41,%r15
+    4949:	74 6c                	je     49b7 <bang_probe_v3::main+0x977>
+    494b:	31 d2                	xor    %edx,%edx
+    494d:	0f 1f 00             	nopl   (%rax)
+    4950:	49 8d 04 17          	lea    (%r15,%rdx,1),%rax
+    4954:	80 7c 05 00 21       	cmpb   $0x21,0x0(%rbp,%rax,1)
+    4959:	74 2d                	je     4988 <bang_probe_v3::main+0x948>
+    495b:	49 8d 04 17          	lea    (%r15,%rdx,1),%rax
+    495f:	48 ff c0             	inc    %rax
+    4962:	48 ff c2             	inc    %rdx
+    4965:	48 83 f8 41          	cmp    $0x41,%rax
+    4969:	75 e5                	jne    4950 <bang_probe_v3::main+0x910>
+    496b:	eb 4a                	jmp    49b7 <bang_probe_v3::main+0x977>
+    496d:	ba 41 00 00 00       	mov    $0x41,%edx
+    4972:	4c 29 fa             	sub    %r15,%rdx
+    4975:	49 8d 34 2f          	lea    (%r15,%rbp,1),%rsi
+    4979:	bf 21 00 00 00       	mov    $0x21,%edi
+    497e:	ff 15 84 3b 00 00    	call   *0x3b84(%rip)        # 8508 <core::slice::memchr::memchr_aligned@Base>
+    4984:	a8 01                	test   $0x1,%al
+    4986:	74 2f                	je     49b7 <bang_probe_v3::main+0x977>
+    4988:	4a 8d 0c 3a          	lea    (%rdx,%r15,1),%rcx
+    498c:	48 ff c1             	inc    %rcx
+    498f:	4c 01 fa             	add    %r15,%rdx
+    4992:	48 83 fa 41          	cmp    $0x41,%rdx
+    4996:	73 9a                	jae    4932 <bang_probe_v3::main+0x8f2>
+    4998:	48 83 fa 40          	cmp    $0x40,%rdx
+    499c:	0f 94 c0             	sete   %al
+    499f:	48 83 f9 41          	cmp    $0x41,%rcx
+    49a3:	0f 87 e5 13 00 00    	ja     5d8e <bang_probe_v3::main+0x1d4e>
+    49a9:	49 89 cf             	mov    %rcx,%r15
+    49ac:	48 83 fa 40          	cmp    $0x40,%rdx
+    49b0:	75 8d                	jne    493f <bang_probe_v3::main+0x8ff>
+    49b2:	e9 d7 13 00 00       	jmp    5d8e <bang_probe_v3::main+0x1d4e>
+    49b7:	48 89 5c 24 70       	mov    %rbx,0x70(%rsp)
+    49bc:	48 89 54 24 78       	mov    %rdx,0x78(%rsp)
+    49c1:	ba 41 00 00 00       	mov    $0x41,%edx
+    49c6:	48 8d 1d f9 d0 ff ff 	lea    -0x2f07(%rip),%rbx        # 1ac6 <__abi_tag+0x17ca>
+    49cd:	45 31 ff             	xor    %r15d,%r15d
+    49d0:	48 8b 2c 24          	mov    (%rsp),%rbp
+    49d4:	66 66 66 2e 0f 1f 84 	data16 data16 cs nopw 0x0(%rax,%rax,1)
+    49db:	00 00 00 00 00 
+    49e0:	bf 21 00 00 00       	mov    $0x21,%edi
+    49e5:	48 89 de             	mov    %rbx,%rsi
+    49e8:	41 ff d4             	call   *%r12
+    49eb:	48 83 f8 01          	cmp    $0x1,%rax
+    49ef:	75 0c                	jne    49fd <bang_probe_v3::main+0x9bd>
+    49f1:	48 83 fa 40          	cmp    $0x40,%rdx
+    49f5:	75 e9                	jne    49e0 <bang_probe_v3::main+0x9a0>
+    49f7:	41 bf 01 00 00 00    	mov    $0x1,%r15d
+    49fd:	4c 89 bc 24 20 01 00 	mov    %r15,0x120(%rsp)
+    4a04:	00 
+    4a05:	48 c7 84 24 28 01 00 	movq   $0x40,0x128(%rsp)
+    4a0c:	00 40 00 00 00 
+    4a11:	48 8d 44 24 20       	lea    0x20(%rsp),%rax
+    4a16:	48 89 84 24 a0 00 00 	mov    %rax,0xa0(%rsp)
+    4a1d:	00 
+    4a1e:	48 8d 05 5b 21 00 00 	lea    0x215b(%rip),%rax        # 6b80 <<&str as core::fmt::Display>::fmt>
+    4a25:	48 89 84 24 a8 00 00 	mov    %rax,0xa8(%rsp)
+    4a2c:	00 
+    4a2d:	48 8d 44 24 08       	lea    0x8(%rsp),%rax
+    4a32:	48 89 84 24 b0 00 00 	mov    %rax,0xb0(%rsp)
+    4a39:	00 
+    4a3a:	48 8b 05 df 3a 00 00 	mov    0x3adf(%rip),%rax        # 8520 <<usize as core::fmt::Display>::fmt@Base>
+    4a41:	48 89 84 24 b8 00 00 	mov    %rax,0xb8(%rsp)
+    4a48:	00 
+    4a49:	48 8d 44 24 70       	lea    0x70(%rsp),%rax
+    4a4e:	48 89 84 24 c0 00 00 	mov    %rax,0xc0(%rsp)
+    4a55:	00 
+    4a56:	4c 89 ac 24 c8 00 00 	mov    %r13,0xc8(%rsp)
+    4a5d:	00 
+    4a5e:	48 8d 84 24 20 01 00 	lea    0x120(%rsp),%rax
+    4a65:	00 
+    4a66:	48 89 84 24 d0 00 00 	mov    %rax,0xd0(%rsp)
+    4a6d:	00 
+    4a6e:	4c 89 ac 24 d8 00 00 	mov    %r13,0xd8(%rsp)
+    4a75:	00 
+    4a76:	48 8d 3d 73 cf ff ff 	lea    -0x308d(%rip),%rdi        # 19f0 <__abi_tag+0x16f4>
+    4a7d:	48 8d b4 24 a0 00 00 	lea    0xa0(%rsp),%rsi
+    4a84:	00 
+    4a85:	ff 15 9d 3a 00 00    	call   *0x3a9d(%rip)        # 8528 <std::io::stdio::_print@Base>
+    4a8b:	48 8d 05 75 d0 ff ff 	lea    -0x2f8b(%rip),%rax        # 1b07 <__abi_tag+0x180b>
+    4a92:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+    4a97:	48 c7 44 24 28 11 00 	movq   $0x11,0x28(%rsp)
+    4a9e:	00 00 
+    4aa0:	48 c7 44 24 08 41 00 	movq   $0x41,0x8(%rsp)
+    4aa7:	00 00 
+    4aa9:	31 db                	xor    %ebx,%ebx
+    4aab:	48 8d 2d 66 d0 ff ff 	lea    -0x2f9a(%rip),%rbp        # 1b18 <__abi_tag+0x181c>
+    4ab2:	45 31 ff             	xor    %r15d,%r15d
+    4ab5:	eb 0d                	jmp    4ac4 <bang_probe_v3::main+0xa84>
+    4ab7:	49 89 cf             	mov    %rcx,%r15
+    4aba:	48 83 f9 41          	cmp    $0x41,%rcx
+    4abe:	0f 87 d2 12 00 00    	ja     5d96 <bang_probe_v3::main+0x1d56>
+    4ac4:	49 83 ff 31          	cmp    $0x31,%r15
+    4ac8:	76 33                	jbe    4afd <bang_probe_v3::main+0xabd>
+    4aca:	49 83 ff 41          	cmp    $0x41,%r15
+    4ace:	74 77                	je     4b47 <bang_probe_v3::main+0xb07>
+    4ad0:	31 d2                	xor    %edx,%edx
+    4ad2:	66 66 66 66 66 2e 0f 	data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    4ad9:	1f 84 00 00 00 00 00 
+    4ae0:	49 8d 04 17          	lea    (%r15,%rdx,1),%rax
+    4ae4:	80 7c 05 00 21       	cmpb   $0x21,0x0(%rbp,%rax,1)
+    4ae9:	74 2d                	je     4b18 <bang_probe_v3::main+0xad8>
+    4aeb:	49 8d 04 17          	lea    (%r15,%rdx,1),%rax
+    4aef:	48 ff c0             	inc    %rax
+    4af2:	48 ff c2             	inc    %rdx
+    4af5:	48 83 f8 41          	cmp    $0x41,%rax
+    4af9:	75 e5                	jne    4ae0 <bang_probe_v3::main+0xaa0>
+    4afb:	eb 4a                	jmp    4b47 <bang_probe_v3::main+0xb07>
+    4afd:	ba 41 00 00 00       	mov    $0x41,%edx
+    4b02:	4c 29 fa             	sub    %r15,%rdx
+    4b05:	49 8d 34 2f          	lea    (%r15,%rbp,1),%rsi
+    4b09:	bf 21 00 00 00       	mov    $0x21,%edi
+    4b0e:	ff 15 f4 39 00 00    	call   *0x39f4(%rip)        # 8508 <core::slice::memchr::memchr_aligned@Base>
+    4b14:	a8 01                	test   $0x1,%al
+    4b16:	74 2f                	je     4b47 <bang_probe_v3::main+0xb07>
+    4b18:	4a 8d 0c 3a          	lea    (%rdx,%r15,1),%rcx
+    4b1c:	48 ff c1             	inc    %rcx
+    4b1f:	4c 01 fa             	add    %r15,%rdx
+    4b22:	48 83 fa 41          	cmp    $0x41,%rdx
+    4b26:	73 8f                	jae    4ab7 <bang_probe_v3::main+0xa77>
+    4b28:	48 83 fa 40          	cmp    $0x40,%rdx
+    4b2c:	0f 94 c0             	sete   %al
+    4b2f:	48 83 f9 41          	cmp    $0x41,%rcx
+    4b33:	0f 87 5f 12 00 00    	ja     5d98 <bang_probe_v3::main+0x1d58>
+    4b39:	49 89 cf             	mov    %rcx,%r15
+    4b3c:	48 83 fa 40          	cmp    $0x40,%rdx
+    4b40:	75 82                	jne    4ac4 <bang_probe_v3::main+0xa84>
+    4b42:	e9 51 12 00 00       	jmp    5d98 <bang_probe_v3::main+0x1d58>
+    4b47:	48 89 5c 24 70       	mov    %rbx,0x70(%rsp)
+    4b4c:	48 89 54 24 78       	mov    %rdx,0x78(%rsp)
+    4b51:	ba 41 00 00 00       	mov    $0x41,%edx
+    4b56:	48 8d 1d bb cf ff ff 	lea    -0x3045(%rip),%rbx        # 1b18 <__abi_tag+0x181c>
+    4b5d:	45 31 ff             	xor    %r15d,%r15d
+    4b60:	48 8b 2c 24          	mov    (%rsp),%rbp
+    4b64:	66 66 66 2e 0f 1f 84 	data16 data16 cs nopw 0x0(%rax,%rax,1)
+    4b6b:	00 00 00 00 00 
+    4b70:	bf 21 00 00 00       	mov    $0x21,%edi
+    4b75:	48 89 de             	mov    %rbx,%rsi
+    4b78:	41 ff d4             	call   *%r12
+    4b7b:	48 83 f8 01          	cmp    $0x1,%rax
+    4b7f:	75 0c                	jne    4b8d <bang_probe_v3::main+0xb4d>
+    4b81:	48 83 fa 40          	cmp    $0x40,%rdx
+    4b85:	75 e9                	jne    4b70 <bang_probe_v3::main+0xb30>
+    4b87:	41 bf 01 00 00 00    	mov    $0x1,%r15d
+    4b8d:	4c 89 bc 24 20 01 00 	mov    %r15,0x120(%rsp)
+    4b94:	00 
+    4b95:	48 c7 84 24 28 01 00 	movq   $0x40,0x128(%rsp)
+    4b9c:	00 40 00 00 00 
+    4ba1:	48 8d 44 24 20       	lea    0x20(%rsp),%rax
+    4ba6:	48 89 84 24 a0 00 00 	mov    %rax,0xa0(%rsp)
+    4bad:	00 
+    4bae:	48 8d 05 cb 1f 00 00 	lea    0x1fcb(%rip),%rax        # 6b80 <<&str as core::fmt::Display>::fmt>
+    4bb5:	48 89 84 24 a8 00 00 	mov    %rax,0xa8(%rsp)
+    4bbc:	00 
+    4bbd:	48 8d 44 24 08       	lea    0x8(%rsp),%rax
+    4bc2:	48 89 84 24 b0 00 00 	mov    %rax,0xb0(%rsp)
+    4bc9:	00 
+    4bca:	48 8b 05 4f 39 00 00 	mov    0x394f(%rip),%rax        # 8520 <<usize as core::fmt::Display>::fmt@Base>
+    4bd1:	48 89 84 24 b8 00 00 	mov    %rax,0xb8(%rsp)
+    4bd8:	00 
+    4bd9:	48 8d 44 24 70       	lea    0x70(%rsp),%rax
+    4bde:	48 89 84 24 c0 00 00 	mov    %rax,0xc0(%rsp)
+    4be5:	00 
+    4be6:	4c 89 ac 24 c8 00 00 	mov    %r13,0xc8(%rsp)
+    4bed:	00 
+    4bee:	48 8d 84 24 20 01 00 	lea    0x120(%rsp),%rax
+    4bf5:	00 
+    4bf6:	48 89 84 24 d0 00 00 	mov    %rax,0xd0(%rsp)
+    4bfd:	00 
+    4bfe:	4c 89 ac 24 d8 00 00 	mov    %r13,0xd8(%rsp)
+    4c05:	00 
+    4c06:	48 8d 3d e3 cd ff ff 	lea    -0x321d(%rip),%rdi        # 19f0 <__abi_tag+0x16f4>
+    4c0d:	48 8d b4 24 a0 00 00 	lea    0xa0(%rsp),%rsi
+    4c14:	00 
+    4c15:	ff 15 0d 39 00 00    	call   *0x390d(%rip)        # 8528 <std::io::stdio::_print@Base>
+    4c1b:	48 8d 05 4e cd ff ff 	lea    -0x32b2(%rip),%rax        # 1970 <__abi_tag+0x1674>
+    4c22:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+    4c27:	48 c7 44 24 28 10 00 	movq   $0x10,0x28(%rsp)
+    4c2e:	00 00 
+    4c30:	48 c7 44 24 08 f7 09 	movq   $0x9f7,0x8(%rsp)
+    4c37:	00 00 
+    4c39:	31 ed                	xor    %ebp,%ebp
+    4c3b:	48 8d 1d 17 cf ff ff 	lea    -0x30e9(%rip),%rbx        # 1b59 <__abi_tag+0x185d>
+    4c42:	45 31 ff             	xor    %r15d,%r15d
+    4c45:	eb 10                	jmp    4c57 <bang_probe_v3::main+0xc17>
+    4c47:	49 89 cf             	mov    %rcx,%r15
+    4c4a:	48 81 f9 f7 09 00 00 	cmp    $0x9f7,%rcx
+    4c51:	0f 87 49 11 00 00    	ja     5da0 <bang_probe_v3::main+0x1d60>
+    4c57:	49 81 ff e7 09 00 00 	cmp    $0x9e7,%r15
+    4c5e:	76 2e                	jbe    4c8e <bang_probe_v3::main+0xc4e>
+    4c60:	49 81 ff f7 09 00 00 	cmp    $0x9f7,%r15
+    4c67:	74 7d                	je     4ce6 <bang_probe_v3::main+0xca6>
+    4c69:	31 d2                	xor    %edx,%edx
+    4c6b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+    4c70:	49 8d 04 17          	lea    (%r15,%rdx,1),%rax
+    4c74:	80 3c 03 21          	cmpb   $0x21,(%rbx,%rax,1)
+    4c78:	74 2f                	je     4ca9 <bang_probe_v3::main+0xc69>
+    4c7a:	49 8d 04 17          	lea    (%r15,%rdx,1),%rax
+    4c7e:	48 ff c0             	inc    %rax
+    4c81:	48 ff c2             	inc    %rdx
+    4c84:	48 3d f7 09 00 00    	cmp    $0x9f7,%rax
+    4c8a:	75 e4                	jne    4c70 <bang_probe_v3::main+0xc30>
+    4c8c:	eb 58                	jmp    4ce6 <bang_probe_v3::main+0xca6>
+    4c8e:	ba f7 09 00 00       	mov    $0x9f7,%edx
+    4c93:	4c 29 fa             	sub    %r15,%rdx
+    4c96:	4a 8d 34 3b          	lea    (%rbx,%r15,1),%rsi
+    4c9a:	bf 21 00 00 00       	mov    $0x21,%edi
+    4c9f:	ff 15 63 38 00 00    	call   *0x3863(%rip)        # 8508 <core::slice::memchr::memchr_aligned@Base>
+    4ca5:	a8 01                	test   $0x1,%al
+    4ca7:	74 3d                	je     4ce6 <bang_probe_v3::main+0xca6>
+    4ca9:	4a 8d 0c 3a          	lea    (%rdx,%r15,1),%rcx
+    4cad:	48 ff c1             	inc    %rcx
+    4cb0:	4c 01 fa             	add    %r15,%rdx
+    4cb3:	48 81 fa f7 09 00 00 	cmp    $0x9f7,%rdx
+    4cba:	73 8b                	jae    4c47 <bang_probe_v3::main+0xc07>
+    4cbc:	0f b6 34 1a          	movzbl (%rdx,%rbx,1),%esi
+    4cc0:	40 80 fe 21          	cmp    $0x21,%sil
+    4cc4:	0f 94 c0             	sete   %al
+    4cc7:	48 81 f9 f7 09 00 00 	cmp    $0x9f7,%rcx
+    4cce:	0f 87 ce 10 00 00    	ja     5da2 <bang_probe_v3::main+0x1d62>
+    4cd4:	49 89 cf             	mov    %rcx,%r15
+    4cd7:	40 80 fe 21          	cmp    $0x21,%sil
+    4cdb:	0f 85 76 ff ff ff    	jne    4c57 <bang_probe_v3::main+0xc17>
+    4ce1:	e9 bc 10 00 00       	jmp    5da2 <bang_probe_v3::main+0x1d62>
+    4ce6:	48 89 6c 24 70       	mov    %rbp,0x70(%rsp)
+    4ceb:	48 89 54 24 78       	mov    %rdx,0x78(%rsp)
+    4cf0:	ba f7 09 00 00       	mov    $0x9f7,%edx
+    4cf5:	45 31 ff             	xor    %r15d,%r15d
+    4cf8:	48 8b 2c 24          	mov    (%rsp),%rbp
+    4cfc:	0f 1f 40 00          	nopl   0x0(%rax)
+    4d00:	bf 21 00 00 00       	mov    $0x21,%edi
+    4d05:	48 89 de             	mov    %rbx,%rsi
+    4d08:	41 ff d4             	call   *%r12
+    4d0b:	48 83 f8 01          	cmp    $0x1,%rax
+    4d0f:	75 0e                	jne    4d1f <bang_probe_v3::main+0xcdf>
+    4d11:	80 3c 1a 21          	cmpb   $0x21,(%rdx,%rbx,1)
+    4d15:	75 e9                	jne    4d00 <bang_probe_v3::main+0xcc0>
+    4d17:	41 bf 01 00 00 00    	mov    $0x1,%r15d
+    4d1d:	eb 00                	jmp    4d1f <bang_probe_v3::main+0xcdf>
+    4d1f:	4c 89 bc 24 20 01 00 	mov    %r15,0x120(%rsp)
+    4d26:	00 
+    4d27:	48 89 94 24 28 01 00 	mov    %rdx,0x128(%rsp)
+    4d2e:	00 
+    4d2f:	48 8d 44 24 20       	lea    0x20(%rsp),%rax
+    4d34:	48 89 84 24 a0 00 00 	mov    %rax,0xa0(%rsp)
+    4d3b:	00 
+    4d3c:	48 8d 05 3d 1e 00 00 	lea    0x1e3d(%rip),%rax        # 6b80 <<&str as core::fmt::Display>::fmt>
+    4d43:	48 89 84 24 a8 00 00 	mov    %rax,0xa8(%rsp)
+    4d4a:	00 
+    4d4b:	48 8d 44 24 08       	lea    0x8(%rsp),%rax
+    4d50:	48 89 84 24 b0 00 00 	mov    %rax,0xb0(%rsp)
+    4d57:	00 
+    4d58:	48 8b 05 c1 37 00 00 	mov    0x37c1(%rip),%rax        # 8520 <<usize as core::fmt::Display>::fmt@Base>
+    4d5f:	48 89 84 24 b8 00 00 	mov    %rax,0xb8(%rsp)
+    4d66:	00 
+    4d67:	48 8d 44 24 70       	lea    0x70(%rsp),%rax
+    4d6c:	48 89 84 24 c0 00 00 	mov    %rax,0xc0(%rsp)
+    4d73:	00 
+    4d74:	4c 89 ac 24 c8 00 00 	mov    %r13,0xc8(%rsp)
+    4d7b:	00 
+    4d7c:	48 8d 84 24 20 01 00 	lea    0x120(%rsp),%rax
+    4d83:	00 
+    4d84:	48 89 84 24 d0 00 00 	mov    %rax,0xd0(%rsp)
+    4d8b:	00 
+    4d8c:	4c 89 ac 24 d8 00 00 	mov    %r13,0xd8(%rsp)
+    4d93:	00 
+    4d94:	48 8d 3d 55 cc ff ff 	lea    -0x33ab(%rip),%rdi        # 19f0 <__abi_tag+0x16f4>
+    4d9b:	48 8d b4 24 a0 00 00 	lea    0xa0(%rsp),%rsi
+    4da2:	00 
+    4da3:	ff 15 7f 37 00 00    	call   *0x377f(%rip)        # 8528 <std::io::stdio::_print@Base>
+    4da9:	48 8d 5d 08          	lea    0x8(%rbp),%rbx
+    4dad:	45 31 ff             	xor    %r15d,%r15d
+    4db0:	4c 8b 25 09 37 00 00 	mov    0x3709(%rip),%r12        # 84c0 <__rustc::__rust_dealloc@Base>
+    4db7:	eb 13                	jmp    4dcc <bang_probe_v3::main+0xd8c>
+    4db9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+    4dc0:	49 ff c7             	inc    %r15
+    4dc3:	48 83 c3 18          	add    $0x18,%rbx
+    4dc7:	4d 39 fe             	cmp    %r15,%r14
+    4dca:	74 16                	je     4de2 <bang_probe_v3::main+0xda2>
+    4dcc:	48 8b 73 f8          	mov    -0x8(%rbx),%rsi
+    4dd0:	48 85 f6             	test   %rsi,%rsi
+    4dd3:	74 eb                	je     4dc0 <bang_probe_v3::main+0xd80>
+    4dd5:	48 8b 3b             	mov    (%rbx),%rdi
+    4dd8:	ba 01 00 00 00       	mov    $0x1,%edx
+    4ddd:	41 ff d4             	call   *%r12
+    4de0:	eb de                	jmp    4dc0 <bang_probe_v3::main+0xd80>
+    4de2:	48 8b 84 24 70 01 00 	mov    0x170(%rsp),%rax
+    4de9:	00 
+    4dea:	48 85 c0             	test   %rax,%rax
+    4ded:	74 16                	je     4e05 <bang_probe_v3::main+0xdc5>
+    4def:	48 c1 e0 03          	shl    $0x3,%rax
+    4df3:	48 8d 34 40          	lea    (%rax,%rax,2),%rsi
+    4df7:	ba 08 00 00 00       	mov    $0x8,%edx
+    4dfc:	48 89 ef             	mov    %rbp,%rdi
+    4dff:	ff 15 bb 36 00 00    	call   *0x36bb(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    4e05:	48 81 c4 98 01 00 00 	add    $0x198,%rsp
+    4e0c:	5b                   	pop    %rbx
+    4e0d:	41 5c                	pop    %r12
+    4e0f:	41 5d                	pop    %r13
+    4e11:	41 5e                	pop    %r14
+    4e13:	41 5f                	pop    %r15
+    4e15:	5d                   	pop    %rbp
+    4e16:	c3                   	ret
+    4e17:	4d 85 ff             	test   %r15,%r15
+    4e1a:	74 27                	je     4e43 <bang_probe_v3::main+0xe03>
+    4e1c:	ff 15 d6 36 00 00    	call   *0x36d6(%rip)        # 84f8 <__rustc::__rust_no_alloc_shim_is_unstable_v2@Base>
+    4e22:	41 bc 08 00 00 00    	mov    $0x8,%r12d
+    4e28:	be 08 00 00 00       	mov    $0x8,%esi
+    4e2d:	4c 89 ff             	mov    %r15,%rdi
+    4e30:	ff 15 ca 36 00 00    	call   *0x36ca(%rip)        # 8500 <__rustc::__rust_alloc@Base>
+    4e36:	48 89 c3             	mov    %rax,%rbx
+    4e39:	48 85 c0             	test   %rax,%rax
+    4e3c:	75 0d                	jne    4e4b <bang_probe_v3::main+0xe0b>
+    4e3e:	e9 cc f9 ff ff       	jmp    480f <bang_probe_v3::main+0x7cf>
+    4e43:	bb 08 00 00 00       	mov    $0x8,%ebx
+    4e48:	45 31 ed             	xor    %r13d,%r13d
+    4e4b:	4c 89 6c 24 70       	mov    %r13,0x70(%rsp)
+    4e50:	48 89 5c 24 78       	mov    %rbx,0x78(%rsp)
+    4e55:	48 c7 84 24 80 00 00 	movq   $0x0,0x80(%rsp)
+    4e5c:	00 00 00 00 00 
+    4e61:	48 8d bc 24 20 01 00 	lea    0x120(%rsp),%rdi
+    4e68:	00 
+    4e69:	48 8d b4 24 a0 00 00 	lea    0xa0(%rsp),%rsi
+    4e70:	00 
+    4e71:	e8 1a 1e 00 00       	call   6c90 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint>
+    4e76:	83 bc 24 28 01 00 00 	cmpl   $0x1,0x128(%rsp)
+    4e7d:	01 
+    4e7e:	0f 85 da 0f 00 00    	jne    5e5e <bang_probe_v3::main+0x1e1e>
+    4e84:	48 8b 94 24 30 01 00 	mov    0x130(%rsp),%rdx
+    4e8b:	00 
+    4e8c:	4c 39 ea             	cmp    %r13,%rdx
+    4e8f:	0f 87 e7 0f 00 00    	ja     5e7c <bang_probe_v3::main+0x1e3c>
+    4e95:	45 31 ff             	xor    %r15d,%r15d
+    4e98:	48 8d 84 24 a8 00 00 	lea    0xa8(%rsp),%rax
+    4e9f:	00 
+    4ea0:	4a c7 04 fb 00 00 00 	movq   $0x0,(%rbx,%r15,8)
+    4ea7:	00 
+    4ea8:	4a c7 44 fb 08 01 00 	movq   $0x1,0x8(%rbx,%r15,8)
+    4eaf:	00 00 
+    4eb1:	4a c7 44 fb 10 02 00 	movq   $0x2,0x10(%rbx,%r15,8)
+    4eb8:	00 00 
+    4eba:	4a c7 44 fb 18 03 00 	movq   $0x3,0x18(%rbx,%r15,8)
+    4ec1:	00 00 
+    4ec3:	4a c7 44 fb 20 04 00 	movq   $0x4,0x20(%rbx,%r15,8)
+    4eca:	00 00 
+    4ecc:	4a c7 44 fb 28 05 00 	movq   $0x5,0x28(%rbx,%r15,8)
+    4ed3:	00 00 
+    4ed5:	4a c7 44 fb 30 06 00 	movq   $0x6,0x30(%rbx,%r15,8)
+    4edc:	00 00 
+    4ede:	4a c7 44 fb 38 07 00 	movq   $0x7,0x38(%rbx,%r15,8)
+    4ee5:	00 00 
+    4ee7:	4a c7 44 fb 40 08 00 	movq   $0x8,0x40(%rbx,%r15,8)
+    4eee:	00 00 
+    4ef0:	4a c7 44 fb 48 09 00 	movq   $0x9,0x48(%rbx,%r15,8)
+    4ef7:	00 00 
+    4ef9:	4a c7 44 fb 50 0a 00 	movq   $0xa,0x50(%rbx,%r15,8)
+    4f00:	00 00 
+    4f02:	4a c7 44 fb 58 0b 00 	movq   $0xb,0x58(%rbx,%r15,8)
+    4f09:	00 00 
+    4f0b:	4a c7 44 fb 60 0c 00 	movq   $0xc,0x60(%rbx,%r15,8)
+    4f12:	00 00 
+    4f14:	4a c7 44 fb 68 0d 00 	movq   $0xd,0x68(%rbx,%r15,8)
+    4f1b:	00 00 
+    4f1d:	4a c7 44 fb 70 0e 00 	movq   $0xe,0x70(%rbx,%r15,8)
+    4f24:	00 00 
+    4f26:	4a c7 44 fb 78 0f 00 	movq   $0xf,0x78(%rbx,%r15,8)
+    4f2d:	00 00 
+    4f2f:	4a c7 84 fb 80 00 00 	movq   $0x10,0x80(%rbx,%r15,8)
+    4f36:	00 10 00 00 00 
+    4f3b:	4a c7 84 fb 88 00 00 	movq   $0x11,0x88(%rbx,%r15,8)
+    4f42:	00 11 00 00 00 
+    4f47:	4a c7 84 fb 90 00 00 	movq   $0x12,0x90(%rbx,%r15,8)
+    4f4e:	00 12 00 00 00 
+    4f53:	4a c7 84 fb 98 00 00 	movq   $0x13,0x98(%rbx,%r15,8)
+    4f5a:	00 13 00 00 00 
+    4f5f:	4a c7 84 fb a0 00 00 	movq   $0x14,0xa0(%rbx,%r15,8)
+    4f66:	00 14 00 00 00 
+    4f6b:	4a c7 84 fb a8 00 00 	movq   $0x15,0xa8(%rbx,%r15,8)
+    4f72:	00 15 00 00 00 
+    4f77:	4a c7 84 fb b0 00 00 	movq   $0x16,0xb0(%rbx,%r15,8)
+    4f7e:	00 16 00 00 00 
+    4f83:	4a c7 84 fb b8 00 00 	movq   $0x17,0xb8(%rbx,%r15,8)
+    4f8a:	00 17 00 00 00 
+    4f8f:	4a c7 84 fb c0 00 00 	movq   $0x18,0xc0(%rbx,%r15,8)
+    4f96:	00 18 00 00 00 
+    4f9b:	4a c7 84 fb c8 00 00 	movq   $0x19,0xc8(%rbx,%r15,8)
+    4fa2:	00 19 00 00 00 
+    4fa7:	4a c7 84 fb d0 00 00 	movq   $0x1a,0xd0(%rbx,%r15,8)
+    4fae:	00 1a 00 00 00 
+    4fb3:	4a c7 84 fb d8 00 00 	movq   $0x1b,0xd8(%rbx,%r15,8)
+    4fba:	00 1b 00 00 00 
+    4fbf:	4a c7 84 fb e0 00 00 	movq   $0x1c,0xe0(%rbx,%r15,8)
+    4fc6:	00 1c 00 00 00 
+    4fcb:	4a c7 84 fb e8 00 00 	movq   $0x1d,0xe8(%rbx,%r15,8)
+    4fd2:	00 1d 00 00 00 
+    4fd7:	4a c7 84 fb f0 00 00 	movq   $0x1e,0xf0(%rbx,%r15,8)
+    4fde:	00 1e 00 00 00 
+    4fe3:	4a c7 84 fb f8 00 00 	movq   $0x1f,0xf8(%rbx,%r15,8)
+    4fea:	00 1f 00 00 00 
+    4fef:	4a c7 84 fb 00 01 00 	movq   $0x20,0x100(%rbx,%r15,8)
+    4ff6:	00 20 00 00 00 
+    4ffb:	4a c7 84 fb 08 01 00 	movq   $0x21,0x108(%rbx,%r15,8)
+    5002:	00 21 00 00 00 
+    5007:	4a c7 84 fb 10 01 00 	movq   $0x22,0x110(%rbx,%r15,8)
+    500e:	00 22 00 00 00 
+    5013:	4a c7 84 fb 18 01 00 	movq   $0x23,0x118(%rbx,%r15,8)
+    501a:	00 23 00 00 00 
+    501f:	4a c7 84 fb 20 01 00 	movq   $0x24,0x120(%rbx,%r15,8)
+    5026:	00 24 00 00 00 
+    502b:	4a c7 84 fb 28 01 00 	movq   $0x25,0x128(%rbx,%r15,8)
+    5032:	00 25 00 00 00 
+    5037:	4a c7 84 fb 30 01 00 	movq   $0x26,0x130(%rbx,%r15,8)
+    503e:	00 26 00 00 00 
+    5043:	4a c7 84 fb 38 01 00 	movq   $0x27,0x138(%rbx,%r15,8)
+    504a:	00 27 00 00 00 
+    504f:	4a c7 84 fb 40 01 00 	movq   $0x28,0x140(%rbx,%r15,8)
+    5056:	00 28 00 00 00 
+    505b:	4a c7 84 fb 48 01 00 	movq   $0x29,0x148(%rbx,%r15,8)
+    5062:	00 29 00 00 00 
+    5067:	4a c7 84 fb 50 01 00 	movq   $0x2a,0x150(%rbx,%r15,8)
+    506e:	00 2a 00 00 00 
+    5073:	4a c7 84 fb 58 01 00 	movq   $0x2b,0x158(%rbx,%r15,8)
+    507a:	00 2b 00 00 00 
+    507f:	4a c7 84 fb 60 01 00 	movq   $0x2c,0x160(%rbx,%r15,8)
+    5086:	00 2c 00 00 00 
+    508b:	4a c7 84 fb 68 01 00 	movq   $0x2d,0x168(%rbx,%r15,8)
+    5092:	00 2d 00 00 00 
+    5097:	4a c7 84 fb 70 01 00 	movq   $0x2e,0x170(%rbx,%r15,8)
+    509e:	00 2e 00 00 00 
+    50a3:	4a c7 84 fb 78 01 00 	movq   $0x2f,0x178(%rbx,%r15,8)
+    50aa:	00 2f 00 00 00 
+    50af:	4a c7 84 fb 80 01 00 	movq   $0x30,0x180(%rbx,%r15,8)
+    50b6:	00 30 00 00 00 
+    50bb:	4a c7 84 fb 88 01 00 	movq   $0x31,0x188(%rbx,%r15,8)
+    50c2:	00 31 00 00 00 
+    50c7:	4a c7 84 fb 90 01 00 	movq   $0x32,0x190(%rbx,%r15,8)
+    50ce:	00 32 00 00 00 
+    50d3:	4a c7 84 fb 98 01 00 	movq   $0x33,0x198(%rbx,%r15,8)
+    50da:	00 33 00 00 00 
+    50df:	4a c7 84 fb a0 01 00 	movq   $0x34,0x1a0(%rbx,%r15,8)
+    50e6:	00 34 00 00 00 
+    50eb:	4a c7 84 fb a8 01 00 	movq   $0x35,0x1a8(%rbx,%r15,8)
+    50f2:	00 35 00 00 00 
+    50f7:	4a c7 84 fb b0 01 00 	movq   $0x36,0x1b0(%rbx,%r15,8)
+    50fe:	00 36 00 00 00 
+    5103:	4a c7 84 fb b8 01 00 	movq   $0x37,0x1b8(%rbx,%r15,8)
+    510a:	00 37 00 00 00 
+    510f:	4a c7 84 fb c0 01 00 	movq   $0x38,0x1c0(%rbx,%r15,8)
+    5116:	00 38 00 00 00 
+    511b:	4a c7 84 fb c8 01 00 	movq   $0x39,0x1c8(%rbx,%r15,8)
+    5122:	00 39 00 00 00 
+    5127:	4a c7 84 fb d0 01 00 	movq   $0x3a,0x1d0(%rbx,%r15,8)
+    512e:	00 3a 00 00 00 
+    5133:	4a c7 84 fb d8 01 00 	movq   $0x3b,0x1d8(%rbx,%r15,8)
+    513a:	00 3b 00 00 00 
+    513f:	4a c7 84 fb e0 01 00 	movq   $0x3c,0x1e0(%rbx,%r15,8)
+    5146:	00 3c 00 00 00 
+    514b:	4a c7 84 fb e8 01 00 	movq   $0x3d,0x1e8(%rbx,%r15,8)
+    5152:	00 3d 00 00 00 
+    5157:	4a c7 84 fb f0 01 00 	movq   $0x3e,0x1f0(%rbx,%r15,8)
+    515e:	00 3e 00 00 00 
+    5163:	4a c7 84 fb f8 01 00 	movq   $0x3f,0x1f8(%rbx,%r15,8)
+    516a:	00 3f 00 00 00 
+    516f:	4a c7 84 fb 00 02 00 	movq   $0x40,0x200(%rbx,%r15,8)
+    5176:	00 40 00 00 00 
+    517b:	4a c7 84 fb 08 02 00 	movq   $0x41,0x208(%rbx,%r15,8)
+    5182:	00 41 00 00 00 
+    5187:	4a c7 84 fb 10 02 00 	movq   $0x42,0x210(%rbx,%r15,8)
+    518e:	00 42 00 00 00 
+    5193:	4a c7 84 fb 18 02 00 	movq   $0x43,0x218(%rbx,%r15,8)
+    519a:	00 43 00 00 00 
+    519f:	4a c7 84 fb 20 02 00 	movq   $0x44,0x220(%rbx,%r15,8)
+    51a6:	00 44 00 00 00 
+    51ab:	4a c7 84 fb 28 02 00 	movq   $0x45,0x228(%rbx,%r15,8)
+    51b2:	00 45 00 00 00 
+    51b7:	4a c7 84 fb 30 02 00 	movq   $0x46,0x230(%rbx,%r15,8)
+    51be:	00 46 00 00 00 
+    51c3:	4a c7 84 fb 38 02 00 	movq   $0x5f,0x238(%rbx,%r15,8)
+    51ca:	00 5f 00 00 00 
+    51cf:	4a c7 84 fb 40 02 00 	movq   $0x60,0x240(%rbx,%r15,8)
+    51d6:	00 60 00 00 00 
+    51db:	4a c7 84 fb 48 02 00 	movq   $0x61,0x248(%rbx,%r15,8)
+    51e2:	00 61 00 00 00 
+    51e7:	4a c7 84 fb 50 02 00 	movq   $0x62,0x250(%rbx,%r15,8)
+    51ee:	00 62 00 00 00 
+    51f3:	4a c7 84 fb 58 02 00 	movq   $0x63,0x258(%rbx,%r15,8)
+    51fa:	00 63 00 00 00 
+    51ff:	4a c7 84 fb 60 02 00 	movq   $0x64,0x260(%rbx,%r15,8)
+    5206:	00 64 00 00 00 
+    520b:	4a c7 84 fb 68 02 00 	movq   $0x65,0x268(%rbx,%r15,8)
+    5212:	00 65 00 00 00 
+    5217:	4a c7 84 fb 70 02 00 	movq   $0x66,0x270(%rbx,%r15,8)
+    521e:	00 66 00 00 00 
+    5223:	4a c7 84 fb 78 02 00 	movq   $0x67,0x278(%rbx,%r15,8)
+    522a:	00 67 00 00 00 
+    522f:	4a c7 84 fb 80 02 00 	movq   $0x68,0x280(%rbx,%r15,8)
+    5236:	00 68 00 00 00 
+    523b:	4a c7 84 fb 88 02 00 	movq   $0x69,0x288(%rbx,%r15,8)
+    5242:	00 69 00 00 00 
+    5247:	4a c7 84 fb 90 02 00 	movq   $0x6a,0x290(%rbx,%r15,8)
+    524e:	00 6a 00 00 00 
+    5253:	4a c7 84 fb 98 02 00 	movq   $0x6b,0x298(%rbx,%r15,8)
+    525a:	00 6b 00 00 00 
+    525f:	4a c7 84 fb a0 02 00 	movq   $0x6c,0x2a0(%rbx,%r15,8)
+    5266:	00 6c 00 00 00 
+    526b:	4a c7 84 fb a8 02 00 	movq   $0x6d,0x2a8(%rbx,%r15,8)
+    5272:	00 6d 00 00 00 
+    5277:	4a c7 84 fb b0 02 00 	movq   $0x6e,0x2b0(%rbx,%r15,8)
+    527e:	00 6e 00 00 00 
+    5283:	4a c7 84 fb b8 02 00 	movq   $0x6f,0x2b8(%rbx,%r15,8)
+    528a:	00 6f 00 00 00 
+    528f:	4a c7 84 fb c0 02 00 	movq   $0x70,0x2c0(%rbx,%r15,8)
+    5296:	00 70 00 00 00 
+    529b:	4a c7 84 fb c8 02 00 	movq   $0x71,0x2c8(%rbx,%r15,8)
+    52a2:	00 71 00 00 00 
+    52a7:	4a c7 84 fb d0 02 00 	movq   $0x72,0x2d0(%rbx,%r15,8)
+    52ae:	00 72 00 00 00 
+    52b3:	4a c7 84 fb d8 02 00 	movq   $0x73,0x2d8(%rbx,%r15,8)
+    52ba:	00 73 00 00 00 
+    52bf:	4a c7 84 fb e0 02 00 	movq   $0x74,0x2e0(%rbx,%r15,8)
+    52c6:	00 74 00 00 00 
+    52cb:	4a c7 84 fb e8 02 00 	movq   $0x75,0x2e8(%rbx,%r15,8)
+    52d2:	00 75 00 00 00 
+    52d7:	4a c7 84 fb f0 02 00 	movq   $0x76,0x2f0(%rbx,%r15,8)
+    52de:	00 76 00 00 00 
+    52e3:	4a c7 84 fb f8 02 00 	movq   $0x77,0x2f8(%rbx,%r15,8)
+    52ea:	00 77 00 00 00 
+    52ef:	4a c7 84 fb 00 03 00 	movq   $0x78,0x300(%rbx,%r15,8)
+    52f6:	00 78 00 00 00 
+    52fb:	4a c7 84 fb 08 03 00 	movq   $0x79,0x308(%rbx,%r15,8)
+    5302:	00 79 00 00 00 
+    5307:	4a c7 84 fb 10 03 00 	movq   $0x7a,0x310(%rbx,%r15,8)
+    530e:	00 7a 00 00 00 
+    5313:	4a c7 84 fb 18 03 00 	movq   $0x7b,0x318(%rbx,%r15,8)
+    531a:	00 7b 00 00 00 
+    531f:	4a c7 84 fb 20 03 00 	movq   $0x7c,0x320(%rbx,%r15,8)
+    5326:	00 7c 00 00 00 
+    532b:	4a c7 84 fb 28 03 00 	movq   $0x7d,0x328(%rbx,%r15,8)
+    5332:	00 7d 00 00 00 
+    5337:	4a c7 84 fb 30 03 00 	movq   $0x7e,0x330(%rbx,%r15,8)
+    533e:	00 7e 00 00 00 
+    5343:	4a c7 84 fb 38 03 00 	movq   $0x7f,0x338(%rbx,%r15,8)
+    534a:	00 7f 00 00 00 
+    534f:	4a c7 84 fb 40 03 00 	movq   $0x80,0x340(%rbx,%r15,8)
+    5356:	00 80 00 00 00 
+    535b:	4a c7 84 fb 48 03 00 	movq   $0x81,0x348(%rbx,%r15,8)
+    5362:	00 81 00 00 00 
+    5367:	4a c7 84 fb 50 03 00 	movq   $0x82,0x350(%rbx,%r15,8)
+    536e:	00 82 00 00 00 
+    5373:	49 83 c7 6b          	add    $0x6b,%r15
+    5377:	0f 10 00             	movups (%rax),%xmm0
+    537a:	0f 10 48 10          	movups 0x10(%rax),%xmm1
+    537e:	0f 10 50 20          	movups 0x20(%rax),%xmm2
+    5382:	0f 10 58 30          	movups 0x30(%rax),%xmm3
+    5386:	0f 29 84 24 20 01 00 	movaps %xmm0,0x120(%rsp)
+    538d:	00 
+    538e:	48 8b 40 40          	mov    0x40(%rax),%rax
+    5392:	48 89 84 24 60 01 00 	mov    %rax,0x160(%rsp)
+    5399:	00 
+    539a:	0f 29 9c 24 50 01 00 	movaps %xmm3,0x150(%rsp)
+    53a1:	00 
+    53a2:	0f 29 94 24 40 01 00 	movaps %xmm2,0x140(%rsp)
+    53a9:	00 
+    53aa:	0f 29 8c 24 30 01 00 	movaps %xmm1,0x130(%rsp)
+    53b1:	00 
+    53b2:	4c 8b ac 24 20 01 00 	mov    0x120(%rsp),%r13
+    53b9:	00 
+    53ba:	4c 8b a4 24 28 01 00 	mov    0x128(%rsp),%r12
+    53c1:	00 
+    53c2:	4c 89 e2             	mov    %r12,%rdx
+    53c5:	4c 29 ea             	sub    %r13,%rdx
+    53c8:	74 1f                	je     53e9 <bang_probe_v3::main+0x13a9>
+    53ca:	4a 8d 3c fb          	lea    (%rbx,%r15,8),%rdi
+    53ce:	4a 8d 34 ec          	lea    (%rsp,%r13,8),%rsi
+    53d2:	48 81 c6 30 01 00 00 	add    $0x130,%rsi
+    53d9:	48 c1 e2 03          	shl    $0x3,%rdx
+    53dd:	ff 15 4d 31 00 00    	call   *0x314d(%rip)        # 8530 <memcpy@GLIBC_2.14>
+    53e3:	4d 29 ef             	sub    %r13,%r15
+    53e6:	4d 01 e7             	add    %r12,%r15
+    53e9:	48 8b 44 24 70       	mov    0x70(%rsp),%rax
+    53ee:	48 89 44 24 38       	mov    %rax,0x38(%rsp)
+    53f3:	48 8b 7c 24 78       	mov    0x78(%rsp),%rdi
+    53f8:	4d 85 ff             	test   %r15,%r15
+    53fb:	0f 84 c8 04 00 00    	je     58c9 <bang_probe_v3::main+0x1889>
+    5401:	4a 8d 0c ff          	lea    (%rdi,%r15,8),%rcx
+    5405:	4c 8b 2d 2c 31 00 00 	mov    0x312c(%rip),%r13        # 8538 <memset@GLIBC_2.2.5>
+    540c:	48 8b 35 e5 30 00 00 	mov    0x30e5(%rip),%rsi        # 84f8 <__rustc::__rust_no_alloc_shim_is_unstable_v2@Base>
+    5413:	4c 8b 25 e6 30 00 00 	mov    0x30e6(%rip),%r12        # 8500 <__rustc::__rust_alloc@Base>
+    541a:	49 89 f8             	mov    %rdi,%r8
+    541d:	48 89 7c 24 58       	mov    %rdi,0x58(%rsp)
+    5422:	49 8b 00             	mov    (%r8),%rax
+    5425:	49 83 c0 08          	add    $0x8,%r8
+    5429:	48 89 44 24 68       	mov    %rax,0x68(%rsp)
+    542e:	31 ff                	xor    %edi,%edi
+    5430:	48 89 7c 24 40       	mov    %rdi,0x40(%rsp)
+    5435:	48 8b 44 24 68       	mov    0x68(%rsp),%rax
+    543a:	48 83 c0 40          	add    $0x40,%rax
+    543e:	48 89 44 24 48       	mov    %rax,0x48(%rsp)
+    5443:	4c 8b 7c 24 38       	mov    0x38(%rsp),%r15
+    5448:	0f 88 cd 08 00 00    	js     5d1b <bang_probe_v3::main+0x1cdb>
+    544e:	4c 89 84 24 88 01 00 	mov    %r8,0x188(%rsp)
+    5455:	00 
+    5456:	48 89 8c 24 90 01 00 	mov    %rcx,0x190(%rsp)
+    545d:	00 
+    545e:	74 31                	je     5491 <bang_probe_v3::main+0x1451>
+    5460:	48 89 bc 24 80 01 00 	mov    %rdi,0x180(%rsp)
+    5467:	00 
+    5468:	ff d6                	call   *%rsi
+    546a:	bb 01 00 00 00       	mov    $0x1,%ebx
+    546f:	be 01 00 00 00       	mov    $0x1,%esi
+    5474:	48 8b 7c 24 48       	mov    0x48(%rsp),%rdi
+    5479:	41 ff d4             	call   *%r12
+    547c:	48 8b bc 24 80 01 00 	mov    0x180(%rsp),%rdi
+    5483:	00 
+    5484:	49 89 c4             	mov    %rax,%r12
+    5487:	48 85 c0             	test   %rax,%rax
+    548a:	75 0b                	jne    5497 <bang_probe_v3::main+0x1457>
+    548c:	e9 8c 08 00 00       	jmp    5d1d <bang_probe_v3::main+0x1cdd>
+    5491:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+    5497:	48 89 2c 24          	mov    %rbp,(%rsp)
+    549b:	48 ff c7             	inc    %rdi
+    549e:	48 89 bc 24 80 01 00 	mov    %rdi,0x180(%rsp)
+    54a5:	00 
+    54a6:	4c 89 e7             	mov    %r12,%rdi
+    54a9:	be 78 00 00 00       	mov    $0x78,%esi
+    54ae:	48 8b 6c 24 48       	mov    0x48(%rsp),%rbp
+    54b3:	48 89 ea             	mov    %rbp,%rdx
+    54b6:	41 ff d5             	call   *%r13
+    54b9:	48 8b 44 24 68       	mov    0x68(%rsp),%rax
+    54be:	48 89 c1             	mov    %rax,%rcx
+    54c1:	48 d1 e9             	shr    $1,%rcx
+    54c4:	31 d2                	xor    %edx,%edx
+    54c6:	48 83 c0 ff          	add    $0xffffffffffffffff,%rax
+    54ca:	0f 92 c2             	setb   %dl
+    54cd:	48 c7 84 24 28 01 00 	movq   $0x4,0x128(%rsp)
+    54d4:	00 04 00 00 00 
+    54d9:	48 c7 84 24 30 01 00 	movq   $0x0,0x130(%rsp)
+    54e0:	00 00 00 00 00 
+    54e5:	48 c7 84 24 40 01 00 	movq   $0x1,0x140(%rsp)
+    54ec:	00 01 00 00 00 
+    54f1:	48 c7 84 24 48 01 00 	movq   $0x0,0x148(%rsp)
+    54f8:	00 00 00 00 00 
+    54fd:	48 c7 84 24 50 01 00 	movq   $0x1,0x150(%rsp)
+    5504:	00 01 00 00 00 
+    5509:	48 89 8c 24 58 01 00 	mov    %rcx,0x158(%rsp)
+    5510:	00 
+    5511:	48 89 94 24 60 01 00 	mov    %rdx,0x160(%rsp)
+    5518:	00 
+    5519:	48 89 84 24 68 01 00 	mov    %rax,0x168(%rsp)
+    5520:	00 
+    5521:	31 c0                	xor    %eax,%eax
+    5523:	4c 89 64 24 60       	mov    %r12,0x60(%rsp)
+    5528:	48 8d 48 01          	lea    0x1(%rax),%rcx
+    552c:	48 89 4c 24 50       	mov    %rcx,0x50(%rsp)
+    5531:	48 c1 e0 04          	shl    $0x4,%rax
+    5535:	48 8d 8c 24 30 01 00 	lea    0x130(%rsp),%rcx
+    553c:	00 
+    553d:	0f b6 14 01          	movzbl (%rcx,%rax,1),%edx
+    5541:	88 54 24 1d          	mov    %dl,0x1d(%rsp)
+    5545:	48 8b 5c 01 08       	mov    0x8(%rcx,%rax,1),%rbx
+    554a:	4c 89 e7             	mov    %r12,%rdi
+    554d:	be 78 00 00 00       	mov    $0x78,%esi
+    5552:	48 89 ea             	mov    %rbp,%rdx
+    5555:	41 ff d5             	call   *%r13
+    5558:	48 8b 54 24 68       	mov    0x68(%rsp),%rdx
+    555d:	48 39 d3             	cmp    %rdx,%rbx
+    5560:	0f 92 c0             	setb   %al
+    5563:	84 44 24 1d          	test   %al,0x1d(%rsp)
+    5567:	74 1c                	je     5585 <bang_probe_v3::main+0x1545>
+    5569:	48 03 5c 24 40       	add    0x40(%rsp),%rbx
+    556e:	48 39 eb             	cmp    %rbp,%rbx
+    5571:	0f 83 6e 0a 00 00    	jae    5fe5 <bang_probe_v3::main+0x1fa5>
+    5577:	48 8b 44 24 60       	mov    0x60(%rsp),%rax
+    557c:	c6 04 18 21          	movb   $0x21,(%rax,%rbx,1)
+    5580:	48 8b 54 24 68       	mov    0x68(%rsp),%rdx
+    5585:	48 8b 74 24 40       	mov    0x40(%rsp),%rsi
+    558a:	48 89 f0             	mov    %rsi,%rax
+    558d:	48 01 d0             	add    %rdx,%rax
+    5590:	0f 82 0f 09 00 00    	jb     5ea5 <bang_probe_v3::main+0x1e65>
+    5596:	48 3b 44 24 48       	cmp    0x48(%rsp),%rax
+    559b:	0f 87 04 09 00 00    	ja     5ea5 <bang_probe_v3::main+0x1e65>
+    55a1:	48 03 74 24 60       	add    0x60(%rsp),%rsi
+    55a6:	48 8d bc 24 a0 00 00 	lea    0xa0(%rsp),%rdi
+    55ad:	00 
+    55ae:	ff 15 8c 2f 00 00    	call   *0x2f8c(%rip)        # 8540 <core::str::converts::from_utf8@Base>
+    55b4:	83 bc 24 a0 00 00 00 	cmpl   $0x1,0xa0(%rsp)
+    55bb:	01 
+    55bc:	0f 84 11 09 00 00    	je     5ed3 <bang_probe_v3::main+0x1e93>
+    55c2:	48 8b 9c 24 a8 00 00 	mov    0xa8(%rsp),%rbx
+    55c9:	00 
+    55ca:	48 8b b4 24 b0 00 00 	mov    0xb0(%rsp),%rsi
+    55d1:	00 
+    55d2:	48 85 f6             	test   %rsi,%rsi
+    55d5:	74 1e                	je     55f5 <bang_probe_v3::main+0x15b5>
+    55d7:	48 8d 46 ff          	lea    -0x1(%rsi),%rax
+    55db:	31 c9                	xor    %ecx,%ecx
+    55dd:	0f 1f 00             	nopl   (%rax)
+    55e0:	80 3c 0b 21          	cmpb   $0x21,(%rbx,%rcx,1)
+    55e4:	41 0f 94 c7          	sete   %r15b
+    55e8:	74 0e                	je     55f8 <bang_probe_v3::main+0x15b8>
+    55ea:	48 39 c8             	cmp    %rcx,%rax
+    55ed:	48 8d 49 01          	lea    0x1(%rcx),%rcx
+    55f1:	75 ed                	jne    55e0 <bang_probe_v3::main+0x15a0>
+    55f3:	eb 03                	jmp    55f8 <bang_probe_v3::main+0x15b8>
+    55f5:	45 31 ff             	xor    %r15d,%r15d
+    55f8:	44 88 7c 24 1e       	mov    %r15b,0x1e(%rsp)
+    55fd:	48 c7 84 24 a0 00 00 	movq   $0x0,0xa0(%rsp)
+    5604:	00 00 00 00 00 
+    5609:	48 c7 84 24 a8 00 00 	movq   $0x7,0xa8(%rsp)
+    5610:	00 07 00 00 00 
+    5615:	48 8d 05 7b cf ff ff 	lea    -0x3085(%rip),%rax        # 2597 <__abi_tag+0x229b>
+    561c:	48 89 84 24 b0 00 00 	mov    %rax,0xb0(%rsp)
+    5623:	00 
+    5624:	48 c7 84 24 b8 00 00 	movq   $0x7,0xb8(%rsp)
+    562b:	00 07 00 00 00 
+    5630:	48 8d 05 67 cf ff ff 	lea    -0x3099(%rip),%rax        # 259e <__abi_tag+0x22a2>
+    5637:	48 89 84 24 c0 00 00 	mov    %rax,0xc0(%rsp)
+    563e:	00 
+    563f:	48 c7 84 24 c8 00 00 	movq   $0x8,0xc8(%rsp)
+    5646:	00 08 00 00 00 
+    564b:	48 8d 05 54 cf ff ff 	lea    -0x30ac(%rip),%rax        # 25a6 <__abi_tag+0x22aa>
+    5652:	48 89 84 24 d0 00 00 	mov    %rax,0xd0(%rsp)
+    5659:	00 
+    565a:	48 c7 84 24 d8 00 00 	movq   $0x6,0xd8(%rsp)
+    5661:	00 06 00 00 00 
+    5666:	48 8d 05 3f cf ff ff 	lea    -0x30c1(%rip),%rax        # 25ac <__abi_tag+0x22b0>
+    566d:	48 89 84 24 e0 00 00 	mov    %rax,0xe0(%rsp)
+    5674:	00 
+    5675:	48 c7 84 24 e8 00 00 	movq   $0x6,0xe8(%rsp)
+    567c:	00 06 00 00 00 
+    5681:	48 8d 05 2a cf ff ff 	lea    -0x30d6(%rip),%rax        # 25b2 <__abi_tag+0x22b6>
+    5688:	48 89 84 24 f0 00 00 	mov    %rax,0xf0(%rsp)
+    568f:	00 
+    5690:	48 c7 84 24 f8 00 00 	movq   $0x6,0xf8(%rsp)
+    5697:	00 06 00 00 00 
+    569c:	48 8d 05 15 cf ff ff 	lea    -0x30eb(%rip),%rax        # 25b8 <__abi_tag+0x22bc>
+    56a3:	48 89 84 24 00 01 00 	mov    %rax,0x100(%rsp)
+    56aa:	00 
+    56ab:	48 c7 84 24 08 01 00 	movq   $0x9,0x108(%rsp)
+    56b2:	00 09 00 00 00 
+    56b7:	48 8d 05 03 cf ff ff 	lea    -0x30fd(%rip),%rax        # 25c1 <__abi_tag+0x22c5>
+    56be:	48 89 84 24 10 01 00 	mov    %rax,0x110(%rsp)
+    56c5:	00 
+    56c6:	48 c7 84 24 18 01 00 	movq   $0x6,0x118(%rsp)
+    56cd:	00 06 00 00 00 
+    56d2:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+    56d8:	48 8d ac 24 b8 00 00 	lea    0xb8(%rsp),%rbp
+    56df:	00 
+    56e0:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+    56e4:	48 8b 4d 00          	mov    0x0(%rbp),%rcx
+    56e8:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
+    56ed:	48 89 4c 24 10       	mov    %rcx,0x10(%rsp)
+    56f2:	48 83 c1 fa          	add    $0xfffffffffffffffa,%rcx
+    56f6:	48 83 f9 03          	cmp    $0x3,%rcx
+    56fa:	0f 87 30 06 00 00    	ja     5d30 <bang_probe_v3::main+0x1cf0>
+    5700:	48 8d 15 19 c2 ff ff 	lea    -0x3de7(%rip),%rdx        # 1920 <__abi_tag+0x1624>
+    5707:	48 63 0c 8a          	movslq (%rdx,%rcx,4),%rcx
+    570b:	48 01 d1             	add    %rdx,%rcx
+    570e:	ff e1                	jmp    *%rcx
+    5710:	8b 08                	mov    (%rax),%ecx
+    5712:	ba 77 6f 72 64       	mov    $0x64726f77,%edx
+    5717:	31 d1                	xor    %edx,%ecx
+    5719:	0f b7 50 04          	movzwl 0x4(%rax),%edx
+    571d:	81 f2 31 36 00 00    	xor    $0x3631,%edx
+    5723:	09 ca                	or     %ecx,%edx
+    5725:	48 8d 0d f4 0e 00 00 	lea    0xef4(%rip),%rcx        # 6620 <bang_probe_v3::word16>
+    572c:	0f 84 cc 00 00 00    	je     57fe <bang_probe_v3::main+0x17be>
+    5732:	8b 08                	mov    (%rax),%ecx
+    5734:	ba 66 6f 6c 64       	mov    $0x646c6f66,%edx
+    5739:	31 d1                	xor    %edx,%ecx
+    573b:	0f b7 50 04          	movzwl 0x4(%rax),%edx
+    573f:	81 f2 31 36 00 00    	xor    $0x3631,%edx
+    5745:	09 ca                	or     %ecx,%edx
+    5747:	48 8d 0d b2 0c 00 00 	lea    0xcb2(%rip),%rcx        # 6400 <bang_probe_v3::fold16>
+    574e:	0f 84 aa 00 00 00    	je     57fe <bang_probe_v3::main+0x17be>
+    5754:	8b 08                	mov    (%rax),%ecx
+    5756:	ba 66 6f 6c 64       	mov    $0x646c6f66,%edx
+    575b:	31 d1                	xor    %edx,%ecx
+    575d:	0f b7 50 04          	movzwl 0x4(%rax),%edx
+    5761:	81 f2 36 34 00 00    	xor    $0x3436,%edx
+    5767:	09 ca                	or     %ecx,%edx
+    5769:	48 8d 0d 30 0d 00 00 	lea    0xd30(%rip),%rcx        # 64a0 <bang_probe_v3::fold64>
+    5770:	0f 84 88 00 00 00    	je     57fe <bang_probe_v3::main+0x17be>
+    5776:	8b 08                	mov    (%rax),%ecx
+    5778:	ba 73 69 6d 64       	mov    $0x646d6973,%edx
+    577d:	31 d1                	xor    %edx,%ecx
+    577f:	0f b7 40 04          	movzwl 0x4(%rax),%eax
+    5783:	35 36 34 00 00       	xor    $0x3436,%eax
+    5788:	09 c8                	or     %ecx,%eax
+    578a:	48 8d 0d cf 0d 00 00 	lea    0xdcf(%rip),%rcx        # 6560 <bang_probe_v3::simd64>
+    5791:	74 6b                	je     57fe <bang_probe_v3::main+0x17be>
+    5793:	e9 98 05 00 00       	jmp    5d30 <bang_probe_v3::main+0x1cf0>
+    5798:	8b 08                	mov    (%rax),%ecx
+    579a:	ba 73 74 64 5f       	mov    $0x5f647473,%edx
+    579f:	31 d1                	xor    %edx,%ecx
+    57a1:	8b 40 03             	mov    0x3(%rax),%eax
+    57a4:	ba 5f 73 74 72       	mov    $0x7274735f,%edx
+    57a9:	31 d0                	xor    %edx,%eax
+    57ab:	09 c8                	or     %ecx,%eax
+    57ad:	48 8d 0d 0c 0f 00 00 	lea    0xf0c(%rip),%rcx        # 66c0 <bang_probe_v3::std_str>
+    57b4:	74 48                	je     57fe <bang_probe_v3::main+0x17be>
+    57b6:	e9 75 05 00 00       	jmp    5d30 <bang_probe_v3::main+0x1cf0>
+    57bb:	48 8d 0d 5e 0f 00 00 	lea    0xf5e(%rip),%rcx        # 6720 <bang_probe_v3::std_char>
+    57c2:	48 ba 73 74 64 5f 63 	movabs $0x726168635f647473,%rdx
+    57c9:	68 61 72 
+    57cc:	48 39 10             	cmp    %rdx,(%rax)
+    57cf:	74 2d                	je     57fe <bang_probe_v3::main+0x17be>
+    57d1:	e9 5a 05 00 00       	jmp    5d30 <bang_probe_v3::main+0x1cf0>
+    57d6:	48 8b 08             	mov    (%rax),%rcx
+    57d9:	48 ba 63 6f 6c 75 6d 	movabs $0x36736e6d756c6f63,%rdx
+    57e0:	6e 73 36 
+    57e3:	48 31 d1             	xor    %rdx,%rcx
+    57e6:	0f b6 40 08          	movzbl 0x8(%rax),%eax
+    57ea:	48 83 f0 34          	xor    $0x34,%rax
+    57ee:	48 09 c8             	or     %rcx,%rax
+    57f1:	48 8d 0d 78 0f 00 00 	lea    0xf78(%rip),%rcx        # 6770 <bang_probe_v3::columns64>
+    57f8:	0f 85 32 05 00 00    	jne    5d30 <bang_probe_v3::main+0x1cf0>
+    57fe:	48 89 5c 24 20       	mov    %rbx,0x20(%rsp)
+    5803:	49 89 f5             	mov    %rsi,%r13
+    5806:	48 89 74 24 28       	mov    %rsi,0x28(%rsp)
+    580b:	48 8d 44 24 20       	lea    0x20(%rsp),%rax
+    5810:	48 8b 7c 24 20       	mov    0x20(%rsp),%rdi
+    5815:	48 8b 74 24 28       	mov    0x28(%rsp),%rsi
+    581a:	ff d1                	call   *%rcx
+    581c:	88 44 24 1f          	mov    %al,0x1f(%rsp)
+    5820:	41 38 c7             	cmp    %al,%r15b
+    5823:	0f 85 a7 05 00 00    	jne    5dd0 <bang_probe_v3::main+0x1d90>
+    5829:	ff 44 24 18          	incl   0x18(%rsp)
+    582d:	48 83 c5 10          	add    $0x10,%rbp
+    5831:	49 ff c4             	inc    %r12
+    5834:	49 83 fc 08          	cmp    $0x8,%r12
+    5838:	4c 89 ee             	mov    %r13,%rsi
+    583b:	0f 85 9f fe ff ff    	jne    56e0 <bang_probe_v3::main+0x16a0>
+    5841:	48 8b 44 24 50       	mov    0x50(%rsp),%rax
+    5846:	48 83 f8 04          	cmp    $0x4,%rax
+    584a:	4c 8b 7c 24 38       	mov    0x38(%rsp),%r15
+    584f:	4c 8b 64 24 60       	mov    0x60(%rsp),%r12
+    5854:	48 8b 6c 24 48       	mov    0x48(%rsp),%rbp
+    5859:	4c 8b 2d d8 2c 00 00 	mov    0x2cd8(%rip),%r13        # 8538 <memset@GLIBC_2.2.5>
+    5860:	0f 85 c2 fc ff ff    	jne    5528 <bang_probe_v3::main+0x14e8>
+    5866:	48 85 ed             	test   %rbp,%rbp
+    5869:	74 15                	je     5880 <bang_probe_v3::main+0x1840>
+    586b:	ba 01 00 00 00       	mov    $0x1,%edx
+    5870:	48 8b 7c 24 60       	mov    0x60(%rsp),%rdi
+    5875:	48 8b 74 24 48       	mov    0x48(%rsp),%rsi
+    587a:	ff 15 40 2c 00 00    	call   *0x2c40(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    5880:	48 8b bc 24 80 01 00 	mov    0x180(%rsp),%rdi
+    5887:	00 
+    5888:	48 83 ff 20          	cmp    $0x20,%rdi
+    588c:	48 8b 2c 24          	mov    (%rsp),%rbp
+    5890:	48 8b 8c 24 90 01 00 	mov    0x190(%rsp),%rcx
+    5897:	00 
+    5898:	4c 8b 2d 99 2c 00 00 	mov    0x2c99(%rip),%r13        # 8538 <memset@GLIBC_2.2.5>
+    589f:	48 8b 35 52 2c 00 00 	mov    0x2c52(%rip),%rsi        # 84f8 <__rustc::__rust_no_alloc_shim_is_unstable_v2@Base>
+    58a6:	4c 8b 25 53 2c 00 00 	mov    0x2c53(%rip),%r12        # 8500 <__rustc::__rust_alloc@Base>
+    58ad:	4c 8b 84 24 88 01 00 	mov    0x188(%rsp),%r8
+    58b4:	00 
+    58b5:	0f 85 75 fb ff ff    	jne    5430 <bang_probe_v3::main+0x13f0>
+    58bb:	49 39 c8             	cmp    %rcx,%r8
+    58be:	48 8b 7c 24 58       	mov    0x58(%rsp),%rdi
+    58c3:	0f 85 59 fb ff ff    	jne    5422 <bang_probe_v3::main+0x13e2>
+    58c9:	48 8b 74 24 38       	mov    0x38(%rsp),%rsi
+    58ce:	48 85 f6             	test   %rsi,%rsi
+    58d1:	74 0f                	je     58e2 <bang_probe_v3::main+0x18a2>
+    58d3:	48 c1 e6 03          	shl    $0x3,%rsi
+    58d7:	ba 08 00 00 00       	mov    $0x8,%edx
+    58dc:	ff 15 de 2b 00 00    	call   *0x2bde(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    58e2:	48 c7 84 24 a0 00 00 	movq   $0x0,0xa0(%rsp)
+    58e9:	00 00 00 00 00 
+    58ee:	48 c7 84 24 a8 00 00 	movq   $0x4,0xa8(%rsp)
+    58f5:	00 04 00 00 00 
+    58fa:	48 8d 8c 24 b0 00 00 	lea    0xb0(%rsp),%rcx
+    5901:	00 
+    5902:	48 8d 05 72 cc ff ff 	lea    -0x338e(%rip),%rax        # 257b <__abi_tag+0x227f>
+    5909:	48 89 84 24 b0 00 00 	mov    %rax,0xb0(%rsp)
+    5910:	00 
+    5911:	48 c7 84 24 b8 00 00 	movq   $0x3,0xb8(%rsp)
+    5918:	00 03 00 00 00 
+    591d:	48 8d 05 6a cc ff ff 	lea    -0x3396(%rip),%rax        # 258e <__abi_tag+0x2292>
+    5924:	48 89 84 24 c0 00 00 	mov    %rax,0xc0(%rsp)
+    592b:	00 
+    592c:	48 c7 84 24 c8 00 00 	movq   $0x4,0xc8(%rsp)
+    5933:	00 04 00 00 00 
+    5938:	48 8d 05 53 cc ff ff 	lea    -0x33ad(%rip),%rax        # 2592 <__abi_tag+0x2296>
+    593f:	48 89 84 24 d0 00 00 	mov    %rax,0xd0(%rsp)
+    5946:	00 
+    5947:	48 c7 84 24 d8 00 00 	movq   $0x3,0xd8(%rsp)
+    594e:	00 03 00 00 00 
+    5953:	48 8d 05 3b cc ff ff 	lea    -0x33c5(%rip),%rax        # 2595 <__abi_tag+0x2299>
+    595a:	48 89 84 24 e0 00 00 	mov    %rax,0xe0(%rsp)
+    5961:	00 
+    5962:	48 c7 84 24 e8 00 00 	movq   $0x2,0xe8(%rsp)
+    5969:	00 02 00 00 00 
+    596e:	31 c0                	xor    %eax,%eax
+    5970:	4c 8d 6c 24 08       	lea    0x8(%rsp),%r13
+    5975:	48 89 2c 24          	mov    %rbp,(%rsp)
+    5979:	48 8d 50 01          	lea    0x1(%rax),%rdx
+    597d:	48 89 54 24 58       	mov    %rdx,0x58(%rsp)
+    5982:	48 c1 e0 04          	shl    $0x4,%rax
+    5986:	48 8b 14 01          	mov    (%rcx,%rax,1),%rdx
+    598a:	48 89 54 24 48       	mov    %rdx,0x48(%rsp)
+    598f:	48 8b 44 01 08       	mov    0x8(%rcx,%rax,1),%rax
+    5994:	48 89 44 24 60       	mov    %rax,0x60(%rsp)
+    5999:	48 c7 84 24 28 01 00 	movq   $0x6,0x128(%rsp)
+    59a0:	00 06 00 00 00 
+    59a5:	48 c7 84 24 30 01 00 	movq   $0x0,0x130(%rsp)
+    59ac:	00 00 00 00 00 
+    59b1:	48 c7 84 24 38 01 00 	movq   $0x1,0x138(%rsp)
+    59b8:	00 01 00 00 00 
+    59bd:	48 c7 84 24 40 01 00 	movq   $0x3,0x140(%rsp)
+    59c4:	00 03 00 00 00 
+    59c9:	48 c7 84 24 48 01 00 	movq   $0x10,0x148(%rsp)
+    59d0:	00 10 00 00 00 
+    59d5:	48 c7 84 24 50 01 00 	movq   $0x41,0x150(%rsp)
+    59dc:	00 41 00 00 00 
+    59e1:	48 c7 84 24 58 01 00 	movq   $0x400,0x158(%rsp)
+    59e8:	00 00 04 00 00 
+    59ed:	31 c0                	xor    %eax,%eax
+    59ef:	eb 13                	jmp    5a04 <bang_probe_v3::main+0x19c4>
+    59f1:	48 8b 44 24 38       	mov    0x38(%rsp),%rax
+    59f6:	48 83 f8 06          	cmp    $0x6,%rax
+    59fa:	48 8b 2c 24          	mov    (%rsp),%rbp
+    59fe:	0f 84 82 02 00 00    	je     5c86 <bang_probe_v3::main+0x1c46>
+    5a04:	48 8b 8c c4 30 01 00 	mov    0x130(%rsp,%rax,8),%rcx
+    5a0b:	00 
+    5a0c:	48 ff c0             	inc    %rax
+    5a0f:	48 89 44 24 38       	mov    %rax,0x38(%rsp)
+    5a14:	48 8d 7c 24 70       	lea    0x70(%rsp),%rdi
+    5a19:	48 8b 74 24 48       	mov    0x48(%rsp),%rsi
+    5a1e:	48 8b 54 24 60       	mov    0x60(%rsp),%rdx
+    5a23:	e8 08 0e 00 00       	call   6830 <<[u8]>::repeat>
+    5a28:	48 8b 84 24 80 00 00 	mov    0x80(%rsp),%rax
+    5a2f:	00 
+    5a30:	48 89 44 24 30       	mov    %rax,0x30(%rsp)
+    5a35:	0f 10 44 24 70       	movups 0x70(%rsp),%xmm0
+    5a3a:	0f 29 44 24 20       	movaps %xmm0,0x20(%rsp)
+    5a3f:	48 c7 44 24 78 02 00 	movq   $0x2,0x78(%rsp)
+    5a46:	00 00 
+    5a48:	66 c7 84 24 80 00 00 	movw   $0x100,0x80(%rsp)
+    5a4f:	00 00 01 
+    5a52:	31 db                	xor    %ebx,%ebx
+    5a54:	66 66 66 2e 0f 1f 84 	data16 data16 cs nopw 0x0(%rax,%rax,1)
+    5a5b:	00 00 00 00 00 
+    5a60:	0f b6 ac 1c 80 00 00 	movzbl 0x80(%rsp,%rbx,1),%ebp
+    5a67:	00 
+    5a68:	48 ff c3             	inc    %rbx
+    5a6b:	40 88 6c 24 68       	mov    %bpl,0x68(%rsp)
+    5a70:	40 84 ed             	test   %bpl,%bpl
+    5a73:	74 2b                	je     5aa0 <bang_probe_v3::main+0x1a60>
+    5a75:	4c 8b 7c 24 30       	mov    0x30(%rsp),%r15
+    5a7a:	4c 39 7c 24 20       	cmp    %r15,0x20(%rsp)
+    5a7f:	0f 84 be 01 00 00    	je     5c43 <bang_probe_v3::main+0x1c03>
+    5a85:	4c 8b 64 24 28       	mov    0x28(%rsp),%r12
+    5a8a:	43 c6 04 3c 21       	movb   $0x21,(%r12,%r15,1)
+    5a8f:	49 ff c7             	inc    %r15
+    5a92:	4c 89 7c 24 30       	mov    %r15,0x30(%rsp)
+    5a97:	eb 11                	jmp    5aaa <bang_probe_v3::main+0x1a6a>
+    5a99:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+    5aa0:	4c 8b 64 24 28       	mov    0x28(%rsp),%r12
+    5aa5:	4c 8b 7c 24 30       	mov    0x30(%rsp),%r15
+    5aaa:	be 07 00 00 00       	mov    $0x7,%esi
+    5aaf:	48 8d 3d e1 ca ff ff 	lea    -0x351f(%rip),%rdi        # 2597 <__abi_tag+0x229b>
+    5ab6:	e8 35 08 00 00       	call   62f0 <bang_probe_v3::choose>
+    5abb:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
+    5ac0:	4c 89 7c 24 10       	mov    %r15,0x10(%rsp)
+    5ac5:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+    5aca:	48 8b 74 24 10       	mov    0x10(%rsp),%rsi
+    5acf:	ff d0                	call   *%rax
+    5ad1:	88 44 24 40          	mov    %al,0x40(%rsp)
+    5ad5:	40 38 e8             	cmp    %bpl,%al
+    5ad8:	0f 85 fd 01 00 00    	jne    5cdb <bang_probe_v3::main+0x1c9b>
+    5ade:	ff 44 24 18          	incl   0x18(%rsp)
+    5ae2:	be 08 00 00 00       	mov    $0x8,%esi
+    5ae7:	48 8d 3d b0 ca ff ff 	lea    -0x3550(%rip),%rdi        # 259e <__abi_tag+0x22a2>
+    5aee:	e8 fd 07 00 00       	call   62f0 <bang_probe_v3::choose>
+    5af3:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
+    5af8:	4c 89 7c 24 10       	mov    %r15,0x10(%rsp)
+    5afd:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+    5b02:	48 8b 74 24 10       	mov    0x10(%rsp),%rsi
+    5b07:	ff d0                	call   *%rax
+    5b09:	88 44 24 40          	mov    %al,0x40(%rsp)
+    5b0d:	40 38 e8             	cmp    %bpl,%al
+    5b10:	0f 85 c5 01 00 00    	jne    5cdb <bang_probe_v3::main+0x1c9b>
+    5b16:	ff 44 24 18          	incl   0x18(%rsp)
+    5b1a:	be 06 00 00 00       	mov    $0x6,%esi
+    5b1f:	48 8d 3d 80 ca ff ff 	lea    -0x3580(%rip),%rdi        # 25a6 <__abi_tag+0x22aa>
+    5b26:	e8 c5 07 00 00       	call   62f0 <bang_probe_v3::choose>
+    5b2b:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
+    5b30:	4c 89 7c 24 10       	mov    %r15,0x10(%rsp)
+    5b35:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+    5b3a:	48 8b 74 24 10       	mov    0x10(%rsp),%rsi
+    5b3f:	ff d0                	call   *%rax
+    5b41:	88 44 24 40          	mov    %al,0x40(%rsp)
+    5b45:	40 38 e8             	cmp    %bpl,%al
+    5b48:	0f 85 8d 01 00 00    	jne    5cdb <bang_probe_v3::main+0x1c9b>
+    5b4e:	ff 44 24 18          	incl   0x18(%rsp)
+    5b52:	be 06 00 00 00       	mov    $0x6,%esi
+    5b57:	48 8d 3d 4e ca ff ff 	lea    -0x35b2(%rip),%rdi        # 25ac <__abi_tag+0x22b0>
+    5b5e:	e8 8d 07 00 00       	call   62f0 <bang_probe_v3::choose>
+    5b63:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
+    5b68:	4c 89 7c 24 10       	mov    %r15,0x10(%rsp)
+    5b6d:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+    5b72:	48 8b 74 24 10       	mov    0x10(%rsp),%rsi
+    5b77:	ff d0                	call   *%rax
+    5b79:	88 44 24 40          	mov    %al,0x40(%rsp)
+    5b7d:	40 38 e8             	cmp    %bpl,%al
+    5b80:	0f 85 55 01 00 00    	jne    5cdb <bang_probe_v3::main+0x1c9b>
+    5b86:	ff 44 24 18          	incl   0x18(%rsp)
+    5b8a:	be 06 00 00 00       	mov    $0x6,%esi
+    5b8f:	48 8d 3d 1c ca ff ff 	lea    -0x35e4(%rip),%rdi        # 25b2 <__abi_tag+0x22b6>
+    5b96:	e8 55 07 00 00       	call   62f0 <bang_probe_v3::choose>
+    5b9b:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
+    5ba0:	4c 89 7c 24 10       	mov    %r15,0x10(%rsp)
+    5ba5:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+    5baa:	48 8b 74 24 10       	mov    0x10(%rsp),%rsi
+    5baf:	ff d0                	call   *%rax
+    5bb1:	88 44 24 40          	mov    %al,0x40(%rsp)
+    5bb5:	40 38 e8             	cmp    %bpl,%al
+    5bb8:	0f 85 1d 01 00 00    	jne    5cdb <bang_probe_v3::main+0x1c9b>
+    5bbe:	ff 44 24 18          	incl   0x18(%rsp)
+    5bc2:	be 09 00 00 00       	mov    $0x9,%esi
+    5bc7:	48 8d 3d ea c9 ff ff 	lea    -0x3616(%rip),%rdi        # 25b8 <__abi_tag+0x22bc>
+    5bce:	e8 1d 07 00 00       	call   62f0 <bang_probe_v3::choose>
+    5bd3:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
+    5bd8:	4c 89 7c 24 10       	mov    %r15,0x10(%rsp)
+    5bdd:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+    5be2:	48 8b 74 24 10       	mov    0x10(%rsp),%rsi
+    5be7:	ff d0                	call   *%rax
+    5be9:	88 44 24 40          	mov    %al,0x40(%rsp)
+    5bed:	40 38 e8             	cmp    %bpl,%al
+    5bf0:	0f 85 e5 00 00 00    	jne    5cdb <bang_probe_v3::main+0x1c9b>
+    5bf6:	ff 44 24 18          	incl   0x18(%rsp)
+    5bfa:	be 06 00 00 00       	mov    $0x6,%esi
+    5bff:	48 8d 3d bb c9 ff ff 	lea    -0x3645(%rip),%rdi        # 25c1 <__abi_tag+0x22c5>
+    5c06:	e8 e5 06 00 00       	call   62f0 <bang_probe_v3::choose>
+    5c0b:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
+    5c10:	4c 89 7c 24 10       	mov    %r15,0x10(%rsp)
+    5c15:	48 8b 7c 24 08       	mov    0x8(%rsp),%rdi
+    5c1a:	48 8b 74 24 10       	mov    0x10(%rsp),%rsi
+    5c1f:	ff d0                	call   *%rax
+    5c21:	88 44 24 40          	mov    %al,0x40(%rsp)
+    5c25:	40 38 e8             	cmp    %bpl,%al
+    5c28:	0f 85 ad 00 00 00    	jne    5cdb <bang_probe_v3::main+0x1c9b>
+    5c2e:	ff 44 24 18          	incl   0x18(%rsp)
+    5c32:	48 83 fb 02          	cmp    $0x2,%rbx
+    5c36:	bb 01 00 00 00       	mov    $0x1,%ebx
+    5c3b:	0f 85 1f fe ff ff    	jne    5a60 <bang_probe_v3::main+0x1a20>
+    5c41:	eb 22                	jmp    5c65 <bang_probe_v3::main+0x1c25>
+    5c43:	ba 01 00 00 00       	mov    $0x1,%edx
+    5c48:	b9 01 00 00 00       	mov    $0x1,%ecx
+    5c4d:	41 b8 01 00 00 00    	mov    $0x1,%r8d
+    5c53:	48 8d 7c 24 20       	lea    0x20(%rsp),%rdi
+    5c58:	4c 89 fe             	mov    %r15,%rsi
+    5c5b:	e8 40 e3 ff ff       	call   3fa0 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>
+    5c60:	e9 20 fe ff ff       	jmp    5a85 <bang_probe_v3::main+0x1a45>
+    5c65:	48 8b 74 24 20       	mov    0x20(%rsp),%rsi
+    5c6a:	48 85 f6             	test   %rsi,%rsi
+    5c6d:	0f 84 7e fd ff ff    	je     59f1 <bang_probe_v3::main+0x19b1>
+    5c73:	ba 01 00 00 00       	mov    $0x1,%edx
+    5c78:	4c 89 e7             	mov    %r12,%rdi
+    5c7b:	ff 15 3f 28 00 00    	call   *0x283f(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    5c81:	e9 6b fd ff ff       	jmp    59f1 <bang_probe_v3::main+0x19b1>
+    5c86:	48 8b 44 24 58       	mov    0x58(%rsp),%rax
+    5c8b:	48 83 f8 04          	cmp    $0x4,%rax
+    5c8f:	48 8d 8c 24 b0 00 00 	lea    0xb0(%rsp),%rcx
+    5c96:	00 
+    5c97:	0f 85 dc fc ff ff    	jne    5979 <bang_probe_v3::main+0x1939>
+    5c9d:	48 8d 44 24 18       	lea    0x18(%rsp),%rax
+    5ca2:	48 89 84 24 a0 00 00 	mov    %rax,0xa0(%rsp)
+    5ca9:	00 
+    5caa:	48 8b 05 97 28 00 00 	mov    0x2897(%rip),%rax        # 8548 <<i32 as core::fmt::Display>::fmt@Base>
+    5cb1:	48 89 84 24 a8 00 00 	mov    %rax,0xa8(%rsp)
+    5cb8:	00 
+    5cb9:	48 8d 3d 7d bd ff ff 	lea    -0x4283(%rip),%rdi        # 1a3d <__abi_tag+0x1741>
+    5cc0:	48 8d b4 24 a0 00 00 	lea    0xa0(%rsp),%rsi
+    5cc7:	00 
+    5cc8:	4c 8b ac 24 78 01 00 	mov    0x178(%rsp),%r13
+    5ccf:	00 
+    5cd0:	ff 15 52 28 00 00    	call   *0x2852(%rip)        # 8528 <std::io::stdio::_print@Base>
+    5cd6:	e9 ce f0 ff ff       	jmp    4da9 <bang_probe_v3::main+0xd69>
+    5cdb:	48 8b 44 24 58       	mov    0x58(%rsp),%rax
+    5ce0:	48 89 84 24 a0 00 00 	mov    %rax,0xa0(%rsp)
+    5ce7:	00 
+    5ce8:	48 8b 44 24 38       	mov    0x38(%rsp),%rax
+    5ced:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    5cf4:	00 
+    5cf5:	48 89 5c 24 70       	mov    %rbx,0x70(%rsp)
+    5cfa:	4c 8d 05 47 24 00 00 	lea    0x2447(%rip),%r8        # 8148 <__frame_dummy_init_array_entry+0x1c0>
+    5d01:	48 8d 7c 24 40       	lea    0x40(%rsp),%rdi
+    5d06:	48 8d 74 24 68       	lea    0x68(%rsp),%rsi
+    5d0b:	31 d2                	xor    %edx,%edx
+    5d0d:	48 8b 2c 24          	mov    (%rsp),%rbp
+    5d11:	e8 3e e2 ff ff       	call   3f54 <core::panicking::assert_failed::<bool, bool>>
+    5d16:	e9 ee 02 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5d1b:	31 db                	xor    %ebx,%ebx
+    5d1d:	48 89 df             	mov    %rbx,%rdi
+    5d20:	48 8b 74 24 48       	mov    0x48(%rsp),%rsi
+    5d25:	ff 15 b5 27 00 00    	call   *0x27b5(%rip)        # 84e0 <alloc::raw_vec::handle_error@Base>
+    5d2b:	e9 d9 02 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5d30:	48 8b 44 24 50       	mov    0x50(%rsp),%rax
+    5d35:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    5d3c:	00 
+    5d3d:	4c 89 a4 24 a0 00 00 	mov    %r12,0xa0(%rsp)
+    5d44:	00 
+    5d45:	48 8d 3d 7b c8 ff ff 	lea    -0x3785(%rip),%rdi        # 25c7 <__abi_tag+0x22cb>
+    5d4c:	48 8d 15 6d 24 00 00 	lea    0x246d(%rip),%rdx        # 81c0 <__frame_dummy_init_array_entry+0x238>
+    5d53:	be 0e 00 00 00       	mov    $0xe,%esi
+    5d58:	48 8b 2c 24          	mov    (%rsp),%rbp
+    5d5c:	ff 15 ee 27 00 00    	call   *0x27ee(%rip)        # 8550 <core::panicking::panic@Base>
+    5d62:	e9 a2 02 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5d67:	80 c2 d0             	add    $0xd0,%dl
+    5d6a:	31 c0                	xor    %eax,%eax
+    5d6c:	80 fa 0a             	cmp    $0xa,%dl
+    5d6f:	14 01                	adc    $0x1,%al
+    5d71:	eb 02                	jmp    5d75 <bang_probe_v3::main+0x1d35>
+    5d73:	b0 02                	mov    $0x2,%al
+    5d75:	0f b6 f8             	movzbl %al,%edi
+    5d78:	e8 83 e1 ff ff       	call   3f00 <core::result::unwrap_failed::<core::num::error::ParseIntError>>
+    5d7d:	e9 87 02 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5d82:	31 c0                	xor    %eax,%eax
+    5d84:	0f b6 d8             	movzbl %al,%ebx
+    5d87:	e9 9c ea ff ff       	jmp    4828 <bang_probe_v3::main+0x7e8>
+    5d8c:	31 c0                	xor    %eax,%eax
+    5d8e:	0f b6 d8             	movzbl %al,%ebx
+    5d91:	e9 21 ec ff ff       	jmp    49b7 <bang_probe_v3::main+0x977>
+    5d96:	31 c0                	xor    %eax,%eax
+    5d98:	0f b6 d8             	movzbl %al,%ebx
+    5d9b:	e9 a7 ed ff ff       	jmp    4b47 <bang_probe_v3::main+0xb07>
+    5da0:	31 c0                	xor    %eax,%eax
+    5da2:	0f b6 e8             	movzbl %al,%ebp
+    5da5:	e9 3c ef ff ff       	jmp    4ce6 <bang_probe_v3::main+0xca6>
+    5daa:	48 8d 3d cf bb ff ff 	lea    -0x4431(%rip),%rdi        # 1980 <__abi_tag+0x1684>
+    5db1:	48 8d 15 d8 24 00 00 	lea    0x24d8(%rip),%rdx        # 8290 <__frame_dummy_init_array_entry+0x308>
+    5db8:	be 23 00 00 00       	mov    $0x23,%esi
+    5dbd:	4c 8b ac 24 78 01 00 	mov    0x178(%rsp),%r13
+    5dc4:	00 
+    5dc5:	ff 15 8d 27 00 00    	call   *0x278d(%rip)        # 8558 <core::panicking::panic_fmt@Base>
+    5dcb:	e9 39 02 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5dd0:	48 8b 44 24 50       	mov    0x50(%rsp),%rax
+    5dd5:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    5ddc:	00 
+    5ddd:	4c 89 a4 24 a0 00 00 	mov    %r12,0xa0(%rsp)
+    5de4:	00 
+    5de5:	48 8d 44 24 08       	lea    0x8(%rsp),%rax
+    5dea:	48 89 44 24 70       	mov    %rax,0x70(%rsp)
+    5def:	48 8d 05 8a 0d 00 00 	lea    0xd8a(%rip),%rax        # 6b80 <<&str as core::fmt::Display>::fmt>
+    5df6:	48 89 44 24 78       	mov    %rax,0x78(%rsp)
+    5dfb:	48 8d 44 24 68       	lea    0x68(%rsp),%rax
+    5e00:	48 89 84 24 80 00 00 	mov    %rax,0x80(%rsp)
+    5e07:	00 
+    5e08:	48 8b 05 11 27 00 00 	mov    0x2711(%rip),%rax        # 8520 <<usize as core::fmt::Display>::fmt@Base>
+    5e0f:	48 89 84 24 88 00 00 	mov    %rax,0x88(%rsp)
+    5e16:	00 
+    5e17:	48 8d 4c 24 40       	lea    0x40(%rsp),%rcx
+    5e1c:	48 89 8c 24 90 00 00 	mov    %rcx,0x90(%rsp)
+    5e23:	00 
+    5e24:	48 89 84 24 98 00 00 	mov    %rax,0x98(%rsp)
+    5e2b:	00 
+    5e2c:	48 8d 15 5e bb ff ff 	lea    -0x44a2(%rip),%rdx        # 1991 <__abi_tag+0x1695>
+    5e33:	4c 8d 05 3e 23 00 00 	lea    0x233e(%rip),%r8        # 8178 <__frame_dummy_init_array_entry+0x1f0>
+    5e3a:	48 8d 7c 24 1f       	lea    0x1f(%rsp),%rdi
+    5e3f:	48 8d 74 24 1e       	lea    0x1e(%rsp),%rsi
+    5e44:	48 8d 4c 24 70       	lea    0x70(%rsp),%rcx
+    5e49:	48 8b 2c 24          	mov    (%rsp),%rbp
+    5e4d:	e8 02 e1 ff ff       	call   3f54 <core::panicking::assert_failed::<bool, bool>>
+    5e52:	e9 b2 01 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5e57:	b0 01                	mov    $0x1,%al
+    5e59:	e9 17 ff ff ff       	jmp    5d75 <bang_probe_v3::main+0x1d35>
+    5e5e:	48 8d 3d 1b bb ff ff 	lea    -0x44e5(%rip),%rdi        # 1980 <__abi_tag+0x1684>
+    5e65:	48 8d 15 24 21 00 00 	lea    0x2124(%rip),%rdx        # 7f90 <__frame_dummy_init_array_entry+0x8>
+    5e6c:	be 23 00 00 00       	mov    $0x23,%esi
+    5e71:	ff 15 e1 26 00 00    	call   *0x26e1(%rip)        # 8558 <core::panicking::panic_fmt@Base>
+    5e77:	e9 8d 01 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5e7c:	48 8d 7c 24 70       	lea    0x70(%rsp),%rdi
+    5e81:	b9 08 00 00 00       	mov    $0x8,%ecx
+    5e86:	41 b8 08 00 00 00    	mov    $0x8,%r8d
+    5e8c:	31 f6                	xor    %esi,%esi
+    5e8e:	e8 0d e1 ff ff       	call   3fa0 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>
+    5e93:	48 8b 5c 24 78       	mov    0x78(%rsp),%rbx
+    5e98:	4c 8b bc 24 80 00 00 	mov    0x80(%rsp),%r15
+    5e9f:	00 
+    5ea0:	e9 f3 ef ff ff       	jmp    4e98 <bang_probe_v3::main+0xe58>
+    5ea5:	48 8b 4c 24 50       	mov    0x50(%rsp),%rcx
+    5eaa:	48 89 8c 24 20 01 00 	mov    %rcx,0x120(%rsp)
+    5eb1:	00 
+    5eb2:	48 8d 0d ef 22 00 00 	lea    0x22ef(%rip),%rcx        # 81a8 <__frame_dummy_init_array_entry+0x220>
+    5eb9:	48 89 f7             	mov    %rsi,%rdi
+    5ebc:	48 89 c6             	mov    %rax,%rsi
+    5ebf:	48 8b 54 24 48       	mov    0x48(%rsp),%rdx
+    5ec4:	48 8b 2c 24          	mov    (%rsp),%rbp
+    5ec8:	ff 15 92 26 00 00    	call   *0x2692(%rip)        # 8560 <core::slice::index::slice_index_fail@Base>
+    5ece:	e9 36 01 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5ed3:	48 8b 44 24 50       	mov    0x50(%rsp),%rax
+    5ed8:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    5edf:	00 
+    5ee0:	48 8d 84 24 a8 00 00 	lea    0xa8(%rsp),%rax
+    5ee7:	00 
+    5ee8:	0f 10 00             	movups (%rax),%xmm0
+    5eeb:	0f 29 44 24 70       	movaps %xmm0,0x70(%rsp)
+    5ef0:	48 8d 7c 24 70       	lea    0x70(%rsp),%rdi
+    5ef5:	48 8b 2c 24          	mov    (%rsp),%rbp
+    5ef9:	e8 32 e0 ff ff       	call   3f30 <core::result::unwrap_failed::<core::str::error::Utf8Error>>
+    5efe:	e9 06 01 00 00       	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5f03:	4c 8b b4 24 28 01 00 	mov    0x128(%rsp),%r14
+    5f0a:	00 
+    5f0b:	48 8b 8c 24 38 01 00 	mov    0x138(%rsp),%rcx
+    5f12:	00 
+    5f13:	48 89 c8             	mov    %rcx,%rax
+    5f16:	4c 29 f0             	sub    %r14,%rax
+    5f19:	48 ba ab aa aa aa aa 	movabs $0xaaaaaaaaaaaaaaab,%rdx
+    5f20:	aa aa aa 
+    5f23:	48 f7 e2             	mul    %rdx
+    5f26:	4c 39 f1             	cmp    %r14,%rcx
+    5f29:	75 3d                	jne    5f68 <bang_probe_v3::main+0x1f28>
+    5f2b:	48 8b 84 24 30 01 00 	mov    0x130(%rsp),%rax
+    5f32:	00 
+    5f33:	48 85 c0             	test   %rax,%rax
+    5f36:	74 1b                	je     5f53 <bang_probe_v3::main+0x1f13>
+    5f38:	48 8b bc 24 20 01 00 	mov    0x120(%rsp),%rdi
+    5f3f:	00 
+    5f40:	48 c1 e0 03          	shl    $0x3,%rax
+    5f44:	48 8d 34 40          	lea    (%rax,%rax,2),%rsi
+    5f48:	ba 08 00 00 00       	mov    $0x8,%edx
+    5f4d:	ff 15 6d 25 00 00    	call   *0x256d(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    5f53:	bd 08 00 00 00       	mov    $0x8,%ebp
+    5f58:	48 c7 84 24 70 01 00 	movq   $0x0,0x170(%rsp)
+    5f5f:	00 00 00 00 00 
+    5f64:	31 db                	xor    %ebx,%ebx
+    5f66:	eb 3a                	jmp    5fa2 <bang_probe_v3::main+0x1f62>
+    5f68:	48 89 d3             	mov    %rdx,%rbx
+    5f6b:	48 c1 eb 04          	shr    $0x4,%rbx
+    5f6f:	49 83 c6 08          	add    $0x8,%r14
+    5f73:	4c 8b 3d 46 25 00 00 	mov    0x2546(%rip),%r15        # 84c0 <__rustc::__rust_dealloc@Base>
+    5f7a:	eb 0d                	jmp    5f89 <bang_probe_v3::main+0x1f49>
+    5f7c:	0f 1f 40 00          	nopl   0x0(%rax)
+    5f80:	49 83 c6 18          	add    $0x18,%r14
+    5f84:	48 ff cb             	dec    %rbx
+    5f87:	74 a2                	je     5f2b <bang_probe_v3::main+0x1eeb>
+    5f89:	49 8b 76 f8          	mov    -0x8(%r14),%rsi
+    5f8d:	48 85 f6             	test   %rsi,%rsi
+    5f90:	74 ee                	je     5f80 <bang_probe_v3::main+0x1f40>
+    5f92:	49 8b 3e             	mov    (%r14),%rdi
+    5f95:	ba 01 00 00 00       	mov    $0x1,%edx
+    5f9a:	41 ff d7             	call   *%r15
+    5f9d:	eb e1                	jmp    5f80 <bang_probe_v3::main+0x1f40>
+    5f9f:	4c 89 f3             	mov    %r14,%rbx
+    5fa2:	48 8d 15 8f 20 00 00 	lea    0x208f(%rip),%rdx        # 8038 <__frame_dummy_init_array_entry+0xb0>
+    5fa9:	41 be 01 00 00 00    	mov    $0x1,%r14d
+    5faf:	bf 01 00 00 00       	mov    $0x1,%edi
+    5fb4:	48 89 de             	mov    %rbx,%rsi
+    5fb7:	ff 15 53 25 00 00    	call   *0x2553(%rip)        # 8510 <core::panicking::panic_bounds_check@Base>
+    5fbd:	eb 4a                	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5fbf:	41 bd 02 00 00 00    	mov    $0x2,%r13d
+    5fc5:	48 8d 15 84 20 00 00 	lea    0x2084(%rip),%rdx        # 8050 <__frame_dummy_init_array_entry+0xc8>
+    5fcc:	bf 02 00 00 00       	mov    $0x2,%edi
+    5fd1:	be 02 00 00 00       	mov    $0x2,%esi
+    5fd6:	ff 15 34 25 00 00    	call   *0x2534(%rip)        # 8510 <core::panicking::panic_bounds_check@Base>
+    5fdc:	eb 2b                	jmp    6009 <bang_probe_v3::main+0x1fc9>
+    5fde:	31 c0                	xor    %eax,%eax
+    5fe0:	e9 90 fd ff ff       	jmp    5d75 <bang_probe_v3::main+0x1d35>
+    5fe5:	48 8b 44 24 50       	mov    0x50(%rsp),%rax
+    5fea:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    5ff1:	00 
+    5ff2:	48 8d 15 67 21 00 00 	lea    0x2167(%rip),%rdx        # 8160 <__frame_dummy_init_array_entry+0x1d8>
+    5ff9:	48 89 df             	mov    %rbx,%rdi
+    5ffc:	48 89 ee             	mov    %rbp,%rsi
+    5fff:	48 8b 2c 24          	mov    (%rsp),%rbp
+    6003:	ff 15 07 25 00 00    	call   *0x2507(%rip)        # 8510 <core::panicking::panic_bounds_check@Base>
+    6009:	0f 0b                	ud2
+    600b:	e9 5c 01 00 00       	jmp    616c <bang_probe_v3::main+0x212c>
+    6010:	49 89 c4             	mov    %rax,%r12
+    6013:	48 8b 44 24 50       	mov    0x50(%rsp),%rax
+    6018:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    601f:	00 
+    6020:	48 8b 2c 24          	mov    (%rsp),%rbp
+    6024:	e9 73 01 00 00       	jmp    619c <bang_probe_v3::main+0x215c>
+    6029:	48 8b 4c 24 50       	mov    0x50(%rsp),%rcx
+    602e:	48 89 8c 24 20 01 00 	mov    %rcx,0x120(%rsp)
+    6035:	00 
+    6036:	4c 89 a4 24 a0 00 00 	mov    %r12,0xa0(%rsp)
+    603d:	00 
+    603e:	49 89 c4             	mov    %rax,%r12
+    6041:	48 8b 2c 24          	mov    (%rsp),%rbp
+    6045:	e9 4d 01 00 00       	jmp    6197 <bang_probe_v3::main+0x2157>
+    604a:	eb 02                	jmp    604e <bang_probe_v3::main+0x200e>
+    604c:	eb 00                	jmp    604e <bang_probe_v3::main+0x200e>
+    604e:	49 89 c4             	mov    %rax,%r12
+    6051:	48 8b 2c 24          	mov    (%rsp),%rbp
+    6055:	e9 a4 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    605a:	49 89 c4             	mov    %rax,%r12
+    605d:	e9 9c 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    6062:	49 89 c4             	mov    %rax,%r12
+    6065:	48 8b 44 24 58       	mov    0x58(%rsp),%rax
+    606a:	48 89 84 24 a0 00 00 	mov    %rax,0xa0(%rsp)
+    6071:	00 
+    6072:	48 8b 44 24 38       	mov    0x38(%rsp),%rax
+    6077:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    607e:	00 
+    607f:	48 8b 2c 24          	mov    (%rsp),%rbp
+    6083:	e9 76 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    6088:	49 89 c4             	mov    %rax,%r12
+    608b:	e9 6e 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    6090:	49 89 c4             	mov    %rax,%r12
+    6093:	e9 66 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    6098:	49 89 c4             	mov    %rax,%r12
+    609b:	e9 ac 01 00 00       	jmp    624c <bang_probe_v3::main+0x220c>
+    60a0:	49 89 c4             	mov    %rax,%r12
+    60a3:	e9 56 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    60a8:	49 89 c4             	mov    %rax,%r12
+    60ab:	e9 4e 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    60b0:	49 89 c4             	mov    %rax,%r12
+    60b3:	e9 46 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    60b8:	49 89 c4             	mov    %rax,%r12
+    60bb:	e9 3e 01 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    60c0:	49 89 c4             	mov    %rax,%r12
+    60c3:	48 85 db             	test   %rbx,%rbx
+    60c6:	0f 85 32 01 00 00    	jne    61fe <bang_probe_v3::main+0x21be>
+    60cc:	48 8b 84 24 70 01 00 	mov    0x170(%rsp),%rax
+    60d3:	00 
+    60d4:	48 85 c0             	test   %rax,%rax
+    60d7:	0f 84 a4 01 00 00    	je     6281 <bang_probe_v3::main+0x2241>
+    60dd:	48 c1 e0 03          	shl    $0x3,%rax
+    60e1:	48 8d 34 40          	lea    (%rax,%rax,2),%rsi
+    60e5:	ba 08 00 00 00       	mov    $0x8,%edx
+    60ea:	48 89 ef             	mov    %rbp,%rdi
+    60ed:	ff 15 cd 23 00 00    	call   *0x23cd(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    60f3:	4c 89 e7             	mov    %r12,%rdi
+    60f6:	e8 75 0e 00 00       	call   6f70 <_Unwind_Resume@plt>
+    60fb:	49 89 c4             	mov    %rax,%r12
+    60fe:	e9 fb 00 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    6103:	49 89 c4             	mov    %rax,%r12
+    6106:	4d 85 ff             	test   %r15,%r15
+    6109:	74 16                	je     6121 <bang_probe_v3::main+0x20e1>
+    610b:	ba 01 00 00 00       	mov    $0x1,%edx
+    6110:	48 89 ef             	mov    %rbp,%rdi
+    6113:	4c 89 fe             	mov    %r15,%rsi
+    6116:	ff 15 a4 23 00 00    	call   *0x23a4(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    611c:	eb 03                	jmp    6121 <bang_probe_v3::main+0x20e1>
+    611e:	49 89 c4             	mov    %rax,%r12
+    6121:	48 8d bc 24 a0 00 00 	lea    0xa0(%rsp),%rdi
+    6128:	00 
+    6129:	e8 32 dd ff ff       	call   3e60 <core::ptr::drop_glue::<std::env::Args>>
+    612e:	48 8d 7c 24 20       	lea    0x20(%rsp),%rdi
+    6133:	e8 98 dc ff ff       	call   3dd0 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>>
+    6138:	4c 89 e7             	mov    %r12,%rdi
+    613b:	e8 30 0e 00 00       	call   6f70 <_Unwind_Resume@plt>
+    6140:	49 89 c4             	mov    %rax,%r12
+    6143:	48 8b 74 24 70       	mov    0x70(%rsp),%rsi
+    6148:	48 85 f6             	test   %rsi,%rsi
+    614b:	0f 84 ad 00 00 00    	je     61fe <bang_probe_v3::main+0x21be>
+    6151:	48 8b 7c 24 78       	mov    0x78(%rsp),%rdi
+    6156:	48 c1 e6 03          	shl    $0x3,%rsi
+    615a:	ba 08 00 00 00       	mov    $0x8,%edx
+    615f:	ff 15 5b 23 00 00    	call   *0x235b(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    6165:	e9 94 00 00 00       	jmp    61fe <bang_probe_v3::main+0x21be>
+    616a:	eb 28                	jmp    6194 <bang_probe_v3::main+0x2154>
+    616c:	49 89 c4             	mov    %rax,%r12
+    616f:	48 8b 44 24 58       	mov    0x58(%rsp),%rax
+    6174:	48 89 84 24 a0 00 00 	mov    %rax,0xa0(%rsp)
+    617b:	00 
+    617c:	48 8b 44 24 38       	mov    0x38(%rsp),%rax
+    6181:	48 89 84 24 20 01 00 	mov    %rax,0x120(%rsp)
+    6188:	00 
+    6189:	48 89 5c 24 70       	mov    %rbx,0x70(%rsp)
+    618e:	48 8b 2c 24          	mov    (%rsp),%rbp
+    6192:	eb 48                	jmp    61dc <bang_probe_v3::main+0x219c>
+    6194:	49 89 c4             	mov    %rax,%r12
+    6197:	4c 8b 7c 24 38       	mov    0x38(%rsp),%r15
+    619c:	48 8b 74 24 48       	mov    0x48(%rsp),%rsi
+    61a1:	48 85 f6             	test   %rsi,%rsi
+    61a4:	48 8b 7c 24 60       	mov    0x60(%rsp),%rdi
+    61a9:	74 10                	je     61bb <bang_probe_v3::main+0x217b>
+    61ab:	ba 01 00 00 00       	mov    $0x1,%edx
+    61b0:	ff 15 0a 23 00 00    	call   *0x230a(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    61b6:	eb 03                	jmp    61bb <bang_probe_v3::main+0x217b>
+    61b8:	49 89 c4             	mov    %rax,%r12
+    61bb:	4d 85 ff             	test   %r15,%r15
+    61be:	74 3e                	je     61fe <bang_probe_v3::main+0x21be>
+    61c0:	49 c1 e7 03          	shl    $0x3,%r15
+    61c4:	ba 08 00 00 00       	mov    $0x8,%edx
+    61c9:	48 8b 7c 24 58       	mov    0x58(%rsp),%rdi
+    61ce:	4c 89 fe             	mov    %r15,%rsi
+    61d1:	ff 15 e9 22 00 00    	call   *0x22e9(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    61d7:	eb 25                	jmp    61fe <bang_probe_v3::main+0x21be>
+    61d9:	49 89 c4             	mov    %rax,%r12
+    61dc:	48 8b 74 24 20       	mov    0x20(%rsp),%rsi
+    61e1:	48 85 f6             	test   %rsi,%rsi
+    61e4:	74 18                	je     61fe <bang_probe_v3::main+0x21be>
+    61e6:	48 8b 7c 24 28       	mov    0x28(%rsp),%rdi
+    61eb:	ba 01 00 00 00       	mov    $0x1,%edx
+    61f0:	ff 15 ca 22 00 00    	call   *0x22ca(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    61f6:	eb 06                	jmp    61fe <bang_probe_v3::main+0x21be>
+    61f8:	49 89 c4             	mov    %rax,%r12
+    61fb:	4d 89 ee             	mov    %r13,%r14
+    61fe:	48 8d 5d 08          	lea    0x8(%rbp),%rbx
+    6202:	4c 8b 3d b7 22 00 00 	mov    0x22b7(%rip),%r15        # 84c0 <__rustc::__rust_dealloc@Base>
+    6209:	eb 12                	jmp    621d <bang_probe_v3::main+0x21dd>
+    620b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+    6210:	48 83 c3 18          	add    $0x18,%rbx
+    6214:	49 ff ce             	dec    %r14
+    6217:	0f 84 af fe ff ff    	je     60cc <bang_probe_v3::main+0x208c>
+    621d:	48 8b 73 f8          	mov    -0x8(%rbx),%rsi
+    6221:	48 85 f6             	test   %rsi,%rsi
+    6224:	74 ea                	je     6210 <bang_probe_v3::main+0x21d0>
+    6226:	48 8b 3b             	mov    (%rbx),%rdi
+    6229:	ba 01 00 00 00       	mov    $0x1,%edx
+    622e:	41 ff d7             	call   *%r15
+    6231:	eb dd                	jmp    6210 <bang_probe_v3::main+0x21d0>
+    6233:	49 89 c4             	mov    %rax,%r12
+    6236:	4d 85 f6             	test   %r14,%r14
+    6239:	74 11                	je     624c <bang_probe_v3::main+0x220c>
+    623b:	ba 01 00 00 00       	mov    $0x1,%edx
+    6240:	48 89 ef             	mov    %rbp,%rdi
+    6243:	4c 89 f6             	mov    %r14,%rsi
+    6246:	ff 15 74 22 00 00    	call   *0x2274(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    624c:	4c 8b b4 24 28 01 00 	mov    0x128(%rsp),%r14
+    6253:	00 
+    6254:	48 8b 8c 24 38 01 00 	mov    0x138(%rsp),%rcx
+    625b:	00 
+    625c:	48 89 c8             	mov    %rcx,%rax
+    625f:	4c 29 f0             	sub    %r14,%rax
+    6262:	48 ba ab aa aa aa aa 	movabs $0xaaaaaaaaaaaaaaab,%rdx
+    6269:	aa aa aa 
+    626c:	48 f7 e2             	mul    %rdx
+    626f:	4c 39 f1             	cmp    %r14,%rcx
+    6272:	75 15                	jne    6289 <bang_probe_v3::main+0x2249>
+    6274:	48 8b 84 24 30 01 00 	mov    0x130(%rsp),%rax
+    627b:	00 
+    627c:	48 85 c0             	test   %rax,%rax
+    627f:	75 3e                	jne    62bf <bang_probe_v3::main+0x227f>
+    6281:	4c 89 e7             	mov    %r12,%rdi
+    6284:	e8 e7 0c 00 00       	call   6f70 <_Unwind_Resume@plt>
+    6289:	48 89 d3             	mov    %rdx,%rbx
+    628c:	48 c1 eb 04          	shr    $0x4,%rbx
+    6290:	49 83 c6 08          	add    $0x8,%r14
+    6294:	4c 8b 3d 25 22 00 00 	mov    0x2225(%rip),%r15        # 84c0 <__rustc::__rust_dealloc@Base>
+    629b:	eb 0c                	jmp    62a9 <bang_probe_v3::main+0x2269>
+    629d:	0f 1f 00             	nopl   (%rax)
+    62a0:	49 83 c6 18          	add    $0x18,%r14
+    62a4:	48 ff cb             	dec    %rbx
+    62a7:	74 cb                	je     6274 <bang_probe_v3::main+0x2234>
+    62a9:	49 8b 76 f8          	mov    -0x8(%r14),%rsi
+    62ad:	48 85 f6             	test   %rsi,%rsi
+    62b0:	74 ee                	je     62a0 <bang_probe_v3::main+0x2260>
+    62b2:	49 8b 3e             	mov    (%r14),%rdi
+    62b5:	ba 01 00 00 00       	mov    $0x1,%edx
+    62ba:	41 ff d7             	call   *%r15
+    62bd:	eb e1                	jmp    62a0 <bang_probe_v3::main+0x2260>
+    62bf:	48 8b bc 24 20 01 00 	mov    0x120(%rsp),%rdi
+    62c6:	00 
+    62c7:	48 c1 e0 03          	shl    $0x3,%rax
+    62cb:	48 8d 34 40          	lea    (%rax,%rax,2),%rsi
+    62cf:	ba 08 00 00 00       	mov    $0x8,%edx
+    62d4:	ff 15 e6 21 00 00    	call   *0x21e6(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    62da:	4c 89 e7             	mov    %r12,%rdi
+    62dd:	e8 8e 0c 00 00       	call   6f70 <_Unwind_Resume@plt>
+    62e2:	cc                   	int3
+    62e3:	cc                   	int3
+    62e4:	cc                   	int3
+    62e5:	cc                   	int3
+    62e6:	cc                   	int3
+    62e7:	cc                   	int3
+    62e8:	cc                   	int3
+    62e9:	cc                   	int3
+    62ea:	cc                   	int3
+    62eb:	cc                   	int3
+    62ec:	cc                   	int3
+    62ed:	cc                   	int3
+    62ee:	cc                   	int3
+    62ef:	cc                   	int3
+
+00000000000062f0 <bang_probe_v3::choose>:
+    62f0:	48 83 c6 fa          	add    $0xfffffffffffffffa,%rsi
+    62f4:	48 83 fe 03          	cmp    $0x3,%rsi
+    62f8:	0f 87 c9 00 00 00    	ja     63c7 <bang_probe_v3::choose+0xd7>
+    62fe:	48 8d 05 2b b6 ff ff 	lea    -0x49d5(%rip),%rax        # 1930 <__abi_tag+0x1634>
+    6305:	48 63 0c b0          	movslq (%rax,%rsi,4),%rcx
+    6309:	48 01 c1             	add    %rax,%rcx
+    630c:	ff e1                	jmp    *%rcx
+    630e:	b8 77 6f 72 64       	mov    $0x64726f77,%eax
+    6313:	33 07                	xor    (%rdi),%eax
+    6315:	0f b7 4f 04          	movzwl 0x4(%rdi),%ecx
+    6319:	81 f1 31 36 00 00    	xor    $0x3631,%ecx
+    631f:	09 c1                	or     %eax,%ecx
+    6321:	0f 84 ba 00 00 00    	je     63e1 <bang_probe_v3::choose+0xf1>
+    6327:	b8 66 6f 6c 64       	mov    $0x646c6f66,%eax
+    632c:	8b 0f                	mov    (%rdi),%ecx
+    632e:	31 c1                	xor    %eax,%ecx
+    6330:	0f b7 57 04          	movzwl 0x4(%rdi),%edx
+    6334:	81 f2 31 36 00 00    	xor    $0x3631,%edx
+    633a:	09 ca                	or     %ecx,%edx
+    633c:	0f 84 a7 00 00 00    	je     63e9 <bang_probe_v3::choose+0xf9>
+    6342:	33 07                	xor    (%rdi),%eax
+    6344:	0f b7 4f 04          	movzwl 0x4(%rdi),%ecx
+    6348:	81 f1 36 34 00 00    	xor    $0x3436,%ecx
+    634e:	09 c1                	or     %eax,%ecx
+    6350:	0f 84 9b 00 00 00    	je     63f1 <bang_probe_v3::choose+0x101>
+    6356:	b8 73 69 6d 64       	mov    $0x646d6973,%eax
+    635b:	33 07                	xor    (%rdi),%eax
+    635d:	0f b7 4f 04          	movzwl 0x4(%rdi),%ecx
+    6361:	81 f1 36 34 00 00    	xor    $0x3436,%ecx
+    6367:	09 c1                	or     %eax,%ecx
+    6369:	75 5c                	jne    63c7 <bang_probe_v3::choose+0xd7>
+    636b:	48 8d 05 ee 01 00 00 	lea    0x1ee(%rip),%rax        # 6560 <bang_probe_v3::simd64>
+    6372:	c3                   	ret
+    6373:	48 b8 73 74 64 5f 63 	movabs $0x726168635f647473,%rax
+    637a:	68 61 72 
+    637d:	48 39 07             	cmp    %rax,(%rdi)
+    6380:	75 45                	jne    63c7 <bang_probe_v3::choose+0xd7>
+    6382:	48 8d 05 97 03 00 00 	lea    0x397(%rip),%rax        # 6720 <bang_probe_v3::std_char>
+    6389:	c3                   	ret
+    638a:	48 b8 63 6f 6c 75 6d 	movabs $0x36736e6d756c6f63,%rax
+    6391:	6e 73 36 
+    6394:	48 33 07             	xor    (%rdi),%rax
+    6397:	0f b6 4f 08          	movzbl 0x8(%rdi),%ecx
+    639b:	48 83 f1 34          	xor    $0x34,%rcx
+    639f:	48 09 c1             	or     %rax,%rcx
+    63a2:	75 23                	jne    63c7 <bang_probe_v3::choose+0xd7>
+    63a4:	48 8d 05 c5 03 00 00 	lea    0x3c5(%rip),%rax        # 6770 <bang_probe_v3::columns64>
+    63ab:	c3                   	ret
+    63ac:	b8 73 74 64 5f       	mov    $0x5f647473,%eax
+    63b1:	33 07                	xor    (%rdi),%eax
+    63b3:	b9 5f 73 74 72       	mov    $0x7274735f,%ecx
+    63b8:	33 4f 03             	xor    0x3(%rdi),%ecx
+    63bb:	09 c1                	or     %eax,%ecx
+    63bd:	75 08                	jne    63c7 <bang_probe_v3::choose+0xd7>
+    63bf:	48 8d 05 fa 02 00 00 	lea    0x2fa(%rip),%rax        # 66c0 <bang_probe_v3::std_str>
+    63c6:	c3                   	ret
+    63c7:	50                   	push   %rax
+    63c8:	48 8d 3d f8 c1 ff ff 	lea    -0x3e08(%rip),%rdi        # 25c7 <__abi_tag+0x22cb>
+    63cf:	48 8d 15 ea 1d 00 00 	lea    0x1dea(%rip),%rdx        # 81c0 <__frame_dummy_init_array_entry+0x238>
+    63d6:	be 0e 00 00 00       	mov    $0xe,%esi
+    63db:	ff 15 6f 21 00 00    	call   *0x216f(%rip)        # 8550 <core::panicking::panic@Base>
+    63e1:	48 8d 05 38 02 00 00 	lea    0x238(%rip),%rax        # 6620 <bang_probe_v3::word16>
+    63e8:	c3                   	ret
+    63e9:	48 8d 05 10 00 00 00 	lea    0x10(%rip),%rax        # 6400 <bang_probe_v3::fold16>
+    63f0:	c3                   	ret
+    63f1:	48 8d 05 a8 00 00 00 	lea    0xa8(%rip),%rax        # 64a0 <bang_probe_v3::fold64>
+    63f8:	c3                   	ret
+    63f9:	cc                   	int3
+    63fa:	cc                   	int3
+    63fb:	cc                   	int3
+    63fc:	cc                   	int3
+    63fd:	cc                   	int3
+    63fe:	cc                   	int3
+    63ff:	cc                   	int3
+
+0000000000006400 <bang_probe_v3::fold16>:
+    6400:	48 89 f0             	mov    %rsi,%rax
+    6403:	48 83 e0 f0          	and    $0xfffffffffffffff0,%rax
+    6407:	74 31                	je     643a <bang_probe_v3::fold16+0x3a>
+    6409:	31 c9                	xor    %ecx,%ecx
+    640b:	66 0f 6f 05 2d b5 ff 	movdqa -0x4ad3(%rip),%xmm0        # 1940 <__abi_tag+0x1644>
+    6412:	ff 
+    6413:	66 66 66 66 2e 0f 1f 	data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    641a:	84 00 00 00 00 00 
+    6420:	f3 0f 6f 0c 0f       	movdqu (%rdi,%rcx,1),%xmm1
+    6425:	66 0f 74 c8          	pcmpeqb %xmm0,%xmm1
+    6429:	66 0f d7 d1          	pmovmskb %xmm1,%edx
+    642d:	85 d2                	test   %edx,%edx
+    642f:	75 5a                	jne    648b <bang_probe_v3::fold16+0x8b>
+    6431:	48 83 c1 10          	add    $0x10,%rcx
+    6435:	48 39 c8             	cmp    %rcx,%rax
+    6438:	75 e6                	jne    6420 <bang_probe_v3::fold16+0x20>
+    643a:	89 f1                	mov    %esi,%ecx
+    643c:	83 e1 0f             	and    $0xf,%ecx
+    643f:	48 83 fe 10          	cmp    $0x10,%rsi
+    6443:	0f 92 c2             	setb   %dl
+    6446:	48 85 c9             	test   %rcx,%rcx
+    6449:	41 0f 94 c0          	sete   %r8b
+    644d:	41 08 d0             	or     %dl,%r8b
+    6450:	74 21                	je     6473 <bang_probe_v3::fold16+0x73>
+    6452:	48 85 c9             	test   %rcx,%rcx
+    6455:	74 37                	je     648e <bang_probe_v3::fold16+0x8e>
+    6457:	48 01 c7             	add    %rax,%rdi
+    645a:	48 ff c9             	dec    %rcx
+    645d:	31 d2                	xor    %edx,%edx
+    645f:	90                   	nop
+    6460:	80 3c 17 21          	cmpb   $0x21,(%rdi,%rdx,1)
+    6464:	0f 94 c0             	sete   %al
+    6467:	74 09                	je     6472 <bang_probe_v3::fold16+0x72>
+    6469:	48 39 d1             	cmp    %rdx,%rcx
+    646c:	48 8d 52 01          	lea    0x1(%rdx),%rdx
+    6470:	75 ee                	jne    6460 <bang_probe_v3::fold16+0x60>
+    6472:	c3                   	ret
+    6473:	f3 0f 6f 44 37 f0    	movdqu -0x10(%rdi,%rsi,1),%xmm0
+    6479:	66 0f 74 05 bf b4 ff 	pcmpeqb -0x4b41(%rip),%xmm0        # 1940 <__abi_tag+0x1644>
+    6480:	ff 
+    6481:	66 0f d7 c0          	pmovmskb %xmm0,%eax
+    6485:	85 c0                	test   %eax,%eax
+    6487:	0f 95 c0             	setne  %al
+    648a:	c3                   	ret
+    648b:	b0 01                	mov    $0x1,%al
+    648d:	c3                   	ret
+    648e:	31 c0                	xor    %eax,%eax
+    6490:	c3                   	ret
+    6491:	cc                   	int3
+    6492:	cc                   	int3
+    6493:	cc                   	int3
+    6494:	cc                   	int3
+    6495:	cc                   	int3
+    6496:	cc                   	int3
+    6497:	cc                   	int3
+    6498:	cc                   	int3
+    6499:	cc                   	int3
+    649a:	cc                   	int3
+    649b:	cc                   	int3
+    649c:	cc                   	int3
+    649d:	cc                   	int3
+    649e:	cc                   	int3
+    649f:	cc                   	int3
+
+00000000000064a0 <bang_probe_v3::fold64>:
+    64a0:	48 83 fe 40          	cmp    $0x40,%rsi
+    64a4:	0f 82 56 ff ff ff    	jb     6400 <bang_probe_v3::fold16>
+    64aa:	48 89 f0             	mov    %rsi,%rax
+    64ad:	48 83 e0 c0          	and    $0xffffffffffffffc0,%rax
+    64b1:	74 51                	je     6504 <bang_probe_v3::fold64+0x64>
+    64b3:	31 c9                	xor    %ecx,%ecx
+    64b5:	66 0f 6f 05 83 b4 ff 	movdqa -0x4b7d(%rip),%xmm0        # 1940 <__abi_tag+0x1644>
+    64bc:	ff 
+    64bd:	0f 1f 00             	nopl   (%rax)
+    64c0:	f3 0f 6f 0c 0f       	movdqu (%rdi,%rcx,1),%xmm1
+    64c5:	f3 0f 6f 54 0f 10    	movdqu 0x10(%rdi,%rcx,1),%xmm2
+    64cb:	f3 0f 6f 5c 0f 20    	movdqu 0x20(%rdi,%rcx,1),%xmm3
+    64d1:	f3 0f 6f 64 0f 30    	movdqu 0x30(%rdi,%rcx,1),%xmm4
+    64d7:	66 0f 74 d8          	pcmpeqb %xmm0,%xmm3
+    64db:	66 0f 74 c8          	pcmpeqb %xmm0,%xmm1
+    64df:	66 0f eb cb          	por    %xmm3,%xmm1
+    64e3:	66 0f 74 e0          	pcmpeqb %xmm0,%xmm4
+    64e7:	66 0f 74 d0          	pcmpeqb %xmm0,%xmm2
+    64eb:	66 0f eb d4          	por    %xmm4,%xmm2
+    64ef:	66 0f eb d1          	por    %xmm1,%xmm2
+    64f3:	66 0f d7 d2          	pmovmskb %xmm2,%edx
+    64f7:	85 d2                	test   %edx,%edx
+    64f9:	75 55                	jne    6550 <bang_probe_v3::fold64+0xb0>
+    64fb:	48 83 c1 40          	add    $0x40,%rcx
+    64ff:	48 39 c8             	cmp    %rcx,%rax
+    6502:	75 bc                	jne    64c0 <bang_probe_v3::fold64+0x20>
+    6504:	40 f6 c6 3f          	test   $0x3f,%sil
+    6508:	74 49                	je     6553 <bang_probe_v3::fold64+0xb3>
+    650a:	f3 0f 6f 44 37 c0    	movdqu -0x40(%rdi,%rsi,1),%xmm0
+    6510:	f3 0f 6f 4c 37 d0    	movdqu -0x30(%rdi,%rsi,1),%xmm1
+    6516:	f3 0f 6f 54 37 e0    	movdqu -0x20(%rdi,%rsi,1),%xmm2
+    651c:	f3 0f 6f 5c 37 f0    	movdqu -0x10(%rdi,%rsi,1),%xmm3
+    6522:	66 0f 6f 25 16 b4 ff 	movdqa -0x4bea(%rip),%xmm4        # 1940 <__abi_tag+0x1644>
+    6529:	ff 
+    652a:	66 0f 74 d4          	pcmpeqb %xmm4,%xmm2
+    652e:	66 0f 74 c4          	pcmpeqb %xmm4,%xmm0
+    6532:	66 0f eb c2          	por    %xmm2,%xmm0
+    6536:	66 0f 74 dc          	pcmpeqb %xmm4,%xmm3
+    653a:	66 0f 74 cc          	pcmpeqb %xmm4,%xmm1
+    653e:	66 0f eb cb          	por    %xmm3,%xmm1
+    6542:	66 0f eb c8          	por    %xmm0,%xmm1
+    6546:	66 0f d7 c1          	pmovmskb %xmm1,%eax
+    654a:	85 c0                	test   %eax,%eax
+    654c:	0f 95 c0             	setne  %al
+    654f:	c3                   	ret
+    6550:	b0 01                	mov    $0x1,%al
+    6552:	c3                   	ret
+    6553:	31 c0                	xor    %eax,%eax
+    6555:	c3                   	ret
+    6556:	cc                   	int3
+    6557:	cc                   	int3
+    6558:	cc                   	int3
+    6559:	cc                   	int3
+    655a:	cc                   	int3
+    655b:	cc                   	int3
+    655c:	cc                   	int3
+    655d:	cc                   	int3
+    655e:	cc                   	int3
+    655f:	cc                   	int3
+
+0000000000006560 <bang_probe_v3::simd64>:
+    6560:	48 83 fe 40          	cmp    $0x40,%rsi
+    6564:	0f 82 96 fe ff ff    	jb     6400 <bang_probe_v3::fold16>
+    656a:	48 89 f0             	mov    %rsi,%rax
+    656d:	48 83 e0 c0          	and    $0xffffffffffffffc0,%rax
+    6571:	74 51                	je     65c4 <bang_probe_v3::simd64+0x64>
+    6573:	31 c9                	xor    %ecx,%ecx
+    6575:	66 0f 6f 05 c3 b3 ff 	movdqa -0x4c3d(%rip),%xmm0        # 1940 <__abi_tag+0x1644>
+    657c:	ff 
+    657d:	0f 1f 00             	nopl   (%rax)
+    6580:	f3 0f 6f 0c 0f       	movdqu (%rdi,%rcx,1),%xmm1
+    6585:	f3 0f 6f 54 0f 10    	movdqu 0x10(%rdi,%rcx,1),%xmm2
+    658b:	f3 0f 6f 5c 0f 20    	movdqu 0x20(%rdi,%rcx,1),%xmm3
+    6591:	f3 0f 6f 64 0f 30    	movdqu 0x30(%rdi,%rcx,1),%xmm4
+    6597:	66 0f 74 c8          	pcmpeqb %xmm0,%xmm1
+    659b:	66 0f 74 d0          	pcmpeqb %xmm0,%xmm2
+    659f:	66 0f eb d1          	por    %xmm1,%xmm2
+    65a3:	66 0f 74 d8          	pcmpeqb %xmm0,%xmm3
+    65a7:	66 0f 74 e0          	pcmpeqb %xmm0,%xmm4
+    65ab:	66 0f eb e3          	por    %xmm3,%xmm4
+    65af:	66 0f eb e2          	por    %xmm2,%xmm4
+    65b3:	66 0f d7 d4          	pmovmskb %xmm4,%edx
+    65b7:	85 d2                	test   %edx,%edx
+    65b9:	75 55                	jne    6610 <bang_probe_v3::simd64+0xb0>
+    65bb:	48 83 c1 40          	add    $0x40,%rcx
+    65bf:	48 39 c8             	cmp    %rcx,%rax
+    65c2:	75 bc                	jne    6580 <bang_probe_v3::simd64+0x20>
+    65c4:	40 f6 c6 3f          	test   $0x3f,%sil
+    65c8:	74 49                	je     6613 <bang_probe_v3::simd64+0xb3>
+    65ca:	66 0f 6f 05 6e b3 ff 	movdqa -0x4c92(%rip),%xmm0        # 1940 <__abi_tag+0x1644>
+    65d1:	ff 
+    65d2:	f3 0f 6f 4c 37 c0    	movdqu -0x40(%rdi,%rsi,1),%xmm1
+    65d8:	f3 0f 6f 54 37 d0    	movdqu -0x30(%rdi,%rsi,1),%xmm2
+    65de:	f3 0f 6f 5c 37 e0    	movdqu -0x20(%rdi,%rsi,1),%xmm3
+    65e4:	f3 0f 6f 64 37 f0    	movdqu -0x10(%rdi,%rsi,1),%xmm4
+    65ea:	66 0f 74 c8          	pcmpeqb %xmm0,%xmm1
+    65ee:	66 0f 74 d0          	pcmpeqb %xmm0,%xmm2
+    65f2:	66 0f eb d1          	por    %xmm1,%xmm2
+    65f6:	66 0f 74 d8          	pcmpeqb %xmm0,%xmm3
+    65fa:	66 0f 74 e0          	pcmpeqb %xmm0,%xmm4
+    65fe:	66 0f eb e3          	por    %xmm3,%xmm4
+    6602:	66 0f eb e2          	por    %xmm2,%xmm4
+    6606:	66 0f d7 c4          	pmovmskb %xmm4,%eax
+    660a:	85 c0                	test   %eax,%eax
+    660c:	0f 95 c0             	setne  %al
+    660f:	c3                   	ret
+    6610:	b0 01                	mov    $0x1,%al
+    6612:	c3                   	ret
+    6613:	31 c0                	xor    %eax,%eax
+    6615:	c3                   	ret
+    6616:	cc                   	int3
+    6617:	cc                   	int3
+    6618:	cc                   	int3
+    6619:	cc                   	int3
+    661a:	cc                   	int3
+    661b:	cc                   	int3
+    661c:	cc                   	int3
+    661d:	cc                   	int3
+    661e:	cc                   	int3
+    661f:	cc                   	int3
+
+0000000000006620 <bang_probe_v3::word16>:
+    6620:	48 89 f0             	mov    %rsi,%rax
+    6623:	48 83 e0 f0          	and    $0xfffffffffffffff0,%rax
+    6627:	74 5f                	je     6688 <bang_probe_v3::word16+0x68>
+    6629:	48 b9 80 80 80 80 80 	movabs $0x8080808080808080,%rcx
+    6630:	80 80 80 
+    6633:	31 d2                	xor    %edx,%edx
+    6635:	66 0f 6f 05 23 b3 ff 	movdqa -0x4cdd(%rip),%xmm0        # 1960 <__abi_tag+0x1664>
+    663c:	ff 
+    663d:	66 0f 6f 0d 0b b3 ff 	movdqa -0x4cf5(%rip),%xmm1        # 1950 <__abi_tag+0x1654>
+    6644:	ff 
+    6645:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+    664c:	00 00 00 00 
+    6650:	f3 0f 6f 14 17       	movdqu (%rdi,%rdx,1),%xmm2
+    6655:	66 0f 6f da          	movdqa %xmm2,%xmm3
+    6659:	66 0f ef d8          	pxor   %xmm0,%xmm3
+    665d:	66 0f d4 d9          	paddq  %xmm1,%xmm3
+    6661:	66 0f eb da          	por    %xmm2,%xmm3
+    6665:	66 49 0f 7e d8       	movq   %xmm3,%r8
+    666a:	49 21 c8             	and    %rcx,%r8
+    666d:	66 0f 70 d3 ee       	pshufd $0xee,%xmm3,%xmm2
+    6672:	66 49 0f 7e d1       	movq   %xmm2,%r9
+    6677:	4d 21 c1             	and    %r8,%r9
+    667a:	49 39 c9             	cmp    %rcx,%r9
+    667d:	75 34                	jne    66b3 <bang_probe_v3::word16+0x93>
+    667f:	48 83 c2 10          	add    $0x10,%rdx
+    6683:	48 39 d0             	cmp    %rdx,%rax
+    6686:	75 c8                	jne    6650 <bang_probe_v3::word16+0x30>
+    6688:	83 e6 0f             	and    $0xf,%esi
+    668b:	74 29                	je     66b6 <bang_probe_v3::word16+0x96>
+    668d:	48 01 c7             	add    %rax,%rdi
+    6690:	48 ff ce             	dec    %rsi
+    6693:	31 c9                	xor    %ecx,%ecx
+    6695:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+    669c:	00 00 00 00 
+    66a0:	80 3c 0f 21          	cmpb   $0x21,(%rdi,%rcx,1)
+    66a4:	0f 94 c0             	sete   %al
+    66a7:	74 09                	je     66b2 <bang_probe_v3::word16+0x92>
+    66a9:	48 39 ce             	cmp    %rcx,%rsi
+    66ac:	48 8d 49 01          	lea    0x1(%rcx),%rcx
+    66b0:	75 ee                	jne    66a0 <bang_probe_v3::word16+0x80>
+    66b2:	c3                   	ret
+    66b3:	b0 01                	mov    $0x1,%al
+    66b5:	c3                   	ret
+    66b6:	31 c0                	xor    %eax,%eax
+    66b8:	c3                   	ret
+    66b9:	cc                   	int3
+    66ba:	cc                   	int3
+    66bb:	cc                   	int3
+    66bc:	cc                   	int3
+    66bd:	cc                   	int3
+    66be:	cc                   	int3
+    66bf:	cc                   	int3
+
+00000000000066c0 <bang_probe_v3::std_str>:
+    66c0:	48 89 f2             	mov    %rsi,%rdx
+    66c3:	48 89 fe             	mov    %rdi,%rsi
+    66c6:	48 83 fa 01          	cmp    $0x1,%rdx
+    66ca:	76 24                	jbe    66f0 <bang_probe_v3::std_str+0x30>
+    66cc:	48 83 fa 0f          	cmp    $0xf,%rdx
+    66d0:	77 27                	ja     66f9 <bang_probe_v3::std_str+0x39>
+    66d2:	31 c0                	xor    %eax,%eax
+    66d4:	66 66 66 2e 0f 1f 84 	data16 data16 cs nopw 0x0(%rax,%rax,1)
+    66db:	00 00 00 00 00 
+    66e0:	80 3c 06 21          	cmpb   $0x21,(%rsi,%rax,1)
+    66e4:	74 2a                	je     6710 <bang_probe_v3::std_str+0x50>
+    66e6:	48 ff c0             	inc    %rax
+    66e9:	48 39 c2             	cmp    %rax,%rdx
+    66ec:	75 f2                	jne    66e0 <bang_probe_v3::std_str+0x20>
+    66ee:	eb 23                	jmp    6713 <bang_probe_v3::std_str+0x53>
+    66f0:	75 21                	jne    6713 <bang_probe_v3::std_str+0x53>
+    66f2:	80 3e 21             	cmpb   $0x21,(%rsi)
+    66f5:	0f 94 c0             	sete   %al
+    66f8:	c3                   	ret
+    66f9:	50                   	push   %rax
+    66fa:	bf 21 00 00 00       	mov    $0x21,%edi
+    66ff:	ff 15 03 1e 00 00    	call   *0x1e03(%rip)        # 8508 <core::slice::memchr::memchr_aligned@Base>
+    6705:	48 83 f8 01          	cmp    $0x1,%rax
+    6709:	48 8d 64 24 08       	lea    0x8(%rsp),%rsp
+    670e:	75 03                	jne    6713 <bang_probe_v3::std_str+0x53>
+    6710:	b0 01                	mov    $0x1,%al
+    6712:	c3                   	ret
+    6713:	31 c0                	xor    %eax,%eax
+    6715:	c3                   	ret
+    6716:	cc                   	int3
+    6717:	cc                   	int3
+    6718:	cc                   	int3
+    6719:	cc                   	int3
+    671a:	cc                   	int3
+    671b:	cc                   	int3
+    671c:	cc                   	int3
+    671d:	cc                   	int3
+    671e:	cc                   	int3
+    671f:	cc                   	int3
+
+0000000000006720 <bang_probe_v3::std_char>:
+    6720:	48 89 f2             	mov    %rsi,%rdx
+    6723:	48 89 fe             	mov    %rdi,%rsi
+    6726:	48 83 fa 0f          	cmp    $0xf,%rdx
+    672a:	77 24                	ja     6750 <bang_probe_v3::std_char+0x30>
+    672c:	48 85 d2             	test   %rdx,%rdx
+    672f:	74 39                	je     676a <bang_probe_v3::std_char+0x4a>
+    6731:	31 c0                	xor    %eax,%eax
+    6733:	66 66 66 66 2e 0f 1f 	data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    673a:	84 00 00 00 00 00 
+    6740:	80 3c 06 21          	cmpb   $0x21,(%rsi,%rax,1)
+    6744:	74 21                	je     6767 <bang_probe_v3::std_char+0x47>
+    6746:	48 ff c0             	inc    %rax
+    6749:	48 39 c2             	cmp    %rax,%rdx
+    674c:	75 f2                	jne    6740 <bang_probe_v3::std_char+0x20>
+    674e:	eb 1a                	jmp    676a <bang_probe_v3::std_char+0x4a>
+    6750:	50                   	push   %rax
+    6751:	bf 21 00 00 00       	mov    $0x21,%edi
+    6756:	ff 15 ac 1d 00 00    	call   *0x1dac(%rip)        # 8508 <core::slice::memchr::memchr_aligned@Base>
+    675c:	48 83 f8 01          	cmp    $0x1,%rax
+    6760:	48 8d 64 24 08       	lea    0x8(%rsp),%rsp
+    6765:	75 03                	jne    676a <bang_probe_v3::std_char+0x4a>
+    6767:	b0 01                	mov    $0x1,%al
+    6769:	c3                   	ret
+    676a:	31 c0                	xor    %eax,%eax
+    676c:	c3                   	ret
+    676d:	cc                   	int3
+    676e:	cc                   	int3
+    676f:	cc                   	int3
+
+0000000000006770 <bang_probe_v3::columns64>:
+    6770:	48 83 fe 40          	cmp    $0x40,%rsi
+    6774:	0f 82 86 fc ff ff    	jb     6400 <bang_probe_v3::fold16>
+    677a:	48 89 f0             	mov    %rsi,%rax
+    677d:	48 83 e0 c0          	and    $0xffffffffffffffc0,%rax
+    6781:	74 51                	je     67d4 <bang_probe_v3::columns64+0x64>
+    6783:	31 c9                	xor    %ecx,%ecx
+    6785:	66 0f 6f 05 b3 b1 ff 	movdqa -0x4e4d(%rip),%xmm0        # 1940 <__abi_tag+0x1644>
+    678c:	ff 
+    678d:	0f 1f 00             	nopl   (%rax)
+    6790:	f3 0f 6f 0c 0f       	movdqu (%rdi,%rcx,1),%xmm1
+    6795:	f3 0f 6f 54 0f 10    	movdqu 0x10(%rdi,%rcx,1),%xmm2
+    679b:	f3 0f 6f 5c 0f 20    	movdqu 0x20(%rdi,%rcx,1),%xmm3
+    67a1:	f3 0f 6f 64 0f 30    	movdqu 0x30(%rdi,%rcx,1),%xmm4
+    67a7:	66 0f 74 d8          	pcmpeqb %xmm0,%xmm3
+    67ab:	66 0f 74 c8          	pcmpeqb %xmm0,%xmm1
+    67af:	66 0f eb cb          	por    %xmm3,%xmm1
+    67b3:	66 0f 74 e0          	pcmpeqb %xmm0,%xmm4
+    67b7:	66 0f 74 d0          	pcmpeqb %xmm0,%xmm2
+    67bb:	66 0f eb d4          	por    %xmm4,%xmm2
+    67bf:	66 0f eb d1          	por    %xmm1,%xmm2
+    67c3:	66 0f d7 d2          	pmovmskb %xmm2,%edx
+    67c7:	85 d2                	test   %edx,%edx
+    67c9:	75 55                	jne    6820 <bang_probe_v3::columns64+0xb0>
+    67cb:	48 83 c1 40          	add    $0x40,%rcx
+    67cf:	48 39 c8             	cmp    %rcx,%rax
+    67d2:	75 bc                	jne    6790 <bang_probe_v3::columns64+0x20>
+    67d4:	40 f6 c6 3f          	test   $0x3f,%sil
+    67d8:	74 49                	je     6823 <bang_probe_v3::columns64+0xb3>
+    67da:	f3 0f 6f 44 37 c0    	movdqu -0x40(%rdi,%rsi,1),%xmm0
+    67e0:	f3 0f 6f 4c 37 d0    	movdqu -0x30(%rdi,%rsi,1),%xmm1
+    67e6:	f3 0f 6f 54 37 e0    	movdqu -0x20(%rdi,%rsi,1),%xmm2
+    67ec:	f3 0f 6f 5c 37 f0    	movdqu -0x10(%rdi,%rsi,1),%xmm3
+    67f2:	66 0f 6f 25 46 b1 ff 	movdqa -0x4eba(%rip),%xmm4        # 1940 <__abi_tag+0x1644>
+    67f9:	ff 
+    67fa:	66 0f 74 d4          	pcmpeqb %xmm4,%xmm2
+    67fe:	66 0f 74 c4          	pcmpeqb %xmm4,%xmm0
+    6802:	66 0f eb c2          	por    %xmm2,%xmm0
+    6806:	66 0f 74 dc          	pcmpeqb %xmm4,%xmm3
+    680a:	66 0f 74 cc          	pcmpeqb %xmm4,%xmm1
+    680e:	66 0f eb cb          	por    %xmm3,%xmm1
+    6812:	66 0f eb c8          	por    %xmm0,%xmm1
+    6816:	66 0f d7 c1          	pmovmskb %xmm1,%eax
+    681a:	85 c0                	test   %eax,%eax
+    681c:	0f 95 c0             	setne  %al
+    681f:	c3                   	ret
+    6820:	b0 01                	mov    $0x1,%al
+    6822:	c3                   	ret
+    6823:	31 c0                	xor    %eax,%eax
+    6825:	c3                   	ret
+    6826:	cc                   	int3
+    6827:	cc                   	int3
+    6828:	cc                   	int3
+    6829:	cc                   	int3
+    682a:	cc                   	int3
+    682b:	cc                   	int3
+    682c:	cc                   	int3
+    682d:	cc                   	int3
+    682e:	cc                   	int3
+    682f:	cc                   	int3
+
+0000000000006830 <<[u8]>::repeat>:
+    6830:	55                   	push   %rbp
+    6831:	41 57                	push   %r15
+    6833:	41 56                	push   %r14
+    6835:	41 55                	push   %r13
+    6837:	41 54                	push   %r12
+    6839:	53                   	push   %rbx
+    683a:	48 83 ec 28          	sub    $0x28,%rsp
+    683e:	48 85 c9             	test   %rcx,%rcx
+    6841:	74 2d                	je     6870 <<[u8]>::repeat+0x40>
+    6843:	49 89 cf             	mov    %rcx,%r15
+    6846:	49 89 d4             	mov    %rdx,%r12
+    6849:	48 89 d0             	mov    %rdx,%rax
+    684c:	48 f7 e1             	mul    %rcx
+    684f:	0f 80 1a 01 00 00    	jo     696f <<[u8]>::repeat+0x13f>
+    6855:	49 89 c6             	mov    %rax,%r14
+    6858:	48 89 04 24          	mov    %rax,(%rsp)
+    685c:	48 85 c0             	test   %rax,%rax
+    685f:	79 2b                	jns    688c <<[u8]>::repeat+0x5c>
+    6861:	31 db                	xor    %ebx,%ebx
+    6863:	48 89 df             	mov    %rbx,%rdi
+    6866:	48 8b 34 24          	mov    (%rsp),%rsi
+    686a:	ff 15 70 1c 00 00    	call   *0x1c70(%rip)        # 84e0 <alloc::raw_vec::handle_error@Base>
+    6870:	48 c7 07 00 00 00 00 	movq   $0x0,(%rdi)
+    6877:	48 c7 47 08 01 00 00 	movq   $0x1,0x8(%rdi)
+    687e:	00 
+    687f:	48 c7 47 10 00 00 00 	movq   $0x0,0x10(%rdi)
+    6886:	00 
+    6887:	e9 d4 00 00 00       	jmp    6960 <<[u8]>::repeat+0x130>
+    688c:	48 89 f5             	mov    %rsi,%rbp
+    688f:	48 89 7c 24 20       	mov    %rdi,0x20(%rsp)
+    6894:	74 24                	je     68ba <<[u8]>::repeat+0x8a>
+    6896:	ff 15 5c 1c 00 00    	call   *0x1c5c(%rip)        # 84f8 <__rustc::__rust_no_alloc_shim_is_unstable_v2@Base>
+    689c:	bb 01 00 00 00       	mov    $0x1,%ebx
+    68a1:	be 01 00 00 00       	mov    $0x1,%esi
+    68a6:	48 8b 3c 24          	mov    (%rsp),%rdi
+    68aa:	ff 15 50 1c 00 00    	call   *0x1c50(%rip)        # 8500 <__rustc::__rust_alloc@Base>
+    68b0:	49 89 c5             	mov    %rax,%r13
+    68b3:	48 85 c0             	test   %rax,%rax
+    68b6:	75 08                	jne    68c0 <<[u8]>::repeat+0x90>
+    68b8:	eb a9                	jmp    6863 <<[u8]>::repeat+0x33>
+    68ba:	41 bd 01 00 00 00    	mov    $0x1,%r13d
+    68c0:	48 8b 04 24          	mov    (%rsp),%rax
+    68c4:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
+    68c9:	4c 89 6c 24 10       	mov    %r13,0x10(%rsp)
+    68ce:	48 c7 44 24 18 00 00 	movq   $0x0,0x18(%rsp)
+    68d5:	00 00 
+    68d7:	4d 39 f4             	cmp    %r14,%r12
+    68da:	0f 87 a8 00 00 00    	ja     6988 <<[u8]>::repeat+0x158>
+    68e0:	31 db                	xor    %ebx,%ebx
+    68e2:	4d 85 e4             	test   %r12,%r12
+    68e5:	74 10                	je     68f7 <<[u8]>::repeat+0xc7>
+    68e7:	4a 8d 3c 2b          	lea    (%rbx,%r13,1),%rdi
+    68eb:	48 89 ee             	mov    %rbp,%rsi
+    68ee:	4c 89 e2             	mov    %r12,%rdx
+    68f1:	ff 15 39 1c 00 00    	call   *0x1c39(%rip)        # 8530 <memcpy@GLIBC_2.14>
+    68f7:	4c 01 e3             	add    %r12,%rbx
+    68fa:	49 d1 ef             	shr    $1,%r15
+    68fd:	74 26                	je     6925 <<[u8]>::repeat+0xf5>
+    68ff:	4c 8b 25 2a 1c 00 00 	mov    0x1c2a(%rip),%r12        # 8530 <memcpy@GLIBC_2.14>
+    6906:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+    690d:	00 00 00 
+    6910:	4a 8d 3c 2b          	lea    (%rbx,%r13,1),%rdi
+    6914:	4c 89 ee             	mov    %r13,%rsi
+    6917:	48 89 da             	mov    %rbx,%rdx
+    691a:	41 ff d4             	call   *%r12
+    691d:	48 01 db             	add    %rbx,%rbx
+    6920:	49 d1 ef             	shr    $1,%r15
+    6923:	75 eb                	jne    6910 <<[u8]>::repeat+0xe0>
+    6925:	48 89 5c 24 18       	mov    %rbx,0x18(%rsp)
+    692a:	49 29 de             	sub    %rbx,%r14
+    692d:	74 1b                	je     694a <<[u8]>::repeat+0x11a>
+    692f:	4c 01 eb             	add    %r13,%rbx
+    6932:	48 89 df             	mov    %rbx,%rdi
+    6935:	4c 89 ee             	mov    %r13,%rsi
+    6938:	4c 89 f2             	mov    %r14,%rdx
+    693b:	ff 15 ef 1b 00 00    	call   *0x1bef(%rip)        # 8530 <memcpy@GLIBC_2.14>
+    6941:	48 8b 04 24          	mov    (%rsp),%rax
+    6945:	48 89 44 24 18       	mov    %rax,0x18(%rsp)
+    694a:	48 8b 44 24 18       	mov    0x18(%rsp),%rax
+    694f:	48 8b 4c 24 20       	mov    0x20(%rsp),%rcx
+    6954:	48 89 41 10          	mov    %rax,0x10(%rcx)
+    6958:	0f 10 44 24 08       	movups 0x8(%rsp),%xmm0
+    695d:	0f 11 01             	movups %xmm0,(%rcx)
+    6960:	48 83 c4 28          	add    $0x28,%rsp
+    6964:	5b                   	pop    %rbx
+    6965:	41 5c                	pop    %r12
+    6967:	41 5d                	pop    %r13
+    6969:	41 5e                	pop    %r14
+    696b:	41 5f                	pop    %r15
+    696d:	5d                   	pop    %rbp
+    696e:	c3                   	ret
+    696f:	48 8d 3d 0a b0 ff ff 	lea    -0x4ff6(%rip),%rdi        # 1980 <__abi_tag+0x1684>
+    6976:	48 8d 15 5b 18 00 00 	lea    0x185b(%rip),%rdx        # 81d8 <__frame_dummy_init_array_entry+0x250>
+    697d:	be 11 00 00 00       	mov    $0x11,%esi
+    6982:	ff 15 e0 1b 00 00    	call   *0x1be0(%rip)        # 8568 <core::option::expect_failed@Base>
+    6988:	48 8d 7c 24 08       	lea    0x8(%rsp),%rdi
+    698d:	b9 01 00 00 00       	mov    $0x1,%ecx
+    6992:	41 b8 01 00 00 00    	mov    $0x1,%r8d
+    6998:	31 f6                	xor    %esi,%esi
+    699a:	4c 89 e2             	mov    %r12,%rdx
+    699d:	e8 fe d5 ff ff       	call   3fa0 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>
+    69a2:	4c 8b 6c 24 10       	mov    0x10(%rsp),%r13
+    69a7:	48 8b 5c 24 18       	mov    0x18(%rsp),%rbx
+    69ac:	e9 36 ff ff ff       	jmp    68e7 <<[u8]>::repeat+0xb7>
+    69b1:	48 89 c3             	mov    %rax,%rbx
+    69b4:	48 8b 74 24 08       	mov    0x8(%rsp),%rsi
+    69b9:	48 85 f6             	test   %rsi,%rsi
+    69bc:	74 10                	je     69ce <<[u8]>::repeat+0x19e>
+    69be:	48 8b 7c 24 10       	mov    0x10(%rsp),%rdi
+    69c3:	ba 01 00 00 00       	mov    $0x1,%edx
+    69c8:	ff 15 f2 1a 00 00    	call   *0x1af2(%rip)        # 84c0 <__rustc::__rust_dealloc@Base>
+    69ce:	48 89 df             	mov    %rbx,%rdi
+    69d1:	e8 9a 05 00 00       	call   6f70 <_Unwind_Resume@plt>
+    69d6:	cc                   	int3
+    69d7:	cc                   	int3
+    69d8:	cc                   	int3
+    69d9:	cc                   	int3
+    69da:	cc                   	int3
+    69db:	cc                   	int3
+    69dc:	cc                   	int3
+    69dd:	cc                   	int3
+    69de:	cc                   	int3
+    69df:	cc                   	int3
+
+00000000000069e0 <<alloc::raw_vec::RawVecInner>::finish_grow>:
+    69e0:	41 57                	push   %r15
+    69e2:	41 56                	push   %r14
+    69e4:	41 54                	push   %r12
+    69e6:	53                   	push   %rbx
+    69e7:	50                   	push   %rax
+    69e8:	4d 89 c7             	mov    %r8,%r15
+    69eb:	49 89 d0             	mov    %rdx,%r8
+    69ee:	48 89 fb             	mov    %rdi,%rbx
+    69f1:	4c 89 c8             	mov    %r9,%rax
+    69f4:	48 f7 e1             	mul    %rcx
+    69f7:	49 89 c6             	mov    %rax,%r14
+    69fa:	0f 90 c0             	seto   %al
+    69fd:	48 b9 00 00 00 00 00 	movabs $0x8000000000000000,%rcx
+    6a04:	00 00 80 
+    6a07:	4c 29 f9             	sub    %r15,%rcx
+    6a0a:	49 39 ce             	cmp    %rcx,%r14
+    6a0d:	0f 97 c1             	seta   %cl
+    6a10:	08 c1                	or     %al,%cl
+    6a12:	41 bc 01 00 00 00    	mov    $0x1,%r12d
+    6a18:	74 0a                	je     6a24 <<alloc::raw_vec::RawVecInner>::finish_grow+0x44>
+    6a1a:	b8 08 00 00 00       	mov    $0x8,%eax
+    6a1f:	45 31 f6             	xor    %r14d,%r14d
+    6a22:	eb 58                	jmp    6a7c <<alloc::raw_vec::RawVecInner>::finish_grow+0x9c>
+    6a24:	48 85 f6             	test   %rsi,%rsi
+    6a27:	74 1d                	je     6a46 <<alloc::raw_vec::RawVecInner>::finish_grow+0x66>
+    6a29:	4c 0f af ce          	imul   %rsi,%r9
+    6a2d:	4c 89 c7             	mov    %r8,%rdi
+    6a30:	4c 89 ce             	mov    %r9,%rsi
+    6a33:	4c 89 fa             	mov    %r15,%rdx
+    6a36:	4c 89 f1             	mov    %r14,%rcx
+    6a39:	ff 15 31 1b 00 00    	call   *0x1b31(%rip)        # 8570 <__rustc::__rust_realloc@Base>
+    6a3f:	48 85 c0             	test   %rax,%rax
+    6a42:	75 2c                	jne    6a70 <<alloc::raw_vec::RawVecInner>::finish_grow+0x90>
+    6a44:	eb 1c                	jmp    6a62 <<alloc::raw_vec::RawVecInner>::finish_grow+0x82>
+    6a46:	4d 85 f6             	test   %r14,%r14
+    6a49:	74 22                	je     6a6d <<alloc::raw_vec::RawVecInner>::finish_grow+0x8d>
+    6a4b:	ff 15 a7 1a 00 00    	call   *0x1aa7(%rip)        # 84f8 <__rustc::__rust_no_alloc_shim_is_unstable_v2@Base>
+    6a51:	4c 89 f7             	mov    %r14,%rdi
+    6a54:	4c 89 fe             	mov    %r15,%rsi
+    6a57:	ff 15 a3 1a 00 00    	call   *0x1aa3(%rip)        # 8500 <__rustc::__rust_alloc@Base>
+    6a5d:	48 85 c0             	test   %rax,%rax
+    6a60:	75 0e                	jne    6a70 <<alloc::raw_vec::RawVecInner>::finish_grow+0x90>
+    6a62:	4c 89 7b 08          	mov    %r15,0x8(%rbx)
+    6a66:	b8 10 00 00 00       	mov    $0x10,%eax
+    6a6b:	eb 0f                	jmp    6a7c <<alloc::raw_vec::RawVecInner>::finish_grow+0x9c>
+    6a6d:	4c 89 f8             	mov    %r15,%rax
+    6a70:	48 89 43 08          	mov    %rax,0x8(%rbx)
+    6a74:	b8 10 00 00 00       	mov    $0x10,%eax
+    6a79:	45 31 e4             	xor    %r12d,%r12d
+    6a7c:	4c 89 34 03          	mov    %r14,(%rbx,%rax,1)
+    6a80:	4c 89 23             	mov    %r12,(%rbx)
+    6a83:	48 83 c4 08          	add    $0x8,%rsp
+    6a87:	5b                   	pop    %rbx
+    6a88:	41 5c                	pop    %r12
+    6a8a:	41 5e                	pop    %r14
+    6a8c:	41 5f                	pop    %r15
+    6a8e:	c3                   	ret
+    6a8f:	cc                   	int3
+
+0000000000006a90 <<&core::option::Option<u8> as core::fmt::Debug>::fmt>:
+    6a90:	48 89 f0             	mov    %rsi,%rax
+    6a93:	48 8b 0f             	mov    (%rdi),%rcx
+    6a96:	80 39 01             	cmpb   $0x1,(%rcx)
+    6a99:	75 29                	jne    6ac4 <<&core::option::Option<u8> as core::fmt::Debug>::fmt+0x34>
+    6a9b:	50                   	push   %rax
+    6a9c:	48 ff c1             	inc    %rcx
+    6a9f:	48 89 0c 24          	mov    %rcx,(%rsp)
+    6aa3:	48 8d 35 dc ba ff ff 	lea    -0x4524(%rip),%rsi        # 2586 <__abi_tag+0x228a>
+    6aaa:	4c 8d 05 9f 17 00 00 	lea    0x179f(%rip),%r8        # 8250 <__frame_dummy_init_array_entry+0x2c8>
+    6ab1:	48 89 e1             	mov    %rsp,%rcx
+    6ab4:	ba 04 00 00 00       	mov    $0x4,%edx
+    6ab9:	48 89 c7             	mov    %rax,%rdi
+    6abc:	ff 15 b6 1a 00 00    	call   *0x1ab6(%rip)        # 8578 <<core::fmt::Formatter>::debug_tuple_field1_finish@Base>
+    6ac2:	59                   	pop    %rcx
+    6ac3:	c3                   	ret
+    6ac4:	48 8d 35 bf ba ff ff 	lea    -0x4541(%rip),%rsi        # 258a <__abi_tag+0x228e>
+    6acb:	ba 04 00 00 00       	mov    $0x4,%edx
+    6ad0:	48 89 c7             	mov    %rax,%rdi
+    6ad3:	ff 25 a7 1a 00 00    	jmp    *0x1aa7(%rip)        # 8580 <<core::fmt::Formatter>::write_str@Base>
+    6ad9:	cc                   	int3
+    6ada:	cc                   	int3
+    6adb:	cc                   	int3
+    6adc:	cc                   	int3
+    6add:	cc                   	int3
+    6ade:	cc                   	int3
+    6adf:	cc                   	int3
+
+0000000000006ae0 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt>:
+    6ae0:	48 89 f0             	mov    %rsi,%rax
+    6ae3:	48 8b 0f             	mov    (%rdi),%rcx
+    6ae6:	0f b6 09             	movzbl (%rcx),%ecx
+    6ae9:	48 8d 15 48 bb ff ff 	lea    -0x44b8(%rip),%rdx        # 2638 <__abi_tag+0x233c>
+    6af0:	0f b6 14 11          	movzbl (%rcx,%rdx,1),%edx
+    6af4:	48 8d 3d 45 bb ff ff 	lea    -0x44bb(%rip),%rdi        # 2640 <__abi_tag+0x2344>
+    6afb:	48 63 34 8f          	movslq (%rdi,%rcx,4),%rsi
+    6aff:	48 01 fe             	add    %rdi,%rsi
+    6b02:	48 89 c7             	mov    %rax,%rdi
+    6b05:	ff 25 75 1a 00 00    	jmp    *0x1a75(%rip)        # 8580 <<core::fmt::Formatter>::write_str@Base>
+    6b0b:	cc                   	int3
+    6b0c:	cc                   	int3
+    6b0d:	cc                   	int3
+    6b0e:	cc                   	int3
+    6b0f:	cc                   	int3
+
+0000000000006b10 <<&bool as core::fmt::Debug>::fmt>:
+    6b10:	48 8b 3f             	mov    (%rdi),%rdi
+    6b13:	ff 25 6f 1a 00 00    	jmp    *0x1a6f(%rip)        # 8588 <<bool as core::fmt::Display>::fmt@Base>
+    6b19:	cc                   	int3
+    6b1a:	cc                   	int3
+    6b1b:	cc                   	int3
+    6b1c:	cc                   	int3
+    6b1d:	cc                   	int3
+    6b1e:	cc                   	int3
+    6b1f:	cc                   	int3
+
+0000000000006b20 <<&u8 as core::fmt::Debug>::fmt>:
+    6b20:	48 8b 3f             	mov    (%rdi),%rdi
+    6b23:	8b 46 10             	mov    0x10(%rsi),%eax
+    6b26:	a9 00 00 00 02       	test   $0x2000000,%eax
+    6b2b:	75 0d                	jne    6b3a <<&u8 as core::fmt::Debug>::fmt+0x1a>
+    6b2d:	a9 00 00 00 04       	test   $0x4000000,%eax
+    6b32:	75 0c                	jne    6b40 <<&u8 as core::fmt::Debug>::fmt+0x20>
+    6b34:	ff 25 56 1a 00 00    	jmp    *0x1a56(%rip)        # 8590 <<u8 as core::fmt::Display>::fmt@Base>
+    6b3a:	ff 25 58 1a 00 00    	jmp    *0x1a58(%rip)        # 8598 <<u8 as core::fmt::LowerHex>::fmt@Base>
+    6b40:	ff 25 5a 1a 00 00    	jmp    *0x1a5a(%rip)        # 85a0 <<u8 as core::fmt::UpperHex>::fmt@Base>
+    6b46:	cc                   	int3
+    6b47:	cc                   	int3
+    6b48:	cc                   	int3
+    6b49:	cc                   	int3
+    6b4a:	cc                   	int3
+    6b4b:	cc                   	int3
+    6b4c:	cc                   	int3
+    6b4d:	cc                   	int3
+    6b4e:	cc                   	int3
+    6b4f:	cc                   	int3
+
+0000000000006b50 <<&usize as core::fmt::Debug>::fmt>:
+    6b50:	48 8b 3f             	mov    (%rdi),%rdi
+    6b53:	8b 46 10             	mov    0x10(%rsi),%eax
+    6b56:	a9 00 00 00 02       	test   $0x2000000,%eax
+    6b5b:	75 0d                	jne    6b6a <<&usize as core::fmt::Debug>::fmt+0x1a>
+    6b5d:	a9 00 00 00 04       	test   $0x4000000,%eax
+    6b62:	75 0c                	jne    6b70 <<&usize as core::fmt::Debug>::fmt+0x20>
+    6b64:	ff 25 b6 19 00 00    	jmp    *0x19b6(%rip)        # 8520 <<usize as core::fmt::Display>::fmt@Base>
+    6b6a:	ff 25 38 1a 00 00    	jmp    *0x1a38(%rip)        # 85a8 <<usize as core::fmt::LowerHex>::fmt@Base>
+    6b70:	ff 25 3a 1a 00 00    	jmp    *0x1a3a(%rip)        # 85b0 <<usize as core::fmt::UpperHex>::fmt@Base>
+    6b76:	cc                   	int3
+    6b77:	cc                   	int3
+    6b78:	cc                   	int3
+    6b79:	cc                   	int3
+    6b7a:	cc                   	int3
+    6b7b:	cc                   	int3
+    6b7c:	cc                   	int3
+    6b7d:	cc                   	int3
+    6b7e:	cc                   	int3
+    6b7f:	cc                   	int3
+
+0000000000006b80 <<&str as core::fmt::Display>::fmt>:
+    6b80:	48 89 f2             	mov    %rsi,%rdx
+    6b83:	48 8b 07             	mov    (%rdi),%rax
+    6b86:	48 8b 77 08          	mov    0x8(%rdi),%rsi
+    6b8a:	48 89 c7             	mov    %rax,%rdi
+    6b8d:	ff 25 25 1a 00 00    	jmp    *0x1a25(%rip)        # 85b8 <<str as core::fmt::Display>::fmt@Base>
+    6b93:	cc                   	int3
+    6b94:	cc                   	int3
+    6b95:	cc                   	int3
+    6b96:	cc                   	int3
+    6b97:	cc                   	int3
+    6b98:	cc                   	int3
+    6b99:	cc                   	int3
+    6b9a:	cc                   	int3
+    6b9b:	cc                   	int3
+    6b9c:	cc                   	int3
+    6b9d:	cc                   	int3
+    6b9e:	cc                   	int3
+    6b9f:	cc                   	int3
+
+0000000000006ba0 <<core::str::error::Utf8Error as core::fmt::Debug>::fmt>:
+    6ba0:	41 56                	push   %r14
+    6ba2:	53                   	push   %rbx
+    6ba3:	50                   	push   %rax
+    6ba4:	48 89 f0             	mov    %rsi,%rax
+    6ba7:	49 89 f9             	mov    %rdi,%r9
+    6baa:	48 8d 4f 08          	lea    0x8(%rdi),%rcx
+    6bae:	48 89 0c 24          	mov    %rcx,(%rsp)
+    6bb2:	48 83 ec 08          	sub    $0x8,%rsp
+    6bb6:	4c 8d 15 73 16 00 00 	lea    0x1673(%rip),%r10        # 8230 <__frame_dummy_init_array_entry+0x2a8>
+    6bbd:	4c 8d 5c 24 08       	lea    0x8(%rsp),%r11
+    6bc2:	48 8d 1d 20 ba ff ff 	lea    -0x45e0(%rip),%rbx        # 25e9 <__abi_tag+0x22ed>
+    6bc9:	4c 8d 35 40 16 00 00 	lea    0x1640(%rip),%r14        # 8210 <__frame_dummy_init_array_entry+0x288>
+    6bd0:	48 8d 35 fe b9 ff ff 	lea    -0x4602(%rip),%rsi        # 25d5 <__abi_tag+0x22d9>
+    6bd7:	48 8d 0d 00 ba ff ff 	lea    -0x4600(%rip),%rcx        # 25de <__abi_tag+0x22e2>
+    6bde:	ba 09 00 00 00       	mov    $0x9,%edx
+    6be3:	41 b8 0b 00 00 00    	mov    $0xb,%r8d
+    6be9:	48 89 c7             	mov    %rax,%rdi
+    6bec:	41 52                	push   %r10
+    6bee:	41 53                	push   %r11
+    6bf0:	6a 09                	push   $0x9
+    6bf2:	53                   	push   %rbx
+    6bf3:	41 56                	push   %r14
+    6bf5:	ff 15 c5 19 00 00    	call   *0x19c5(%rip)        # 85c0 <<core::fmt::Formatter>::debug_struct_field2_finish@Base>
+    6bfb:	48 83 c4 38          	add    $0x38,%rsp
+    6bff:	5b                   	pop    %rbx
+    6c00:	41 5e                	pop    %r14
+    6c02:	c3                   	ret
+    6c03:	cc                   	int3
+    6c04:	cc                   	int3
+    6c05:	cc                   	int3
+    6c06:	cc                   	int3
+    6c07:	cc                   	int3
+    6c08:	cc                   	int3
+    6c09:	cc                   	int3
+    6c0a:	cc                   	int3
+    6c0b:	cc                   	int3
+    6c0c:	cc                   	int3
+    6c0d:	cc                   	int3
+    6c0e:	cc                   	int3
+    6c0f:	cc                   	int3
+
+0000000000006c10 <<core::option::Option<usize> as core::fmt::Debug>::fmt>:
+    6c10:	48 89 f0             	mov    %rsi,%rax
+    6c13:	83 3f 01             	cmpl   $0x1,(%rdi)
+    6c16:	75 2a                	jne    6c42 <<core::option::Option<usize> as core::fmt::Debug>::fmt+0x32>
+    6c18:	50                   	push   %rax
+    6c19:	48 83 c7 08          	add    $0x8,%rdi
+    6c1d:	48 89 3c 24          	mov    %rdi,(%rsp)
+    6c21:	48 8d 35 5e b9 ff ff 	lea    -0x46a2(%rip),%rsi        # 2586 <__abi_tag+0x228a>
+    6c28:	4c 8d 05 41 16 00 00 	lea    0x1641(%rip),%r8        # 8270 <__frame_dummy_init_array_entry+0x2e8>
+    6c2f:	48 89 e1             	mov    %rsp,%rcx
+    6c32:	ba 04 00 00 00       	mov    $0x4,%edx
+    6c37:	48 89 c7             	mov    %rax,%rdi
+    6c3a:	ff 15 38 19 00 00    	call   *0x1938(%rip)        # 8578 <<core::fmt::Formatter>::debug_tuple_field1_finish@Base>
+    6c40:	59                   	pop    %rcx
+    6c41:	c3                   	ret
+    6c42:	48 8d 35 41 b9 ff ff 	lea    -0x46bf(%rip),%rsi        # 258a <__abi_tag+0x228e>
+    6c49:	ba 04 00 00 00       	mov    $0x4,%edx
+    6c4e:	48 89 c7             	mov    %rax,%rdi
+    6c51:	ff 25 29 19 00 00    	jmp    *0x1929(%rip)        # 8580 <<core::fmt::Formatter>::write_str@Base>
+    6c57:	cc                   	int3
+    6c58:	cc                   	int3
+    6c59:	cc                   	int3
+    6c5a:	cc                   	int3
+    6c5b:	cc                   	int3
+    6c5c:	cc                   	int3
+    6c5d:	cc                   	int3
+    6c5e:	cc                   	int3
+    6c5f:	cc                   	int3
+
+0000000000006c60 <<usize as core::fmt::Debug>::fmt>:
+    6c60:	8b 46 10             	mov    0x10(%rsi),%eax
+    6c63:	a9 00 00 00 02       	test   $0x2000000,%eax
+    6c68:	75 0d                	jne    6c77 <<usize as core::fmt::Debug>::fmt+0x17>
+    6c6a:	a9 00 00 00 04       	test   $0x4000000,%eax
+    6c6f:	75 0c                	jne    6c7d <<usize as core::fmt::Debug>::fmt+0x1d>
+    6c71:	ff 25 a9 18 00 00    	jmp    *0x18a9(%rip)        # 8520 <<usize as core::fmt::Display>::fmt@Base>
+    6c77:	ff 25 2b 19 00 00    	jmp    *0x192b(%rip)        # 85a8 <<usize as core::fmt::LowerHex>::fmt@Base>
+    6c7d:	ff 25 2d 19 00 00    	jmp    *0x192d(%rip)        # 85b0 <<usize as core::fmt::UpperHex>::fmt@Base>
+    6c83:	cc                   	int3
+    6c84:	cc                   	int3
+    6c85:	cc                   	int3
+    6c86:	cc                   	int3
+    6c87:	cc                   	int3
+    6c88:	cc                   	int3
+    6c89:	cc                   	int3
+    6c8a:	cc                   	int3
+    6c8b:	cc                   	int3
+    6c8c:	cc                   	int3
+    6c8d:	cc                   	int3
+    6c8e:	cc                   	int3
+    6c8f:	cc                   	int3
+
+0000000000006c90 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint>:
+    6c90:	0f b6 06             	movzbl (%rsi),%eax
+    6c93:	0f b6 56 78          	movzbl 0x78(%rsi),%edx
+    6c97:	80 fa ff             	cmp    $0xff,%dl
+    6c9a:	74 23                	je     6cbf <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x2f>
+    6c9c:	84 c0                	test   %al,%al
+    6c9e:	74 35                	je     6cd5 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x45>
+    6ca0:	0f b6 4e 60          	movzbl 0x60(%rsi),%ecx
+    6ca4:	80 f9 02             	cmp    $0x2,%cl
+    6ca7:	75 49                	jne    6cf2 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x62>
+    6ca9:	41 b1 01             	mov    $0x1,%r9b
+    6cac:	84 d2                	test   %dl,%dl
+    6cae:	75 59                	jne    6d09 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x79>
+    6cb0:	48 8b 46 70          	mov    0x70(%rsi),%rax
+    6cb4:	48 2b 46 68          	sub    0x68(%rsi),%rax
+    6cb8:	72 4f                	jb     6d09 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x79>
+    6cba:	e9 bb 00 00 00       	jmp    6d7a <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xea>
+    6cbf:	b1 01                	mov    $0x1,%cl
+    6cc1:	84 c0                	test   %al,%al
+    6cc3:	74 61                	je     6d26 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x96>
+    6cc5:	48 8b 46 10          	mov    0x10(%rsi),%rax
+    6cc9:	48 2b 46 08          	sub    0x8(%rsi),%rax
+    6ccd:	48 89 c2             	mov    %rax,%rdx
+    6cd0:	e9 92 01 00 00       	jmp    6e67 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1d7>
+    6cd5:	0f b6 46 60          	movzbl 0x60(%rsi),%eax
+    6cd9:	b1 01                	mov    $0x1,%cl
+    6cdb:	3c 02                	cmp    $0x2,%al
+    6cdd:	75 34                	jne    6d13 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x83>
+    6cdf:	84 d2                	test   %dl,%dl
+    6ce1:	75 43                	jne    6d26 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x96>
+    6ce3:	4c 8b 46 70          	mov    0x70(%rsi),%r8
+    6ce7:	4c 2b 46 68          	sub    0x68(%rsi),%r8
+    6ceb:	72 39                	jb     6d26 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x96>
+    6ced:	e9 a6 00 00 00       	jmp    6d98 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x108>
+    6cf2:	80 fa 02             	cmp    $0x2,%dl
+    6cf5:	75 38                	jne    6d2f <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x9f>
+    6cf7:	41 b1 01             	mov    $0x1,%r9b
+    6cfa:	f6 c1 01             	test   $0x1,%cl
+    6cfd:	75 0a                	jne    6d09 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x79>
+    6cff:	48 8b 46 58          	mov    0x58(%rsi),%rax
+    6d03:	48 2b 46 50          	sub    0x50(%rsi),%rax
+    6d07:	73 71                	jae    6d7a <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xea>
+    6d09:	31 c9                	xor    %ecx,%ecx
+    6d0b:	45 31 c0             	xor    %r8d,%r8d
+    6d0e:	e9 32 01 00 00       	jmp    6e45 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1b5>
+    6d13:	80 fa 02             	cmp    $0x2,%dl
+    6d16:	75 3e                	jne    6d56 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xc6>
+    6d18:	a8 01                	test   $0x1,%al
+    6d1a:	75 0a                	jne    6d26 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x96>
+    6d1c:	4c 8b 46 58          	mov    0x58(%rsi),%r8
+    6d20:	4c 2b 46 50          	sub    0x50(%rsi),%r8
+    6d24:	73 72                	jae    6d98 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x108>
+    6d26:	31 c0                	xor    %eax,%eax
+    6d28:	31 d2                	xor    %edx,%edx
+    6d2a:	e9 38 01 00 00       	jmp    6e67 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1d7>
+    6d2f:	b0 01                	mov    $0x1,%al
+    6d31:	f6 c1 01             	test   $0x1,%cl
+    6d34:	75 0a                	jne    6d40 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xb0>
+    6d36:	4c 8b 46 58          	mov    0x58(%rsi),%r8
+    6d3a:	4c 2b 46 50          	sub    0x50(%rsi),%r8
+    6d3e:	73 75                	jae    6db5 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x125>
+    6d40:	31 c9                	xor    %ecx,%ecx
+    6d42:	41 b2 01             	mov    $0x1,%r10b
+    6d45:	45 31 c9             	xor    %r9d,%r9d
+    6d48:	f6 c2 01             	test   $0x1,%dl
+    6d4b:	0f 84 82 00 00 00    	je     6dd3 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x143>
+    6d51:	e9 87 00 00 00       	jmp    6ddd <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x14d>
+    6d56:	a8 01                	test   $0x1,%al
+    6d58:	75 0a                	jne    6d64 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xd4>
+    6d5a:	4c 8b 4e 58          	mov    0x58(%rsi),%r9
+    6d5e:	4c 2b 4e 50          	sub    0x50(%rsi),%r9
+    6d62:	73 7e                	jae    6de2 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x152>
+    6d64:	31 c0                	xor    %eax,%eax
+    6d66:	41 b1 01             	mov    $0x1,%r9b
+    6d69:	45 31 c0             	xor    %r8d,%r8d
+    6d6c:	f6 c2 01             	test   $0x1,%dl
+    6d6f:	0f 84 8b 00 00 00    	je     6e00 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x170>
+    6d75:	e9 90 00 00 00       	jmp    6e0a <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x17a>
+    6d7a:	49 89 c0             	mov    %rax,%r8
+    6d7d:	49 ff c0             	inc    %r8
+    6d80:	48 c7 c1 ff ff ff ff 	mov    $0xffffffffffffffff,%rcx
+    6d87:	49 0f 45 c8          	cmovne %r8,%rcx
+    6d8b:	48 83 f8 ff          	cmp    $0xffffffffffffffff,%rax
+    6d8f:	41 0f 95 c1          	setne  %r9b
+    6d93:	e9 ad 00 00 00       	jmp    6e45 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1b5>
+    6d98:	4c 89 c2             	mov    %r8,%rdx
+    6d9b:	48 ff c2             	inc    %rdx
+    6d9e:	48 c7 c0 ff ff ff ff 	mov    $0xffffffffffffffff,%rax
+    6da5:	48 0f 45 c2          	cmovne %rdx,%rax
+    6da9:	49 83 f8 ff          	cmp    $0xffffffffffffffff,%r8
+    6dad:	0f 95 c1             	setne  %cl
+    6db0:	e9 b2 00 00 00       	jmp    6e67 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1d7>
+    6db5:	4d 89 c1             	mov    %r8,%r9
+    6db8:	49 ff c1             	inc    %r9
+    6dbb:	48 c7 c1 ff ff ff ff 	mov    $0xffffffffffffffff,%rcx
+    6dc2:	49 0f 45 c9          	cmovne %r9,%rcx
+    6dc6:	49 83 f8 ff          	cmp    $0xffffffffffffffff,%r8
+    6dca:	41 0f 95 c2          	setne  %r10b
+    6dce:	f6 c2 01             	test   $0x1,%dl
+    6dd1:	75 0a                	jne    6ddd <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x14d>
+    6dd3:	48 8b 56 70          	mov    0x70(%rsi),%rdx
+    6dd7:	48 2b 56 68          	sub    0x68(%rsi),%rdx
+    6ddb:	73 34                	jae    6e11 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x181>
+    6ddd:	45 31 c0             	xor    %r8d,%r8d
+    6de0:	eb 53                	jmp    6e35 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1a5>
+    6de2:	4d 89 c8             	mov    %r9,%r8
+    6de5:	49 ff c0             	inc    %r8
+    6de8:	48 c7 c0 ff ff ff ff 	mov    $0xffffffffffffffff,%rax
+    6def:	49 0f 45 c0          	cmovne %r8,%rax
+    6df3:	49 83 f9 ff          	cmp    $0xffffffffffffffff,%r9
+    6df7:	41 0f 95 c1          	setne  %r9b
+    6dfb:	f6 c2 01             	test   $0x1,%dl
+    6dfe:	75 0a                	jne    6e0a <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x17a>
+    6e00:	4c 8b 56 70          	mov    0x70(%rsi),%r10
+    6e04:	4c 2b 56 68          	sub    0x68(%rsi),%r10
+    6e08:	73 6c                	jae    6e76 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1e6>
+    6e0a:	31 d2                	xor    %edx,%edx
+    6e0c:	e9 87 00 00 00       	jmp    6e98 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x208>
+    6e11:	53                   	push   %rbx
+    6e12:	49 89 d0             	mov    %rdx,%r8
+    6e15:	49 ff c0             	inc    %r8
+    6e18:	49 c7 c3 ff ff ff ff 	mov    $0xffffffffffffffff,%r11
+    6e1f:	4c 89 c3             	mov    %r8,%rbx
+    6e22:	49 0f 44 db          	cmove  %r11,%rbx
+    6e26:	48 83 fa ff          	cmp    $0xffffffffffffffff,%rdx
+    6e2a:	0f 95 c0             	setne  %al
+    6e2d:	48 01 d9             	add    %rbx,%rcx
+    6e30:	49 0f 42 cb          	cmovb  %r11,%rcx
+    6e34:	5b                   	pop    %rbx
+    6e35:	41 20 c2             	and    %al,%r10b
+    6e38:	4d 01 c8             	add    %r9,%r8
+    6e3b:	4d 39 c8             	cmp    %r9,%r8
+    6e3e:	41 0f 93 c1          	setae  %r9b
+    6e42:	45 20 d1             	and    %r10b,%r9b
+    6e45:	48 8b 56 10          	mov    0x10(%rsi),%rdx
+    6e49:	48 2b 56 08          	sub    0x8(%rsi),%rdx
+    6e4d:	48 01 d1             	add    %rdx,%rcx
+    6e50:	48 c7 c0 ff ff ff ff 	mov    $0xffffffffffffffff,%rax
+    6e57:	48 0f 43 c1          	cmovae %rcx,%rax
+    6e5b:	4c 01 c2             	add    %r8,%rdx
+    6e5e:	4c 39 c2             	cmp    %r8,%rdx
+    6e61:	0f 93 c1             	setae  %cl
+    6e64:	44 20 c9             	and    %r9b,%cl
+    6e67:	0f b6 c9             	movzbl %cl,%ecx
+    6e6a:	48 89 07             	mov    %rax,(%rdi)
+    6e6d:	48 89 4f 08          	mov    %rcx,0x8(%rdi)
+    6e71:	48 89 57 10          	mov    %rdx,0x10(%rdi)
+    6e75:	c3                   	ret
+    6e76:	4c 89 d2             	mov    %r10,%rdx
+    6e79:	48 ff c2             	inc    %rdx
+    6e7c:	48 c7 c6 ff ff ff ff 	mov    $0xffffffffffffffff,%rsi
+    6e83:	49 89 d3             	mov    %rdx,%r11
+    6e86:	4c 0f 44 de          	cmove  %rsi,%r11
+    6e8a:	49 83 fa ff          	cmp    $0xffffffffffffffff,%r10
+    6e8e:	0f 95 c1             	setne  %cl
+    6e91:	4c 01 d8             	add    %r11,%rax
+    6e94:	48 0f 42 c6          	cmovb  %rsi,%rax
+    6e98:	41 20 c9             	and    %cl,%r9b
+    6e9b:	eb be                	jmp    6e5b <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1cb>
+    6e9d:	cc                   	int3
+    6e9e:	cc                   	int3
+    6e9f:	cc                   	int3
+
+0000000000006ea0 <<core::num::error::ParseIntError as core::fmt::Debug>::fmt>:
+    6ea0:	48 83 ec 18          	sub    $0x18,%rsp
+    6ea4:	48 89 f0             	mov    %rsi,%rax
+    6ea7:	48 89 7c 24 10       	mov    %rdi,0x10(%rsp)
+    6eac:	48 8d 0d 3d 13 00 00 	lea    0x133d(%rip),%rcx        # 81f0 <__frame_dummy_init_array_entry+0x268>
+    6eb3:	48 89 0c 24          	mov    %rcx,(%rsp)
+    6eb7:	48 8d 35 34 b7 ff ff 	lea    -0x48cc(%rip),%rsi        # 25f2 <__abi_tag+0x22f6>
+    6ebe:	48 8d 0d bd b6 ff ff 	lea    -0x4943(%rip),%rcx        # 2582 <__abi_tag+0x2286>
+    6ec5:	4c 8d 4c 24 10       	lea    0x10(%rsp),%r9
+    6eca:	ba 0d 00 00 00       	mov    $0xd,%edx
+    6ecf:	41 b8 04 00 00 00    	mov    $0x4,%r8d
+    6ed5:	48 89 c7             	mov    %rax,%rdi
+    6ed8:	ff 15 ea 16 00 00    	call   *0x16ea(%rip)        # 85c8 <<core::fmt::Formatter>::debug_struct_field1_finish@Base>
+    6ede:	48 83 c4 18          	add    $0x18,%rsp
+    6ee2:	c3                   	ret
+    6ee3:	cc                   	int3
+    6ee4:	cc                   	int3
+    6ee5:	cc                   	int3
+    6ee6:	cc                   	int3
+    6ee7:	cc                   	int3
+    6ee8:	cc                   	int3
+    6ee9:	cc                   	int3
+    6eea:	cc                   	int3
+    6eeb:	cc                   	int3
+    6eec:	cc                   	int3
+    6eed:	cc                   	int3
+    6eee:	cc                   	int3
+    6eef:	cc                   	int3
+
+0000000000006ef0 <main>:
+    6ef0:	50                   	push   %rax
+    6ef1:	48 89 f1             	mov    %rsi,%rcx
+    6ef4:	48 63 d7             	movslq %edi,%rdx
+    6ef7:	48 8d 05 42 d1 ff ff 	lea    -0x2ebe(%rip),%rax        # 4040 <bang_probe_v3::main>
+    6efe:	48 89 04 24          	mov    %rax,(%rsp)
+    6f02:	48 8d 35 ff 10 00 00 	lea    0x10ff(%rip),%rsi        # 8008 <__frame_dummy_init_array_entry+0x80>
+    6f09:	48 89 e7             	mov    %rsp,%rdi
+    6f0c:	45 31 c0             	xor    %r8d,%r8d
+    6f0f:	ff 15 c3 15 00 00    	call   *0x15c3(%rip)        # 84d8 <std::rt::lang_start_internal@Base>
+    6f15:	59                   	pop    %rcx
+    6f16:	c3                   	ret
+
+Disassembly of section .init:
+
+0000000000006f18 <_init>:
+    6f18:	f3 0f 1e fa          	endbr64
+    6f1c:	48 83 ec 08          	sub    $0x8,%rsp
+    6f20:	48 8b 05 79 15 00 00 	mov    0x1579(%rip),%rax        # 84a0 <__gmon_start__>
+    6f27:	48 85 c0             	test   %rax,%rax
+    6f2a:	74 02                	je     6f2e <_init+0x16>
+    6f2c:	ff d0                	call   *%rax
+    6f2e:	48 83 c4 08          	add    $0x8,%rsp
+    6f32:	c3                   	ret
+
+Disassembly of section .fini:
+
+0000000000006f34 <_fini>:
+    6f34:	f3 0f 1e fa          	endbr64
+    6f38:	48 83 ec 08          	sub    $0x8,%rsp
+    6f3c:	48 83 c4 08          	add    $0x8,%rsp
+    6f40:	c3                   	ret
+
+Disassembly of section .plt:
+
+0000000000006f50 <__cxa_finalize@plt-0x10>:
+    6f50:	ff 35 82 16 00 00    	push   0x1682(%rip)        # 85d8 <_GLOBAL_OFFSET_TABLE_+0x8>
+    6f56:	ff 25 84 16 00 00    	jmp    *0x1684(%rip)        # 85e0 <_GLOBAL_OFFSET_TABLE_+0x10>
+    6f5c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000006f60 <__cxa_finalize@plt>:
+    6f60:	ff 25 82 16 00 00    	jmp    *0x1682(%rip)        # 85e8 <__cxa_finalize@GLIBC_2.2.5>
+    6f66:	68 00 00 00 00       	push   $0x0
+    6f6b:	e9 e0 ff ff ff       	jmp    6f50 <_fini+0x1c>
+
+0000000000006f70 <_Unwind_Resume@plt>:
+    6f70:	ff 25 7a 16 00 00    	jmp    *0x167a(%rip)        # 85f0 <_Unwind_Resume@GCC_3.0>
+    6f76:	68 01 00 00 00       	push   $0x1
+    6f7b:	e9 d0 ff ff ff       	jmp    6f50 <_fini+0x1c>

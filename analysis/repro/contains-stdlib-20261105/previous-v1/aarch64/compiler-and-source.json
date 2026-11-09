@@ -1,0 +1,37 @@
+{
+  "source": "/home/wheel/c00936152/rust-contains-stdlib",
+  "repository": "/home/wheel/c00936152/rust-analysis",
+  "head": "dc55da5cca14a0aa773ecb7a0459756260b2ee5c",
+  "library_snapshot": "current working tree including existing changes",
+  "pattern_sha256": "878333fb2b4371194f0853b93ff4fc53efe02be878f603b546ab5ae00fa3eefd",
+  "rustc_vV": "rustc 1.99.0-dev\nbinary: rustc\ncommit-hash: unknown\ncommit-date: unknown\nhost: aarch64-unknown-linux-gnu\nrelease: 1.99.0-dev\nLLVM version: 23.1.0\n",
+  "cargo_v": "cargo 1.99.0-nightly (b07e5a086 2026-08-07)\n",
+  "stdlib_build_command": [
+    "./x",
+    "build",
+    "--stage",
+    "0",
+    "library/std",
+    "library/test",
+    "--target",
+    "aarch64-unknown-linux-gnu,x86_64-unknown-linux-gnu"
+  ],
+  "app_compile_flags": [
+    "-O",
+    "--edition=2024",
+    "-Cprefer-dynamic",
+    "-Zinline-mir",
+    "-Cllvm-args=-import-instr-limit=10"
+  ],
+  "new_inline_attributes": 0,
+  "host_target": "aarch64-unknown-linux-gnu",
+  "execution_targets": [
+    "aarch64-unknown-linux-gnu",
+    "x86_64-unknown-linux-gnu"
+  ],
+  "arm_target": "builtin; custom JSON attempt was not used",
+  "bootstrap_patch_scope": "isolated worktree only; permit native stage0 local-rebuild and install rebuilt outputs",
+  "standard_library_patch_sha256": "8e58815fa140e7796dca33f7534ac96fc426fa9a68cfd648e33cffbca54cf64d",
+  "bootstrap_patch_sha256": "18ec149fbc7dcc99d9cd0da0bbc6380741e435b6fae6d3b56740658f83cfd146",
+  "pattern_after_sha256": "5fcb3efdfe7cbc81110ed91fa1c020b36261e5d8984afc0f2228cc987fc84af2"
+}

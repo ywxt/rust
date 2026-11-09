@@ -1,0 +1,22 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cycles:u'
+# Event count (approx.): 1264007584
+#
+# Overhead  Command  Shared Object               Symbol                                                                               
+# ........  .......  ..........................  .....................................................................................
+#
+    96.88%  counted  libstd-7a2f7be1a1e543fc.so  [.] _RNvNtNtCshp6Wxz1DwXO_4core3str7pattern18contains_byte_simd
+     1.34%  counted  counted                     [.] _RNvXst_NtNtCshp6Wxz1DwXO_4core3str7patternReNtB5_7Pattern15is_contained_in
+     0.99%  counted  counted                     [.] _RNvNtNtCshp6Wxz1DwXO_4core3str7pattern18contains_byte_simd@plt
+     0.71%  counted  counted                     [.] _RNvNtCs7Com3XUV1E3_7counted3str34contains_bang_str_long_lorem_ipsum
+     0.04%  counted  ld-linux-aarch64.so.1       [.] _dl_lookup_symbol_x
+     0.04%  counted  libstd-7a2f7be1a1e543fc.so  [.] _RNvNvNtNtNtNtCs68fcPop4ROg_3std3sys4args4unix3imp15ARGV_INIT_ARRAY12init_wrapper
+
+
+#
+# (Tip: Sample related events with: perf record -e '{cycles,instructions}:S')
+#

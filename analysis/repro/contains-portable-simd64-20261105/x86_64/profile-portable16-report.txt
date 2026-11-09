@@ -1,0 +1,23 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu_core/cycles/u'
+# Event count (approx.): 1374508247
+#
+# Overhead  Command  Shared Object               Symbol                                                    
+# ........  .......  ..........................  ..........................................................
+#
+    95.96%  counted  libstd-320fe7036dd8354d.so  [.] core::str::pattern::contains_byte_simd
+     2.76%  counted  counted                     [.] <&str as core::str::pattern::Pattern>::is_contained_in
+     1.09%  counted  counted                     [.] counted::str::contains_bang_str_long_lorem_ipsum
+     0.07%  env      ld-linux-x86-64.so.2        [.] _dl_relocate_object_no_relro
+     0.04%  counted  ld-linux-x86-64.so.2        [.] _dl_next_ld_env_entry
+     0.04%  counted  ld-linux-x86-64.so.2        [.] _dl_relocate_object_no_relro
+     0.04%  counted  [unknown]                   [k] 0xffffffffb6201280
+
+
+#
+# (Tip: To not record events from perf itself add --exclude-perf)
+#

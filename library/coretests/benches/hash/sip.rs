@@ -122,3 +122,72 @@ fn bench_bytes_c_128(b: &mut Bencher) {
     b.iter(|| hash_bytes(SipHasher::default(), &data));
     b.bytes = 128;
 }
+
+#[bench]
+fn bench_str_runtime_under_8_bytes(b: &mut Bencher) {
+    let s = "foo";
+    b.iter(|| hash(&black_box(s)));
+    b.bytes = s.len() as u64;
+}
+
+#[bench]
+fn bench_str_runtime_of_8_bytes(b: &mut Bencher) {
+    let s = "foobar78";
+    b.iter(|| hash(&black_box(s)));
+    b.bytes = s.len() as u64;
+}
+
+#[bench]
+fn bench_str_runtime_over_8_bytes(b: &mut Bencher) {
+    let s = "foobarbaz0";
+    b.iter(|| hash(&black_box(s)));
+    b.bytes = s.len() as u64;
+}
+
+#[bench]
+fn bench_bytes_runtime_7(b: &mut Bencher) {
+    let data = black_box([b' '; 7]);
+    b.iter(|| hash_bytes(SipHasher::default(), black_box(data.as_slice())));
+    b.bytes = 7;
+}
+
+#[bench]
+fn bench_bytes_runtime_128(b: &mut Bencher) {
+    let data = black_box([b' '; 128]);
+    b.iter(|| hash_bytes(SipHasher::default(), black_box(data.as_slice())));
+    b.bytes = 128;
+}
+
+#[bench]
+fn bench_bytes_chunked_128(b: &mut Bencher) {
+    let data = black_box([b' '; 128]);
+    b.iter(|| {
+        let mut state = SipHasher::default();
+        for chunk in black_box(data.as_slice()).chunks(7) {
+            state.write(chunk);
+        }
+        state.finish()
+    });
+    b.bytes = 128;
+}
+
+#[bench]
+fn bench_default_hasher_u64(b: &mut Bencher) {
+    let value = black_box(16262950014981195938u64);
+    b.iter(|| hash_with(std::hash::DefaultHasher::new(), &value));
+    b.bytes = 8;
+}
+
+#[bench]
+fn bench_default_hasher_bytes_7(b: &mut Bencher) {
+    let data = black_box([b' '; 7]);
+    b.iter(|| hash_bytes(std::hash::DefaultHasher::new(), black_box(data.as_slice())));
+    b.bytes = 7;
+}
+
+#[bench]
+fn bench_default_hasher_bytes_128(b: &mut Bencher) {
+    let data = black_box([b' '; 128]);
+    b.iter(|| hash_bytes(std::hash::DefaultHasher::new(), black_box(data.as_slice())));
+    b.bytes = 128;
+}

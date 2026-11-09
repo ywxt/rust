@@ -1,0 +1,26 @@
+[
+  [
+    "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+    "--edition=2024",
+    "-O",
+    "-C",
+    "codegen-units=1",
+    "--emit=link,asm,llvm-ir",
+    "/tmp/slice-swap-usize30-20261105/aligned-probe.rs",
+    "-o",
+    "/tmp/slice-swap-usize30-20261105/aligned"
+  ],
+  [
+    "/tmp/xdiff-src/build/aarch64-unknown-linux-gnu/stage1/bin/rustc",
+    "--edition=2024",
+    "-O",
+    "-C",
+    "codegen-units=1",
+    "--emit=link,asm,llvm-ir",
+    "-C",
+    "llvm-args=-aarch64-enable-ldst-opt=false",
+    "/tmp/slice-swap-usize30-20261105/aligned-probe.rs",
+    "-o",
+    "/tmp/slice-swap-usize30-20261105/aligned_noldst"
+  ]
+]

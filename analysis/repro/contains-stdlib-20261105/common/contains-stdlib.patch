@@ -1,0 +1,156 @@
+--- a/library/core/src/str/pattern.rs
++++ b/library/core/src/str/pattern.rs
+@@ -584,6 +584,13 @@
+     #[inline]
+     fn is_contained_in(self, haystack: &str) -> bool {
+         if (self as u32) < 128 {
++            #[cfg(any(
++                all(target_arch = "aarch64", target_feature = "neon"),
++                all(target_arch = "x86_64", target_feature = "sse2"),
++            ))]
++            if haystack.len() >= 64 {
++                return contains_byte_simd(haystack.as_bytes(), self as u8);
++            }
+             haystack.as_bytes().contains(&(self as u8))
+         } else {
+             let mut buffer = [0u8; 4];
+@@ -994,6 +1001,13 @@
+         match self.len().cmp(&haystack.len()) {
+             Ordering::Less => {
+                 if self.len() == 1 {
++                    #[cfg(any(
++                        all(target_arch = "aarch64", target_feature = "neon"),
++                        all(target_arch = "x86_64", target_feature = "sse2"),
++                    ))]
++                    if haystack.len() >= 64 {
++                        return contains_byte_simd(haystack.as_bytes(), self.as_bytes()[0]);
++                    }
+                     return haystack.as_bytes().contains(&self.as_bytes()[0]);
+                 }
+ 
+@@ -2007,3 +2021,54 @@
+         vx == vy
+     }
+ }
++
++#[cfg(all(target_arch = "aarch64", target_feature = "neon"))]
++fn contains_byte_64(c: &[u8], needle: u8) -> bool {
++    use crate::arch::aarch64::*;
++    assert_eq!(c.len(), 64);
++    unsafe {
++        let p = c.as_ptr();
++        let n = vdupq_n_u8(needle);
++        let a = vceqq_u8(vld1q_u8(p), n);
++        let b = vceqq_u8(vld1q_u8(p.add(16)), n);
++        let d = vceqq_u8(vld1q_u8(p.add(32)), n);
++        let e = vceqq_u8(vld1q_u8(p.add(48)), n);
++        vmaxvq_u8(vorrq_u8(vorrq_u8(a, b), vorrq_u8(d, e))) != 0
++    }
++}
++
++#[cfg(all(target_arch = "x86_64", target_feature = "sse2"))]
++fn contains_byte_64(c: &[u8], needle: u8) -> bool {
++    use crate::arch::x86_64::*;
++    assert_eq!(c.len(), 64);
++    unsafe {
++        let p = c.as_ptr().cast::<__m128i>();
++        let n = _mm_set1_epi8(needle as i8);
++        let a = _mm_cmpeq_epi8(_mm_loadu_si128(p), n);
++        let b = _mm_cmpeq_epi8(_mm_loadu_si128(p.add(1)), n);
++        let d = _mm_cmpeq_epi8(_mm_loadu_si128(p.add(2)), n);
++        let e = _mm_cmpeq_epi8(_mm_loadu_si128(p.add(3)), n);
++        _mm_movemask_epi8(_mm_or_si128(_mm_or_si128(a, b), _mm_or_si128(d, e))) != 0
++    }
++}
++
++#[cfg(any(
++    all(target_arch = "aarch64", target_feature = "neon"),
++    all(target_arch = "x86_64", target_feature = "sse2"),
++))]
++fn contains_byte_simd(bytes: &[u8], needle: u8) -> bool {
++    if bytes[0] == needle {
++        return true;
++    }
++    let prefix = if bytes.len() >= 128 { bytes.as_ptr().align_offset(64) } else { 0 };
++    if prefix != 0 && contains_byte_64(&bytes[..64], needle) {
++        return true;
++    }
++    let mut chunks = bytes[prefix..].chunks_exact(64);
++    for c in &mut chunks {
++        if contains_byte_64(c, needle) {
++            return true;
++        }
++    }
++    !chunks.remainder().is_empty() && contains_byte_64(&bytes[bytes.len() - 64..], needle)
++}
+--- a/library/alloctests/tests/str.rs
++++ b/library/alloctests/tests/str.rs
+@@ -2676,3 +2676,68 @@
+         check_many(s, [idx], ret);
+     }
+ }
++
++#[test]
++fn test_contains_runtime_ascii_all_alignments() {
++    let lengths = [0usize, 1, 7, 8, 15, 16, 17, 31, 32, 63, 64, 65, 127, 128, 129, 255, 256, 257];
++    for needle in 0..=127u8 {
++        let encoded = [needle];
++        let pattern = from_utf8(&encoded).unwrap();
++        let fill = if needle == b'x' { b'y' } else { b'x' };
++        for len in lengths {
++            for offset in 0..64 {
++                let mut bytes = vec![fill; len + 64];
++                for pos in [None, Some(0), Some(len / 2), len.checked_sub(1)] {
++                    bytes.fill(fill);
++                    if let Some(i) = pos {
++                        if i < len {
++                            bytes[offset + i] = needle;
++                        }
++                    }
++                    let haystack = from_utf8(&bytes[offset..offset + len]).unwrap();
++                    let expected = pos.is_some_and(|p| p < len);
++                    assert_eq!(haystack.contains(pattern), expected);
++                    assert_eq!(haystack.contains(needle as char), expected);
++                }
++            }
++        }
++    }
++}
++
++#[test]
++fn test_contains_runtime_full_pattern_semantics() {
++    let haystacks = [
++        "",
++        "a!b",
++        "é中💩",
++        "a\0b",
++        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++    ];
++    for haystack in haystacks {
++        for pattern in
++            ["", "!", "\0", "é", "中💩", "💩中", "aaaaaaaaab", "longer than a short haystack"]
++        {
++            let expected = pattern.is_empty()
++                || haystack.as_bytes().windows(pattern.len()).any(|w| w == pattern.as_bytes());
++            assert_eq!(haystack.contains(pattern), expected);
++        }
++        for needle in ['!', '\0', 'é', '中', '💩', '\u{10ffff}'] {
++            assert_eq!(haystack.contains(needle), haystack.chars().any(|c| c == needle));
++        }
++        let chars = ['!', '中'];
++        let expected = haystack.chars().any(|c| chars.iter().any(|&n| n == c));
++        assert_eq!(haystack.contains(&chars[..]), expected);
++        let mut actual_visits = Vec::new();
++        let mut expected_visits = Vec::new();
++        let actual = haystack.contains(|c| {
++            actual_visits.push(c);
++            c == '中'
++        });
++        let expected = haystack.chars().any(|c| {
++            expected_visits.push(c);
++            c == '中'
++        });
++        assert_eq!(actual, expected);
++        assert_eq!(actual_visits, expected_visits);
++    }
++}

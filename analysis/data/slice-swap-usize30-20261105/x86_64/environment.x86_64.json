@@ -1,0 +1,68 @@
+{
+  "compiler": {
+    "command": [
+      "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/bin/rustc",
+      "-vV"
+    ],
+    "stdout": "rustc 1.101.0-dev\nbinary: rustc\ncommit-hash: unknown\ncommit-date: unknown\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-dev\nLLVM version: 23.1.4\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "uname": {
+    "command": [
+      "uname",
+      "-a"
+    ],
+    "stdout": "Linux ywxt-work 7.2.8 #1-NixOS SMP PREEMPT_DYNAMIC Fri Sep 25 14:37:14 UTC 2026 x86_64 GNU/Linux\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "lscpu": {
+    "command": [
+      "lscpu",
+      "-J"
+    ],
+    "stdout": "{\n   \"lscpu\": [\n      {\n         \"field\": \"Architecture:\",\n         \"data\": \"x86_64\"\n      },{\n         \"field\": \"CPU op-mode(s):\",\n         \"data\": \"32-bit, 64-bit\"\n      },{\n         \"field\": \"Address sizes:\",\n         \"data\": \"46 bits physical, 48 bits virtual\"\n      },{\n         \"field\": \"Byte Order:\",\n         \"data\": \"Little Endian\"\n      },{\n         \"field\": \"CPU(s):\",\n         \"data\": \"20\"\n      },{\n         \"field\": \"On-line CPU(s) list:\",\n         \"data\": \"0-19\"\n      },{\n         \"field\": \"Vendor ID:\",\n         \"data\": \"GenuineIntel\"\n      },{\n         \"field\": \"Model name:\",\n         \"data\": \"12th Gen Intel(R) Core(TM) i7-12700\"\n      },{\n         \"field\": \"CPU family:\",\n         \"data\": \"6\"\n      },{\n         \"field\": \"Model:\",\n         \"data\": \"151\"\n      },{\n         \"field\": \"Thread(s) per core:\",\n         \"data\": \"2\"\n      },{\n         \"field\": \"Core(s) per socket:\",\n         \"data\": \"12\"\n      },{\n         \"field\": \"Socket(s):\",\n         \"data\": \"1\"\n      },{\n         \"field\": \"Stepping:\",\n         \"data\": \"2\"\n      },{\n         \"field\": \"Microcode version:\",\n         \"data\": \"0x3e\"\n      },{\n         \"field\": \"CPU(s) scaling MHz:\",\n         \"data\": \"33%\"\n      },{\n         \"field\": \"CPU max MHz:\",\n         \"data\": \"4900.0000\"\n      },{\n         \"field\": \"CPU min MHz:\",\n         \"data\": \"800.0000\"\n      },{\n         \"field\": \"BogoMIPS:\",\n         \"data\": \"4224.00\"\n      },{\n         \"field\": \"Flags:\",\n         \"data\": \"fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities\"\n      },{\n         \"field\": \"Virtualization:\",\n         \"data\": \"VT-x\"\n      },{\n         \"field\": \"L1d cache:\",\n         \"data\": \"512 KiB (12 instances)\"\n      },{\n         \"field\": \"L1i cache:\",\n         \"data\": \"512 KiB (12 instances)\"\n      },{\n         \"field\": \"L2 cache:\",\n         \"data\": \"12 MiB (9 instances)\"\n      },{\n         \"field\": \"L3 cache:\",\n         \"data\": \"25 MiB (1 instance)\"\n      },{\n         \"field\": \"NUMA node(s):\",\n         \"data\": \"1\"\n      },{\n         \"field\": \"NUMA node0 CPU(s):\",\n         \"data\": \"0-19\"\n      },{\n         \"field\": \"Vulnerability Gather data sampling:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Ghostwrite:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Indirect target selection:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Itlb multihit:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability L1tf:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Mds:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Meltdown:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Mmio stale data:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Old microcode:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Reg file data sampling:\",\n         \"data\": \"Mitigation; Clear Register File\"\n      },{\n         \"field\": \"Vulnerability Retbleed:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Spec rstack overflow:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Spec store bypass:\",\n         \"data\": \"Mitigation; Speculative Store Bypass disabled via prctl\"\n      },{\n         \"field\": \"Vulnerability Spectre v1:\",\n         \"data\": \"Mitigation; usercopy/swapgs barriers and __user pointer sanitization\"\n      },{\n         \"field\": \"Vulnerability Spectre v2:\",\n         \"data\": \"Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI BHI_DIS_S\"\n      },{\n         \"field\": \"Vulnerability Srbds:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Tsa:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Tsx async abort:\",\n         \"data\": \"Not affected\"\n      },{\n         \"field\": \"Vulnerability Vmscape:\",\n         \"data\": \"Mitigation; IBPB before exit to userspace\"\n      }\n   ]\n}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "glibc": {
+    "command": [
+      "ldd",
+      "--version"
+    ],
+    "stdout": "ldd (GNU libc) 2.42\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\nWritten by Roland McGrath and Ulrich Drepper.\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "source_head": {
+    "command": [
+      "git",
+      "-C",
+      "/tmp/xdiff-src",
+      "rev-parse",
+      "HEAD"
+    ],
+    "stdout": "8fcaaf4c3fe47544c8d857e421ec258e7b06be96\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "source_sha256": {
+    "/tmp/slice-swap-usize30-20261105/probe.rs": "f8b61aa3be7e661455e9111917e52ae5e59e2c77f16e68857f2505bcc139c95e",
+    "/tmp/slice-swap-usize30-20261105/methods.rs": "208fa5baeb1f1deeada8dbff57d256d1ad8ff9d4398120a90f9c170ff9e82ca6",
+    "/tmp/slice-swap-usize30-20261105/initial-probe.rs": "1677cf5b6646a66ead365027d8f42ed4cdfbd6214f8544dc3ac7434d1f51eed0",
+    "/tmp/slice-swap-usize30-20261105/initial-methods.rs": "b7d2b80e137032bafa74fc23f012b42635acef46d7b3e89c57243ecc681d85b3",
+    "/tmp/slice-swap-usize30-20261105/harness.rs": "e872ccce52e50214352b3b0f24fee1c4bedf1c548a17c85a119d47b1a2b095a7",
+    "/tmp/slice-swap-usize30-20261105/extra-check.rs": "506e2bb3ff489445468ff9164852dc7f54ed3623e6cd014161a7352a3d97866c",
+    "/tmp/slice-swap-usize30-20261105/asm-probe.rs": "f6012e0d5e3c9d95dbf36ce0eb1a5015b62d616509672fa5a594e8c18cbb3e44",
+    "/tmp/slice-swap-usize30-20261105/aligned-probe.rs": "225dbf23da37203c93ac939596de96f5d17b6332bd918079e30e40393b638919",
+    "/tmp/slice-swap-usize30-20261105/distance-probe.rs": "5c967a22fd925978d358b4b1f0318330cca9e23b8f340eaee18bb84999f61c98",
+    "/tmp/xdiff-src/library/coretests/benches/slice.rs": "33585b13f8648f17f5fc874c2889f85de9d4c9fff469181845f47537a998f3bf",
+    "/tmp/xdiff-src/library/core/src/ptr/mod.rs": "82bc7866b3cded078a5e327d620ec4a8d4f140eb0c339914a3b790d8229f4e64"
+  },
+  "benchmark_binary": {
+    "path": "/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1-std/x86_64-unknown-linux-gnu/dist/build/coretests/d6382d1542e5d229/out/corebenches-d6382d1542e5d229",
+    "sha256": "6968f37b772cb7e2eec1f6f6ad113cec02a91515ccc069d4fadd2b9f2a9a587f"
+  },
+  "probe_binary_sha256": "d39becbacbd05d3fcf599baf612d0d7de2d229497a5d95b6a890e8fbdafd4f99"
+}

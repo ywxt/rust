@@ -1,0 +1,81 @@
+--- a/library/core/src/slice/memchr.rs
++++ b/library/core/src/slice/memchr.rs
+@@ -47,6 +47,7 @@
+     None
+ }
+ 
++#[cfg(not(all(target_arch = "aarch64", target_feature = "neon", target_endian = "little")))]
+ #[rustc_allow_const_fn_unstable(const_eval_select)] // fallback impl has same behavior
+ const fn memchr_aligned(x: u8, text: &[u8]) -> Option<usize> {
+     // The runtime version behaves the same as the compiletime version, it's
+@@ -159,3 +160,70 @@
+     // Find the byte before the point the body loop stopped.
+     text[..offset].iter().rposition(|elt| *elt == x)
+ }
++
++#[cfg(all(target_arch = "aarch64", target_feature = "neon", target_endian = "little"))]
++fn matching_nibbles(needle: u8, block: &[u8]) -> u64 {
++    use crate::simd::cmp::SimdPartialEq;
++    use crate::simd::num::SimdUint;
++    use crate::simd::{u8x16, u16x8};
++
++    let mask = u8x16::from_slice(block).simd_eq(u8x16::splat(needle));
++    // SAFETY: Both vectors contain 16 initialized bytes; all u16 lane values are valid.
++    let pairs: u16x8 = unsafe { crate::mem::transmute(mask.to_simd()) };
++    let packed = (pairs >> u16x8::splat(4)).cast::<u8>();
++    u64::from_le_bytes(packed.to_array())
++}
++
++#[cfg(all(target_arch = "aarch64", target_feature = "neon", target_endian = "little"))]
++#[rustc_allow_const_fn_unstable(const_eval_select)]
++const fn memchr_aligned(x: u8, text: &[u8]) -> Option<usize> {
++    const_eval_select!(
++        @capture { x: u8, text: &[u8] } -> Option<usize>:
++        if const {
++            memchr_naive(x, text)
++        } else {
++            let len = text.len();
++            if len < 16 {
++                return memchr_naive(x, text);
++            }
++            if text[0] == x {
++                return Some(0);
++            }
++            let mut offset = 0;
++            while len - offset >= 64 {
++                let a = matching_nibbles(x, &text[offset..offset + 16]);
++                let b = matching_nibbles(x, &text[offset + 16..offset + 32]);
++                let c = matching_nibbles(x, &text[offset + 32..offset + 48]);
++                let d = matching_nibbles(x, &text[offset + 48..offset + 64]);
++                if a | b | c | d != 0 {
++                    let (bits, start) = if a != 0 {
++                        (a, offset)
++                    } else if b != 0 {
++                        (b, offset + 16)
++                    } else if c != 0 {
++                        (c, offset + 32)
++                    } else {
++                        (d, offset + 48)
++                    };
++                    return Some(start + bits.trailing_zeros() as usize / 4);
++                }
++                offset += 64;
++            }
++            while len - offset >= 16 {
++                let bits = matching_nibbles(x, &text[offset..offset + 16]);
++                if bits != 0 {
++                    return Some(offset + bits.trailing_zeros() as usize / 4);
++                }
++                offset += 16;
++            }
++            if offset < len {
++                let start = len - 16;
++                let bits = matching_nibbles(x, &text[start..]);
++                if bits != 0 {
++                    return Some(start + bits.trailing_zeros() as usize / 4);
++                }
++            }
++            None
++        }
++    )
++}

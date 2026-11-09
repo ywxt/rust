@@ -1,0 +1,43 @@
+{
+  "llvm_version": "23.1.4",
+  "original_ir_modules": {
+    "L01-select-opt": {
+      "sha256": "a7aca88757fd6f1374e9aa814c57372bfcf3877a684280a25afc6e85a978f61d",
+      "llvm_as": "passed"
+    },
+    "L02-ifconv-csel": {
+      "sha256": "158c57a32726827c0bc0a6b88136a2ba5a9248c208ca07d0e2d657a249cab425",
+      "llvm_as": "passed"
+    },
+    "L03-interleave-ld4": {
+      "sha256": "4a2ca65fc7c4704f38a4b644e741bab486aa104f4221d16200caf886c61719f2",
+      "llvm_as": "passed"
+    },
+    "L04-lsr-cmp-imm": {
+      "sha256": "fa292e251d520b2fc70ee939b2a076a86174e5d4ebdb724b3627c5ea1088a970",
+      "llvm_as": "passed"
+    },
+    "L07-aos-ld1-lane": {
+      "sha256": "eec18e67f0b8853cd85c6acae0a85febd11c185e3076e0569087ad2efafc0987",
+      "llvm_as": "passed"
+    },
+    "L10-stack-coloring-sret": {
+      "sha256": "2dd5050f9bdb4c89e7576fe9d139faa29bcdac735ba4b49c1afbe82d0a8809f5",
+      "llvm_as": "passed"
+    },
+    "L11-movemask": {
+      "sha256": "2eea127e8278162ad61794ec75b2ef71f247b8883a57676f25ea478548871342",
+      "llvm_as": "passed"
+    }
+  },
+  "extract_stage": {
+    "llvm_as": "passed",
+    "aarch64_llc": "passed",
+    "x86_64_llc": "passed",
+    "aarch64_usra": true
+  },
+  "retain_u32": {
+    "llvm_mc_sve": "passed"
+  },
+  "performance_measurements": "none"
+}

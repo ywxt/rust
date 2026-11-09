@@ -1,0 +1,230 @@
+
+/tmp/xdiff-src/build/x86_64-unknown-linux-gnu/stage1/lib/rustlib/x86_64-unknown-linux-gnu/lib/libstd-3f1ea972a24311e5.so:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+000000000011c250 <core::slice::memchr::memchr_aligned>:
+  11c250:	41 56                	push   %r14
+  11c252:	53                   	push   %rbx
+  11c253:	48 89 d1             	mov    %rdx,%rcx
+  11c256:	48 8d 56 07          	lea    0x7(%rsi),%rdx
+  11c25a:	48 83 e2 f8          	and    $0xfffffffffffffff8,%rdx
+  11c25e:	48 29 f2             	sub    %rsi,%rdx
+  11c261:	75 08                	jne    11c26b <core::slice::memchr::memchr_aligned+0x1b>
+  11c263:	48 8d 41 f0          	lea    -0x10(%rcx),%rax
+  11c267:	31 d2                	xor    %edx,%edx
+  11c269:	eb 30                	jmp    11c29b <core::slice::memchr::memchr_aligned+0x4b>
+  11c26b:	48 39 ca             	cmp    %rcx,%rdx
+  11c26e:	48 0f 43 d1          	cmovae %rcx,%rdx
+  11c272:	48 85 c9             	test   %rcx,%rcx
+  11c275:	74 1b                	je     11c292 <core::slice::memchr::memchr_aligned+0x42>
+  11c277:	45 31 c0             	xor    %r8d,%r8d
+  11c27a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+  11c280:	42 3a 3c 06          	cmp    (%rsi,%r8,1),%dil
+  11c284:	0f 84 91 00 00 00    	je     11c31b <core::slice::memchr::memchr_aligned+0xcb>
+  11c28a:	49 ff c0             	inc    %r8
+  11c28d:	4c 39 c2             	cmp    %r8,%rdx
+  11c290:	75 ee                	jne    11c280 <core::slice::memchr::memchr_aligned+0x30>
+  11c292:	48 8d 41 f0          	lea    -0x10(%rcx),%rax
+  11c296:	48 39 c2             	cmp    %rax,%rdx
+  11c299:	77 5a                	ja     11c2f5 <core::slice::memchr::memchr_aligned+0xa5>
+  11c29b:	49 b8 80 80 80 80 80 	movabs $0x8080808080808080,%r8
+  11c2a2:	80 80 80 
+  11c2a5:	49 b9 00 01 01 01 01 	movabs $0x101010101010100,%r9
+  11c2ac:	01 01 01 
+  11c2af:	44 0f b6 df          	movzbl %dil,%r11d
+  11c2b3:	4d 8d 51 01          	lea    0x1(%r9),%r10
+  11c2b7:	4d 0f af d3          	imul   %r11,%r10
+  11c2bb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  11c2c0:	4c 8b 1c 16          	mov    (%rsi,%rdx,1),%r11
+  11c2c4:	4d 31 d3             	xor    %r10,%r11
+  11c2c7:	4c 89 cb             	mov    %r9,%rbx
+  11c2ca:	4c 29 db             	sub    %r11,%rbx
+  11c2cd:	4c 09 db             	or     %r11,%rbx
+  11c2d0:	4c 8b 5c 16 08       	mov    0x8(%rsi,%rdx,1),%r11
+  11c2d5:	4d 31 d3             	xor    %r10,%r11
+  11c2d8:	4d 89 ce             	mov    %r9,%r14
+  11c2db:	4d 29 de             	sub    %r11,%r14
+  11c2de:	4d 09 de             	or     %r11,%r14
+  11c2e1:	4c 21 c3             	and    %r8,%rbx
+  11c2e4:	4c 21 f3             	and    %r14,%rbx
+  11c2e7:	4c 39 c3             	cmp    %r8,%rbx
+  11c2ea:	75 09                	jne    11c2f5 <core::slice::memchr::memchr_aligned+0xa5>
+  11c2ec:	48 83 c2 10          	add    $0x10,%rdx
+  11c2f0:	48 39 c2             	cmp    %rax,%rdx
+  11c2f3:	76 cb                	jbe    11c2c0 <core::slice::memchr::memchr_aligned+0x70>
+  11c2f5:	31 c0                	xor    %eax,%eax
+  11c2f7:	48 39 d1             	cmp    %rdx,%rcx
+  11c2fa:	74 12                	je     11c30e <core::slice::memchr::memchr_aligned+0xbe>
+  11c2fc:	0f 1f 40 00          	nopl   0x0(%rax)
+  11c300:	40 3a 3c 16          	cmp    (%rsi,%rdx,1),%dil
+  11c304:	74 0c                	je     11c312 <core::slice::memchr::memchr_aligned+0xc2>
+  11c306:	48 ff c2             	inc    %rdx
+  11c309:	48 39 d1             	cmp    %rdx,%rcx
+  11c30c:	75 f2                	jne    11c300 <core::slice::memchr::memchr_aligned+0xb0>
+  11c30e:	5b                   	pop    %rbx
+  11c30f:	41 5e                	pop    %r14
+  11c311:	c3                   	ret
+  11c312:	b8 01 00 00 00       	mov    $0x1,%eax
+  11c317:	5b                   	pop    %rbx
+  11c318:	41 5e                	pop    %r14
+  11c31a:	c3                   	ret
+  11c31b:	b8 01 00 00 00       	mov    $0x1,%eax
+  11c320:	4c 89 c2             	mov    %r8,%rdx
+  11c323:	5b                   	pop    %rbx
+  11c324:	41 5e                	pop    %r14
+  11c326:	c3                   	ret
+  11c327:	cc                   	int3
+  11c328:	cc                   	int3
+  11c329:	cc                   	int3
+  11c32a:	cc                   	int3
+  11c32b:	cc                   	int3
+  11c32c:	cc                   	int3
+  11c32d:	cc                   	int3
+  11c32e:	cc                   	int3
+  11c32f:	cc                   	int3
+
+000000000011c330 <core::slice::memchr::memrchr_aligned>:
+  11c330:	55                   	push   %rbp
+  11c331:	48 89 e5             	mov    %rsp,%rbp
+  11c334:	41 57                	push   %r15
+  11c336:	41 56                	push   %r14
+  11c338:	53                   	push   %rbx
+  11c339:	50                   	push   %rax
+  11c33a:	4c 8d 46 07          	lea    0x7(%rsi),%r8
+  11c33e:	49 83 e0 f8          	and    $0xfffffffffffffff8,%r8
+  11c342:	49 29 f0             	sub    %rsi,%r8
+  11c345:	48 89 d0             	mov    %rdx,%rax
+  11c348:	48 89 d1             	mov    %rdx,%rcx
+  11c34b:	4c 39 c2             	cmp    %r8,%rdx
+  11c34e:	72 17                	jb     11c367 <core::slice::memchr::memrchr_aligned+0x37>
+  11c350:	89 d1                	mov    %edx,%ecx
+  11c352:	44 29 c1             	sub    %r8d,%ecx
+  11c355:	83 e1 0f             	and    $0xf,%ecx
+  11c358:	48 89 d0             	mov    %rdx,%rax
+  11c35b:	48 29 c8             	sub    %rcx,%rax
+  11c35e:	0f 82 e3 00 00 00    	jb     11c447 <core::slice::memchr::memrchr_aligned+0x117>
+  11c364:	4c 89 c1             	mov    %r8,%rcx
+  11c367:	48 39 d0             	cmp    %rdx,%rax
+  11c36a:	74 2e                	je     11c39a <core::slice::memchr::memrchr_aligned+0x6a>
+  11c36c:	4c 8d 42 ff          	lea    -0x1(%rdx),%r8
+  11c370:	49 89 c1             	mov    %rax,%r9
+  11c373:	49 f7 d9             	neg    %r9
+  11c376:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  11c37d:	00 00 00 
+  11c380:	42 38 3c 06          	cmp    %dil,(%rsi,%r8,1)
+  11c384:	0f 84 94 00 00 00    	je     11c41e <core::slice::memchr::memrchr_aligned+0xee>
+  11c38a:	4f 8d 14 01          	lea    (%r9,%r8,1),%r10
+  11c38e:	49 ff ca             	dec    %r10
+  11c391:	49 ff c8             	dec    %r8
+  11c394:	49 83 fa ff          	cmp    $0xffffffffffffffff,%r10
+  11c398:	75 e6                	jne    11c380 <core::slice::memchr::memrchr_aligned+0x50>
+  11c39a:	49 b9 80 80 80 80 80 	movabs $0x8080808080808080,%r9
+  11c3a1:	80 80 80 
+  11c3a4:	49 ba 00 01 01 01 01 	movabs $0x101010101010100,%r10
+  11c3ab:	01 01 01 
+  11c3ae:	44 0f b6 c7          	movzbl %dil,%r8d
+  11c3b2:	4d 8d 5a 01          	lea    0x1(%r10),%r11
+  11c3b6:	4d 0f af d8          	imul   %r8,%r11
+  11c3ba:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+  11c3c0:	49 89 c0             	mov    %rax,%r8
+  11c3c3:	48 39 c8             	cmp    %rcx,%rax
+  11c3c6:	76 31                	jbe    11c3f9 <core::slice::memchr::memrchr_aligned+0xc9>
+  11c3c8:	49 8d 40 f0          	lea    -0x10(%r8),%rax
+  11c3cc:	4a 8b 5c 06 f0       	mov    -0x10(%rsi,%r8,1),%rbx
+  11c3d1:	4c 31 db             	xor    %r11,%rbx
+  11c3d4:	4d 89 d6             	mov    %r10,%r14
+  11c3d7:	49 29 de             	sub    %rbx,%r14
+  11c3da:	49 09 de             	or     %rbx,%r14
+  11c3dd:	4a 8b 5c 06 f8       	mov    -0x8(%rsi,%r8,1),%rbx
+  11c3e2:	4c 31 db             	xor    %r11,%rbx
+  11c3e5:	4d 89 d7             	mov    %r10,%r15
+  11c3e8:	49 29 df             	sub    %rbx,%r15
+  11c3eb:	49 09 df             	or     %rbx,%r15
+  11c3ee:	4d 21 ce             	and    %r9,%r14
+  11c3f1:	4d 21 fe             	and    %r15,%r14
+  11c3f4:	4d 39 ce             	cmp    %r9,%r14
+  11c3f7:	74 c7                	je     11c3c0 <core::slice::memchr::memrchr_aligned+0x90>
+  11c3f9:	49 39 d0             	cmp    %rdx,%r8
+  11c3fc:	77 37                	ja     11c435 <core::slice::memchr::memrchr_aligned+0x105>
+  11c3fe:	4d 85 c0             	test   %r8,%r8
+  11c401:	74 22                	je     11c425 <core::slice::memchr::memrchr_aligned+0xf5>
+  11c403:	49 ff c8             	dec    %r8
+  11c406:	31 c0                	xor    %eax,%eax
+  11c408:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+  11c40f:	00 
+  11c410:	42 38 3c 06          	cmp    %dil,(%rsi,%r8,1)
+  11c414:	74 08                	je     11c41e <core::slice::memchr::memrchr_aligned+0xee>
+  11c416:	49 83 c0 ff          	add    $0xffffffffffffffff,%r8
+  11c41a:	72 f4                	jb     11c410 <core::slice::memchr::memrchr_aligned+0xe0>
+  11c41c:	eb 09                	jmp    11c427 <core::slice::memchr::memrchr_aligned+0xf7>
+  11c41e:	b8 01 00 00 00       	mov    $0x1,%eax
+  11c423:	eb 02                	jmp    11c427 <core::slice::memchr::memrchr_aligned+0xf7>
+  11c425:	31 c0                	xor    %eax,%eax
+  11c427:	4c 89 c2             	mov    %r8,%rdx
+  11c42a:	48 83 c4 08          	add    $0x8,%rsp
+  11c42e:	5b                   	pop    %rbx
+  11c42f:	41 5e                	pop    %r14
+  11c431:	41 5f                	pop    %r15
+  11c433:	5d                   	pop    %rbp
+  11c434:	c3                   	ret
+  11c435:	48 8d 0d 74 a6 01 00 	lea    0x1a674(%rip),%rcx        # 136ab0 <std::panicking::EMPTY_PANIC+0x5ba0>
+  11c43c:	31 ff                	xor    %edi,%edi
+  11c43e:	4c 89 c6             	mov    %r8,%rsi
+  11c441:	ff 15 51 bc 01 00    	call   *0x1bc51(%rip)        # 138098 <core::slice::index::slice_index_fail@@Base+0x1bf18>
+  11c447:	48 8d 0d 7a a6 01 00 	lea    0x1a67a(%rip),%rcx        # 136ac8 <std::panicking::EMPTY_PANIC+0x5bb8>
+  11c44e:	48 89 c7             	mov    %rax,%rdi
+  11c451:	48 89 d6             	mov    %rdx,%rsi
+  11c454:	ff 15 3e bc 01 00    	call   *0x1bc3e(%rip)        # 138098 <core::slice::index::slice_index_fail@@Base+0x1bf18>
+  11c45a:	cc                   	int3
+  11c45b:	cc                   	int3
+  11c45c:	cc                   	int3
+  11c45d:	cc                   	int3
+  11c45e:	cc                   	int3
+  11c45f:	cc                   	int3
+
+000000000011c460 <core::panicking::panic_const::panic_const_div_by_zero>:
+  11c460:	55                   	push   %rbp
+  11c461:	48 89 e5             	mov    %rsp,%rbp
+  11c464:	48 89 fa             	mov    %rdi,%rdx
+  11c467:	48 8d 3d 5f 56 f4 ff 	lea    -0xba9a1(%rip),%rdi        # 61acd <core::unicode::unicode_data::uppercase::BITSET_CHUNKS_MAP+0xafe>
+  11c46e:	be 33 00 00 00       	mov    $0x33,%esi
+  11c473:	ff 15 f7 bb 01 00    	call   *0x1bbf7(%rip)        # 138070 <core::panicking::panic_fmt@@Base+0x1d4d0>
+  11c479:	cc                   	int3
+  11c47a:	cc                   	int3
+  11c47b:	cc                   	int3
+  11c47c:	cc                   	int3
+  11c47d:	cc                   	int3
+  11c47e:	cc                   	int3
+  11c47f:	cc                   	int3
+
+000000000011c480 <core::panicking::panic_const::panic_const_gen_fn_none>:
+  11c480:	55                   	push   %rbp
+  11c481:	48 89 e5             	mov    %rsp,%rbp
+  11c484:	48 89 fa             	mov    %rdi,%rdx
+  11c487:	48 8d 3d 58 56 f4 ff 	lea    -0xba9a8(%rip),%rdi        # 61ae6 <core::unicode::unicode_data::uppercase::BITSET_CHUNKS_MAP+0xb17>
+  11c48e:	be 77 00 00 00       	mov    $0x77,%esi
+  11c493:	ff 15 d7 bb 01 00    	call   *0x1bbd7(%rip)        # 138070 <core::panicking::panic_fmt@@Base+0x1d4d0>
+  11c499:	cc                   	int3
+  11c49a:	cc                   	int3
+  11c49b:	cc                   	int3
+  11c49c:	cc                   	int3
+  11c49d:	cc                   	int3
+  11c49e:	cc                   	int3
+  11c49f:	cc                   	int3
+
+000000000011c4a0 <core::panicking::panic_const::panic_const_rem_by_zero>:
+  11c4a0:	55                   	push   %rbp
+  11c4a1:	48 89 e5             	mov    %rsp,%rbp
+  11c4a4:	48 89 fa             	mov    %rdi,%rdx
+  11c4a7:	48 8d 3d 73 56 f4 ff 	lea    -0xba98d(%rip),%rdi        # 61b21 <core::unicode::unicode_data::uppercase::BITSET_CHUNKS_MAP+0xb52>
+  11c4ae:	be 73 00 00 00       	mov    $0x73,%esi
+  11c4b3:	ff 15 b7 bb 01 00    	call   *0x1bbb7(%rip)        # 138070 <core::panicking::panic_fmt@@Base+0x1d4d0>
+  11c4b9:	cc                   	int3
+  11c4ba:	cc                   	int3
+  11c4bb:	cc                   	int3
+  11c4bc:	cc                   	int3
+  11c4bd:	cc                   	int3
+  11c4be:	cc                   	int3
+  11c4bf:	cc                   	int3

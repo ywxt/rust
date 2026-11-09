@@ -1,0 +1,552 @@
+ Percent |	Source code & Disassembly of counted for cycles:u (42 samples, percent: local period)
+-----------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    0000000000004f14 <<&str as core::str::pattern::Pattern>::is_contained_in>:
+         : 6    <&str as core::str::pattern::Pattern>::is_contained_in:
+    0.00 :   4f14:   sub     sp, sp, #0x140
+    0.00 :   4f18:   stp     x29, x30, [sp, #224]
+    0.00 :   4f1c:   stp     x28, x27, [sp, #240]
+    0.00 :   4f20:   stp     x26, x25, [sp, #256]
+    0.00 :   4f24:   stp     x24, x23, [sp, #272]
+    4.30 :   4f28:   stp     x22, x21, [sp, #288]
+    0.00 :   4f2c:   stp     x20, x19, [sp, #304]
+    0.00 :   4f30:   add     x29, sp, #0xe0
+    0.00 :   4f34:   cbz     x1, 5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>
+    0.00 :   4f38:   mov     x20, x1
+    0.00 :   4f3c:   cmp     x1, x3
+    0.00 :   4f40:   b.cs    4f84 <<&str as core::str::pattern::Pattern>::is_contained_in+0x70>  // b.hs, b.nlast
+    0.00 :   4f44:   subs    x23, x20, #0x1
+    0.00 :   4f48:   b.ne    4fa0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x8c>  // b.any
+    0.00 :   4f4c:   ldrb    w8, [x0]
+    0.00 :   4f50:   cmp     x3, #0x3f
+    0.00 :   4f54:   b.ls    4fd4 <<&str as core::str::pattern::Pattern>::is_contained_in+0xc0>  // b.plast
+    0.00 :   4f58:   mov     x0, x2
+    0.00 :   4f5c:   mov     x1, x3
+    0.00 :   4f60:   mov     w2, w8
+    0.00 :   4f64:   ldp     x20, x19, [sp, #304]
+    0.00 :   4f68:   ldp     x22, x21, [sp, #288]
+    0.00 :   4f6c:   ldp     x24, x23, [sp, #272]
+    0.00 :   4f70:   ldp     x26, x25, [sp, #256]
+    0.00 :   4f74:   ldp     x28, x27, [sp, #240]
+    0.00 :   4f78:   ldp     x29, x30, [sp, #224]
+    0.00 :   4f7c:   add     sp, sp, #0x140
+    0.00 :   4f80:   b       14c0 <core::str::pattern::contains_byte_simd@plt>
+    0.00 :   4f84:   b.ne    5218 <<&str as core::str::pattern::Pattern>::is_contained_in+0x304>  // b.any
+    0.00 :   4f88:   mov     x1, x2
+    0.00 :   4f8c:   mov     x2, x20
+    0.00 :   4f90:   bl      1540 <bcmp@plt>
+    0.00 :   4f94:   cmp     w0, #0x0
+    0.00 :   4f98:   cset    w19, eq // eq = none
+    0.00 :   4f9c:   b       576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>
+    1.32 :   4fa0:   cmp     x20, #0x21
+    0.00 :   4fa4:   b.cs    501c <<&str as core::str::pattern::Pattern>::is_contained_in+0x108>  // b.hs, b.nlast
+    0.00 :   4fa8:   ldrb    w8, [x0]
+    0.00 :   4fac:   cmp     x20, #0x2
+    0.00 :   4fb0:   mov     x25, x2
+    2.92 :   4fb4:   str     x3, [sp, #104]
+    0.00 :   4fb8:   b.ne    5000 <<&str as core::str::pattern::Pattern>::is_contained_in+0xec>  // b.any
+    0.00 :   4fbc:   cmp     x3, #0x11
+    0.00 :   4fc0:   b.cc    5184 <<&str as core::str::pattern::Pattern>::is_contained_in+0x270>  // b.lo, b.ul, b.last
+    0.00 :   4fc4:   ldrb    w9, [x0, #1]
+    0.00 :   4fc8:   dup     v16.16b, w8
+    0.00 :   4fcc:   mov     w26, #0x1                       // #1
+    0.00 :   4fd0:   b       5224 <<&str as core::str::pattern::Pattern>::is_contained_in+0x310>
+    0.00 :   4fd4:   cmp     x3, #0xf
+    0.00 :   4fd8:   b.hi    50ac <<&str as core::str::pattern::Pattern>::is_contained_in+0x198>  // b.pmore
+    0.00 :   4fdc:   sub     x9, x3, #0x1
+    0.00 :   4fe0:   ldrb    w10, [x2], #1
+    0.00 :   4fe4:   cmp     w10, w8
+    0.00 :   4fe8:   cset    w19, eq // eq = none
+    0.00 :   4fec:   b.eq    576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>  // b.none
+    0.00 :   4ff0:   mov     x10, x9
+    0.00 :   4ff4:   sub     x9, x9, #0x1
+    0.00 :   4ff8:   cbnz    x10, 4fe0 <<&str as core::str::pattern::Pattern>::is_contained_in+0xcc>
+    0.00 :   4ffc:   b       576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>
+    0.00 :   5000:   mov     x26, x23
+    5.46 :   5004:   ldrb    w9, [x0, x26]
+    0.00 :   5008:   cmp     w9, w8
+    0.00 :   500c:   b.ne    5178 <<&str as core::str::pattern::Pattern>::is_contained_in+0x264>  // b.any
+    0.00 :   5010:   cmp     x26, #0x2
+    0.00 :   5014:   sub     x26, x26, #0x1
+    0.00 :   5018:   b.cs    5004 <<&str as core::str::pattern::Pattern>::is_contained_in+0xf0>  // b.hs, b.nlast
+    0.00 :   501c:   mov     x9, x0
+    0.00 :   5020:   add     x8, sp, #0x70
+    0.00 :   5024:   mov     x0, x2
+    0.00 :   5028:   mov     x1, x3
+    0.00 :   502c:   mov     x2, x9
+    0.00 :   5030:   mov     x3, x20
+    0.00 :   5034:   bl      15f0 <<core::str::pattern::StrSearcher>::new@plt>
+    0.00 :   5038:   ldr     w8, [sp, #112]
+    0.00 :   503c:   tbz     w8, #0, 507c <<&str as core::str::pattern::Pattern>::is_contained_in+0x168>
+    0.00 :   5040:   ldp     x13, x1, [sp, #200]
+    0.00 :   5044:   ldr     x11, [sp, #168]
+    0.00 :   5048:   ldp     x8, x9, [sp, #184]
+    0.00 :   504c:   cmn     x11, #0x1
+    0.00 :   5050:   sub     x10, x1, #0x1
+    0.00 :   5054:   b.eq    51d4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x2c0>  // b.none
+    0.00 :   5058:   ldr     x17, [sp, #152]
+    0.00 :   505c:   add     x0, x17, x10
+    0.00 :   5060:   cmp     x0, x9
+    0.00 :   5064:   b.cs    5218 <<&str as core::str::pattern::Pattern>::is_contained_in+0x304>  // b.hs, b.nlast
+    0.00 :   5068:   ldr     x12, [sp, #120]
+    0.00 :   506c:   ldp     x15, x14, [sp, #136]
+    0.00 :   5070:   mov     w16, #0x1                       // #1
+    0.00 :   5074:   sub     x16, x16, x12
+    0.00 :   5078:   b       50e4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1d0>
+    0.00 :   507c:   ldrb    w8, [sp, #138]
+    0.00 :   5080:   tbnz    w8, #0, 5218 <<&str as core::str::pattern::Pattern>::is_contained_in+0x304>
+    0.00 :   5084:   ldp     x0, x1, [sp, #184]
+    0.00 :   5088:   ldr     x2, [sp, #120]
+    0.00 :   508c:   ldrb    w19, [sp, #136]
+    0.00 :   5090:   cbz     x2, 557c <<&str as core::str::pattern::Pattern>::is_contained_in+0x668>
+    0.00 :   5094:   cmp     x2, x1
+    0.00 :   5098:   b.cs    5578 <<&str as core::str::pattern::Pattern>::is_contained_in+0x664>  // b.hs, b.nlast
+    0.00 :   509c:   ldrsb   w8, [x0, x2]
+    0.00 :   50a0:   cmn     w8, #0x40
+    0.00 :   50a4:   b.ge    557c <<&str as core::str::pattern::Pattern>::is_contained_in+0x668>  // b.tcont
+    0.00 :   50a8:   b       573c <<&str as core::str::pattern::Pattern>::is_contained_in+0x828>
+    0.00 :   50ac:   mov     w0, w8
+    0.00 :   50b0:   mov     x1, x2
+    0.00 :   50b4:   mov     x2, x3
+    0.00 :   50b8:   bl      1530 <core::slice::memchr::memchr_aligned@plt>
+    0.00 :   50bc:   cmp     x0, #0x1
+    0.00 :   50c0:   cset    w19, eq // eq = none
+    0.00 :   50c4:   b       576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>
+    0.00 :   50c8:   mov     x11, xzr
+    0.00 :   50cc:   add     x18, x17, x1
+    0.00 :   50d0:   add     x0, x18, x10
+    0.00 :   50d4:   mov     w19, wzr
+    0.00 :   50d8:   mov     x17, x18
+    0.00 :   50dc:   cmp     x0, x9
+    0.00 :   50e0:   b.cs    576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>  // b.hs, b.nlast
+    0.00 :   50e4:   ldrb    w18, [x8, x0]
+    0.00 :   50e8:   lsr     x18, x14, x18
+    0.00 :   50ec:   tbz     w18, #0, 50c8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1b4>
+    0.00 :   50f0:   cmp     x11, x12
+    0.00 :   50f4:   csel    x0, x11, x12, hi        // hi = pmore
+    0.00 :   50f8:   cmp     x0, x1
+    0.00 :   50fc:   b.cs    512c <<&str as core::str::pattern::Pattern>::is_contained_in+0x218>  // b.hs, b.nlast
+    0.00 :   5100:   add     x2, x17, x0
+    0.00 :   5104:   add     x18, x2, x16
+    0.00 :   5108:   ldrb    w3, [x13, x0]
+    0.00 :   510c:   ldrb    w4, [x8, x2]
+    0.00 :   5110:   cmp     w3, w4
+    0.00 :   5114:   b.ne    5170 <<&str as core::str::pattern::Pattern>::is_contained_in+0x25c>  // b.any
+    0.00 :   5118:   add     x0, x0, #0x1
+    0.00 :   511c:   add     x18, x18, #0x1
+    0.00 :   5120:   add     x2, x2, #0x1
+    0.00 :   5124:   cmp     x0, x1
+    0.00 :   5128:   b.cc    5108 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1f4>  // b.lo, b.ul, b.last
+    0.00 :   512c:   cmp     x11, x12
+    0.00 :   5130:   b.cs    5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>  // b.hs, b.nlast
+    0.00 :   5134:   add     x18, x8, x17
+    0.00 :   5138:   sub     x0, x12, #0x1
+    0.00 :   513c:   cmp     x0, x1
+    0.00 :   5140:   b.cs    56d4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7c0>  // b.hs, b.nlast
+    0.00 :   5144:   ldrb    w2, [x13, x0]
+    0.00 :   5148:   ldrb    w3, [x18, x0]
+    0.00 :   514c:   cmp     w2, w3
+    0.00 :   5150:   b.ne    5164 <<&str as core::str::pattern::Pattern>::is_contained_in+0x250>  // b.any
+    0.00 :   5154:   cmp     x11, x0
+    0.00 :   5158:   sub     x0, x0, #0x1
+    0.00 :   515c:   b.cc    513c <<&str as core::str::pattern::Pattern>::is_contained_in+0x228>  // b.lo, b.ul, b.last
+    0.00 :   5160:   b       5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>
+    0.00 :   5164:   add     x18, x17, x15
+    0.00 :   5168:   sub     x11, x1, x15
+    0.00 :   516c:   b       50d0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1bc>
+    0.00 :   5170:   mov     x11, xzr
+    0.00 :   5174:   b       50d0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x1bc>
+    0.00 :   5178:   add     x10, x20, #0xf
+    0.00 :   517c:   cmp     x3, x10
+    0.00 :   5180:   b.cs    5220 <<&str as core::str::pattern::Pattern>::is_contained_in+0x30c>  // b.hs, b.nlast
+    0.00 :   5184:   mov     x1, x0
+    0.00 :   5188:   mov     x0, x2
+    0.00 :   518c:   mov     x2, x20
+    0.00 :   5190:   mov     x21, x1
+    0.00 :   5194:   bl      1540 <bcmp@plt>
+    0.00 :   5198:   cbz     w0, 5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>
+    0.00 :   519c:   ldr     x8, [sp, #104]
+    0.00 :   51a0:   add     x22, x25, #0x1
+    0.00 :   51a4:   sub     x23, x8, #0x1
+    0.00 :   51a8:   cmp     x20, x23
+    0.00 :   51ac:   cset    w19, ls // ls = plast
+    0.00 :   51b0:   b.hi    576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>  // b.pmore
+    0.00 :   51b4:   mov     x0, x22
+    0.00 :   51b8:   mov     x1, x21
+    0.00 :   51bc:   mov     x2, x20
+    0.00 :   51c0:   bl      1540 <bcmp@plt>
+    0.00 :   51c4:   add     x22, x22, #0x1
+    0.00 :   51c8:   sub     x23, x23, #0x1
+    0.00 :   51cc:   cbnz    w0, 51a8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x294>
+    0.00 :   51d0:   b       576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>
+    0.00 :   51d4:   ldr     x14, [sp, #152]
+    0.00 :   51d8:   add     x2, x14, x10
+    0.00 :   51dc:   cmp     x2, x9
+    0.00 :   51e0:   b.cs    5218 <<&str as core::str::pattern::Pattern>::is_contained_in+0x304>  // b.hs, b.nlast
+    0.00 :   51e4:   ldr     x11, [sp, #120]
+    0.00 :   51e8:   ldr     x12, [sp, #144]
+    0.00 :   51ec:   cmp     x11, x1
+    0.00 :   51f0:   sub     x0, x11, #0x1
+    0.00 :   51f4:   csel    x17, x11, x1, hi        // hi = pmore
+    0.00 :   51f8:   cmp     x0, x1
+    0.00 :   51fc:   b.cs    5660 <<&str as core::str::pattern::Pattern>::is_contained_in+0x74c>  // b.hs, b.nlast
+    0.00 :   5200:   ldr     x15, [sp, #136]
+    0.00 :   5204:   add     x16, x13, x11
+    0.00 :   5208:   sub     x17, x17, x11
+    0.00 :   520c:   sub     x18, x8, #0x1
+    0.00 :   5210:   sub     x13, x13, #0x1
+    0.00 :   5214:   b       55e4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x6d0>
+    0.00 :   5218:   mov     w19, wzr
+    0.00 :   521c:   b       576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>
+    0.00 :   5220:   dup     v16.16b, w8
+    0.00 :   5224:   dup     v17.16b, w9
+    0.00 :   5228:   add     x9, x20, #0x3f
+    0.00 :   522c:   add     x8, x0, #0x1
+    0.00 :   5230:   cmp     x9, x3
+    0.00 :   5234:   adrp    x9, 5000 <<&str as core::str::pattern::Pattern>::is_contained_in+0xec>
+    0.00 :   5238:   stp     x2, x3, [sp, #112]
+    0.00 :   523c:   stp     x8, x23, [sp, #128]
+    0.00 :   5240:   stp     q17, q16, [sp, #64]
+    0.00 :   5244:   b.cs    546c <<&str as core::str::pattern::Pattern>::is_contained_in+0x558>  // b.hs, b.nlast
+    0.00 :   5248:   add     x8, x26, x2
+   22.44 :   524c:   ldr     q0, [x9, #2144]
+    0.00 :   5250:   mov     x21, xzr
+    0.00 :   5254:   add     x28, x20, #0x7f
+    0.00 :   5258:   add     x27, x8, #0x20
+    0.00 :   525c:   add     x24, x2, #0x30
+    0.00 :   5260:   str     q0, [sp, #32]
+    0.00 :   5264:   add     x8, x24, x21
+    0.00 :   5268:   add     x9, x27, x21
+    0.00 :   526c:   ldp     q0, q1, [x8, #-48]
+    0.00 :   5270:   ldp     q2, q3, [x9, #-32]
+    0.00 :   5274:   ldp     q4, q5, [x8, #-16]
+    1.28 :   5278:   ldp     q6, q7, [x9]
+    0.00 :   527c:   cmeq    v0.16b, v0.16b, v16.16b
+    0.00 :   5280:   cmeq    v2.16b, v2.16b, v17.16b
+    0.00 :   5284:   cmeq    v1.16b, v1.16b, v16.16b
+    0.00 :   5288:   cmeq    v3.16b, v3.16b, v17.16b
+    0.00 :   528c:   cmeq    v4.16b, v4.16b, v16.16b
+    0.00 :   5290:   cmeq    v5.16b, v5.16b, v16.16b
+    0.00 :   5294:   cmeq    v6.16b, v6.16b, v17.16b
+    0.00 :   5298:   cmeq    v7.16b, v7.16b, v17.16b
+    0.00 :   529c:   and     v0.16b, v0.16b, v2.16b
+    0.00 :   52a0:   and     v18.16b, v1.16b, v3.16b
+    0.00 :   52a4:   and     v4.16b, v4.16b, v6.16b
+    0.00 :   52a8:   and     v3.16b, v5.16b, v7.16b
+    0.00 :   52ac:   orr     v1.16b, v0.16b, v18.16b
+    0.00 :   52b0:   orr     v2.16b, v4.16b, v3.16b
+    0.00 :   52b4:   orr     v1.16b, v1.16b, v2.16b
+    0.00 :   52b8:   addp    d1, v1.2d
+    0.00 :   52bc:   fmov    x8, d1
+    0.00 :   52c0:   cbz     x8, 530c <<&str as core::str::pattern::Pattern>::is_contained_in+0x3f8>
+    0.00 :   52c4:   addp    d1, v0.2d
+    0.00 :   52c8:   fmov    x8, d1
+    0.00 :   52cc:   cbnz    x8, 532c <<&str as core::str::pattern::Pattern>::is_contained_in+0x418>
+    0.00 :   52d0:   mov     w19, wzr
+    0.00 :   52d4:   addp    d0, v18.2d
+    0.00 :   52d8:   fmov    x8, d0
+    0.00 :   52dc:   cbnz    x8, 5380 <<&str as core::str::pattern::Pattern>::is_contained_in+0x46c>
+    0.00 :   52e0:   addp    d0, v4.2d
+    0.00 :   52e4:   fmov    x8, d0
+    0.00 :   52e8:   cbnz    x8, 53d4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x4c0>
+    0.00 :   52ec:   addp    d0, v3.2d
+    0.00 :   52f0:   fmov    x8, d0
+    0.00 :   52f4:   cbnz    x8, 5420 <<&str as core::str::pattern::Pattern>::is_contained_in+0x50c>
+    0.00 :   52f8:   add     x8, x28, x21
+    0.00 :   52fc:   add     x22, x21, #0x40
+    0.00 :   5300:   cmp     x8, x3
+    0.00 :   5304:   b.cc    5320 <<&str as core::str::pattern::Pattern>::is_contained_in+0x40c>  // b.lo, b.ul, b.last
+    0.00 :   5308:   b       5474 <<&str as core::str::pattern::Pattern>::is_contained_in+0x560>
+   47.46 :   530c:   mov     w19, wzr
+    0.00 :   5310:   add     x8, x28, x21
+    0.00 :   5314:   add     x22, x21, #0x40
+    0.00 :   5318:   cmp     x8, x3
+    0.00 :   531c:   b.cs    5474 <<&str as core::str::pattern::Pattern>::is_contained_in+0x560>  // b.hs, b.nlast
+    0.00 :   5320:   mov     x21, x22
+    0.00 :   5324:   tbz     w19, #0, 5264 <<&str as core::str::pattern::Pattern>::is_contained_in+0x350>
+    0.00 :   5328:   b       5474 <<&str as core::str::pattern::Pattern>::is_contained_in+0x560>
+    0.00 :   532c:   ldr     q1, [sp, #32]
+    0.00 :   5330:   add     x0, sp, #0x70
+    0.00 :   5334:   mov     x1, x21
+    0.00 :   5338:   mov     w3, wzr
+    0.00 :   533c:   str     q3, [sp, #48]
+    0.00 :   5340:   and     v0.16b, v0.16b, v1.16b
+    0.00 :   5344:   stp     q18, q4, [sp]
+    0.00 :   5348:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   534c:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   5350:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   5354:   umov    w2, v0.h[0]
+    0.00 :   5358:   bl      1688 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   535c:   ldp     q18, q4, [sp]
+    0.00 :   5360:   mov     x2, x25
+    0.00 :   5364:   ldp     q3, q17, [sp, #48]
+    0.00 :   5368:   mov     w19, w0
+    0.00 :   536c:   ldr     q16, [sp, #80]
+    0.00 :   5370:   ldr     x3, [sp, #104]
+    0.00 :   5374:   addp    d0, v18.2d
+    0.00 :   5378:   fmov    x8, d0
+    0.00 :   537c:   cbz     x8, 52e0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x3cc>
+    0.00 :   5380:   ldr     q0, [sp, #32]
+    0.00 :   5384:   add     x0, sp, #0x70
+    0.00 :   5388:   add     x1, x21, #0x10
+    0.00 :   538c:   mov     w3, w19
+    0.00 :   5390:   str     q3, [sp, #48]
+    0.00 :   5394:   and     v0.16b, v18.16b, v0.16b
+    0.00 :   5398:   str     q4, [sp, #16]
+    0.00 :   539c:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   53a0:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   53a4:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   53a8:   umov    w2, v0.h[0]
+    0.00 :   53ac:   bl      1688 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   53b0:   ldp     q3, q17, [sp, #48]
+    0.00 :   53b4:   mov     x2, x25
+    0.00 :   53b8:   ldr     q4, [sp, #16]
+    0.00 :   53bc:   ldr     q16, [sp, #80]
+    0.00 :   53c0:   orr     w19, w19, w0
+    0.00 :   53c4:   ldr     x3, [sp, #104]
+    0.00 :   53c8:   addp    d0, v4.2d
+    0.00 :   53cc:   fmov    x8, d0
+    0.00 :   53d0:   cbz     x8, 52ec <<&str as core::str::pattern::Pattern>::is_contained_in+0x3d8>
+    0.00 :   53d4:   ldr     q0, [sp, #32]
+    0.00 :   53d8:   add     x0, sp, #0x70
+    0.00 :   53dc:   add     x1, x21, #0x20
+    0.00 :   53e0:   mov     w3, w19
+    0.00 :   53e4:   str     q3, [sp, #48]
+    0.00 :   53e8:   and     v0.16b, v4.16b, v0.16b
+    0.00 :   53ec:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   53f0:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   53f4:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   53f8:   umov    w2, v0.h[0]
+    0.00 :   53fc:   bl      1688 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   5400:   ldp     q3, q17, [sp, #48]
+    0.00 :   5404:   mov     x2, x25
+    0.00 :   5408:   ldr     q16, [sp, #80]
+    0.00 :   540c:   ldr     x3, [sp, #104]
+    0.00 :   5410:   orr     w19, w19, w0
+    0.00 :   5414:   addp    d0, v3.2d
+    0.00 :   5418:   fmov    x8, d0
+    0.00 :   541c:   cbz     x8, 52f8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x3e4>
+    0.00 :   5420:   ldr     q0, [sp, #32]
+    0.00 :   5424:   add     x0, sp, #0x70
+    0.00 :   5428:   add     x1, x21, #0x30
+    0.00 :   542c:   mov     w3, w19
+    0.00 :   5430:   and     v0.16b, v3.16b, v0.16b
+    0.00 :   5434:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   5438:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   543c:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   5440:   umov    w2, v0.h[0]
+    0.00 :   5444:   bl      1688 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   5448:   ldp     q17, q16, [sp, #64]
+    0.00 :   544c:   mov     x2, x25
+    0.00 :   5450:   ldr     x3, [sp, #104]
+    0.00 :   5454:   orr     w19, w19, w0
+    0.00 :   5458:   add     x8, x28, x21
+    0.00 :   545c:   add     x22, x21, #0x40
+    0.00 :   5460:   cmp     x8, x3
+    0.00 :   5464:   b.cc    5320 <<&str as core::str::pattern::Pattern>::is_contained_in+0x40c>  // b.lo, b.ul, b.last
+    0.00 :   5468:   b       5474 <<&str as core::str::pattern::Pattern>::is_contained_in+0x560>
+    0.00 :   546c:   mov     x22, xzr
+    0.00 :   5470:   mov     w19, wzr
+    0.00 :   5474:   add     x8, x20, x22
+    0.00 :   5478:   adrp    x24, 5000 <<&str as core::str::pattern::Pattern>::is_contained_in+0xec>
+    0.00 :   547c:   add     x8, x8, #0xf
+    0.00 :   5480:   cmp     x8, x3
+    0.00 :   5484:   csinc   w8, w19, wzr, cc        // cc = lo, ul, last
+    0.00 :   5488:   tbz     w8, #0, 54e4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x5d0>
+    0.00 :   548c:   sub     x8, x3, x23
+    0.00 :   5490:   sub     x1, x8, #0x10
+    0.00 :   5494:   add     x8, x2, x1
+    0.00 :   5498:   ldr     q0, [x8]
+    7.40 :   549c:   ldr     q1, [x8, x26]
+    0.00 :   54a0:   cmeq    v0.16b, v0.16b, v16.16b
+    0.00 :   54a4:   cmeq    v1.16b, v1.16b, v17.16b
+    0.00 :   54a8:   and     v0.16b, v0.16b, v1.16b
+    0.00 :   54ac:   addp    d1, v0.2d
+    0.00 :   54b0:   fmov    x8, d1
+    0.00 :   54b4:   cbz     x8, 576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>
+    0.00 :   54b8:   ldr     q1, [x24, #2144]
+    0.00 :   54bc:   add     x0, sp, #0x70
+    0.00 :   54c0:   mov     w3, w19
+    0.00 :   54c4:   and     v0.16b, v0.16b, v1.16b
+    0.00 :   54c8:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   54cc:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   54d0:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   54d4:   umov    w2, v0.h[0]
+    0.00 :   54d8:   bl      1688 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   54dc:   orr     w19, w19, w0
+    0.00 :   54e0:   b       576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>
+    0.00 :   54e4:   add     x8, x22, x20
+    0.00 :   54e8:   ldr     q0, [x24, #2144]
+    0.00 :   54ec:   add     x21, x2, x26
+    0.00 :   54f0:   add     x20, x8, #0x1f
+    0.00 :   54f4:   str     q0, [sp, #48]
+    0.00 :   54f8:   ldr     q0, [x2, x22]
+    0.00 :   54fc:   ldr     q1, [x21, x22]
+    0.00 :   5500:   cmeq    v0.16b, v0.16b, v16.16b
+    0.00 :   5504:   cmeq    v1.16b, v1.16b, v17.16b
+    0.00 :   5508:   and     v0.16b, v0.16b, v1.16b
+    0.00 :   550c:   addp    d1, v0.2d
+    0.00 :   5510:   fmov    x8, d1
+    0.00 :   5514:   cbnz    x8, 5534 <<&str as core::str::pattern::Pattern>::is_contained_in+0x620>
+    0.00 :   5518:   mov     w19, wzr
+    0.00 :   551c:   cmp     x20, x3
+    0.00 :   5520:   b.cs    548c <<&str as core::str::pattern::Pattern>::is_contained_in+0x578>  // b.hs, b.nlast
+    0.00 :   5524:   add     x22, x22, #0x10
+    0.00 :   5528:   add     x20, x20, #0x10
+    0.00 :   552c:   tbz     w19, #0, 54f8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x5e4>
+    0.00 :   5530:   b       548c <<&str as core::str::pattern::Pattern>::is_contained_in+0x578>
+    0.00 :   5534:   ldr     q1, [sp, #48]
+    0.00 :   5538:   add     x0, sp, #0x70
+    0.00 :   553c:   mov     x1, x22
+    0.00 :   5540:   mov     w3, wzr
+    0.00 :   5544:   and     v0.16b, v0.16b, v1.16b
+    0.00 :   5548:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   554c:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   5550:   addp    v0.16b, v0.16b, v0.16b
+    0.00 :   5554:   umov    w2, v0.h[0]
+    0.00 :   5558:   bl      1688 <core::str::pattern::simd_contains::{closure#2}>
+    0.00 :   555c:   ldp     q17, q16, [sp, #64]
+    0.00 :   5560:   mov     x2, x25
+    0.00 :   5564:   ldr     x3, [sp, #104]
+    0.00 :   5568:   mov     w19, w0
+    0.00 :   556c:   cmp     x20, x3
+    0.00 :   5570:   b.cc    5524 <<&str as core::str::pattern::Pattern>::is_contained_in+0x610>  // b.lo, b.ul, b.last
+    0.00 :   5574:   b       548c <<&str as core::str::pattern::Pattern>::is_contained_in+0x578>
+    0.00 :   5578:   b.ne    573c <<&str as core::str::pattern::Pattern>::is_contained_in+0x828>  // b.any
+    0.00 :   557c:   cmp     x2, x1
+    0.00 :   5580:   b.eq    576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>  // b.none
+    0.00 :   5584:   add     x9, x0, x2
+    0.00 :   5588:   ldrsb   w10, [x9]
+    0.00 :   558c:   and     w8, w10, #0xff
+    0.00 :   5590:   tbz     w10, #31, 56f0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7dc>
+    0.00 :   5594:   ldrb    w10, [x9, #1]
+    0.00 :   5598:   cmp     w8, #0xe0
+    0.00 :   559c:   and     w10, w10, #0x3f
+    0.00 :   55a0:   b.cc    56e0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7cc>  // b.lo, b.ul, b.last
+    0.00 :   55a4:   ldrb    w11, [x9, #2]
+    0.00 :   55a8:   cmp     w8, #0xf0
+    0.00 :   55ac:   and     w11, w11, #0x3f
+    0.00 :   55b0:   orr     w11, w11, w10, lsl #6
+    0.00 :   55b4:   and     w10, w8, #0x1f
+    0.00 :   55b8:   b.cc    56ec <<&str as core::str::pattern::Pattern>::is_contained_in+0x7d8>  // b.lo, b.ul, b.last
+    0.00 :   55bc:   ldrb    w8, [x9, #3]
+    0.00 :   55c0:   and     w8, w8, #0x3f
+    0.00 :   55c4:   orr     w8, w8, w11, lsl #6
+    0.00 :   55c8:   bfi     w8, w10, #18, #3
+    0.00 :   55cc:   b       56f0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7dc>
+    0.00 :   55d0:   add     x14, x14, x1
+    0.00 :   55d4:   add     x2, x14, x10
+    0.00 :   55d8:   mov     w19, wzr
+    0.00 :   55dc:   cmp     x2, x9
+    0.00 :   55e0:   b.cs    576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>  // b.hs, b.nlast
+    0.00 :   55e4:   ldrb    w0, [x8, x2]
+    0.00 :   55e8:   lsr     x0, x12, x0
+    0.00 :   55ec:   tbz     w0, #0, 55d0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x6bc>
+    0.00 :   55f0:   cmp     x11, x1
+    0.00 :   55f4:   b.cs    5628 <<&str as core::str::pattern::Pattern>::is_contained_in+0x714>  // b.hs, b.nlast
+    0.00 :   55f8:   mvn     x0, x14
+    0.00 :   55fc:   add     x2, x11, x14
+    0.00 :   5600:   mov     x3, x17
+    0.00 :   5604:   mov     x4, x16
+    0.00 :   5608:   ldrb    w5, [x4], #1
+    0.00 :   560c:   ldrb    w6, [x8, x2]
+    0.00 :   5610:   cmp     w5, w6
+    0.00 :   5614:   b.ne    5658 <<&str as core::str::pattern::Pattern>::is_contained_in+0x744>  // b.any
+    0.00 :   5618:   subs    x3, x3, #0x1
+    0.00 :   561c:   sub     x0, x0, #0x1
+    0.00 :   5620:   add     x2, x2, #0x1
+    0.00 :   5624:   b.ne    5608 <<&str as core::str::pattern::Pattern>::is_contained_in+0x6f4>  // b.any
+    0.00 :   5628:   cbz     x11, 5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>
+    0.00 :   562c:   add     x0, x18, x14
+    0.00 :   5630:   mov     x2, x11
+    0.00 :   5634:   ldrb    w3, [x13, x2]
+    0.00 :   5638:   ldrb    w4, [x0, x2]
+    0.00 :   563c:   cmp     w3, w4
+    0.00 :   5640:   b.ne    5650 <<&str as core::str::pattern::Pattern>::is_contained_in+0x73c>  // b.any
+    0.00 :   5644:   sub     x2, x2, #0x1
+    0.00 :   5648:   cbnz    x2, 5634 <<&str as core::str::pattern::Pattern>::is_contained_in+0x720>
+    0.00 :   564c:   b       5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>
+    0.00 :   5650:   add     x14, x14, x15
+    0.00 :   5654:   b       55d4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x6c0>
+    0.00 :   5658:   neg     x14, x0
+    0.00 :   565c:   b       55d4 <<&str as core::str::pattern::Pattern>::is_contained_in+0x6c0>
+    0.00 :   5660:   add     x13, x13, x11
+    0.00 :   5664:   sub     x15, x17, x11
+    0.00 :   5668:   ldrb    w16, [x8, x2]
+    0.00 :   566c:   lsr     x16, x12, x16
+    0.00 :   5670:   tbz     w16, #0, 56b0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x79c>
+    0.00 :   5674:   cmp     x11, x1
+    0.00 :   5678:   b.cs    56d0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7bc>  // b.hs, b.nlast
+    0.00 :   567c:   mvn     x16, x14
+    0.00 :   5680:   add     x14, x11, x14
+    0.00 :   5684:   mov     x17, x15
+    0.00 :   5688:   mov     x18, x13
+    0.00 :   568c:   ldrb    w2, [x18], #1
+    0.00 :   5690:   ldrb    w3, [x8, x14]
+    0.00 :   5694:   cmp     w2, w3
+    0.00 :   5698:   b.ne    56b8 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7a4>  // b.any
+    0.00 :   569c:   subs    x17, x17, #0x1
+    0.00 :   56a0:   sub     x16, x16, #0x1
+    0.00 :   56a4:   add     x14, x14, #0x1
+    0.00 :   56a8:   b.ne    568c <<&str as core::str::pattern::Pattern>::is_contained_in+0x778>  // b.any
+    0.00 :   56ac:   b       56d0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7bc>
+    0.00 :   56b0:   add     x14, x14, x1
+    0.00 :   56b4:   b       56bc <<&str as core::str::pattern::Pattern>::is_contained_in+0x7a8>
+    0.00 :   56b8:   neg     x14, x16
+    0.00 :   56bc:   add     x2, x14, x10
+    0.00 :   56c0:   mov     w19, wzr
+    0.00 :   56c4:   cmp     x2, x9
+    0.00 :   56c8:   b.cc    5668 <<&str as core::str::pattern::Pattern>::is_contained_in+0x754>  // b.lo, b.ul, b.last
+    0.00 :   56cc:   b       576c <<&str as core::str::pattern::Pattern>::is_contained_in+0x858>
+    0.00 :   56d0:   cbz     x11, 5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>
+    0.00 :   56d4:   adrp    x2, 1f000 <GCC_except_table24+0x17374>
+    0.00 :   56d8:   add     x2, x2, #0xab8
+    0.00 :   56dc:   bl      1480 <core::panicking::panic_bounds_check@plt>
+    0.00 :   56e0:   bfi     w10, w8, #6, #5
+    0.00 :   56e4:   mov     w8, w10
+    0.00 :   56e8:   b       56f0 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7dc>
+    0.00 :   56ec:   orr     w8, w11, w10, lsl #12
+    0.00 :   56f0:   tbnz    w19, #0, 5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>
+    0.00 :   56f4:   cmp     w8, #0x80
+    0.00 :   56f8:   b.cs    5704 <<&str as core::str::pattern::Pattern>::is_contained_in+0x7f0>  // b.hs, b.nlast
+    0.00 :   56fc:   mov     w8, #0x1                        // #1
+    0.00 :   5700:   b       5720 <<&str as core::str::pattern::Pattern>::is_contained_in+0x80c>
+    0.00 :   5704:   cmp     w8, #0x800
+    0.00 :   5708:   b.cs    5714 <<&str as core::str::pattern::Pattern>::is_contained_in+0x800>  // b.hs, b.nlast
+    0.00 :   570c:   mov     w8, #0x2                        // #2
+    0.00 :   5710:   b       5720 <<&str as core::str::pattern::Pattern>::is_contained_in+0x80c>
+    0.00 :   5714:   cmp     w8, #0x10, lsl #12
+    0.00 :   5718:   mov     w8, #0x3                        // #3
+    0.00 :   571c:   cinc    x8, x8, cs      // cs = hs, nlast
+    0.00 :   5720:   adds    x2, x8, x2
+    0.00 :   5724:   b.eq    5750 <<&str as core::str::pattern::Pattern>::is_contained_in+0x83c>  // b.none
+    0.00 :   5728:   cmp     x2, x1
+    0.00 :   572c:   b.cs    574c <<&str as core::str::pattern::Pattern>::is_contained_in+0x838>  // b.hs, b.nlast
+    0.00 :   5730:   ldrsb   w8, [x0, x2]
+    0.00 :   5734:   cmn     w8, #0x40
+    0.00 :   5738:   b.ge    5750 <<&str as core::str::pattern::Pattern>::is_contained_in+0x83c>  // b.tcont
+    0.00 :   573c:   adrp    x4, 1f000 <GCC_except_table24+0x17374>
+    0.00 :   5740:   add     x4, x4, #0xc80
+    0.00 :   5744:   mov     x3, x1
+    0.00 :   5748:   bl      15c0 <core::str::slice_error_fail@plt>
+    0.00 :   574c:   b.ne    573c <<&str as core::str::pattern::Pattern>::is_contained_in+0x828>  // b.any
+    0.00 :   5750:   cmp     x2, x1
+    0.00 :   5754:   b.eq    5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>  // b.none
+    0.00 :   5758:   ldrsb   w8, [x0, x2]
+    0.00 :   575c:   tbz     w8, #31, 5768 <<&str as core::str::pattern::Pattern>::is_contained_in+0x854>
+    0.00 :   5760:   and     w8, w8, #0xff
+    0.00 :   5764:   cmp     w8, #0xe0
+    0.00 :   5768:   mov     w19, #0x1                       // #1
+    7.43 :   576c:   and     w0, w19, #0x1
+    0.00 :   5770:   ldp     x20, x19, [sp, #304]
+    0.00 :   5774:   ldp     x22, x21, [sp, #288]
+    0.00 :   5778:   ldp     x24, x23, [sp, #272]
+    0.00 :   577c:   ldp     x26, x25, [sp, #256]
+    0.00 :   5780:   ldp     x28, x27, [sp, #240]
+    0.00 :   5784:   ldp     x29, x30, [sp, #224]
+    0.00 :   5788:   add     sp, sp, #0x140
+    0.00 :   578c:   ret

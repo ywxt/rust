@@ -1,0 +1,225 @@
+_RINvNtCsbvh2iR3x0la_4test5bench13ns_iter_inneruNCNvNtCs3LK9MfeDMnJ_7benches9optimizeds_26bench_contains_short_short0EBP_:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	pushq	%r15
+	.cfi_def_cfa_offset 24
+	pushq	%r14
+	.cfi_def_cfa_offset 32
+	pushq	%r13
+	.cfi_def_cfa_offset 40
+	pushq	%r12
+	.cfi_def_cfa_offset 48
+	pushq	%rbx
+	.cfi_def_cfa_offset 56
+	subq	$56, %rsp
+	.cfi_def_cfa_offset 112
+	.cfi_offset %rbx, -56
+	.cfi_offset %r12, -48
+	.cfi_offset %r13, -40
+	.cfi_offset %r14, -32
+	.cfi_offset %r15, -24
+	.cfi_offset %rbp, -16
+	movq	%rsi, %rbx
+	movq	%rdi, %r14
+	callq	*_RNvMNtCs9wefJfwQbYy_3std4timeNtB2_7Instant3now@GOTPCREL(%rip)
+	movq	%rax, 40(%rsp)
+	movl	%edx, 48(%rsp)
+	testq	%rbx, %rbx
+	je	.LBB26_25
+	movq	(%r14), %r15
+	movq	8(%r14), %r12
+	movq	16(%r14), %r14
+	xorl	%r13d, %r13d
+	movq	%rsp, %rbp
+	leaq	24(%rsp), %r11
+	jmp	.LBB26_4
+	.p2align	4
+.LBB26_2:
+	movq	%r13, 16(%rsp)
+	movq	%rbx, %r13
+	movq	%r14, %rbx
+	movq	%r12, %r14
+	movq	%r15, %r12
+	movq	%r11, %r15
+	callq	_RNvXst_NtNtCs6knCYbIatyh_4core3str7patternReNtB5_7Pattern15is_contained_in
+	movq	%r15, %r11
+	movq	%r12, %r15
+	movq	%r14, %r12
+	movq	%rbx, %r14
+	movq	%r13, %rbx
+	movq	16(%rsp), %r13
+	testb	%al, %al
+	je	.LBB26_26
+.LBB26_3:
+	incq	%r13
+	#APP
+	#NO_APP
+	cmpq	%rbx, %r13
+	je	.LBB26_25
+.LBB26_4:
+	movq	%r15, (%rsp)
+	movq	%r12, 8(%rsp)
+	#APP
+	#NO_APP
+	movdqu	(%r14), %xmm0
+	movdqu	%xmm0, 24(%rsp)
+	#APP
+	#NO_APP
+	movq	24(%rsp), %rdi
+	movq	32(%rsp), %rsi
+	movq	(%rsp), %rdx
+	movq	8(%rsp), %rcx
+	cmpq	$1, %rsi
+	sete	%al
+	cmpq	$16, %rcx
+	setae	%r8b
+	testb	%r8b, %al
+	je	.LBB26_2
+	movzbl	(%rdi), %esi
+	cmpq	$64, %rcx
+	jae	.LBB26_11
+	movq	%rcx, %rax
+	movd	%esi, %xmm0
+	punpcklbw	%xmm0, %xmm0
+	pshuflw	$0, %xmm0, %xmm0
+	pshufd	$68, %xmm0, %xmm0
+	andq	$48, %rax
+	je	.LBB26_9
+	movdqu	(%rdx), %xmm1
+	pcmpeqb	%xmm0, %xmm1
+	pmovmskb	%xmm1, %esi
+	testl	%esi, %esi
+	jne	.LBB26_3
+	cmpl	$16, %eax
+	jne	.LBB26_22
+.LBB26_9:
+	testb	$15, %cl
+	je	.LBB26_26
+	movdqu	-16(%rdx,%rcx), %xmm1
+	pcmpeqb	%xmm0, %xmm1
+	pmovmskb	%xmm1, %eax
+	testl	%eax, %eax
+	jne	.LBB26_3
+	jmp	.LBB26_26
+	.p2align	4
+.LBB26_11:
+	cmpq	$127, %rcx
+	jbe	.LBB26_15
+	leaq	63(%rdx), %rax
+	andq	$-64, %rax
+	subq	%rdx, %rax
+	je	.LBB26_15
+	movd	%esi, %xmm0
+	punpcklbw	%xmm0, %xmm0
+	pshuflw	$0, %xmm0, %xmm0
+	pshufd	$68, %xmm0, %xmm0
+	movdqu	(%rdx), %xmm1
+	movdqu	16(%rdx), %xmm2
+	movdqu	32(%rdx), %xmm3
+	movdqu	48(%rdx), %xmm4
+	pcmpeqb	%xmm0, %xmm1
+	pcmpeqb	%xmm0, %xmm2
+	por	%xmm1, %xmm2
+	pcmpeqb	%xmm0, %xmm3
+	pcmpeqb	%xmm0, %xmm4
+	por	%xmm3, %xmm4
+	por	%xmm2, %xmm4
+	pmovmskb	%xmm4, %edi
+	testl	%edi, %edi
+	jne	.LBB26_3
+	jmp	.LBB26_16
+.LBB26_15:
+	xorl	%eax, %eax
+.LBB26_16:
+	movq	%rcx, %rdi
+	subq	%rax, %rdi
+	movq	%rdi, %r8
+	movd	%esi, %xmm0
+	punpcklbw	%xmm0, %xmm0
+	pshuflw	$0, %xmm0, %xmm0
+	pshufd	$68, %xmm0, %xmm0
+	movabsq	$9223372036854775744, %rsi
+	andq	%rsi, %r8
+	je	.LBB26_20
+	addq	%rdx, %rax
+	xorl	%esi, %esi
+	.p2align	4
+.LBB26_18:
+	movdqu	(%rax,%rsi), %xmm1
+	movdqu	16(%rax,%rsi), %xmm2
+	movdqu	32(%rax,%rsi), %xmm3
+	movdqu	48(%rax,%rsi), %xmm4
+	pcmpeqb	%xmm0, %xmm1
+	pcmpeqb	%xmm0, %xmm2
+	por	%xmm1, %xmm2
+	pcmpeqb	%xmm0, %xmm3
+	pcmpeqb	%xmm0, %xmm4
+	por	%xmm3, %xmm4
+	por	%xmm2, %xmm4
+	pmovmskb	%xmm4, %r9d
+	testl	%r9d, %r9d
+	jne	.LBB26_3
+	addq	$64, %rsi
+	cmpq	%rsi, %r8
+	jne	.LBB26_18
+.LBB26_20:
+	testb	$63, %dil
+	je	.LBB26_26
+	movdqu	-64(%rdx,%rcx), %xmm1
+	movdqu	-48(%rdx,%rcx), %xmm2
+	movdqu	-32(%rdx,%rcx), %xmm3
+	movdqu	-16(%rdx,%rcx), %xmm4
+	pcmpeqb	%xmm0, %xmm1
+	pcmpeqb	%xmm0, %xmm2
+	por	%xmm1, %xmm2
+	pcmpeqb	%xmm0, %xmm3
+	pcmpeqb	%xmm0, %xmm4
+	por	%xmm3, %xmm4
+	por	%xmm2, %xmm4
+	pmovmskb	%xmm4, %eax
+	testl	%eax, %eax
+	jne	.LBB26_3
+	jmp	.LBB26_26
+.LBB26_22:
+	movdqu	16(%rdx), %xmm1
+	pcmpeqb	%xmm0, %xmm1
+	pmovmskb	%xmm1, %esi
+	testl	%esi, %esi
+	jne	.LBB26_3
+	cmpl	$32, %eax
+	je	.LBB26_9
+	movdqu	32(%rdx), %xmm1
+	pcmpeqb	%xmm0, %xmm1
+	pmovmskb	%xmm1, %eax
+	testl	%eax, %eax
+	jne	.LBB26_3
+	jmp	.LBB26_9
+.LBB26_25:
+	leaq	40(%rsp), %rdi
+	callq	*_RNvMNtCs9wefJfwQbYy_3std4timeNtB2_7Instant7elapsed@GOTPCREL(%rip)
+	imulq	$1000000000, %rax, %rcx
+	movl	%edx, %eax
+	addq	%rcx, %rax
+	addq	$56, %rsp
+	.cfi_def_cfa_offset 56
+	popq	%rbx
+	.cfi_def_cfa_offset 48
+	popq	%r12
+	.cfi_def_cfa_offset 40
+	popq	%r13
+	.cfi_def_cfa_offset 32
+	popq	%r14
+	.cfi_def_cfa_offset 24
+	popq	%r15
+	.cfi_def_cfa_offset 16
+	popq	%rbp
+	.cfi_def_cfa_offset 8
+	retq
+.LBB26_26:
+	.cfi_def_cfa_offset 112
+	leaq	.Lalloc_ae3ba8d2c79fb9fc29fd4d04bcc5e64a(%rip), %rdi
+	leaq	.Lalloc_dda373e7d3092c7431bab8069d8f8ffa(%rip), %rdx
+	movl	$61, %esi
+	callq	*_RNvNtCs6knCYbIatyh_4core9panicking5panic@GOTPCREL(%rip)
+.Lfunc_end26:

@@ -1,0 +1,15 @@
+{
+  "baseline": "main contains implementation; unrelated preexisting changes fixed",
+  "change": "Preserve original scalar word loop with one shared scalar hit/tail block for 16..127B; only >=128B takes long SIMD helper; Option<usize> caller ABI kept; main memchr/find/split untouched.",
+  "cpu_midr_el1": "0x00000000480fd020",
+  "cpu_model": "920B per user; hardware MIDR recorded",
+  "new_inline_attributes": 0,
+  "previous_candidate": "/tmp/contains-arm-indexabi-20261106",
+  "acceptance": [
+    "no reproducible regression in tested scenarios",
+    "lower 920B/x86-main cycles ratio"
+  ],
+  "endianness_and_pointer_guard": "aarch64 + neon + little endian + 64bit",
+  "audit_method": "read-only Python ELF parser; no objcopy rewriting of measured artifacts",
+  "tail_change": "original word and scalar hit/tail paths; SIMD restricted to long body"
+}

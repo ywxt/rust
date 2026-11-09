@@ -1,0 +1,26 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 10K of event 'cpu_core/cycles/u'
+# Event count (approx.): 19823343860
+#
+# Overhead  Command       Shared Object               Symbol                                                                                                                              
+# ........  ............  ..........................  ....................................................................................................................................
+#
+    95.88%  benches-base  libstd-320fe7036dd8354d.so  [.] core::slice::memchr::memrchr
+            |
+            ---core::slice::memchr::memrchr
+               |          
+                --89.24%--<benches::str::rfind_zzz_char::short_mixed::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+
+     4.06%  benches-base  benches-base                [.] <benches::str::rfind_zzz_char::short_mixed::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+            |
+            ---<benches::str::rfind_zzz_char::short_mixed::{closure#0} as core::ops::function::FnOnce<(&mut test::bench::Bencher,)>>::call_once
+
+
+
+#
+# (Tip: Limit to show entries above 5% only: perf report --percent-limit 5)
+#

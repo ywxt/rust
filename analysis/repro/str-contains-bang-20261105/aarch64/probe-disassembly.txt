@@ -1,0 +1,2994 @@
+
+/tmp/str-contains-bang-20261105/bang-probe:     file format elf64-littleaarch64
+
+
+Disassembly of section .init:
+
+00000000000017b8 <_init>:
+    17b8:	d503201f 	nop
+    17bc:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+    17c0:	910003fd 	mov	x29, sp
+    17c4:	9400013c 	bl	1cb4 <call_weak_fn>
+    17c8:	a8c17bfd 	ldp	x29, x30, [sp], #16
+    17cc:	d65f03c0 	ret
+
+Disassembly of section .plt:
+
+00000000000017d0 <.plt>:
+    17d0:	a9bf7bf0 	stp	x16, x30, [sp, #-16]!
+    17d4:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    17d8:	f9474211 	ldr	x17, [x16, #3712]
+    17dc:	913a0210 	add	x16, x16, #0xe80
+    17e0:	d61f0220 	br	x17
+    17e4:	d503201f 	nop
+    17e8:	d503201f 	nop
+    17ec:	d503201f 	nop
+
+00000000000017f0 <memcpy@plt>:
+    17f0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    17f4:	f9474611 	ldr	x17, [x16, #3720]
+    17f8:	913a2210 	add	x16, x16, #0xe88
+    17fc:	d61f0220 	br	x17
+
+0000000000001800 <__libc_start_main@plt>:
+    1800:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1804:	f9474a11 	ldr	x17, [x16, #3728]
+    1808:	913a4210 	add	x16, x16, #0xe90
+    180c:	d61f0220 	br	x17
+
+0000000000001810 <core::panicking::panic_bounds_check@plt>:
+    1810:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1814:	f9474e11 	ldr	x17, [x16, #3736]
+    1818:	913a6210 	add	x16, x16, #0xe98
+    181c:	d61f0220 	br	x17
+
+0000000000001820 <<usize as core::fmt::LowerHex>::fmt@plt>:
+    1820:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1824:	f9475211 	ldr	x17, [x16, #3744]
+    1828:	913a8210 	add	x16, x16, #0xea0
+    182c:	d61f0220 	br	x17
+
+0000000000001830 <__cxa_finalize@plt>:
+    1830:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1834:	f9475611 	ldr	x17, [x16, #3752]
+    1838:	913aa210 	add	x16, x16, #0xea8
+    183c:	d61f0220 	br	x17
+
+0000000000001840 <std::io::stdio::_print@plt>:
+    1840:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1844:	f9475a11 	ldr	x17, [x16, #3760]
+    1848:	913ac210 	add	x16, x16, #0xeb0
+    184c:	d61f0220 	br	x17
+
+0000000000001850 <<core::fmt::Formatter>::debug_struct_field1_finish@plt>:
+    1850:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1854:	f9475e11 	ldr	x17, [x16, #3768]
+    1858:	913ae210 	add	x16, x16, #0xeb8
+    185c:	d61f0220 	br	x17
+
+0000000000001860 <<str as core::fmt::Display>::fmt@plt>:
+    1860:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1864:	f9476211 	ldr	x17, [x16, #3776]
+    1868:	913b0210 	add	x16, x16, #0xec0
+    186c:	d61f0220 	br	x17
+
+0000000000001870 <std::rt::lang_start_internal@plt>:
+    1870:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1874:	f9476611 	ldr	x17, [x16, #3784]
+    1878:	913b2210 	add	x16, x16, #0xec8
+    187c:	d61f0220 	br	x17
+
+0000000000001880 <core::panicking::assert_failed_inner@plt>:
+    1880:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1884:	f9476a11 	ldr	x17, [x16, #3792]
+    1888:	913b4210 	add	x16, x16, #0xed0
+    188c:	d61f0220 	br	x17
+
+0000000000001890 <__rustc::__rust_alloc@plt>:
+    1890:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1894:	f9476e11 	ldr	x17, [x16, #3800]
+    1898:	913b6210 	add	x16, x16, #0xed8
+    189c:	d61f0220 	br	x17
+
+00000000000018a0 <<core::fmt::Formatter>::debug_tuple_field1_finish@plt>:
+    18a0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    18a4:	f9477211 	ldr	x17, [x16, #3808]
+    18a8:	913b8210 	add	x16, x16, #0xee0
+    18ac:	d61f0220 	br	x17
+
+00000000000018b0 <<core::fmt::Formatter>::write_str@plt>:
+    18b0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    18b4:	f9477611 	ldr	x17, [x16, #3816]
+    18b8:	913ba210 	add	x16, x16, #0xee8
+    18bc:	d61f0220 	br	x17
+
+00000000000018c0 <memset@plt>:
+    18c0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    18c4:	f9477a11 	ldr	x17, [x16, #3824]
+    18c8:	913bc210 	add	x16, x16, #0xef0
+    18cc:	d61f0220 	br	x17
+
+00000000000018d0 <<usize as core::fmt::UpperHex>::fmt@plt>:
+    18d0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    18d4:	f9477e11 	ldr	x17, [x16, #3832]
+    18d8:	913be210 	add	x16, x16, #0xef8
+    18dc:	d61f0220 	br	x17
+
+00000000000018e0 <core::panicking::panic_fmt@plt>:
+    18e0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    18e4:	f9478211 	ldr	x17, [x16, #3840]
+    18e8:	913c0210 	add	x16, x16, #0xf00
+    18ec:	d61f0220 	br	x17
+
+00000000000018f0 <core::slice::memchr::memrchr_aligned@plt>:
+    18f0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    18f4:	f9478611 	ldr	x17, [x16, #3848]
+    18f8:	913c2210 	add	x16, x16, #0xf08
+    18fc:	d61f0220 	br	x17
+
+0000000000001900 <__rustc::__rust_no_alloc_shim_is_unstable_v2@plt>:
+    1900:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1904:	f9478a11 	ldr	x17, [x16, #3856]
+    1908:	913c4210 	add	x16, x16, #0xf10
+    190c:	d61f0220 	br	x17
+
+0000000000001910 <core::option::expect_failed@plt>:
+    1910:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1914:	f9478e11 	ldr	x17, [x16, #3864]
+    1918:	913c6210 	add	x16, x16, #0xf18
+    191c:	d61f0220 	br	x17
+
+0000000000001920 <__rustc::__rust_realloc@plt>:
+    1920:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1924:	f9479211 	ldr	x17, [x16, #3872]
+    1928:	913c8210 	add	x16, x16, #0xf20
+    192c:	d61f0220 	br	x17
+
+0000000000001930 <__gmon_start__@plt>:
+    1930:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1934:	f9479611 	ldr	x17, [x16, #3880]
+    1938:	913ca210 	add	x16, x16, #0xf28
+    193c:	d61f0220 	br	x17
+
+0000000000001940 <__rustc::__rust_dealloc@plt>:
+    1940:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1944:	f9479a11 	ldr	x17, [x16, #3888]
+    1948:	913cc210 	add	x16, x16, #0xf30
+    194c:	d61f0220 	br	x17
+
+0000000000001950 <abort@plt>:
+    1950:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1954:	f9479e11 	ldr	x17, [x16, #3896]
+    1958:	913ce210 	add	x16, x16, #0xf38
+    195c:	d61f0220 	br	x17
+
+0000000000001960 <core::panicking::panic@plt>:
+    1960:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1964:	f947a211 	ldr	x17, [x16, #3904]
+    1968:	913d0210 	add	x16, x16, #0xf40
+    196c:	d61f0220 	br	x17
+
+0000000000001970 <core::slice::index::slice_index_fail@plt>:
+    1970:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1974:	f947a611 	ldr	x17, [x16, #3912]
+    1978:	913d2210 	add	x16, x16, #0xf48
+    197c:	d61f0220 	br	x17
+
+0000000000001980 <alloc::raw_vec::handle_error@plt>:
+    1980:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1984:	f947aa11 	ldr	x17, [x16, #3920]
+    1988:	913d4210 	add	x16, x16, #0xf50
+    198c:	d61f0220 	br	x17
+
+0000000000001990 <__rustc::rust_eh_personality@plt>:
+    1990:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1994:	f947ae11 	ldr	x17, [x16, #3928]
+    1998:	913d6210 	add	x16, x16, #0xf58
+    199c:	d61f0220 	br	x17
+
+00000000000019a0 <std::env::args@plt>:
+    19a0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    19a4:	f947b211 	ldr	x17, [x16, #3936]
+    19a8:	913d8210 	add	x16, x16, #0xf60
+    19ac:	d61f0220 	br	x17
+
+00000000000019b0 <<usize as core::fmt::Display>::fmt@plt>:
+    19b0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    19b4:	f947b611 	ldr	x17, [x16, #3944]
+    19b8:	913da210 	add	x16, x16, #0xf68
+    19bc:	d61f0220 	br	x17
+
+00000000000019c0 <<bool as core::fmt::Display>::fmt@plt>:
+    19c0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    19c4:	f947ba11 	ldr	x17, [x16, #3952]
+    19c8:	913dc210 	add	x16, x16, #0xf70
+    19cc:	d61f0220 	br	x17
+
+00000000000019d0 <core::slice::memchr::memchr_aligned@plt>:
+    19d0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    19d4:	f947be11 	ldr	x17, [x16, #3960]
+    19d8:	913de210 	add	x16, x16, #0xf78
+    19dc:	d61f0220 	br	x17
+
+00000000000019e0 <core::result::unwrap_failed::unwrap_failed_inner@plt>:
+    19e0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    19e4:	f947c211 	ldr	x17, [x16, #3968]
+    19e8:	913e0210 	add	x16, x16, #0xf80
+    19ec:	d61f0220 	br	x17
+
+00000000000019f0 <<u8 as core::fmt::UpperHex>::fmt@plt>:
+    19f0:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    19f4:	f947c611 	ldr	x17, [x16, #3976]
+    19f8:	913e2210 	add	x16, x16, #0xf88
+    19fc:	d61f0220 	br	x17
+
+0000000000001a00 <<std::env::Args as core::iter::traits::iterator::Iterator>::next@plt>:
+    1a00:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1a04:	f947ca11 	ldr	x17, [x16, #3984]
+    1a08:	913e4210 	add	x16, x16, #0xf90
+    1a0c:	d61f0220 	br	x17
+
+0000000000001a10 <core::str::converts::from_utf8@plt>:
+    1a10:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1a14:	f947ce11 	ldr	x17, [x16, #3992]
+    1a18:	913e6210 	add	x16, x16, #0xf98
+    1a1c:	d61f0220 	br	x17
+
+0000000000001a20 <<u8 as core::fmt::Display>::fmt@plt>:
+    1a20:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1a24:	f947d211 	ldr	x17, [x16, #4000]
+    1a28:	913e8210 	add	x16, x16, #0xfa0
+    1a2c:	d61f0220 	br	x17
+
+0000000000001a30 <_Unwind_Resume@plt>:
+    1a30:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1a34:	f947d611 	ldr	x17, [x16, #4008]
+    1a38:	913ea210 	add	x16, x16, #0xfa8
+    1a3c:	d61f0220 	br	x17
+
+0000000000001a40 <<u8 as core::fmt::LowerHex>::fmt@plt>:
+    1a40:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1a44:	f947da11 	ldr	x17, [x16, #4016]
+    1a48:	913ec210 	add	x16, x16, #0xfb0
+    1a4c:	d61f0220 	br	x17
+
+0000000000001a50 <<core::fmt::Formatter>::debug_struct_field2_finish@plt>:
+    1a50:	d00000f0 	adrp	x16, 1f000 <GCC_except_table10+0x1952c>
+    1a54:	f947de11 	ldr	x17, [x16, #4024]
+    1a58:	913ee210 	add	x16, x16, #0xfb8
+    1a5c:	d61f0220 	br	x17
+
+Disassembly of section .text:
+
+0000000000001a80 <core::result::unwrap_failed::<core::num::error::ParseIntError>>:
+    1a80:	d10083ff 	sub	sp, sp, #0x20
+    1a84:	a9017bfd 	stp	x29, x30, [sp, #16]
+    1a88:	910043fd 	add	x29, sp, #0x10
+    1a8c:	aa0103e4 	mov	x4, x1
+    1a90:	381fc3a0 	sturb	w0, [x29, #-4]
+    1a94:	90000020 	adrp	x0, 5000 <_fini+0xc00>
+    1a98:	91107400 	add	x0, x0, #0x41d
+    1a9c:	d00000e3 	adrp	x3, 1f000 <GCC_except_table10+0x1952c>
+    1aa0:	91258063 	add	x3, x3, #0x960
+    1aa4:	d10013a2 	sub	x2, x29, #0x4
+    1aa8:	52800561 	mov	w1, #0x2b                  	// #43
+    1aac:	97ffffcd 	bl	19e0 <core::result::unwrap_failed::unwrap_failed_inner@plt>
+
+0000000000001ab0 <core::result::unwrap_failed::<core::str::error::Utf8Error>>:
+    1ab0:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+    1ab4:	910003fd 	mov	x29, sp
+    1ab8:	aa0003e2 	mov	x2, x0
+    1abc:	90000020 	adrp	x0, 5000 <_fini+0xc00>
+    1ac0:	91107400 	add	x0, x0, #0x41d
+    1ac4:	d00000e3 	adrp	x3, 1f000 <GCC_except_table10+0x1952c>
+    1ac8:	91260063 	add	x3, x3, #0x980
+    1acc:	d00000e4 	adrp	x4, 1f000 <GCC_except_table10+0x1952c>
+    1ad0:	912d2084 	add	x4, x4, #0xb48
+    1ad4:	52800561 	mov	w1, #0x2b                  	// #43
+    1ad8:	97ffffc2 	bl	19e0 <core::result::unwrap_failed::unwrap_failed_inner@plt>
+
+0000000000001adc <core::panicking::assert_failed::<bool, bool>>:
+    1adc:	d10083ff 	sub	sp, sp, #0x20
+    1ae0:	a9017bfd 	stp	x29, x30, [sp, #16]
+    1ae4:	910043fd 	add	x29, sp, #0x10
+    1ae8:	aa0203e5 	mov	x5, x2
+    1aec:	d00000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    1af0:	91268042 	add	x2, x2, #0x9a0
+    1af4:	aa0403e7 	mov	x7, x4
+    1af8:	aa0303e6 	mov	x6, x3
+    1afc:	a90007e0 	stp	x0, x1, [sp]
+    1b00:	910003e1 	mov	x1, sp
+    1b04:	910023e3 	add	x3, sp, #0x8
+    1b08:	2a1f03e0 	mov	w0, wzr
+    1b0c:	aa0203e4 	mov	x4, x2
+    1b10:	97ffff5c 	bl	1880 <core::panicking::assert_failed_inner@plt>
+
+0000000000001b14 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>:
+    1b14:	d10103ff 	sub	sp, sp, #0x40
+    1b18:	a9027bfd 	stp	x29, x30, [sp, #32]
+    1b1c:	a9034ff4 	stp	x20, x19, [sp, #48]
+    1b20:	910083fd 	add	x29, sp, #0x20
+    1b24:	ab010048 	adds	x8, x2, x1
+    1b28:	54000322 	b.cs	1b8c <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>+0x78>  // b.hs, b.nlast
+    1b2c:	a9400801 	ldp	x1, x2, [x0]
+    1b30:	aa0403e5 	mov	x5, x4
+    1b34:	5280010a 	mov	w10, #0x8                   	// #8
+    1b38:	aa0303e4 	mov	x4, x3
+    1b3c:	aa0003f3 	mov	x19, x0
+    1b40:	910023e0 	add	x0, sp, #0x8
+    1b44:	d37ff829 	lsl	x9, x1, #1
+    1b48:	eb08013f 	cmp	x9, x8
+    1b4c:	9a888128 	csel	x8, x9, x8, hi	// hi = pmore
+    1b50:	f10004bf 	cmp	x5, #0x1
+    1b54:	52800089 	mov	w9, #0x4                   	// #4
+    1b58:	9a890149 	csel	x9, x10, x9, eq	// eq = none
+    1b5c:	eb08013f 	cmp	x9, x8
+    1b60:	9a888134 	csel	x20, x9, x8, hi	// hi = pmore
+    1b64:	aa1403e3 	mov	x3, x20
+    1b68:	9400000d 	bl	1b9c <<alloc::raw_vec::RawVecInner>::finish_grow>
+    1b6c:	f94007e8 	ldr	x8, [sp, #8]
+    1b70:	b5000128 	cbnz	x8, 1b94 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>+0x80>
+    1b74:	f9400be8 	ldr	x8, [sp, #16]
+    1b78:	a9002274 	stp	x20, x8, [x19]
+    1b7c:	a9434ff4 	ldp	x20, x19, [sp, #48]
+    1b80:	a9427bfd 	ldp	x29, x30, [sp, #32]
+    1b84:	910103ff 	add	sp, sp, #0x40
+    1b88:	d65f03c0 	ret
+    1b8c:	aa1f03e0 	mov	x0, xzr
+    1b90:	97ffff7c 	bl	1980 <alloc::raw_vec::handle_error@plt>
+    1b94:	a94107e0 	ldp	x0, x1, [sp, #16]
+    1b98:	97ffff7a 	bl	1980 <alloc::raw_vec::handle_error@plt>
+
+0000000000001b9c <<alloc::raw_vec::RawVecInner>::finish_grow>:
+    1b9c:	a9bd7bfd 	stp	x29, x30, [sp, #-48]!
+    1ba0:	f9000bf5 	str	x21, [sp, #16]
+    1ba4:	a9024ff4 	stp	x20, x19, [sp, #32]
+    1ba8:	910003fd 	mov	x29, sp
+    1bac:	9bc37ca8 	umulh	x8, x5, x3
+    1bb0:	d2f00009 	mov	x9, #0x8000000000000000    	// #-9223372036854775808
+    1bb4:	aa0003f4 	mov	x20, x0
+    1bb8:	cb040129 	sub	x9, x9, x4
+    1bbc:	9b037cb3 	mul	x19, x5, x3
+    1bc0:	eb0803ff 	cmp	xzr, x8
+    1bc4:	fa490262 	ccmp	x19, x9, #0x2, eq	// eq = none
+    1bc8:	54000129 	b.ls	1bec <<alloc::raw_vec::RawVecInner>::finish_grow+0x50>  // b.plast
+    1bcc:	52800028 	mov	w8, #0x1                   	// #1
+    1bd0:	52800109 	mov	w9, #0x8                   	// #8
+    1bd4:	f8296a9f 	str	xzr, [x20, x9]
+    1bd8:	f9000288 	str	x8, [x20]
+    1bdc:	a9424ff4 	ldp	x20, x19, [sp, #32]
+    1be0:	f9400bf5 	ldr	x21, [sp, #16]
+    1be4:	a8c37bfd 	ldp	x29, x30, [sp], #48
+    1be8:	d65f03c0 	ret
+    1bec:	aa0403f5 	mov	x21, x4
+    1bf0:	b4000101 	cbz	x1, 1c10 <<alloc::raw_vec::RawVecInner>::finish_grow+0x74>
+    1bf4:	9b017ca1 	mul	x1, x5, x1
+    1bf8:	aa0203e0 	mov	x0, x2
+    1bfc:	aa1503e2 	mov	x2, x21
+    1c00:	aa1303e3 	mov	x3, x19
+    1c04:	97ffff47 	bl	1920 <__rustc::__rust_realloc@plt>
+    1c08:	b5000180 	cbnz	x0, 1c38 <<alloc::raw_vec::RawVecInner>::finish_grow+0x9c>
+    1c0c:	14000007 	b	1c28 <<alloc::raw_vec::RawVecInner>::finish_grow+0x8c>
+    1c10:	b4000133 	cbz	x19, 1c34 <<alloc::raw_vec::RawVecInner>::finish_grow+0x98>
+    1c14:	97ffff3b 	bl	1900 <__rustc::__rust_no_alloc_shim_is_unstable_v2@plt>
+    1c18:	aa1303e0 	mov	x0, x19
+    1c1c:	aa1503e1 	mov	x1, x21
+    1c20:	97ffff1c 	bl	1890 <__rustc::__rust_alloc@plt>
+    1c24:	b50000a0 	cbnz	x0, 1c38 <<alloc::raw_vec::RawVecInner>::finish_grow+0x9c>
+    1c28:	52800028 	mov	w8, #0x1                   	// #1
+    1c2c:	f9000695 	str	x21, [x20, #8]
+    1c30:	14000004 	b	1c40 <<alloc::raw_vec::RawVecInner>::finish_grow+0xa4>
+    1c34:	aa1503e0 	mov	x0, x21
+    1c38:	aa1f03e8 	mov	x8, xzr
+    1c3c:	f9000680 	str	x0, [x20, #8]
+    1c40:	52800209 	mov	w9, #0x10                  	// #16
+    1c44:	f8296a93 	str	x19, [x20, x9]
+    1c48:	f9000288 	str	x8, [x20]
+    1c4c:	a9424ff4 	ldp	x20, x19, [sp, #32]
+    1c50:	f9400bf5 	ldr	x21, [sp, #16]
+    1c54:	a8c37bfd 	ldp	x29, x30, [sp], #48
+    1c58:	d65f03c0 	ret
+    1c5c:	d503201f 	nop
+    1c60:	d503201f 	nop
+    1c64:	d503201f 	nop
+    1c68:	d503201f 	nop
+    1c6c:	d503201f 	nop
+    1c70:	d503201f 	nop
+    1c74:	d503201f 	nop
+    1c78:	d503201f 	nop
+    1c7c:	d503201f 	nop
+
+0000000000001c80 <_start>:
+    1c80:	d503201f 	nop
+    1c84:	d280001d 	mov	x29, #0x0                   	// #0
+    1c88:	d280001e 	mov	x30, #0x0                   	// #0
+    1c8c:	aa0003e5 	mov	x5, x0
+    1c90:	f94003e1 	ldr	x1, [sp]
+    1c94:	910023e2 	add	x2, sp, #0x8
+    1c98:	910003e6 	mov	x6, sp
+    1c9c:	d00000e0 	adrp	x0, 1f000 <GCC_except_table10+0x1952c>
+    1ca0:	f947f800 	ldr	x0, [x0, #4080]
+    1ca4:	d2800003 	mov	x3, #0x0                   	// #0
+    1ca8:	d2800004 	mov	x4, #0x0                   	// #0
+    1cac:	97fffed5 	bl	1800 <__libc_start_main@plt>
+    1cb0:	97ffff28 	bl	1950 <abort@plt>
+
+0000000000001cb4 <call_weak_fn>:
+    1cb4:	d00000e0 	adrp	x0, 1f000 <GCC_except_table10+0x1952c>
+    1cb8:	f947f000 	ldr	x0, [x0, #4064]
+    1cbc:	b4000040 	cbz	x0, 1cc4 <call_weak_fn+0x10>
+    1cc0:	17ffff1c 	b	1930 <__gmon_start__@plt>
+    1cc4:	d65f03c0 	ret
+    1cc8:	d503201f 	nop
+    1ccc:	d503201f 	nop
+
+0000000000001cd0 <deregister_tm_clones>:
+    1cd0:	f00000e0 	adrp	x0, 20000 <__dso_handle>
+    1cd4:	91004000 	add	x0, x0, #0x10
+    1cd8:	f00000e1 	adrp	x1, 20000 <__dso_handle>
+    1cdc:	91004021 	add	x1, x1, #0x10
+    1ce0:	eb00003f 	cmp	x1, x0
+    1ce4:	540000c0 	b.eq	1cfc <deregister_tm_clones+0x2c>  // b.none
+    1ce8:	d00000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    1cec:	f947e421 	ldr	x1, [x1, #4040]
+    1cf0:	b4000061 	cbz	x1, 1cfc <deregister_tm_clones+0x2c>
+    1cf4:	aa0103f0 	mov	x16, x1
+    1cf8:	d61f0200 	br	x16
+    1cfc:	d65f03c0 	ret
+
+0000000000001d00 <register_tm_clones>:
+    1d00:	f00000e0 	adrp	x0, 20000 <__dso_handle>
+    1d04:	91004000 	add	x0, x0, #0x10
+    1d08:	f00000e1 	adrp	x1, 20000 <__dso_handle>
+    1d0c:	91004021 	add	x1, x1, #0x10
+    1d10:	cb000021 	sub	x1, x1, x0
+    1d14:	d37ffc22 	lsr	x2, x1, #63
+    1d18:	8b810c41 	add	x1, x2, x1, asr #3
+    1d1c:	9341fc21 	asr	x1, x1, #1
+    1d20:	b40000c1 	cbz	x1, 1d38 <register_tm_clones+0x38>
+    1d24:	d00000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    1d28:	f947fc42 	ldr	x2, [x2, #4088]
+    1d2c:	b4000062 	cbz	x2, 1d38 <register_tm_clones+0x38>
+    1d30:	aa0203f0 	mov	x16, x2
+    1d34:	d61f0200 	br	x16
+    1d38:	d65f03c0 	ret
+    1d3c:	d503201f 	nop
+
+0000000000001d40 <__do_global_dtors_aux>:
+    1d40:	a9be7bfd 	stp	x29, x30, [sp, #-32]!
+    1d44:	910003fd 	mov	x29, sp
+    1d48:	f9000bf3 	str	x19, [sp, #16]
+    1d4c:	f00000f3 	adrp	x19, 20000 <__dso_handle>
+    1d50:	39404260 	ldrb	w0, [x19, #16]
+    1d54:	37000140 	tbnz	w0, #0, 1d7c <__do_global_dtors_aux+0x3c>
+    1d58:	d00000e0 	adrp	x0, 1f000 <GCC_except_table10+0x1952c>
+    1d5c:	f947e800 	ldr	x0, [x0, #4048]
+    1d60:	b4000080 	cbz	x0, 1d70 <__do_global_dtors_aux+0x30>
+    1d64:	f00000e0 	adrp	x0, 20000 <__dso_handle>
+    1d68:	f9400000 	ldr	x0, [x0]
+    1d6c:	97fffeb1 	bl	1830 <__cxa_finalize@plt>
+    1d70:	97ffffd8 	bl	1cd0 <deregister_tm_clones>
+    1d74:	52800020 	mov	w0, #0x1                   	// #1
+    1d78:	39004260 	strb	w0, [x19, #16]
+    1d7c:	f9400bf3 	ldr	x19, [sp, #16]
+    1d80:	a8c27bfd 	ldp	x29, x30, [sp], #32
+    1d84:	d65f03c0 	ret
+    1d88:	d503201f 	nop
+    1d8c:	d503201f 	nop
+
+0000000000001d90 <frame_dummy>:
+    1d90:	17ffffdc 	b	1d00 <register_tm_clones>
+
+0000000000001d94 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>>:
+    1d94:	a9bd7bfd 	stp	x29, x30, [sp, #-48]!
+    1d98:	a90157f6 	stp	x22, x21, [sp, #16]
+    1d9c:	a9024ff4 	stp	x20, x19, [sp, #32]
+    1da0:	910003fd 	mov	x29, sp
+    1da4:	a940d413 	ldp	x19, x21, [x0, #8]
+    1da8:	aa0003f4 	mov	x20, x0
+    1dac:	b4000195 	cbz	x21, 1ddc <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x48>
+    1db0:	91002276 	add	x22, x19, #0x8
+    1db4:	14000004 	b	1dc4 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x30>
+    1db8:	f10006b5 	subs	x21, x21, #0x1
+    1dbc:	910062d6 	add	x22, x22, #0x18
+    1dc0:	540000e0 	b.eq	1ddc <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x48>  // b.none
+    1dc4:	f85f82c1 	ldur	x1, [x22, #-8]
+    1dc8:	b4ffff81 	cbz	x1, 1db8 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x24>
+    1dcc:	f94002c0 	ldr	x0, [x22]
+    1dd0:	52800022 	mov	w2, #0x1                   	// #1
+    1dd4:	97fffedb 	bl	1940 <__rustc::__rust_dealloc@plt>
+    1dd8:	17fffff8 	b	1db8 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x24>
+    1ddc:	f9400288 	ldr	x8, [x20]
+    1de0:	b4000128 	cbz	x8, 1e04 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>+0x70>
+    1de4:	8b080508 	add	x8, x8, x8, lsl #1
+    1de8:	aa1303e0 	mov	x0, x19
+    1dec:	d37df101 	lsl	x1, x8, #3
+    1df0:	52800102 	mov	w2, #0x8                   	// #8
+    1df4:	a9424ff4 	ldp	x20, x19, [sp, #32]
+    1df8:	a94157f6 	ldp	x22, x21, [sp, #16]
+    1dfc:	a8c37bfd 	ldp	x29, x30, [sp], #48
+    1e00:	17fffed0 	b	1940 <__rustc::__rust_dealloc@plt>
+    1e04:	a9424ff4 	ldp	x20, x19, [sp, #32]
+    1e08:	a94157f6 	ldp	x22, x21, [sp, #16]
+    1e0c:	a8c37bfd 	ldp	x29, x30, [sp], #48
+    1e10:	d65f03c0 	ret
+
+0000000000001e14 <core::ptr::drop_glue::<std::env::Args>>:
+    1e14:	a9bd7bfd 	stp	x29, x30, [sp, #-48]!
+    1e18:	f9000bf5 	str	x21, [sp, #16]
+    1e1c:	a9024ff4 	stp	x20, x19, [sp, #32]
+    1e20:	910003fd 	mov	x29, sp
+    1e24:	f9400408 	ldr	x8, [x0, #8]
+    1e28:	f9400c09 	ldr	x9, [x0, #24]
+    1e2c:	aa0003f3 	mov	x19, x0
+    1e30:	eb080129 	subs	x9, x9, x8
+    1e34:	54000200 	b.eq	1e74 <core::ptr::drop_glue::<std::env::Args>+0x60>  // b.none
+    1e38:	b201f3ea 	mov	x10, #0xaaaaaaaaaaaaaaaa    	// #-6148914691236517206
+    1e3c:	91002115 	add	x21, x8, #0x8
+    1e40:	f295556a 	movk	x10, #0xaaab
+    1e44:	9bca7d29 	umulh	x9, x9, x10
+    1e48:	d344fd34 	lsr	x20, x9, #4
+    1e4c:	14000004 	b	1e5c <core::ptr::drop_glue::<std::env::Args>+0x48>
+    1e50:	f1000694 	subs	x20, x20, #0x1
+    1e54:	910062b5 	add	x21, x21, #0x18
+    1e58:	540000e0 	b.eq	1e74 <core::ptr::drop_glue::<std::env::Args>+0x60>  // b.none
+    1e5c:	f85f82a1 	ldur	x1, [x21, #-8]
+    1e60:	b4ffff81 	cbz	x1, 1e50 <core::ptr::drop_glue::<std::env::Args>+0x3c>
+    1e64:	f94002a0 	ldr	x0, [x21]
+    1e68:	52800022 	mov	w2, #0x1                   	// #1
+    1e6c:	97fffeb5 	bl	1940 <__rustc::__rust_dealloc@plt>
+    1e70:	17fffff8 	b	1e50 <core::ptr::drop_glue::<std::env::Args>+0x3c>
+    1e74:	f9400a68 	ldr	x8, [x19, #16]
+    1e78:	b4000128 	cbz	x8, 1e9c <core::ptr::drop_glue::<std::env::Args>+0x88>
+    1e7c:	8b080508 	add	x8, x8, x8, lsl #1
+    1e80:	f9400260 	ldr	x0, [x19]
+    1e84:	d37df101 	lsl	x1, x8, #3
+    1e88:	52800102 	mov	w2, #0x8                   	// #8
+    1e8c:	a9424ff4 	ldp	x20, x19, [sp, #32]
+    1e90:	f9400bf5 	ldr	x21, [sp, #16]
+    1e94:	a8c37bfd 	ldp	x29, x30, [sp], #48
+    1e98:	17fffeaa 	b	1940 <__rustc::__rust_dealloc@plt>
+    1e9c:	a9424ff4 	ldp	x20, x19, [sp, #32]
+    1ea0:	f9400bf5 	ldr	x21, [sp, #16]
+    1ea4:	a8c37bfd 	ldp	x29, x30, [sp], #48
+    1ea8:	d65f03c0 	ret
+
+0000000000001eac <std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>>:
+    1eac:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+    1eb0:	910003fd 	mov	x29, sp
+    1eb4:	d63f0000 	blr	x0
+    1eb8:	a8c17bfd 	ldp	x29, x30, [sp], #16
+    1ebc:	d65f03c0 	ret
+
+0000000000001ec0 <std::rt::lang_start::<()>::{closure#0}>:
+    1ec0:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+    1ec4:	910003fd 	mov	x29, sp
+    1ec8:	f9400000 	ldr	x0, [x0]
+    1ecc:	97fffff8 	bl	1eac <std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>>
+    1ed0:	2a1f03e0 	mov	w0, wzr
+    1ed4:	a8c17bfd 	ldp	x29, x30, [sp], #16
+    1ed8:	d65f03c0 	ret
+
+0000000000001edc <<std::rt::lang_start<()>::{closure#0} as core::ops::function::FnOnce<()>>::call_once::{shim:vtable#0}>:
+    1edc:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+    1ee0:	910003fd 	mov	x29, sp
+    1ee4:	f9400000 	ldr	x0, [x0]
+    1ee8:	97fffff1 	bl	1eac <std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>>
+    1eec:	2a1f03e0 	mov	w0, wzr
+    1ef0:	a8c17bfd 	ldp	x29, x30, [sp], #16
+    1ef4:	d65f03c0 	ret
+
+0000000000001ef8 <bang_probe::main>:
+    1ef8:	a9ba7bfd 	stp	x29, x30, [sp, #-96]!
+    1efc:	a9016ffc 	stp	x28, x27, [sp, #16]
+    1f00:	a90267fa 	stp	x26, x25, [sp, #32]
+    1f04:	a9035ff8 	stp	x24, x23, [sp, #48]
+    1f08:	a90457f6 	stp	x22, x21, [sp, #64]
+    1f0c:	a9054ff4 	stp	x20, x19, [sp, #80]
+    1f10:	910003fd 	mov	x29, sp
+    1f14:	d10783ff 	sub	sp, sp, #0x1e0
+    1f18:	d10203a8 	sub	x8, x29, #0x80
+    1f1c:	d102c3bc 	sub	x28, x29, #0xb0
+    1f20:	97fffea0 	bl	19a0 <std::env::args@plt>
+    1f24:	9102c3e8 	add	x8, sp, #0xb0
+    1f28:	d10203a0 	sub	x0, x29, #0x80
+    1f2c:	97fffeb5 	bl	1a00 <<std::env::Args as core::iter::traits::iterator::Iterator>::next@plt>
+    1f30:	f9405bf4 	ldr	x20, [sp, #176]
+    1f34:	b100069f 	cmn	x20, #0x1
+    1f38:	5400ce20 	b.eq	38fc <bang_probe::main+0x1a04>  // b.none
+    1f3c:	f9401f88 	ldr	x8, [x28, #56]
+    1f40:	f9402789 	ldr	x9, [x28, #72]
+    1f44:	b201f3ea 	mov	x10, #0xaaaaaaaaaaaaaaaa    	// #-6148914691236517206
+    1f48:	f295556a 	movk	x10, #0xaaab
+    1f4c:	b27be7eb 	mov	x11, #0x7fffffffffffffe0    	// #9223372036854775776
+    1f50:	f9405ff5 	ldr	x21, [sp, #184]
+    1f54:	cb080129 	sub	x9, x9, x8
+    1f58:	d343fd28 	lsr	x8, x9, #3
+    1f5c:	9b0a7d08 	mul	x8, x8, x10
+    1f60:	5280006a 	mov	w10, #0x3                   	// #3
+    1f64:	f1000d1f 	cmp	x8, #0x3
+    1f68:	9a8a8108 	csel	x8, x8, x10, hi	// hi = pmore
+    1f6c:	eb0b013f 	cmp	x9, x11
+    1f70:	540000c9 	b.ls	1f88 <bang_probe::main+0x90>  // b.plast
+    1f74:	aa1f03f7 	mov	x23, xzr
+    1f78:	aa1703e0 	mov	x0, x23
+    1f7c:	aa1603e1 	mov	x1, x22
+    1f80:	97fffe80 	bl	1980 <alloc::raw_vec::handle_error@plt>
+    1f84:	1400069c 	b	39f4 <bang_probe::main+0x1afc>
+    1f88:	91000519 	add	x25, x8, #0x1
+    1f8c:	f94063fa 	ldr	x26, [sp, #192]
+    1f90:	8b190728 	add	x8, x25, x25, lsl #1
+    1f94:	d37df116 	lsl	x22, x8, #3
+    1f98:	b4000136 	cbz	x22, 1fbc <bang_probe::main+0xc4>
+    1f9c:	97fffe59 	bl	1900 <__rustc::__rust_no_alloc_shim_is_unstable_v2@plt>
+    1fa0:	aa1603e0 	mov	x0, x22
+    1fa4:	52800101 	mov	w1, #0x8                   	// #8
+    1fa8:	52800117 	mov	w23, #0x8                   	// #8
+    1fac:	97fffe39 	bl	1890 <__rustc::__rust_alloc@plt>
+    1fb0:	b4fffe40 	cbz	x0, 1f78 <bang_probe::main+0x80>
+    1fb4:	aa0003f3 	mov	x19, x0
+    1fb8:	14000003 	b	1fc4 <bang_probe::main+0xcc>
+    1fbc:	aa1f03f9 	mov	x25, xzr
+    1fc0:	52800113 	mov	w19, #0x8                   	// #8
+    1fc4:	a9005674 	stp	x20, x21, [x19]
+    1fc8:	aa1f03f8 	mov	x24, xzr
+    1fcc:	52800029 	mov	w9, #0x1                   	// #1
+    1fd0:	f9000a7a 	str	x26, [x19, #16]
+    1fd4:	52800028 	mov	w8, #0x1                   	// #1
+    1fd8:	52800057 	mov	w23, #0x2                   	// #2
+    1fdc:	ad418780 	ldp	q0, q1, [x28, #48]
+    1fe0:	a901cf99 	stp	x25, x19, [x28, #24]
+    1fe4:	b201f3f9 	mov	x25, #0xaaaaaaaaaaaaaaaa    	// #-6148914691236517206
+    1fe8:	d280003a 	mov	x26, #0x1                   	// #1
+    1fec:	f90053e8 	str	x8, [sp, #160]
+    1ff0:	f2955579 	movk	x25, #0xaaab
+    1ff4:	f9001789 	str	x9, [x28, #40]
+    1ff8:	ad0587e0 	stp	q0, q1, [sp, #176]
+    1ffc:	1400000b 	b	2028 <bang_probe::main+0x130>
+    2000:	f9401393 	ldr	x19, [x28, #32]
+    2004:	f94053e9 	ldr	x9, [sp, #160]
+    2008:	8b180268 	add	x8, x19, x24
+    200c:	91006318 	add	x24, x24, #0x18
+    2010:	a901d915 	stp	x21, x22, [x8, #24]
+    2014:	91000529 	add	x9, x9, #0x1
+    2018:	f900151b 	str	x27, [x8, #40]
+    201c:	f90053e9 	str	x9, [sp, #160]
+    2020:	f9001797 	str	x23, [x28, #40]
+    2024:	910006f7 	add	x23, x23, #0x1
+    2028:	d100c3a8 	sub	x8, x29, #0x30
+    202c:	9102c3e0 	add	x0, sp, #0xb0
+    2030:	97fffe74 	bl	1a00 <<std::env::Args as core::iter::traits::iterator::Iterator>::next@plt>
+    2034:	f9404395 	ldr	x21, [x28, #128]
+    2038:	d10006f4 	sub	x20, x23, #0x1
+    203c:	b10006bf 	cmn	x21, #0x1
+    2040:	54000200 	b.eq	2080 <bang_probe::main+0x188>  // b.none
+    2044:	f9400f88 	ldr	x8, [x28, #24]
+    2048:	a948ef96 	ldp	x22, x27, [x28, #136]
+    204c:	eb08029f 	cmp	x20, x8
+    2050:	54fffda1 	b.ne	2004 <bang_probe::main+0x10c>  // b.any
+    2054:	f94067e8 	ldr	x8, [sp, #200]
+    2058:	f9405fe9 	ldr	x9, [sp, #184]
+    205c:	cb090108 	sub	x8, x8, x9
+    2060:	d343fd08 	lsr	x8, x8, #3
+    2064:	9b196902 	madd	x2, x8, x25, x26
+    2068:	d10263a0 	sub	x0, x29, #0x98
+    206c:	d10006e1 	sub	x1, x23, #0x1
+    2070:	52800103 	mov	w3, #0x8                   	// #8
+    2074:	52800304 	mov	w4, #0x18                  	// #24
+    2078:	97fffea7 	bl	1b14 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>
+    207c:	17ffffe1 	b	2000 <bang_probe::main+0x108>
+    2080:	f9405fe8 	ldr	x8, [sp, #184]
+    2084:	f94067e9 	ldr	x9, [sp, #200]
+    2088:	eb080129 	subs	x9, x9, x8
+    208c:	54000200 	b.eq	20cc <bang_probe::main+0x1d4>  // b.none
+    2090:	b201f3ea 	mov	x10, #0xaaaaaaaaaaaaaaaa    	// #-6148914691236517206
+    2094:	91002115 	add	x21, x8, #0x8
+    2098:	f295556a 	movk	x10, #0xaaab
+    209c:	9bca7d29 	umulh	x9, x9, x10
+    20a0:	d344fd33 	lsr	x19, x9, #4
+    20a4:	14000004 	b	20b4 <bang_probe::main+0x1bc>
+    20a8:	f1000673 	subs	x19, x19, #0x1
+    20ac:	910062b5 	add	x21, x21, #0x18
+    20b0:	540000e0 	b.eq	20cc <bang_probe::main+0x1d4>  // b.none
+    20b4:	f85f82a1 	ldur	x1, [x21, #-8]
+    20b8:	b4ffff81 	cbz	x1, 20a8 <bang_probe::main+0x1b0>
+    20bc:	f94002a0 	ldr	x0, [x21]
+    20c0:	52800022 	mov	w2, #0x1                   	// #1
+    20c4:	97fffe1f 	bl	1940 <__rustc::__rust_dealloc@plt>
+    20c8:	17fffff8 	b	20a8 <bang_probe::main+0x1b0>
+    20cc:	f94063e8 	ldr	x8, [sp, #192]
+    20d0:	b40000c8 	cbz	x8, 20e8 <bang_probe::main+0x1f0>
+    20d4:	8b080508 	add	x8, x8, x8, lsl #1
+    20d8:	f9405be0 	ldr	x0, [sp, #176]
+    20dc:	52800102 	mov	w2, #0x8                   	// #8
+    20e0:	d37df101 	lsl	x1, x8, #3
+    20e4:	97fffe17 	bl	1940 <__rustc::__rust_dealloc@plt>
+    20e8:	a941a389 	ldp	x9, x8, [x28, #24]
+    20ec:	f1000a9f 	cmp	x20, #0x2
+    20f0:	f90047e9 	str	x9, [sp, #136]
+    20f4:	f9004fe8 	str	x8, [sp, #152]
+    20f8:	5400c203 	b.cc	3938 <bang_probe::main+0x1a40>  // b.lo, b.ul, b.last
+    20fc:	f9401508 	ldr	x8, [x8, #40]
+    2100:	f100151f 	cmp	x8, #0x5
+    2104:	540002c0 	b.eq	215c <bang_probe::main+0x264>  // b.none
+    2108:	f100211f 	cmp	x8, #0x8
+    210c:	540003a1 	b.ne	2180 <bang_probe::main+0x288>  // b.any
+    2110:	f9404fe8 	ldr	x8, [sp, #152]
+    2114:	d28cada9 	mov	x9, #0x656d                	// #25965
+    2118:	f2ac2e89 	movk	x9, #0x6174, lsl #16
+    211c:	f9401108 	ldr	x8, [x8, #32]
+    2120:	f2cc2c89 	movk	x9, #0x6164, lsl #32
+    2124:	f2ec2e89 	movk	x9, #0x6174, lsl #48
+    2128:	f9400108 	ldr	x8, [x8]
+    212c:	eb09011f 	cmp	x8, x9
+    2130:	54000281 	b.ne	2180 <bang_probe::main+0x288>  // b.any
+    2134:	aa1f03f3 	mov	x19, xzr
+    2138:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    213c:	9124f508 	add	x8, x8, #0x93d
+    2140:	52800169 	mov	w9, #0xb                   	// #11
+    2144:	52800815 	mov	w21, #0x40                  	// #64
+    2148:	d0000016 	adrp	x22, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    214c:	912522d6 	add	x22, x22, #0x948
+    2150:	a901a788 	stp	x8, x9, [x28, #24]
+    2154:	f9000795 	str	x21, [x28, #8]
+    2158:	140000c8 	b	2478 <bang_probe::main+0x580>
+    215c:	f9404fe8 	ldr	x8, [sp, #152]
+    2160:	f9401108 	ldr	x8, [x8, #32]
+    2164:	39401109 	ldrb	w9, [x8, #4]
+    2168:	b9400108 	ldr	w8, [x8]
+    216c:	7101ad3f 	cmp	w9, #0x6b
+    2170:	528d0c69 	mov	w9, #0x6863                	// #26723
+    2174:	72ac6ca9 	movk	w9, #0x6365, lsl #16
+    2178:	7a490100 	ccmp	w8, w9, #0x0, eq	// eq = none
+    217c:	54001ba0 	b.eq	24f0 <bang_probe::main+0x5f8>  // b.none
+    2180:	f1000eff 	cmp	x23, #0x3
+    2184:	5400c040 	b.eq	398c <bang_probe::main+0x1a94>  // b.none
+    2188:	f9404fe8 	ldr	x8, [sp, #152]
+    218c:	a943a909 	ldp	x9, x10, [x8, #56]
+    2190:	f100055f 	cmp	x10, #0x1
+    2194:	54000080 	b.eq	21a4 <bang_probe::main+0x2ac>  // b.none
+    2198:	b400c30a 	cbz	x10, 39f8 <bang_probe::main+0x1b00>
+    219c:	3940012b 	ldrb	w11, [x9]
+    21a0:	14000009 	b	21c4 <bang_probe::main+0x2cc>
+    21a4:	3940012b 	ldrb	w11, [x9]
+    21a8:	b00000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    21ac:	912ba021 	add	x1, x1, #0xae8
+    21b0:	52800028 	mov	w8, #0x1                   	// #1
+    21b4:	7100ad7f 	cmp	w11, #0x2b
+    21b8:	5400ae80 	b.eq	3788 <bang_probe::main+0x1890>  // b.none
+    21bc:	7100b57f 	cmp	w11, #0x2d
+    21c0:	5400ae40 	b.eq	3788 <bang_probe::main+0x1890>  // b.none
+    21c4:	7100ad7f 	cmp	w11, #0x2b
+    21c8:	1a9f17e8 	cset	w8, eq	// eq = none
+    21cc:	9a891529 	cinc	x9, x9, eq	// eq = none
+    21d0:	cb080148 	sub	x8, x10, x8
+    21d4:	f100451f 	cmp	x8, #0x11
+    21d8:	540001e2 	b.cs	2214 <bang_probe::main+0x31c>  // b.hs, b.nlast
+    21dc:	aa1f03e0 	mov	x0, xzr
+    21e0:	b40003c8 	cbz	x8, 2258 <bang_probe::main+0x360>
+    21e4:	b00000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    21e8:	912ba021 	add	x1, x1, #0xae8
+    21ec:	5280014a 	mov	w10, #0xa                   	// #10
+    21f0:	3840152b 	ldrb	w11, [x9], #1
+    21f4:	5100c16b 	sub	w11, w11, #0x30
+    21f8:	7100257f 	cmp	w11, #0x9
+    21fc:	5400b528 	b.hi	38a0 <bang_probe::main+0x19a8>  // b.pmore
+    2200:	9b0a7c0c 	mul	x12, x0, x10
+    2204:	f1000508 	subs	x8, x8, #0x1
+    2208:	8b2b4180 	add	x0, x12, w11, uxtw
+    220c:	54ffff21 	b.ne	21f0 <bang_probe::main+0x2f8>  // b.any
+    2210:	14000012 	b	2258 <bang_probe::main+0x360>
+    2214:	aa1f03e0 	mov	x0, xzr
+    2218:	5280014a 	mov	w10, #0xa                   	// #10
+    221c:	b00000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    2220:	912ba021 	add	x1, x1, #0xae8
+    2224:	9bca7c0c 	umulh	x12, x0, x10
+    2228:	3840152b 	ldrb	w11, [x9], #1
+    222c:	eb0c03ff 	cmp	xzr, x12
+    2230:	5400a921 	b.ne	3754 <bang_probe::main+0x185c>  // b.any
+    2234:	5100c16b 	sub	w11, w11, #0x30
+    2238:	7100297f 	cmp	w11, #0xa
+    223c:	5400b322 	b.cs	38a0 <bang_probe::main+0x19a8>  // b.hs, b.nlast
+    2240:	8b00080c 	add	x12, x0, x0, lsl #2
+    2244:	d37ff98c 	lsl	x12, x12, #1
+    2248:	ab2b4180 	adds	x0, x12, w11, uxtw
+    224c:	5400a802 	b.cs	374c <bang_probe::main+0x1854>  // b.hs, b.nlast
+    2250:	d1000508 	sub	x8, x8, #0x1
+    2254:	b5fffe88 	cbnz	x8, 2224 <bang_probe::main+0x32c>
+    2258:	f100129f 	cmp	x20, #0x4
+    225c:	5400ba83 	b.cc	39ac <bang_probe::main+0x1ab4>  // b.lo, b.ul, b.last
+    2260:	f9404fe8 	ldr	x8, [sp, #152]
+    2264:	a9452909 	ldp	x9, x10, [x8, #80]
+    2268:	f100055f 	cmp	x10, #0x1
+    226c:	54000080 	b.eq	227c <bang_probe::main+0x384>  // b.none
+    2270:	b400bc8a 	cbz	x10, 3a00 <bang_probe::main+0x1b08>
+    2274:	3940012b 	ldrb	w11, [x9]
+    2278:	14000009 	b	229c <bang_probe::main+0x3a4>
+    227c:	3940012b 	ldrb	w11, [x9]
+    2280:	b00000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    2284:	912b4021 	add	x1, x1, #0xad0
+    2288:	52800028 	mov	w8, #0x1                   	// #1
+    228c:	7100ad7f 	cmp	w11, #0x2b
+    2290:	5400a7c0 	b.eq	3788 <bang_probe::main+0x1890>  // b.none
+    2294:	7100b57f 	cmp	w11, #0x2d
+    2298:	5400a780 	b.eq	3788 <bang_probe::main+0x1890>  // b.none
+    229c:	7100ad7f 	cmp	w11, #0x2b
+    22a0:	1a9f17e8 	cset	w8, eq	// eq = none
+    22a4:	9a891529 	cinc	x9, x9, eq	// eq = none
+    22a8:	cb080148 	sub	x8, x10, x8
+    22ac:	f100451f 	cmp	x8, #0x11
+    22b0:	540001e2 	b.cs	22ec <bang_probe::main+0x3f4>  // b.hs, b.nlast
+    22b4:	aa1f03f3 	mov	x19, xzr
+    22b8:	b40003c8 	cbz	x8, 2330 <bang_probe::main+0x438>
+    22bc:	b00000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    22c0:	912b4021 	add	x1, x1, #0xad0
+    22c4:	5280014a 	mov	w10, #0xa                   	// #10
+    22c8:	3840152b 	ldrb	w11, [x9], #1
+    22cc:	5100c16b 	sub	w11, w11, #0x30
+    22d0:	7100257f 	cmp	w11, #0x9
+    22d4:	5400ae68 	b.hi	38a0 <bang_probe::main+0x19a8>  // b.pmore
+    22d8:	9b0a7e6c 	mul	x12, x19, x10
+    22dc:	f1000508 	subs	x8, x8, #0x1
+    22e0:	8b2b4193 	add	x19, x12, w11, uxtw
+    22e4:	54ffff21 	b.ne	22c8 <bang_probe::main+0x3d0>  // b.any
+    22e8:	14000012 	b	2330 <bang_probe::main+0x438>
+    22ec:	aa1f03f3 	mov	x19, xzr
+    22f0:	5280014a 	mov	w10, #0xa                   	// #10
+    22f4:	b00000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    22f8:	912b4021 	add	x1, x1, #0xad0
+    22fc:	9bca7e6c 	umulh	x12, x19, x10
+    2300:	3840152b 	ldrb	w11, [x9], #1
+    2304:	eb0c03ff 	cmp	xzr, x12
+    2308:	5400a341 	b.ne	3770 <bang_probe::main+0x1878>  // b.any
+    230c:	5100c16b 	sub	w11, w11, #0x30
+    2310:	7100297f 	cmp	w11, #0xa
+    2314:	5400ac62 	b.cs	38a0 <bang_probe::main+0x19a8>  // b.hs, b.nlast
+    2318:	8b130a6c 	add	x12, x19, x19, lsl #2
+    231c:	d37ff98c 	lsl	x12, x12, #1
+    2320:	ab2b4193 	adds	x19, x12, w11, uxtw
+    2324:	5400a142 	b.cs	374c <bang_probe::main+0x1854>  // b.hs, b.nlast
+    2328:	d1000508 	sub	x8, x8, #0x1
+    232c:	b5fffe88 	cbnz	x8, 22fc <bang_probe::main+0x404>
+    2330:	f1000c1f 	cmp	x0, #0x3
+    2334:	5400b4c8 	b.hi	39cc <bang_probe::main+0x1ad4>  // b.pmore
+    2338:	b00000e8 	adrp	x8, 1f000 <GCC_except_table10+0x1952c>
+    233c:	9128e108 	add	x8, x8, #0xa38
+    2340:	8b001508 	add	x8, x8, x0, lsl #5
+    2344:	a9412109 	ldp	x9, x8, [x8, #16]
+    2348:	a90b23e9 	stp	x9, x8, [sp, #176]
+    234c:	9102c3e9 	add	x9, sp, #0xb0
+    2350:	d10203a8 	sub	x8, x29, #0x80
+    2354:	f9001b89 	str	x9, [x28, #48]
+    2358:	f9404fe8 	ldr	x8, [sp, #152]
+    235c:	a9422508 	ldp	x8, x9, [x8, #32]
+    2360:	f100193f 	cmp	x9, #0x6
+    2364:	54000420 	b.eq	23e8 <bang_probe::main+0x4f0>  // b.none
+    2368:	f100213f 	cmp	x9, #0x8
+    236c:	54000240 	b.eq	23b4 <bang_probe::main+0x4bc>  // b.none
+    2370:	f1001d3f 	cmp	x9, #0x7
+    2374:	54000701 	b.ne	2454 <bang_probe::main+0x55c>  // b.any
+    2378:	b9400109 	ldr	w9, [x8]
+    237c:	528e8e6a 	mov	w10, #0x7473                	// #29811
+    2380:	b8403108 	ldur	w8, [x8, #3]
+    2384:	72abec8a 	movk	w10, #0x5f64, lsl #16
+    2388:	6b0a013f 	cmp	w9, w10
+    238c:	528e6be9 	mov	w9, #0x735f                	// #29535
+    2390:	72ae4e89 	movk	w9, #0x7274, lsl #16
+    2394:	7a490100 	ccmp	w8, w9, #0x0, eq	// eq = none
+    2398:	540005e1 	b.ne	2454 <bang_probe::main+0x55c>  // b.any
+    239c:	b0000008 	adrp	x8, 3000 <bang_probe::main+0x1108>
+    23a0:	913ad108 	add	x8, x8, #0xeb4
+    23a4:	f9001b88 	str	x8, [x28, #48]
+    23a8:	d10203a8 	sub	x8, x29, #0x80
+    23ac:	b50032b3 	cbnz	x19, 2a00 <bang_probe::main+0xb08>
+    23b0:	1400019b 	b	2a1c <bang_probe::main+0xb24>
+    23b4:	d28e8e69 	mov	x9, #0x7473                	// #29811
+    23b8:	f9400108 	ldr	x8, [x8]
+    23bc:	f2abec89 	movk	x9, #0x5f64, lsl #16
+    23c0:	f2cd0c69 	movk	x9, #0x6863, lsl #32
+    23c4:	f2ee4c29 	movk	x9, #0x7261, lsl #48
+    23c8:	eb09011f 	cmp	x8, x9
+    23cc:	54000441 	b.ne	2454 <bang_probe::main+0x55c>  // b.any
+    23d0:	b0000008 	adrp	x8, 3000 <bang_probe::main+0x1108>
+    23d4:	913cb108 	add	x8, x8, #0xf2c
+    23d8:	f9001b88 	str	x8, [x28, #48]
+    23dc:	d10203a8 	sub	x8, x29, #0x80
+    23e0:	b5003113 	cbnz	x19, 2a00 <bang_probe::main+0xb08>
+    23e4:	1400018e 	b	2a1c <bang_probe::main+0xb24>
+    23e8:	b9400109 	ldr	w9, [x8]
+    23ec:	528deeeb 	mov	w11, #0x6f77                	// #28535
+    23f0:	7940090a 	ldrh	w10, [x8, #4]
+    23f4:	72ac8e4b 	movk	w11, #0x6472, lsl #16
+    23f8:	6b0b013f 	cmp	w9, w11
+    23fc:	5286c629 	mov	w9, #0x3631                	// #13873
+    2400:	7a490140 	ccmp	w10, w9, #0x0, eq	// eq = none
+    2404:	54000e60 	b.eq	25d0 <bang_probe::main+0x6d8>  // b.none
+    2408:	b940010b 	ldr	w11, [x8]
+    240c:	528decca 	mov	w10, #0x6f66                	// #28518
+    2410:	7940090c 	ldrh	w12, [x8, #4]
+    2414:	72ac8d8a 	movk	w10, #0x646c, lsl #16
+    2418:	6b0a017f 	cmp	w11, w10
+    241c:	7a490180 	ccmp	w12, w9, #0x0, eq	// eq = none
+    2420:	54002e60 	b.eq	29ec <bang_probe::main+0xaf4>  // b.none
+    2424:	b9400109 	ldr	w9, [x8]
+    2428:	79400908 	ldrh	w8, [x8, #4]
+    242c:	6b0a013f 	cmp	w9, w10
+    2430:	528686c9 	mov	w9, #0x3436                	// #13366
+    2434:	7a490100 	ccmp	w8, w9, #0x0, eq	// eq = none
+    2438:	540000e1 	b.ne	2454 <bang_probe::main+0x55c>  // b.any
+    243c:	b0000008 	adrp	x8, 3000 <bang_probe::main+0x1108>
+    2440:	91346108 	add	x8, x8, #0xd18
+    2444:	f9001b88 	str	x8, [x28, #48]
+    2448:	d10203a8 	sub	x8, x29, #0x80
+    244c:	b5002db3 	cbnz	x19, 2a00 <bang_probe::main+0xb08>
+    2450:	14000173 	b	2a1c <bang_probe::main+0xb24>
+    2454:	f0000000 	adrp	x0, 5000 <_fini+0xc00>
+    2458:	91120400 	add	x0, x0, #0x481
+    245c:	b00000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    2460:	912de042 	add	x2, x2, #0xb78
+    2464:	528001c1 	mov	w1, #0xe                   	// #14
+    2468:	97fffd3e 	bl	1960 <core::panicking::panic@plt>
+    246c:	14000562 	b	39f4 <bang_probe::main+0x1afc>
+    2470:	f101027f 	cmp	x19, #0x40
+    2474:	54009908 	b.hi	3794 <bang_probe::main+0x189c>  // b.pmore
+    2478:	f100c67f 	cmp	x19, #0x31
+    247c:	cb1302a8 	sub	x8, x21, x19
+    2480:	8b1302c9 	add	x9, x22, x19
+    2484:	54000163 	b.cc	24b0 <bang_probe::main+0x5b8>  // b.lo, b.ul, b.last
+    2488:	f101027f 	cmp	x19, #0x40
+    248c:	54000840 	b.eq	2594 <bang_probe::main+0x69c>  // b.none
+    2490:	aa1f03e1 	mov	x1, xzr
+    2494:	3861692a 	ldrb	w10, [x9, x1]
+    2498:	7100855f 	cmp	w10, #0x21
+    249c:	54000140 	b.eq	24c4 <bang_probe::main+0x5cc>  // b.none
+    24a0:	91000421 	add	x1, x1, #0x1
+    24a4:	eb01011f 	cmp	x8, x1
+    24a8:	54ffff61 	b.ne	2494 <bang_probe::main+0x59c>  // b.any
+    24ac:	1400003a 	b	2594 <bang_probe::main+0x69c>
+    24b0:	8b1302c1 	add	x1, x22, x19
+    24b4:	cb1302a2 	sub	x2, x21, x19
+    24b8:	52800420 	mov	w0, #0x21                  	// #33
+    24bc:	97fffd45 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    24c0:	360006a0 	tbz	w0, #0, 2594 <bang_probe::main+0x69c>
+    24c4:	8b130028 	add	x8, x1, x19
+    24c8:	f101011f 	cmp	x8, #0x40
+    24cc:	91000513 	add	x19, x8, #0x1
+    24d0:	54fffd02 	b.cs	2470 <bang_probe::main+0x578>  // b.hs, b.nlast
+    24d4:	f100fd1f 	cmp	x8, #0x3f
+    24d8:	1a9f17e9 	cset	w9, eq	// eq = none
+    24dc:	f101027f 	cmp	x19, #0x40
+    24e0:	540095c8 	b.hi	3798 <bang_probe::main+0x18a0>  // b.pmore
+    24e4:	f100fd1f 	cmp	x8, #0x3f
+    24e8:	54fffc81 	b.ne	2478 <bang_probe::main+0x580>  // b.any
+    24ec:	140004ab 	b	3798 <bang_probe::main+0x18a0>
+    24f0:	d0000009 	adrp	x9, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    24f4:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    24f8:	d10203a0 	sub	x0, x29, #0x80
+    24fc:	3dc10d21 	ldr	q1, [x9, #1072]
+    2500:	d0000009 	adrp	x9, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2504:	3dc10900 	ldr	q0, [x8, #1056]
+    2508:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    250c:	3dc12122 	ldr	q2, [x9, #1152]
+    2510:	9102c3e1 	add	x1, sp, #0xb0
+    2514:	3dc11103 	ldr	q3, [x8, #1088]
+    2518:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    251c:	b900afff 	str	wzr, [sp, #172]
+    2520:	ad0783e2 	stp	q2, q0, [sp, #240]
+    2524:	3dc11500 	ldr	q0, [x8, #1104]
+    2528:	910067e8 	add	x8, sp, #0x19
+    252c:	3c8ff101 	stur	q1, [x8, #255]
+    2530:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2534:	9102c3f3 	add	x19, sp, #0xb0
+    2538:	3dc11901 	ldr	q1, [x8, #1120]
+    253c:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2540:	ad0583e3 	stp	q3, q0, [sp, #176]
+    2544:	3dc11d00 	ldr	q0, [x8, #1136]
+    2548:	3d801fe3 	str	q3, [sp, #112]
+    254c:	390443ff 	strb	wzr, [sp, #272]
+    2550:	ad0683e1 	stp	q1, q0, [sp, #208]
+    2554:	3904a3ff 	strb	wzr, [sp, #296]
+    2558:	940006fc 	bl	4148 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint>
+    255c:	f9401f88 	ldr	x8, [x28, #56]
+    2560:	b4009928 	cbz	x8, 3884 <bang_probe::main+0x198c>
+    2564:	f9402398 	ldr	x24, [x28, #64]
+    2568:	b27defe8 	mov	x8, #0x7ffffffffffffff8    	// #9223372036854775800
+    256c:	d37df316 	lsl	x22, x24, #3
+    2570:	92430b09 	and	x9, x24, #0xe000000000000000
+    2574:	eb0802df 	cmp	x22, x8
+    2578:	fa409920 	ccmp	x9, #0x0, #0x0, ls	// ls = plast
+    257c:	54002260 	b.eq	29c8 <bang_probe::main+0xad0>  // b.none
+    2580:	aa1f03f7 	mov	x23, xzr
+    2584:	aa1703e0 	mov	x0, x23
+    2588:	aa1603e1 	mov	x1, x22
+    258c:	97fffcfd 	bl	1980 <alloc::raw_vec::handle_error@plt>
+    2590:	14000519 	b	39f4 <bang_probe::main+0x1afc>
+    2594:	aa1f03e9 	mov	x9, xzr
+    2598:	d0000015 	adrp	x21, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    259c:	912522b5 	add	x21, x21, #0x948
+    25a0:	52800802 	mov	w2, #0x40                  	// #64
+    25a4:	52800033 	mov	w19, #0x1                   	// #1
+    25a8:	a9082389 	stp	x9, x8, [x28, #128]
+    25ac:	52800420 	mov	w0, #0x21                  	// #33
+    25b0:	aa1503e1 	mov	x1, x21
+    25b4:	97fffccf 	bl	18f0 <core::slice::memchr::memrchr_aligned@plt>
+    25b8:	f100041f 	cmp	x0, #0x1
+    25bc:	54000161 	b.ne	25e8 <bang_probe::main+0x6f0>  // b.any
+    25c0:	aa0103e2 	mov	x2, x1
+    25c4:	f100fc3f 	cmp	x1, #0x3f
+    25c8:	54ffff21 	b.ne	25ac <bang_probe::main+0x6b4>  // b.any
+    25cc:	14000008 	b	25ec <bang_probe::main+0x6f4>
+    25d0:	b0000008 	adrp	x8, 3000 <bang_probe::main+0x1108>
+    25d4:	91387108 	add	x8, x8, #0xe1c
+    25d8:	f9001b88 	str	x8, [x28, #48]
+    25dc:	d10203a8 	sub	x8, x29, #0x80
+    25e0:	b5002113 	cbnz	x19, 2a00 <bang_probe::main+0xb08>
+    25e4:	1400010e 	b	2a1c <bang_probe::main+0xb24>
+    25e8:	aa1f03f3 	mov	x19, xzr
+    25ec:	528007e8 	mov	w8, #0x3f                  	// #63
+    25f0:	d10263a9 	sub	x9, x29, #0x98
+    25f4:	d0000016 	adrp	x22, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    25f8:	910142d6 	add	x22, x22, #0x50
+    25fc:	a9032393 	stp	x19, x8, [x28, #48]
+    2600:	b00000f8 	adrp	x24, 1f000 <GCC_except_table10+0x1952c>
+    2604:	a90b5be9 	stp	x9, x22, [sp, #176]
+    2608:	d102a3a8 	sub	x8, x29, #0xa8
+    260c:	d0000017 	adrp	x23, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2610:	910352f7 	add	x23, x23, #0xd4
+    2614:	f947f718 	ldr	x24, [x24, #4072]
+    2618:	a90c63e8 	stp	x8, x24, [sp, #192]
+    261c:	d100c3a8 	sub	x8, x29, #0x30
+    2620:	a90d5fe8 	stp	x8, x23, [sp, #208]
+    2624:	d10203a8 	sub	x8, x29, #0x80
+    2628:	a90e5fe8 	stp	x8, x23, [sp, #224]
+    262c:	d0000000 	adrp	x0, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2630:	91235c00 	add	x0, x0, #0x8d7
+    2634:	9102c3e1 	add	x1, sp, #0xb0
+    2638:	97fffc82 	bl	1840 <std::io::stdio::_print@plt>
+    263c:	aa1f03f3 	mov	x19, xzr
+    2640:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2644:	91262108 	add	x8, x8, #0x988
+    2648:	52800169 	mov	w9, #0xb                   	// #11
+    264c:	52800835 	mov	w21, #0x41                  	// #65
+    2650:	d0000019 	adrp	x25, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2654:	91264f39 	add	x25, x25, #0x993
+    2658:	a901a788 	stp	x8, x9, [x28, #24]
+    265c:	f9000795 	str	x21, [x28, #8]
+    2660:	14000003 	b	266c <bang_probe::main+0x774>
+    2664:	f101067f 	cmp	x19, #0x41
+    2668:	540089c8 	b.hi	37a0 <bang_probe::main+0x18a8>  // b.pmore
+    266c:	f100c67f 	cmp	x19, #0x31
+    2670:	cb1302a8 	sub	x8, x21, x19
+    2674:	8b130329 	add	x9, x25, x19
+    2678:	54000169 	b.ls	26a4 <bang_probe::main+0x7ac>  // b.plast
+    267c:	f101067f 	cmp	x19, #0x41
+    2680:	54000320 	b.eq	26e4 <bang_probe::main+0x7ec>  // b.none
+    2684:	aa1f03e1 	mov	x1, xzr
+    2688:	3861692a 	ldrb	w10, [x9, x1]
+    268c:	7100855f 	cmp	w10, #0x21
+    2690:	54000140 	b.eq	26b8 <bang_probe::main+0x7c0>  // b.none
+    2694:	91000421 	add	x1, x1, #0x1
+    2698:	eb01011f 	cmp	x8, x1
+    269c:	54ffff61 	b.ne	2688 <bang_probe::main+0x790>  // b.any
+    26a0:	14000011 	b	26e4 <bang_probe::main+0x7ec>
+    26a4:	8b130321 	add	x1, x25, x19
+    26a8:	cb1302a2 	sub	x2, x21, x19
+    26ac:	52800420 	mov	w0, #0x21                  	// #33
+    26b0:	97fffcc8 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    26b4:	36000180 	tbz	w0, #0, 26e4 <bang_probe::main+0x7ec>
+    26b8:	8b130028 	add	x8, x1, x19
+    26bc:	f101051f 	cmp	x8, #0x41
+    26c0:	91000513 	add	x19, x8, #0x1
+    26c4:	54fffd02 	b.cs	2664 <bang_probe::main+0x76c>  // b.hs, b.nlast
+    26c8:	f101011f 	cmp	x8, #0x40
+    26cc:	1a9f17e9 	cset	w9, eq	// eq = none
+    26d0:	f101067f 	cmp	x19, #0x41
+    26d4:	54008688 	b.hi	37a4 <bang_probe::main+0x18ac>  // b.pmore
+    26d8:	f101011f 	cmp	x8, #0x40
+    26dc:	54fffc81 	b.ne	266c <bang_probe::main+0x774>  // b.any
+    26e0:	14000431 	b	37a4 <bang_probe::main+0x18ac>
+    26e4:	aa1f03e9 	mov	x9, xzr
+    26e8:	d0000015 	adrp	x21, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    26ec:	91264eb5 	add	x21, x21, #0x993
+    26f0:	52800822 	mov	w2, #0x41                  	// #65
+    26f4:	52800033 	mov	w19, #0x1                   	// #1
+    26f8:	a9082389 	stp	x9, x8, [x28, #128]
+    26fc:	52800420 	mov	w0, #0x21                  	// #33
+    2700:	aa1503e1 	mov	x1, x21
+    2704:	97fffc7b 	bl	18f0 <core::slice::memchr::memrchr_aligned@plt>
+    2708:	f100041f 	cmp	x0, #0x1
+    270c:	540000a1 	b.ne	2720 <bang_probe::main+0x828>  // b.any
+    2710:	aa0103e2 	mov	x2, x1
+    2714:	f101003f 	cmp	x1, #0x40
+    2718:	54ffff21 	b.ne	26fc <bang_probe::main+0x804>  // b.any
+    271c:	14000002 	b	2724 <bang_probe::main+0x82c>
+    2720:	aa1f03f3 	mov	x19, xzr
+    2724:	52800808 	mov	w8, #0x40                  	// #64
+    2728:	d10263a9 	sub	x9, x29, #0x98
+    272c:	a9032393 	stp	x19, x8, [x28, #48]
+    2730:	d102a3a8 	sub	x8, x29, #0xa8
+    2734:	a90c63e8 	stp	x8, x24, [sp, #192]
+    2738:	d100c3a8 	sub	x8, x29, #0x30
+    273c:	a90d5fe8 	stp	x8, x23, [sp, #208]
+    2740:	d10203a8 	sub	x8, x29, #0x80
+    2744:	a90b5be9 	stp	x9, x22, [sp, #176]
+    2748:	a90e5fe8 	stp	x8, x23, [sp, #224]
+    274c:	d0000000 	adrp	x0, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2750:	91235c00 	add	x0, x0, #0x8d7
+    2754:	9102c3e1 	add	x1, sp, #0xb0
+    2758:	97fffc3a 	bl	1840 <std::io::stdio::_print@plt>
+    275c:	aa1f03f3 	mov	x19, xzr
+    2760:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2764:	91275108 	add	x8, x8, #0x9d4
+    2768:	52800229 	mov	w9, #0x11                  	// #17
+    276c:	52800835 	mov	w21, #0x41                  	// #65
+    2770:	d0000019 	adrp	x25, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2774:	91279739 	add	x25, x25, #0x9e5
+    2778:	a901a788 	stp	x8, x9, [x28, #24]
+    277c:	f9000795 	str	x21, [x28, #8]
+    2780:	14000003 	b	278c <bang_probe::main+0x894>
+    2784:	f101067f 	cmp	x19, #0x41
+    2788:	54008128 	b.hi	37ac <bang_probe::main+0x18b4>  // b.pmore
+    278c:	f100c67f 	cmp	x19, #0x31
+    2790:	cb1302a8 	sub	x8, x21, x19
+    2794:	8b130329 	add	x9, x25, x19
+    2798:	54000169 	b.ls	27c4 <bang_probe::main+0x8cc>  // b.plast
+    279c:	f101067f 	cmp	x19, #0x41
+    27a0:	54000320 	b.eq	2804 <bang_probe::main+0x90c>  // b.none
+    27a4:	aa1f03e1 	mov	x1, xzr
+    27a8:	3861692a 	ldrb	w10, [x9, x1]
+    27ac:	7100855f 	cmp	w10, #0x21
+    27b0:	54000140 	b.eq	27d8 <bang_probe::main+0x8e0>  // b.none
+    27b4:	91000421 	add	x1, x1, #0x1
+    27b8:	eb01011f 	cmp	x8, x1
+    27bc:	54ffff61 	b.ne	27a8 <bang_probe::main+0x8b0>  // b.any
+    27c0:	14000011 	b	2804 <bang_probe::main+0x90c>
+    27c4:	8b130321 	add	x1, x25, x19
+    27c8:	cb1302a2 	sub	x2, x21, x19
+    27cc:	52800420 	mov	w0, #0x21                  	// #33
+    27d0:	97fffc80 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    27d4:	36000180 	tbz	w0, #0, 2804 <bang_probe::main+0x90c>
+    27d8:	8b130028 	add	x8, x1, x19
+    27dc:	f101051f 	cmp	x8, #0x41
+    27e0:	91000513 	add	x19, x8, #0x1
+    27e4:	54fffd02 	b.cs	2784 <bang_probe::main+0x88c>  // b.hs, b.nlast
+    27e8:	f101011f 	cmp	x8, #0x40
+    27ec:	1a9f17e9 	cset	w9, eq	// eq = none
+    27f0:	f101067f 	cmp	x19, #0x41
+    27f4:	54007de8 	b.hi	37b0 <bang_probe::main+0x18b8>  // b.pmore
+    27f8:	f101011f 	cmp	x8, #0x40
+    27fc:	54fffc81 	b.ne	278c <bang_probe::main+0x894>  // b.any
+    2800:	140003ec 	b	37b0 <bang_probe::main+0x18b8>
+    2804:	aa1f03e9 	mov	x9, xzr
+    2808:	d0000015 	adrp	x21, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    280c:	912796b5 	add	x21, x21, #0x9e5
+    2810:	52800822 	mov	w2, #0x41                  	// #65
+    2814:	52800033 	mov	w19, #0x1                   	// #1
+    2818:	a9082389 	stp	x9, x8, [x28, #128]
+    281c:	52800420 	mov	w0, #0x21                  	// #33
+    2820:	aa1503e1 	mov	x1, x21
+    2824:	97fffc33 	bl	18f0 <core::slice::memchr::memrchr_aligned@plt>
+    2828:	f100041f 	cmp	x0, #0x1
+    282c:	540000a1 	b.ne	2840 <bang_probe::main+0x948>  // b.any
+    2830:	aa0103e2 	mov	x2, x1
+    2834:	f101003f 	cmp	x1, #0x40
+    2838:	54ffff21 	b.ne	281c <bang_probe::main+0x924>  // b.any
+    283c:	14000002 	b	2844 <bang_probe::main+0x94c>
+    2840:	aa1f03f3 	mov	x19, xzr
+    2844:	52800808 	mov	w8, #0x40                  	// #64
+    2848:	d10263a9 	sub	x9, x29, #0x98
+    284c:	a9032393 	stp	x19, x8, [x28, #48]
+    2850:	d102a3a8 	sub	x8, x29, #0xa8
+    2854:	a90c63e8 	stp	x8, x24, [sp, #192]
+    2858:	d100c3a8 	sub	x8, x29, #0x30
+    285c:	a90d5fe8 	stp	x8, x23, [sp, #208]
+    2860:	d10203a8 	sub	x8, x29, #0x80
+    2864:	a90b5be9 	stp	x9, x22, [sp, #176]
+    2868:	a90e5fe8 	stp	x8, x23, [sp, #224]
+    286c:	d0000000 	adrp	x0, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2870:	91235c00 	add	x0, x0, #0x8d7
+    2874:	9102c3e1 	add	x1, sp, #0xb0
+    2878:	97fffbf2 	bl	1840 <std::io::stdio::_print@plt>
+    287c:	aa1f03f3 	mov	x19, xzr
+    2880:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2884:	91210108 	add	x8, x8, #0x840
+    2888:	52800209 	mov	w9, #0x10                  	// #16
+    288c:	52813ef9 	mov	w25, #0x9f7                 	// #2551
+    2890:	d0000015 	adrp	x21, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2894:	91289ab5 	add	x21, x21, #0xa26
+    2898:	a901a788 	stp	x8, x9, [x28, #24]
+    289c:	f9000799 	str	x25, [x28, #8]
+    28a0:	14000003 	b	28ac <bang_probe::main+0x9b4>
+    28a4:	f127de7f 	cmp	x19, #0x9f7
+    28a8:	54007888 	b.hi	37b8 <bang_probe::main+0x18c0>  // b.pmore
+    28ac:	f1279e7f 	cmp	x19, #0x9e7
+    28b0:	cb130328 	sub	x8, x25, x19
+    28b4:	8b1302a9 	add	x9, x21, x19
+    28b8:	54000169 	b.ls	28e4 <bang_probe::main+0x9ec>  // b.plast
+    28bc:	f127de7f 	cmp	x19, #0x9f7
+    28c0:	54000340 	b.eq	2928 <bang_probe::main+0xa30>  // b.none
+    28c4:	aa1f03e1 	mov	x1, xzr
+    28c8:	3861692a 	ldrb	w10, [x9, x1]
+    28cc:	7100855f 	cmp	w10, #0x21
+    28d0:	54000140 	b.eq	28f8 <bang_probe::main+0xa00>  // b.none
+    28d4:	91000421 	add	x1, x1, #0x1
+    28d8:	eb01011f 	cmp	x8, x1
+    28dc:	54ffff61 	b.ne	28c8 <bang_probe::main+0x9d0>  // b.any
+    28e0:	14000012 	b	2928 <bang_probe::main+0xa30>
+    28e4:	8b1302a1 	add	x1, x21, x19
+    28e8:	cb130322 	sub	x2, x25, x19
+    28ec:	52800420 	mov	w0, #0x21                  	// #33
+    28f0:	97fffc38 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    28f4:	360001a0 	tbz	w0, #0, 2928 <bang_probe::main+0xa30>
+    28f8:	8b130028 	add	x8, x1, x19
+    28fc:	f127dd1f 	cmp	x8, #0x9f7
+    2900:	91000513 	add	x19, x8, #0x1
+    2904:	54fffd02 	b.cs	28a4 <bang_probe::main+0x9ac>  // b.hs, b.nlast
+    2908:	38686aaa 	ldrb	w10, [x21, x8]
+    290c:	7100855f 	cmp	w10, #0x21
+    2910:	1a9f17e9 	cset	w9, eq	// eq = none
+    2914:	f127de7f 	cmp	x19, #0x9f7
+    2918:	54007528 	b.hi	37bc <bang_probe::main+0x18c4>  // b.pmore
+    291c:	7100855f 	cmp	w10, #0x21
+    2920:	54fffc61 	b.ne	28ac <bang_probe::main+0x9b4>  // b.any
+    2924:	140003a6 	b	37bc <bang_probe::main+0x18c4>
+    2928:	aa1f03e9 	mov	x9, xzr
+    292c:	52813ee2 	mov	w2, #0x9f7                 	// #2551
+    2930:	52800033 	mov	w19, #0x1                   	// #1
+    2934:	a9082389 	stp	x9, x8, [x28, #128]
+    2938:	52800420 	mov	w0, #0x21                  	// #33
+    293c:	aa1503e1 	mov	x1, x21
+    2940:	97fffbec 	bl	18f0 <core::slice::memchr::memrchr_aligned@plt>
+    2944:	f100041f 	cmp	x0, #0x1
+    2948:	540000c1 	b.ne	2960 <bang_probe::main+0xa68>  // b.any
+    294c:	38616aa8 	ldrb	w8, [x21, x1]
+    2950:	aa0103e2 	mov	x2, x1
+    2954:	7100851f 	cmp	w8, #0x21
+    2958:	54ffff01 	b.ne	2938 <bang_probe::main+0xa40>  // b.any
+    295c:	14000002 	b	2964 <bang_probe::main+0xa6c>
+    2960:	aa1f03f3 	mov	x19, xzr
+    2964:	d10263a8 	sub	x8, x29, #0x98
+    2968:	a9030b93 	stp	x19, x2, [x28, #48]
+    296c:	a90b5be8 	stp	x8, x22, [sp, #176]
+    2970:	d102a3a8 	sub	x8, x29, #0xa8
+    2974:	a90c63e8 	stp	x8, x24, [sp, #192]
+    2978:	d100c3a8 	sub	x8, x29, #0x30
+    297c:	a90d5fe8 	stp	x8, x23, [sp, #208]
+    2980:	d10203a8 	sub	x8, x29, #0x80
+    2984:	a90e5fe8 	stp	x8, x23, [sp, #224]
+    2988:	d0000000 	adrp	x0, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    298c:	91235c00 	add	x0, x0, #0x8d7
+    2990:	9102c3e1 	add	x1, sp, #0xb0
+    2994:	97fffbab 	bl	1840 <std::io::stdio::_print@plt>
+    2998:	f9404fe8 	ldr	x8, [sp, #152]
+    299c:	91002113 	add	x19, x8, #0x8
+    29a0:	14000004 	b	29b0 <bang_probe::main+0xab8>
+    29a4:	f1000694 	subs	x20, x20, #0x1
+    29a8:	91006273 	add	x19, x19, #0x18
+    29ac:	54000500 	b.eq	2a4c <bang_probe::main+0xb54>  // b.none
+    29b0:	f85f8261 	ldur	x1, [x19, #-8]
+    29b4:	b4ffff81 	cbz	x1, 29a4 <bang_probe::main+0xaac>
+    29b8:	f9400260 	ldr	x0, [x19]
+    29bc:	52800022 	mov	w2, #0x1                   	// #1
+    29c0:	97fffbe0 	bl	1940 <__rustc::__rust_dealloc@plt>
+    29c4:	17fffff8 	b	29a4 <bang_probe::main+0xaac>
+    29c8:	b4000616 	cbz	x22, 2a88 <bang_probe::main+0xb90>
+    29cc:	97fffbcd 	bl	1900 <__rustc::__rust_no_alloc_shim_is_unstable_v2@plt>
+    29d0:	aa1603e0 	mov	x0, x22
+    29d4:	52800101 	mov	w1, #0x8                   	// #8
+    29d8:	52800117 	mov	w23, #0x8                   	// #8
+    29dc:	97fffbad 	bl	1890 <__rustc::__rust_alloc@plt>
+    29e0:	b4ffdd20 	cbz	x0, 2584 <bang_probe::main+0x68c>
+    29e4:	aa0003f5 	mov	x21, x0
+    29e8:	1400002a 	b	2a90 <bang_probe::main+0xb98>
+    29ec:	b0000008 	adrp	x8, 3000 <bang_probe::main+0x1108>
+    29f0:	9131d108 	add	x8, x8, #0xc74
+    29f4:	f9001b88 	str	x8, [x28, #48]
+    29f8:	d10203a8 	sub	x8, x29, #0x80
+    29fc:	b4000113 	cbz	x19, 2a1c <bang_probe::main+0xb24>
+    2a00:	d100c3b5 	sub	x21, x29, #0x30
+    2a04:	a94b07e0 	ldp	x0, x1, [sp, #176]
+    2a08:	f9401b88 	ldr	x8, [x28, #48]
+    2a0c:	d63f0100 	blr	x8
+    2a10:	381d03a0 	sturb	w0, [x29, #-48]
+    2a14:	f1000673 	subs	x19, x19, #0x1
+    2a18:	54ffff61 	b.ne	2a04 <bang_probe::main+0xb0c>  // b.any
+    2a1c:	f9404fe8 	ldr	x8, [sp, #152]
+    2a20:	91002113 	add	x19, x8, #0x8
+    2a24:	14000004 	b	2a34 <bang_probe::main+0xb3c>
+    2a28:	f1000694 	subs	x20, x20, #0x1
+    2a2c:	91006273 	add	x19, x19, #0x18
+    2a30:	540000e0 	b.eq	2a4c <bang_probe::main+0xb54>  // b.none
+    2a34:	f85f8261 	ldur	x1, [x19, #-8]
+    2a38:	b4ffff81 	cbz	x1, 2a28 <bang_probe::main+0xb30>
+    2a3c:	f9400260 	ldr	x0, [x19]
+    2a40:	52800022 	mov	w2, #0x1                   	// #1
+    2a44:	97fffbbf 	bl	1940 <__rustc::__rust_dealloc@plt>
+    2a48:	17fffff8 	b	2a28 <bang_probe::main+0xb30>
+    2a4c:	f94047e8 	ldr	x8, [sp, #136]
+    2a50:	b40000c8 	cbz	x8, 2a68 <bang_probe::main+0xb70>
+    2a54:	8b080508 	add	x8, x8, x8, lsl #1
+    2a58:	f9404fe0 	ldr	x0, [sp, #152]
+    2a5c:	52800102 	mov	w2, #0x8                   	// #8
+    2a60:	d37df101 	lsl	x1, x8, #3
+    2a64:	97fffbb7 	bl	1940 <__rustc::__rust_dealloc@plt>
+    2a68:	910783ff 	add	sp, sp, #0x1e0
+    2a6c:	a9454ff4 	ldp	x20, x19, [sp, #80]
+    2a70:	a94457f6 	ldp	x22, x21, [sp, #64]
+    2a74:	a9435ff8 	ldp	x24, x23, [sp, #48]
+    2a78:	a94267fa 	ldp	x26, x25, [sp, #32]
+    2a7c:	a9416ffc 	ldp	x28, x27, [sp, #16]
+    2a80:	a8c67bfd 	ldp	x29, x30, [sp], #96
+    2a84:	d65f03c0 	ret
+    2a88:	aa1f03f8 	mov	x24, xzr
+    2a8c:	52800115 	mov	w21, #0x8                   	// #8
+    2a90:	d10203a0 	sub	x0, x29, #0x80
+    2a94:	9102c3e1 	add	x1, sp, #0xb0
+    2a98:	a9085798 	stp	x24, x21, [x28, #128]
+    2a9c:	f9004b9f 	str	xzr, [x28, #144]
+    2aa0:	940005aa 	bl	4148 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint>
+    2aa4:	f9401f88 	ldr	x8, [x28, #56]
+    2aa8:	b4007008 	cbz	x8, 38a8 <bang_probe::main+0x19b0>
+    2aac:	f9402382 	ldr	x2, [x28, #64]
+    2ab0:	eb18005f 	cmp	x2, x24
+    2ab4:	54007088 	b.hi	38c4 <bang_probe::main+0x19cc>  // b.pmore
+    2ab8:	aa1f03e8 	mov	x8, xzr
+    2abc:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2ac0:	8b080ea9 	add	x9, x21, x8, lsl #3
+    2ac4:	d000000b 	adrp	x11, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2ac8:	3dc12540 	ldr	q0, [x10, #1168]
+    2acc:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2ad0:	3dc12961 	ldr	q1, [x11, #1184]
+    2ad4:	d000000b 	adrp	x11, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2ad8:	3dc12d42 	ldr	q2, [x10, #1200]
+    2adc:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2ae0:	3c808120 	stur	q0, [x9, #8]
+    2ae4:	3dc13160 	ldr	q0, [x11, #1216]
+    2ae8:	5280042b 	mov	w11, #0x21                  	// #33
+    2aec:	3c818121 	stur	q1, [x9, #24]
+    2af0:	3dc13541 	ldr	q1, [x10, #1232]
+    2af4:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2af8:	3c838120 	stur	q0, [x9, #56]
+    2afc:	3dc13940 	ldr	q0, [x10, #1248]
+    2b00:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b04:	3c848121 	stur	q1, [x9, #72]
+    2b08:	3dc13d41 	ldr	q1, [x10, #1264]
+    2b0c:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b10:	3c858120 	stur	q0, [x9, #88]
+    2b14:	3dc14140 	ldr	q0, [x10, #1280]
+    2b18:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b1c:	3c868121 	stur	q1, [x9, #104]
+    2b20:	3dc14541 	ldr	q1, [x10, #1296]
+    2b24:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b28:	3c878120 	stur	q0, [x9, #120]
+    2b2c:	3dc14940 	ldr	q0, [x10, #1312]
+    2b30:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b34:	3c888121 	stur	q1, [x9, #136]
+    2b38:	3dc14d41 	ldr	q1, [x10, #1328]
+    2b3c:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b40:	3c898120 	stur	q0, [x9, #152]
+    2b44:	3dc15140 	ldr	q0, [x10, #1344]
+    2b48:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b4c:	3c8a8121 	stur	q1, [x9, #168]
+    2b50:	3dc15541 	ldr	q1, [x10, #1360]
+    2b54:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b58:	3c8b8120 	stur	q0, [x9, #184]
+    2b5c:	3dc15940 	ldr	q0, [x10, #1376]
+    2b60:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b64:	3c8c8121 	stur	q1, [x9, #200]
+    2b68:	3dc15d41 	ldr	q1, [x10, #1392]
+    2b6c:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b70:	3c8d8120 	stur	q0, [x9, #216]
+    2b74:	3dc16140 	ldr	q0, [x10, #1408]
+    2b78:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b7c:	3c8e8121 	stur	q1, [x9, #232]
+    2b80:	3c8f8120 	stur	q0, [x9, #248]
+    2b84:	3dc16540 	ldr	q0, [x10, #1424]
+    2b88:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b8c:	3dc16941 	ldr	q1, [x10, #1440]
+    2b90:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2b94:	3c828122 	stur	q2, [x9, #40]
+    2b98:	3dc16d42 	ldr	q2, [x10, #1456]
+    2b9c:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2ba0:	f900013f 	str	xzr, [x9]
+    2ba4:	ad088520 	stp	q0, q1, [x9, #272]
+    2ba8:	3dc17140 	ldr	q0, [x10, #1472]
+    2bac:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2bb0:	3dc17541 	ldr	q1, [x10, #1488]
+    2bb4:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2bb8:	f900852b 	str	x11, [x9, #264]
+    2bbc:	ad098122 	stp	q2, q0, [x9, #304]
+    2bc0:	3dc17940 	ldr	q0, [x10, #1504]
+    2bc4:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2bc8:	3dc17d42 	ldr	q2, [x10, #1520]
+    2bcc:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2bd0:	b27d026b 	orr	x11, x19, #0x8
+    2bd4:	ad0a8121 	stp	q1, q0, [x9, #336]
+    2bd8:	3dc18140 	ldr	q0, [x10, #1536]
+    2bdc:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2be0:	3dc18541 	ldr	q1, [x10, #1552]
+    2be4:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2be8:	9101ad13 	add	x19, x8, #0x6b
+    2bec:	ad0b8122 	stp	q2, q0, [x9, #368]
+    2bf0:	3dc18940 	ldr	q0, [x10, #1568]
+    2bf4:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2bf8:	3dc18d42 	ldr	q2, [x10, #1584]
+    2bfc:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c00:	ad0c8121 	stp	q1, q0, [x9, #400]
+    2c04:	3dc19140 	ldr	q0, [x10, #1600]
+    2c08:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c0c:	3dc19541 	ldr	q1, [x10, #1616]
+    2c10:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c14:	ad0d8122 	stp	q2, q0, [x9, #432]
+    2c18:	3dc19940 	ldr	q0, [x10, #1632]
+    2c1c:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c20:	3dc19d42 	ldr	q2, [x10, #1648]
+    2c24:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c28:	ad0e8121 	stp	q1, q0, [x9, #464]
+    2c2c:	3dc1a140 	ldr	q0, [x10, #1664]
+    2c30:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c34:	3dc1a541 	ldr	q1, [x10, #1680]
+    2c38:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c3c:	ad0f8122 	stp	q2, q0, [x9, #496]
+    2c40:	3dc1a940 	ldr	q0, [x10, #1696]
+    2c44:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c48:	3dc1ad42 	ldr	q2, [x10, #1712]
+    2c4c:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c50:	ad108121 	stp	q1, q0, [x9, #528]
+    2c54:	3dc1b140 	ldr	q0, [x10, #1728]
+    2c58:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c5c:	3dc1b541 	ldr	q1, [x10, #1744]
+    2c60:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c64:	ad118122 	stp	q2, q0, [x9, #560]
+    2c68:	3dc1b940 	ldr	q0, [x10, #1760]
+    2c6c:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c70:	3dc1bd42 	ldr	q2, [x10, #1776]
+    2c74:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c78:	ad128121 	stp	q1, q0, [x9, #592]
+    2c7c:	3dc1c140 	ldr	q0, [x10, #1792]
+    2c80:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c84:	3dc1c541 	ldr	q1, [x10, #1808]
+    2c88:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c8c:	ad138122 	stp	q2, q0, [x9, #624]
+    2c90:	3dc1c940 	ldr	q0, [x10, #1824]
+    2c94:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2c98:	3dc1cd42 	ldr	q2, [x10, #1840]
+    2c9c:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2ca0:	ad148121 	stp	q1, q0, [x9, #656]
+    2ca4:	3dc1d140 	ldr	q0, [x10, #1856]
+    2ca8:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2cac:	3dc1d541 	ldr	q1, [x10, #1872]
+    2cb0:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2cb4:	ad158122 	stp	q2, q0, [x9, #688]
+    2cb8:	3dc1d940 	ldr	q0, [x10, #1888]
+    2cbc:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2cc0:	3dc1dd42 	ldr	q2, [x10, #1904]
+    2cc4:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2cc8:	ad168121 	stp	q1, q0, [x9, #720]
+    2ccc:	3dc1e140 	ldr	q0, [x10, #1920]
+    2cd0:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2cd4:	3dc1e541 	ldr	q1, [x10, #1936]
+    2cd8:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2cdc:	ad178122 	stp	q2, q0, [x9, #752]
+    2ce0:	3dc1e940 	ldr	q0, [x10, #1952]
+    2ce4:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2ce8:	3dc1ed42 	ldr	q2, [x10, #1968]
+    2cec:	d000000a 	adrp	x10, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2cf0:	ad188121 	stp	q1, q0, [x9, #784]
+    2cf4:	3dc1f140 	ldr	q0, [x10, #1984]
+    2cf8:	5280104a 	mov	w10, #0x82                  	// #130
+    2cfc:	f901a92a 	str	x10, [x9, #848]
+    2d00:	ad198122 	stp	q2, q0, [x9, #816]
+    2d04:	ad400560 	ldp	q0, q1, [x11]
+    2d08:	f9402169 	ldr	x9, [x11, #64]
+    2d0c:	f9003b89 	str	x9, [x28, #112]
+    2d10:	ad018780 	stp	q0, q1, [x28, #48]
+    2d14:	ad410162 	ldp	q2, q0, [x11, #32]
+    2d18:	a9435f96 	ldp	x22, x23, [x28, #48]
+    2d1c:	ad028382 	stp	q2, q0, [x28, #80]
+    2d20:	eb1602e9 	subs	x9, x23, x22
+    2d24:	54000120 	b.eq	2d48 <bang_probe::main+0xe50>  // b.none
+    2d28:	d10203a8 	sub	x8, x29, #0x80
+    2d2c:	8b130ea0 	add	x0, x21, x19, lsl #3
+    2d30:	d37df122 	lsl	x2, x9, #3
+    2d34:	8b160d08 	add	x8, x8, x22, lsl #3
+    2d38:	91004101 	add	x1, x8, #0x10
+    2d3c:	97fffaad 	bl	17f0 <memcpy@plt>
+    2d40:	cb160268 	sub	x8, x19, x22
+    2d44:	8b170113 	add	x19, x8, x23
+    2d48:	a9485b97 	ldp	x23, x22, [x28, #128]
+    2d4c:	b40022b3 	cbz	x19, 31a0 <bang_probe::main+0x12a8>
+    2d50:	8b130ec8 	add	x8, x22, x19, lsl #3
+    2d54:	b203c3fa 	mov	x26, #0x2020202020202020    	// #2314885530818453536
+    2d58:	b200c3f5 	mov	x21, #0x101010101010101     	// #72340172838076673
+    2d5c:	52800033 	mov	w19, #0x1                   	// #1
+    2d60:	b200c35a 	orr	x26, x26, #0x101010101010101
+    2d64:	f2802015 	movk	x21, #0x100
+    2d68:	f90013e8 	str	x8, [sp, #32]
+    2d6c:	9102c3e8 	add	x8, sp, #0xb0
+    2d70:	b201c3f8 	mov	x24, #0x8080808080808080    	// #-9187201950435737472
+    2d74:	91004108 	add	x8, x8, #0x10
+    2d78:	f90043e8 	str	x8, [sp, #128]
+    2d7c:	d0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    2d80:	3dc1f500 	ldr	q0, [x8, #2000]
+    2d84:	aa1603e8 	mov	x8, x22
+    2d88:	3d801be0 	str	q0, [sp, #96]
+    2d8c:	aa0803e9 	mov	x9, x8
+    2d90:	aa1f03ea 	mov	x10, xzr
+    2d94:	f8408528 	ldr	x8, [x9], #8
+    2d98:	f9001be9 	str	x9, [sp, #48]
+    2d9c:	f9000388 	str	x8, [x28]
+    2da0:	f9400388 	ldr	x8, [x28]
+    2da4:	f900078a 	str	x10, [x28, #8]
+    2da8:	b1010119 	adds	x25, x8, #0x40
+    2dac:	54004bc4 	b.mi	3724 <bang_probe::main+0x182c>  // b.first
+    2db0:	b4000139 	cbz	x25, 2dd4 <bang_probe::main+0xedc>
+    2db4:	aa0a03fb 	mov	x27, x10
+    2db8:	97fffad2 	bl	1900 <__rustc::__rust_no_alloc_shim_is_unstable_v2@plt>
+    2dbc:	aa1903e0 	mov	x0, x25
+    2dc0:	52800021 	mov	w1, #0x1                   	// #1
+    2dc4:	97fffab3 	bl	1890 <__rustc::__rust_alloc@plt>
+    2dc8:	aa1b03ea 	mov	x10, x27
+    2dcc:	b5000060 	cbnz	x0, 2dd8 <bang_probe::main+0xee0>
+    2dd0:	14000256 	b	3728 <bang_probe::main+0x1830>
+    2dd4:	52800020 	mov	w0, #0x1                   	// #1
+    2dd8:	9100054a 	add	x10, x10, #0x1
+    2ddc:	52800f01 	mov	w1, #0x78                  	// #120
+    2de0:	aa1903e2 	mov	x2, x25
+    2de4:	a9055bf7 	stp	x23, x22, [sp, #80]
+    2de8:	f90027ea 	str	x10, [sp, #72]
+    2dec:	f9004be0 	str	x0, [sp, #144]
+    2df0:	97fffab4 	bl	18c0 <memset@plt>
+    2df4:	f9400388 	ldr	x8, [x28]
+    2df8:	ad4303e1 	ldp	q1, q0, [sp, #96]
+    2dfc:	5280002a 	mov	w10, #0x1                   	// #1
+    2e00:	aa1f03f3 	mov	x19, xzr
+    2e04:	d341fd09 	lsr	x9, x8, #1
+    2e08:	f1000508 	subs	x8, x8, #0x1
+    2e0c:	3c8b83e1 	stur	q1, [sp, #184]
+    2e10:	a90e27ea 	stp	x10, x9, [sp, #224]
+    2e14:	1a9f37ea 	cset	w10, cs	// cs = hs, nlast
+    2e18:	3d8037e0 	str	q0, [sp, #208]
+    2e1c:	a90f23ea 	stp	x10, x8, [sp, #240]
+    2e20:	f94043e8 	ldr	x8, [sp, #128]
+    2e24:	f9404be0 	ldr	x0, [sp, #144]
+    2e28:	52800f01 	mov	w1, #0x78                  	// #120
+    2e2c:	aa1903e2 	mov	x2, x25
+    2e30:	8b131108 	add	x8, x8, x19, lsl #4
+    2e34:	91000673 	add	x19, x19, #0x1
+    2e38:	b9400117 	ldr	w23, [x8]
+    2e3c:	f9400516 	ldr	x22, [x8, #8]
+    2e40:	97fffaa0 	bl	18c0 <memset@plt>
+    2e44:	f9400381 	ldr	x1, [x28]
+    2e48:	eb0102df 	cmp	x22, x1
+    2e4c:	1a9723e8 	csel	w8, wzr, w23, cs	// cs = hs, nlast
+    2e50:	36000128 	tbz	w8, #0, 2e74 <bang_probe::main+0xf7c>
+    2e54:	f9400788 	ldr	x8, [x28, #8]
+    2e58:	8b160100 	add	x0, x8, x22
+    2e5c:	eb19001f 	cmp	x0, x25
+    2e60:	54005c02 	b.cs	39e0 <bang_probe::main+0x1ae8>  // b.hs, b.nlast
+    2e64:	f9404be8 	ldr	x8, [sp, #144]
+    2e68:	52800429 	mov	w9, #0x21                  	// #33
+    2e6c:	38206909 	strb	w9, [x8, x0]
+    2e70:	f9400381 	ldr	x1, [x28]
+    2e74:	f9400780 	ldr	x0, [x28, #8]
+    2e78:	ab010008 	adds	x8, x0, x1
+    2e7c:	54004cc2 	b.cs	3814 <bang_probe::main+0x191c>  // b.hs, b.nlast
+    2e80:	eb19011f 	cmp	x8, x25
+    2e84:	54004c88 	b.hi	3814 <bang_probe::main+0x191c>  // b.pmore
+    2e88:	f9404be9 	ldr	x9, [sp, #144]
+    2e8c:	d10203a8 	sub	x8, x29, #0x80
+    2e90:	8b000120 	add	x0, x9, x0
+    2e94:	97fffadf 	bl	1a10 <core::str::converts::from_utf8@plt>
+    2e98:	f9401b88 	ldr	x8, [x28, #48]
+    2e9c:	b5004e68 	cbnz	x8, 3868 <bang_probe::main+0x1970>
+    2ea0:	aa1903fb 	mov	x27, x25
+    2ea4:	a943df99 	ldp	x25, x23, [x28, #56]
+    2ea8:	b40001b7 	cbz	x23, 2edc <bang_probe::main+0xfe4>
+    2eac:	f24006e9 	ands	x9, x23, #0x3
+    2eb0:	aa1903e8 	mov	x8, x25
+    2eb4:	540000e0 	b.eq	2ed0 <bang_probe::main+0xfd8>  // b.none
+    2eb8:	aa1903e8 	mov	x8, x25
+    2ebc:	3840150a 	ldrb	w10, [x8], #1
+    2ec0:	7100855f 	cmp	w10, #0x21
+    2ec4:	54000300 	b.eq	2f24 <bang_probe::main+0x102c>  // b.none
+    2ec8:	f1000529 	subs	x9, x9, #0x1
+    2ecc:	54ffff81 	b.ne	2ebc <bang_probe::main+0xfc4>  // b.any
+    2ed0:	f10012ff 	cmp	x23, #0x4
+    2ed4:	8b170329 	add	x9, x25, x23
+    2ed8:	54000062 	b.cs	2ee4 <bang_probe::main+0xfec>  // b.hs, b.nlast
+    2edc:	2a1f03f6 	mov	w22, wzr
+    2ee0:	14000012 	b	2f28 <bang_probe::main+0x1030>
+    2ee4:	3940010a 	ldrb	w10, [x8]
+    2ee8:	7100855f 	cmp	w10, #0x21
+    2eec:	540001c0 	b.eq	2f24 <bang_probe::main+0x102c>  // b.none
+    2ef0:	3940050a 	ldrb	w10, [x8, #1]
+    2ef4:	7100855f 	cmp	w10, #0x21
+    2ef8:	54000160 	b.eq	2f24 <bang_probe::main+0x102c>  // b.none
+    2efc:	3940090a 	ldrb	w10, [x8, #2]
+    2f00:	7100855f 	cmp	w10, #0x21
+    2f04:	54000100 	b.eq	2f24 <bang_probe::main+0x102c>  // b.none
+    2f08:	39400d0a 	ldrb	w10, [x8, #3]
+    2f0c:	7100855f 	cmp	w10, #0x21
+    2f10:	540000a0 	b.eq	2f24 <bang_probe::main+0x102c>  // b.none
+    2f14:	91001108 	add	x8, x8, #0x4
+    2f18:	eb09011f 	cmp	x8, x9
+    2f1c:	54fffe41 	b.ne	2ee4 <bang_probe::main+0xfec>  // b.any
+    2f20:	17ffffef 	b	2edc <bang_probe::main+0xfe4>
+    2f24:	52800036 	mov	w22, #0x1                   	// #1
+    2f28:	f0000008 	adrp	x8, 5000 <_fini+0xc00>
+    2f2c:	91118109 	add	x9, x8, #0x460
+    2f30:	381603b6 	sturb	w22, [x29, #-160]
+    2f34:	528000e8 	mov	w8, #0x7                   	// #7
+    2f38:	a9085f99 	stp	x25, x23, [x28, #128]
+    2f3c:	a901a389 	stp	x9, x8, [x28, #24]
+    2f40:	d100c3a8 	sub	x8, x29, #0x30
+    2f44:	a9480b81 	ldp	x1, x2, [x28, #128]
+    2f48:	f100045f 	cmp	x2, #0x1
+    2f4c:	54000169 	b.ls	2f78 <bang_probe::main+0x1080>  // b.plast
+    2f50:	f1003c5f 	cmp	x2, #0xf
+    2f54:	54000228 	b.hi	2f98 <bang_probe::main+0x10a0>  // b.pmore
+    2f58:	aa1f03e8 	mov	x8, xzr
+    2f5c:	38686829 	ldrb	w9, [x1, x8]
+    2f60:	7100853f 	cmp	w9, #0x21
+    2f64:	54000220 	b.eq	2fa8 <bang_probe::main+0x10b0>  // b.none
+    2f68:	91000508 	add	x8, x8, #0x1
+    2f6c:	eb08005f 	cmp	x2, x8
+    2f70:	54ffff61 	b.ne	2f5c <bang_probe::main+0x1064>  // b.any
+    2f74:	14000011 	b	2fb8 <bang_probe::main+0x10c0>
+    2f78:	54000201 	b.ne	2fb8 <bang_probe::main+0x10c0>  // b.any
+    2f7c:	39400028 	ldrb	w8, [x1]
+    2f80:	7100851f 	cmp	w8, #0x21
+    2f84:	1a9f17e8 	cset	w8, eq	// eq = none
+    2f88:	6b0802df 	cmp	w22, w8
+    2f8c:	381643a8 	sturb	w8, [x29, #-156]
+    2f90:	54000180 	b.eq	2fc0 <bang_probe::main+0x10c8>  // b.none
+    2f94:	1400020c 	b	37c4 <bang_probe::main+0x18cc>
+    2f98:	52800420 	mov	w0, #0x21                  	// #33
+    2f9c:	97fffa8d 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    2fa0:	f100041f 	cmp	x0, #0x1
+    2fa4:	540000a1 	b.ne	2fb8 <bang_probe::main+0x10c0>  // b.any
+    2fa8:	52800028 	mov	w8, #0x1                   	// #1
+    2fac:	381643a8 	sturb	w8, [x29, #-156]
+    2fb0:	37000096 	tbnz	w22, #0, 2fc0 <bang_probe::main+0x10c8>
+    2fb4:	14000204 	b	37c4 <bang_probe::main+0x18cc>
+    2fb8:	381643bf 	sturb	wzr, [x29, #-156]
+    2fbc:	37004056 	tbnz	w22, #0, 37c4 <bang_probe::main+0x18cc>
+    2fc0:	b940afe8 	ldr	w8, [sp, #172]
+    2fc4:	f0000009 	adrp	x9, 5000 <_fini+0xc00>
+    2fc8:	91119d2a 	add	x10, x9, #0x467
+    2fcc:	52800109 	mov	w9, #0x8                   	// #8
+    2fd0:	a9085f99 	stp	x25, x23, [x28, #128]
+    2fd4:	11000508 	add	w8, w8, #0x1
+    2fd8:	a901a78a 	stp	x10, x9, [x28, #24]
+    2fdc:	b900afe8 	str	w8, [sp, #172]
+    2fe0:	d100c3a8 	sub	x8, x29, #0x30
+    2fe4:	a9480b81 	ldp	x1, x2, [x28, #128]
+    2fe8:	f1003c5f 	cmp	x2, #0xf
+    2fec:	54000148 	b.hi	3014 <bang_probe::main+0x111c>  // b.pmore
+    2ff0:	b4000202 	cbz	x2, 3030 <bang_probe::main+0x1138>
+    2ff4:	aa1f03e8 	mov	x8, xzr
+    2ff8:	38686829 	ldrb	w9, [x1, x8]
+    2ffc:	7100853f 	cmp	w9, #0x21
+    3000:	54000100 	b.eq	3020 <bang_probe::main+0x1128>  // b.none
+    3004:	91000508 	add	x8, x8, #0x1
+    3008:	eb08005f 	cmp	x2, x8
+    300c:	54ffff61 	b.ne	2ff8 <bang_probe::main+0x1100>  // b.any
+    3010:	14000008 	b	3030 <bang_probe::main+0x1138>
+    3014:	52800420 	mov	w0, #0x21                  	// #33
+    3018:	97fffa6e 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    301c:	360000a0 	tbz	w0, #0, 3030 <bang_probe::main+0x1138>
+    3020:	52800028 	mov	w8, #0x1                   	// #1
+    3024:	381643a8 	sturb	w8, [x29, #-156]
+    3028:	35000096 	cbnz	w22, 3038 <bang_probe::main+0x1140>
+    302c:	140001e6 	b	37c4 <bang_probe::main+0x18cc>
+    3030:	381643bf 	sturb	wzr, [x29, #-156]
+    3034:	37003c96 	tbnz	w22, #0, 37c4 <bang_probe::main+0x18cc>
+    3038:	b940afe8 	ldr	w8, [sp, #172]
+    303c:	d0000009 	adrp	x9, 5000 <_fini+0xc00>
+    3040:	9111bd2a 	add	x10, x9, #0x46f
+    3044:	528000c9 	mov	w9, #0x6                   	// #6
+    3048:	a9085f99 	stp	x25, x23, [x28, #128]
+    304c:	11000508 	add	w8, w8, #0x1
+    3050:	a901a78a 	stp	x10, x9, [x28, #24]
+    3054:	b900afe8 	str	w8, [sp, #172]
+    3058:	d100c3a8 	sub	x8, x29, #0x30
+    305c:	a9482b88 	ldp	x8, x10, [x28, #128]
+    3060:	f27ced49 	ands	x9, x10, #0xfffffffffffffff0
+    3064:	54000200 	b.eq	30a4 <bang_probe::main+0x11ac>  // b.none
+    3068:	927ced4b 	and	x11, x10, #0xfffffffffffffff0
+    306c:	aa0803ec 	mov	x12, x8
+    3070:	cb0b03eb 	neg	x11, x11
+    3074:	a8c1398d 	ldp	x13, x14, [x12], #16
+    3078:	ca1a01af 	eor	x15, x13, x26
+    307c:	ca1a01d0 	eor	x16, x14, x26
+    3080:	cb0f02af 	sub	x15, x21, x15
+    3084:	cb1002b0 	sub	x16, x21, x16
+    3088:	aa0d01ed 	orr	x13, x15, x13
+    308c:	aa0e020e 	orr	x14, x16, x14
+    3090:	8a0e01ad 	and	x13, x13, x14
+    3094:	ea2d031f 	bics	xzr, x24, x13
+    3098:	540001c1 	b.ne	30d0 <bang_probe::main+0x11d8>  // b.any
+    309c:	b100416b 	adds	x11, x11, #0x10
+    30a0:	54fffea1 	b.ne	3074 <bang_probe::main+0x117c>  // b.any
+    30a4:	92400d4a 	and	x10, x10, #0xf
+    30a8:	b40000ea 	cbz	x10, 30c4 <bang_probe::main+0x11cc>
+    30ac:	8b090108 	add	x8, x8, x9
+    30b0:	38401509 	ldrb	w9, [x8], #1
+    30b4:	7100853f 	cmp	w9, #0x21
+    30b8:	540000c0 	b.eq	30d0 <bang_probe::main+0x11d8>  // b.none
+    30bc:	f100054a 	subs	x10, x10, #0x1
+    30c0:	54ffff81 	b.ne	30b0 <bang_probe::main+0x11b8>  // b.any
+    30c4:	381643bf 	sturb	wzr, [x29, #-156]
+    30c8:	360000b6 	tbz	w22, #0, 30dc <bang_probe::main+0x11e4>
+    30cc:	140001be 	b	37c4 <bang_probe::main+0x18cc>
+    30d0:	52800028 	mov	w8, #0x1                   	// #1
+    30d4:	381643a8 	sturb	w8, [x29, #-156]
+    30d8:	36003776 	tbz	w22, #0, 37c4 <bang_probe::main+0x18cc>
+    30dc:	b940afe8 	ldr	w8, [sp, #172]
+    30e0:	d0000009 	adrp	x9, 5000 <_fini+0xc00>
+    30e4:	9111d52a 	add	x10, x9, #0x475
+    30e8:	528000c9 	mov	w9, #0x6                   	// #6
+    30ec:	a9085f99 	stp	x25, x23, [x28, #128]
+    30f0:	11000508 	add	w8, w8, #0x1
+    30f4:	a901a78a 	stp	x10, x9, [x28, #24]
+    30f8:	b900afe8 	str	w8, [sp, #172]
+    30fc:	d100c3a8 	sub	x8, x29, #0x30
+    3100:	a9480780 	ldp	x0, x1, [x28, #128]
+    3104:	940002dc 	bl	3c74 <bang_probe::fold16>
+    3108:	6b0002df 	cmp	w22, w0
+    310c:	381643a0 	sturb	w0, [x29, #-156]
+    3110:	540035a1 	b.ne	37c4 <bang_probe::main+0x18cc>  // b.any
+    3114:	b940afe8 	ldr	w8, [sp, #172]
+    3118:	d0000009 	adrp	x9, 5000 <_fini+0xc00>
+    311c:	9111ed2a 	add	x10, x9, #0x47b
+    3120:	528000c9 	mov	w9, #0x6                   	// #6
+    3124:	a9085f99 	stp	x25, x23, [x28, #128]
+    3128:	11000508 	add	w8, w8, #0x1
+    312c:	a901a78a 	stp	x10, x9, [x28, #24]
+    3130:	b900afe8 	str	w8, [sp, #172]
+    3134:	d100c3a8 	sub	x8, x29, #0x30
+    3138:	a9480780 	ldp	x0, x1, [x28, #128]
+    313c:	940002f7 	bl	3d18 <bang_probe::fold64>
+    3140:	6b0002df 	cmp	w22, w0
+    3144:	381643a0 	sturb	w0, [x29, #-156]
+    3148:	540033e1 	b.ne	37c4 <bang_probe::main+0x18cc>  // b.any
+    314c:	b940afe8 	ldr	w8, [sp, #172]
+    3150:	f100127f 	cmp	x19, #0x4
+    3154:	aa1b03f9 	mov	x25, x27
+    3158:	11000508 	add	w8, w8, #0x1
+    315c:	b900afe8 	str	w8, [sp, #172]
+    3160:	54ffe601 	b.ne	2e20 <bang_probe::main+0xf28>  // b.any
+    3164:	b40000b9 	cbz	x25, 3178 <bang_probe::main+0x1280>
+    3168:	f9404be0 	ldr	x0, [sp, #144]
+    316c:	aa1903e1 	mov	x1, x25
+    3170:	52800022 	mov	w2, #0x1                   	// #1
+    3174:	97fff9f3 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3178:	a944dfea 	ldp	x10, x23, [sp, #72]
+    317c:	52800033 	mov	w19, #0x1                   	// #1
+    3180:	f9402ff6 	ldr	x22, [sp, #88]
+    3184:	f100815f 	cmp	x10, #0x20
+    3188:	54ffe0c1 	b.ne	2da0 <bang_probe::main+0xea8>  // b.any
+    318c:	f94013e8 	ldr	x8, [sp, #32]
+    3190:	f9401be9 	ldr	x9, [sp, #48]
+    3194:	eb08013f 	cmp	x9, x8
+    3198:	aa0903e8 	mov	x8, x9
+    319c:	54ffdf81 	b.ne	2d8c <bang_probe::main+0xe94>  // b.any
+    31a0:	b40000b7 	cbz	x23, 31b4 <bang_probe::main+0x12bc>
+    31a4:	d37df2e1 	lsl	x1, x23, #3
+    31a8:	aa1603e0 	mov	x0, x22
+    31ac:	52800102 	mov	w2, #0x8                   	// #8
+    31b0:	97fff9e4 	bl	1940 <__rustc::__rust_dealloc@plt>
+    31b4:	b0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    31b8:	d0000009 	adrp	x9, 5000 <_fini+0xc00>
+    31bc:	91112129 	add	x9, x9, #0x448
+    31c0:	5280006a 	mov	w10, #0x3                   	// #3
+    31c4:	3dc1f900 	ldr	q0, [x8, #2016]
+    31c8:	d0000008 	adrp	x8, 5000 <_fini+0xc00>
+    31cc:	91112d08 	add	x8, x8, #0x44b
+    31d0:	a90c2be9 	stp	x9, x10, [sp, #192]
+    31d4:	52800089 	mov	w9, #0x4                   	// #4
+    31d8:	a90d27e8 	stp	x8, x9, [sp, #208]
+    31dc:	9102c3e8 	add	x8, sp, #0xb0
+    31e0:	d0000009 	adrp	x9, 5000 <_fini+0xc00>
+    31e4:	91116d29 	add	x9, x9, #0x45b
+    31e8:	9100410b 	add	x11, x8, #0x10
+    31ec:	52800048 	mov	w8, #0x2                   	// #2
+    31f0:	a90e2be9 	stp	x9, x10, [sp, #224]
+    31f4:	d0000009 	adrp	x9, 5000 <_fini+0xc00>
+    31f8:	91117929 	add	x9, x9, #0x45e
+    31fc:	a90f23e9 	stp	x9, x8, [sp, #240]
+    3200:	d10203a8 	sub	x8, x29, #0x80
+    3204:	b0000009 	adrp	x9, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    3208:	91004108 	add	x8, x8, #0x10
+    320c:	3d802fe0 	str	q0, [sp, #176]
+    3210:	3dc1fd20 	ldr	q0, [x9, #2032]
+    3214:	f9003be8 	str	x8, [sp, #112]
+    3218:	b0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    321c:	b0000009 	adrp	x9, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    3220:	3dc20101 	ldr	q1, [x8, #2048]
+    3224:	b0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    3228:	b203c3f5 	mov	x21, #0x2020202020202020    	// #2314885530818453536
+    322c:	b200c3f7 	mov	x23, #0x101010101010101     	// #72340172838076673
+    3230:	3dc20502 	ldr	q2, [x8, #2064]
+    3234:	3dc20923 	ldr	q3, [x9, #2080]
+    3238:	aa1f03fa 	mov	x26, xzr
+    323c:	b200c2b5 	orr	x21, x21, #0x101010101010101
+    3240:	f2802017 	movk	x23, #0x100
+    3244:	52800028 	mov	w8, #0x1                   	// #1
+    3248:	b201c3f6 	mov	x22, #0x8080808080808080    	// #-9187201950435737472
+    324c:	f90027eb 	str	x11, [sp, #72]
+    3250:	f90033e8 	str	x8, [sp, #96]
+    3254:	ad000be3 	stp	q3, q2, [sp]
+    3258:	ad0103e1 	stp	q1, q0, [sp, #32]
+    325c:	8b1a1169 	add	x9, x11, x26, lsl #4
+    3260:	aa1f03ea 	mov	x10, xzr
+    3264:	9100075a 	add	x26, x26, #0x1
+    3268:	ad018780 	stp	q0, q1, [x28, #48]
+    326c:	a940252b 	ldp	x11, x9, [x9]
+    3270:	ad028f82 	stp	q2, q3, [x28, #80]
+    3274:	f9002beb 	str	x11, [sp, #80]
+    3278:	f90043e9 	str	x9, [sp, #128]
+    327c:	f9403be9 	ldr	x9, [sp, #112]
+    3280:	f86a7933 	ldr	x19, [x9, x10, lsl #3]
+    3284:	91000549 	add	x9, x10, #0x1
+    3288:	f9004be9 	str	x9, [sp, #144]
+    328c:	b4000213 	cbz	x19, 32cc <bang_probe::main+0x13d4>
+    3290:	f94043e2 	ldr	x2, [sp, #128]
+    3294:	9bd37c48 	umulh	x8, x2, x19
+    3298:	eb0803ff 	cmp	xzr, x8
+    329c:	54003221 	b.ne	38e0 <bang_probe::main+0x19e8>  // b.any
+    32a0:	9b137c58 	mul	x24, x2, x19
+    32a4:	b7f824b8 	tbnz	x24, #63, 3738 <bang_probe::main+0x1840>
+    32a8:	b40001b8 	cbz	x24, 32dc <bang_probe::main+0x13e4>
+    32ac:	97fff995 	bl	1900 <__rustc::__rust_no_alloc_shim_is_unstable_v2@plt>
+    32b0:	aa1803e0 	mov	x0, x24
+    32b4:	52800021 	mov	w1, #0x1                   	// #1
+    32b8:	97fff976 	bl	1890 <__rustc::__rust_alloc@plt>
+    32bc:	f94043e2 	ldr	x2, [sp, #128]
+    32c0:	aa0003f9 	mov	x25, x0
+    32c4:	b50000e0 	cbnz	x0, 32e0 <bang_probe::main+0x13e8>
+    32c8:	1400011d 	b	373c <bang_probe::main+0x1844>
+    32cc:	aa1f03f8 	mov	x24, xzr
+    32d0:	aa1f03f9 	mov	x25, xzr
+    32d4:	52800033 	mov	w19, #0x1                   	// #1
+    32d8:	14000021 	b	335c <bang_probe::main+0x1464>
+    32dc:	52800039 	mov	w25, #0x1                   	// #1
+    32e0:	eb18005f 	cmp	x2, x24
+    32e4:	f9002ffa 	str	x26, [sp, #88]
+    32e8:	a9086798 	stp	x24, x25, [x28, #128]
+    32ec:	f9004b9f 	str	xzr, [x28, #144]
+    32f0:	54001ee8 	b.hi	36cc <bang_probe::main+0x17d4>  // b.pmore
+    32f4:	aa1f03fa 	mov	x26, xzr
+    32f8:	aa1f03e8 	mov	x8, xzr
+    32fc:	b40000c2 	cbz	x2, 3314 <bang_probe::main+0x141c>
+    3300:	f9402be1 	ldr	x1, [sp, #80]
+    3304:	8b1a0320 	add	x0, x25, x26
+    3308:	97fff93a 	bl	17f0 <memcpy@plt>
+    330c:	f94043e2 	ldr	x2, [sp, #128]
+    3310:	aa1a03e8 	mov	x8, x26
+    3314:	d341fe73 	lsr	x19, x19, #1
+    3318:	8b02011a 	add	x26, x8, x2
+    331c:	b4000113 	cbz	x19, 333c <bang_probe::main+0x1444>
+    3320:	8b1a0320 	add	x0, x25, x26
+    3324:	aa1903e1 	mov	x1, x25
+    3328:	aa1a03e2 	mov	x2, x26
+    332c:	97fff931 	bl	17f0 <memcpy@plt>
+    3330:	d341fe73 	lsr	x19, x19, #1
+    3334:	d37ffb5a 	lsl	x26, x26, #1
+    3338:	b5ffff53 	cbnz	x19, 3320 <bang_probe::main+0x1428>
+    333c:	eb1a0302 	subs	x2, x24, x26
+    3340:	f9004b9a 	str	x26, [x28, #144]
+    3344:	54000080 	b.eq	3354 <bang_probe::main+0x145c>  // b.none
+    3348:	8b1a0320 	add	x0, x25, x26
+    334c:	aa1903e1 	mov	x1, x25
+    3350:	97fff928 	bl	17f0 <memcpy@plt>
+    3354:	a9484f99 	ldp	x25, x19, [x28, #128]
+    3358:	f9402ffa 	ldr	x26, [sp, #88]
+    335c:	a9084f99 	stp	x25, x19, [x28, #128]
+    3360:	d10263a8 	sub	x8, x29, #0x98
+    3364:	f9004b98 	str	x24, [x28, #144]
+    3368:	381503bf 	sturb	wzr, [x29, #-176]
+    336c:	a901e393 	stp	x19, x24, [x28, #24]
+    3370:	a9418b81 	ldp	x1, x2, [x28, #24]
+    3374:	f100045f 	cmp	x2, #0x1
+    3378:	54000129 	b.ls	339c <bang_probe::main+0x14a4>  // b.plast
+    337c:	f1003c5f 	cmp	x2, #0xf
+    3380:	540001c8 	b.hi	33b8 <bang_probe::main+0x14c0>  // b.pmore
+    3384:	38401428 	ldrb	w8, [x1], #1
+    3388:	7100851f 	cmp	w8, #0x21
+    338c:	54002520 	b.eq	3830 <bang_probe::main+0x1938>  // b.none
+    3390:	f1000442 	subs	x2, x2, #0x1
+    3394:	54ffff81 	b.ne	3384 <bang_probe::main+0x148c>  // b.any
+    3398:	1400000b 	b	33c4 <bang_probe::main+0x14cc>
+    339c:	54000141 	b.ne	33c4 <bang_probe::main+0x14cc>  // b.any
+    33a0:	39400028 	ldrb	w8, [x1]
+    33a4:	7100851f 	cmp	w8, #0x21
+    33a8:	1a9f17e8 	cset	w8, eq	// eq = none
+    33ac:	381583a8 	sturb	w8, [x29, #-168]
+    33b0:	540000a1 	b.ne	33c4 <bang_probe::main+0x14cc>  // b.any
+    33b4:	14000123 	b	3840 <bang_probe::main+0x1948>
+    33b8:	52800420 	mov	w0, #0x21                  	// #33
+    33bc:	97fff985 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    33c0:	37002380 	tbnz	w0, #0, 3830 <bang_probe::main+0x1938>
+    33c4:	b940afe8 	ldr	w8, [sp, #172]
+    33c8:	a901e393 	stp	x19, x24, [x28, #24]
+    33cc:	11000508 	add	w8, w8, #0x1
+    33d0:	b900afe8 	str	w8, [sp, #172]
+    33d4:	d10263a8 	sub	x8, x29, #0x98
+    33d8:	a9418b81 	ldp	x1, x2, [x28, #24]
+    33dc:	f1003c5f 	cmp	x2, #0xf
+    33e0:	54000108 	b.hi	3400 <bang_probe::main+0x1508>  // b.pmore
+    33e4:	b4000142 	cbz	x2, 340c <bang_probe::main+0x1514>
+    33e8:	38401428 	ldrb	w8, [x1], #1
+    33ec:	7100851f 	cmp	w8, #0x21
+    33f0:	54002200 	b.eq	3830 <bang_probe::main+0x1938>  // b.none
+    33f4:	f1000442 	subs	x2, x2, #0x1
+    33f8:	54ffff81 	b.ne	33e8 <bang_probe::main+0x14f0>  // b.any
+    33fc:	14000004 	b	340c <bang_probe::main+0x1514>
+    3400:	52800420 	mov	w0, #0x21                  	// #33
+    3404:	97fff973 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    3408:	37002140 	tbnz	w0, #0, 3830 <bang_probe::main+0x1938>
+    340c:	b940afe8 	ldr	w8, [sp, #172]
+    3410:	a901e393 	stp	x19, x24, [x28, #24]
+    3414:	11000508 	add	w8, w8, #0x1
+    3418:	b900afe8 	str	w8, [sp, #172]
+    341c:	d10263a8 	sub	x8, x29, #0x98
+    3420:	a941ab88 	ldp	x8, x10, [x28, #24]
+    3424:	f27ced49 	ands	x9, x10, #0xfffffffffffffff0
+    3428:	54000200 	b.eq	3468 <bang_probe::main+0x1570>  // b.none
+    342c:	927ced4b 	and	x11, x10, #0xfffffffffffffff0
+    3430:	aa0803ec 	mov	x12, x8
+    3434:	cb0b03eb 	neg	x11, x11
+    3438:	a8c1398d 	ldp	x13, x14, [x12], #16
+    343c:	ca1501af 	eor	x15, x13, x21
+    3440:	ca1501d0 	eor	x16, x14, x21
+    3444:	cb0f02ef 	sub	x15, x23, x15
+    3448:	cb1002f0 	sub	x16, x23, x16
+    344c:	aa0d01ed 	orr	x13, x15, x13
+    3450:	aa0e020e 	orr	x14, x16, x14
+    3454:	8a0e01ad 	and	x13, x13, x14
+    3458:	ea2d02df 	bics	xzr, x22, x13
+    345c:	54001ea1 	b.ne	3830 <bang_probe::main+0x1938>  // b.any
+    3460:	b100416b 	adds	x11, x11, #0x10
+    3464:	54fffea1 	b.ne	3438 <bang_probe::main+0x1540>  // b.any
+    3468:	92400d4a 	and	x10, x10, #0xf
+    346c:	b40000ea 	cbz	x10, 3488 <bang_probe::main+0x1590>
+    3470:	8b090108 	add	x8, x8, x9
+    3474:	38401509 	ldrb	w9, [x8], #1
+    3478:	7100853f 	cmp	w9, #0x21
+    347c:	54001da0 	b.eq	3830 <bang_probe::main+0x1938>  // b.none
+    3480:	f100054a 	subs	x10, x10, #0x1
+    3484:	54ffff81 	b.ne	3474 <bang_probe::main+0x157c>  // b.any
+    3488:	b940afe8 	ldr	w8, [sp, #172]
+    348c:	a901e393 	stp	x19, x24, [x28, #24]
+    3490:	11000508 	add	w8, w8, #0x1
+    3494:	b900afe8 	str	w8, [sp, #172]
+    3498:	d10263a8 	sub	x8, x29, #0x98
+    349c:	a9418780 	ldp	x0, x1, [x28, #24]
+    34a0:	940001f5 	bl	3c74 <bang_probe::fold16>
+    34a4:	381583a0 	sturb	w0, [x29, #-168]
+    34a8:	37001cc0 	tbnz	w0, #0, 3840 <bang_probe::main+0x1948>
+    34ac:	b940afe8 	ldr	w8, [sp, #172]
+    34b0:	a901e393 	stp	x19, x24, [x28, #24]
+    34b4:	11000508 	add	w8, w8, #0x1
+    34b8:	b900afe8 	str	w8, [sp, #172]
+    34bc:	d10263a8 	sub	x8, x29, #0x98
+    34c0:	a9418780 	ldp	x0, x1, [x28, #24]
+    34c4:	94000215 	bl	3d18 <bang_probe::fold64>
+    34c8:	381583a0 	sturb	w0, [x29, #-168]
+    34cc:	37001ba0 	tbnz	w0, #0, 3840 <bang_probe::main+0x1948>
+    34d0:	b940afe8 	ldr	w8, [sp, #172]
+    34d4:	eb18033f 	cmp	x25, x24
+    34d8:	11000508 	add	w8, w8, #0x1
+    34dc:	b900afe8 	str	w8, [sp, #172]
+    34e0:	52800028 	mov	w8, #0x1                   	// #1
+    34e4:	381503a8 	sturb	w8, [x29, #-176]
+    34e8:	54000e20 	b.eq	36ac <bang_probe::main+0x17b4>  // b.none
+    34ec:	52800428 	mov	w8, #0x21                  	// #33
+    34f0:	38386a68 	strb	w8, [x19, x24]
+    34f4:	91000713 	add	x19, x24, #0x1
+    34f8:	f9404798 	ldr	x24, [x28, #136]
+    34fc:	f9004b93 	str	x19, [x28, #144]
+    3500:	d10263a8 	sub	x8, x29, #0x98
+    3504:	a901cf98 	stp	x24, x19, [x28, #24]
+    3508:	a9418b81 	ldp	x1, x2, [x28, #24]
+    350c:	f100045f 	cmp	x2, #0x1
+    3510:	54000169 	b.ls	353c <bang_probe::main+0x1644>  // b.plast
+    3514:	f1003c5f 	cmp	x2, #0xf
+    3518:	54000208 	b.hi	3558 <bang_probe::main+0x1660>  // b.pmore
+    351c:	aa1f03e8 	mov	x8, xzr
+    3520:	38686829 	ldrb	w9, [x1, x8]
+    3524:	7100853f 	cmp	w9, #0x21
+    3528:	540001e0 	b.eq	3564 <bang_probe::main+0x166c>  // b.none
+    352c:	91000508 	add	x8, x8, #0x1
+    3530:	eb08005f 	cmp	x2, x8
+    3534:	54ffff61 	b.ne	3520 <bang_probe::main+0x1628>  // b.any
+    3538:	140000c1 	b	383c <bang_probe::main+0x1944>
+    353c:	54001801 	b.ne	383c <bang_probe::main+0x1944>  // b.any
+    3540:	39400028 	ldrb	w8, [x1]
+    3544:	7100851f 	cmp	w8, #0x21
+    3548:	1a9f17e8 	cset	w8, eq	// eq = none
+    354c:	381583a8 	sturb	w8, [x29, #-168]
+    3550:	540000a0 	b.eq	3564 <bang_probe::main+0x166c>  // b.none
+    3554:	140000bb 	b	3840 <bang_probe::main+0x1948>
+    3558:	52800420 	mov	w0, #0x21                  	// #33
+    355c:	97fff91d 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    3560:	360016e0 	tbz	w0, #0, 383c <bang_probe::main+0x1944>
+    3564:	b940afe8 	ldr	w8, [sp, #172]
+    3568:	a901cf98 	stp	x24, x19, [x28, #24]
+    356c:	11000508 	add	w8, w8, #0x1
+    3570:	b900afe8 	str	w8, [sp, #172]
+    3574:	d10263a8 	sub	x8, x29, #0x98
+    3578:	a9418b81 	ldp	x1, x2, [x28, #24]
+    357c:	f1003c5f 	cmp	x2, #0xf
+    3580:	54000148 	b.hi	35a8 <bang_probe::main+0x16b0>  // b.pmore
+    3584:	b40015c2 	cbz	x2, 383c <bang_probe::main+0x1944>
+    3588:	aa1f03e8 	mov	x8, xzr
+    358c:	38686829 	ldrb	w9, [x1, x8]
+    3590:	7100853f 	cmp	w9, #0x21
+    3594:	54000100 	b.eq	35b4 <bang_probe::main+0x16bc>  // b.none
+    3598:	91000508 	add	x8, x8, #0x1
+    359c:	eb08005f 	cmp	x2, x8
+    35a0:	54ffff61 	b.ne	358c <bang_probe::main+0x1694>  // b.any
+    35a4:	140000a6 	b	383c <bang_probe::main+0x1944>
+    35a8:	52800420 	mov	w0, #0x21                  	// #33
+    35ac:	97fff909 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    35b0:	36001460 	tbz	w0, #0, 383c <bang_probe::main+0x1944>
+    35b4:	b940afe8 	ldr	w8, [sp, #172]
+    35b8:	a901cf98 	stp	x24, x19, [x28, #24]
+    35bc:	11000508 	add	w8, w8, #0x1
+    35c0:	b900afe8 	str	w8, [sp, #172]
+    35c4:	d10263a8 	sub	x8, x29, #0x98
+    35c8:	a941ab88 	ldp	x8, x10, [x28, #24]
+    35cc:	f27ced49 	ands	x9, x10, #0xfffffffffffffff0
+    35d0:	54000200 	b.eq	3610 <bang_probe::main+0x1718>  // b.none
+    35d4:	927ced4b 	and	x11, x10, #0xfffffffffffffff0
+    35d8:	aa0803ec 	mov	x12, x8
+    35dc:	cb0b03eb 	neg	x11, x11
+    35e0:	a8c1398d 	ldp	x13, x14, [x12], #16
+    35e4:	ca1501af 	eor	x15, x13, x21
+    35e8:	ca1501d0 	eor	x16, x14, x21
+    35ec:	cb0f02ef 	sub	x15, x23, x15
+    35f0:	cb1002f0 	sub	x16, x23, x16
+    35f4:	aa0d01ed 	orr	x13, x15, x13
+    35f8:	aa0e020e 	orr	x14, x16, x14
+    35fc:	8a0e01ad 	and	x13, x13, x14
+    3600:	ea2d02df 	bics	xzr, x22, x13
+    3604:	54000181 	b.ne	3634 <bang_probe::main+0x173c>  // b.any
+    3608:	b100416b 	adds	x11, x11, #0x10
+    360c:	54fffea1 	b.ne	35e0 <bang_probe::main+0x16e8>  // b.any
+    3610:	92400d4a 	and	x10, x10, #0xf
+    3614:	b400114a 	cbz	x10, 383c <bang_probe::main+0x1944>
+    3618:	8b090108 	add	x8, x8, x9
+    361c:	38401509 	ldrb	w9, [x8], #1
+    3620:	7100853f 	cmp	w9, #0x21
+    3624:	54000080 	b.eq	3634 <bang_probe::main+0x173c>  // b.none
+    3628:	f100054a 	subs	x10, x10, #0x1
+    362c:	54ffff81 	b.ne	361c <bang_probe::main+0x1724>  // b.any
+    3630:	14000083 	b	383c <bang_probe::main+0x1944>
+    3634:	b940afe8 	ldr	w8, [sp, #172]
+    3638:	a901cf98 	stp	x24, x19, [x28, #24]
+    363c:	11000508 	add	w8, w8, #0x1
+    3640:	b900afe8 	str	w8, [sp, #172]
+    3644:	d10263a8 	sub	x8, x29, #0x98
+    3648:	a9418780 	ldp	x0, x1, [x28, #24]
+    364c:	9400018a 	bl	3c74 <bang_probe::fold16>
+    3650:	381583a0 	sturb	w0, [x29, #-168]
+    3654:	34000f60 	cbz	w0, 3840 <bang_probe::main+0x1948>
+    3658:	b940afe8 	ldr	w8, [sp, #172]
+    365c:	a901cf98 	stp	x24, x19, [x28, #24]
+    3660:	11000508 	add	w8, w8, #0x1
+    3664:	b900afe8 	str	w8, [sp, #172]
+    3668:	d10263a8 	sub	x8, x29, #0x98
+    366c:	a9418780 	ldp	x0, x1, [x28, #24]
+    3670:	940001aa 	bl	3d18 <bang_probe::fold64>
+    3674:	381583a0 	sturb	w0, [x29, #-168]
+    3678:	34000e40 	cbz	w0, 3840 <bang_probe::main+0x1948>
+    367c:	b940afe8 	ldr	w8, [sp, #172]
+    3680:	f9404381 	ldr	x1, [x28, #128]
+    3684:	11000508 	add	w8, w8, #0x1
+    3688:	b900afe8 	str	w8, [sp, #172]
+    368c:	b4000081 	cbz	x1, 369c <bang_probe::main+0x17a4>
+    3690:	aa1803e0 	mov	x0, x24
+    3694:	52800022 	mov	w2, #0x1                   	// #1
+    3698:	97fff8aa 	bl	1940 <__rustc::__rust_dealloc@plt>
+    369c:	f9404bea 	ldr	x10, [sp, #144]
+    36a0:	f100195f 	cmp	x10, #0x6
+    36a4:	54ffdec1 	b.ne	327c <bang_probe::main+0x1384>  // b.any
+    36a8:	14000011 	b	36ec <bang_probe::main+0x17f4>
+    36ac:	d100c3a0 	sub	x0, x29, #0x30
+    36b0:	aa1803e1 	mov	x1, x24
+    36b4:	52800022 	mov	w2, #0x1                   	// #1
+    36b8:	52800023 	mov	w3, #0x1                   	// #1
+    36bc:	52800024 	mov	w4, #0x1                   	// #1
+    36c0:	97fff915 	bl	1b14 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>
+    36c4:	f9404793 	ldr	x19, [x28, #136]
+    36c8:	17ffff89 	b	34ec <bang_probe::main+0x15f4>
+    36cc:	d100c3a0 	sub	x0, x29, #0x30
+    36d0:	aa1f03e1 	mov	x1, xzr
+    36d4:	52800023 	mov	w3, #0x1                   	// #1
+    36d8:	52800024 	mov	w4, #0x1                   	// #1
+    36dc:	97fff90e 	bl	1b14 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>
+    36e0:	a948eb99 	ldp	x25, x26, [x28, #136]
+    36e4:	f94043e2 	ldr	x2, [sp, #128]
+    36e8:	17ffff06 	b	3300 <bang_probe::main+0x1408>
+    36ec:	ad4103e1 	ldp	q1, q0, [sp, #32]
+    36f0:	f100135f 	cmp	x26, #0x4
+    36f4:	ad400be3 	ldp	q3, q2, [sp]
+    36f8:	f94027eb 	ldr	x11, [sp, #72]
+    36fc:	54ffdb01 	b.ne	325c <bang_probe::main+0x1364>  // b.any
+    3700:	900000e9 	adrp	x9, 1f000 <GCC_except_table10+0x1952c>
+    3704:	9102b3e8 	add	x8, sp, #0xac
+    3708:	f947ed29 	ldr	x9, [x9, #4056]
+    370c:	a90b27e8 	stp	x8, x9, [sp, #176]
+    3710:	b0000000 	adrp	x0, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    3714:	9122b000 	add	x0, x0, #0x8ac
+    3718:	9102c3e1 	add	x1, sp, #0xb0
+    371c:	97fff849 	bl	1840 <std::io::stdio::_print@plt>
+    3720:	17fffc9e 	b	2998 <bang_probe::main+0xaa0>
+    3724:	aa1f03f3 	mov	x19, xzr
+    3728:	aa1303e0 	mov	x0, x19
+    372c:	aa1903e1 	mov	x1, x25
+    3730:	97fff894 	bl	1980 <alloc::raw_vec::handle_error@plt>
+    3734:	140000b0 	b	39f4 <bang_probe::main+0x1afc>
+    3738:	f90033ff 	str	xzr, [sp, #96]
+    373c:	f94033e0 	ldr	x0, [sp, #96]
+    3740:	aa1803e1 	mov	x1, x24
+    3744:	97fff88f 	bl	1980 <alloc::raw_vec::handle_error@plt>
+    3748:	140000ab 	b	39f4 <bang_probe::main+0x1afc>
+    374c:	52800048 	mov	w8, #0x2                   	// #2
+    3750:	1400000e 	b	3788 <bang_probe::main+0x1890>
+    3754:	5100c168 	sub	w8, w11, #0x30
+    3758:	7100291f 	cmp	w8, #0xa
+    375c:	52800028 	mov	w8, #0x1                   	// #1
+    3760:	1a882508 	cinc	w8, w8, cc	// cc = lo, ul, last
+    3764:	900000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    3768:	912ba021 	add	x1, x1, #0xae8
+    376c:	14000007 	b	3788 <bang_probe::main+0x1890>
+    3770:	5100c168 	sub	w8, w11, #0x30
+    3774:	900000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    3778:	912b4021 	add	x1, x1, #0xad0
+    377c:	7100291f 	cmp	w8, #0xa
+    3780:	52800028 	mov	w8, #0x1                   	// #1
+    3784:	1a882508 	cinc	w8, w8, cc	// cc = lo, ul, last
+    3788:	2a0803e0 	mov	w0, w8
+    378c:	97fff8bd 	bl	1a80 <core::result::unwrap_failed::<core::num::error::ParseIntError>>
+    3790:	14000099 	b	39f4 <bang_probe::main+0x1afc>
+    3794:	2a1f03e9 	mov	w9, wzr
+    3798:	2a0903e9 	mov	w9, w9
+    379c:	17fffb7f 	b	2598 <bang_probe::main+0x6a0>
+    37a0:	2a1f03e9 	mov	w9, wzr
+    37a4:	2a0903e9 	mov	w9, w9
+    37a8:	17fffbd0 	b	26e8 <bang_probe::main+0x7f0>
+    37ac:	2a1f03e9 	mov	w9, wzr
+    37b0:	2a0903e9 	mov	w9, w9
+    37b4:	17fffc15 	b	2808 <bang_probe::main+0x910>
+    37b8:	2a1f03e9 	mov	w9, wzr
+    37bc:	2a0903e9 	mov	w9, w9
+    37c0:	17fffc5b 	b	292c <bang_probe::main+0xa34>
+    37c4:	d10263a8 	sub	x8, x29, #0x98
+    37c8:	b0000009 	adrp	x9, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    37cc:	91014129 	add	x9, x9, #0x50
+    37d0:	f9005bf3 	str	x19, [sp, #176]
+    37d4:	a9032788 	stp	x8, x9, [x28, #48]
+    37d8:	900000e8 	adrp	x8, 1f000 <GCC_except_table10+0x1952c>
+    37dc:	d102a3a9 	sub	x9, x29, #0xa8
+    37e0:	f947f508 	ldr	x8, [x8, #4072]
+    37e4:	a904239c 	stp	x28, x8, [x28, #64]
+    37e8:	a9052389 	stp	x9, x8, [x28, #80]
+    37ec:	b0000002 	adrp	x2, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    37f0:	91231042 	add	x2, x2, #0x8c4
+    37f4:	900000e4 	adrp	x4, 1f000 <GCC_except_table10+0x1952c>
+    37f8:	912cc084 	add	x4, x4, #0xb30
+    37fc:	d10273a0 	sub	x0, x29, #0x9c
+    3800:	d10283a1 	sub	x1, x29, #0xa0
+    3804:	d10203a3 	sub	x3, x29, #0x80
+    3808:	aa1b03f9 	mov	x25, x27
+    380c:	97fff8b4 	bl	1adc <core::panicking::assert_failed::<bool, bool>>
+    3810:	14000079 	b	39f4 <bang_probe::main+0x1afc>
+    3814:	f9005bf3 	str	x19, [sp, #176]
+    3818:	900000e3 	adrp	x3, 1f000 <GCC_except_table10+0x1952c>
+    381c:	912d8063 	add	x3, x3, #0xb60
+    3820:	aa0803e1 	mov	x1, x8
+    3824:	aa1903e2 	mov	x2, x25
+    3828:	97fff852 	bl	1970 <core::slice::index::slice_index_fail@plt>
+    382c:	14000072 	b	39f4 <bang_probe::main+0x1afc>
+    3830:	52800028 	mov	w8, #0x1                   	// #1
+    3834:	381583a8 	sturb	w8, [x29, #-168]
+    3838:	14000002 	b	3840 <bang_probe::main+0x1948>
+    383c:	381583bf 	sturb	wzr, [x29, #-168]
+    3840:	f9404be8 	ldr	x8, [sp, #144]
+    3844:	f9005bfa 	str	x26, [sp, #176]
+    3848:	f9001b88 	str	x8, [x28, #48]
+    384c:	900000e4 	adrp	x4, 1f000 <GCC_except_table10+0x1952c>
+    3850:	912c0084 	add	x4, x4, #0xb00
+    3854:	d102a3a0 	sub	x0, x29, #0xa8
+    3858:	d102c3a1 	sub	x1, x29, #0xb0
+    385c:	aa1f03e2 	mov	x2, xzr
+    3860:	97fff89f 	bl	1adc <core::panicking::assert_failed::<bool, bool>>
+    3864:	14000064 	b	39f4 <bang_probe::main+0x1afc>
+    3868:	d10203a8 	sub	x8, x29, #0x80
+    386c:	f9005bf3 	str	x19, [sp, #176]
+    3870:	3cc08100 	ldur	q0, [x8, #8]
+    3874:	3d802380 	str	q0, [x28, #128]
+    3878:	d100c3a0 	sub	x0, x29, #0x30
+    387c:	97fff88d 	bl	1ab0 <core::result::unwrap_failed::<core::str::error::Utf8Error>>
+    3880:	1400005d 	b	39f4 <bang_probe::main+0x1afc>
+    3884:	b0000000 	adrp	x0, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    3888:	91214000 	add	x0, x0, #0x850
+    388c:	900000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    3890:	91312042 	add	x2, x2, #0xc48
+    3894:	52800461 	mov	w1, #0x23                  	// #35
+    3898:	97fff812 	bl	18e0 <core::panicking::panic_fmt@plt>
+    389c:	14000056 	b	39f4 <bang_probe::main+0x1afc>
+    38a0:	52800028 	mov	w8, #0x1                   	// #1
+    38a4:	17ffffb9 	b	3788 <bang_probe::main+0x1890>
+    38a8:	b0000000 	adrp	x0, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    38ac:	91214000 	add	x0, x0, #0x850
+    38b0:	900000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    38b4:	91252042 	add	x2, x2, #0x948
+    38b8:	52800461 	mov	w1, #0x23                  	// #35
+    38bc:	97fff809 	bl	18e0 <core::panicking::panic_fmt@plt>
+    38c0:	1400004d 	b	39f4 <bang_probe::main+0x1afc>
+    38c4:	d100c3a0 	sub	x0, x29, #0x30
+    38c8:	aa1f03e1 	mov	x1, xzr
+    38cc:	52800103 	mov	w3, #0x8                   	// #8
+    38d0:	52800104 	mov	w4, #0x8                   	// #8
+    38d4:	97fff890 	bl	1b14 <<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>>
+    38d8:	a948a395 	ldp	x21, x8, [x28, #136]
+    38dc:	17fffc78 	b	2abc <bang_probe::main+0xbc4>
+    38e0:	b0000000 	adrp	x0, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    38e4:	91214000 	add	x0, x0, #0x850
+    38e8:	900000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    38ec:	912e4042 	add	x2, x2, #0xb90
+    38f0:	52800221 	mov	w1, #0x11                  	// #17
+    38f4:	97fff807 	bl	1910 <core::option::expect_failed@plt>
+    38f8:	1400003f 	b	39f4 <bang_probe::main+0x1afc>
+    38fc:	f9401f88 	ldr	x8, [x28, #56]
+    3900:	f9402789 	ldr	x9, [x28, #72]
+    3904:	eb080129 	subs	x9, x9, x8
+    3908:	54000241 	b.ne	3950 <bang_probe::main+0x1a58>  // b.any
+    390c:	f9402388 	ldr	x8, [x28, #64]
+    3910:	b40000c8 	cbz	x8, 3928 <bang_probe::main+0x1a30>
+    3914:	8b080508 	add	x8, x8, x8, lsl #1
+    3918:	f9401b80 	ldr	x0, [x28, #48]
+    391c:	52800102 	mov	w2, #0x8                   	// #8
+    3920:	d37df101 	lsl	x1, x8, #3
+    3924:	97fff807 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3928:	aa1f03f4 	mov	x20, xzr
+    392c:	52800108 	mov	w8, #0x8                   	// #8
+    3930:	f90047ff 	str	xzr, [sp, #136]
+    3934:	f9004fe8 	str	x8, [sp, #152]
+    3938:	900000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    393c:	9127c042 	add	x2, x2, #0x9f0
+    3940:	52800020 	mov	w0, #0x1                   	// #1
+    3944:	aa1403e1 	mov	x1, x20
+    3948:	97fff7b2 	bl	1810 <core::panicking::panic_bounds_check@plt>
+    394c:	1400002a 	b	39f4 <bang_probe::main+0x1afc>
+    3950:	b201f3ea 	mov	x10, #0xaaaaaaaaaaaaaaaa    	// #-6148914691236517206
+    3954:	91002114 	add	x20, x8, #0x8
+    3958:	f295556a 	movk	x10, #0xaaab
+    395c:	9bca7d29 	umulh	x9, x9, x10
+    3960:	d344fd33 	lsr	x19, x9, #4
+    3964:	14000004 	b	3974 <bang_probe::main+0x1a7c>
+    3968:	f1000673 	subs	x19, x19, #0x1
+    396c:	91006294 	add	x20, x20, #0x18
+    3970:	54fffce0 	b.eq	390c <bang_probe::main+0x1a14>  // b.none
+    3974:	f85f8281 	ldur	x1, [x20, #-8]
+    3978:	b4ffff81 	cbz	x1, 3968 <bang_probe::main+0x1a70>
+    397c:	f9400280 	ldr	x0, [x20]
+    3980:	52800022 	mov	w2, #0x1                   	// #1
+    3984:	97fff7ef 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3988:	17fffff8 	b	3968 <bang_probe::main+0x1a70>
+    398c:	52800048 	mov	w8, #0x2                   	// #2
+    3990:	f90053e8 	str	x8, [sp, #160]
+    3994:	900000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    3998:	91282042 	add	x2, x2, #0xa08
+    399c:	52800040 	mov	w0, #0x2                   	// #2
+    39a0:	52800041 	mov	w1, #0x2                   	// #2
+    39a4:	97fff79b 	bl	1810 <core::panicking::panic_bounds_check@plt>
+    39a8:	14000013 	b	39f4 <bang_probe::main+0x1afc>
+    39ac:	52800068 	mov	w8, #0x3                   	// #3
+    39b0:	f90053e8 	str	x8, [sp, #160]
+    39b4:	900000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    39b8:	91288042 	add	x2, x2, #0xa20
+    39bc:	52800060 	mov	w0, #0x3                   	// #3
+    39c0:	52800061 	mov	w1, #0x3                   	// #3
+    39c4:	97fff793 	bl	1810 <core::panicking::panic_bounds_check@plt>
+    39c8:	1400000b 	b	39f4 <bang_probe::main+0x1afc>
+    39cc:	900000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    39d0:	912ae042 	add	x2, x2, #0xab8
+    39d4:	52800081 	mov	w1, #0x4                   	// #4
+    39d8:	97fff78e 	bl	1810 <core::panicking::panic_bounds_check@plt>
+    39dc:	14000006 	b	39f4 <bang_probe::main+0x1afc>
+    39e0:	f9005bf3 	str	x19, [sp, #176]
+    39e4:	900000e2 	adrp	x2, 1f000 <GCC_except_table10+0x1952c>
+    39e8:	912c6042 	add	x2, x2, #0xb18
+    39ec:	aa1903e1 	mov	x1, x25
+    39f0:	97fff788 	bl	1810 <core::panicking::panic_bounds_check@plt>
+    39f4:	d4200020 	brk	#0x1
+    39f8:	2a1f03e8 	mov	w8, wzr
+    39fc:	17ffff5a 	b	3764 <bang_probe::main+0x186c>
+    3a00:	2a1f03e8 	mov	w8, wzr
+    3a04:	900000e1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    3a08:	912b4021 	add	x1, x1, #0xad0
+    3a0c:	17ffff5f 	b	3788 <bang_probe::main+0x1890>
+    3a10:	f9404381 	ldr	x1, [x28, #128]
+    3a14:	aa0003f8 	mov	x24, x0
+    3a18:	b5000061 	cbnz	x1, 3a24 <bang_probe::main+0x1b2c>
+    3a1c:	f9402ffa 	ldr	x26, [sp, #88]
+    3a20:	14000058 	b	3b80 <bang_probe::main+0x1c88>
+    3a24:	f9404780 	ldr	x0, [x28, #136]
+    3a28:	52800022 	mov	w2, #0x1                   	// #1
+    3a2c:	97fff7c5 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3a30:	f9402ffa 	ldr	x26, [sp, #88]
+    3a34:	14000053 	b	3b80 <bang_probe::main+0x1c88>
+    3a38:	14000001 	b	3a3c <bang_probe::main+0x1b44>
+    3a3c:	f9404be8 	ldr	x8, [sp, #144]
+    3a40:	aa0003f8 	mov	x24, x0
+    3a44:	f9005bfa 	str	x26, [sp, #176]
+    3a48:	f9001b88 	str	x8, [x28, #48]
+    3a4c:	1400003e 	b	3b44 <bang_probe::main+0x1c4c>
+    3a50:	14000058 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a54:	14000057 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a58:	14000056 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a5c:	14000055 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a60:	14000054 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a64:	14000053 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a68:	a9455bf7 	ldp	x23, x22, [sp, #80]
+    3a6c:	aa0003f8 	mov	x24, x0
+    3a70:	f9005bf3 	str	x19, [sp, #176]
+    3a74:	aa1b03f9 	mov	x25, x27
+    3a78:	1400003b 	b	3b64 <bang_probe::main+0x1c6c>
+    3a7c:	aa0003f8 	mov	x24, x0
+    3a80:	f9005bf3 	str	x19, [sp, #176]
+    3a84:	14000037 	b	3b60 <bang_probe::main+0x1c68>
+    3a88:	aa0003f8 	mov	x24, x0
+    3a8c:	1400005c 	b	3bfc <bang_probe::main+0x1d04>
+    3a90:	14000048 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a94:	14000047 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a98:	14000046 	b	3bb0 <bang_probe::main+0x1cb8>
+    3a9c:	14000045 	b	3bb0 <bang_probe::main+0x1cb8>
+    3aa0:	aa0003f8 	mov	x24, x0
+    3aa4:	b5000154 	cbnz	x20, 3acc <bang_probe::main+0x1bd4>
+    3aa8:	f94047e8 	ldr	x8, [sp, #136]
+    3aac:	f9404fe0 	ldr	x0, [sp, #152]
+    3ab0:	b4000b28 	cbz	x8, 3c14 <bang_probe::main+0x1d1c>
+    3ab4:	8b080508 	add	x8, x8, x8, lsl #1
+    3ab8:	d37df101 	lsl	x1, x8, #3
+    3abc:	52800102 	mov	w2, #0x8                   	// #8
+    3ac0:	97fff7a0 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3ac4:	aa1803e0 	mov	x0, x24
+    3ac8:	97fff7da 	bl	1a30 <_Unwind_Resume@plt>
+    3acc:	52800034 	mov	w20, #0x1                   	// #1
+    3ad0:	14000039 	b	3bb4 <bang_probe::main+0x1cbc>
+    3ad4:	14000037 	b	3bb0 <bang_probe::main+0x1cb8>
+    3ad8:	aa0003f8 	mov	x24, x0
+    3adc:	b4000195 	cbz	x21, 3b0c <bang_probe::main+0x1c14>
+    3ae0:	aa1603e0 	mov	x0, x22
+    3ae4:	aa1503e1 	mov	x1, x21
+    3ae8:	52800022 	mov	w2, #0x1                   	// #1
+    3aec:	97fff795 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3af0:	9102c3e0 	add	x0, sp, #0xb0
+    3af4:	97fff8c8 	bl	1e14 <core::ptr::drop_glue::<std::env::Args>>
+    3af8:	d10263a0 	sub	x0, x29, #0x98
+    3afc:	97fff8a6 	bl	1d94 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>>
+    3b00:	aa1803e0 	mov	x0, x24
+    3b04:	97fff7cb 	bl	1a30 <_Unwind_Resume@plt>
+    3b08:	aa0003f8 	mov	x24, x0
+    3b0c:	9102c3e0 	add	x0, sp, #0xb0
+    3b10:	97fff8c1 	bl	1e14 <core::ptr::drop_glue::<std::env::Args>>
+    3b14:	d10263a0 	sub	x0, x29, #0x98
+    3b18:	97fff89f 	bl	1d94 <core::ptr::drop_glue::<alloc::vec::Vec<alloc::string::String>>>
+    3b1c:	aa1803e0 	mov	x0, x24
+    3b20:	97fff7c4 	bl	1a30 <_Unwind_Resume@plt>
+    3b24:	f9404388 	ldr	x8, [x28, #128]
+    3b28:	aa0003f8 	mov	x24, x0
+    3b2c:	b4000448 	cbz	x8, 3bb4 <bang_probe::main+0x1cbc>
+    3b30:	f9404780 	ldr	x0, [x28, #136]
+    3b34:	d37df101 	lsl	x1, x8, #3
+    3b38:	1400001a 	b	3ba0 <bang_probe::main+0x1ca8>
+    3b3c:	14000008 	b	3b5c <bang_probe::main+0x1c64>
+    3b40:	aa0003f8 	mov	x24, x0
+    3b44:	f9404381 	ldr	x1, [x28, #128]
+    3b48:	b4000361 	cbz	x1, 3bb4 <bang_probe::main+0x1cbc>
+    3b4c:	f9404780 	ldr	x0, [x28, #136]
+    3b50:	52800022 	mov	w2, #0x1                   	// #1
+    3b54:	97fff77b 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3b58:	14000017 	b	3bb4 <bang_probe::main+0x1cbc>
+    3b5c:	aa0003f8 	mov	x24, x0
+    3b60:	a9455bf7 	ldp	x23, x22, [sp, #80]
+    3b64:	f9404be0 	ldr	x0, [sp, #144]
+    3b68:	b4000179 	cbz	x25, 3b94 <bang_probe::main+0x1c9c>
+    3b6c:	aa1903e1 	mov	x1, x25
+    3b70:	52800022 	mov	w2, #0x1                   	// #1
+    3b74:	97fff773 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3b78:	14000007 	b	3b94 <bang_probe::main+0x1c9c>
+    3b7c:	aa0003f8 	mov	x24, x0
+    3b80:	f9404be8 	ldr	x8, [sp, #144]
+    3b84:	f9005bfa 	str	x26, [sp, #176]
+    3b88:	f9001b88 	str	x8, [x28, #48]
+    3b8c:	1400000a 	b	3bb4 <bang_probe::main+0x1cbc>
+    3b90:	aa0003f8 	mov	x24, x0
+    3b94:	b4000117 	cbz	x23, 3bb4 <bang_probe::main+0x1cbc>
+    3b98:	d37df2e1 	lsl	x1, x23, #3
+    3b9c:	aa1603e0 	mov	x0, x22
+    3ba0:	52800102 	mov	w2, #0x8                   	// #8
+    3ba4:	97fff767 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3ba8:	14000003 	b	3bb4 <bang_probe::main+0x1cbc>
+    3bac:	f94053f4 	ldr	x20, [sp, #160]
+    3bb0:	aa0003f8 	mov	x24, x0
+    3bb4:	f9404fe8 	ldr	x8, [sp, #152]
+    3bb8:	91002113 	add	x19, x8, #0x8
+    3bbc:	14000004 	b	3bcc <bang_probe::main+0x1cd4>
+    3bc0:	f1000694 	subs	x20, x20, #0x1
+    3bc4:	91006273 	add	x19, x19, #0x18
+    3bc8:	54fff700 	b.eq	3aa8 <bang_probe::main+0x1bb0>  // b.none
+    3bcc:	f85f8261 	ldur	x1, [x19, #-8]
+    3bd0:	b4ffff81 	cbz	x1, 3bc0 <bang_probe::main+0x1cc8>
+    3bd4:	f9400260 	ldr	x0, [x19]
+    3bd8:	52800022 	mov	w2, #0x1                   	// #1
+    3bdc:	97fff759 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3be0:	17fffff8 	b	3bc0 <bang_probe::main+0x1cc8>
+    3be4:	aa0003f8 	mov	x24, x0
+    3be8:	b40000b4 	cbz	x20, 3bfc <bang_probe::main+0x1d04>
+    3bec:	aa1503e0 	mov	x0, x21
+    3bf0:	aa1403e1 	mov	x1, x20
+    3bf4:	52800022 	mov	w2, #0x1                   	// #1
+    3bf8:	97fff752 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3bfc:	f9401f88 	ldr	x8, [x28, #56]
+    3c00:	f9402789 	ldr	x9, [x28, #72]
+    3c04:	eb080129 	subs	x9, x9, x8
+    3c08:	540000a1 	b.ne	3c1c <bang_probe::main+0x1d24>  // b.any
+    3c0c:	f9402388 	ldr	x8, [x28, #64]
+    3c10:	b5000248 	cbnz	x8, 3c58 <bang_probe::main+0x1d60>
+    3c14:	aa1803e0 	mov	x0, x24
+    3c18:	97fff786 	bl	1a30 <_Unwind_Resume@plt>
+    3c1c:	b201f3ea 	mov	x10, #0xaaaaaaaaaaaaaaaa    	// #-6148914691236517206
+    3c20:	91002114 	add	x20, x8, #0x8
+    3c24:	f295556a 	movk	x10, #0xaaab
+    3c28:	9bca7d29 	umulh	x9, x9, x10
+    3c2c:	d344fd33 	lsr	x19, x9, #4
+    3c30:	14000004 	b	3c40 <bang_probe::main+0x1d48>
+    3c34:	f1000673 	subs	x19, x19, #0x1
+    3c38:	91006294 	add	x20, x20, #0x18
+    3c3c:	54fffe80 	b.eq	3c0c <bang_probe::main+0x1d14>  // b.none
+    3c40:	f85f8281 	ldur	x1, [x20, #-8]
+    3c44:	b4ffff81 	cbz	x1, 3c34 <bang_probe::main+0x1d3c>
+    3c48:	f9400280 	ldr	x0, [x20]
+    3c4c:	52800022 	mov	w2, #0x1                   	// #1
+    3c50:	97fff73c 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3c54:	17fffff8 	b	3c34 <bang_probe::main+0x1d3c>
+    3c58:	f9401b80 	ldr	x0, [x28, #48]
+    3c5c:	8b080508 	add	x8, x8, x8, lsl #1
+    3c60:	d37df101 	lsl	x1, x8, #3
+    3c64:	52800102 	mov	w2, #0x8                   	// #8
+    3c68:	97fff736 	bl	1940 <__rustc::__rust_dealloc@plt>
+    3c6c:	aa1803e0 	mov	x0, x24
+    3c70:	97fff770 	bl	1a30 <_Unwind_Resume@plt>
+
+0000000000003c74 <bang_probe::fold16>:
+    3c74:	f27cec28 	ands	x8, x1, #0xfffffffffffffff0
+    3c78:	54000180 	b.eq	3ca8 <bang_probe::fold16+0x34>  // b.none
+    3c7c:	4f01e420 	movi	v0.16b, #0x21
+    3c80:	927cec29 	and	x9, x1, #0xfffffffffffffff0
+    3c84:	aa0003ea 	mov	x10, x0
+    3c88:	cb0903e9 	neg	x9, x9
+    3c8c:	3cc10541 	ldr	q1, [x10], #16
+    3c90:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    3c94:	5ef1b821 	addp	d1, v1.2d
+    3c98:	9e66002b 	fmov	x11, d1
+    3c9c:	b500036b 	cbnz	x11, 3d08 <bang_probe::fold16+0x94>
+    3ca0:	b1004129 	adds	x9, x9, #0x10
+    3ca4:	54ffff41 	b.ne	3c8c <bang_probe::fold16+0x18>  // b.any
+    3ca8:	92400c29 	and	x9, x1, #0xf
+    3cac:	f100013f 	cmp	x9, #0x0
+    3cb0:	fa501820 	ccmp	x1, #0x10, #0x0, ne	// ne = any
+    3cb4:	54000182 	b.cs	3ce4 <bang_probe::fold16+0x70>  // b.hs, b.nlast
+    3cb8:	b40002c9 	cbz	x9, 3d10 <bang_probe::fold16+0x9c>
+    3cbc:	8b080008 	add	x8, x0, x8
+    3cc0:	d1000529 	sub	x9, x9, #0x1
+    3cc4:	3840150a 	ldrb	w10, [x8], #1
+    3cc8:	7100855f 	cmp	w10, #0x21
+    3ccc:	1a9f17e0 	cset	w0, eq	// eq = none
+    3cd0:	54000080 	b.eq	3ce0 <bang_probe::fold16+0x6c>  // b.none
+    3cd4:	aa0903ea 	mov	x10, x9
+    3cd8:	d1000529 	sub	x9, x9, #0x1
+    3cdc:	b5ffff4a 	cbnz	x10, 3cc4 <bang_probe::fold16+0x50>
+    3ce0:	d65f03c0 	ret
+    3ce4:	4f01e420 	movi	v0.16b, #0x21
+    3ce8:	8b010008 	add	x8, x0, x1
+    3cec:	3cdf0101 	ldur	q1, [x8, #-16]
+    3cf0:	6e208c20 	cmeq	v0.16b, v1.16b, v0.16b
+    3cf4:	5ef1b800 	addp	d0, v0.2d
+    3cf8:	9e660008 	fmov	x8, d0
+    3cfc:	f100011f 	cmp	x8, #0x0
+    3d00:	1a9f07e0 	cset	w0, ne	// ne = any
+    3d04:	d65f03c0 	ret
+    3d08:	52800020 	mov	w0, #0x1                   	// #1
+    3d0c:	d65f03c0 	ret
+    3d10:	2a1f03e0 	mov	w0, wzr
+    3d14:	d65f03c0 	ret
+
+0000000000003d18 <bang_probe::fold64>:
+    3d18:	f101003f 	cmp	x1, #0x40
+    3d1c:	54000042 	b.cs	3d24 <bang_probe::fold64+0xc>  // b.hs, b.nlast
+    3d20:	17ffffd5 	b	3c74 <bang_probe::fold16>
+    3d24:	f27ae43f 	tst	x1, #0xffffffffffffffc0
+    3d28:	54000500 	b.eq	3dc8 <bang_probe::fold64+0xb0>  // b.none
+    3d2c:	4f01e420 	movi	v0.16b, #0x21
+    3d30:	b0000008 	adrp	x8, 4000 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt+0x1c>
+    3d34:	927ae429 	and	x9, x1, #0xffffffffffffffc0
+    3d38:	3dc20d01 	ldr	q1, [x8, #2096]
+    3d3c:	cb0903e8 	neg	x8, x9
+    3d40:	aa0003e9 	mov	x9, x0
+    3d44:	ad410d22 	ldp	q2, q3, [x9, #32]
+    3d48:	acc21125 	ldp	q5, q4, [x9], #64
+    3d4c:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    3d50:	6e208c63 	cmeq	v3.16b, v3.16b, v0.16b
+    3d54:	6e208ca5 	cmeq	v5.16b, v5.16b, v0.16b
+    3d58:	6e208c84 	cmeq	v4.16b, v4.16b, v0.16b
+    3d5c:	4e211c42 	and	v2.16b, v2.16b, v1.16b
+    3d60:	4e211c63 	and	v3.16b, v3.16b, v1.16b
+    3d64:	4e211ca5 	and	v5.16b, v5.16b, v1.16b
+    3d68:	4e211c84 	and	v4.16b, v4.16b, v1.16b
+    3d6c:	4e22bc42 	addp	v2.16b, v2.16b, v2.16b
+    3d70:	4e23bc63 	addp	v3.16b, v3.16b, v3.16b
+    3d74:	4e25bca5 	addp	v5.16b, v5.16b, v5.16b
+    3d78:	4e24bc84 	addp	v4.16b, v4.16b, v4.16b
+    3d7c:	4e22bc42 	addp	v2.16b, v2.16b, v2.16b
+    3d80:	4e23bc63 	addp	v3.16b, v3.16b, v3.16b
+    3d84:	4e25bca5 	addp	v5.16b, v5.16b, v5.16b
+    3d88:	4e24bc84 	addp	v4.16b, v4.16b, v4.16b
+    3d8c:	4e22bc42 	addp	v2.16b, v2.16b, v2.16b
+    3d90:	4e23bc63 	addp	v3.16b, v3.16b, v3.16b
+    3d94:	4e25bca5 	addp	v5.16b, v5.16b, v5.16b
+    3d98:	4e24bc84 	addp	v4.16b, v4.16b, v4.16b
+    3d9c:	0e023c4a 	umov	w10, v2.h[0]
+    3da0:	0e023c6c 	umov	w12, v3.h[0]
+    3da4:	0e023cab 	umov	w11, v5.h[0]
+    3da8:	0e023c8d 	umov	w13, v4.h[0]
+    3dac:	2a0a016a 	orr	w10, w11, w10
+    3db0:	2a0c01ab 	orr	w11, w13, w12
+    3db4:	2a0b014a 	orr	w10, w10, w11
+    3db8:	72003d5f 	tst	w10, #0xffff
+    3dbc:	54000281 	b.ne	3e0c <bang_probe::fold64+0xf4>  // b.any
+    3dc0:	b1010108 	adds	x8, x8, #0x40
+    3dc4:	54fffc01 	b.ne	3d44 <bang_probe::fold64+0x2c>  // b.any
+    3dc8:	92401428 	and	x8, x1, #0x3f
+    3dcc:	b4000248 	cbz	x8, 3e14 <bang_probe::fold64+0xfc>
+    3dd0:	4f01e420 	movi	v0.16b, #0x21
+    3dd4:	8b010008 	add	x8, x0, x1
+    3dd8:	ad7f0901 	ldp	q1, q2, [x8, #-32]
+    3ddc:	ad7e0d04 	ldp	q4, q3, [x8, #-64]
+    3de0:	6e208c21 	cmeq	v1.16b, v1.16b, v0.16b
+    3de4:	6e208c42 	cmeq	v2.16b, v2.16b, v0.16b
+    3de8:	6e208c84 	cmeq	v4.16b, v4.16b, v0.16b
+    3dec:	6e208c60 	cmeq	v0.16b, v3.16b, v0.16b
+    3df0:	4ea21c00 	orr	v0.16b, v0.16b, v2.16b
+    3df4:	4ea11c81 	orr	v1.16b, v4.16b, v1.16b
+    3df8:	4ea01c20 	orr	v0.16b, v1.16b, v0.16b
+    3dfc:	6e30a800 	umaxv	b0, v0.16b
+    3e00:	1e260008 	fmov	w8, s0
+    3e04:	12000100 	and	w0, w8, #0x1
+    3e08:	d65f03c0 	ret
+    3e0c:	52800020 	mov	w0, #0x1                   	// #1
+    3e10:	d65f03c0 	ret
+    3e14:	2a1f03e0 	mov	w0, wzr
+    3e18:	d65f03c0 	ret
+
+0000000000003e1c <bang_probe::word16>:
+    3e1c:	f27cec28 	ands	x8, x1, #0xfffffffffffffff0
+    3e20:	540002a0 	b.eq	3e74 <bang_probe::word16+0x58>  // b.none
+    3e24:	b203c3e9 	mov	x9, #0x2020202020202020    	// #2314885530818453536
+    3e28:	b200c3ea 	mov	x10, #0x101010101010101     	// #72340172838076673
+    3e2c:	927cec2b 	and	x11, x1, #0xfffffffffffffff0
+    3e30:	b200c129 	orr	x9, x9, #0x101010101010101
+    3e34:	f280200a 	movk	x10, #0x100
+    3e38:	cb0b03eb 	neg	x11, x11
+    3e3c:	b201c3ec 	mov	x12, #0x8080808080808080    	// #-9187201950435737472
+    3e40:	aa0003ed 	mov	x13, x0
+    3e44:	a8c13dae 	ldp	x14, x15, [x13], #16
+    3e48:	ca0901d0 	eor	x16, x14, x9
+    3e4c:	ca0901f1 	eor	x17, x15, x9
+    3e50:	cb100150 	sub	x16, x10, x16
+    3e54:	cb110151 	sub	x17, x10, x17
+    3e58:	aa0e020e 	orr	x14, x16, x14
+    3e5c:	aa0f022f 	orr	x15, x17, x15
+    3e60:	8a0f01ce 	and	x14, x14, x15
+    3e64:	ea2e019f 	bics	xzr, x12, x14
+    3e68:	540001e1 	b.ne	3ea4 <bang_probe::word16+0x88>  // b.any
+    3e6c:	b100416b 	adds	x11, x11, #0x10
+    3e70:	54fffea1 	b.ne	3e44 <bang_probe::word16+0x28>  // b.any
+    3e74:	92400c29 	and	x9, x1, #0xf
+    3e78:	b40001a9 	cbz	x9, 3eac <bang_probe::word16+0x90>
+    3e7c:	8b080008 	add	x8, x0, x8
+    3e80:	d1000529 	sub	x9, x9, #0x1
+    3e84:	3840150a 	ldrb	w10, [x8], #1
+    3e88:	7100855f 	cmp	w10, #0x21
+    3e8c:	1a9f17e0 	cset	w0, eq	// eq = none
+    3e90:	54000080 	b.eq	3ea0 <bang_probe::word16+0x84>  // b.none
+    3e94:	aa0903ea 	mov	x10, x9
+    3e98:	d1000529 	sub	x9, x9, #0x1
+    3e9c:	b5ffff4a 	cbnz	x10, 3e84 <bang_probe::word16+0x68>
+    3ea0:	d65f03c0 	ret
+    3ea4:	52800020 	mov	w0, #0x1                   	// #1
+    3ea8:	d65f03c0 	ret
+    3eac:	2a1f03e0 	mov	w0, wzr
+    3eb0:	d65f03c0 	ret
+
+0000000000003eb4 <bang_probe::std_str>:
+    3eb4:	aa0103e2 	mov	x2, x1
+    3eb8:	f100043f 	cmp	x1, #0x1
+    3ebc:	aa0003e1 	mov	x1, x0
+    3ec0:	54000169 	b.ls	3eec <bang_probe::std_str+0x38>  // b.plast
+    3ec4:	f1003c5f 	cmp	x2, #0xf
+    3ec8:	540001c8 	b.hi	3f00 <bang_probe::std_str+0x4c>  // b.pmore
+    3ecc:	aa1f03e8 	mov	x8, xzr
+    3ed0:	38686829 	ldrb	w9, [x1, x8]
+    3ed4:	7100853f 	cmp	w9, #0x21
+    3ed8:	54000220 	b.eq	3f1c <bang_probe::std_str+0x68>  // b.none
+    3edc:	91000508 	add	x8, x8, #0x1
+    3ee0:	eb08005f 	cmp	x2, x8
+    3ee4:	54ffff61 	b.ne	3ed0 <bang_probe::std_str+0x1c>  // b.any
+    3ee8:	1400000f 	b	3f24 <bang_probe::std_str+0x70>
+    3eec:	540001c1 	b.ne	3f24 <bang_probe::std_str+0x70>  // b.any
+    3ef0:	39400028 	ldrb	w8, [x1]
+    3ef4:	7100851f 	cmp	w8, #0x21
+    3ef8:	1a9f17e0 	cset	w0, eq	// eq = none
+    3efc:	d65f03c0 	ret
+    3f00:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+    3f04:	910003fd 	mov	x29, sp
+    3f08:	52800420 	mov	w0, #0x21                  	// #33
+    3f0c:	97fff6b1 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    3f10:	f100041f 	cmp	x0, #0x1
+    3f14:	a8c17bfd 	ldp	x29, x30, [sp], #16
+    3f18:	54000061 	b.ne	3f24 <bang_probe::std_str+0x70>  // b.any
+    3f1c:	52800020 	mov	w0, #0x1                   	// #1
+    3f20:	d65f03c0 	ret
+    3f24:	2a1f03e0 	mov	w0, wzr
+    3f28:	d65f03c0 	ret
+
+0000000000003f2c <bang_probe::std_char>:
+    3f2c:	aa0103e2 	mov	x2, x1
+    3f30:	f1003c3f 	cmp	x1, #0xf
+    3f34:	aa0003e1 	mov	x1, x0
+    3f38:	54000148 	b.hi	3f60 <bang_probe::std_char+0x34>  // b.pmore
+    3f3c:	b4000242 	cbz	x2, 3f84 <bang_probe::std_char+0x58>
+    3f40:	aa1f03e8 	mov	x8, xzr
+    3f44:	38686829 	ldrb	w9, [x1, x8]
+    3f48:	7100853f 	cmp	w9, #0x21
+    3f4c:	54000180 	b.eq	3f7c <bang_probe::std_char+0x50>  // b.none
+    3f50:	91000508 	add	x8, x8, #0x1
+    3f54:	eb08005f 	cmp	x2, x8
+    3f58:	54ffff61 	b.ne	3f44 <bang_probe::std_char+0x18>  // b.any
+    3f5c:	1400000a 	b	3f84 <bang_probe::std_char+0x58>
+    3f60:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+    3f64:	910003fd 	mov	x29, sp
+    3f68:	52800420 	mov	w0, #0x21                  	// #33
+    3f6c:	97fff699 	bl	19d0 <core::slice::memchr::memchr_aligned@plt>
+    3f70:	f100041f 	cmp	x0, #0x1
+    3f74:	a8c17bfd 	ldp	x29, x30, [sp], #16
+    3f78:	54000061 	b.ne	3f84 <bang_probe::std_char+0x58>  // b.any
+    3f7c:	52800020 	mov	w0, #0x1                   	// #1
+    3f80:	d65f03c0 	ret
+    3f84:	2a1f03e0 	mov	w0, wzr
+    3f88:	d65f03c0 	ret
+
+0000000000003f8c <<&core::option::Option<u8> as core::fmt::Debug>::fmt>:
+    3f8c:	f9400008 	ldr	x8, [x0]
+    3f90:	aa0103e0 	mov	x0, x1
+    3f94:	38401509 	ldrb	w9, [x8], #1
+    3f98:	340001e9 	cbz	w9, 3fd4 <<&core::option::Option<u8> as core::fmt::Debug>::fmt+0x48>
+    3f9c:	d10083ff 	sub	sp, sp, #0x20
+    3fa0:	a9017bfd 	stp	x29, x30, [sp, #16]
+    3fa4:	910043fd 	add	x29, sp, #0x10
+    3fa8:	d0000001 	adrp	x1, 5000 <_fini+0xc00>
+    3fac:	91114c21 	add	x1, x1, #0x453
+    3fb0:	900000e4 	adrp	x4, 1f000 <GCC_except_table10+0x1952c>
+    3fb4:	91302084 	add	x4, x4, #0xc08
+    3fb8:	910023e3 	add	x3, sp, #0x8
+    3fbc:	52800082 	mov	w2, #0x4                   	// #4
+    3fc0:	f90007e8 	str	x8, [sp, #8]
+    3fc4:	97fff637 	bl	18a0 <<core::fmt::Formatter>::debug_tuple_field1_finish@plt>
+    3fc8:	a9417bfd 	ldp	x29, x30, [sp, #16]
+    3fcc:	910083ff 	add	sp, sp, #0x20
+    3fd0:	d65f03c0 	ret
+    3fd4:	d0000001 	adrp	x1, 5000 <_fini+0xc00>
+    3fd8:	91113c21 	add	x1, x1, #0x44f
+    3fdc:	52800082 	mov	w2, #0x4                   	// #4
+    3fe0:	17fff634 	b	18b0 <<core::fmt::Formatter>::write_str@plt>
+
+0000000000003fe4 <<&core::num::error::IntErrorKind as core::fmt::Debug>::fmt>:
+    3fe4:	f9400008 	ldr	x8, [x0]
+    3fe8:	d0000009 	adrp	x9, 5000 <_fini+0xc00>
+    3fec:	9113e129 	add	x9, x9, #0x4f8
+    3ff0:	aa0103e0 	mov	x0, x1
+    3ff4:	39400108 	ldrb	w8, [x8]
+    3ff8:	38686922 	ldrb	w2, [x9, x8]
+    3ffc:	d0000009 	adrp	x9, 5000 <_fini+0xc00>
+    4000:	91140129 	add	x9, x9, #0x500
+    4004:	b8a87928 	ldrsw	x8, [x9, x8, lsl #2]
+    4008:	8b080121 	add	x1, x9, x8
+    400c:	17fff629 	b	18b0 <<core::fmt::Formatter>::write_str@plt>
+
+0000000000004010 <<&bool as core::fmt::Debug>::fmt>:
+    4010:	f9400000 	ldr	x0, [x0]
+    4014:	17fff66b 	b	19c0 <<bool as core::fmt::Display>::fmt@plt>
+
+0000000000004018 <<&u8 as core::fmt::Debug>::fmt>:
+    4018:	b9401028 	ldr	w8, [x1, #16]
+    401c:	f9400000 	ldr	x0, [x0]
+    4020:	37c80068 	tbnz	w8, #25, 402c <<&u8 as core::fmt::Debug>::fmt+0x14>
+    4024:	37d00068 	tbnz	w8, #26, 4030 <<&u8 as core::fmt::Debug>::fmt+0x18>
+    4028:	17fff67e 	b	1a20 <<u8 as core::fmt::Display>::fmt@plt>
+    402c:	17fff685 	b	1a40 <<u8 as core::fmt::LowerHex>::fmt@plt>
+    4030:	17fff670 	b	19f0 <<u8 as core::fmt::UpperHex>::fmt@plt>
+
+0000000000004034 <<&usize as core::fmt::Debug>::fmt>:
+    4034:	b9401028 	ldr	w8, [x1, #16]
+    4038:	f9400000 	ldr	x0, [x0]
+    403c:	37c80068 	tbnz	w8, #25, 4048 <<&usize as core::fmt::Debug>::fmt+0x14>
+    4040:	37d00068 	tbnz	w8, #26, 404c <<&usize as core::fmt::Debug>::fmt+0x18>
+    4044:	17fff65b 	b	19b0 <<usize as core::fmt::Display>::fmt@plt>
+    4048:	17fff5f6 	b	1820 <<usize as core::fmt::LowerHex>::fmt@plt>
+    404c:	17fff621 	b	18d0 <<usize as core::fmt::UpperHex>::fmt@plt>
+
+0000000000004050 <<&str as core::fmt::Display>::fmt>:
+    4050:	a9402408 	ldp	x8, x9, [x0]
+    4054:	aa0103e2 	mov	x2, x1
+    4058:	aa0803e0 	mov	x0, x8
+    405c:	aa0903e1 	mov	x1, x9
+    4060:	17fff600 	b	1860 <<str as core::fmt::Display>::fmt@plt>
+
+0000000000004064 <<core::str::error::Utf8Error as core::fmt::Debug>::fmt>:
+    4064:	d100c3ff 	sub	sp, sp, #0x30
+    4068:	a9027bfd 	stp	x29, x30, [sp, #32]
+    406c:	910083fd 	add	x29, sp, #0x20
+    4070:	91002009 	add	x9, x0, #0x8
+    4074:	aa0103e8 	mov	x8, x1
+    4078:	aa0003e5 	mov	x5, x0
+    407c:	f81f83a9 	stur	x9, [x29, #-8]
+    4080:	f00000c9 	adrp	x9, 1f000 <GCC_except_table10+0x1952c>
+    4084:	912fa12b 	add	x11, x9, #0xbe8
+    4088:	b0000001 	adrp	x1, 5000 <_fini+0xc00>
+    408c:	91123c21 	add	x1, x1, #0x48f
+    4090:	b0000003 	adrp	x3, 5000 <_fini+0xc00>
+    4094:	91126063 	add	x3, x3, #0x498
+    4098:	d10023a9 	sub	x9, x29, #0x8
+    409c:	f00000c6 	adrp	x6, 1f000 <GCC_except_table10+0x1952c>
+    40a0:	912f20c6 	add	x6, x6, #0xbc8
+    40a4:	5280012a 	mov	w10, #0x9                   	// #9
+    40a8:	b0000007 	adrp	x7, 5000 <_fini+0xc00>
+    40ac:	91128ce7 	add	x7, x7, #0x4a3
+    40b0:	aa0803e0 	mov	x0, x8
+    40b4:	52800122 	mov	w2, #0x9                   	// #9
+    40b8:	52800164 	mov	w4, #0xb                   	// #11
+    40bc:	a900afe9 	stp	x9, x11, [sp, #8]
+    40c0:	f90003ea 	str	x10, [sp]
+    40c4:	97fff663 	bl	1a50 <<core::fmt::Formatter>::debug_struct_field2_finish@plt>
+    40c8:	a9427bfd 	ldp	x29, x30, [sp, #32]
+    40cc:	9100c3ff 	add	sp, sp, #0x30
+    40d0:	d65f03c0 	ret
+
+00000000000040d4 <<core::option::Option<usize> as core::fmt::Debug>::fmt>:
+    40d4:	f9400009 	ldr	x9, [x0]
+    40d8:	aa0003e8 	mov	x8, x0
+    40dc:	aa0103e0 	mov	x0, x1
+    40e0:	b4000209 	cbz	x9, 4120 <<core::option::Option<usize> as core::fmt::Debug>::fmt+0x4c>
+    40e4:	d10083ff 	sub	sp, sp, #0x20
+    40e8:	a9017bfd 	stp	x29, x30, [sp, #16]
+    40ec:	910043fd 	add	x29, sp, #0x10
+    40f0:	91002108 	add	x8, x8, #0x8
+    40f4:	b0000001 	adrp	x1, 5000 <_fini+0xc00>
+    40f8:	91114c21 	add	x1, x1, #0x453
+    40fc:	f00000c4 	adrp	x4, 1f000 <GCC_except_table10+0x1952c>
+    4100:	9130a084 	add	x4, x4, #0xc28
+    4104:	910023e3 	add	x3, sp, #0x8
+    4108:	52800082 	mov	w2, #0x4                   	// #4
+    410c:	f90007e8 	str	x8, [sp, #8]
+    4110:	97fff5e4 	bl	18a0 <<core::fmt::Formatter>::debug_tuple_field1_finish@plt>
+    4114:	a9417bfd 	ldp	x29, x30, [sp, #16]
+    4118:	910083ff 	add	sp, sp, #0x20
+    411c:	d65f03c0 	ret
+    4120:	b0000001 	adrp	x1, 5000 <_fini+0xc00>
+    4124:	91113c21 	add	x1, x1, #0x44f
+    4128:	52800082 	mov	w2, #0x4                   	// #4
+    412c:	17fff5e1 	b	18b0 <<core::fmt::Formatter>::write_str@plt>
+
+0000000000004130 <<usize as core::fmt::Debug>::fmt>:
+    4130:	b9401028 	ldr	w8, [x1, #16]
+    4134:	37c80068 	tbnz	w8, #25, 4140 <<usize as core::fmt::Debug>::fmt+0x10>
+    4138:	37d00068 	tbnz	w8, #26, 4144 <<usize as core::fmt::Debug>::fmt+0x14>
+    413c:	17fff61d 	b	19b0 <<usize as core::fmt::Display>::fmt@plt>
+    4140:	17fff5b8 	b	1820 <<usize as core::fmt::LowerHex>::fmt@plt>
+    4144:	17fff5e3 	b	18d0 <<usize as core::fmt::UpperHex>::fmt@plt>
+
+0000000000004148 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint>:
+    4148:	3941e029 	ldrb	w9, [x1, #120]
+    414c:	b9400028 	ldr	w8, [x1]
+    4150:	7103fd3f 	cmp	w9, #0xff
+    4154:	54000200 	b.eq	4194 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x4c>  // b.none
+    4158:	360002e8 	tbz	w8, #0, 41b4 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x6c>
+    415c:	39418028 	ldrb	w8, [x1, #96]
+    4160:	7100091f 	cmp	w8, #0x2
+    4164:	54000381 	b.ne	41d4 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x8c>  // b.any
+    4168:	35000429 	cbnz	w9, 41ec <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xa4>
+    416c:	a946a428 	ldp	x8, x9, [x1, #104]
+    4170:	cb08012a 	sub	x10, x9, x8
+    4174:	b100054b 	adds	x11, x10, #0x1
+    4178:	da9f316a 	csinv	x10, x11, xzr, cc	// cc = lo, ul, last
+    417c:	1a9f07ec 	cset	w12, ne	// ne = any
+    4180:	eb08013f 	cmp	x9, x8
+    4184:	9a8a33e8 	csel	x8, xzr, x10, cc	// cc = lo, ul, last
+    4188:	1a9f258a 	csinc	w10, w12, wzr, cs	// cs = hs, nlast
+    418c:	9a8b33ec 	csel	x12, xzr, x11, cc	// cc = lo, ul, last
+    4190:	14000060 	b	4310 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1c8>
+    4194:	34000408 	cbz	w8, 4214 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xcc>
+    4198:	a940a428 	ldp	x8, x9, [x1, #8]
+    419c:	5280002a 	mov	w10, #0x1                   	// #1
+    41a0:	cb080128 	sub	x8, x9, x8
+    41a4:	2a0a03ea 	mov	w10, w10
+    41a8:	f9000808 	str	x8, [x0, #16]
+    41ac:	a9002808 	stp	x8, x10, [x0]
+    41b0:	d65f03c0 	ret
+    41b4:	39418028 	ldrb	w8, [x1, #96]
+    41b8:	7100091f 	cmp	w8, #0x2
+    41bc:	54000201 	b.ne	41fc <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xb4>  // b.any
+    41c0:	350002a9 	cbnz	w9, 4214 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xcc>
+    41c4:	a946a428 	ldp	x8, x9, [x1, #104]
+    41c8:	eb080128 	subs	x8, x9, x8
+    41cc:	54000243 	b.cc	4214 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xcc>  // b.lo, b.ul, b.last
+    41d0:	14000028 	b	4270 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x128>
+    41d4:	7100093f 	cmp	w9, #0x2
+    41d8:	54000281 	b.ne	4228 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xe0>  // b.any
+    41dc:	37000088 	tbnz	w8, #0, 41ec <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xa4>
+    41e0:	a9452428 	ldp	x8, x9, [x1, #80]
+    41e4:	eb080128 	subs	x8, x9, x8
+    41e8:	54000522 	b.cs	428c <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x144>  // b.hs, b.nlast
+    41ec:	aa1f03e8 	mov	x8, xzr
+    41f0:	aa1f03ec 	mov	x12, xzr
+    41f4:	5280002a 	mov	w10, #0x1                   	// #1
+    41f8:	14000046 	b	4310 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1c8>
+    41fc:	7100093f 	cmp	w9, #0x2
+    4200:	54000261 	b.ne	424c <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x104>  // b.any
+    4204:	37000088 	tbnz	w8, #0, 4214 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xcc>
+    4208:	a9452428 	ldp	x8, x9, [x1, #80]
+    420c:	eb080128 	subs	x8, x9, x8
+    4210:	54000302 	b.cs	4270 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x128>  // b.hs, b.nlast
+    4214:	5280002a 	mov	w10, #0x1                   	// #1
+    4218:	2a0a03ea 	mov	w10, w10
+    421c:	f900081f 	str	xzr, [x0, #16]
+    4220:	a900281f 	stp	xzr, x10, [x0]
+    4224:	d65f03c0 	ret
+    4228:	37000088 	tbnz	w8, #0, 4238 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0xf0>
+    422c:	a9452828 	ldp	x8, x10, [x1, #80]
+    4230:	eb080148 	subs	x8, x10, x8
+    4234:	54000342 	b.cs	429c <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x154>  // b.hs, b.nlast
+    4238:	aa1f03e8 	mov	x8, xzr
+    423c:	aa1f03ea 	mov	x10, xzr
+    4240:	5280002b 	mov	w11, #0x1                   	// #1
+    4244:	36000349 	tbz	w9, #0, 42ac <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x164>
+    4248:	1400001c 	b	42b8 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x170>
+    424c:	37000088 	tbnz	w8, #0, 425c <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x114>
+    4250:	a9452828 	ldp	x8, x10, [x1, #80]
+    4254:	eb080148 	subs	x8, x10, x8
+    4258:	54000362 	b.cs	42c4 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x17c>  // b.hs, b.nlast
+    425c:	aa1f03e8 	mov	x8, xzr
+    4260:	aa1f03ea 	mov	x10, xzr
+    4264:	5280002b 	mov	w11, #0x1                   	// #1
+    4268:	36000369 	tbz	w9, #0, 42d4 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x18c>
+    426c:	1400001d 	b	42e0 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x198>
+    4270:	b1000509 	adds	x9, x8, #0x1
+    4274:	da9f3128 	csinv	x8, x9, xzr, cc	// cc = lo, ul, last
+    4278:	1a9f07ea 	cset	w10, ne	// ne = any
+    427c:	2a0a03ea 	mov	w10, w10
+    4280:	f9000809 	str	x9, [x0, #16]
+    4284:	a9002808 	stp	x8, x10, [x0]
+    4288:	d65f03c0 	ret
+    428c:	b100050c 	adds	x12, x8, #0x1
+    4290:	da9f3188 	csinv	x8, x12, xzr, cc	// cc = lo, ul, last
+    4294:	1a9f07ea 	cset	w10, ne	// ne = any
+    4298:	1400001e 	b	4310 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1c8>
+    429c:	b100050a 	adds	x10, x8, #0x1
+    42a0:	da9f3148 	csinv	x8, x10, xzr, cc	// cc = lo, ul, last
+    42a4:	1a9f07eb 	cset	w11, ne	// ne = any
+    42a8:	37000089 	tbnz	w9, #0, 42b8 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x170>
+    42ac:	a946b029 	ldp	x9, x12, [x1, #104]
+    42b0:	eb090189 	subs	x9, x12, x9
+    42b4:	540001c2 	b.cs	42ec <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1a4>  // b.hs, b.nlast
+    42b8:	aa1f03e9 	mov	x9, xzr
+    42bc:	5280002d 	mov	w13, #0x1                   	// #1
+    42c0:	14000010 	b	4300 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1b8>
+    42c4:	b100050a 	adds	x10, x8, #0x1
+    42c8:	da9f3148 	csinv	x8, x10, xzr, cc	// cc = lo, ul, last
+    42cc:	1a9f07eb 	cset	w11, ne	// ne = any
+    42d0:	37000089 	tbnz	w9, #0, 42e0 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x198>
+    42d4:	a946b029 	ldp	x9, x12, [x1, #104]
+    42d8:	eb090189 	subs	x9, x12, x9
+    42dc:	54000322 	b.cs	4340 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x1f8>  // b.hs, b.nlast
+    42e0:	aa1f03e9 	mov	x9, xzr
+    42e4:	5280002c 	mov	w12, #0x1                   	// #1
+    42e8:	1400001b 	b	4354 <<core::iter::adapters::chain::Chain<core::iter::adapters::chain::Chain<core::ops::range::RangeInclusive<usize>, core::ops::range::RangeInclusive<usize>>, core::array::iter::IntoIter<usize, 7>> as core::iter::traits::iterator::Iterator>::size_hint+0x20c>
+    42ec:	b1000529 	adds	x9, x9, #0x1
+    42f0:	da9f312c 	csinv	x12, x9, xzr, cc	// cc = lo, ul, last
+    42f4:	1a9f07ed 	cset	w13, ne	// ne = any
+    42f8:	ab0c0108 	adds	x8, x8, x12
+    42fc:	da9f3108 	csinv	x8, x8, xzr, cc	// cc = lo, ul, last
+    4300:	8b0a012c 	add	x12, x9, x10
+    4304:	0a0d0169 	and	w9, w11, w13
+    4308:	eb0a019f 	cmp	x12, x10
+    430c:	1a8933ea 	csel	w10, wzr, w9, cc	// cc = lo, ul, last
+    4310:	a940ac29 	ldp	x9, x11, [x1, #8]
+    4314:	cb090169 	sub	x9, x11, x9
+    4318:	ab090108 	adds	x8, x8, x9
+    431c:	8b0c0129 	add	x9, x9, x12
+    4320:	da9f3108 	csinv	x8, x8, xzr, cc	// cc = lo, ul, last
+    4324:	eb0c013f 	cmp	x9, x12
+    4328:	1a9f37eb 	cset	w11, cs	// cs = hs, nlast
+    432c:	0a0b014a 	and	w10, w10, w11
+    4330:	2a0a03ea 	mov	w10, w10
+    4334:	f9000809 	str	x9, [x0, #16]
+    4338:	a9002808 	stp	x8, x10, [x0]
+    433c:	d65f03c0 	ret
+    4340:	b1000529 	adds	x9, x9, #0x1
+    4344:	da9f312d 	csinv	x13, x9, xzr, cc	// cc = lo, ul, last
+    4348:	1a9f07ec 	cset	w12, ne	// ne = any
+    434c:	ab0d0108 	adds	x8, x8, x13
+    4350:	da9f3108 	csinv	x8, x8, xzr, cc	// cc = lo, ul, last
+    4354:	8b0a0129 	add	x9, x9, x10
+    4358:	0a0c016b 	and	w11, w11, w12
+    435c:	eb0a013f 	cmp	x9, x10
+    4360:	1a8b33ea 	csel	w10, wzr, w11, cc	// cc = lo, ul, last
+    4364:	2a0a03ea 	mov	w10, w10
+    4368:	f9000809 	str	x9, [x0, #16]
+    436c:	a9002808 	stp	x8, x10, [x0]
+    4370:	d65f03c0 	ret
+
+0000000000004374 <<core::num::error::ParseIntError as core::fmt::Debug>::fmt>:
+    4374:	d10083ff 	sub	sp, sp, #0x20
+    4378:	a9017bfd 	stp	x29, x30, [sp, #16]
+    437c:	910043fd 	add	x29, sp, #0x10
+    4380:	aa0103e8 	mov	x8, x1
+    4384:	f90007e0 	str	x0, [sp, #8]
+    4388:	b0000001 	adrp	x1, 5000 <_fini+0xc00>
+    438c:	9112b021 	add	x1, x1, #0x4ac
+    4390:	b0000003 	adrp	x3, 5000 <_fini+0xc00>
+    4394:	91115c63 	add	x3, x3, #0x457
+    4398:	f00000c6 	adrp	x6, 1f000 <GCC_except_table10+0x1952c>
+    439c:	912ea0c6 	add	x6, x6, #0xba8
+    43a0:	910023e5 	add	x5, sp, #0x8
+    43a4:	aa0803e0 	mov	x0, x8
+    43a8:	528001a2 	mov	w2, #0xd                   	// #13
+    43ac:	52800084 	mov	w4, #0x4                   	// #4
+    43b0:	97fff528 	bl	1850 <<core::fmt::Formatter>::debug_struct_field1_finish@plt>
+    43b4:	a9417bfd 	ldp	x29, x30, [sp, #16]
+    43b8:	910083ff 	add	sp, sp, #0x20
+    43bc:	d65f03c0 	ret
+
+00000000000043c0 <main>:
+    43c0:	d10083ff 	sub	sp, sp, #0x20
+    43c4:	a9017bfd 	stp	x29, x30, [sp, #16]
+    43c8:	910043fd 	add	x29, sp, #0x10
+    43cc:	93407c02 	sxtw	x2, w0
+    43d0:	aa0103e3 	mov	x3, x1
+    43d4:	b0ffffe8 	adrp	x8, 1000 <__abi_tag+0xd88>
+    43d8:	913be108 	add	x8, x8, #0xef8
+    43dc:	f00000c1 	adrp	x1, 1f000 <GCC_except_table10+0x1952c>
+    43e0:	91270021 	add	x1, x1, #0x9c0
+    43e4:	910023e0 	add	x0, sp, #0x8
+    43e8:	2a1f03e4 	mov	w4, wzr
+    43ec:	f90007e8 	str	x8, [sp, #8]
+    43f0:	97fff520 	bl	1870 <std::rt::lang_start_internal@plt>
+    43f4:	a9417bfd 	ldp	x29, x30, [sp, #16]
+    43f8:	910083ff 	add	sp, sp, #0x20
+    43fc:	d65f03c0 	ret
+
+Disassembly of section .fini:
+
+0000000000004400 <_fini>:
+    4400:	d503201f 	nop
+    4404:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+    4408:	910003fd 	mov	x29, sp
+    440c:	a8c17bfd 	ldp	x29, x30, [sp], #16
+    4410:	d65f03c0 	ret
