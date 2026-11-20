@@ -2,7 +2,7 @@
 
 比较对象为 HiSilicon 920B（2.9 GHz）与 X86 核。标准库测试提交为 `07e526db9df`，编译器为相同版本的 rustc 1.101.0-dev、LLVM 23.1.4；glibc 分别为 2.38 和 2.42。
 
-`R = ARM cycles / x86 cycles`。R=1.30 表示完成相同工作时 ARM 多用 30% 的周期。以下先总结原因和代表性 benchmark，再列出修改方法。原始测量与 PR 数据分别保留各自的版本、输入和计时范围。
+`R = ARM cycles / x86 cycles`。R=1.30 表示完成相同工作时 ARM 多用 30% 的周期。以下先总结原因和代表性 benchmark，再列出修改方法。原始测量与 PR 数据分别保留各自的版本、输入和计时范围。 文中的 Kunpeng 950 补充实验另列处理器与工具链。
 
 ## 原因总结
 
@@ -31,7 +31,7 @@ a.eq_ignore_ascii_case_simple(b)
 
 ### LLVM 优化产生低效代码
 
-以下问题已通过生成代码、关闭具体优化或固定代码地址的对照确认。
+以下问题已通过生成代码、关闭具体优化或在相同 benchmark 上修改单个机制的对照确认。
 
 | 原因 | 代表性接口和 benchmark | 实验解释 | 代码示例与 IR | 对应修改方法 |
 |---|---|---|---|---|
@@ -40,6 +40,7 @@ a.eq_ignore_ascii_case_simple(b)
 | 循环出口比较多生成整数指令 | `SkipWhile::fold/try_fold`；`iter::bench_skip_while_sum`、`bench_skip_while_ref_sum` | 循环只需比较索引和结束值，实际在比较前额外执行一条 add，使每个元素都增加整数指令开销。消除后 ARM 从 1.873 降到 1.036 cycles/元素，x86 约为 1.006。[L04](analysis/repro/L04-lsr-cmp-imm/) | [双循环出口](#example-llvm-lsr) | `-C llvm-args=-disable-constant-hoisting` [说明](#method-llvm-options) |
 | 向量加载和重排选择不佳 | `str::chars().count()`；`str::char_count::*::case00_libcore`；结构体字段抽取 `vec::bench_map_fast/regular` | 连续数据本可按顺序加载，实际生成 ld4 及额外的栈写入读回，增加数据搬移和等待；ARM 为 0.1862 cycles/B；关闭该加载选择后为 0.1486，x86 为 0.1499。字段抽取中，VectorCombine 将 8 个 i32 加载缩成 7 个，产生逐 lane 加载和搬移；关闭约快 6%，完整 benchmark 仍有剩余差距。[L03](analysis/repro/L03-interleave-ld4/)、[L07](analysis/repro/L07-aos-ld1-lane/) | [字符计数与字段抽取](#example-llvm-load) | chars count：`-C llvm-args=-enable-interleaved-mem-accesses=false`；AoS：`-C llvm-args=-disable-vector-combine` [说明](#method-llvm-options) |
 | 栈槽复用与写入配对增加写后读等待 | `Any::downcast_ref`；`any::bench_downcast_ref` | 两个指针的配对读回跨越不同来源的写入；TypeId 返回缓冲区又被不同宽度临时值反复覆盖，增加写后读等待。固定地址对照：默认 20.134 cycles，只移动栈槽 20.175，只配对写入 13.063，组合处理并消除重复覆盖后 4.990。ARM 四个代码地址均重现主要差距；x86 原循环约 5.1 cycles。局部 LLVM 修法尚未实现。[双平台修复分析](any-downcast-ref-analysis.md) | [Any 栈槽](#example-llvm-stack) | 分别测试 `-C llvm-args=-no-stack-coloring`、`-C llvm-args=-aarch64-enable-ldst-opt=false`，其他写法可能回退 [说明](#method-llvm-options) |
+| `memcpy` 返回后从栈上重读长度 | `Vec::append_elements_unreserved`，`slice::join` | Kunpeng 950 的循环在每段复制后重读旧长度，下一段写入地址依赖该值。仅改用跨调用寄存器传递后，正式 benchmark 的二进制对照配对耗时降低 25.9%。 | [复制后重读长度](#example-vec-append-len) | [复用复制前的长度](#method-vec-append-len) |
 
 分支和条件选择的优劣取决于预测准确率及数据依赖。前两项分别需要保留无分支选择和保留可预测分支，不能使用统一规则。
 
@@ -181,6 +182,15 @@ call void %fn(ptr sret([16 x i8]) %s, ptr %arg)
 
 三个分配的生命周期不重叠，栈槽复用可将它们放到同一位置。AArch64 的胖指针初始化还存在跨不同写入来源的配对读回。两项需结合验证；固定地址组合实验与双平台结果见 [Any 专项分析](any-downcast-ref-analysis.md)。
 
+<a id="example-vec-append-len"></a>
+#### 示例：`memcpy` 返回后从栈上重读长度
+
+`slice::join` 预分配输出，再通过 `Vec::extend_from_slice` 的平凡复制特化调用 `Vec::append_elements_unreserved`。正式测试在计时外构造 100 个长度为 0–99 的 `Vec<i32>`，每轮创建并析构含 5,049 个元素（20,196 B）的输出，包含 99 次非空数据段复制。
+
+原实现先读出旧长度计算目的地址，复制后再用 `self.len += count` 更新长度。Kunpeng 950 的原版在 `memcpy` 返回后执行 `ldr x1, [sp, #24]`，再用读回的值计算新长度。下一段目的地址依赖这个新长度，因此每段复制后的读回都进入依赖链。
+
+在正式 benchmark 二进制的隔离副本中，只将旧长度改用跨调用寄存器传递，九轮中位数从 **601.10 降到 445.77 ns**，配对耗时降低 **25.9%**。独立探针的原版已把长度留在寄存器中，耗时约 431.09 ns，适用于解释其与正式 benchmark 的差异。当前证据定位到了生成代码中的重载，尚未确定是哪一个 LLVM pass 作出的决定。 [二进制单项对照](analysis/data/vec-append-elements-unreserved-20261119/arm-register-recheck.json) · [原版汇编](analysis/data/vec-append-elements-unreserved-20261119/arm-before.asm)
+
 ### 硬件执行能力存在差异
 
 相同算法会因指令吞吐、依赖延迟和访存能力不同，产生不同成本。算法的循环组织和数据访问方式决定了这些成本出现的次数。
@@ -241,6 +251,26 @@ define i16 @mask(<16 x i8> %v) {
 | 已合入 PR 与接口 | 具体修改 | 对应原因与代表性 benchmark | 测试版本 | 修改示例 |
 |---|---|---|---|---|
 | [#160143](https://github.com/rust-lang/rust/pull/160143)；`[u8]::is_ascii`、`[u8]` / `str::eq_ignore_ascii_case` | is_ascii 使用 NEON，每 64 B 合并四个向量后做一次归约；大小写无关比较将至少 16 B 的分块路径扩展到 NEON | 补齐 x86 已有而 AArch64 缺少的批处理路径，减少逐字节控制。对应 `ascii::*::case00_libcore`、`str::eq_ignore_ascii_case::bench_large_str_eq` | 已包含；短输入仍按实际路径分析 | [示例](#method-neon-block) |
+
+<a id="method-vec-append-len"></a>
+### 复用 `Vec::append_elements_unreserved` 复制前的长度
+
+保留复制前取出的 `len`，把复制后的长度更新由 `self.len += count` 改为以下写法。
+
+```rust
+self.len = len + count;
+```
+
+ARM 生成代码把旧长度保存在 `x21`，`memcpy` 返回后用 `add x26, x21, x20` 计算新长度。分段、复制字节数和 `memcpy` 路径与原版一致。x86 这次建置的原版已复用寄存器里的长度，重编后的 `allocbenches` 执行文件 SHA-256 相同。 [修改后汇编](analysis/data/vec-append-elements-unreserved-20261119/arm-after.asm) · [x86 执行文件哈希](analysis/data/vec-append-elements-unreserved-20261119/x86-sha256.txt)
+
+| ARM 正式 benchmark | 原版 ns/iter | 修改后 ns/iter | 配对耗时变化 |
+|---|---:|---:|---:|
+| `slice::join` | 594.78 | 447.39 | **−24.83%** |
+| `slice::concat` | 363.89 | 364.19 | +0.08% |
+| `vec::bench_extend_from_slice_0000_0000` | 1.16 | 1.16 | 0.00% |
+| `vec::bench_extend_from_slice_0000_0010` | 19.47 | 19.11 | −1.85% |
+
+`slice::join` 运行七轮，其他对照各五轮。ARM 为 Kunpeng 950 7592C，rustc 1.101.0-dev／LLVM 23.1.3。x86 为 i7-12700 P 核，rustc 1.102.0-dev／LLVM 23.1.5。结果适用于这两组建置和所列场景，其他调用该 helper 的接口尚未完整覆盖。 [测量方法与完整证据](benchmarks-conclusion.md#vecappend_elements_unreservedaarch64-在複製後重讀長度2026-11-19) · [ARM 配对样本](analysis/data/vec-append-elements-unreserved-20261119/arm-paired.json)
 
 <a id="method-llvm-options"></a>
 ### 编译器与 LLVM 选项

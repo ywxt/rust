@@ -17878,3 +17878,35 @@ B1(同址 store→load,主因)、N4(觸發條件在 bench 的 `black_box` 寫法
 # harness 與 perf:/tmp/xdiff/work/swap/{x86_stat.txt,x86.data,x86_ann.txt}(本機)、{a64_stat.txt,a64.data,a64_ann.txt}(遠程)
 # bench 二進位:/tmp/xdiff/var3/base/corebenches-*(兩台)
 ```
+
+# `Vec::append_elements_unreserved`：AArch64 在複製後重讀長度（2026-11-19）
+
+**結果**：保留原本的 `slice::join`，只讓 `Vec::append_elements_unreserved` 用複製前已取出的長度計算新長度。在 work-2 的 Kunpeng 950 上，正式 benchmark 從 **594.78 ns 降到 447.39 ns**，七輪配對耗時降低 **24.8%**。x86 重編後的 benchmark 執行檔與原版 SHA-256 一致。
+
+## 測試範圍
+
+- 接口路徑：`Join<&i32>` → `Vec::extend_from_slice` 的平凡複製特化 → `append_elements` → [`append_elements_unreserved`](library/alloc/src/vec/mod.rs#L2978)。
+- [`slice::join`](library/alloctests/benches/slice.rs#L47) 在計時外建立 100 個長度為 0–99 的 `Vec<i32>`。每輪以單個 `i32` 作分隔符，建立並析構一個 5,049 元素（20,196 B）的輸出。原實作已預配置輸出，正常情況不增容，有 99 次非空資料段複製。
+- ARM 為 Kunpeng 950 7592C，CPU 52，rustc 1.101.0-dev／LLVM 23.1.3。x86 為 i7-12700 P 核，CPU 12，rustc 1.102.0-dev／LLVM 23.1.5。兩台機器的精確 rustc 提交未取得，因此差異限定於這兩組建置。
+- 以 `./x bench -j <jobs> library/alloctests --stage 1 --keep-stage 0 '--test-args=slice::join --exact'` 建置正式 benchmark。ARM 使用既有 work-2 bootstrap 設定。保存兩個執行檔後，以相同動態標準庫、綁核和關閉 ASLR 的條件交錯重跑。表內耗時是各版中位數，百分比是逐輪配對變化的中位數。
+
+## 成因與單項對照
+
+helper 在複製前已讀出舊長度，目的是算出輸出緩衝區裡的目的位址。但原本的長度更新會再讀取 `self.len`。ARM 正式原版在每段資料的 `memcpy` 返回後，執行 `ldr x1, [sp, #24]`，接著才用這個值相加。下一段目的位址依賴更新後的長度，這次重讀便反覆進入 99 段的依賴鏈。
+
+在正式原版二進位的隔離副本中，只把這段長度傳遞改成使用跨呼叫暫存器，九輪配對的結果從 **601.10 → 445.77 ns（−25.9%）**。固定次數的獨立探針本來就把舊長度留在暫存器，耗時約 **431.09 ns**，所以不能把該探針的原版耗時和正式 benchmark 當成同一基線。控制輸出位址與改動 `black_box` 的位置也沒有消除原本的差距。
+
+源碼實驗讓更新直接使用複製前已取出的舊長度。ARM 新的熱迴圈把舊值留在 `x21`，`memcpy` 返回後以 `add x26, x21, x20` 更新。分段邏輯、拷貝長度和 `memcpy` 路徑相同。x86 在這次建置的原版已重用暫存器中的長度，重編確認沒有二進位差異。已確認的是此處的生成碼及其效能影響，尚未定位到哪個 LLVM pass 決定了重載。
+
+## 正式 benchmark 與驗證限制
+
+| ARM benchmark | 原版 ns/iter | 一行修改 ns/iter | 配對變化 |
+|---|---:|---:|---:|
+| `slice::join` | 594.78 | 447.39 | **−24.83%** |
+| `slice::concat` | 363.89 | 364.19 | +0.08% |
+| `vec::bench_extend_from_slice_0000_0000` | 1.16 | 1.16 | 0.00% |
+| `vec::bench_extend_from_slice_0000_0010` | 19.47 | 19.11 | −1.85% |
+
+`slice::join` 各跑七輪，其他三個對照各五輪。x86 的逐位元比對適用於本次的 `allocbenches` 執行檔，不等於所有下游程式在所有編譯配置下都會生成相同指令。此 helper 也用於多個 `Vec` 接口，這三個對照不足以證明整體無回退。這次修改是隔離工作樹上的實驗。
+
+原始證據：[ARM 源碼對照樣本](analysis/data/vec-append-elements-unreserved-20261119/arm-paired.json)、[ARM 二進位單項對照](analysis/data/vec-append-elements-unreserved-20261119/arm-register-recheck.json)、[ARM 原版組合語言](analysis/data/vec-append-elements-unreserved-20261119/arm-before.asm)、[ARM 修改後組合語言](analysis/data/vec-append-elements-unreserved-20261119/arm-after.asm)、[x86 執行檔雜湊](analysis/data/vec-append-elements-unreserved-20261119/x86-sha256.txt)。
